@@ -13,6 +13,9 @@ export default function HomePage() {
       <HelloWorld />
 
       <p className="text-muted-foreground text-sm">{message}</p>
+      <a href="/auth" className="text-black transition-all duration-1000 hover:text-5xl">
+        Click here to sign up
+      </a>
 
       <div className="flex flex-col items-center gap-3">
         <span className="text-4xl font-bold">{count}</span>

@@ -1,21 +1,25 @@
 'use client';
 
+import { t } from '@lingui/core/macro';
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '../shadcn/button';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { ROUTES } from '@/src/lib/constants';
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
-  const navItems = ['PRECISION ENGINE FRAMEWORK', 'SUPPORT'];
+  const navItems = [t`PRECISION ENGINE FRAMEWORK`, t`SUPPORT`];
 
   return (
     <header className="border-b border-black/[0.07] bg-[#f5f4f0]">
-      <nav className="mx-auto flex h-14 w-full max-w-[1200px] items-center justify-between px-4 sm:px-6 lg:px-12">
-        <span className="text-[13px] font-semibold tracking-[0.12em] text-neutral-900">
-          INCUBATOR
-        </span>
+      <nav className="mx-auto flex h-14 w-full max-w-300 items-center justify-between px-4 sm:px-6 lg:px-12">
+        <Link
+          href={ROUTES.ROOT}
+          className="text-sm font-bold tracking-[0.1em] text-neutral-900 hover:text-neutral-700"
+        >
+          {t`NTI`}
+        </Link>
 
         <div className="hidden items-center gap-8 md:flex">
           {navItems.map((item) => (
@@ -27,14 +31,16 @@ export function Header() {
               {item}
             </button>
           ))}
-          <Button>Join us</Button>
+          <Button asChild>
+            <Link href={ROUTES.AUTH.REGISTER_SELECT}>{t`Join us`}</Link>
+          </Button>
         </div>
 
         <button
           type="button"
-          className="inline-flex h-9 w-9 items-center justify-center rounded-sm text-neutral-700 transition-colors hover:bg-black/[0.04] hover:text-neutral-900 md:hidden"
+          className="inline-flex h-9 w-9 items-center justify-center rounded-sm text-neutral-700 transition-colors hover:bg-black/4 hover:text-neutral-900 md:hidden"
           onClick={() => setIsOpen((prev) => !prev)}
-          aria-label={isOpen ? 'Close menu' : 'Open menu'}
+          aria-label={isOpen ? t`Close menu` : t`Open menu`}
           aria-expanded={isOpen}
           aria-controls="mobile-nav"
         >
@@ -55,14 +61,8 @@ export function Header() {
                 {item}
               </button>
             ))}
-            <Button
-              className="mt-1 w-full"
-              onClick={() => {
-                setIsOpen(false);
-                router.push('/auth');
-              }}
-            >
-              Join us
+            <Button asChild className="mt-1 w-full">
+              <Link href={ROUTES.AUTH.REGISTER_SELECT}>{t`Join us`}</Link>
             </Button>
           </div>
         </div>

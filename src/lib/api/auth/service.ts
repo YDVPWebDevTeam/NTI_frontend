@@ -1,3 +1,6 @@
+import { api } from '@/src/lib/api/base-client';
+
+import { authEndpoints } from './endpoints';
 import type {
   AuthResponse,
   AuthUser,
@@ -6,46 +9,42 @@ import type {
   RegisterRequest,
   ResendConfirmationEmailRequest,
 } from './types';
-import { baseClient } from '@/src/lib/api/base-client';
 
-export function login(payload: LoginRequest): Promise<AuthResponse> {
-  return baseClient<AuthResponse>('/auth/login', {
-    method: 'POST',
-    body: JSON.stringify(payload),
-  });
-}
+export const authService = {
+  login(payload: LoginRequest) {
+    return api.post<AuthResponse, LoginRequest>(authEndpoints.login, payload);
+  },
 
-export function registerStudent(payload: RegisterRequest): Promise<AuthResponse | AuthUser> {
-  return baseClient<AuthResponse | AuthUser>('/auth/register', {
-    method: 'POST',
-    body: JSON.stringify(payload),
-  });
-}
+  registerStudent(payload: RegisterRequest) {
+    return api.post<AuthResponse | AuthUser, RegisterRequest>(
+      authEndpoints.registerStudent,
+      payload,
+    );
+  },
 
-export function resendConfirmationEmail(
-  payload: ResendConfirmationEmailRequest,
-): Promise<{ message?: string } | void> {
-  return baseClient<{ message?: string } | void>('/auth/resend-confirmation-email', {
-    method: 'POST',
-    body: JSON.stringify(payload),
-  });
-}
+  resendConfirmationEmail(payload: ResendConfirmationEmailRequest) {
+    return api.post<{ message?: string } | void, ResendConfirmationEmailRequest>(
+      authEndpoints.resendConfirmationEmail,
+      payload,
+    );
+  },
 
-export function confirmEmail(payload: ConfirmEmailRequest): Promise<AuthResponse | AuthUser> {
-  return baseClient<AuthResponse | AuthUser>('/auth/confirm-email', {
-    method: 'POST',
-    body: JSON.stringify(payload),
-  });
-}
+  confirmEmail(payload: ConfirmEmailRequest) {
+    return api.post<AuthResponse | AuthUser, ConfirmEmailRequest>(
+      authEndpoints.confirmEmail,
+      payload,
+    );
+  },
 
-export function getCurrentUser(): Promise<AuthUser> {
-  return baseClient<AuthUser>('/auth/me', {
-    method: 'GET',
-  });
-}
+  getCurrentUser() {
+    return api.get<AuthUser>(authEndpoints.me);
+  },
 
-export function logout(): Promise<{ success?: boolean } | void> {
-  return baseClient<{ success?: boolean } | void>('/auth/logout', {
-    method: 'POST',
-  });
-}
+  refresh() {
+    return api.post<AuthUser>(authEndpoints.refresh);
+  },
+
+  logout() {
+    return api.post<{ success?: boolean } | void>(authEndpoints.logout);
+  },
+};

@@ -4,7 +4,8 @@ import * as z from 'zod';
 
 export const PASSWORD_MIN_LENGTH = 6;
 export const VERIFICATION_CODE_MIN_LENGTH = 4;
-export const FULL_NAME_MIN_LENGTH = 2;
+export const NAME_MIN_LENGTH = 2;
+export const NAME_MAX_LENGTH = 50;
 
 export function createLoginSchema() {
   return z.object({
@@ -17,9 +18,16 @@ export function createLoginSchema() {
 
 export function createStudentIdentitySchema() {
   return z.object({
-    fullName: z
+    firstName: z
       .string()
-      .min(FULL_NAME_MIN_LENGTH, { message: i18n._(msg`Must be at least 2 characters.`) }),
+      .trim()
+      .min(NAME_MIN_LENGTH, { message: i18n._(msg`Must be at least 2 characters.`) })
+      .max(NAME_MAX_LENGTH, { message: i18n._(msg`Must be at most 50 characters.`) }),
+    lastName: z
+      .string()
+      .trim()
+      .min(NAME_MIN_LENGTH, { message: i18n._(msg`Must be at least 2 characters.`) })
+      .max(NAME_MAX_LENGTH, { message: i18n._(msg`Must be at most 50 characters.`) }),
     email: z.email({ message: i18n._(msg`Must be a valid email address.`) }),
     password: z
       .string()

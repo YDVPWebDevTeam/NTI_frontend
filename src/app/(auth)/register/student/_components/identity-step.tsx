@@ -19,12 +19,21 @@ export function IdentityStep() {
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:gap-5">
-      <ControlledInputField
-        control={control}
-        name="fullName"
-        label={t`Full Name`}
-        placeholder={t`Enter your full legal name`}
-      />
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
+        <ControlledInputField
+          control={control}
+          name="firstName"
+          label={t`First Name`}
+          placeholder={t`Enter your first name`}
+        />
+
+        <ControlledInputField
+          control={control}
+          name="lastName"
+          label={t`Last Name`}
+          placeholder={t`Enter your last name`}
+        />
+      </div>
 
       <ControlledInputField
         control={control}

@@ -46,7 +46,7 @@ export default function SignUpPage() {
         id: 'identity',
         label: t`Identity Verification`,
         process: t`PROCESS 01`,
-        fields: ['fullName', 'email', 'password', 'acceptTerms'],
+        fields: ['firstName', 'lastName', 'email', 'password', 'acceptTerms'],
         description: t`Create your registration profile with core credentials and accept the institutional privacy terms.`,
       },
       {
@@ -85,7 +85,8 @@ export default function SignUpPage() {
   const form = useForm<StudentRegistrationValues>({
     resolver: zodResolver(studentRegistrationSchema),
     defaultValues: {
-      fullName: '',
+      firstName: '',
+      lastName: '',
       email: '',
       password: '',
       acceptTerms: false,
@@ -106,7 +107,8 @@ export default function SignUpPage() {
         const values = form.getValues();
 
         await register({
-          name: values.fullName,
+          firstName: values.firstName,
+          lastName: values.lastName,
           email: values.email,
           password: values.password,
         });

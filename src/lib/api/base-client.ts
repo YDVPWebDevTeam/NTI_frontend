@@ -1,5 +1,7 @@
 import { t } from '@lingui/core/macro';
 
+import { authEndpoints } from './auth/endpoints';
+import { clearAccessToken, getAccessToken } from './auth/token-store';
 import { type ApiResponse } from './types';
 
 const DEFAULT_API_BASE_URL = 'http://localhost:3001/api';
@@ -67,19 +69,42 @@ export interface RequestConfig {
   method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
   data?: unknown;
   headers?: HeadersInit;
+  skipAuthRefresh?: boolean;
 }
 
 export async function request<TResponse>(path: string, config?: RequestConfig): Promise<TResponse> {
   try {
+    const headers = new Headers(config?.headers);
+    const accessToken = getAccessToken();
+    const hasBody = config?.data !== undefined;
+
+    if (accessToken && !headers.has('Authorization')) {
+      headers.set('Authorization', `Bearer ${accessToken}`);
+    }
+
+    if (hasBody && !headers.has('Content-Type')) {
+      headers.set('Content-Type', 'application/json');
+    }
+
     const response = await fetch(buildApiUrl(path), {
       method: config?.method ?? 'GET',
       credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-        ...config?.headers,
-      },
-      body: config?.data === undefined ? undefined : JSON.stringify(config.data),
+      headers,
+      body: hasBody ? JSON.stringify(config.data) : undefined,
     });
+
+    if (response.status === 401 && !config?.skipAuthRefresh && !isAuthRefreshEndpoint(path)) {
+      const refreshed = await refreshAccessToken();
+
+      if (refreshed) {
+        return request<TResponse>(path, {
+          ...config,
+          skipAuthRefresh: true,
+        });
+      }
+
+      clearAccessToken();
+    }
 
     const payload = (await response.json()) as unknown;
 
@@ -90,6 +115,29 @@ export async function request<TResponse>(path: string, config?: RequestConfig): 
     return unwrapResponseData<TResponse>(payload);
   } catch (error) {
     throw toError(error);
+  }
+}
+
+function isAuthRefreshEndpoint(path: string): boolean {
+  return [
+    authEndpoints.login,
+    authEndpoints.registerStudent,
+    authEndpoints.resendConfirmationEmail,
+    authEndpoints.confirmEmail,
+    authEndpoints.refresh,
+    authEndpoints.logout,
+  ].includes(path);
+}
+
+async function refreshAccessToken(): Promise<boolean> {
+  try {
+    const { authService } = await import('./auth/service');
+
+    await authService.refresh();
+
+    return true;
+  } catch {
+    return false;
   }
 }
 

@@ -3,13 +3,8 @@
 import { I18nProvider } from '@lingui/react';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
-import {
-  type AppLocale,
-  DEFAULT_LOCALE,
-  isAppLocale,
-  LOCALE_STORAGE_KEY,
-} from '@/src/lib/i18n/config';
-import { activateLocale, i18n } from '@/src/lib/i18n/runtime';
+import { type AppLocale, DEFAULT_LOCALE, isAppLocale, LOCALE_STORAGE_KEY } from 'lib/i18n/config';
+import { activateLocale, i18n } from 'lib/i18n/runtime';
 
 type LocaleContextValue = {
   locale: AppLocale;

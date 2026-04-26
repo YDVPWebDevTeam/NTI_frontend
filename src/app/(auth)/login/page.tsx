@@ -8,14 +8,14 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import { ROUTES } from '@/src/lib/constants';
-import { createLoginSchema, type LoginFormValues } from '@/src/lib/auth/schemas';
-import type { AuthResponse, AuthUser } from '@/src/lib/api/auth';
-import { useLoginMutation } from '@/src/lib/api/auth';
+import { ROUTES } from 'lib/constants';
+import { createLoginSchema, type LoginFormValues } from 'lib/auth/schemas';
+import type { AuthResponse, AuthUser } from 'lib/api';
+import { useLoginMutation } from 'lib/api';
 
-import { ControlledInputField } from '@/src/components/forms/auth/form-field-primitives';
-import { Button } from '@/src/components/shadcn/button';
-import { Form } from '@/src/components/shadcn/form';
+import { ControlledInputField } from 'components/forms';
+import { Button } from 'components/shadcn';
+import { Form } from 'components/shadcn';
 
 function getAuthUser(response: AuthResponse | AuthUser): AuthUser {
   return 'user' in response ? response.user : response;

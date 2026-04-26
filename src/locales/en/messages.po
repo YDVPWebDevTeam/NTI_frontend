@@ -13,882 +13,1120 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/layout/footer.tsx:8
-msgid "© 2024 INSTITUTIONAL INCUBATOR. PRECISION ENGINE FRAMEWORK."
-msgstr "© 2024 INSTITUTIONAL INCUBATOR. PRECISION ENGINE FRAMEWORK."
-
-#: src/app/page.tsx:466
+#: src/components/layout/landing-footer.tsx:108
 msgid "© 2024 Nitriansky technologický inkubátor. All rights reserved."
 msgstr "© 2024 Nitriansky technologický inkubátor. All rights reserved."
 
-#: src/app/page.tsx:154
+#: src/components/layout/footer.tsx:10
+msgid "© 2026 INSTITUTIONAL INCUBATOR."
+msgstr "© 2026 INSTITUTIONAL INCUBATOR."
+
+#: src/app/page.tsx:104
 msgid "1-on-1 Mentoring"
 msgstr "1-on-1 Mentoring"
 
-#: src/app/page.tsx:329
+#: src/app/(auth)/register/student/_components/registration-completion.tsx:44
+msgid "100% Complete"
+msgstr "100% Complete"
+
+#: src/app/page.tsx:285
 msgid "2023 Cohort Graduate"
 msgstr "2023 Cohort Graduate"
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:55
-msgid "2028"
-msgstr "2028"
-
-#: src/app/(auth)/register/student/_components/email-step.tsx:25
+#: src/app/(auth)/register/student/_components/email-step.tsx:24
 msgid "A confirmation link will be sent to"
 msgstr "A confirmation link will be sent to"
 
-#: src/app/(auth)/register/student/page.tsx:57
-msgid "Academic Status"
-msgstr "Academic Status"
+#: src/app/(auth)/register/student/_components/review-step.tsx:90
+msgid "Academic Achievements"
+msgstr "Academic Achievements"
 
-#: src/app/(auth)/login/page.tsx:161
+#: src/app/(auth)/register/student/_components/academic/academic-indicators-section.tsx:124
+msgid "Academic Achievements (Optional)"
+msgstr "Academic Achievements (Optional)"
+
+#: src/app/(auth)/register/student/_components/academic/academic-indicators-section.tsx:29
+msgid "Academic Indicators"
+msgstr "Academic Indicators"
+
+#: src/app/(auth)/register/student/_components/review-step.tsx:51
+#: src/app/(auth)/register/student/_lib/registration-config.ts:33
+msgid "Academic Information"
+msgstr "Academic Information"
+
+#: src/app/(auth)/login/page.tsx:136
 msgid "ACCESS ENGINE"
 msgstr "ACCESS ENGINE"
 
-#: src/app/(auth)/register/select-role/page.tsx:188
+#: src/app/(auth)/register/select-role/page.tsx:192
 msgid "Access the high-performance environment tailored to your institutional role. Choose a path to begin your technical journey."
 msgstr "Access the high-performance environment tailored to your institutional role. Choose a path to begin your technical journey."
 
-#: src/app/page.tsx:224
+#: src/app/page.tsx:176
 msgid "Access to premium office spaces, 3D printing labs, and legal support to scale your dream."
 msgstr "Access to premium office spaces, 3D printing labs, and legal support to scale your dream."
 
-#: src/app/(auth)/register/select-role/page.tsx:139
+#: src/app/(auth)/register/select-role/page.tsx:146
 msgid "Access to Program A Frameworks"
 msgstr "Access to Program A Frameworks"
 
-#: src/app/(auth)/register/student/page.tsx:217
+#: src/app/(auth)/register/student/_components/registration-stage-header.tsx:25
 msgid "ACTIVE STAGE"
 msgstr "ACTIVE STAGE"
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:29
-msgid "AI & Data Technologies"
-msgstr "AI & Data Technologies"
+#: src/lib/auth/schemas.ts:129
+msgid "Add at least one technical skill."
+msgstr "Add at least one technical skill."
 
-#: src/app/(auth)/register/select-role/page.tsx:199
+#: src/app/(auth)/register/student/_components/skills/projects-summary-section.tsx:157
+msgid "Add Project"
+msgstr "Add Project"
+
+#: src/app/(auth)/register/student/_components/skills/technical-skills-section.tsx:172
+msgid "Add Skill"
+msgstr "Add Skill"
+
+#: src/app/(auth)/register/select-role/page.tsx:203
 msgid "Already have an account?"
 msgstr "Already have an account?"
 
-#: src/app/page.tsx:351
+#: src/app/page.tsx:310
 msgid "Apply as Student"
 msgstr "Apply as Student"
 
-#: src/app/page.tsx:95
+#: src/app/page.tsx:47
 msgid "Apply as student/team"
 msgstr "Apply as student/team"
 
-#: src/app/page.tsx:324
+#: src/app/page.tsx:280
 msgid "AquaSense Solutions"
 msgstr "AquaSense Solutions"
 
-#: src/app/(auth)/register/select-role/page.tsx:167
+#: src/lib/auth/schemas.ts:153
+msgid "At least one skill must be marked as primary."
+msgstr "At least one skill must be marked as primary."
+
+#: src/app/(auth)/register/select-role/page.tsx:174
 msgid "AUTH PROTOCOL"
 msgstr "AUTH PROTOCOL"
 
-#: src/app/(auth)/login/page.tsx:110
+#: src/app/(auth)/login/page.tsx:91
 msgid "AUTHENTICATION GATEWAY"
 msgstr "AUTHENTICATION GATEWAY"
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:19
-msgid "Bachelor"
-msgstr "Bachelor"
+#: src/app/(auth)/register/student/_components/academic/academic-indicators-section.tsx:77
+msgid "Average grade from key subjects"
+msgstr "Average grade from key subjects"
 
-#: src/app/(auth)/verify-email/page.tsx:150
-msgid "Back to login"
-msgstr "Back to login"
+#: src/app/(auth)/register/student/_components/review-step.tsx:104
+msgid "Bio"
+msgstr "Bio"
 
-#: src/app/page.tsx:310
+#: src/app/page.tsx:266
 msgid "Business Strategy"
 msgstr "Business Strategy"
 
-#: src/app/page.tsx:189
+#: src/app/page.tsx:140
 msgid "Career Placement Opportunities"
 msgstr "Career Placement Opportunities"
 
-#: src/app/(auth)/register/student/_components/email-step.tsx:46
+#: src/app/(auth)/register/student/_components/email-step.tsx:45
 msgid "Check your inbox and paste token only if needed."
 msgstr "Check your inbox and paste token only if needed."
 
-#: src/app/page.tsx:129
+#: src/app/(auth)/register/student/_components/skills-step.tsx:41
+msgid "Choose from the supported soft-skill categories."
+msgstr "Choose from the supported soft-skill categories."
+
+#: src/app/page.tsx:83
 msgid "Choose Your Path to Innovation"
 msgstr "Choose Your Path to Innovation"
 
-#: src/app/page.tsx:25
-msgid "close"
-msgstr "close"
-
-#: src/components/layout/header.tsx:38
+#: src/components/layout/landing-header.tsx:27
 msgid "Close menu"
 msgstr "Close menu"
 
-#: src/lib/auth/schemas.ts:40
+#: src/lib/auth/schemas.ts:48
 msgid "Code must be at least 4 characters."
 msgstr "Code must be at least 4 characters."
 
-#: src/app/page.tsx:185
+#: src/app/page.tsx:136
 msgid "Collaboration with Enterprises"
 msgstr "Collaboration with Enterprises"
 
-#: src/app/(auth)/register/select-role/page.tsx:149
+#: src/app/(auth)/register/select-role/page.tsx:156
 msgid "Company Partner"
 msgstr "Company Partner"
 
-#: src/app/(auth)/register/select-role/page.tsx:165
+#: src/app/(auth)/register/select-role/page.tsx:172
 msgid "COMPLIANT"
 msgstr "COMPLIANT"
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:39
-msgid "Computer Science"
-msgstr "Computer Science"
-
-#: src/app/(auth)/verify-email/page.tsx:146
-msgid "CONFIRM EMAIL"
-msgstr "CONFIRM EMAIL"
-
-#: src/app/(auth)/register/student/page.tsx:141
+#: src/app/(auth)/register/student/_lib/registration-config.ts:29
 msgid "Confirm your email address from the message sent to your inbox before full platform access."
 msgstr "Confirm your email address from the message sent to your inbox before full platform access."
 
-#: src/app/(auth)/verify-email/page.tsx:61
-msgid "Confirmation email sent. Check your inbox."
-msgstr "Confirmation email sent. Check your inbox."
-
-#: src/app/page.tsx:435
+#: src/components/layout/landing-footer.tsx:78
 msgid "Connect"
 msgstr "Connect"
 
-#: src/app/page.tsx:234
+#: src/app/page.tsx:186
 msgid "Connecting you to university research and top European tech clusters."
 msgstr "Connecting you to university research and top European tech clusters."
 
-#: src/app/page.tsx:443
+#: src/components/layout/landing-footer.tsx:85
 msgid "Contact Us"
 msgstr "Contact Us"
 
-#: src/app/(auth)/register/select-role/page.tsx:159
+#: src/app/(auth)/register/select-role/page.tsx:165
 msgid "Continue as Company Partner"
 msgstr "Continue as Company Partner"
 
-#: src/app/(auth)/register/select-role/page.tsx:144
+#: src/app/(auth)/register/select-role/page.tsx:151
 msgid "Continue as Regular User"
 msgstr "Continue as Regular User"
 
-#: src/app/page.tsx:389
+#: src/components/layout/landing-footer.tsx:35
 msgid "Corporate Challenges"
 msgstr "Corporate Challenges"
 
-#: src/app/(auth)/register/student/_components/identity-step.tsx:42
+#: src/app/(auth)/register/student/_components/identity-step.tsx:51
 msgid "Create a secure password"
 msgstr "Create a secure password"
 
-#: src/app/(auth)/login/page.tsx:98
+#: src/app/(auth)/login/page.tsx:79
 msgid "CREATE ACCOUNT"
 msgstr "CREATE ACCOUNT"
 
-#: src/app/(auth)/register/student/page.tsx:139
+#: src/app/(auth)/register/student/_lib/registration-config.ts:22
 msgid "Create your registration profile with core credentials and accept the institutional privacy terms."
 msgstr "Create your registration profile with core credentials and accept the institutional privacy terms."
 
-#: src/app/(auth)/register/select-role/page.tsx:137
+#: src/app/(auth)/register/student/_components/academic/academic-affiliation-study-fields.tsx:85
+msgid "Current Year of Study"
+msgstr "Current Year of Study"
+
+#: src/app/(auth)/register/student/_components/skills/portfolio-resume-section.tsx:37
+msgid "CV File"
+msgstr "CV File"
+
+#: src/app/(auth)/register/student/_hooks/use-student-registration-actions.ts:164
+#: src/lib/auth/schemas.ts:164
+msgid "CV file is required."
+msgstr "CV file is required."
+
+#: src/app/(auth)/register/select-role/page.tsx:144
 msgid "Dedicated environment for Program A participants. Focus on end-to-end innovation, collaborative architectural design, and rapid prototyping within the Incubator ecosystem."
 msgstr "Dedicated environment for Program A participants. Focus on end-to-end innovation, collaborative architectural design, and rapid prototyping within the Incubator ecosystem."
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:45
+#: src/app/(auth)/register/student/_components/academic/academic-affiliation-study-fields.tsx:35
+#: src/app/(auth)/register/student/_components/review-step.tsx:55
 msgid "Degree Level"
 msgstr "Degree Level"
 
-#: src/lib/auth/schemas.ts:49
+#: src/lib/auth/schemas.ts:58
 msgid "Degree level is required."
 msgstr "Degree level is required."
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:24
-msgid "Desktop and mobile ecosystems, architecture fundamentals, and embedded programming."
-msgstr "Desktop and mobile ecosystems, architecture fundamentals, and embedded programming."
+#: src/lib/auth/schemas.ts:134
+msgid "Description is required."
+msgstr "Description is required."
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:48
-msgid "Distributed Backend Systems"
-msgstr "Distributed Backend Systems"
+#: src/app/(auth)/register/student/_components/academic/academic-indicators-section.tsx:45
+msgid "Do you currently have transferred / unfinished subjects?"
+msgstr "Do you currently have transferred / unfinished subjects?"
 
-#: src/app/(auth)/login/page.tsx:90
+#: src/app/(auth)/login/page.tsx:72
 msgid "Don't have an account yet?"
 msgstr "Don't have an account yet?"
 
-#: src/app/page.tsx:309
+#: src/app/page.tsx:265
 msgid "Dr. Lucia Bielik"
 msgstr "Dr. Lucia Bielik"
 
-#: src/app/page.tsx:368
+#: src/components/layout/landing-footer.tsx:16
 msgid "Driving innovation and economic growth through technology and academic collaboration."
 msgstr "Driving innovation and economic growth through technology and academic collaboration."
 
-#: src/app/(auth)/login/page.tsx:125
-#: src/app/(auth)/register/student/_components/identity-step.tsx:32
+#: src/app/(auth)/register/student/_components/academic/academic-indicators-section.tsx:102
+msgid "E.g. Algorithms, Distributed Systems, UX Design"
+msgstr "E.g. Algorithms, Distributed Systems, UX Design"
+
+#: src/app/(auth)/register/student/_components/academic/academic-indicators-section.tsx:128
+msgid "E.g. competitions, awards, scholarships..."
+msgstr "E.g. competitions, awards, scholarships..."
+
+#: src/app/(auth)/register/student/_components/skills/technical-skills-section.tsx:61
+msgid "e.g., React"
+msgstr "e.g., React"
+
+#: src/app/(auth)/register/student/_components/review-step.tsx:43
+msgid "Email"
+msgstr "Email"
+
+#: src/app/(auth)/login/page.tsx:106
+#: src/app/(auth)/register/student/_components/identity-step.tsx:41
 msgid "Email Address"
 msgstr "Email Address"
 
-#: src/app/(auth)/register/student/page.tsx:51
+#: src/app/(auth)/register/student/_lib/registration-config.ts:26
 msgid "Email Confirmation"
 msgstr "Email Confirmation"
 
-#: src/app/(auth)/verify-email/page.tsx:57
-msgid "Email confirmed successfully. You can continue."
-msgstr "Email confirmed successfully. You can continue."
-
-#: src/app/(auth)/verify-email/page.tsx:85
-msgid "EMAIL VERIFICATION"
-msgstr "EMAIL VERIFICATION"
-
-#: src/components/i18n/language-switcher.tsx:11
-#~ msgid "EN"
-#~ msgstr "EN"
-
-#: src/app/(auth)/register/select-role/page.tsx:166
+#: src/app/(auth)/register/select-role/page.tsx:173
 msgid "ENCRYPTION"
 msgstr "ENCRYPTION"
 
-#: src/app/(auth)/register/select-role/page.tsx:166
+#: src/app/(auth)/register/select-role/page.tsx:173
 msgid "END-TO-END"
 msgstr "END-TO-END"
 
-#: src/app/(auth)/login/page.tsx:116
-msgid "Enter your credentials below to access the high-performance environment and continue your journey."
-msgstr "Enter your credentials below to access the high-performance environment and continue your journey."
+#: src/lib/auth/schemas.ts:105
+#: src/lib/auth/schemas.ts:110
+#: src/lib/auth/schemas.ts:115
+#: src/lib/auth/schemas.ts:139
+msgid "Enter a valid URL."
+msgstr "Enter a valid URL."
 
-#: src/app/(auth)/register/student/_components/identity-step.tsx:26
-msgid "Enter your full legal name"
-msgstr "Enter your full legal name"
+#: src/app/(auth)/login/page.tsx:97
+msgid "Enter your credentials below to access the platform."
+msgstr "Enter your credentials below to access the platform."
 
-#: src/app/(auth)/login/page.tsx:136
-msgid "Enter your secure password"
-msgstr "Enter your secure password"
+#: src/app/(auth)/register/student/_components/identity-step.tsx:27
+msgid "Enter your first name"
+msgstr "Enter your first name"
 
-#: src/app/(auth)/register/select-role/page.tsx:155
+#: src/app/(auth)/register/student/_components/identity-step.tsx:34
+msgid "Enter your last name"
+msgstr "Enter your last name"
+
+#: src/app/(auth)/login/page.tsx:117
+msgid "Enter your password"
+msgstr "Enter your password"
+
+#: src/app/(auth)/register/select-role/page.tsx:161
 msgid "Enterprise Data Analytics"
 msgstr "Enterprise Data Analytics"
 
-#: src/app/(auth)/register/select-role/page.tsx:152
+#: src/app/(auth)/register/select-role/page.tsx:158
 msgid "Entry point for Program B stakeholders. Manage technical challenges, oversee precision metrics, and interface directly with emerging talent pools through the Engine portal."
 msgstr "Entry point for Program B stakeholders. Manage technical challenges, oversee precision metrics, and interface directly with emerging talent pools through the Engine portal."
 
-#: src/lib/api.ts:26
-msgid "Error occurred, try again"
-msgstr "Error occurred, try again"
-
-#: src/app/page.tsx:428
+#: src/components/layout/landing-footer.tsx:72
 msgid "EU Funding Disclosure"
 msgstr "EU Funding Disclosure"
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:16
-msgid "EUBA University"
-msgstr "EUBA University"
+#: src/app/(auth)/register/student/_components/review-step.tsx:67
+msgid "Expected Graduation"
+msgstr "Expected Graduation"
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:53
+#: src/app/(auth)/register/student/_components/academic/academic-affiliation-study-fields.tsx:109
 msgid "Expected Graduation Year"
 msgstr "Expected Graduation Year"
 
-#: src/app/page.tsx:294
+#: src/app/(auth)/register/student/_components/skills/technical-skills-section.tsx:102
+msgid "Experience (months)"
+msgstr "Experience (months)"
+
+#: src/app/page.tsx:250
 msgid "Expert in neural networks with 15+ years in international R&D."
 msgstr "Expert in neural networks with 15+ years in international R&D."
 
-#: src/app/page.tsx:193
+#: src/app/page.tsx:147
 msgid "Explore Challenges"
 msgstr "Explore Challenges"
 
-#: src/services/hello-service.ts:7
-msgid "Failed to fetch hello"
-msgstr "Failed to fetch hello"
+#: src/app/(auth)/register/student/_components/academic/academic-affiliation-program-fields.tsx:81
+msgid "Faculty"
+msgstr "Faculty"
 
-#: src/app/(auth)/register/student/page.tsx:281
+#: src/lib/auth/schemas.ts:56
+msgid "Faculty is required."
+msgstr "Faculty is required."
+
+#: src/app/(auth)/register/student/_components/registration-actions.tsx:43
 msgid "FINISH REGISTRATION"
 msgstr "FINISH REGISTRATION"
 
-#: src/app/page.tsx:145
+#: src/app/(auth)/register/student/_components/identity-step.tsx:26
+msgid "First Name"
+msgstr "First Name"
+
+#: src/app/(auth)/register/student/_components/review-step.tsx:109
+#: src/app/(auth)/register/student/_components/skills-step.tsx:20
+msgid "Focus Areas"
+msgstr "Focus Areas"
+
+#: src/app/page.tsx:97
 msgid "For visionaries with their own product ideas. Transform your prototype into a market-ready company with full incubation support."
 msgstr "For visionaries with their own product ideas. Transform your prototype into a market-ready company with full incubation support."
 
-#: src/app/(auth)/login/page.tsx:152
+#: src/app/(auth)/login/page.tsx:127
 msgid "Forgot password?"
 msgstr "Forgot password?"
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:37
-msgid "Frontend frameworks, backend APIs, and high-performance cloud-ready applications."
-msgstr "Frontend frameworks, backend APIs, and high-performance cloud-ready applications."
+#: src/app/(auth)/register/student/_components/registration-completion.tsx:56
+msgid "Form Conquered"
+msgstr "Form Conquered"
 
-#: src/app/page.tsx:87
+#: src/app/(auth)/register/student/_components/registration-completion.tsx:58
+msgid "Friends Next"
+msgstr "Friends Next"
+
+#: src/app/page.tsx:36
 msgid "Fueling the"
 msgstr "Fueling the"
 
-#: src/app/(auth)/register/student/_components/identity-step.tsx:25
-msgid "Full Name"
-msgstr "Full Name"
-
-#: src/app/page.tsx:222
+#: src/app/page.tsx:174
 msgid "Full-Cycle Incubation"
 msgstr "Full-Cycle Incubation"
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:55
-msgid "Game Development"
-msgstr "Game Development"
-
-#: src/app/(auth)/register/select-role/page.tsx:184
+#: src/app/(auth)/register/select-role/page.tsx:188
 msgid "Gateway"
 msgstr "Gateway"
 
-#: src/app/page.tsx:232
+#: src/app/(auth)/register/student/_components/skills/portfolio-resume-section.tsx:76
+msgid "GitHub Profile"
+msgstr "GitHub Profile"
+
+#: src/app/page.tsx:184
 msgid "Global Partnerships"
 msgstr "Global Partnerships"
 
-#: src/app/page.tsx:244
+#: src/app/page.tsx:196
 msgid "Guided by veterans from Silicon Valley to Bratislava."
 msgstr "Guided by veterans from Silicon Valley to Bratislava."
 
-#: src/lib/hooks/use-hello.ts:7
-msgid "Hello from a custom hook!"
-msgstr "Hello from a custom hook!"
+#: src/app/(auth)/register/student/_components/academic/academic-indicators-section.tsx:30
+msgid "Help us understand your academic performance."
+msgstr "Help us understand your academic performance."
 
-#: src/components/hello-world.tsx:6
-msgid "Hello, World!"
-msgstr "Hello, World!"
+#: src/app/(auth)/register/student/_lib/registration-config.ts:70
+msgid "Highlight your technical and soft skills for potential partners."
+msgstr "Highlight your technical and soft skills for potential partners."
 
-#: src/app/(auth)/register/student/_components/identity-step.tsx:59
+#: src/app/(auth)/register/student/_components/identity-step.tsx:68
 msgid "I accept the Privacy Policy and institutional data processing terms required for platform access."
 msgstr "I accept the Privacy Policy and institutional data processing terms required for platform access."
 
-#: src/app/(auth)/register/student/page.tsx:45
+#: src/app/(auth)/register/student/_components/academic/academic-verification-section.tsx:59
+msgid "I declare that the academic information provided is accurate."
+msgstr "I declare that the academic information provided is accurate."
+
+#: src/app/(auth)/register/student/_components/review-step.tsx:33
+msgid "Identity"
+msgstr "Identity"
+
+#: src/app/(auth)/register/student/_lib/registration-config.ts:19
 msgid "Identity Verification"
 msgstr "Identity Verification"
 
-#: src/app/(auth)/register/select-role/page.tsx:179
+#: src/app/(auth)/register/select-role/page.tsx:183
 msgid "IDENTITY VERIFICATION"
 msgstr "IDENTITY VERIFICATION"
 
-#: src/components/layout/header.tsx:18
-msgid "INCUBATOR"
-msgstr "INCUBATOR"
-
-#: src/app/page.tsx:55
-msgid "Infrastructure"
-msgstr "Infrastructure"
-
-#: src/app/page.tsx:291
+#: src/app/page.tsx:247
 msgid "Ing. Marek Novak"
 msgstr "Ing. Marek Novak"
 
-#: src/app/page.tsx:84
+#: src/app/page.tsx:33
 msgid "Innovation Hub"
 msgstr "Innovation Hub"
 
-#: src/app/(auth)/register/select-role/page.tsx:141
+#: src/app/(auth)/register/select-role/page.tsx:148
 msgid "Innovation Repository"
 msgstr "Innovation Repository"
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:57
-msgid "Interactive 3D environments, rendering pipelines, and realtime simulation design."
-msgstr "Interactive 3D environments, rendering pipelines, and realtime simulation design."
-
-#: src/app/page.tsx:213
+#: src/app/page.tsx:167
 msgid "Interior space"
 msgstr "Interior space"
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:42
-msgid "IoT & Intelligent Systems"
-msgstr "IoT & Intelligent Systems"
+#: src/app/(auth)/register/student/_components/registration-completion.tsx:76
+msgid "INVITE COLLEAGUES"
+msgstr "INVITE COLLEAGUES"
 
-#: src/app/page.tsx:347
+#: src/app/page.tsx:303
 msgid "Join a community of innovators, engineers, and entrepreneurs. Our next cohort starts in September."
 msgstr "Join a community of innovators, engineers, and entrepreneurs. Our next cohort starts in September."
 
-#: src/components/layout/header.tsx:31
-#: src/components/layout/header.tsx:66
+#: src/components/layout/header.tsx:36
 msgid "Join us"
 msgstr "Join us"
 
-#: src/app/page.tsx:254
+#: src/app/page.tsx:206
 msgid "Keeping bright minds in Nitra through opportunity."
 msgstr "Keeping bright minds in Nitra through opportunity."
 
-#: src/app/page.tsx:162
+#: src/app/(auth)/register/student/_components/identity-step.tsx:33
+msgid "Last Name"
+msgstr "Last Name"
+
+#: src/app/page.tsx:115
 msgid "Launch Startup"
 msgstr "Launch Startup"
 
-#: src/app/page.tsx:292
+#: src/app/page.tsx:248
 msgid "Lead Mentor / AI Systems"
 msgstr "Lead Mentor / AI Systems"
 
-#: src/app/page.tsx:105
+#: src/app/page.tsx:60
 msgid "Learn more about NTI"
 msgstr "Learn more about NTI"
 
-#: src/app/page.tsx:404
+#: src/components/layout/landing-footer.tsx:49
 msgid "Legal"
 msgstr "Legal"
 
-#: src/app/page.tsx:451
+#: src/lib/auth/schemas.ts:124
+msgid "Level is required."
+msgstr "Level is required."
+
+#: src/components/layout/landing-footer.tsx:93
 msgid "LinkedIn"
 msgstr "LinkedIn"
 
-#: src/app/(auth)/register/select-role/page.tsx:201
+#: src/app/(auth)/register/student/_components/skills/portfolio-resume-section.tsx:90
+msgid "LinkedIn Profile"
+msgstr "LinkedIn Profile"
+
+#: src/app/(auth)/register/student/_components/review-step.tsx:162
+msgid "Links"
+msgstr "Links"
+
+#: src/app/(auth)/register/student/_components/skills/technical-skills-section.tsx:45
+msgid "List your primary technical skills and proficiency."
+msgstr "List your primary technical skills and proficiency."
+
+#: src/app/(auth)/register/student/_components/academic/use-academic-dependent-fields.ts:88
+msgid "Loading faculties..."
+msgstr "Loading faculties..."
+
+#: src/app/(auth)/register/student/_components/academic/use-academic-dependent-fields.ts:102
+msgid "Loading specializations..."
+msgstr "Loading specializations..."
+
+#: src/app/(auth)/register/student/_components/academic/use-academic-dependent-fields.ts:74
+msgid "Loading universities..."
+msgstr "Loading universities..."
+
+#: src/app/(auth)/register/select-role/page.tsx:205
 msgid "Log in"
 msgstr "Log in"
 
-#: src/app/page.tsx:69
+#: src/components/layout/landing-header.tsx:68
 msgid "Login"
 msgstr "Login"
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:43
-msgid "Low-level C/C++, sensor integration, and robotics device communication."
-msgstr "Low-level C/C++, sensor integration, and robotics device communication."
+#: src/app/(auth)/register/student/_components/registration-completion.tsx:57
+msgid "Looking absolutely stellar"
+msgstr "Looking absolutely stellar"
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:30
-msgid "Machine learning workflows, model deployment, and practical data-driven systems."
-msgstr "Machine learning workflows, model deployment, and practical data-driven systems."
-
-#: src/app/(auth)/register/student/_components/academic-step.tsx:20
-msgid "Master"
-msgstr "Master"
-
-#: src/app/page.tsx:285
-#: src/app/page.tsx:303
+#: src/app/page.tsx:241
+#: src/app/page.tsx:259
 msgid "Mentor"
 msgstr "Mentor"
 
-#: src/app/page.tsx:242
-#: src/app/page.tsx:397
+#: src/app/page.tsx:194
+#: src/components/layout/landing-footer.tsx:43
 msgid "Mentoring"
 msgstr "Mentoring"
 
-#: src/app/page.tsx:49
+#: src/components/layout/landing-header.tsx:46
 msgid "Mentors"
 msgstr "Mentors"
 
-#: src/app/page.tsx:25
-msgid "menu"
-msgstr "menu"
-
-#: src/app/page.tsx:114
+#: src/app/page.tsx:68
 msgid "Modern lab environment"
 msgstr "Modern lab environment"
 
-#: src/app/(auth)/register/select-role/page.tsx:167
+#: src/app/(auth)/register/select-role/page.tsx:174
 msgid "MULTI-FACTOR"
 msgstr "MULTI-FACTOR"
 
-#: src/lib/auth/schemas.ts:23
+#: src/lib/auth/schemas.ts:31
 msgid "Must be a valid email address."
 msgstr "Must be a valid email address."
 
-#: src/lib/auth/schemas.ts:22
+#: src/lib/auth/schemas.ts:24
+#: src/lib/auth/schemas.ts:29
 msgid "Must be at least 2 characters."
 msgstr "Must be at least 2 characters."
 
-#: src/app/(auth)/login/page.tsx:127
-#: src/app/(auth)/register/student/_components/identity-step.tsx:34
+#: src/lib/auth/schemas.ts:25
+#: src/lib/auth/schemas.ts:30
+msgid "Must be at most 50 characters."
+msgstr "Must be at most 50 characters."
+
+#: src/app/(auth)/register/student/_components/review-step.tsx:37
+msgid "Name"
+msgstr "Name"
+
+#: src/app/(auth)/login/page.tsx:108
+#: src/app/(auth)/register/student/_components/identity-step.tsx:43
 msgid "name@institution.edu"
 msgstr "name@institution.edu"
 
-#: src/app/page.tsx:61
+#: src/components/layout/landing-header.tsx:52
 msgid "News"
 msgstr "News"
 
-#: src/app/(auth)/register/student/page.tsx:270
+#: src/app/(auth)/register/student/_components/registration-actions.tsx:43
 msgid "NEXT STEP"
 msgstr "NEXT STEP"
 
-#: src/app/page.tsx:276
+#: src/app/page.tsx:231
 msgid "NITRA_LAB"
 msgstr "NITRA_LAB"
 
-#: src/app/page.tsx:91
+#: src/app/page.tsx:40
 msgid "Nitriansky technologický inkubátor bridges the gap between academic research and market reality. We turn bold ideas into high-performance startups."
 msgstr "Nitriansky technologický inkubátor bridges the gap between academic research and market reality. We turn bold ideas into high-performance startups."
 
-#: src/app/page.tsx:366
+#: src/app/(auth)/register/student/_components/academic/use-academic-dependent-fields.ts:91
+msgid "No faculties available"
+msgstr "No faculties available"
+
+#: src/app/(auth)/register/student/_components/academic/use-academic-dependent-fields.ts:105
+msgid "No specializations available"
+msgstr "No specializations available"
+
+#: src/app/(auth)/register/student/_components/academic/use-academic-dependent-fields.ts:77
+msgid "No universities available"
+msgstr "No universities available"
+
+#: src/components/layout/header.tsx:18
+#: src/components/layout/landing-footer.tsx:14
 msgid "NTI"
 msgstr "NTI"
 
-#: src/app/page.tsx:88
+#: src/app/(auth)/register/student/_components/academic/academic-indicators-section.tsx:57
+msgid "Number of transferred subjects"
+msgstr "Number of transferred subjects"
+
+#: src/app/page.tsx:37
 msgid "of Future Tech."
 msgstr "of Future Tech."
 
-#: src/components/layout/header.tsx:38
+#: src/components/layout/landing-header.tsx:27
 msgid "Open menu"
 msgstr "Open menu"
 
-#: src/app/page.tsx:268
+#: src/app/page.tsx:220
 msgid "Our Ecosystem"
 msgstr "Our Ecosystem"
 
-#: src/app/(auth)/login/page.tsx:134
-#: src/app/(auth)/register/student/_components/identity-step.tsx:40
+#: src/app/(auth)/login/page.tsx:115
+#: src/app/(auth)/register/student/_components/identity-step.tsx:49
 msgid "Password"
 msgstr "Password"
 
-#: src/lib/auth/schemas.ts:14
-#: src/lib/auth/schemas.ts:26
+#: src/lib/auth/schemas.ts:15
+#: src/lib/auth/schemas.ts:34
 msgid "Password must be at least 6 characters."
 msgstr "Password must be at least 6 characters."
 
-#: src/app/(auth)/register/student/_components/email-step.tsx:54
+#: src/app/(auth)/register/student/_components/email-step.tsx:53
 msgid "Paste token from email if you want to verify now"
 msgstr "Paste token from email if you want to verify now"
 
-#: src/app/(auth)/verify-email/page.tsx:124
-msgid "Paste verification token"
-msgstr "Paste verification token"
+#: src/app/(auth)/register/student/_components/skills/portfolio-resume-section.tsx:108
+msgid "Personal Portfolio / Website"
+msgstr "Personal Portfolio / Website"
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:21
-msgid "PhD"
-msgstr "PhD"
+#: src/app/(auth)/register/student/_components/registration-completion.tsx:48
+msgid "Phew! You survived."
+msgstr "Phew! You survived."
 
-#: src/lib/auth/schemas.ts:11
+#: src/lib/auth/schemas.ts:12
 msgid "Please enter a valid email address."
 msgstr "Please enter a valid email address."
 
-#: src/app/page.tsx:87
+#: src/app/(auth)/register/student/_lib/registration-config.ts:77
+msgid "Please review your information before completing the registration."
+msgstr "Please review your information before completing the registration."
+
+#: src/app/(auth)/register/student/_components/skills/portfolio-resume-section.tsx:28
+msgid "Portfolio & Resume"
+msgstr "Portfolio & Resume"
+
+#: src/app/page.tsx:36
 msgid "Precision"
 msgstr "Precision"
 
-#: src/components/layout/header.tsx:12
-msgid "PRECISION ENGINE FRAMEWORK"
-msgstr "PRECISION ENGINE FRAMEWORK"
+#: src/app/(auth)/register/student/_components/review-step.tsx:123
+#: src/app/(auth)/register/student/_components/skills-step.tsx:30
+msgid "Preferred Roles"
+msgstr "Preferred Roles"
 
-#: src/app/(auth)/register/student/page.tsx:167
-msgid "Precision Engine Registration"
-msgstr "Precision Engine Registration"
-
-#: src/app/(auth)/register/student/page.tsx:261
+#: src/app/(auth)/register/student/_components/registration-actions.tsx:33
 msgid "PREVIOUS STEP"
 msgstr "PREVIOUS STEP"
 
-#: src/app/page.tsx:412
+#: src/app/(auth)/register/student/_components/skills/technical-skills-section.tsx:123
+msgid "Primary"
+msgstr "Primary"
+
+#: src/components/layout/landing-footer.tsx:56
 msgid "Privacy Policy"
 msgstr "Privacy Policy"
 
-#: src/components/layout/footer.tsx:11
+#: src/components/layout/footer.tsx:13
 msgid "PRIVACY POLICY"
 msgstr "PRIVACY POLICY"
 
-#: src/app/(auth)/register/student/page.tsx:46
-msgid "PROCESS 01"
-msgstr "PROCESS 01"
+#: src/app/(auth)/register/student/_components/registration-actions.tsx:43
+msgid "PROCESSING..."
+msgstr "PROCESSING..."
 
-#: src/app/(auth)/register/student/page.tsx:52
-msgid "PROCESS 02"
-msgstr "PROCESS 02"
+#: src/app/(auth)/register/student/_components/review-step.tsx:99
+#: src/app/(auth)/register/student/_lib/registration-config.ts:55
+msgid "Professional Skills"
+msgstr "Professional Skills"
 
-#: src/app/(auth)/register/student/page.tsx:58
-msgid "PROCESS 03"
-msgstr "PROCESS 03"
+#: src/app/(auth)/register/student/_components/skills/projects-summary-section.tsx:167
+msgid "Professional Summary"
+msgstr "Professional Summary"
 
-#: src/app/(auth)/register/student/page.tsx:64
-msgid "PROCESS 04"
-msgstr "PROCESS 04"
+#: src/app/(auth)/register/student/_components/skills/technical-skills-section.tsx:75
+msgid "Proficiency"
+msgstr "Proficiency"
 
-#: src/app/page.tsx:142
+#: src/app/(auth)/register/student/_components/registration-completion.tsx:57
+msgid "Profile Nailed"
+msgstr "Profile Nailed"
+
+#: src/app/page.tsx:94
 msgid "Program A: Venture Launch"
 msgstr "Program A: Venture Launch"
 
-#: src/app/(auth)/register/select-role/page.tsx:154
+#: src/app/(auth)/register/select-role/page.tsx:160
 msgid "Program B Challenge Management"
 msgstr "Program B Challenge Management"
 
-#: src/app/page.tsx:173
+#: src/app/page.tsx:124
 msgid "Program B: Industry Bridge"
 msgstr "Program B: Industry Bridge"
 
-#: src/app/page.tsx:37
-#: src/app/page.tsx:373
+#: src/components/layout/landing-footer.tsx:20
+#: src/components/layout/landing-header.tsx:40
 msgid "Programs"
 msgstr "Programs"
 
-#: src/app/(auth)/register/student/page.tsx:143
-msgid "Provide your current academic information to align your incubation pathway and project matching."
-msgstr "Provide your current academic information to align your incubation pathway and project matching."
+#: src/app/(auth)/register/student/_components/skills/projects-summary-section.tsx:56
+msgid "Project Title"
+msgstr "Project Title"
 
-#: src/app/page.tsx:344
+#: src/lib/auth/schemas.ts:133
+msgid "Project title is required."
+msgstr "Project title is required."
+
+#: src/app/(auth)/register/student/_components/review-step.tsx:212
+#: src/app/(auth)/register/student/_components/skills/projects-summary-section.tsx:41
+msgid "Projects"
+msgstr "Projects"
+
+#: src/app/(auth)/register/student/_components/skills/projects-summary-section.tsx:36
+msgid "Projects & Summary"
+msgstr "Projects & Summary"
+
+#: src/app/page.tsx:300
 msgid "Ready to build the future of Nitra?"
 msgstr "Ready to build the future of Nitra?"
 
-#: src/app/page.tsx:181
+#: src/app/page.tsx:132
 msgid "Real-world Corporate Practice"
 msgstr "Real-world Corporate Practice"
 
-#: src/app/page.tsx:322
+#: src/app/page.tsx:278
 msgid "Recent Success"
 msgstr "Recent Success"
 
-#: src/app/page.tsx:72
+#: src/components/layout/landing-header.tsx:74
 msgid "Register"
 msgstr "Register"
 
-#: src/app/(auth)/register/select-role/page.tsx:134
+#: src/app/(auth)/register/select-role/page.tsx:142
 msgid "Regular User"
 msgstr "Regular User"
 
-#: src/services/auth-service.ts:48
-#: src/services/auth-service.ts:55
-#: src/services/auth-service.ts:60
+#: src/app/(auth)/register/student/_components/academic/academic-indicators-section.tsx:99
+#: src/app/(auth)/register/student/_components/review-step.tsx:84
+msgid "Relevant Courses"
+msgstr "Relevant Courses"
+
+#: src/lib/api/base-client.ts:41
+#: src/lib/api/base-client.ts:46
+#: src/lib/api/base-client.ts:53
+#: src/lib/api/base-client.ts:59
 msgid "Request failed"
 msgstr "Request failed"
 
-#: src/app/(auth)/register/student/_components/email-step.tsx:41
+#: src/app/(auth)/register/student/_components/skills/portfolio-resume-section.tsx:62
+msgid "Required. Selected file will be uploaded upon submission."
+msgstr "Required. Selected file will be uploaded upon submission."
+
+#: src/app/(auth)/register/student/_components/email-step.tsx:40
 msgid "RESEND CONFIRMATION EMAIL"
 msgstr "RESEND CONFIRMATION EMAIL"
 
-#: src/app/(auth)/verify-email/page.tsx:106
-msgid "RESEND EMAIL"
-msgstr "RESEND EMAIL"
+#: src/app/(auth)/register/student/_lib/registration-config.ts:74
+msgid "Review"
+msgstr "Review"
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:50
-msgid "Scalable services, messaging pipelines, observability, and resilient data layers."
-msgstr "Scalable services, messaging pipelines, observability, and resilient data layers."
+#: src/lib/auth/schemas.ts:135
+msgid "Role is required."
+msgstr "Role is required."
 
-#: src/app/page.tsx:328
+#: src/app/page.tsx:284
 msgid "Secured €500k Funding"
 msgstr "Secured €500k Funding"
 
-#: src/components/layout/footer.tsx:11
+#: src/components/layout/footer.tsx:13
 msgid "SECURITY ARCHITECTURE"
 msgstr "SECURITY ARCHITECTURE"
 
-#: src/app/(auth)/register/select-role/page.tsx:165
+#: src/app/(auth)/register/select-role/page.tsx:172
 msgid "SECURITY STANDARDS"
 msgstr "SECURITY STANDARDS"
 
-#: src/app/page.tsx:150
+#: src/app/page.tsx:101
 msgid "Seed Funding Access"
 msgstr "Seed Funding Access"
 
-#: src/lib/auth/schemas.ts:60
-msgid "Select at least one skill."
-msgstr "Select at least one skill."
+#: src/lib/auth/schemas.ts:98
+msgid "Select at least one focus area."
+msgstr "Select at least one focus area."
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:46
-msgid "Select degree level"
-msgstr "Select degree level"
+#: src/lib/auth/schemas.ts:101
+msgid "Select at least one preferred role."
+msgstr "Select at least one preferred role."
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:30
+#: src/app/(auth)/register/student/_components/academic/academic-affiliation-study-fields.tsx:39
+msgid "Select degree"
+msgstr "Select degree"
+
+#: src/app/(auth)/register/student/_components/academic/use-academic-dependent-fields.ts:94
+msgid "Select faculty"
+msgstr "Select faculty"
+
+#: src/app/(auth)/register/student/_components/academic/use-academic-dependent-fields.ts:99
+msgid "Select faculty first"
+msgstr "Select faculty first"
+
+#: src/app/(auth)/register/student/_components/academic/academic-affiliation-study-fields.tsx:116
+msgid "Select graduation year"
+msgstr "Select graduation year"
+
+#: src/app/(auth)/register/student/_components/skills/technical-skills-section.tsx:79
+msgid "Select level"
+msgstr "Select level"
+
+#: src/app/(auth)/register/student/_components/academic/use-academic-dependent-fields.ts:108
+msgid "Select specialization"
+msgstr "Select specialization"
+
+#: src/app/(auth)/register/student/_components/academic/academic-affiliation-study-fields.tsx:64
+msgid "Select study mode"
+msgstr "Select study mode"
+
+#: src/app/(auth)/register/student/_components/academic/use-academic-dependent-fields.ts:80
 msgid "Select university"
 msgstr "Select university"
 
-#: src/app/(auth)/register/select-role/page.tsx:184
+#: src/app/(auth)/register/student/_components/academic/use-academic-dependent-fields.ts:85
+msgid "Select university first"
+msgstr "Select university first"
+
+#: src/app/(auth)/register/select-role/page.tsx:188
 msgid "Select Your"
 msgstr "Select Your"
 
-#: src/app/(auth)/register/student/page.tsx:144
-msgid "Select your strongest technical competencies to personalize ecosystem recommendations."
-msgstr "Select your strongest technical competencies to personalize ecosystem recommendations."
+#: src/app/(auth)/register/student/_components/skills-step.tsx:39
+msgid "Select your strongest collaboration and communication skills."
+msgstr "Select your strongest collaboration and communication skills."
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:131
-msgid "Selected stacks:"
-msgstr "Selected stacks:"
+#: src/app/(auth)/register/student/_components/academic/academic-affiliation-section.tsx:41
+msgid "Select your university and program details."
+msgstr "Select your university and program details."
 
-#: src/app/(auth)/register/student/_components/email-step.tsx:41
-#: src/app/(auth)/verify-email/page.tsx:106
+#: src/app/(auth)/register/student/_components/academic/academic-verification-section.tsx:41
+msgid "Selected file will be uploaded after clicking NEXT STEP."
+msgstr "Selected file will be uploaded after clicking NEXT STEP."
+
+#: src/app/(auth)/register/student/_components/email-step.tsx:40
 msgid "SENDING..."
 msgstr "SENDING..."
 
-#: src/app/(auth)/login/page.tsx:113
+#: src/app/(auth)/register/student/_components/skills/projects-summary-section.tsx:86
+msgid "Short project description..."
+msgstr "Short project description..."
+
+#: src/app/(auth)/register/student/_components/skills/projects-summary-section.tsx:37
+msgid "Showcase your best projects and tell us about yourself."
+msgstr "Showcase your best projects and tell us about yourself."
+
+#: src/app/(auth)/login/page.tsx:94
 msgid "Sign In"
 msgstr "Sign In"
 
-#: src/app/(auth)/login/page.tsx:161
+#: src/app/(auth)/login/page.tsx:136
 msgid "SIGNING IN..."
 msgstr "SIGNING IN..."
 
-#: src/components/i18n/language-switcher.tsx:10
-#~ msgid "SK"
-#~ msgstr "SK"
+#: src/app/(auth)/register/student/_components/skills/technical-skills-section.tsx:59
+msgid "Skill Name"
+msgstr "Skill Name"
 
-#: src/app/(auth)/register/student/page.tsx:63
-msgid "Skills & Stacks"
-msgstr "Skills & Stacks"
+#: src/lib/auth/schemas.ts:123
+msgid "Skill name is required."
+msgstr "Skill name is required."
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:22
-msgid "Software Development"
-msgstr "Software Development"
+#: src/app/(auth)/register/student/_components/review-step.tsx:137
+#: src/app/(auth)/register/student/_components/skills-step.tsx:38
+msgid "Soft Skills"
+msgstr "Soft Skills"
 
-#: src/app/page.tsx:176
+#: src/app/page.tsx:127
 msgid "Solve real-world challenges defined by our corporate partners. Gain professional experience while building breakthrough solutions."
 msgstr "Solve real-world challenges defined by our corporate partners. Gain professional experience while building breakthrough solutions."
 
-#: src/app/page.tsx:158
+#: src/app/(auth)/register/student/_components/academic/academic-affiliation-program-fields.tsx:110
+msgid "Specialization"
+msgstr "Specialization"
+
+#: src/lib/auth/schemas.ts:57
+msgid "Specialization is required."
+msgstr "Specialization is required."
+
+#: src/app/page.tsx:108
 msgid "Specialized Lab Infrastructure"
 msgstr "Specialized Lab Infrastructure"
 
-#: src/app/page.tsx:312
+#: src/app/page.tsx:268
 msgid "Specializes in market entry strategies for DeepTech startups."
 msgstr "Specializes in market entry strategies for DeepTech startups."
 
-#: src/app/page.tsx:43
-#: src/app/page.tsx:381
+#: src/app/(auth)/register/student/_components/registration-stage-header.tsx:43
+msgid "START FROM THE BEGINNING"
+msgstr "START FROM THE BEGINNING"
+
+#: src/components/layout/landing-footer.tsx:27
 msgid "Startups"
 msgstr "Startups"
 
-#: src/app/(auth)/register/select-role/page.tsx:150
+#. placeholder {0}: 1
+#. placeholder {0}: 2
+#. placeholder {0}: 3
+#: src/app/(auth)/register/student/_lib/registration-config.ts:20
+#: src/app/(auth)/register/student/_lib/registration-config.ts:27
+#: src/app/(auth)/register/student/_lib/registration-config.ts:34
+#: src/app/(auth)/register/student/_lib/registration-config.ts:56
+#: src/app/(auth)/register/student/_lib/registration-config.ts:75
+msgid "Step {0}"
+msgstr "Step {0}"
+
+#: src/app/(auth)/register/select-role/page.tsx:157
 msgid "Strategic Institutions"
 msgstr "Strategic Institutions"
 
-#: src/app/(auth)/register/select-role/page.tsx:135
+#: src/app/(auth)/register/select-role/page.tsx:143
 msgid "Students & Teams"
 msgstr "Students & Teams"
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:38
-msgid "Study Program"
-msgstr "Study Program"
+#: src/app/(auth)/register/student/_components/academic/academic-affiliation-section.tsx:40
+msgid "Study Affiliation"
+msgstr "Study Affiliation"
 
-#: src/lib/auth/schemas.ts:48
-msgid "Study program is required."
-msgstr "Study program is required."
+#: src/app/(auth)/register/student/_components/academic/academic-affiliation-study-fields.tsx:60
+#: src/app/(auth)/register/student/_components/review-step.tsx:59
+msgid "Study Mode"
+msgstr "Study Mode"
 
-#: src/app/page.tsx:98
+#: src/app/(auth)/register/student/_components/review-step.tsx:63
+msgid "Study Year"
+msgstr "Study Year"
+
+#: src/app/(auth)/register/student/_components/review-step.tsx:78
+msgid "Subject Average"
+msgstr "Subject Average"
+
+#: src/app/page.tsx:53
 msgid "Submit a challenge"
 msgstr "Submit a challenge"
 
-#: src/app/page.tsx:354
+#: src/app/page.tsx:316
 msgid "Submit Challenge"
 msgstr "Submit Challenge"
 
-#: src/app/(auth)/register/student/page.tsx:280
-msgid "SUBMITTING..."
-msgstr "SUBMITTING..."
-
-#: src/components/layout/header.tsx:12
+#: src/components/layout/header.tsx:26
 msgid "SUPPORT"
 msgstr "SUPPORT"
 
-#: src/app/(auth)/login/page.tsx:81
+#: src/app/(auth)/login/page.tsx:64
 msgid "SYSTEM IMMERSION"
 msgstr "SYSTEM IMMERSION"
 
-#: src/app/(auth)/register/student/page.tsx:164
-msgid "SYSTEM MANIFEST"
-msgstr "SYSTEM MANIFEST"
-
-#: src/app/(auth)/register/select-role/page.tsx:156
+#: src/app/(auth)/register/select-role/page.tsx:162
 msgid "Talent Acquisition Pipeline"
 msgstr "Talent Acquisition Pipeline"
 
-#: src/app/page.tsx:252
+#: src/app/page.tsx:204
 msgid "Talent Retention"
 msgstr "Talent Retention"
 
-#: src/app/(auth)/register/select-role/page.tsx:140
+#: src/app/(auth)/register/select-role/page.tsx:147
 msgid "Team Collaboration Tools"
 msgstr "Team Collaboration Tools"
 
-#: src/app/page.tsx:274
+#: src/app/page.tsx:227
 msgid "TECHCORP"
 msgstr "TECHCORP"
 
-#: src/app/page.tsx:420
+#: src/app/(auth)/register/student/_components/review-step.tsx:151
+#: src/app/(auth)/register/student/_components/skills/technical-skills-section.tsx:44
+msgid "Technical Skills"
+msgstr "Technical Skills"
+
+#: src/app/(auth)/register/student/_components/skills/projects-summary-section.tsx:102
+msgid "Technologies (comma separated)"
+msgstr "Technologies (comma separated)"
+
+#: src/app/(auth)/register/student/_components/skills/projects-summary-section.tsx:170
+msgid "Tell us a little about your goals and experience..."
+msgstr "Tell us a little about your goals and experience..."
+
+#: src/app/(auth)/register/student/_lib/registration-config.ts:51
+msgid "Tell us about your educational background."
+msgstr "Tell us about your educational background."
+
+#: src/components/layout/landing-footer.tsx:64
 msgid "Terms of Service"
 msgstr "Terms of Service"
 
-#: src/components/layout/footer.tsx:11
+#: src/components/layout/footer.tsx:13
 msgid "TERMS OF SERVICE"
 msgstr "TERMS OF SERVICE"
 
-#: src/app/page.tsx:205
+#: src/app/(auth)/register/student/_components/registration-completion.tsx:51
+msgid "That was a lot of typing, but you made it! Your profile is officially sparkling clean and ready to go. Now, don't suffer alone—invite your colleagues to share the joy of filling out this form!"
+msgstr "That was a lot of typing, but you made it! Your profile is officially sparkling clean and ready to go. Now, don't suffer alone—invite your colleagues to share the joy of filling out this form!"
+
+#: src/app/page.tsx:159
 msgid "The Precision Engine Architecture"
 msgstr "The Precision Engine Architecture"
 
-#: src/components/hello-world.tsx:7
-msgid "This is a dummy component."
-msgstr "This is a dummy component."
+#: src/app/(auth)/register/student/_components/academic/academic-indicators-section.tsx:88
+msgid "This is used as a supporting evaluation signal."
+msgstr "This is used as a supporting evaluation signal."
 
-#: src/app/page.tsx:459
+#: src/app/(auth)/register/student/_components/registration-completion.tsx:58
+msgid "Time to invite colleagues"
+msgstr "Time to invite colleagues"
+
+#: src/app/(auth)/register/student/_components/review-step.tsx:72
+msgid "Transferred Subjects"
+msgstr "Transferred Subjects"
+
+#: src/components/layout/landing-footer.tsx:101
 msgid "Twitter"
 msgstr "Twitter"
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:15
-msgid "UKF University"
-msgstr "UKF University"
+#: src/app/(auth)/register/student/_components/review-step.tsx:22
+msgid "Unable to load profile data for review."
+msgstr "Unable to load profile data for review."
 
-#: src/app/(auth)/verify-email/page.tsx:74
-msgid "Unable to confirm email. Please try again."
-msgstr "Unable to confirm email. Please try again."
-
-#: src/app/(auth)/login/page.tsx:57
+#: src/app/(auth)/login/page.tsx:44
 msgid "Unable to log in. Please try again."
 msgstr "Unable to log in. Please try again."
 
-#: src/app/(auth)/register/student/page.tsx:132
-msgid "Unable to register right now. Please try again."
-msgstr "Unable to register right now. Please try again."
+#: src/app/(auth)/register/student/_hooks/use-student-registration-actions.ts:230
+#: src/app/(auth)/register/student/_hooks/use-student-registration-actions.ts:238
+#: src/app/(auth)/register/student/_hooks/use-student-registration-actions.ts:247
+msgid "Unable to register. Please try again."
+msgstr "Unable to register. Please try again."
 
-#: src/app/page.tsx:275
+#: src/app/page.tsx:229
 msgid "UNIDATA"
 msgstr "UNIDATA"
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:29
+#: src/app/(auth)/register/student/_components/academic/academic-affiliation-program-fields.tsx:56
 msgid "University"
 msgstr "University"
 
-#: src/lib/auth/schemas.ts:47
+#: src/lib/auth/schemas.ts:55
 msgid "University is required."
 msgstr "University is required."
 
-#: src/app/(auth)/verify-email/page.tsx:92
-msgid "Use the link in your email, or paste the token below."
-msgstr "Use the link in your email, or paste the token below."
+#: src/app/(auth)/register/student/_components/skills/portfolio-resume-section.tsx:29
+msgid "Upload your CV and add links to your profiles."
+msgstr "Upload your CV and add links to your profiles."
 
-#: src/app/(auth)/verify-email/page.tsx:111
-msgid "Use this if the email didn't arrive."
-msgstr "Use this if the email didn't arrive."
+#. placeholder {0}: field.value
+#: src/app/(auth)/register/student/_components/skills/portfolio-resume-section.tsx:59
+msgid "Using existing CV (ID: {0})"
+msgstr "Using existing CV (ID: {0})"
 
-#: src/lib/auth/schemas.ts:52
-msgid "Valid graduation year expected (e.g. 2028)."
-msgstr "Valid graduation year expected (e.g. 2028)."
+#: src/app/(auth)/register/student/_components/academic/academic-verification-section.tsx:28
+msgid "Verification"
+msgstr "Verification"
 
-#: src/app/(auth)/verify-email/page.tsx:123
-msgid "Verification Token"
-msgstr "Verification Token"
-
-#: src/app/(auth)/register/student/_components/email-step.tsx:53
+#: src/app/(auth)/register/student/_components/email-step.tsx:52
 msgid "Verification Token (Optional for this step)"
 msgstr "Verification Token (Optional for this step)"
 
-#: src/app/(auth)/verify-email/page.tsx:42
-msgid "Verification token is required."
-msgstr "Verification token is required."
-
-#: src/app/(auth)/verify-email/page.tsx:87
-msgid "Verify Your Email"
-msgstr "Verify Your Email"
-
-#: src/app/(auth)/verify-email/page.tsx:146
-msgid "VERIFYING..."
-msgstr "VERIFYING..."
-
-#: src/app/page.tsx:271
+#: src/app/page.tsx:223
 msgid "We collaborate with the most innovative companies and experienced mentors in the region to ensure your success."
 msgstr "We collaborate with the most innovative companies and experienced mentors in the region to ensure your success."
 
-#: src/app/(auth)/verify-email/page.tsx:90
-msgid "We sent a confirmation message to"
-msgstr "We sent a confirmation message to"
-
-#: src/app/(auth)/register/student/_components/skills-step.tsx:35
-msgid "Web Applications"
-msgstr "Web Applications"
-
-#: src/app/(auth)/login/page.tsx:84
+#: src/app/(auth)/login/page.tsx:67
 msgid "Welcome Back to NTI Engine"
 msgstr "Welcome Back to NTI Engine"
 
-#: src/app/page.tsx:204
+#: src/app/(auth)/register/student/_components/skills-step.tsx:21
+msgid "What are your main areas of interest?"
+msgstr "What are your main areas of interest?"
+
+#: src/app/(auth)/register/student/_components/skills-step.tsx:31
+msgid "What kind of team role are you looking for?"
+msgstr "What kind of team role are you looking for?"
+
+#: src/app/page.tsx:158
 msgid "Why NTI"
 msgstr "Why NTI"
 
-#: src/lib/auth/schemas.ts:28
+#: src/lib/auth/schemas.ts:67
+msgid "Year cannot be in the past."
+msgstr "Year cannot be in the past."
+
+#: src/lib/auth/schemas.ts:68
+msgid "Year is too far in the future."
+msgstr "Year is too far in the future."
+
+#: src/lib/auth/schemas.ts:62
+msgid "Year of study must be a whole number."
+msgstr "Year of study must be a whole number."
+
+#: src/lib/auth/schemas.ts:63
+#: src/lib/auth/schemas.ts:64
+msgid "Year of study must be between 1 and 8."
+msgstr "Year of study must be between 1 and 8."
+
+#: src/lib/auth/schemas.ts:78
+msgid "You must accept the academic declaration."
+msgstr "You must accept the academic declaration."
+
+#: src/lib/auth/schemas.ts:36
 msgid "You must accept the terms."
 msgstr "You must accept the terms."
 
-#: src/app/(auth)/register/student/_components/email-step.tsx:26
+#: src/app/(auth)/register/student/_components/registration-completion.tsx:56
+msgid "You survived the boss fight"
+msgstr "You survived the boss fight"
+
+#: src/app/(auth)/register/student/_components/email-step.tsx:25
 msgid "your email address"
 msgstr "your email address"
 
-#: src/app/(auth)/verify-email/page.tsx:91
-msgid "your inbox"
-msgstr "your inbox"
+#: src/app/(auth)/register/student/_components/skills/projects-summary-section.tsx:71
+msgid "Your Role (e.g., Frontend Dev)"
+msgstr "Your Role (e.g., Frontend Dev)"

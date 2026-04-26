@@ -13,10 +13,10 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 
-import { Button } from '@/src/components/shadcn/button';
-import { Card, CardContent, CardFooter, CardHeader } from '@/src/components/shadcn/card';
-import { ROUTES } from '@/src/lib/constants';
-import { cn } from '@/src/lib/utils';
+import { Button } from 'components/shadcn';
+import { Card, CardContent, CardFooter, CardHeader } from 'components/shadcn';
+import { ROUTES } from 'lib/constants';
+import { cn } from 'lib/utils';
 
 type GatewayCardTheme = 'light' | 'dark';
 

@@ -99,6 +99,7 @@ export default [
       curly: ['error', 'all'],
       'max-params': ['error', 3],
       'no-negated-condition': 'error',
+      'no-nested-ternary': 'error',
       'no-unneeded-ternary': 'error',
       'require-await': 'error',
 

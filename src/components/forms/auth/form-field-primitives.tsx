@@ -4,21 +4,9 @@ import type { InputHTMLAttributes, ReactNode } from 'react';
 import type { Control, FieldPath, FieldValues } from 'react-hook-form';
 import { type ControllerRenderProps } from 'react-hook-form';
 
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/src/components/shadcn/form';
-import { Input } from '@/src/components/shadcn/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/src/components/shadcn/select';
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from 'components/shadcn';
+import { Input } from 'components/shadcn';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from 'components/shadcn';
 
 const LABEL_CLASS_NAME = 'text-[11px] font-medium tracking-[0.1em] text-neutral-500 uppercase';
 const INPUT_CLASS_NAME =

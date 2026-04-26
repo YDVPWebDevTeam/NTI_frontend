@@ -3,7 +3,7 @@
 import { t } from '@lingui/core/macro';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ROUTES } from '@/src/lib/constants';
+import { ROUTES } from 'lib/constants';
 import {
   ArrowRight,
   BadgeCheck,
@@ -14,8 +14,8 @@ import {
   UserRoundCog,
   Users,
 } from 'lucide-react';
-import { LandingFooter } from '@/src/components/layout/landing-footer';
-import { LandingHeader } from '@/src/components/layout/landing-header';
+import { LandingFooter } from 'components/layout';
+import { LandingHeader } from 'components/layout';
 
 export default function HomePage() {
   return (

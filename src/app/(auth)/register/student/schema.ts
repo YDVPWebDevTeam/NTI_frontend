@@ -1,4 +1,1 @@
-export {
-  createStudentRegistrationSchema,
-  type StudentRegistrationValues,
-} from '@/src/lib/auth/schemas';
+export { createStudentRegistrationSchema, type StudentRegistrationValues } from 'lib/auth/schemas';

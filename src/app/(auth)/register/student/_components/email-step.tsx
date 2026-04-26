@@ -4,8 +4,8 @@ import { t } from '@lingui/core/macro';
 import { MailCheck } from 'lucide-react';
 import { useFormContext } from 'react-hook-form';
 
-import { ControlledInputField } from '@/src/components/forms/auth/form-field-primitives';
-import { Button } from '@/src/components/shadcn/button';
+import { ControlledInputField } from 'components/forms';
+import { Button } from 'components/shadcn';
 import type { StudentRegistrationValues } from '../schema';
 
 type EmailStepProps = {

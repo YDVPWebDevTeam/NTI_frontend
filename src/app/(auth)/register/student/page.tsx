@@ -46,7 +46,7 @@ export default function SignUpPage() {
     mode: 'onChange',
   });
 
-  const { submitStep, resendConfirmation, finishRegistration, isBusy, isResending } =
+  const { submitStep, resendConfirmation, isBusy, isResending } =
     useStudentRegistrationActions(form);
 
   const handleNextStep = async () => {
@@ -88,11 +88,9 @@ export default function SignUpPage() {
         <section className="bg-[#ececef] px-5 py-7 sm:px-8 sm:py-10 lg:px-12">
           {isCompletionStep ? (
             <RegistrationCompletion
-              onFinish={() => {
-                finishRegistration(() => {
-                  resetStep();
-                  form.reset();
-                });
+              onInviteClick={() => {
+                resetStep();
+                form.reset();
               }}
             />
           ) : (

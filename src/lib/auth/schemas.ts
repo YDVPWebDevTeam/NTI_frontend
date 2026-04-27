@@ -10,6 +10,33 @@ export const NAME_MAX_LENGTH = 50;
 export const STUDY_YEAR_MAX = 8;
 export const MAX_SOFT_SKILLS = 3;
 
+type StudentSkillsValidationValues = {
+  skills: Array<{ isPrimary?: boolean }>;
+  cvFile?: unknown;
+  cvFileId?: string;
+};
+
+function refineStudentSkills(values: StudentSkillsValidationValues, ctx: z.RefinementCtx) {
+  if (!values.skills.some((skill) => skill.isPrimary)) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ['skills'],
+      message: i18n._(msg`At least one skill must be marked as primary.`),
+    });
+  }
+
+  const hasSelectedCvFile = typeof File !== 'undefined' && values.cvFile instanceof File;
+  const hasUploadedCvFileId = Boolean(values.cvFileId?.trim());
+
+  if (!hasSelectedCvFile && !hasUploadedCvFileId) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ['cvFileId'],
+      message: i18n._(msg`CV file is required.`),
+    });
+  }
+}
+
 export function createLoginSchema() {
   return z.object({
     email: z.email({ message: i18n._(msg`Please enter a valid email address.`) }),
@@ -152,26 +179,7 @@ export function createStudentSkillsSchema() {
         .default([]),
       bio: z.string().optional(),
     })
-    .superRefine((values, ctx) => {
-      if (!values.skills.some((skill) => skill.isPrimary)) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: ['skills'],
-          message: i18n._(msg`At least one skill must be marked as primary.`),
-        });
-      }
-
-      const hasSelectedCvFile = typeof File !== 'undefined' && values.cvFile instanceof File;
-      const hasUploadedCvFileId = Boolean(values.cvFileId?.trim());
-
-      if (!hasSelectedCvFile && !hasUploadedCvFileId) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: ['cvFileId'],
-          message: i18n._(msg`CV file is required.`),
-        });
-      }
-    });
+    .superRefine(refineStudentSkills);
 }
 
 export function createStudentRegistrationSchema() {
@@ -187,26 +195,7 @@ export function createStudentRegistrationSchema() {
       ...studentAcademicSchema.shape,
       ...studentSkillsSchema.shape,
     })
-    .superRefine((values, ctx) => {
-      if (!values.skills.some((skill) => skill.isPrimary)) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: ['skills'],
-          message: i18n._(msg`At least one skill must be marked as primary.`),
-        });
-      }
-
-      const hasSelectedCvFile = Boolean(values.cvFile);
-      const hasUploadedCvFileId = Boolean(values.cvFileId?.trim());
-
-      if (!hasSelectedCvFile && !hasUploadedCvFileId) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          path: ['cvFileId'],
-          message: i18n._(msg`CV file is required.`),
-        });
-      }
-    });
+    .superRefine(refineStudentSkills);
 }
 
 export type LoginFormValues = z.infer<ReturnType<typeof createLoginSchema>>;

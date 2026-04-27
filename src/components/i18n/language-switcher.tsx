@@ -43,9 +43,6 @@ export function LanguageSelector({
         >
           <div className="flex items-center gap-2">
             <Languages className="h-4 w-4 shrink-0 text-slate-600" />
-            <span className="hidden text-[10px] font-semibold tracking-wider text-slate-500 uppercase sm:inline">
-              Language
-            </span>
             <span className="font-medium text-slate-800">{currentLanguage.label}</span>
           </div>
         </SelectTrigger>

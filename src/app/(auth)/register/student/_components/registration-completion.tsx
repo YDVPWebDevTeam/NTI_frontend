@@ -6,10 +6,10 @@ import { Button } from 'components/shadcn';
 import { ROUTES } from 'lib/constants/routes';
 
 type RegistrationCompletionProps = {
-  onFinish: () => void;
+  onInviteClick?: () => void;
 };
 
-export function RegistrationCompletion({ onFinish }: RegistrationCompletionProps) {
+export function RegistrationCompletion({ onInviteClick }: RegistrationCompletionProps) {
   return (
     <div className="animate-in fade-in zoom-in slide-in-from-bottom-8 relative overflow-hidden rounded-3xl border border-black/5 bg-white p-6 shadow-xl duration-700 sm:p-10">
       <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-3xl">
@@ -72,11 +72,9 @@ export function RegistrationCompletion({ onFinish }: RegistrationCompletionProps
         <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button
             asChild
-            type="button"
-            onClick={onFinish}
             className="h-14 rounded-full bg-[#1e58d5] px-8 text-[12px] font-bold tracking-[0.15em] text-white shadow-md transition-all hover:bg-[#245fdc] hover:shadow-lg"
           >
-            <Link href={ROUTES.ONBOARDING_INVITES}>
+            <Link href={ROUTES.ONBOARDING_INVITES} onClick={onInviteClick}>
               {t`INVITE COLLEAGUES`}
               <ArrowRight className="ml-1 h-4 w-4" />
             </Link>

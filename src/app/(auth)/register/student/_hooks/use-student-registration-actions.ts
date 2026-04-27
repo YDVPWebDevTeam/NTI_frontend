@@ -75,8 +75,13 @@ export function useStudentRegistrationActions(form: UseFormReturn<StudentRegistr
 
   const handleEmailStep = async () => {
     const values = form.getValues();
+    const token = values.verificationCode.trim();
 
-    await confirmEmail({ token: values.verificationCode });
+    if (!token) {
+      return;
+    }
+
+    await confirmEmail({ token });
   };
 
   const handleAcademicStep = async () => {

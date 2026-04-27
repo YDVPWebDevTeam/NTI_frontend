@@ -1,7 +1,6 @@
 import { t } from '@lingui/core/macro';
 
 import { authEndpoints } from './auth/endpoints';
-import { clearAccessToken, getAccessToken } from './auth/token-store';
 import { type ApiResponse } from './types';
 
 const DEFAULT_API_BASE_URL = 'http://localhost:3001/api';
@@ -75,12 +74,7 @@ export interface RequestConfig {
 export async function request<TResponse>(path: string, config?: RequestConfig): Promise<TResponse> {
   try {
     const headers = new Headers(config?.headers);
-    const accessToken = getAccessToken();
     const hasBody = config?.data !== undefined;
-
-    if (accessToken && !headers.has('Authorization')) {
-      headers.set('Authorization', `Bearer ${accessToken}`);
-    }
 
     if (hasBody && !headers.has('Content-Type')) {
       headers.set('Content-Type', 'application/json');
@@ -102,8 +96,6 @@ export async function request<TResponse>(path: string, config?: RequestConfig): 
           skipAuthRefresh: true,
         });
       }
-
-      clearAccessToken();
     }
 
     const payload = (await response.json()) as unknown;

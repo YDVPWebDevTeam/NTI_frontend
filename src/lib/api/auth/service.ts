@@ -1,7 +1,6 @@
 import { api } from 'lib/api/base-client';
 
 import { authEndpoints } from './endpoints';
-import { clearAccessToken, setAccessToken } from './token-store';
 import type {
   AuthResponse,
   AuthUser,
@@ -11,28 +10,16 @@ import type {
   ResendConfirmationEmailRequest,
 } from './types';
 
-function persistAccessToken(response: AuthResponse | AuthUser): AuthResponse | AuthUser {
-  if ('accessToken' in response) {
-    setAccessToken(response.accessToken);
-  }
-
-  return response;
-}
-
 export const authService = {
-  async login(payload: LoginRequest) {
-    const response = await api.post<AuthResponse, LoginRequest>(authEndpoints.login, payload);
-
-    return persistAccessToken(response);
+  login(payload: LoginRequest) {
+    return api.post<AuthResponse, LoginRequest>(authEndpoints.login, payload);
   },
 
-  async registerStudent(payload: RegisterRequest) {
-    const response = await api.post<AuthResponse | AuthUser, RegisterRequest>(
+  registerStudent(payload: RegisterRequest) {
+    return api.post<AuthResponse | AuthUser, RegisterRequest>(
       authEndpoints.registerStudent,
       payload,
     );
-
-    return persistAccessToken(response);
   },
 
   resendConfirmationEmail(payload: ResendConfirmationEmailRequest) {
@@ -42,30 +29,22 @@ export const authService = {
     );
   },
 
-  async confirmEmail(payload: ConfirmEmailRequest) {
-    const response = await api.post<AuthResponse | AuthUser, ConfirmEmailRequest>(
+  confirmEmail(payload: ConfirmEmailRequest) {
+    return api.post<AuthResponse | AuthUser, ConfirmEmailRequest>(
       authEndpoints.confirmEmail,
       payload,
     );
-
-    return persistAccessToken(response);
   },
 
   getCurrentUser() {
     return api.get<AuthUser>(authEndpoints.me);
   },
 
-  async refresh() {
-    const response = await api.post<AuthResponse | AuthUser>(authEndpoints.refresh);
-
-    return persistAccessToken(response);
+  refresh() {
+    return api.post<AuthResponse | AuthUser>(authEndpoints.refresh);
   },
 
-  async logout() {
-    try {
-      return await api.post<{ success?: boolean } | void>(authEndpoints.logout);
-    } finally {
-      clearAccessToken();
-    }
+  logout() {
+    return api.post<{ success?: boolean } | void>(authEndpoints.logout);
   },
 };

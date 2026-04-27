@@ -1,20 +1,21 @@
 import { t } from '@lingui/core/macro';
-import type { Control, UseFormSetValue } from 'react-hook-form';
+import type { Control, UseFormSetValue, UseFormClearErrors } from 'react-hook-form';
 
-import { FormField, FormControl, FormItem, FormLabel, FormMessage } from 'components/shadcn';
-import { Input } from 'components/shadcn';
+import { FormControl, FormField, FormItem, FormLabel, FormMessage, Input } from 'components/shadcn';
 import type { StudentRegistrationValues } from '../../schema';
 import { RegistrationSectionCard } from '../registration-section-card';
 
 type PortfolioResumeSectionProps = {
   control: Control<StudentRegistrationValues>;
   setValue: UseFormSetValue<StudentRegistrationValues>;
+  clearErrors: UseFormClearErrors<StudentRegistrationValues>;
   selectedCvFile: unknown;
 };
 
 export function PortfolioResumeSection({
   control,
   setValue,
+  clearErrors,
   selectedCvFile,
 }: PortfolioResumeSectionProps) {
   return (
@@ -39,12 +40,6 @@ export function PortfolioResumeSection({
                   </p>
                 );
               }
-
-              return (
-                <p className="text-xs font-medium text-red-600">
-                  {t`Required. Selected file will be uploaded upon submission.`}
-                </p>
-              );
             })();
 
             return (
@@ -62,7 +57,12 @@ export function PortfolioResumeSection({
                       }
 
                       field.onChange(undefined);
-                      setValue('cvFile', file, { shouldDirty: true, shouldTouch: true });
+                      setValue('cvFile', file, {
+                        shouldDirty: true,
+                        shouldTouch: true,
+                        shouldValidate: true,
+                      });
+                      clearErrors('cvFileId');
                       event.target.value = '';
                     }}
                     className="border-input bg-background block w-full rounded-md border px-3 py-2 text-sm"

@@ -1,6 +1,7 @@
 import { t } from '@lingui/core/macro';
 import { useFormContext } from 'react-hook-form';
 
+import { MAX_SOFT_SKILLS } from 'lib/auth/schemas';
 import type { StudentRegistrationValues } from '../schema';
 import { MultiSelectFormField } from './skills/multi-select-form-field';
 import { PortfolioResumeSection } from './skills/portfolio-resume-section';
@@ -9,7 +10,7 @@ import { FOCUS_AREA_OPTIONS, PREFERRED_ROLE_OPTIONS, SOFT_SKILL_OPTIONS } from '
 import { TechnicalSkillsSection } from './skills/technical-skills-section';
 
 export function SkillsStep() {
-  const { control, setValue, watch } = useFormContext<StudentRegistrationValues>();
+  const { control, setValue, clearErrors, watch } = useFormContext<StudentRegistrationValues>();
   const selectedCvFile = watch('cvFile');
 
   return (
@@ -35,15 +36,16 @@ export function SkillsStep() {
       <MultiSelectFormField
         control={control}
         name="softSkills"
-        title={t`Soft Skills`}
+        title={t`Your Top 3 Soft Skills`}
         description={t`Select your strongest collaboration and communication skills.`}
         options={SOFT_SKILL_OPTIONS}
-        helperText={t`Choose from the supported soft-skill categories.`}
+        maxSelections={MAX_SOFT_SKILLS}
       />
 
       <PortfolioResumeSection
         control={control}
         setValue={setValue}
+        clearErrors={clearErrors}
         selectedCvFile={selectedCvFile}
       />
 

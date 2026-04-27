@@ -8,6 +8,7 @@ export const VERIFICATION_CODE_MIN_LENGTH = 4;
 export const NAME_MIN_LENGTH = 2;
 export const NAME_MAX_LENGTH = 50;
 export const STUDY_YEAR_MAX = 8;
+export const MAX_SOFT_SKILLS = 3;
 
 export function createLoginSchema() {
   return z.object({
@@ -101,7 +102,11 @@ export function createStudentSkillsSchema() {
       preferredRoles: z
         .array(z.string())
         .min(1, { message: i18n._(msg`Select at least one preferred role.`) }),
-      softSkills: z.array(softSkillSchema).optional().default([]),
+      softSkills: z
+        .array(softSkillSchema)
+        .max(MAX_SOFT_SKILLS, { message: i18n._(msg`Select at most 3 soft skills.`) })
+        .optional()
+        .default([]),
       githubUrl: z
         .string()
         .url({ message: i18n._(msg`Enter a valid URL.`) })
@@ -175,12 +180,33 @@ export function createStudentRegistrationSchema() {
   const studentAcademicSchema = createStudentAcademicSchema();
   const studentSkillsSchema = createStudentSkillsSchema();
 
-  return z.object({
-    ...studentIdentitySchema.shape,
-    ...studentEmailStepSchema.shape,
-    ...studentAcademicSchema.shape,
-    ...studentSkillsSchema.shape,
-  });
+  return z
+    .object({
+      ...studentIdentitySchema.shape,
+      ...studentEmailStepSchema.shape,
+      ...studentAcademicSchema.shape,
+      ...studentSkillsSchema.shape,
+    })
+    .superRefine((values, ctx) => {
+      if (!values.skills.some((skill) => skill.isPrimary)) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['skills'],
+          message: i18n._(msg`At least one skill must be marked as primary.`),
+        });
+      }
+
+      const hasSelectedCvFile = Boolean(values.cvFile);
+      const hasUploadedCvFileId = Boolean(values.cvFileId?.trim());
+
+      if (!hasSelectedCvFile && !hasUploadedCvFileId) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['cvFileId'],
+          message: i18n._(msg`CV file is required.`),
+        });
+      }
+    });
 }
 
 export type LoginFormValues = z.infer<ReturnType<typeof createLoginSchema>>;

@@ -36,10 +36,9 @@ export default function LoginPage() {
 
   const handleSubmit = async (values: LoginFormValues) => {
     try {
-      const response = await login(values);
-      const user = getAuthUser(response);
+      await login(values);
 
-      router.push(user.status === 'PENDING' ? ROUTES.AUTH.VERIFY_EMAIL : ROUTES.ROOT);
+      router.push(ROUTES.DASHBOARD);
     } catch (error) {
       toast.error(error instanceof Error ? error.message : t`Unable to log in. Please try again.`);
     }

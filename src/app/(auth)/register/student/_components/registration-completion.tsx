@@ -1,7 +1,9 @@
 import { t } from '@lingui/core/macro';
 import { ArrowRight, PartyPopper, Sparkles, Star } from 'lucide-react';
+import Link from 'next/link';
 
 import { Button } from 'components/shadcn';
+import { ROUTES } from 'lib/constants/routes';
 
 type RegistrationCompletionProps = {
   onFinish: () => void;
@@ -69,12 +71,15 @@ export function RegistrationCompletion({ onFinish }: RegistrationCompletionProps
 
         <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button
+            asChild
             type="button"
             onClick={onFinish}
             className="h-14 rounded-full bg-[#1e58d5] px-8 text-[12px] font-bold tracking-[0.15em] text-white shadow-md transition-all hover:bg-[#245fdc] hover:shadow-lg"
           >
-            {t`INVITE COLLEAGUES`}
-            <ArrowRight className="ml-1 h-4 w-4" />
+            <Link href={ROUTES.ONBOARDING_INVITES}>
+              {t`INVITE COLLEAGUES`}
+              <ArrowRight className="ml-1 h-4 w-4" />
+            </Link>
           </Button>
         </div>
       </div>

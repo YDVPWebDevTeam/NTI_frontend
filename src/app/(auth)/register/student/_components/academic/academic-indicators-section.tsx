@@ -3,7 +3,7 @@ import type { Control } from 'react-hook-form';
 
 import { Checkbox } from 'components/shadcn';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from 'components/shadcn';
-import { Input } from 'components/shadcn';
+import { Input, TagInput } from 'components/shadcn';
 import { Textarea } from 'components/shadcn';
 import type { StudentRegistrationValues } from '../../schema';
 import { parseOptionalNumber } from './constants';
@@ -92,17 +92,10 @@ export function AcademicIndicatorsSection({
             <FormItem>
               <FormLabel>{t`Relevant Courses`}</FormLabel>
               <FormControl>
-                <Input
+                <TagInput
                   placeholder={t`E.g. Algorithms, Distributed Systems, UX Design`}
-                  value={field.value?.join(', ') ?? ''}
-                  onChange={(event) => {
-                    const courses = event.target.value
-                      .split(',')
-                      .map((course) => course.trim())
-                      .filter(Boolean);
-
-                    field.onChange(courses);
-                  }}
+                  value={field.value || []}
+                  onChange={field.onChange}
                 />
               </FormControl>
               <FormMessage />
@@ -120,7 +113,7 @@ export function AcademicIndicatorsSection({
                 <Textarea
                   {...field}
                   placeholder={t`E.g. competitions, awards, scholarships...`}
-                  className="min-h-[100px]"
+                  className="min-h-25"
                 />
               </FormControl>
               <FormMessage />

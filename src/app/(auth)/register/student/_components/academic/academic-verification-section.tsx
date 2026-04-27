@@ -28,12 +28,8 @@ export function AcademicVerificationSection({
             onChange={onAcademicEvidenceFileChange}
             className="border-input bg-background block w-full rounded-md border px-3 py-2 text-sm"
           />
-          {selectedAcademicEvidenceFile instanceof File ? (
+          {selectedAcademicEvidenceFile instanceof File && (
             <p className="text-xs text-neutral-500">{selectedAcademicEvidenceFile.name}</p>
-          ) : (
-            <p className="text-xs text-neutral-500">
-              {t`Selected file will be uploaded after clicking NEXT STEP.`}
-            </p>
           )}
         </div>
 

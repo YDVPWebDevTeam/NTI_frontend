@@ -12,6 +12,7 @@ type MultiSelectFormFieldProps<TValue extends string> = {
   description: string;
   options: TValue[];
   helperText?: string;
+  maxSelections?: number;
 };
 
 export function MultiSelectFormField<TValue extends string>({
@@ -21,6 +22,7 @@ export function MultiSelectFormField<TValue extends string>({
   description,
   options,
   helperText,
+  maxSelections,
 }: MultiSelectFormFieldProps<TValue>) {
   return (
     <FormField
@@ -32,12 +34,13 @@ export function MultiSelectFormField<TValue extends string>({
         return (
           <FormItem>
             <FormControl>
-              <MultiSelectSection
+              <MultiSelectSection<TValue>
                 title={title}
                 description={description}
                 options={options}
                 selectedValues={selectedValues}
-                onToggle={(value, checked) =>
+                maxSelections={maxSelections}
+                onValueChange={(value, checked) =>
                   field.onChange(toggleArraySelection(selectedValues, value, checked))
                 }
               />

@@ -10,6 +10,8 @@ const AUTH_ROUTES = {
 
 export const ROUTES = {
   ROOT: '/',
+  DASHBOARD: '/dashboard',
+  ONBOARDING_INVITES: '/onboarding/invites',
   TERMS_OF_SERVICE: '/terms-of-service',
   PRIVACY_POLICY: '/privacy-policy',
   EU_FUNDING_DISCLOSURE: '/eu-funding-disclosure',

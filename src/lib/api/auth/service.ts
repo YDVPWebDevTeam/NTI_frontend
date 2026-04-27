@@ -1,4 +1,4 @@
-import { api } from '@/src/lib/api/base-client';
+import { api } from 'lib/api/base-client';
 
 import { authEndpoints } from './endpoints';
 import type {
@@ -41,7 +41,7 @@ export const authService = {
   },
 
   refresh() {
-    return api.post<AuthUser>(authEndpoints.refresh);
+    return api.post<AuthResponse | AuthUser>(authEndpoints.refresh);
   },
 
   logout() {

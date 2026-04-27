@@ -1,787 +1,1010 @@
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2026-04-11 12:28+0200\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: @lingui/cli\n"
-"Language: sk\n"
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-11 12:28+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
+"X-Generator: Poedit 3.9\n"
 
-#: src/components/layout/footer.tsx:8
-msgid "© 2024 INSTITUTIONAL INCUBATOR. PRECISION ENGINE FRAMEWORK."
-msgstr "© 2024 INŠTITUCIONÁLNY INKUBÁTOR. RÁMEC PRECISION ENGINE."
+#: src/app/(auth)/register/student/_components/identity-step.tsx:73
+msgid " and institutional data processing terms required for platform access."
+msgstr " a inštitucionálne podmienky spracovania údajov potrebné na prístup k platforme."
 
-#: src/app/page.tsx:466
+#: src/components/layout/landing-footer.tsx:108
 msgid "© 2024 Nitriansky technologický inkubátor. All rights reserved."
 msgstr "© 2024 Nitriansky technologický inkubátor. Všetky práva vyhradené."
 
-#: src/app/page.tsx:154
+#: src/components/layout/footer.tsx:19
+msgid "© 2026 INSTITUTIONAL INCUBATOR."
+msgstr "© 2026 INŠTITUCIONÁLNY INKUBÁTOR."
+
+#: src/app/page.tsx:104
 msgid "1-on-1 Mentoring"
 msgstr "Individuálny mentoring"
 
-#: src/app/page.tsx:329
+#: src/app/(auth)/register/student/_components/registration-completion.tsx:46
+msgid "100% Complete"
+msgstr "100 % dokončené"
+
+#: src/app/page.tsx:285
 msgid "2023 Cohort Graduate"
 msgstr "Absolvent kohorty 2023"
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:57
-msgid "2028"
-msgstr "2028"
-
-#: src/app/(auth)/register/student/_components/email-step.tsx:25
+#: src/app/(auth)/register/student/_components/email-step.tsx:24
 msgid "A confirmation link will be sent to"
 msgstr "Potvrdzovací odkaz bude odoslaný na"
 
-#: src/app/(auth)/register/student/page.tsx:42
-msgid "Academic Status"
-msgstr "Akademický status"
+#: src/app/(auth)/register/student/_components/review-step.tsx:90
+msgid "Academic Achievements"
+msgstr "Akademické úspechy"
 
-#: src/app/(auth)/login/page.tsx:157
+#: src/app/(auth)/register/student/_components/academic/academic-indicators-section.tsx:111
+msgid "Academic Achievements (Optional)"
+msgstr "Akademické úspechy (voliteľné)"
+
+#: src/app/(auth)/register/student/_components/academic/academic-indicators-section.tsx:23
+msgid "Academic Indicators"
+msgstr "Akademické ukazovatele"
+
+#: src/app/(auth)/register/student/_components/review-step.tsx:51
+#: src/app/(auth)/register/student/_lib/registration-config.ts:39
+msgid "Academic Information"
+msgstr "Akademické informácie"
+
+#: src/app/(auth)/login/page.tsx:135
 msgid "ACCESS ENGINE"
 msgstr "PRÍSTUPOVÝ MODUL"
 
-#: src/app/(auth)/register/select-role/page.tsx:189
+#: src/app/(auth)/register/select-role/page.tsx:192
 msgid "Access the high-performance environment tailored to your institutional role. Choose a path to begin your technical journey."
 msgstr "Získajte prístup do vysokovýkonného prostredia prispôsobeného vašej inštitucionálnej úlohe. Vyberte si cestu a začnite svoju technologickú cestu."
 
-#: src/app/page.tsx:224
+#: src/app/page.tsx:176
 msgid "Access to premium office spaces, 3D printing labs, and legal support to scale your dream."
 msgstr "Prístup k prémiovým kancelárskym priestorom, 3D tlačovým laboratóriám a právnej podpore na rozvoj vášho sna."
 
-#: src/app/(auth)/register/select-role/page.tsx:39
+#: src/app/(auth)/register/select-role/page.tsx:146
 msgid "Access to Program A Frameworks"
 msgstr "Prístup k rámcom Programu A"
 
-#: src/app/(auth)/register/student/page.tsx:211
+#: src/app/(auth)/register/student/_components/registration-stage-header.tsx:25
 msgid "ACTIVE STAGE"
 msgstr "AKTÍVNA FÁZA"
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:26
-msgid "AI & Data Technologies"
-msgstr "AI a dátové technológie"
+#: src/lib/auth/schemas.ts:163
+msgid "Add at least one technical skill."
+msgstr "Pridajte aspoň jednu technickú zručnosť."
 
-#: src/app/(auth)/register/select-role/page.tsx:200
+#: src/app/(auth)/register/student/_components/skills/projects-summary-section.tsx:151
+msgid "Add Project"
+msgstr "Pridať projekt"
+
+#: src/app/(auth)/register/student/_components/skills/technical-skills-section.tsx:164
+msgid "Add Skill"
+msgstr "Pridať zručnosť"
+
+#: src/app/(auth)/register/select-role/page.tsx:203
 msgid "Already have an account?"
 msgstr "Už máte účet?"
 
-#: src/app/page.tsx:351
+#: src/app/page.tsx:310
 msgid "Apply as Student"
 msgstr "Prihlásiť sa ako študent"
 
-#: src/app/page.tsx:95
+#: src/app/page.tsx:47
 msgid "Apply as student/team"
 msgstr "Prihlásiť sa ako študent/tím"
 
-#: src/app/page.tsx:324
+#: src/app/page.tsx:280
 msgid "AquaSense Solutions"
 msgstr "AquaSense Solutions"
 
-#: src/app/(auth)/register/select-role/page.tsx:68
+#: src/lib/auth/schemas.ts:24
+msgid "At least one skill must be marked as primary."
+msgstr "Aspoň jedna zručnosť musí byť označená ako hlavná."
+
+#: src/app/(auth)/register/select-role/page.tsx:174
 msgid "AUTH PROTOCOL"
 msgstr "AUTENTIFIKAČNÝ PROTOKOL"
 
-#: src/app/(auth)/login/page.tsx:106
+#: src/app/(auth)/login/page.tsx:90
 msgid "AUTHENTICATION GATEWAY"
 msgstr "AUTENTIFIKAČNÁ BRÁNA"
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:18
-msgid "Bachelor"
-msgstr "Bakalár"
+#: src/app/(auth)/register/student/_components/academic/academic-indicators-section.tsx:71
+msgid "Average grade from key subjects"
+msgstr "Priemerná známka z kľúčových predmetov"
 
-#: src/app/(auth)/verify-email/page.tsx:142
-msgid "Back to login"
-msgstr "Späť na prihlásenie"
+#: src/app/(auth)/register/student/_components/review-step.tsx:104
+msgid "Bio"
+msgstr "Bio"
 
-#: src/app/page.tsx:310
+#: src/app/page.tsx:266
 msgid "Business Strategy"
 msgstr "Obchodná stratégia"
 
-#: src/app/page.tsx:189
+#: src/app/page.tsx:140
 msgid "Career Placement Opportunities"
 msgstr "Príležitosti kariérneho uplatnenia"
 
-#: src/app/(auth)/register/student/_components/email-step.tsx:46
+#: src/app/(auth)/register/student/_components/email-step.tsx:45
 msgid "Check your inbox and paste token only if needed."
 msgstr "Skontrolujte si doručenú poštu a vložte token iba v prípade potreby."
 
-#: src/app/page.tsx:129
+#: src/app/page.tsx:83
 msgid "Choose Your Path to Innovation"
 msgstr "Vyberte si svoju cestu k inovácii"
 
-#: src/app/page.tsx:25
-msgid "close"
-msgstr "zavrieť"
-
-#: src/components/layout/header.tsx:38
+#: src/components/layout/landing-header.tsx:27
 msgid "Close menu"
 msgstr "Zavrieť menu"
 
-#: src/lib/auth/schemas.ts:32
+#: src/lib/auth/schemas.ts:78
 msgid "Code must be at least 4 characters."
 msgstr "Kód musí mať aspoň 4 znaky."
 
-#: src/app/page.tsx:185
+#: src/app/page.tsx:136
 msgid "Collaboration with Enterprises"
 msgstr "Spolupráca s firmami"
 
-#: src/app/(auth)/register/select-role/page.tsx:49
+#: src/app/(auth)/register/select-role/page.tsx:156
 msgid "Company Partner"
 msgstr "Firemný partner"
 
-#: src/app/(auth)/register/select-role/page.tsx:66
+#: src/app/(auth)/register/select-role/page.tsx:172
 msgid "COMPLIANT"
 msgstr "V SÚLADE"
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:41
-msgid "Computer Science"
-msgstr "Informatika"
-
-#: src/app/(auth)/verify-email/page.tsx:138
-msgid "CONFIRM EMAIL"
-msgstr "POTVRDIŤ E-MAIL"
-
-#: src/app/(auth)/register/student/page.tsx:135
+#: src/app/(auth)/register/student/_lib/registration-config.ts:35
 msgid "Confirm your email address from the message sent to your inbox before full platform access."
 msgstr "Pred plným prístupom na platformu potvrďte svoju e-mailovú adresu prostredníctvom správy odoslanej do vašej schránky."
 
-#: src/app/(auth)/verify-email/page.tsx:53
-msgid "Confirmation email sent. Check your inbox."
-msgstr "Potvrdzovací e-mail bol odoslaný. Skontrolujte si doručenú poštu."
-
-#: src/app/page.tsx:435
+#: src/components/layout/landing-footer.tsx:78
 msgid "Connect"
 msgstr "Spojiť sa"
 
-#: src/app/page.tsx:234
+#: src/app/page.tsx:186
 msgid "Connecting you to university research and top European tech clusters."
 msgstr "Spájame vás s univerzitným výskumom a poprednými európskymi technologickými klastrami."
 
-#: src/app/page.tsx:443
+#: src/components/layout/landing-footer.tsx:85
 msgid "Contact Us"
 msgstr "Kontaktujte nás"
 
-#: src/app/(auth)/register/select-role/page.tsx:59
+#: src/app/(auth)/register/select-role/page.tsx:165
 msgid "Continue as Company Partner"
 msgstr "Pokračovať ako firemný partner"
 
-#: src/app/(auth)/register/select-role/page.tsx:44
+#: src/app/(auth)/register/select-role/page.tsx:151
 msgid "Continue as Regular User"
 msgstr "Pokračovať ako bežný používateľ"
 
-#: src/app/page.tsx:389
+#: src/components/layout/landing-footer.tsx:35
 msgid "Corporate Challenges"
 msgstr "Firemné výzvy"
 
-#: src/app/(auth)/register/student/_components/identity-step.tsx:42
+#: src/app/(auth)/register/student/_components/identity-step.tsx:47
 msgid "Create a secure password"
 msgstr "Vytvorte bezpečné heslo"
 
-#: src/app/(auth)/login/page.tsx:94
+#: src/app/(auth)/login/page.tsx:78
 msgid "CREATE ACCOUNT"
 msgstr "VYTVORIŤ ÚČET"
 
-#: src/app/(auth)/register/student/page.tsx:133
+#: src/app/(auth)/register/student/_lib/registration-config.ts:28
 msgid "Create your registration profile with core credentials and accept the institutional privacy terms."
 msgstr "Vytvorte si registračný profil so základnými údajmi a prijmite inštitucionálne podmienky ochrany súkromia."
 
-#: src/app/(auth)/register/select-role/page.tsx:37
+#: src/app/(auth)/register/student/_components/academic/academic-affiliation-study-fields.tsx:73
+msgid "Current Year of Study"
+msgstr "Aktuálny ročník štúdia"
+
+#: src/app/(auth)/register/student/_components/skills/portfolio-resume-section.tsx:47
+msgid "CV File"
+msgstr "Súbor CV"
+
+#: src/app/(auth)/register/student/_hooks/use-student-registration-actions.ts:168
+#: src/lib/auth/schemas.ts:35
+msgid "CV file is required."
+msgstr "Súbor CV je povinný."
+
+#: src/app/(auth)/register/select-role/page.tsx:144
 msgid "Dedicated environment for Program A participants. Focus on end-to-end innovation, collaborative architectural design, and rapid prototyping within the Incubator ecosystem."
 msgstr "Vyhradené prostredie pre účastníkov Programu A. Zameranie na komplexné inovácie, kolaboratívny architektonický návrh a rýchle prototypovanie v ekosystéme Inkubátora."
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:47
+#: src/app/(auth)/register/student/_components/academic/academic-affiliation-study-fields.tsx:23
+#: src/app/(auth)/register/student/_components/review-step.tsx:55
 msgid "Degree Level"
 msgstr "Stupeň štúdia"
 
-#: src/lib/auth/schemas.ts:39
+#: src/lib/auth/schemas.ts:88
 msgid "Degree level is required."
 msgstr "Stupeň štúdia je povinný."
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:21
-msgid "Desktop and mobile ecosystems, architecture fundamentals, and embedded programming."
-msgstr "Desktopové a mobilné ekosystémy, základy architektúry a embedded programovanie."
+#: src/lib/auth/schemas.ts:168
+msgid "Description is required."
+msgstr "Popis je povinný."
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:45
-msgid "Distributed Backend Systems"
-msgstr "Distribuované backendové systémy"
+#: src/app/(auth)/register/student/_components/academic/academic-indicators-section.tsx:39
+msgid "Do you currently have transferred / unfinished subjects?"
+msgstr "Máte aktuálne uznané alebo nedokončené predmety?"
 
-#: src/app/(auth)/login/page.tsx:86
+#: src/app/(auth)/login/page.tsx:71
 msgid "Don't have an account yet?"
 msgstr "Ešte nemáte účet?"
 
-#: src/app/page.tsx:309
+#: src/app/page.tsx:265
 msgid "Dr. Lucia Bielik"
 msgstr "Dr. Lucia Bielik"
 
-#: src/app/page.tsx:368
+#: src/components/layout/landing-footer.tsx:16
 msgid "Driving innovation and economic growth through technology and academic collaboration."
 msgstr "Podporujeme inovácie a ekonomický rast prostredníctvom technológií a akademickej spolupráce."
 
-#: src/app/(auth)/login/page.tsx:121
-#: src/app/(auth)/register/student/_components/identity-step.tsx:32
+#: src/app/(auth)/register/student/_components/academic/academic-indicators-section.tsx:96
+msgid "E.g. Algorithms, Distributed Systems, UX Design"
+msgstr "Napr. Algoritmy, distribuované systémy, UX dizajn"
+
+#: src/app/(auth)/register/student/_components/academic/academic-indicators-section.tsx:115
+msgid "E.g. competitions, awards, scholarships..."
+msgstr "Napr. súťaže, ocenenia, štipendiá..."
+
+#: src/app/(auth)/register/student/_components/skills/technical-skills-section.tsx:49
+msgid "e.g., React"
+msgstr "napr. React"
+
+#: src/app/(auth)/register/student/_components/review-step.tsx:43
+msgid "Email"
+msgstr "E-mail"
+
+#: src/app/(auth)/login/page.tsx:105
+#: src/app/(auth)/register/student/_components/identity-step.tsx:37
 msgid "Email Address"
 msgstr "E-mailová adresa"
 
-#: src/app/(auth)/register/student/page.tsx:36
+#: src/app/(auth)/register/student/_lib/registration-config.ts:32
 msgid "Email Confirmation"
 msgstr "Potvrdenie e-mailu"
 
-#: src/app/(auth)/verify-email/page.tsx:49
-msgid "Email confirmed successfully. You can continue."
-msgstr "E-mail bol úspešne potvrdený. Môžete pokračovať."
-
-#: src/app/(auth)/verify-email/page.tsx:77
-msgid "EMAIL VERIFICATION"
-msgstr "OVERENIE E-MAILU"
-
-#: src/components/i18n/language-switcher.tsx:11
-msgid "EN"
-msgstr "EN"
-
-#: src/app/(auth)/register/select-role/page.tsx:67
+#: src/app/(auth)/register/select-role/page.tsx:173
 msgid "ENCRYPTION"
 msgstr "ŠIFROVANIE"
 
-#: src/app/(auth)/register/select-role/page.tsx:67
+#: src/app/(auth)/register/select-role/page.tsx:173
 msgid "END-TO-END"
 msgstr "KOMPLEXNÉ"
 
-#: src/app/(auth)/login/page.tsx:112
-msgid "Enter your credentials below to access the high-performance environment and continue your journey."
-msgstr "Zadajte nižšie svoje prihlasovacie údaje, aby ste získali prístup do vysokovýkonného prostredia a mohli pokračovať vo svojej ceste."
+#: src/lib/auth/schemas.ts:139
+#: src/lib/auth/schemas.ts:144
+#: src/lib/auth/schemas.ts:149
+#: src/lib/auth/schemas.ts:173
+msgid "Enter a valid URL."
+msgstr "Zadajte platnú URL adresu."
 
-#: src/app/(auth)/register/student/_components/identity-step.tsx:26
-msgid "Enter your full legal name"
-msgstr "Zadajte svoje celé oficiálne meno"
+#: src/app/(auth)/login/page.tsx:96
+msgid "Enter your credentials below to access the platform."
+msgstr "Zadajte svoje prihlasovacie údaje nižšie pre prístup na platformu."
 
-#: src/app/(auth)/login/page.tsx:132
-msgid "Enter your secure password"
-msgstr "Zadajte svoje bezpečné heslo"
+#: src/app/(auth)/register/student/_components/identity-step.tsx:23
+msgid "Enter your first name"
+msgstr "Zadajte svoje meno"
 
-#: src/app/(auth)/register/select-role/page.tsx:55
+#: src/app/(auth)/register/student/_components/identity-step.tsx:30
+msgid "Enter your last name"
+msgstr "Zadajte svoje priezvisko"
+
+#: src/app/(auth)/login/page.tsx:116
+msgid "Enter your password"
+msgstr "Zadajte svoje heslo"
+
+#: src/app/(auth)/register/select-role/page.tsx:161
 msgid "Enterprise Data Analytics"
 msgstr "Podniková dátová analytika"
 
-#: src/app/(auth)/register/select-role/page.tsx:52
+#: src/app/(auth)/register/select-role/page.tsx:158
 msgid "Entry point for Program B stakeholders. Manage technical challenges, oversee precision metrics, and interface directly with emerging talent pools through the Engine portal."
-msgstr "Vstupný bod pre zainteresované strany Programu B. Spravujte technické výzvy, dohliadajte na metriky presnosti a komunikujte priamo s novými talentmi cez portál Engine."
+msgstr "Vstupný bod pre účastníkov Programu B. Spravujte technické výzvy, sledujte presné metriky a komunikujte priamo s novými talentmi cez portál Engine."
 
-#: src/lib/api.ts:26
-msgid "Error occurred, try again"
-msgstr "Vyskytla sa chyba, skúste to znova"
-
-#: src/app/page.tsx:428
+#: src/components/layout/landing-footer.tsx:72
 msgid "EU Funding Disclosure"
-msgstr "Informácie o financovaní EÚ"
+msgstr "Informácie o financovaní z EÚ"
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:14
-msgid "EUBA University"
-msgstr "Univerzita EUBA"
+#: src/app/(auth)/register/student/_components/review-step.tsx:67
+msgid "Expected Graduation"
+msgstr "Predpokladané ukončenie štúdia"
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:55
+#: src/app/(auth)/register/student/_components/academic/academic-affiliation-study-fields.tsx:97
 msgid "Expected Graduation Year"
 msgstr "Predpokladaný rok ukončenia štúdia"
 
-#: src/app/page.tsx:294
-msgid "Expert in neural networks with 15+ years in international R&D."
-msgstr "Expert na neurónové siete s viac ako 15 rokmi medzinárodných skúseností vo výskume a vývoji."
+#: src/app/(auth)/register/student/_components/skills/technical-skills-section.tsx:90
+msgid "Experience (months)"
+msgstr "Skúsenosti (mesiace)"
 
-#: src/app/page.tsx:193
+#: src/app/page.tsx:250
+msgid "Expert in neural networks with 15+ years in international R&D."
+msgstr "Expert na neurónové siete s viac ako 15 rokmi skúseností v medzinárodnom výskume a vývoji."
+
+#: src/app/page.tsx:147
 msgid "Explore Challenges"
 msgstr "Preskúmať výzvy"
 
-#: src/services/hello-service.ts:7
-msgid "Failed to fetch hello"
-msgstr "Nepodarilo sa načítať hello"
+#: src/app/(auth)/register/student/_components/academic/academic-affiliation-program-fields.tsx:69
+msgid "Faculty"
+msgstr "Fakulta"
 
-#: src/app/(auth)/register/student/page.tsx:275
+#: src/lib/auth/schemas.ts:86
+msgid "Faculty is required."
+msgstr "Fakulta je povinná."
+
+#: src/app/(auth)/register/student/_components/registration-actions.tsx:27
 msgid "FINISH REGISTRATION"
 msgstr "DOKONČIŤ REGISTRÁCIU"
 
-#: src/app/page.tsx:145
-msgid "For visionaries with their own product ideas. Transform your prototype into a market-ready company with full incubation support."
-msgstr "Pre vizionárov s vlastnými produktovými nápadmi. Premeníte svoj prototyp na firmu pripravenú na trh s plnou inkubačnou podporou."
+#: src/app/(auth)/register/student/_components/identity-step.tsx:22
+msgid "First Name"
+msgstr "Meno"
 
-#: src/app/(auth)/login/page.tsx:148
+#: src/app/(auth)/register/student/_components/review-step.tsx:109
+#: src/app/(auth)/register/student/_components/skills-step.tsx:21
+msgid "Focus Areas"
+msgstr "Oblasti záujmu"
+
+#: src/app/page.tsx:97
+msgid "For visionaries with their own product ideas. Transform your prototype into a market-ready company with full incubation support."
+msgstr "Pre vizionárov s vlastnými produktovými nápadmi. Premeňte svoj prototyp na firmu pripravenú na trh s plnou inkubačnou podporou."
+
+#: src/app/(auth)/login/page.tsx:126
 msgid "Forgot password?"
 msgstr "Zabudli ste heslo?"
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:34
-msgid "Frontend frameworks, backend APIs, and high-performance cloud-ready applications."
-msgstr "Frontendové frameworky, backendové API a vysokovýkonné cloud-ready aplikácie."
+#: src/app/(auth)/register/student/_components/registration-completion.tsx:58
+msgid "Form Conquered"
+msgstr "Formulár zvládnutý"
 
-#: src/app/page.tsx:87
+#: src/app/(auth)/register/student/_components/registration-completion.tsx:60
+msgid "Friends Next"
+msgstr "Na rade sú kolegovia"
+
+#: src/app/page.tsx:36
 msgid "Fueling the"
-msgstr "Poháňame"
+msgstr "Podporujeme"
 
-#: src/app/(auth)/register/student/_components/identity-step.tsx:25
-msgid "Full Name"
-msgstr "Celé meno"
-
-#: src/app/page.tsx:222
+#: src/app/page.tsx:174
 msgid "Full-Cycle Incubation"
-msgstr "Komplexná inkubácia"
+msgstr "Kompletná inkubácia"
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:52
-msgid "Game Development"
-msgstr "Vývoj hier"
-
-#: src/app/(auth)/register/select-role/page.tsx:185
+#: src/app/(auth)/register/select-role/page.tsx:188
 msgid "Gateway"
 msgstr "Brána"
 
-#: src/app/page.tsx:232
+#: src/app/(auth)/register/student/_components/skills/portfolio-resume-section.tsx:84
+msgid "GitHub Profile"
+msgstr "GitHub profil"
+
+#: src/app/page.tsx:184
 msgid "Global Partnerships"
 msgstr "Globálne partnerstvá"
 
-#: src/app/page.tsx:244
+#: src/app/page.tsx:196
 msgid "Guided by veterans from Silicon Valley to Bratislava."
-msgstr "Pod vedením expertov od Silicon Valley až po Bratislavu."
+msgstr "Pod vedením skúsených odborníkov od Silicon Valley až po Bratislavu."
 
-#: src/lib/hooks/use-hello.ts:7
-msgid "Hello from a custom hook!"
-msgstr "Ahoj z vlastného hooku!"
+#: src/app/(auth)/register/student/_components/academic/academic-indicators-section.tsx:24
+msgid "Help us understand your academic performance."
+msgstr "Pomôžte nám pochopiť vaše akademické výsledky."
 
-#: src/components/hello-world.tsx:6
-msgid "Hello, World!"
-msgstr "Ahoj, svet!"
+#: src/app/(auth)/register/student/_lib/registration-config.ts:76
+msgid "Highlight your technical and soft skills for potential partners."
+msgstr "Zdôraznite svoje technické a soft skills pre potenciálnych partnerov."
 
-#: src/app/(auth)/register/student/_components/identity-step.tsx:59
-msgid "I accept the Privacy Policy and institutional data processing terms required for platform access."
-msgstr "Súhlasím so Zásadami ochrany súkromia a inštitucionálnymi podmienkami spracovania údajov potrebnými pre prístup na platformu."
+#: src/app/(auth)/register/student/_components/identity-step.tsx:64
+msgid "I accept the "
+msgstr "Súhlasím s "
 
-#: src/app/(auth)/register/student/page.tsx:30
+#: src/app/(auth)/register/student/_components/academic/academic-verification-section.tsx:49
+msgid "I declare that the academic information provided is accurate."
+msgstr "Vyhlasujem, že poskytnuté akademické údaje sú pravdivé."
+
+#: src/app/(auth)/register/student/_components/review-step.tsx:33
+msgid "Identity"
+msgstr "Identita"
+
+#: src/app/(auth)/register/student/_lib/registration-config.ts:25
 msgid "Identity Verification"
 msgstr "Overenie identity"
 
-#: src/app/(auth)/register/select-role/page.tsx:180
+#: src/app/(auth)/register/select-role/page.tsx:183
 msgid "IDENTITY VERIFICATION"
 msgstr "OVERENIE IDENTITY"
 
-#: src/components/layout/header.tsx:18
-msgid "INCUBATOR"
-msgstr "INKUBÁTOR"
-
-#: src/app/page.tsx:55
-msgid "Infrastructure"
-msgstr "Infraštruktúra"
-
-#: src/app/page.tsx:291
+#: src/app/page.tsx:247
 msgid "Ing. Marek Novak"
-msgstr "Ing. Marek Novak"
+msgstr "Ing. Marek Novák"
 
-#: src/app/page.tsx:84
+#: src/app/page.tsx:33
 msgid "Innovation Hub"
 msgstr "Inovačný hub"
 
-#: src/app/(auth)/register/select-role/page.tsx:41
+#: src/app/(auth)/register/select-role/page.tsx:148
 msgid "Innovation Repository"
 msgstr "Repozitár inovácií"
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:54
-msgid "Interactive 3D environments, rendering pipelines, and realtime simulation design."
-msgstr "Interaktívne 3D prostredia, renderovacie pipeline a návrh simulácií v reálnom čase."
-
-#: src/app/page.tsx:213
+#: src/app/page.tsx:167
 msgid "Interior space"
 msgstr "Interiérový priestor"
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:39
-msgid "IoT & Intelligent Systems"
-msgstr "IoT a inteligentné systémy"
+#: src/app/(auth)/register/student/_components/registration-completion.tsx:78
+msgid "INVITE COLLEAGUES"
+msgstr "POZVAŤ KOLEGOV"
 
-#: src/app/page.tsx:347
+#: src/app/page.tsx:303
 msgid "Join a community of innovators, engineers, and entrepreneurs. Our next cohort starts in September."
 msgstr "Pridajte sa ku komunite inovátorov, inžinierov a podnikateľov. Naša ďalšia kohorta začína v septembri."
 
-#: src/components/layout/header.tsx:31
-#: src/components/layout/header.tsx:66
+#: src/components/layout/header.tsx:36
 msgid "Join us"
 msgstr "Pridajte sa k nám"
 
-#: src/app/page.tsx:254
+#: src/app/page.tsx:206
 msgid "Keeping bright minds in Nitra through opportunity."
-msgstr "Udržiavame talentované mysle v Nitre prostredníctvom príležitostí."
+msgstr "Udržiavame talentovaných ľudí v Nitre vďaka príležitostiam."
 
-#: src/app/page.tsx:162
+#: src/app/(auth)/register/student/_components/identity-step.tsx:29
+msgid "Last Name"
+msgstr "Priezvisko"
+
+#: src/app/page.tsx:115
 msgid "Launch Startup"
 msgstr "Spustiť startup"
 
-#: src/app/page.tsx:292
+#: src/app/page.tsx:248
 msgid "Lead Mentor / AI Systems"
 msgstr "Hlavný mentor / AI systémy"
 
-#: src/app/page.tsx:105
+#: src/app/page.tsx:60
 msgid "Learn more about NTI"
-msgstr "Zistite viac o NTI"
+msgstr "Zistiť viac o NTI"
 
-#: src/app/page.tsx:404
+#: src/components/layout/landing-footer.tsx:49
 msgid "Legal"
 msgstr "Právne informácie"
 
-#: src/app/page.tsx:451
+#: src/lib/auth/schemas.ts:158
+msgid "Level is required."
+msgstr "Úroveň je povinná."
+
+#: src/components/layout/landing-footer.tsx:93
 msgid "LinkedIn"
 msgstr "LinkedIn"
 
-#: src/app/(auth)/register/select-role/page.tsx:202
+#: src/app/(auth)/register/student/_components/skills/portfolio-resume-section.tsx:98
+msgid "LinkedIn Profile"
+msgstr "LinkedIn profil"
+
+#: src/app/(auth)/register/student/_components/review-step.tsx:162
+msgid "Links"
+msgstr "Odkazy"
+
+#: src/app/(auth)/register/student/_components/skills/technical-skills-section.tsx:33
+msgid "List your primary technical skills and proficiency."
+msgstr "Uveďte svoje hlavné technické zručnosti a úroveň znalostí."
+
+#: src/app/(auth)/register/student/_components/academic/use-academic-dependent-fields.ts:88
+msgid "Loading faculties..."
+msgstr "Načítavajú sa fakulty..."
+
+#: src/app/(auth)/register/student/_components/academic/use-academic-dependent-fields.ts:102
+msgid "Loading specializations..."
+msgstr "Načítavajú sa špecializácie..."
+
+#: src/app/(auth)/register/student/_components/academic/use-academic-dependent-fields.ts:74
+msgid "Loading universities..."
+msgstr "Načítavajú sa univerzity..."
+
+#: src/app/(auth)/register/select-role/page.tsx:205
 msgid "Log in"
 msgstr "Prihlásiť sa"
 
-#: src/app/page.tsx:69
+#: src/components/layout/landing-header.tsx:68
 msgid "Login"
 msgstr "Prihlásenie"
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:40
-msgid "Low-level C/C++, sensor integration, and robotics device communication."
-msgstr "Nízkoúrovňové C/C++, integrácia senzorov a komunikácia robotických zariadení."
+#: src/app/(auth)/register/student/_components/registration-completion.tsx:59
+msgid "Looking absolutely stellar"
+msgstr "Vyzerá to naozaj skvelo"
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:27
-msgid "Machine learning workflows, model deployment, and practical data-driven systems."
-msgstr "Workflow strojového učenia, nasadzovanie modelov a praktické dátovo riadené systémy."
-
-#: src/app/(auth)/register/student/_components/academic-step.tsx:19
-msgid "Master"
-msgstr "Magister"
-
-#: src/app/page.tsx:285
-#: src/app/page.tsx:303
+#: src/app/page.tsx:241
+#: src/app/page.tsx:259
 msgid "Mentor"
 msgstr "Mentor"
 
-#: src/app/page.tsx:242
-#: src/app/page.tsx:397
+#: src/app/page.tsx:194
+#: src/components/layout/landing-footer.tsx:43
 msgid "Mentoring"
 msgstr "Mentoring"
 
-#: src/app/page.tsx:49
+#: src/components/layout/landing-header.tsx:46
 msgid "Mentors"
 msgstr "Mentori"
 
-#: src/app/page.tsx:25
-msgid "menu"
-msgstr "menu"
-
-#: src/app/page.tsx:114
+#: src/app/page.tsx:68
 msgid "Modern lab environment"
 msgstr "Moderné laboratórne prostredie"
 
-#: src/app/(auth)/register/select-role/page.tsx:68
+#: src/app/(auth)/register/select-role/page.tsx:174
 msgid "MULTI-FACTOR"
 msgstr "VIACFAKTOROVÉ"
 
-#: src/lib/auth/schemas.ts:17
+#: src/lib/auth/schemas.ts:61
 msgid "Must be a valid email address."
-msgstr "Musí to byť platná e-mailová adresa."
+msgstr "Musí byť platná e-mailová adresa."
 
-#: src/lib/auth/schemas.ts:16
+#: src/lib/auth/schemas.ts:54
+#: src/lib/auth/schemas.ts:59
 msgid "Must be at least 2 characters."
 msgstr "Musí mať aspoň 2 znaky."
 
-#: src/app/(auth)/login/page.tsx:123
-#: src/app/(auth)/register/student/_components/identity-step.tsx:34
+#: src/lib/auth/schemas.ts:55
+#: src/lib/auth/schemas.ts:60
+msgid "Must be at most 50 characters."
+msgstr "Musí mať najviac 50 znakov."
+
+#: src/app/(auth)/register/student/_components/review-step.tsx:37
+msgid "Name"
+msgstr "Meno"
+
+#: src/app/(auth)/login/page.tsx:107
+#: src/app/(auth)/register/student/_components/identity-step.tsx:39
 msgid "name@institution.edu"
 msgstr "meno@institucia.edu"
 
-#: src/app/page.tsx:61
+#: src/components/layout/landing-header.tsx:52
 msgid "News"
 msgstr "Novinky"
 
-#: src/app/(auth)/register/student/page.tsx:264
+#: src/app/(auth)/register/student/_components/registration-actions.tsx:30
 msgid "NEXT STEP"
 msgstr "ĎALŠÍ KROK"
 
-#: src/app/page.tsx:276
+#: src/app/page.tsx:231
 msgid "NITRA_LAB"
 msgstr "NITRA_LAB"
 
-#: src/app/page.tsx:91
+#: src/app/page.tsx:40
 msgid "Nitriansky technologický inkubátor bridges the gap between academic research and market reality. We turn bold ideas into high-performance startups."
-msgstr "Nitriansky technologický inkubátor prepája akademický výskum s realitou trhu. Premieňame odvážne nápady na vysokovýkonné startupy."
+msgstr "Nitriansky technologický inkubátor prepája akademický výskum s realitou trhu. Odvážne nápady premieňame na výkonné startupy."
 
-#: src/app/page.tsx:366
+#: src/app/(auth)/register/student/_components/academic/use-academic-dependent-fields.ts:91
+msgid "No faculties available"
+msgstr "Nie sú dostupné žiadne fakulty"
+
+#: src/app/(auth)/register/student/_components/academic/use-academic-dependent-fields.ts:105
+msgid "No specializations available"
+msgstr "Nie sú dostupné žiadne špecializácie"
+
+#: src/app/(auth)/register/student/_components/academic/use-academic-dependent-fields.ts:77
+msgid "No universities available"
+msgstr "Nie sú dostupné žiadne univerzity"
+
+#: src/components/layout/header.tsx:18
+#: src/components/layout/landing-footer.tsx:14
 msgid "NTI"
 msgstr "NTI"
 
-#: src/app/page.tsx:88
+#: src/app/(auth)/register/student/_components/academic/academic-indicators-section.tsx:51
+msgid "Number of transferred subjects"
+msgstr "Počet uznaných predmetov"
+
+#: src/app/page.tsx:37
 msgid "of Future Tech."
 msgstr "budúcich technológií."
 
-#: src/components/layout/header.tsx:38
+#: src/components/layout/landing-header.tsx:27
 msgid "Open menu"
 msgstr "Otvoriť menu"
 
-#: src/app/page.tsx:268
+#: src/app/page.tsx:220
 msgid "Our Ecosystem"
 msgstr "Náš ekosystém"
 
-#: src/app/(auth)/login/page.tsx:130
-#: src/app/(auth)/register/student/_components/identity-step.tsx:40
+#: src/app/(auth)/login/page.tsx:114
+#: src/app/(auth)/register/student/_components/identity-step.tsx:45
 msgid "Password"
 msgstr "Heslo"
 
-#: src/lib/auth/schemas.ts:12
-#: src/lib/auth/schemas.ts:20
+#: src/lib/auth/schemas.ts:45
+#: src/lib/auth/schemas.ts:64
 msgid "Password must be at least 6 characters."
 msgstr "Heslo musí mať aspoň 6 znakov."
 
-#: src/app/(auth)/register/student/_components/email-step.tsx:54
+#: src/app/(auth)/register/student/_components/email-step.tsx:53
 msgid "Paste token from email if you want to verify now"
-msgstr "Ak chcete overiť teraz, vložte token z e-mailu"
+msgstr "Vložte token z e-mailu, ak chcete overenie vykonať teraz"
 
-#: src/app/(auth)/verify-email/page.tsx:116
-msgid "Paste verification token"
-msgstr "Vložte overovací token"
+#: src/app/(auth)/register/student/_components/skills/portfolio-resume-section.tsx:116
+msgid "Personal Portfolio / Website"
+msgstr "Osobné portfólio / webová stránka"
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:20
-msgid "PhD"
-msgstr "PhD"
+#: src/app/(auth)/register/student/_components/registration-completion.tsx:50
+msgid "Phew! You survived."
+msgstr "Uf! Zvládli ste to."
 
-#: src/lib/auth/schemas.ts:9
+#: src/lib/auth/schemas.ts:42
 msgid "Please enter a valid email address."
 msgstr "Zadajte platnú e-mailovú adresu."
 
-#: src/app/page.tsx:87
+#: src/app/(auth)/register/student/_lib/registration-config.ts:83
+msgid "Please review your information before completing the registration."
+msgstr "Pred dokončením registrácie si skontrolujte svoje údaje."
+
+#: src/app/(auth)/register/student/_components/skills/portfolio-resume-section.tsx:23
+msgid "Portfolio & Resume"
+msgstr "Portfólio a CV"
+
+#: src/app/page.tsx:36
 msgid "Precision"
 msgstr "Presnosť"
 
-#: src/components/layout/header.tsx:12
-msgid "PRECISION ENGINE FRAMEWORK"
-msgstr "RÁMEC PRECISION ENGINE"
+#: src/app/(auth)/register/student/_components/review-step.tsx:123
+#: src/app/(auth)/register/student/_components/skills-step.tsx:31
+msgid "Preferred Roles"
+msgstr "Preferované roly"
 
-#: src/app/(auth)/register/student/page.tsx:161
-msgid "Precision Engine Registration"
-msgstr "Registrácia do Precision Engine"
-
-#: src/app/(auth)/register/student/page.tsx:255
+#: src/app/(auth)/register/student/_components/registration-actions.tsx:45
 msgid "PREVIOUS STEP"
 msgstr "PREDCHÁDZAJÚCI KROK"
 
-#: src/app/page.tsx:412
+#: src/app/(auth)/register/student/_components/skills/technical-skills-section.tsx:115
+msgid "Primary"
+msgstr "Hlavná"
+
+#: src/app/(auth)/register/student/_components/identity-step.tsx:71
+#: src/components/layout/landing-footer.tsx:56
 msgid "Privacy Policy"
 msgstr "Zásady ochrany súkromia"
 
-#: src/components/layout/footer.tsx:11
+#: src/components/layout/footer.tsx:10
 msgid "PRIVACY POLICY"
 msgstr "ZÁSADY OCHRANY SÚKROMIA"
 
-#: src/app/(auth)/register/student/page.tsx:31
-msgid "PROCESS 01"
-msgstr "PROCES 01"
+#: src/app/(auth)/register/student/_components/registration-actions.tsx:23
+msgid "PROCESSING..."
+msgstr "SPRACOVÁVA SA..."
 
-#: src/app/(auth)/register/student/page.tsx:37
-msgid "PROCESS 02"
-msgstr "PROCES 02"
+#: src/app/(auth)/register/student/_components/review-step.tsx:99
+#: src/app/(auth)/register/student/_lib/registration-config.ts:61
+msgid "Professional Skills"
+msgstr "Profesionálne zručnosti"
 
-#: src/app/(auth)/register/student/page.tsx:43
-msgid "PROCESS 03"
-msgstr "PROCES 03"
+#: src/app/(auth)/register/student/_components/skills/projects-summary-section.tsx:161
+msgid "Professional Summary"
+msgstr "Profesionálne zhrnutie"
 
-#: src/app/(auth)/register/student/page.tsx:49
-msgid "PROCESS 04"
-msgstr "PROCES 04"
+#: src/app/(auth)/register/student/_components/skills/technical-skills-section.tsx:63
+msgid "Proficiency"
+msgstr "Úroveň znalostí"
 
-#: src/app/page.tsx:142
+#: src/app/(auth)/register/student/_components/registration-completion.tsx:59
+msgid "Profile Nailed"
+msgstr "Profil zvládnutý"
+
+#: src/app/page.tsx:94
 msgid "Program A: Venture Launch"
 msgstr "Program A: Spustenie venture projektu"
 
-#: src/app/(auth)/register/select-role/page.tsx:54
+#: src/app/(auth)/register/select-role/page.tsx:160
 msgid "Program B Challenge Management"
 msgstr "Správa výziev Programu B"
 
-#: src/app/page.tsx:173
+#: src/app/page.tsx:124
 msgid "Program B: Industry Bridge"
 msgstr "Program B: Most k priemyslu"
 
-#: src/app/page.tsx:37
-#: src/app/page.tsx:373
+#: src/components/layout/landing-footer.tsx:20
+#: src/components/layout/landing-header.tsx:40
 msgid "Programs"
 msgstr "Programy"
 
-#: src/app/(auth)/register/student/page.tsx:137
-msgid "Provide your current academic information to align your incubation pathway and project matching."
-msgstr "Uveďte svoje aktuálne akademické informácie, aby sa prispôsobila vaša inkubačná cesta a párovanie projektov."
+#: src/app/(auth)/register/student/_components/skills/projects-summary-section.tsx:50
+msgid "Project Title"
+msgstr "Názov projektu"
 
-#: src/app/page.tsx:344
+#: src/lib/auth/schemas.ts:167
+msgid "Project title is required."
+msgstr "Názov projektu je povinný."
+
+#: src/app/(auth)/register/student/_components/review-step.tsx:212
+#: src/app/(auth)/register/student/_components/skills/projects-summary-section.tsx:35
+msgid "Projects"
+msgstr "Projekty"
+
+#: src/app/(auth)/register/student/_components/skills/projects-summary-section.tsx:30
+msgid "Projects & Summary"
+msgstr "Projekty a zhrnutie"
+
+#: src/app/page.tsx:300
 msgid "Ready to build the future of Nitra?"
 msgstr "Ste pripravení budovať budúcnosť Nitry?"
 
-#: src/app/page.tsx:181
+#: src/app/page.tsx:132
 msgid "Real-world Corporate Practice"
 msgstr "Reálna firemná prax"
 
-#: src/app/page.tsx:322
+#: src/app/page.tsx:278
 msgid "Recent Success"
 msgstr "Nedávny úspech"
 
-#: src/app/page.tsx:72
+#: src/components/layout/landing-header.tsx:74
 msgid "Register"
 msgstr "Registrácia"
 
-#: src/app/(auth)/register/select-role/page.tsx:34
+#: src/app/(auth)/register/select-role/page.tsx:142
 msgid "Regular User"
 msgstr "Bežný používateľ"
 
-#: src/services/auth-service.ts:48
-#: src/services/auth-service.ts:55
-#: src/services/auth-service.ts:60
+#: src/app/(auth)/register/student/_components/academic/academic-indicators-section.tsx:93
+#: src/app/(auth)/register/student/_components/review-step.tsx:84
+msgid "Relevant Courses"
+msgstr "Príslušné kurzy"
+
+#: src/lib/api/base-client.ts:40
+#: src/lib/api/base-client.ts:45
+#: src/lib/api/base-client.ts:52
+#: src/lib/api/base-client.ts:58
 msgid "Request failed"
 msgstr "Požiadavka zlyhala"
 
-#: src/app/(auth)/register/student/_components/email-step.tsx:41
+#: src/app/(auth)/register/student/_components/email-step.tsx:40
 msgid "RESEND CONFIRMATION EMAIL"
 msgstr "ZNOVA ODOSLAŤ POTVRDZOVACÍ E-MAIL"
 
-#: src/app/(auth)/verify-email/page.tsx:98
-msgid "RESEND EMAIL"
-msgstr "ZNOVA ODOSLAŤ E-MAIL"
+#: src/app/(auth)/register/student/_lib/registration-config.ts:80
+msgid "Review"
+msgstr "Kontrola"
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:47
-msgid "Scalable services, messaging pipelines, observability, and resilient data layers."
-msgstr "Škálovateľné služby, message pipeline, observabilita a odolné dátové vrstvy."
+#: src/lib/auth/schemas.ts:169
+msgid "Role is required."
+msgstr "Rola je povinná."
 
-#: src/app/page.tsx:328
+#: src/app/page.tsx:284
 msgid "Secured €500k Funding"
 msgstr "Získané financovanie 500-tisíc €"
 
-#: src/components/layout/footer.tsx:11
+#: src/components/layout/footer.tsx:12
 msgid "SECURITY ARCHITECTURE"
 msgstr "BEZPEČNOSTNÁ ARCHITEKTÚRA"
 
-#: src/app/(auth)/register/select-role/page.tsx:66
+#: src/app/(auth)/register/select-role/page.tsx:172
 msgid "SECURITY STANDARDS"
 msgstr "BEZPEČNOSTNÉ ŠTANDARDY"
 
-#: src/app/page.tsx:150
+#: src/app/page.tsx:101
 msgid "Seed Funding Access"
 msgstr "Prístup k seed financovaniu"
 
-#: src/lib/auth/schemas.ts:46
-msgid "Select at least one skill."
-msgstr "Vyberte aspoň jednu zručnosť."
+#: src/lib/auth/schemas.ts:128
+msgid "Select at least one focus area."
+msgstr "Vyberte aspoň jednu oblasť záujmu."
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:48
-msgid "Select degree level"
+#: src/lib/auth/schemas.ts:131
+msgid "Select at least one preferred role."
+msgstr "Vyberte aspoň jednu preferovanú rolu."
+
+#: src/lib/auth/schemas.ts:134
+msgid "Select at most 3 soft skills."
+msgstr "Vyberte najviac 3 soft skills."
+
+#: src/app/(auth)/register/student/_components/academic/academic-affiliation-study-fields.tsx:27
+msgid "Select degree"
 msgstr "Vyberte stupeň štúdia"
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:32
+#: src/app/(auth)/register/student/_components/academic/use-academic-dependent-fields.ts:94
+msgid "Select faculty"
+msgstr "Vyberte fakultu"
+
+#: src/app/(auth)/register/student/_components/academic/use-academic-dependent-fields.ts:99
+msgid "Select faculty first"
+msgstr "Najprv vyberte fakultu"
+
+#: src/app/(auth)/register/student/_components/academic/academic-affiliation-study-fields.tsx:104
+msgid "Select graduation year"
+msgstr "Vyberte rok ukončenia štúdia"
+
+#: src/app/(auth)/register/student/_components/skills/technical-skills-section.tsx:67
+msgid "Select level"
+msgstr "Vyberte úroveň"
+
+#: src/app/(auth)/register/student/_components/academic/use-academic-dependent-fields.ts:108
+msgid "Select specialization"
+msgstr "Vyberte špecializáciu"
+
+#: src/app/(auth)/register/student/_components/academic/academic-affiliation-study-fields.tsx:52
+msgid "Select study mode"
+msgstr "Vyberte formu štúdia"
+
+#: src/app/(auth)/register/student/_components/academic/use-academic-dependent-fields.ts:80
 msgid "Select university"
 msgstr "Vyberte univerzitu"
 
-#: src/app/(auth)/register/select-role/page.tsx:185
+#: src/app/(auth)/register/student/_components/academic/use-academic-dependent-fields.ts:85
+msgid "Select university first"
+msgstr "Najprv vyberte univerzitu"
+
+#: src/app/(auth)/register/select-role/page.tsx:188
 msgid "Select Your"
-msgstr "Vyberte si svoju"
+msgstr "Vyberte svoju"
 
-#: src/app/(auth)/register/student/page.tsx:138
-msgid "Select your strongest technical competencies to personalize ecosystem recommendations."
-msgstr "Vyberte svoje najsilnejšie technické kompetencie na prispôsobenie odporúčaní ekosystému."
+#: src/app/(auth)/register/student/_components/skills-step.tsx:40
+msgid "Select your strongest collaboration and communication skills."
+msgstr "Vyberte svoje najsilnejšie schopnosti spolupráce a komunikácie."
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:132
-msgid "Selected stacks:"
-msgstr "Vybrané stacky:"
+#: src/app/(auth)/register/student/_components/academic-step.tsx:41
+msgid "Select your university and program details."
+msgstr "Vyberte svoju univerzitu a detaily študijného programu."
 
-#: src/app/(auth)/register/student/_components/email-step.tsx:41
-#: src/app/(auth)/verify-email/page.tsx:98
+#: src/app/(auth)/register/student/_components/email-step.tsx:40
 msgid "SENDING..."
 msgstr "ODOSIELA SA..."
 
-#: src/app/(auth)/login/page.tsx:109
+#: src/app/(auth)/register/student/_components/skills/projects-summary-section.tsx:80
+msgid "Short project description..."
+msgstr "Krátky popis projektu..."
+
+#: src/app/(auth)/register/student/_components/skills/projects-summary-section.tsx:31
+msgid "Showcase your best projects and tell us about yourself."
+msgstr "Predstavte svoje najlepšie projekty a povedzte nám niečo o sebe."
+
+#: src/app/(auth)/login/page.tsx:93
 msgid "Sign In"
 msgstr "Prihlásiť sa"
 
-#: src/app/(auth)/login/page.tsx:157
+#: src/app/(auth)/login/page.tsx:135
 msgid "SIGNING IN..."
 msgstr "PRIHLASUJE SA..."
 
-#: src/components/i18n/language-switcher.tsx:10
-msgid "SK"
-msgstr "SK"
+#: src/app/(auth)/register/student/_components/skills/technical-skills-section.tsx:47
+msgid "Skill Name"
+msgstr "Názov zručnosti"
 
-#: src/app/(auth)/register/student/page.tsx:48
-msgid "Skills & Stacks"
-msgstr "Zručnosti a stacky"
+#: src/lib/auth/schemas.ts:157
+msgid "Skill name is required."
+msgstr "Názov zručnosti je povinný."
 
-#: src/app/(auth)/register/student/_components/skills-step.tsx:19
-msgid "Software Development"
-msgstr "Vývoj softvéru"
+#: src/app/(auth)/register/student/_components/review-step.tsx:137
+msgid "Soft Skills"
+msgstr "Mäkké zručnosti"
 
-#: src/app/page.tsx:176
+#: src/app/page.tsx:127
 msgid "Solve real-world challenges defined by our corporate partners. Gain professional experience while building breakthrough solutions."
 msgstr "Riešte reálne výzvy definované našimi firemnými partnermi. Získajte profesionálne skúsenosti pri tvorbe prelomových riešení."
 
-#: src/app/page.tsx:158
+#: src/app/(auth)/register/student/_components/academic/academic-affiliation-program-fields.tsx:98
+msgid "Specialization"
+msgstr "Špecializácia"
+
+#: src/lib/auth/schemas.ts:87
+msgid "Specialization is required."
+msgstr "Je potrebná špecializácia."
+
+#: src/app/page.tsx:108
 msgid "Specialized Lab Infrastructure"
 msgstr "Špecializovaná laboratórna infraštruktúra"
 
-#: src/app/page.tsx:312
+#: src/app/page.tsx:268
 msgid "Specializes in market entry strategies for DeepTech startups."
 msgstr "Špecializuje sa na stratégie vstupu na trh pre DeepTech startupy."
 
-#: src/app/page.tsx:43
-#: src/app/page.tsx:381
+#: src/app/(auth)/register/student/_components/registration-stage-header.tsx:43
+msgid "START FROM THE BEGINNING"
+msgstr "ZAČAŤ OD ZAČIATKU"
+
+#: src/components/layout/landing-footer.tsx:27
 msgid "Startups"
 msgstr "Startupy"
 
-#: src/app/(auth)/register/select-role/page.tsx:50
+#: src/app/(auth)/register/student/_lib/registration-config.ts:40
+msgid "Step {ACADEMIC_STEP_NUMBER}"
+msgstr "Krok {ACADEMIC_STEP_NUMBER}"
+
+#: src/app/(auth)/register/student/_lib/registration-config.ts:33
+msgid "Step {EMAIL_STEP_NUMBER}"
+msgstr "Krok {EMAIL_STEP_NUMBER}"
+
+#: src/app/(auth)/register/student/_lib/registration-config.ts:26
+msgid "Step {IDENTITY_STEP_NUMBER}"
+msgstr "Krok {IDENTITY_STEP_NUMBER}"
+
+#: src/app/(auth)/register/student/_lib/registration-config.ts:81
+msgid "Step {REVIEW_STEP_NUMBER}"
+msgstr "Krok {REVIEW_STEP_NUMBER}"
+
+#: src/app/(auth)/register/student/_lib/registration-config.ts:62
+msgid "Step {SKILLS_STEP_NUMBER}"
+msgstr "Krok {SKILLS_STEP_NUMBER}"
+
+#: src/app/(auth)/register/select-role/page.tsx:157
 msgid "Strategic Institutions"
 msgstr "Strategické inštitúcie"
 
-#: src/app/(auth)/register/select-role/page.tsx:35
+#: src/app/(auth)/register/select-role/page.tsx:143
 msgid "Students & Teams"
 msgstr "Študenti a tímy"
 
 #: src/app/(auth)/register/student/_components/academic-step.tsx:40
-msgid "Study Program"
-msgstr "Študijný program"
+msgid "Study Affiliation"
+msgstr "Študijná príslušnosť"
 
-#: src/lib/auth/schemas.ts:38
-msgid "Study program is required."
-msgstr "Študijný program je povinný."
+#: src/app/(auth)/register/student/_components/academic/academic-affiliation-study-fields.tsx:48
+#: src/app/(auth)/register/student/_components/review-step.tsx:59
+msgid "Study Mode"
+msgstr "Forma štúdia"
 
-#: src/app/page.tsx:98
+#: src/app/(auth)/register/student/_components/review-step.tsx:63
+msgid "Study Year"
+msgstr "Ročník štúdia"
+
+#: src/app/(auth)/register/student/_components/review-step.tsx:78
+msgid "Subject Average"
+msgstr "Priemer z predmetov"
+
+#: src/app/page.tsx:53
 msgid "Submit a challenge"
 msgstr "Odoslať výzvu"
 
-#: src/app/page.tsx:354
+#: src/app/page.tsx:316
 msgid "Submit Challenge"
 msgstr "Odoslať výzvu"
 
-#: src/app/(auth)/register/student/page.tsx:274
-msgid "SUBMITTING..."
-msgstr "ODOSIELA SA..."
-
-#: src/components/layout/header.tsx:12
+#: src/components/layout/header.tsx:26
 msgid "SUPPORT"
 msgstr "PODPORA"
 
-#: src/app/(auth)/login/page.tsx:77
+#: src/app/(auth)/login/page.tsx:63
 msgid "SYSTEM IMMERSION"
 msgstr "SYSTÉMOVÁ IMERZIA"
 
-#: src/app/(auth)/register/student/page.tsx:158
-msgid "SYSTEM MANIFEST"
-msgstr "SYSTÉMOVÝ MANIFEST"
-
-#: src/app/(auth)/register/select-role/page.tsx:56
+#: src/app/(auth)/register/select-role/page.tsx:162
 msgid "Talent Acquisition Pipeline"
 msgstr "Pipeline získavania talentov"
 
-#: src/app/page.tsx:252
+#: src/app/page.tsx:204
 msgid "Talent Retention"
 msgstr "Udržanie talentov"
 
-#: src/app/(auth)/register/select-role/page.tsx:40
+#: src/app/(auth)/register/select-role/page.tsx:147
 msgid "Team Collaboration Tools"
 msgstr "Nástroje tímovej spolupráce"
 
-#: src/app/page.tsx:274
+#: src/app/page.tsx:227
 msgid "TECHCORP"
 msgstr "TECHCORP"
 
-#: src/app/page.tsx:420
+#: src/app/(auth)/register/student/_components/review-step.tsx:151
+#: src/app/(auth)/register/student/_components/skills/technical-skills-section.tsx:32
+msgid "Technical Skills"
+msgstr "Technické zručnosti"
+
+#: src/app/(auth)/register/student/_components/skills/projects-summary-section.tsx:96
+msgid "Technologies (comma separated)"
+msgstr "Technológie (oddelené čiarkou)"
+
+#: src/app/(auth)/register/student/_components/skills/projects-summary-section.tsx:164
+msgid "Tell us a little about your goals and experience..."
+msgstr "Povedzte nám niečo o svojich cieľoch a skúsenostiach..."
+
+#: src/app/(auth)/register/student/_lib/registration-config.ts:57
+msgid "Tell us about your educational background."
+msgstr "Povedzte nám o svojom vzdelaní."
+
+#: src/components/layout/landing-footer.tsx:64
 msgid "Terms of Service"
 msgstr "Podmienky používania"
 
@@ -789,106 +1012,130 @@ msgstr "Podmienky používania"
 msgid "TERMS OF SERVICE"
 msgstr "PODMIENKY POUŽÍVANIA"
 
-#: src/app/page.tsx:205
+#: src/app/(auth)/register/student/_components/registration-completion.tsx:53
+msgid "That was a lot of typing, but you made it! Your profile is officially sparkling clean and ready to go. Now, don't suffer alone—invite your colleagues to share the joy of filling out this form!"
+msgstr "Bolo to veľa písania, ale zvládli ste to! Váš profil je oficiálne krásne čistý a pripravený. Teraz netrpte sami — pozvite kolegov, aby si aj oni užili radosť z vypĺňania tohto formulára!"
+
+#: src/app/page.tsx:159
 msgid "The Precision Engine Architecture"
 msgstr "Architektúra Precision Engine"
 
-#: src/components/hello-world.tsx:7
-msgid "This is a dummy component."
-msgstr "Toto je dummy komponent."
+#: src/app/(auth)/register/student/_components/academic/academic-indicators-section.tsx:82
+msgid "This is used as a supporting evaluation signal."
+msgstr "Používa sa to ako doplnkový hodnotiaci signál."
 
-#: src/app/page.tsx:459
+#: src/app/(auth)/register/student/_components/registration-completion.tsx:60
+msgid "Time to invite colleagues"
+msgstr "Čas pozvať kolegov"
+
+#: src/app/(auth)/register/student/_components/review-step.tsx:72
+msgid "Transferred Subjects"
+msgstr "Uznané predmety"
+
+#: src/components/layout/landing-footer.tsx:101
 msgid "Twitter"
 msgstr "Twitter"
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:13
-msgid "UKF University"
-msgstr "Univerzita UKF"
+#: src/app/(auth)/register/student/_components/review-step.tsx:22
+msgid "Unable to load profile data for review."
+msgstr "Nepodarilo sa načítať údaje profilu na kontrolu."
 
-#: src/app/(auth)/verify-email/page.tsx:66
-msgid "Unable to confirm email. Please try again."
-msgstr "Nepodarilo sa potvrdiť e-mail. Skúste to znova."
-
-#: src/app/(auth)/login/page.tsx:53
+#: src/app/(auth)/login/page.tsx:43
 msgid "Unable to log in. Please try again."
 msgstr "Nepodarilo sa prihlásiť. Skúste to znova."
 
-#: src/app/(auth)/register/student/page.tsx:126
-msgid "Unable to register right now. Please try again."
-msgstr "Momentálne sa nedá zaregistrovať. Skúste to znova."
+#: src/app/(auth)/register/student/_hooks/use-student-registration-actions.ts:224
+#: src/app/(auth)/register/student/_hooks/use-student-registration-actions.ts:232
+#: src/app/(auth)/register/student/_hooks/use-student-registration-actions.ts:241
+msgid "Unable to register. Please try again."
+msgstr "Nepodarilo sa zaregistrovať. Skúste to znova."
 
-#: src/app/page.tsx:275
+#: src/app/page.tsx:229
 msgid "UNIDATA"
 msgstr "UNIDATA"
 
-#: src/app/(auth)/register/student/_components/academic-step.tsx:31
+#: src/app/(auth)/register/student/_components/academic/academic-affiliation-program-fields.tsx:44
 msgid "University"
 msgstr "Univerzita"
 
-#: src/lib/auth/schemas.ts:37
+#: src/lib/auth/schemas.ts:85
 msgid "University is required."
 msgstr "Univerzita je povinná."
 
-#: src/app/(auth)/verify-email/page.tsx:84
-msgid "Use the link in your email, or paste the token below."
-msgstr "Použite odkaz v e-maile alebo vložte token nižšie."
+#: src/app/(auth)/register/student/_components/skills/portfolio-resume-section.tsx:24
+msgid "Upload your CV and add links to your profiles."
+msgstr "Nahrajte svoje CV a pridajte odkazy na svoje profily."
 
-#: src/app/(auth)/verify-email/page.tsx:103
-msgid "Use this if the email didn't arrive."
-msgstr "Použite toto, ak e-mail neprišiel."
+#. placeholder {0}: field.value
+#: src/app/(auth)/register/student/_components/skills/portfolio-resume-section.tsx:39
+msgid "Using existing CV (ID: {0})"
+msgstr "Používa sa existujúce CV (ID: {0})"
 
-#: src/lib/auth/schemas.ts:42
-msgid "Valid graduation year expected (e.g. 2028)."
-msgstr "Očakáva sa platný rok ukončenia štúdia (napr. 2028)."
+#: src/app/(auth)/register/student/_components/academic/academic-verification-section.tsx:22
+msgid "Verification"
+msgstr "Overenie"
 
-#: src/app/(auth)/verify-email/page.tsx:115
-msgid "Verification Token"
-msgstr "Overovací token"
-
-#: src/app/(auth)/register/student/_components/email-step.tsx:53
+#: src/app/(auth)/register/student/_components/email-step.tsx:52
 msgid "Verification Token (Optional for this step)"
 msgstr "Overovací token (voliteľné pre tento krok)"
 
-#: src/app/(auth)/verify-email/page.tsx:24
-msgid "Verification token is required."
-msgstr "Overovací token je povinný."
-
-#: src/app/(auth)/verify-email/page.tsx:79
-msgid "Verify Your Email"
-msgstr "Overte svoj e-mail"
-
-#: src/app/(auth)/verify-email/page.tsx:138
-msgid "VERIFYING..."
-msgstr "OVERUJE SA..."
-
-#: src/app/page.tsx:271
+#: src/app/page.tsx:223
 msgid "We collaborate with the most innovative companies and experienced mentors in the region to ensure your success."
 msgstr "Spolupracujeme s najinovatívnejšími firmami a skúsenými mentormi v regióne, aby sme zabezpečili váš úspech."
 
-#: src/app/(auth)/verify-email/page.tsx:82
-msgid "We sent a confirmation message to"
-msgstr "Odoslali sme potvrdzovaciu správu na"
-
-#: src/app/(auth)/register/student/_components/skills-step.tsx:32
-msgid "Web Applications"
-msgstr "Webové aplikácie"
-
-#: src/app/(auth)/login/page.tsx:80
+#: src/app/(auth)/login/page.tsx:66
 msgid "Welcome Back to NTI Engine"
 msgstr "Vitajte späť v NTI Engine"
 
-#: src/app/page.tsx:204
+#: src/app/(auth)/register/student/_components/skills-step.tsx:22
+msgid "What are your main areas of interest?"
+msgstr "Aké sú vaše hlavné oblasti záujmu?"
+
+#: src/app/(auth)/register/student/_components/skills-step.tsx:32
+msgid "What kind of team role are you looking for?"
+msgstr "Akú rolu v tíme hľadáte?"
+
+#: src/app/page.tsx:158
 msgid "Why NTI"
 msgstr "Prečo NTI"
 
-#: src/lib/auth/schemas.ts:22
+#: src/lib/auth/schemas.ts:97
+msgid "Year cannot be in the past."
+msgstr "Rok nemôže byť v minulosti."
+
+#: src/lib/auth/schemas.ts:98
+msgid "Year is too far in the future."
+msgstr "Rok je príliš vzdialený v budúcnosti."
+
+#: src/lib/auth/schemas.ts:92
+msgid "Year of study must be a whole number."
+msgstr "Ročník štúdia musí byť celé číslo."
+
+#: src/lib/auth/schemas.ts:93
+#: src/lib/auth/schemas.ts:94
+msgid "Year of study must be between 1 and 8."
+msgstr "Ročník štúdia musí byť medzi 1 a 8."
+
+#: src/lib/auth/schemas.ts:108
+msgid "You must accept the academic declaration."
+msgstr "Musíte prijať akademické vyhlásenie."
+
+#: src/lib/auth/schemas.ts:66
 msgid "You must accept the terms."
 msgstr "Musíte prijať podmienky."
 
-#: src/app/(auth)/register/student/_components/email-step.tsx:26
-msgid "your email address"
-msgstr "vašu e-mailovú adresu"
+#: src/app/(auth)/register/student/_components/registration-completion.tsx:58
+msgid "You survived the boss fight"
+msgstr "Prežili ste boss fight"
 
-#: src/app/(auth)/verify-email/page.tsx:83
-msgid "your inbox"
-msgstr "vašu schránku"
+#: src/app/(auth)/register/student/_components/email-step.tsx:25
+msgid "your email address"
+msgstr "vaša e-mailová adresa"
+
+#: src/app/(auth)/register/student/_components/skills/projects-summary-section.tsx:65
+msgid "Your Role (e.g., Frontend Dev)"
+msgstr "Vaša rola (napr. Frontend Dev)"
+
+#: src/app/(auth)/register/student/_components/skills-step.tsx:39
+msgid "Your Top 3 Soft Skills"
+msgstr "Vaše 3 najsilnejšie mäkké zručnosti"

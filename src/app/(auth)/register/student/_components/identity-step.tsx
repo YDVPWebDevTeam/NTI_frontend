@@ -1,17 +1,13 @@
 'use client';
 
 import { t } from '@lingui/core/macro';
+import Link from 'next/link';
 import { useFormContext } from 'react-hook-form';
 
-import { ControlledInputField } from '@/src/components/forms/auth/form-field-primitives';
-import { Checkbox } from '@/src/components/shadcn/checkbox';
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/src/components/shadcn/form';
+import { ControlledInputField } from 'components/forms';
+import { Checkbox } from 'components/shadcn';
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from 'components/shadcn';
+import { ROUTES } from 'lib/constants';
 import type { StudentRegistrationValues } from '../schema';
 
 export function IdentityStep() {
@@ -65,7 +61,16 @@ export function IdentityStep() {
             </FormControl>
             <div className="space-y-1 leading-none">
               <FormLabel>
-                {t`I accept the Privacy Policy and institutional data processing terms required for platform access.`}
+                {t`I accept the `}
+                <Link
+                  className="underline underline-offset-2 hover:no-underline"
+                  href={ROUTES.PRIVACY_POLICY}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t`Privacy Policy`}
+                </Link>
+                {t` and institutional data processing terms required for platform access.`}
               </FormLabel>
               <FormMessage />
             </div>

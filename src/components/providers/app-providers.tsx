@@ -2,7 +2,7 @@
 
 import { Toaster } from 'sonner';
 
-import { LinguiProvider } from '@/src/components/providers/i18n-provider';
+import { LinguiProvider } from './i18n-provider';
 
 import { QueryProvider } from './query-provider';
 

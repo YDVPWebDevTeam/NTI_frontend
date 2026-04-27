@@ -10,8 +10,8 @@ type CatalogModule = {
 };
 
 const loaders: Record<AppLocale, () => Promise<CatalogModule>> = {
-  en: () => import('@/src/locales/en/messages'),
-  sk: () => import('@/src/locales/sk/messages'),
+  en: () => import('locales/en/messages'),
+  sk: () => import('locales/sk/messages'),
 };
 
 function ensureLocaleActivated() {

@@ -5,8 +5,8 @@ import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import { LanguageSwitcher } from '@/src/components/i18n/language-switcher';
-import { ROUTES } from '@/src/lib/constants';
+import { LanguageSelector } from 'components/i18n/language-switcher';
+import { ROUTES } from 'lib/constants';
 
 export function LandingHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -56,7 +56,11 @@ export function LandingHeader() {
         <div
           className={`${mobileMenuOpen ? 'flex' : 'hidden'} w-full flex-col items-center gap-3 pt-6 md:flex md:w-auto md:flex-row md:pt-0`}
         >
-          <LanguageSwitcher className="static border-slate-200 bg-white/90 p-1 shadow-none dark:border-slate-700 dark:bg-slate-900/80" />
+          <LanguageSelector
+            className="border-slate-200 bg-white/90 dark:border-slate-700 dark:bg-slate-900/80"
+            triggerClassName="text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/70"
+            contentClassName="border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900"
+          />
           <Link
             className="w-full px-4 py-2 text-center font-bold text-slate-600 transition-all hover:text-blue-900 md:w-auto dark:text-slate-400"
             href={ROUTES.AUTH.LOGIN}

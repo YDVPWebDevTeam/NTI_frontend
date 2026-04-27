@@ -1,7 +1,7 @@
 import { t } from '@lingui/core/macro';
 import Link from 'next/link';
 
-import { ROUTES } from '@/src/lib/constants';
+import { ROUTES } from 'lib/constants';
 
 export function LandingFooter() {
   return (

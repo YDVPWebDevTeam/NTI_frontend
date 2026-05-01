@@ -4,7 +4,7 @@ import { t } from '@lingui/core/macro';
 import Link from 'next/link';
 import { useFormContext } from 'react-hook-form';
 
-import { ControlledInputField } from 'components/forms';
+import { ControlledInputField, ControlledPasswordField } from 'components/forms';
 import { Checkbox } from 'components/shadcn';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from 'components/shadcn';
 import { ROUTES } from 'lib/constants';
@@ -39,11 +39,10 @@ export function IdentityStep() {
         placeholder={t`name@institution.edu`}
       />
 
-      <ControlledInputField
+      <ControlledPasswordField
         control={control}
         name="password"
         label={t`Password`}
-        type="password"
         placeholder={t`Create a secure password`}
       />
 

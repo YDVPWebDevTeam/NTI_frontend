@@ -1,9 +1,14 @@
 import { t } from '@lingui/core/macro';
+import axios, { type AxiosRequestConfig } from 'axios';
 
+import { authEndpoints as adminAuthEndpoints } from './admin/auth/endpoints';
 import { authEndpoints } from './auth/endpoints';
 import { type ApiResponse } from './types';
 
 const DEFAULT_API_BASE_URL = 'http://localhost:3001/api';
+const HTTP_STATUS_MULTIPLE_CHOICES = 300;
+const HTTP_STATUS_UNAUTHORIZED = 401;
+const HTTP_STATUS_FORBIDDEN = 403;
 const API_BASE_URL = (
   process.env.API_URL ||
   process.env.NEXT_PUBLIC_API_URL ||
@@ -11,6 +16,24 @@ const API_BASE_URL = (
 ).replace(/\/+$/, '');
 
 type ApiEnvelope<T> = ApiResponse<T>;
+
+export class ApiRequestError extends Error {
+  status?: number;
+
+  constructor(message: string, status?: number) {
+    super(message);
+    this.name = 'ApiRequestError';
+    this.status = status;
+  }
+}
+
+export function isApiRequestError(error: unknown): error is ApiRequestError {
+  return error instanceof ApiRequestError;
+}
+
+export function isAuthErrorStatus(status?: number) {
+  return status === HTTP_STATUS_UNAUTHORIZED || status === HTTP_STATUS_FORBIDDEN;
+}
 
 function isApiEnvelope<T>(value: unknown): value is ApiEnvelope<T> {
   return Boolean(
@@ -37,7 +60,7 @@ function toError(value: unknown): Error {
     return value;
   }
 
-  return new Error(t`Request failed`);
+  return new ApiRequestError(t`Request failed`);
 }
 
 export function extractApiErrorMessage(payload: unknown): string {
@@ -68,46 +91,71 @@ export interface RequestConfig {
   method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
   data?: unknown;
   headers?: HeadersInit;
+  params?: Record<string, unknown>;
   skipAuthRefresh?: boolean;
 }
 
 export async function request<TResponse>(path: string, config?: RequestConfig): Promise<TResponse> {
   try {
-    const headers = new Headers(config?.headers);
-    const hasBody = config?.data !== undefined;
-
-    if (hasBody && !headers.has('Content-Type')) {
-      headers.set('Content-Type', 'application/json');
-    }
-
-    const response = await fetch(buildApiUrl(path), {
+    const axiosConfig: AxiosRequestConfig = {
       method: config?.method ?? 'GET',
-      credentials: 'include',
-      headers,
-      body: hasBody ? JSON.stringify(config.data) : undefined,
-    });
+      url: buildApiUrl(path),
+      withCredentials: true,
+      data: config?.data,
+      params: config?.params,
+      headers: normalizeHeaders(config?.headers),
+      validateStatus: () => true,
+    };
 
-    if (response.status === 401 && !config?.skipAuthRefresh && !isAuthRefreshEndpoint(path)) {
-      const refreshed = await refreshAccessToken();
+    const response = await axios.request<unknown>(axiosConfig);
 
-      if (refreshed) {
-        return request<TResponse>(path, {
-          ...config,
-          skipAuthRefresh: true,
-        });
-      }
+    if (
+      response.status === 401 &&
+      !config?.skipAuthRefresh &&
+      !isAuthRefreshEndpoint(path) &&
+      (await refreshAccessToken(path))
+    ) {
+      return request<TResponse>(path, {
+        ...config,
+        skipAuthRefresh: true,
+      });
     }
 
-    const payload = (await response.json()) as unknown;
-
-    if (!response.ok) {
-      throw new Error(extractApiErrorMessage(payload));
+    if (response.status < 200 || response.status >= HTTP_STATUS_MULTIPLE_CHOICES) {
+      throw new ApiRequestError(extractApiErrorMessage(response.data), response.status);
     }
 
-    return unwrapResponseData<TResponse>(payload);
+    return unwrapResponseData<TResponse>(response.data);
   } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw new ApiRequestError(
+        extractApiErrorMessage(error.response?.data),
+        error.response?.status,
+      );
+    }
+
     throw toError(error);
   }
+}
+
+function normalizeHeaders(headers?: HeadersInit): Record<string, string> | undefined {
+  if (!headers) {
+    return undefined;
+  }
+
+  if (headers instanceof Headers) {
+    return Object.fromEntries(headers.entries());
+  }
+
+  if (Array.isArray(headers)) {
+    return Object.fromEntries(headers);
+  }
+
+  return Object.fromEntries(Object.entries(headers).map(([key, value]) => [key, String(value)]));
+}
+
+function isAdminPath(path: string): boolean {
+  return path.startsWith('/admin/') || path.startsWith('/auth/admin/');
 }
 
 function isAuthRefreshEndpoint(path: string): boolean {
@@ -118,11 +166,23 @@ function isAuthRefreshEndpoint(path: string): boolean {
     authEndpoints.confirmEmail,
     authEndpoints.refresh,
     authEndpoints.logout,
+    adminAuthEndpoints.loginAdmin,
+    adminAuthEndpoints.forceChangePassword,
+    adminAuthEndpoints.refresh,
+    adminAuthEndpoints.logout,
   ].includes(path);
 }
 
-async function refreshAccessToken(): Promise<boolean> {
+async function refreshAccessToken(path: string): Promise<boolean> {
   try {
+    if (isAdminPath(path)) {
+      const { authService } = await import('./admin/auth/service');
+
+      await authService.refresh();
+
+      return true;
+    }
+
     const { authService } = await import('./auth/service');
 
     await authService.refresh();

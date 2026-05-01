@@ -10,16 +10,11 @@ import { toast } from 'sonner';
 
 import { ROUTES } from 'lib/constants';
 import { createLoginSchema, type LoginFormValues } from 'lib/auth/schemas';
-import type { AuthResponse, AuthUser } from 'lib/api';
 import { useLoginMutation } from 'lib/api';
 
-import { ControlledInputField } from 'components/forms';
+import { ControlledInputField, ControlledPasswordField } from 'components/forms';
 import { Button } from 'components/shadcn';
 import { Form } from 'components/shadcn';
-
-function getAuthUser(response: AuthResponse | AuthUser): AuthUser {
-  return 'user' in response ? response.user : response;
-}
 
 export default function LoginPage() {
   const router = useRouter();
@@ -108,11 +103,10 @@ export default function LoginPage() {
                   startIcon={<Mail className="h-4 w-4" />}
                 />
 
-                <ControlledInputField
+                <ControlledPasswordField
                   control={form.control}
                   name="password"
                   label={t`Password`}
-                  type="password"
                   placeholder={t`Enter your password`}
                   startIcon={<Lock className="h-4 w-4" />}
                 />

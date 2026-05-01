@@ -1,6 +1,13 @@
-export type AuthRole = 'STUDENT' | 'COMPANY_OWNER' | 'ADMIN' | 'SUPER_ADMIN' | (string & {});
+import { type UserRole } from 'lib/api/admin/auth';
+import { type UserAccountStatus } from 'lib/api/admin/types';
 
-export type AuthStatus = 'PENDING' | 'ACTIVE' | 'SUSPENDED' | (string & {});
+export type AuthRole = UserRole | (string & {});
+
+export enum PendingAuthStatus {
+  PENDING = 'PENDING',
+}
+
+export type AuthStatus = UserAccountStatus | PendingAuthStatus | (string & {});
 
 export interface AuthUser {
   id: string;

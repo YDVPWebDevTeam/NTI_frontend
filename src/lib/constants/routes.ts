@@ -8,6 +8,17 @@ const AUTH_ROUTES = {
   REGISTER_SELECT: '/register/select-role',
 } as const;
 
+const ADMIN_ROUTES = {
+  LOGIN: '/admin/login',
+  FORCE_CHANGE_PASSWORD: '/admin/force-change-password',
+  ROOT: '/admin',
+  USERS: '/admin/users',
+  ORGANIZATIONS: '/admin/organizations',
+  ORGANIZATION_DETAILS: '/admin/organizations/[organizationId]',
+  organizationDetails: (organizationId: string) => `/admin/organizations/${organizationId}`,
+  INVITES: '/admin/invites',
+} as const;
+
 export const ROUTES = {
   ROOT: '/',
   DASHBOARD: '/dashboard',
@@ -31,5 +42,6 @@ export const ROUTES = {
     TWITTER: 'https://x.com',
   },
 
+  ADMIN: ADMIN_ROUTES,
   AUTH: AUTH_ROUTES,
 } as const;

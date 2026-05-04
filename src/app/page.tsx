@@ -21,7 +21,6 @@ export default function HomePage() {
   return (
     <div className="bg-surface font-body text-on-surface overflow-x-hidden antialiased">
       <LandingHeader />
-
       <section
         className="bg-surface relative overflow-hidden pt-32 pb-20 md:pt-48 md:pb-32"
         id="about"

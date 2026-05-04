@@ -1,7 +1,7 @@
 const AUTH_ROUTES = {
   LOGIN: '/login',
   REGISTER_STUDENT: '/register/student',
-  REGISTER_COMPANY: '/register/company-partner',
+  REGISTER_COMPANY: '/register/company-owner',
   FORGOT_PASSWORD: '/forgot-password',
   VERIFY_EMAIL: '/verify-email',
   RESET_PASSWORD: '/reset-password',

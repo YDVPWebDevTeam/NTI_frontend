@@ -1,5 +1,5 @@
 export const filesEndpoints = {
-  requestUploadUrl: '/files/upload-url',
-  completeUpload: '/files/complete',
-  downloadUrl: (id: string) => `/files/${id}/download-url`,
+  requestUploadUrl: '/v1/files/upload-url',
+  completeUpload: '/v1/files/complete',
+  downloadUrl: (id: string) => `/v1/files/${id}/download-url`,
 };

@@ -30,7 +30,7 @@ export default function RegisterCompanyOwnerPage() {
       });
 
       sessionStorage.setItem('companyOwnerEmail', email);
-      sessionStorage.setItem('companyOwnerPassword', password);
+      setPassword('');
 
       router.push('/register/company-owner/confirm-email');
     } catch (error) {

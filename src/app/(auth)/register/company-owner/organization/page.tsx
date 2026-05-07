@@ -1,38 +1,113 @@
 'use client';
 
-import { type ChangeEvent, type FormEvent, useState } from 'react';
+import { t } from '@lingui/core/macro';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ArrowRight } from 'lucide-react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import * as z from 'zod';
 
 import { filesService, uploadAndCompleteFile, useCreateOrganizationMutation } from 'lib/api';
+import { ROUTES } from 'lib/constants';
+
+import { ControlledInputField } from 'components/forms';
+import {
+  Button,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from 'components/shadcn';
+
+import { CompanyOwnerAuthLayout } from '../_components/company-owner-auth-layout';
+
+const COMPANY_NAME_MIN_LENGTH = 2;
+const COMPANY_NAME_MAX_LENGTH = 100;
+const ICO_LENGTH = 8;
+const SECTOR_MIN_LENGTH = 2;
+const DESCRIPTION_MIN_LENGTH = 10;
+
+function createCompanyOwnerOrganizationSchema() {
+  return z.object({
+    name: z
+      .string()
+      .trim()
+      .min(COMPANY_NAME_MIN_LENGTH, {
+        message: t`Company name must be at least 2 characters.`,
+      })
+      .max(COMPANY_NAME_MAX_LENGTH, {
+        message: t`Company name must be at most 100 characters.`,
+      }),
+    ico: z
+      .string()
+      .trim()
+      .length(ICO_LENGTH, {
+        message: t`IČO must contain exactly 8 characters.`,
+      }),
+    sector: z
+      .string()
+      .trim()
+      .min(SECTOR_MIN_LENGTH, {
+        message: t`Sector must be at least 2 characters.`,
+      }),
+    description: z
+      .string()
+      .trim()
+      .min(DESCRIPTION_MIN_LENGTH, {
+        message: t`Description must be at least 10 characters.`,
+      }),
+    website: z
+      .string()
+      .trim()
+      .url({
+        message: t`Please enter a valid website URL.`,
+      }),
+    logoFile: z.unknown().optional().nullable(),
+  });
+}
+
+type CompanyOwnerOrganizationValues = z.infer<
+  ReturnType<typeof createCompanyOwnerOrganizationSchema>
+>;
 
 export default function CreateCompanyOwnerOrganizationPage() {
   const router = useRouter();
 
   const { mutateAsync: createOrganization, isPending } = useCreateOrganizationMutation();
 
-  const [name, setName] = useState('');
-  const [ico, setIco] = useState('');
-  const [sector, setSector] = useState('');
-  const [description, setDescription] = useState('');
-  const [website, setWebsite] = useState('');
-  const [logoFile, setLogoFile] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [errorMessage, setErrorMessage] = useState('');
+  const form = useForm<CompanyOwnerOrganizationValues>({
+    resolver: zodResolver(createCompanyOwnerOrganizationSchema()),
+    defaultValues: {
+      name: '',
+      ico: '',
+      sector: '',
+      description: '',
+      website: '',
+      logoFile: null,
+    },
+    mode: 'onChange',
+  });
 
-  function handleLogoChange(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0] ?? null;
+  const selectedLogoFile = form.watch('logoFile');
+  const isSubmitDisabled = isPending || isSubmitting;
 
-    setLogoFile(file);
-  }
+  const handleSubmit = async (values: CompanyOwnerOrganizationValues) => {
+    if (isSubmitting) {
+      return;
+    }
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setErrorMessage('');
+    setIsSubmitting(true);
 
     try {
       let logoUrl: string | undefined;
 
-      if (logoFile) {
+      if (values.logoFile instanceof File) {
         const uploadedLogo = await uploadAndCompleteFile(
           {
             requestUploadUrl: (payload) => filesService.requestUploadUrl(payload),
@@ -41,7 +116,7 @@ export default function CreateCompanyOwnerOrganizationPage() {
             completeUpload: (payload) => filesService.completeUpload(payload),
           },
           {
-            file: logoFile,
+            file: values.logoFile,
             purpose: 'organization-logo',
             entityType: 'organization',
           },
@@ -49,147 +124,130 @@ export default function CreateCompanyOwnerOrganizationPage() {
 
         logoUrl = uploadedLogo.publicUrl;
       }
+
       await createOrganization({
-        name,
-        ico,
-        sector,
-        description,
-        website,
+        name: values.name,
+        ico: values.ico,
+        sector: values.sector,
+        description: values.description,
+        website: values.website,
         logoUrl,
       });
 
       sessionStorage.removeItem('companyOwnerEmail');
-      sessionStorage.removeItem('companyOwnerPassword');
 
-      router.push('/dashboard');
+      router.push(ROUTES.DASHBOARD);
     } catch (error) {
-      setErrorMessage(error instanceof Error ? error.message : 'Organization creation failed');
+      toast.error(error instanceof Error ? error.message : t`Organization creation failed`);
+    } finally {
+      setIsSubmitting(false);
     }
-  }
+  };
 
   return (
-    <main className="mx-auto flex w-full max-w-xl flex-1 flex-col justify-center px-4 py-10">
-      <section className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
-        <div className="mb-6">
-          <h1 className="text-2xl font-semibold text-gray-950">Create organization</h1>
+    <CompanyOwnerAuthLayout
+      eyebrow={t`ORGANIZATION SETUP`}
+      title={t`Create your organization profile`}
+      description={t`Add company details so your organization can be reviewed and connected to the platform.`}
+    >
+      <div className="mb-8">
+        <p className="text-[11px] font-medium tracking-[0.12em] text-neutral-500">
+          {t`COMPANY DETAILS`}
+        </p>
 
-          <p className="mt-2 text-sm text-gray-600">
-            Add basic information about your organization.
-          </p>
-        </div>
+        <h2 className="mt-2 text-4xl font-semibold tracking-tight text-[#0c1a4f]">
+          {t`Create organization`}
+        </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label htmlFor="name" className="mb-1 block text-sm font-medium text-gray-800">
-              Company name
-            </label>
+        <p className="mt-3 text-[15px] leading-relaxed text-neutral-600">
+          {t`Add basic information about your organization.`}
+        </p>
+      </div>
 
-            <input
-              id="name"
-              type="text"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-              placeholder="Test Company"
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm transition outline-none focus:border-gray-950"
-              required
-            />
-          </div>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-5">
+          <ControlledInputField
+            control={form.control}
+            name="name"
+            label={t`Company name`}
+            type="text"
+            placeholder={t`Test Company`}
+          />
 
-          <div>
-            <label htmlFor="ico" className="mb-1 block text-sm font-medium text-gray-800">
-              IČO
-            </label>
+          <ControlledInputField
+            control={form.control}
+            name="ico"
+            label={t`IČO`}
+            type="text"
+            placeholder={t`12345678`}
+          />
 
-            <input
-              id="ico"
-              type="text"
-              value={ico}
-              onChange={(event) => setIco(event.target.value)}
-              placeholder="12345678"
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm transition outline-none focus:border-gray-950"
-              required
-            />
-          </div>
+          <ControlledInputField
+            control={form.control}
+            name="sector"
+            label={t`Sector`}
+            type="text"
+            placeholder={t`IT`}
+          />
 
-          <div>
-            <label htmlFor="sector" className="mb-1 block text-sm font-medium text-gray-800">
-              Sector
-            </label>
+          <ControlledInputField
+            control={form.control}
+            name="description"
+            label={t`Description`}
+            type="text"
+            placeholder={t`Software development company.`}
+          />
 
-            <input
-              id="sector"
-              type="text"
-              value={sector}
-              onChange={(event) => setSector(event.target.value)}
-              placeholder="IT"
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm transition outline-none focus:border-gray-950"
-              required
-            />
-          </div>
+          <ControlledInputField
+            control={form.control}
+            name="website"
+            label={t`Website`}
+            type="url"
+            placeholder={t`https://example.com`}
+          />
 
-          <div>
-            <label htmlFor="description" className="mb-1 block text-sm font-medium text-gray-800">
-              Description
-            </label>
+          <FormField
+            control={form.control}
+            name="logoFile"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t`Logo`}</FormLabel>
 
-            <textarea
-              id="description"
-              value={description}
-              onChange={(event) => setDescription(event.target.value)}
-              placeholder="Software development company."
-              rows={4}
-              className="w-full resize-none rounded-lg border border-gray-300 px-3 py-2 text-sm transition outline-none focus:border-gray-950"
-              required
-            />
-          </div>
+                <FormControl>
+                  <input
+                    id="logo"
+                    type="file"
+                    accept="image/png,image/jpeg,image/webp"
+                    onChange={(event) => {
+                      const file = event.target.files?.[0] ?? null;
 
-          <div>
-            <label htmlFor="website" className="mb-1 block text-sm font-medium text-gray-800">
-              Website
-            </label>
+                      field.onChange(file);
+                    }}
+                    className="border-input bg-background block w-full rounded-md border px-3 py-2 text-sm"
+                  />
+                </FormControl>
 
-            <input
-              id="website"
-              type="url"
-              value={website}
-              onChange={(event) => setWebsite(event.target.value)}
-              placeholder="https://example.com"
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm transition outline-none focus:border-gray-950"
-              required
-            />
-          </div>
+                {selectedLogoFile instanceof File && (
+                  <p className="text-xs text-neutral-500">{selectedLogoFile.name}</p>
+                )}
 
-          <div>
-            <label htmlFor="logo" className="mb-1 block text-sm font-medium text-gray-800">
-              Logo
-            </label>
+                <p className="text-xs text-gray-500">{t`PNG, JPG or WEBP. Logo is optional.`}</p>
 
-            <input
-              id="logo"
-              type="file"
-              accept="image/png,image/jpeg,image/webp"
-              onChange={handleLogoChange}
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm transition outline-none file:mr-3 file:rounded-md file:border-0 file:bg-gray-100 file:px-3 file:py-1 file:text-sm file:font-medium"
-            />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-            <p className="mt-1 text-xs text-gray-500">PNG, JPG or WEBP. Logo is optional.</p>
-          </div>
-
-          {errorMessage && (
-            <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600">
-              {errorMessage}
-            </div>
-          )}
-
-          <button
+          <Button
             type="submit"
-            disabled={isPending}
-            className="w-full rounded-lg bg-gray-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-60"
+            disabled={isSubmitDisabled}
+            className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
           >
-            {isPending ? 'Creating organization...' : 'Create organization'}
-          </button>
+            {isSubmitDisabled ? t`CREATING ORGANIZATION...` : t`CREATE ORGANIZATION`}
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
         </form>
-      </section>
-    </main>
+      </Form>
+    </CompanyOwnerAuthLayout>
   );
 }

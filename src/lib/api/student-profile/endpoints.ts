@@ -1,5 +1,5 @@
 export const studentProfileEndpoints = {
-  getMyProfile: '/student-profile/me',
-  updateProfessionalSkills: '/student-profile/me/professional-skills',
-  updateAcademicInformation: '/student-profile/me/academic-information',
+  getMyProfile: '/v1/student-profile/me',
+  updateProfessionalSkills: '/v1/student-profile/me/professional-skills',
+  updateAcademicInformation: '/v1/student-profile/me/academic-information',
 };

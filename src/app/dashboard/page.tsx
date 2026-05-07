@@ -4,9 +4,7 @@ export default function DashboardPage() {
       <section className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
         <h1 className="text-2xl font-semibold text-gray-950">Dashboard</h1>
 
-        <p className="mt-2 text-sm text-gray-600">
-          Your organization registration was submitted successfully.
-        </p>
+        <p className="mt-2 text-sm text-gray-600">Welcome to your dashboard.</p>
       </section>
     </main>
   );

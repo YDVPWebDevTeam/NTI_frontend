@@ -1,134 +1,161 @@
 'use client';
 
-import { type FormEvent, useState } from 'react';
+import { t } from '@lingui/core/macro';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import * as z from 'zod';
 
 import { useRegisterCompanyOwnerMutation } from 'lib/api';
+import { ROUTES } from 'lib/constants';
+
+import { ControlledInputField, ControlledPasswordField } from 'components/forms';
+import { Button, Form } from 'components/shadcn';
+
+import { CompanyOwnerAuthLayout } from './_components/company-owner-auth-layout';
+
+const COMPANY_OWNER_NAME_MIN_LENGTH = 2;
+const COMPANY_OWNER_NAME_MAX_LENGTH = 50;
+const COMPANY_OWNER_PASSWORD_MIN_LENGTH = 6;
+
+function createCompanyOwnerRegistrationSchema() {
+  return z.object({
+    email: z.email({
+      message: t`Please enter a valid email address.`,
+    }),
+    firstName: z
+      .string()
+      .trim()
+      .min(COMPANY_OWNER_NAME_MIN_LENGTH, {
+        message: t`First name must be at least 2 characters.`,
+      })
+      .max(COMPANY_OWNER_NAME_MAX_LENGTH, {
+        message: t`First name must be at most 50 characters.`,
+      }),
+    lastName: z
+      .string()
+      .trim()
+      .min(COMPANY_OWNER_NAME_MIN_LENGTH, {
+        message: t`Last name must be at least 2 characters.`,
+      })
+      .max(COMPANY_OWNER_NAME_MAX_LENGTH, {
+        message: t`Last name must be at most 50 characters.`,
+      }),
+    password: z.string().min(COMPANY_OWNER_PASSWORD_MIN_LENGTH, {
+      message: t`Password must be at least 6 characters.`,
+    }),
+  });
+}
+
+type CompanyOwnerRegistrationValues = z.infer<
+  ReturnType<typeof createCompanyOwnerRegistrationSchema>
+>;
 
 export default function RegisterCompanyOwnerPage() {
   const router = useRouter();
 
   const { mutateAsync: registerCompanyOwner, isPending } = useRegisterCompanyOwnerMutation();
 
-  const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [password, setPassword] = useState('');
+  const form = useForm<CompanyOwnerRegistrationValues>({
+    resolver: zodResolver(createCompanyOwnerRegistrationSchema()),
+    defaultValues: {
+      email: '',
+      firstName: '',
+      lastName: '',
+      password: '',
+    },
+    mode: 'onChange',
+  });
 
-  const [errorMessage, setErrorMessage] = useState('');
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setErrorMessage('');
-
+  const handleSubmit = async (values: CompanyOwnerRegistrationValues) => {
     try {
       await registerCompanyOwner({
-        email,
-        firstName,
-        lastName,
-        password,
+        email: values.email,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        password: values.password,
       });
 
-      sessionStorage.setItem('companyOwnerEmail', email);
-      setPassword('');
+      sessionStorage.setItem('companyOwnerEmail', values.email);
 
-      router.push('/register/company-owner/confirm-email');
+      form.reset({
+        email: values.email,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        password: '',
+      });
+
+      router.push(ROUTES.AUTH.REGISTER_COMPANY_CONFIRM_EMAIL);
     } catch (error) {
-      setErrorMessage(error instanceof Error ? error.message : 'Registration failed');
+      toast.error(error instanceof Error ? error.message : t`Registration failed`);
     }
-  }
+  };
 
   return (
-    <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center px-4 py-10">
-      <section className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
-        <div className="mb-6">
-          <h1 className="text-2xl font-semibold text-gray-950">Register company owner</h1>
+    <CompanyOwnerAuthLayout
+      eyebrow={t`COMPANY OWNER GATEWAY`}
+      title={t`Create your company owner account`}
+      description={t`Register your account to continue with organization onboarding.`}
+    >
+      <div className="mb-8">
+        <p className="text-[11px] font-medium tracking-[0.12em] text-neutral-500">
+          {t`ACCOUNT SETUP`}
+        </p>
 
-          <p className="mt-2 text-sm text-gray-600">
-            Create your company owner account to continue with organization registration.
-          </p>
-        </div>
+        <h2 className="mt-2 text-4xl font-semibold tracking-tight text-[#0c1a4f]">
+          {t`Register company owner`}
+        </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label htmlFor="email" className="mb-1 block text-sm font-medium text-gray-800">
-              Email
-            </label>
+        <p className="mt-3 text-[15px] leading-relaxed text-neutral-600">
+          {t`Create your company owner account to continue with organization registration.`}
+        </p>
+      </div>
 
-            <input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              placeholder="owner@example.com"
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm transition outline-none focus:border-gray-950"
-              required
-            />
-          </div>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-5">
+          <ControlledInputField
+            control={form.control}
+            name="email"
+            label={t`Email`}
+            type="email"
+            placeholder={t`owner@example.com`}
+          />
 
-          <div>
-            <label htmlFor="firstName" className="mb-1 block text-sm font-medium text-gray-800">
-              First name
-            </label>
+          <ControlledInputField
+            control={form.control}
+            name="firstName"
+            label={t`First name`}
+            type="text"
+            placeholder={t`John`}
+          />
 
-            <input
-              id="firstName"
-              type="text"
-              value={firstName}
-              onChange={(event) => setFirstName(event.target.value)}
-              placeholder="John"
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm transition outline-none focus:border-gray-950"
-              required
-            />
-          </div>
+          <ControlledInputField
+            control={form.control}
+            name="lastName"
+            label={t`Last name`}
+            type="text"
+            placeholder={t`Doe`}
+          />
 
-          <div>
-            <label htmlFor="lastName" className="mb-1 block text-sm font-medium text-gray-800">
-              Last name
-            </label>
+          <ControlledPasswordField
+            control={form.control}
+            name="password"
+            label={t`Password`}
+            placeholder={t`StrongPass123!`}
+          />
 
-            <input
-              id="lastName"
-              type="text"
-              value={lastName}
-              onChange={(event) => setLastName(event.target.value)}
-              placeholder="Doe"
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm transition outline-none focus:border-gray-950"
-              required
-            />
-          </div>
-
-          <div>
-            <label htmlFor="password" className="mb-1 block text-sm font-medium text-gray-800">
-              Password
-            </label>
-
-            <input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              placeholder="StrongPass123!"
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm transition outline-none focus:border-gray-950"
-              required
-            />
-          </div>
-
-          {errorMessage && (
-            <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600">
-              {errorMessage}
-            </div>
-          )}
-
-          <button
+          <Button
             type="submit"
             disabled={isPending}
-            className="w-full rounded-lg bg-gray-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-60"
+            className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
           >
-            {isPending ? 'Creating account...' : 'Create account'}
-          </button>
+            {isPending ? t`CREATING ACCOUNT...` : t`CREATE ACCOUNT`}
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
         </form>
-      </section>
-    </main>
+      </Form>
+    </CompanyOwnerAuthLayout>
   );
 }

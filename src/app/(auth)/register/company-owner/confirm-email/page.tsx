@@ -1,110 +1,118 @@
 'use client';
 
-import { type FormEvent, useEffect, useState } from 'react';
+import { t } from '@lingui/core/macro';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ArrowRight } from 'lucide-react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import * as z from 'zod';
 
-import { useConfirmEmailMutation, useLoginMutation } from 'lib/api';
+import { useConfirmEmailMutation } from 'lib/api';
+import { ROUTES } from 'lib/constants';
+
+import { ControlledInputField } from 'components/forms';
+import { Button, Form } from 'components/shadcn';
+
+import { CompanyOwnerAuthLayout } from '../_components/company-owner-auth-layout';
+
+const VERIFICATION_TOKEN_MIN_LENGTH = 4;
+
+function createCompanyOwnerEmailConfirmationSchema() {
+  return z.object({
+    token: z
+      .string()
+      .trim()
+      .min(VERIFICATION_TOKEN_MIN_LENGTH, {
+        message: t`Verification token must be at least 4 characters.`,
+      }),
+  });
+}
+
+type CompanyOwnerEmailConfirmationValues = z.infer<
+  ReturnType<typeof createCompanyOwnerEmailConfirmationSchema>
+>;
 
 export default function ConfirmCompanyOwnerEmailPage() {
   const router = useRouter();
 
-  const { mutateAsync: confirmEmail, isPending: isConfirmPending } = useConfirmEmailMutation();
+  const { mutateAsync: confirmEmail, isPending } = useConfirmEmailMutation();
 
-  const { mutateAsync: login, isPending: isLoginPending } = useLoginMutation();
+  const [savedEmail] = useState(() => {
+    if (typeof window === 'undefined') {
+      return '';
+    }
 
-  const [token, setToken] = useState('');
-  const [savedEmail, setSavedEmail] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+    return sessionStorage.getItem('companyOwnerEmail') || '';
+  });
 
-  const isPending = isConfirmPending || isLoginPending;
+  const form = useForm<CompanyOwnerEmailConfirmationValues>({
+    resolver: zodResolver(createCompanyOwnerEmailConfirmationSchema()),
+    defaultValues: {
+      token: savedEmail,
+    },
+    mode: 'onChange',
+  });
 
-  useEffect(() => {
-    const email = sessionStorage.getItem('companyOwnerEmail') || '';
-
-    setSavedEmail(email);
-
-    // For local development backend may allow email as token.
-    // If backend requires a real token, replace this value manually.
-    setToken(email);
-  }, []);
-
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setErrorMessage('');
-
+  const handleSubmit = async (values: CompanyOwnerEmailConfirmationValues) => {
     try {
       await confirmEmail({
-        token,
+        token: values.token.trim(),
       });
 
-      const email = sessionStorage.getItem('companyOwnerEmail');
-      const password = sessionStorage.getItem('companyOwnerPassword');
-
-      if (!email || !password) {
-        throw new Error('Saved email or password is missing. Please register again.');
-      }
-
-      await login({
-        email,
-        password,
-      });
-
-      router.push('/register/company-owner/organization');
+      router.push(ROUTES.AUTH.REGISTER_COMPANY_ORGANIZATION);
     } catch (error) {
-      setErrorMessage(error instanceof Error ? error.message : 'Email confirmation failed');
+      toast.error(error instanceof Error ? error.message : t`Email confirmation failed`);
     }
-  }
+  };
 
   return (
-    <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center px-4 py-10">
-      <section className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
-        <div className="mb-6">
-          <h1 className="text-2xl font-semibold text-gray-950">Confirm email</h1>
+    <CompanyOwnerAuthLayout
+      eyebrow={t`EMAIL VERIFICATION`}
+      title={t`Confirm your company owner account`}
+      description={t`Verify your email address before creating your organization profile.`}
+    >
+      <div className="mb-8">
+        <p className="text-[11px] font-medium tracking-[0.12em] text-neutral-500">
+          {t`VERIFICATION STEP`}
+        </p>
 
-          <p className="mt-2 text-sm text-gray-600">
-            Enter the verification token from your email. In local development, you can try using
-            your email as the token.
+        <h2 className="mt-2 text-4xl font-semibold tracking-tight text-[#0c1a4f]">
+          {t`Confirm email`}
+        </h2>
+
+        <p className="mt-3 text-[15px] leading-relaxed text-neutral-600">
+          {t`Enter the verification token from your email. In local development, you can try using your email as the token.`}
+        </p>
+
+        {savedEmail && (
+          <p className="mt-4 rounded-sm border border-black/10 bg-white px-3 py-2 text-sm text-neutral-600">
+            {t`Registered email:`} {savedEmail}
           </p>
+        )}
+      </div>
 
-          {savedEmail && (
-            <p className="mt-3 rounded-lg bg-gray-100 px-3 py-2 text-sm text-gray-700">
-              Registered email: {savedEmail}
-            </p>
-          )}
-        </div>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-5">
+          <ControlledInputField
+            control={form.control}
+            name="token"
+            label={t`Verification token`}
+            type="text"
+            placeholder={t`Paste your verification token`}
+          />
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label htmlFor="token" className="mb-1 block text-sm font-medium text-gray-800">
-              Verification token
-            </label>
-
-            <input
-              id="token"
-              type="text"
-              value={token}
-              onChange={(event) => setToken(event.target.value)}
-              placeholder="Paste your verification token"
-              className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm transition outline-none focus:border-gray-950"
-              required
-            />
-          </div>
-
-          {errorMessage && (
-            <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600">
-              {errorMessage}
-            </div>
-          )}
-
-          <button
+          <Button
             type="submit"
             disabled={isPending}
-            className="w-full rounded-lg bg-gray-950 px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-60"
+            className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
           >
-            {isPending ? 'Confirming...' : 'Confirm email'}
-          </button>
+            {isPending ? t`CONFIRMING...` : t`CONFIRM EMAIL`}
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
         </form>
-      </section>
-    </main>
+      </Form>
+    </CompanyOwnerAuthLayout>
   );
 }

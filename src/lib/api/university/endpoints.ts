@@ -1,5 +1,5 @@
 export const lookupEndpoints = {
-  universities: '/universities',
-  facultiesByUniversity: (universityId: string) => `/universities/${universityId}/faculties`,
-  specializationsByFaculty: (facultyId: string) => `/faculties/${facultyId}/specializations`,
+  universities: '/v1/universities',
+  facultiesByUniversity: (universityId: string) => `/v1/universities/${universityId}/faculties`,
+  specializationsByFaculty: (facultyId: string) => `/v1/faculties/${facultyId}/specializations`,
 };

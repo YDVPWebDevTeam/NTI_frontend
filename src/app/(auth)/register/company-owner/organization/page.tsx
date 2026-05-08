@@ -7,7 +7,6 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import * as z from 'zod';
 
 import { filesService, uploadAndCompleteFile, useCreateOrganizationMutation } from 'lib/api';
 import { ROUTES } from 'lib/constants';
@@ -24,55 +23,10 @@ import {
 } from 'components/shadcn';
 
 import { CompanyOwnerAuthLayout } from '../_components/company-owner-auth-layout';
-
-const COMPANY_NAME_MIN_LENGTH = 2;
-const COMPANY_NAME_MAX_LENGTH = 100;
-const ICO_LENGTH = 8;
-const SECTOR_MIN_LENGTH = 2;
-const DESCRIPTION_MIN_LENGTH = 10;
-
-function createCompanyOwnerOrganizationSchema() {
-  return z.object({
-    name: z
-      .string()
-      .trim()
-      .min(COMPANY_NAME_MIN_LENGTH, {
-        message: t`Company name must be at least 2 characters.`,
-      })
-      .max(COMPANY_NAME_MAX_LENGTH, {
-        message: t`Company name must be at most 100 characters.`,
-      }),
-    ico: z
-      .string()
-      .trim()
-      .length(ICO_LENGTH, {
-        message: t`IČO must contain exactly 8 characters.`,
-      }),
-    sector: z
-      .string()
-      .trim()
-      .min(SECTOR_MIN_LENGTH, {
-        message: t`Sector must be at least 2 characters.`,
-      }),
-    description: z
-      .string()
-      .trim()
-      .min(DESCRIPTION_MIN_LENGTH, {
-        message: t`Description must be at least 10 characters.`,
-      }),
-    website: z
-      .string()
-      .trim()
-      .url({
-        message: t`Please enter a valid website URL.`,
-      }),
-    logoFile: z.unknown().optional().nullable(),
-  });
-}
-
-type CompanyOwnerOrganizationValues = z.infer<
-  ReturnType<typeof createCompanyOwnerOrganizationSchema>
->;
+import {
+  createCompanyOwnerOrganizationSchema,
+  type CompanyOwnerOrganizationValues,
+} from './schema';
 
 export default function CreateCompanyOwnerOrganizationPage() {
   const router = useRouter();
@@ -134,8 +88,6 @@ export default function CreateCompanyOwnerOrganizationPage() {
         logoUrl,
       });
 
-      sessionStorage.removeItem('companyOwnerEmail');
-
       router.push(ROUTES.DASHBOARD);
     } catch (error) {
       toast.error(error instanceof Error ? error.message : t`Organization creation failed`);
@@ -177,7 +129,7 @@ export default function CreateCompanyOwnerOrganizationPage() {
           <ControlledInputField
             control={form.control}
             name="ico"
-            label={t`IČO`}
+            label={t`ICO`}
             type="text"
             placeholder={t`12345678`}
           />

@@ -6,7 +6,6 @@ import { ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import * as z from 'zod';
 
 import { useRegisterCompanyOwnerMutation } from 'lib/api';
 import { ROUTES } from 'lib/constants';
@@ -15,43 +14,10 @@ import { ControlledInputField, ControlledPasswordField } from 'components/forms'
 import { Button, Form } from 'components/shadcn';
 
 import { CompanyOwnerAuthLayout } from './_components/company-owner-auth-layout';
-
-const COMPANY_OWNER_NAME_MIN_LENGTH = 2;
-const COMPANY_OWNER_NAME_MAX_LENGTH = 50;
-const COMPANY_OWNER_PASSWORD_MIN_LENGTH = 6;
-
-function createCompanyOwnerRegistrationSchema() {
-  return z.object({
-    email: z.email({
-      message: t`Please enter a valid email address.`,
-    }),
-    firstName: z
-      .string()
-      .trim()
-      .min(COMPANY_OWNER_NAME_MIN_LENGTH, {
-        message: t`First name must be at least 2 characters.`,
-      })
-      .max(COMPANY_OWNER_NAME_MAX_LENGTH, {
-        message: t`First name must be at most 50 characters.`,
-      }),
-    lastName: z
-      .string()
-      .trim()
-      .min(COMPANY_OWNER_NAME_MIN_LENGTH, {
-        message: t`Last name must be at least 2 characters.`,
-      })
-      .max(COMPANY_OWNER_NAME_MAX_LENGTH, {
-        message: t`Last name must be at most 50 characters.`,
-      }),
-    password: z.string().min(COMPANY_OWNER_PASSWORD_MIN_LENGTH, {
-      message: t`Password must be at least 6 characters.`,
-    }),
-  });
-}
-
-type CompanyOwnerRegistrationValues = z.infer<
-  ReturnType<typeof createCompanyOwnerRegistrationSchema>
->;
+import {
+  createCompanyOwnerRegistrationSchema,
+  type CompanyOwnerRegistrationValues,
+} from './schema';
 
 export default function RegisterCompanyOwnerPage() {
   const router = useRouter();
@@ -77,8 +43,6 @@ export default function RegisterCompanyOwnerPage() {
         lastName: values.lastName,
         password: values.password,
       });
-
-      sessionStorage.setItem('companyOwnerEmail', values.email);
 
       form.reset({
         email: values.email,

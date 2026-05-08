@@ -3,11 +3,9 @@
 import { t } from '@lingui/core/macro';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowRight } from 'lucide-react';
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
-import * as z from 'zod';
 
 import { useConfirmEmailMutation } from 'lib/api';
 import { ROUTES } from 'lib/constants';
@@ -16,42 +14,19 @@ import { ControlledInputField } from 'components/forms';
 import { Button, Form } from 'components/shadcn';
 
 import { CompanyOwnerAuthLayout } from '../_components/company-owner-auth-layout';
-
-const VERIFICATION_TOKEN_MIN_LENGTH = 4;
-
-function createCompanyOwnerEmailConfirmationSchema() {
-  return z.object({
-    token: z
-      .string()
-      .trim()
-      .min(VERIFICATION_TOKEN_MIN_LENGTH, {
-        message: t`Verification token must be at least 4 characters.`,
-      }),
-  });
-}
-
-type CompanyOwnerEmailConfirmationValues = z.infer<
-  ReturnType<typeof createCompanyOwnerEmailConfirmationSchema>
->;
+import {
+  createCompanyOwnerEmailConfirmationSchema,
+  type CompanyOwnerEmailConfirmationValues,
+} from './schema';
 
 export default function ConfirmCompanyOwnerEmailPage() {
   const router = useRouter();
 
   const { mutateAsync: confirmEmail, isPending } = useConfirmEmailMutation();
 
-  const [savedEmail] = useState(() => {
-    if (typeof window === 'undefined') {
-      return '';
-    }
-
-    return sessionStorage.getItem('companyOwnerEmail') || '';
-  });
-
   const form = useForm<CompanyOwnerEmailConfirmationValues>({
     resolver: zodResolver(createCompanyOwnerEmailConfirmationSchema()),
-    defaultValues: {
-      token: savedEmail,
-    },
+    defaultValues: { token: '' },
     mode: 'onChange',
   });
 
@@ -83,14 +58,8 @@ export default function ConfirmCompanyOwnerEmailPage() {
         </h2>
 
         <p className="mt-3 text-[15px] leading-relaxed text-neutral-600">
-          {t`Enter the verification token from your email. In local development, you can try using your email as the token.`}
+          {t`Enter the verification token from your email.`}
         </p>
-
-        {savedEmail && (
-          <p className="mt-4 rounded-sm border border-black/10 bg-white px-3 py-2 text-sm text-neutral-600">
-            {t`Registered email:`} {savedEmail}
-          </p>
-        )}
       </div>
 
       <Form {...form}>

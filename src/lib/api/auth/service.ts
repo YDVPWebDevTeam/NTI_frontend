@@ -6,6 +6,7 @@ import type {
   AuthUser,
   ConfirmEmailRequest,
   LoginRequest,
+  RegisterCompanyOwnerRequest,
   RegisterRequest,
   ResendConfirmationEmailRequest,
 } from './types';
@@ -18,6 +19,13 @@ export const authService = {
   registerStudent(payload: RegisterRequest) {
     return api.post<AuthResponse | AuthUser, RegisterRequest>(
       authEndpoints.registerStudent,
+      payload,
+    );
+  },
+
+  registerCompanyOwner(payload: RegisterCompanyOwnerRequest) {
+    return api.post<AuthResponse | AuthUser, RegisterCompanyOwnerRequest>(
+      authEndpoints.registerCompanyOwner,
       payload,
     );
   },

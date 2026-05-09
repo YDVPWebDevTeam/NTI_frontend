@@ -162,6 +162,7 @@ function isAuthRefreshEndpoint(path: string): boolean {
   return [
     authEndpoints.login,
     authEndpoints.registerStudent,
+    authEndpoints.registerCompanyOwner,
     authEndpoints.resendConfirmationEmail,
     authEndpoints.confirmEmail,
     authEndpoints.refresh,

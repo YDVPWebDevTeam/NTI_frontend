@@ -17,11 +17,11 @@ msgstr ""
 msgid " and institutional data processing terms required for platform access."
 msgstr " a inštitucionálne podmienky spracovania údajov potrebné na prístup k platforme."
 
-#: src/app/admin/page.tsx:70
+#: src/app/admin/page.tsx:68
 msgid "{activeOrganizations} organizations are currently active."
 msgstr ""
 
-#: src/app/admin/page.tsx:58
+#: src/app/admin/page.tsx:56
 msgid "{activeUsers} active accounts across the platform."
 msgstr ""
 
@@ -33,7 +33,7 @@ msgstr "© 2024 Nitriansky technologický inkubátor. Všetky práva vyhradené.
 msgid "© 2026 INSTITUTIONAL INCUBATOR."
 msgstr "© 2026 INŠTITUCIONÁLNY INKUBÁTOR."
 
-#: src/app/page.tsx:104
+#: src/app/page.tsx:103
 msgid "1-on-1 Mentoring"
 msgstr "Individuálny mentoring"
 
@@ -41,7 +41,11 @@ msgstr "Individuálny mentoring"
 msgid "100% Complete"
 msgstr "100 % dokončené"
 
-#: src/app/page.tsx:285
+#: src/app/(auth)/register/company-owner/organization/page.tsx:134
+msgid "12345678"
+msgstr ""
+
+#: src/app/page.tsx:284
 msgid "2023 Cohort Graduate"
 msgstr "Absolvent kohorty 2023"
 
@@ -86,7 +90,7 @@ msgstr "PRÍSTUPOVÝ MODUL"
 msgid "Access the high-performance environment tailored to your institutional role. Choose a path to begin your technical journey."
 msgstr "Získajte prístup do vysokovýkonného prostredia prispôsobeného vašej inštitucionálnej úlohe. Vyberte si cestu a začnite svoju technologickú cestu."
 
-#: src/app/page.tsx:176
+#: src/app/page.tsx:175
 msgid "Access to premium office spaces, 3D printing labs, and legal support to scale your dream."
 msgstr "Prístup k prémiovým kancelárskym priestorom, 3D tlačovým laboratóriám a právnej podpore na rozvoj vášho sna."
 
@@ -94,16 +98,20 @@ msgstr "Prístup k prémiovým kancelárskym priestorom, 3D tlačovým laborató
 msgid "Access to Program A Frameworks"
 msgstr "Prístup k rámcom Programu A"
 
-#: src/app/admin/page.tsx:64
+#: src/app/(auth)/register/company-owner/page.tsx:68
+msgid "ACCOUNT SETUP"
+msgstr ""
+
+#: src/app/admin/page.tsx:62
 msgid "Accounts currently blocked from normal access."
 msgstr ""
 
 #: src/app/admin/organizations/page.tsx:87
-#: src/app/admin/users/page.tsx:83
+#: src/app/admin/users/page.tsx:79
 msgid "Actions"
 msgstr ""
 
-#: src/app/admin/users/page.tsx:102
+#: src/app/admin/users/page.tsx:98
 msgid "Activate"
 msgstr ""
 
@@ -114,6 +122,14 @@ msgstr "AKTÍVNA FÁZA"
 #: src/lib/auth/schemas.ts:163
 msgid "Add at least one technical skill."
 msgstr "Pridajte aspoň jednu technickú zručnosť."
+
+#: src/app/(auth)/register/company-owner/organization/page.tsx:115
+msgid "Add basic information about your organization."
+msgstr ""
+
+#: src/app/(auth)/register/company-owner/organization/page.tsx:103
+msgid "Add company details so your organization can be reviewed and connected to the platform."
+msgstr ""
 
 #: src/app/(auth)/register/student/_components/skills/projects-summary-section.tsx:151
 msgid "Add Project"
@@ -135,7 +151,7 @@ msgstr ""
 msgid "Admin overview unavailable"
 msgstr ""
 
-#: src/components/admin/admin-shell.tsx:97
+#: src/components/admin/admin-shell.tsx:99
 msgid "Admin Workspace"
 msgstr ""
 
@@ -155,11 +171,11 @@ msgstr ""
 msgid "Already have an account?"
 msgstr "Už máte účet?"
 
-#: src/app/page.tsx:310
+#: src/app/page.tsx:309
 msgid "Apply as Student"
 msgstr "Prihlásiť sa ako študent"
 
-#: src/app/page.tsx:47
+#: src/app/page.tsx:46
 msgid "Apply as student/team"
 msgstr "Prihlásiť sa ako študent/tím"
 
@@ -167,7 +183,7 @@ msgstr "Prihlásiť sa ako študent/tím"
 msgid "Approve"
 msgstr ""
 
-#: src/app/admin/page.tsx:145
+#: src/app/admin/page.tsx:143
 msgid "Approve or reject organization onboarding requests."
 msgstr ""
 
@@ -175,7 +191,7 @@ msgstr ""
 msgid "Approving..."
 msgstr ""
 
-#: src/app/page.tsx:280
+#: src/app/page.tsx:279
 msgid "AquaSense Solutions"
 msgstr "AquaSense Solutions"
 
@@ -183,7 +199,7 @@ msgstr "AquaSense Solutions"
 msgid "At least one skill must be marked as primary."
 msgstr "Aspoň jedna zručnosť musí byť označená ako hlavná."
 
-#: src/app/admin/page.tsx:85
+#: src/app/admin/page.tsx:83
 msgid "Attention Required"
 msgstr ""
 
@@ -211,7 +227,7 @@ msgstr ""
 msgid "Bio"
 msgstr "Bio"
 
-#: src/app/page.tsx:266
+#: src/app/page.tsx:265
 msgid "Business Strategy"
 msgstr "Obchodná stratégia"
 
@@ -219,7 +235,7 @@ msgstr "Obchodná stratégia"
 msgid "Cancel"
 msgstr ""
 
-#: src/app/page.tsx:140
+#: src/app/page.tsx:139
 msgid "Career Placement Opportunities"
 msgstr "Príležitosti kariérneho uplatnenia"
 
@@ -227,7 +243,7 @@ msgstr "Príležitosti kariérneho uplatnenia"
 msgid "Check your inbox and paste token only if needed."
 msgstr "Skontrolujte si doručenú poštu a vložte token iba v prípade potreby."
 
-#: src/app/page.tsx:83
+#: src/app/page.tsx:82
 msgid "Choose Your Path to Innovation"
 msgstr "Vyberte si svoju cestu k inovácii"
 
@@ -239,9 +255,29 @@ msgstr "Zavrieť menu"
 msgid "Code must be at least 4 characters."
 msgstr "Kód musí mať aspoň 4 znaky."
 
-#: src/app/page.tsx:136
+#: src/app/page.tsx:135
 msgid "Collaboration with Enterprises"
 msgstr "Spolupráca s firmami"
+
+#: src/app/(auth)/register/company-owner/organization/page.tsx:107
+msgid "COMPANY DETAILS"
+msgstr ""
+
+#: src/app/(auth)/register/company-owner/organization/page.tsx:124
+msgid "Company name"
+msgstr ""
+
+#: src/app/(auth)/register/company-owner/organization/schema.ts:16
+msgid "Company name must be at least 2 characters."
+msgstr ""
+
+#: src/app/(auth)/register/company-owner/organization/schema.ts:19
+msgid "Company name must be at most 100 characters."
+msgstr ""
+
+#: src/app/(auth)/register/company-owner/page.tsx:62
+msgid "COMPANY OWNER GATEWAY"
+msgstr ""
 
 #: src/app/(auth)/register/select-role/page.tsx:156
 msgid "Company Partner"
@@ -251,6 +287,14 @@ msgstr "Firemný partner"
 msgid "COMPLIANT"
 msgstr "V SÚLADE"
 
+#: src/app/(auth)/register/company-owner/confirm-email/page.tsx:57
+msgid "Confirm email"
+msgstr ""
+
+#: src/app/(auth)/register/company-owner/confirm-email/page.tsx:80
+msgid "CONFIRM EMAIL"
+msgstr ""
+
 #: src/app/admin/force-change-password/page.tsx:72
 msgid "Confirm Password"
 msgstr ""
@@ -259,15 +303,23 @@ msgstr ""
 msgid "Confirm Rejection"
 msgstr ""
 
+#: src/app/(auth)/register/company-owner/confirm-email/page.tsx:48
+msgid "Confirm your company owner account"
+msgstr ""
+
 #: src/app/(auth)/register/student/_lib/registration-config.ts:35
 msgid "Confirm your email address from the message sent to your inbox before full platform access."
 msgstr "Pred plným prístupom na platformu potvrďte svoju e-mailovú adresu prostredníctvom správy odoslanej do vašej schránky."
+
+#: src/app/(auth)/register/company-owner/confirm-email/page.tsx:80
+msgid "CONFIRMING..."
+msgstr ""
 
 #: src/components/layout/landing-footer.tsx:78
 msgid "Connect"
 msgstr "Spojiť sa"
 
-#: src/app/page.tsx:186
+#: src/app/page.tsx:185
 msgid "Connecting you to university research and top European tech clusters."
 msgstr "Spájame vás s univerzitným výskumom a poprednými európskymi technologickými klastrami."
 
@@ -283,7 +335,7 @@ msgstr "Pokračovať ako firemný partner"
 msgid "Continue as Regular User"
 msgstr "Pokračovať ako bežný používateľ"
 
-#: src/components/admin/admin-shell.tsx:66
+#: src/components/admin/admin-shell.tsx:68
 msgid "Control Center"
 msgstr ""
 
@@ -296,6 +348,7 @@ msgid "Create a secure password"
 msgstr "Vytvorte bezpečné heslo"
 
 #: src/app/(auth)/login/page.tsx:73
+#: src/app/(auth)/register/company-owner/page.tsx:118
 msgid "CREATE ACCOUNT"
 msgstr "VYTVORIŤ ÚČET"
 
@@ -307,9 +360,29 @@ msgstr ""
 msgid "Create Invite"
 msgstr ""
 
+#: src/app/(auth)/register/company-owner/organization/page.tsx:111
+msgid "Create organization"
+msgstr ""
+
+#: src/app/(auth)/register/company-owner/organization/page.tsx:198
+msgid "CREATE ORGANIZATION"
+msgstr ""
+
 #: src/app/admin/invites/page.tsx:70
-#: src/app/admin/page.tsx:149
+#: src/app/admin/page.tsx:147
 msgid "Create System Invite"
+msgstr ""
+
+#: src/app/(auth)/register/company-owner/page.tsx:63
+msgid "Create your company owner account"
+msgstr ""
+
+#: src/app/(auth)/register/company-owner/page.tsx:76
+msgid "Create your company owner account to continue with organization registration."
+msgstr ""
+
+#: src/app/(auth)/register/company-owner/organization/page.tsx:102
+msgid "Create your organization profile"
 msgstr ""
 
 #: src/app/(auth)/register/student/_lib/registration-config.ts:28
@@ -322,6 +395,14 @@ msgstr ""
 
 #: src/app/admin/invites/page.tsx:156
 msgid "Created At"
+msgstr ""
+
+#: src/app/(auth)/register/company-owner/page.tsx:118
+msgid "CREATING ACCOUNT..."
+msgstr ""
+
+#: src/app/(auth)/register/company-owner/organization/page.tsx:198
+msgid "CREATING ORGANIZATION..."
 msgstr ""
 
 #: src/app/admin/invites/page.tsx:101
@@ -354,19 +435,31 @@ msgstr "Stupeň štúdia"
 msgid "Degree level is required."
 msgstr "Stupeň štúdia je povinný."
 
+#: src/app/(auth)/register/company-owner/organization/page.tsx:148
+msgid "Description"
+msgstr ""
+
 #: src/lib/auth/schemas.ts:168
 msgid "Description is required."
 msgstr "Popis je povinný."
+
+#: src/app/(auth)/register/company-owner/organization/schema.ts:37
+msgid "Description must be at least 10 characters."
+msgstr ""
 
 #: src/app/(auth)/register/student/_components/academic/academic-indicators-section.tsx:39
 msgid "Do you currently have transferred / unfinished subjects?"
 msgstr "Máte aktuálne uznané alebo nedokončené predmety?"
 
+#: src/app/(auth)/register/company-owner/page.tsx:103
+msgid "Doe"
+msgstr ""
+
 #: src/app/(auth)/login/page.tsx:66
 msgid "Don't have an account yet?"
 msgstr "Ešte nemáte účet?"
 
-#: src/app/page.tsx:265
+#: src/app/page.tsx:264
 msgid "Dr. Lucia Bielik"
 msgstr "Dr. Lucia Bielik"
 
@@ -386,10 +479,11 @@ msgstr "Napr. súťaže, ocenenia, štipendiá..."
 msgid "e.g., React"
 msgstr "napr. React"
 
+#: src/app/(auth)/register/company-owner/page.tsx:85
 #: src/app/(auth)/register/student/_components/review-step.tsx:43
 #: src/app/admin/invites/page.tsx:142
 #: src/app/admin/organizations/[organizationId]/page.tsx:79
-#: src/app/admin/users/page.tsx:79
+#: src/app/admin/users/page.tsx:75
 msgid "Email"
 msgstr "E-mail"
 
@@ -403,6 +497,14 @@ msgstr "E-mailová adresa"
 #: src/app/(auth)/register/student/_lib/registration-config.ts:32
 msgid "Email Confirmation"
 msgstr "Potvrdenie e-mailu"
+
+#: src/app/(auth)/register/company-owner/confirm-email/page.tsx:41
+msgid "Email confirmation failed"
+msgstr ""
+
+#: src/app/(auth)/register/company-owner/confirm-email/page.tsx:47
+msgid "EMAIL VERIFICATION"
+msgstr ""
 
 #: src/app/(auth)/register/select-role/page.tsx:173
 msgid "ENCRYPTION"
@@ -422,6 +524,10 @@ msgstr ""
 #: src/lib/auth/schemas.ts:173
 msgid "Enter a valid URL."
 msgstr "Zadajte platnú URL adresu."
+
+#: src/app/(auth)/register/company-owner/confirm-email/page.tsx:61
+msgid "Enter the verification token from your email."
+msgstr ""
 
 #: src/app/(auth)/login/page.tsx:91
 msgid "Enter your credentials below to access the platform."
@@ -452,7 +558,7 @@ msgstr "Vstupný bod pre účastníkov Programu B. Spravujte technické výzvy, 
 msgid "EU Funding Disclosure"
 msgstr "Informácie o financovaní z EÚ"
 
-#: src/app/admin/page.tsx:101
+#: src/app/admin/page.tsx:99
 msgid "Everything is up to date right now."
 msgstr ""
 
@@ -468,7 +574,7 @@ msgstr "Predpokladaný rok ukončenia štúdia"
 msgid "Experience (months)"
 msgstr "Skúsenosti (mesiace)"
 
-#: src/app/page.tsx:250
+#: src/app/page.tsx:249
 msgid "Expert in neural networks with 15+ years in international R&D."
 msgstr "Expert na neurónové siete s viac ako 15 rokmi skúseností v medzinárodnom výskume a vývoji."
 
@@ -489,7 +595,7 @@ msgstr ""
 msgid "Explain why this organization should be rejected."
 msgstr ""
 
-#: src/app/page.tsx:147
+#: src/app/page.tsx:146
 msgid "Explore Challenges"
 msgstr "Preskúmať výzvy"
 
@@ -505,16 +611,28 @@ msgstr "Fakulta je povinná."
 msgid "FINISH REGISTRATION"
 msgstr "DOKONČIŤ REGISTRÁCIU"
 
+#: src/app/(auth)/register/company-owner/page.tsx:93
+msgid "First name"
+msgstr ""
+
 #: src/app/(auth)/register/student/_components/identity-step.tsx:22
 msgid "First Name"
 msgstr "Meno"
+
+#: src/app/(auth)/register/company-owner/schema.ts:17
+msgid "First name must be at least 2 characters."
+msgstr ""
+
+#: src/app/(auth)/register/company-owner/schema.ts:20
+msgid "First name must be at most 50 characters."
+msgstr ""
 
 #: src/app/(auth)/register/student/_components/review-step.tsx:109
 #: src/app/(auth)/register/student/_components/skills-step.tsx:21
 msgid "Focus Areas"
 msgstr "Oblasti záujmu"
 
-#: src/app/page.tsx:97
+#: src/app/page.tsx:96
 msgid "For visionaries with their own product ideas. Transform your prototype into a market-ready company with full incubation support."
 msgstr "Pre vizionárov s vlastnými produktovými nápadmi. Premeňte svoj prototyp na firmu pripravenú na trh s plnou inkubačnou podporou."
 
@@ -530,11 +648,11 @@ msgstr "Formulár zvládnutý"
 msgid "Friends Next"
 msgstr "Na rade sú kolegovia"
 
-#: src/app/page.tsx:36
+#: src/app/page.tsx:35
 msgid "Fueling the"
 msgstr "Podporujeme"
 
-#: src/app/page.tsx:174
+#: src/app/page.tsx:173
 msgid "Full-Cycle Incubation"
 msgstr "Kompletná inkubácia"
 
@@ -546,7 +664,7 @@ msgstr "Brána"
 msgid "Generate a direct invite for a target role. No invite history is shown because the backend does not expose a list endpoint yet."
 msgstr ""
 
-#: src/app/admin/page.tsx:150
+#: src/app/admin/page.tsx:148
 msgid "Generate a direct invite for any supported platform role."
 msgstr ""
 
@@ -554,11 +672,11 @@ msgstr ""
 msgid "GitHub Profile"
 msgstr "GitHub profil"
 
-#: src/app/page.tsx:184
+#: src/app/page.tsx:183
 msgid "Global Partnerships"
 msgstr "Globálne partnerstvá"
 
-#: src/app/page.tsx:196
+#: src/app/page.tsx:195
 msgid "Guided by veterans from Silicon Valley to Bratislava."
 msgstr "Pod vedením skúsených odborníkov od Silicon Valley až po Bratislavu."
 
@@ -574,6 +692,10 @@ msgstr ""
 msgid "Highlight your technical and soft skills for potential partners."
 msgstr "Zdôraznite svoje technické a soft skills pre potenciálnych partnerov."
 
+#: src/app/(auth)/register/company-owner/organization/page.tsx:158
+msgid "https://example.com"
+msgstr ""
+
 #: src/app/(auth)/register/student/_components/identity-step.tsx:63
 msgid "I accept the "
 msgstr "Súhlasím s "
@@ -582,7 +704,15 @@ msgstr "Súhlasím s "
 msgid "I declare that the academic information provided is accurate."
 msgstr "Vyhlasujem, že poskytnuté akademické údaje sú pravdivé."
 
-#: src/app/admin/users/page.tsx:82
+#: src/app/(auth)/register/company-owner/organization/page.tsx:132
+msgid "ICO"
+msgstr ""
+
+#: src/app/(auth)/register/company-owner/organization/schema.ts:25
+msgid "ICO must contain exactly 8 characters."
+msgstr ""
+
+#: src/app/admin/users/page.tsx:78
 msgid "Id"
 msgstr ""
 
@@ -598,11 +728,11 @@ msgstr "Overenie identity"
 msgid "IDENTITY VERIFICATION"
 msgstr "OVERENIE IDENTITY"
 
-#: src/app/page.tsx:247
+#: src/app/page.tsx:246
 msgid "Ing. Marek Novak"
 msgstr "Ing. Marek Novák"
 
-#: src/app/page.tsx:33
+#: src/app/page.tsx:32
 msgid "Innovation Hub"
 msgstr "Inovačný hub"
 
@@ -610,7 +740,7 @@ msgstr "Inovačný hub"
 msgid "Innovation Repository"
 msgstr "Repozitár inovácií"
 
-#: src/app/page.tsx:167
+#: src/app/page.tsx:166
 msgid "Interior space"
 msgstr "Interiérový priestor"
 
@@ -631,10 +761,18 @@ msgid "Invite Status"
 msgstr ""
 
 #: src/components/admin/utils.ts:37
-msgid "Invites"
+#~ msgid "Invites"
+#~ msgstr ""
+
+#: src/app/(auth)/register/company-owner/organization/page.tsx:142
+msgid "IT"
 msgstr ""
 
-#: src/app/page.tsx:303
+#: src/app/(auth)/register/company-owner/page.tsx:95
+msgid "John"
+msgstr ""
+
+#: src/app/page.tsx:302
 msgid "Join a community of innovators, engineers, and entrepreneurs. Our next cohort starts in September."
 msgstr "Pridajte sa ku komunite inovátorov, inžinierov a podnikateľov. Naša ďalšia kohorta začína v septembri."
 
@@ -642,27 +780,39 @@ msgstr "Pridajte sa ku komunite inovátorov, inžinierov a podnikateľov. Naša 
 msgid "Join us"
 msgstr "Pridajte sa k nám"
 
-#: src/app/page.tsx:206
+#: src/app/page.tsx:205
 msgid "Keeping bright minds in Nitra through opportunity."
 msgstr "Udržiavame talentovaných ľudí v Nitre vďaka príležitostiam."
+
+#: src/app/(auth)/register/company-owner/page.tsx:101
+msgid "Last name"
+msgstr ""
 
 #: src/app/(auth)/register/student/_components/identity-step.tsx:29
 msgid "Last Name"
 msgstr "Priezvisko"
 
+#: src/app/(auth)/register/company-owner/schema.ts:26
+msgid "Last name must be at least 2 characters."
+msgstr ""
+
+#: src/app/(auth)/register/company-owner/schema.ts:29
+msgid "Last name must be at most 50 characters."
+msgstr ""
+
 #: src/app/admin/invites/page.tsx:129
 msgid "Latest Invite Response"
 msgstr ""
 
-#: src/app/page.tsx:115
+#: src/app/page.tsx:114
 msgid "Launch Startup"
 msgstr "Spustiť startup"
 
-#: src/app/page.tsx:248
+#: src/app/page.tsx:247
 msgid "Lead Mentor / AI Systems"
 msgstr "Hlavný mentor / AI systémy"
 
-#: src/app/page.tsx:60
+#: src/app/page.tsx:59
 msgid "Learn more about NTI"
 msgstr "Zistiť viac o NTI"
 
@@ -710,7 +860,7 @@ msgstr "Načítavajú sa univerzity..."
 msgid "Log in"
 msgstr "Prihlásiť sa"
 
-#: src/components/admin/admin-shell.tsx:113
+#: src/components/admin/admin-shell.tsx:115
 msgid "Log out"
 msgstr ""
 
@@ -718,20 +868,24 @@ msgstr ""
 msgid "Login"
 msgstr "Prihlásenie"
 
+#: src/app/(auth)/register/company-owner/organization/page.tsx:166
+msgid "Logo"
+msgstr ""
+
 #: src/app/(auth)/register/student/_components/registration-completion.tsx:59
 msgid "Looking absolutely stellar"
 msgstr "Vyzerá to naozaj skvelo"
 
-#: src/app/admin/page.tsx:139
+#: src/app/admin/page.tsx:137
 msgid "Manage Users"
 msgstr ""
 
-#: src/app/page.tsx:241
-#: src/app/page.tsx:259
+#: src/app/page.tsx:240
+#: src/app/page.tsx:258
 msgid "Mentor"
 msgstr "Mentor"
 
-#: src/app/page.tsx:194
+#: src/app/page.tsx:193
 #: src/components/layout/landing-footer.tsx:43
 msgid "Mentoring"
 msgstr "Mentoring"
@@ -740,7 +894,7 @@ msgstr "Mentoring"
 msgid "Mentors"
 msgstr "Mentori"
 
-#: src/app/page.tsx:68
+#: src/app/page.tsx:67
 msgid "Modern lab environment"
 msgstr "Moderné laboratórne prostredie"
 
@@ -787,11 +941,11 @@ msgstr "Novinky"
 msgid "NEXT STEP"
 msgstr "ĎALŠÍ KROK"
 
-#: src/app/page.tsx:231
+#: src/app/page.tsx:230
 msgid "NITRA_LAB"
 msgstr "NITRA_LAB"
 
-#: src/app/page.tsx:40
+#: src/app/page.tsx:39
 msgid "Nitriansky technologický inkubátor bridges the gap between academic research and market reality. We turn bold ideas into high-performance startups."
 msgstr "Nitriansky technologický inkubátor prepája akademický výskum s realitou trhu. Odvážne nápady premieňame na výkonné startupy."
 
@@ -807,7 +961,7 @@ msgstr ""
 msgid "No organizations match the current filters."
 msgstr ""
 
-#: src/app/admin/page.tsx:100
+#: src/app/admin/page.tsx:98
 msgid "No organizations need review"
 msgstr ""
 
@@ -819,11 +973,11 @@ msgstr "Nie sú dostupné žiadne špecializácie"
 msgid "No universities available"
 msgstr "Nie sú dostupné žiadne univerzity"
 
-#: src/app/admin/users/page.tsx:136
+#: src/app/admin/users/page.tsx:132
 msgid "No users match the current filters."
 msgstr ""
 
-#: src/app/admin/page.tsx:113
+#: src/app/admin/page.tsx:111
 msgid "No website provided"
 msgstr ""
 
@@ -833,7 +987,7 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: src/components/admin/utils.ts:104
+#: src/components/admin/utils.ts:107
 msgid "Not available"
 msgstr ""
 
@@ -847,7 +1001,7 @@ msgstr ""
 msgid "NTI"
 msgstr "NTI"
 
-#: src/components/admin/admin-shell.tsx:65
+#: src/components/admin/admin-shell.tsx:67
 msgid "NTI Admin"
 msgstr ""
 
@@ -859,7 +1013,7 @@ msgstr ""
 msgid "Number of transferred subjects"
 msgstr "Počet uznaných predmetov"
 
-#: src/app/page.tsx:37
+#: src/app/page.tsx:36
 msgid "of Future Tech."
 msgstr "budúcich technológií."
 
@@ -867,12 +1021,16 @@ msgstr "budúcich technológií."
 msgid "Open menu"
 msgstr "Otvoriť menu"
 
-#: src/app/admin/page.tsx:92
+#: src/app/admin/page.tsx:90
 msgid "Open Queue"
 msgstr ""
 
 #: src/app/admin/organizations/page.tsx:83
 msgid "Organization"
+msgstr ""
+
+#: src/app/(auth)/register/company-owner/organization/page.tsx:93
+msgid "Organization creation failed"
 msgstr ""
 
 #: src/app/admin/organizations/[organizationId]/page.tsx:61
@@ -887,8 +1045,11 @@ msgstr ""
 msgid "Organization invites unavailable"
 msgstr ""
 
-#: src/app/admin/page.tsx:68
-#: src/components/admin/utils.ts:33
+#: src/app/(auth)/register/company-owner/organization/page.tsx:101
+msgid "ORGANIZATION SETUP"
+msgstr ""
+
+#: src/app/admin/page.tsx:66
 #: src/components/admin/utils.ts:139
 msgid "Organizations"
 msgstr ""
@@ -897,25 +1058,30 @@ msgstr ""
 msgid "Organizations are unavailable"
 msgstr ""
 
-#: src/app/admin/page.tsx:76
+#: src/app/admin/page.tsx:74
 msgid "Organizations waiting for review or already rejected."
 msgstr ""
 
-#: src/app/page.tsx:220
+#: src/app/page.tsx:219
 msgid "Our Ecosystem"
 msgstr "Náš ekosystém"
 
-#: src/components/admin/utils.ts:24
 #: src/components/admin/utils.ts:131
 msgid "Overview"
 msgstr ""
 
+#: src/app/(auth)/register/company-owner/page.tsx:87
+msgid "owner@example.com"
+msgstr ""
+
 #: src/app/(auth)/login/page.tsx:109
+#: src/app/(auth)/register/company-owner/page.tsx:109
 #: src/app/(auth)/register/student/_components/identity-step.tsx:45
 #: src/app/admin/login/page.tsx:118
 msgid "Password"
 msgstr "Heslo"
 
+#: src/app/(auth)/register/company-owner/schema.ts:32
 #: src/lib/auth/schemas.ts:45
 #: src/lib/auth/schemas.ts:64
 msgid "Password must be at least 6 characters."
@@ -929,6 +1095,10 @@ msgstr ""
 msgid "Paste token from email if you want to verify now"
 msgstr "Vložte token z e-mailu, ak chcete overenie vykonať teraz"
 
+#: src/app/(auth)/register/company-owner/confirm-email/page.tsx:72
+msgid "Paste your verification token"
+msgstr ""
+
 #: src/app/admin/invites/page.tsx:83
 msgid "person@example.com"
 msgstr ""
@@ -941,19 +1111,28 @@ msgstr "Osobné portfólio / webová stránka"
 msgid "Phew! You survived."
 msgstr "Uf! Zvládli ste to."
 
+#: src/app/(auth)/register/company-owner/schema.ts:11
 #: src/lib/auth/schemas.ts:42
 msgid "Please enter a valid email address."
 msgstr "Zadajte platnú e-mailovú adresu."
+
+#: src/app/(auth)/register/company-owner/organization/schema.ts:43
+msgid "Please enter a valid website URL."
+msgstr ""
 
 #: src/app/(auth)/register/student/_lib/registration-config.ts:83
 msgid "Please review your information before completing the registration."
 msgstr "Pred dokončením registrácie si skontrolujte svoje údaje."
 
+#: src/app/(auth)/register/company-owner/organization/page.tsx:186
+msgid "PNG, JPG or WEBP. Logo is optional."
+msgstr ""
+
 #: src/app/(auth)/register/student/_components/skills/portfolio-resume-section.tsx:23
 msgid "Portfolio & Resume"
 msgstr "Portfólio a CV"
 
-#: src/app/page.tsx:36
+#: src/app/page.tsx:35
 msgid "Precision"
 msgstr "Presnosť"
 
@@ -1000,7 +1179,7 @@ msgstr "Úroveň znalostí"
 msgid "Profile Nailed"
 msgstr "Profil zvládnutý"
 
-#: src/app/page.tsx:94
+#: src/app/page.tsx:93
 msgid "Program A: Venture Launch"
 msgstr "Program A: Spustenie venture projektu"
 
@@ -1008,7 +1187,7 @@ msgstr "Program A: Spustenie venture projektu"
 msgid "Program B Challenge Management"
 msgstr "Správa výziev Programu B"
 
-#: src/app/page.tsx:124
+#: src/app/page.tsx:123
 msgid "Program B: Industry Bridge"
 msgstr "Program B: Most k priemyslu"
 
@@ -1034,33 +1213,45 @@ msgstr "Projekty"
 msgid "Projects & Summary"
 msgstr "Projekty a zhrnutie"
 
-#: src/app/admin/users/page.tsx:100
+#: src/app/admin/users/page.tsx:96
 msgid "Protected"
 msgstr ""
 
-#: src/app/admin/page.tsx:133
+#: src/app/admin/page.tsx:131
 msgid "Quick Links"
 msgstr ""
 
-#: src/app/page.tsx:300
+#: src/app/page.tsx:299
 msgid "Ready to build the future of Nitra?"
 msgstr "Ste pripravení budovať budúcnosť Nitry?"
 
-#: src/app/page.tsx:132
+#: src/app/page.tsx:131
 msgid "Real-world Corporate Practice"
 msgstr "Reálna firemná prax"
 
-#: src/app/admin/page.tsx:87
+#: src/app/admin/page.tsx:85
 msgid "Recent organizations that still need an operational decision."
 msgstr ""
 
-#: src/app/page.tsx:278
+#: src/app/page.tsx:277
 msgid "Recent Success"
 msgstr "Nedávny úspech"
 
 #: src/components/layout/landing-header.tsx:74
 msgid "Register"
 msgstr "Registrácia"
+
+#: src/app/(auth)/register/company-owner/page.tsx:72
+msgid "Register company owner"
+msgstr ""
+
+#: src/app/(auth)/register/company-owner/page.tsx:64
+msgid "Register your account to continue with organization onboarding."
+msgstr ""
+
+#: src/app/(auth)/register/company-owner/page.tsx:56
+msgid "Registration failed"
+msgstr ""
 
 #: src/app/(auth)/register/select-role/page.tsx:142
 msgid "Regular User"
@@ -1096,7 +1287,7 @@ msgstr "ZNOVA ODOSLAŤ POTVRDZOVACÍ E-MAIL"
 
 #: src/app/admin/organizations/[organizationId]/page.tsx:48
 #: src/app/admin/organizations/page.tsx:63
-#: src/app/admin/users/page.tsx:59
+#: src/app/admin/users/page.tsx:55
 msgid "Retry"
 msgstr ""
 
@@ -1104,11 +1295,11 @@ msgstr ""
 msgid "Review"
 msgstr "Kontrola"
 
-#: src/app/admin/page.tsx:144
+#: src/app/admin/page.tsx:142
 msgid "Review Organizations"
 msgstr ""
 
-#: src/app/admin/page.tsx:74
+#: src/app/admin/page.tsx:72
 msgid "Review Queue"
 msgstr ""
 
@@ -1119,7 +1310,7 @@ msgstr ""
 #: src/app/admin/invites/page.tsx:116
 #: src/app/admin/invites/page.tsx:146
 #: src/app/admin/organizations/[organizationId]/page.tsx:80
-#: src/app/admin/users/page.tsx:80
+#: src/app/admin/users/page.tsx:76
 msgid "Role"
 msgstr ""
 
@@ -1143,11 +1334,11 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: src/app/admin/page.tsx:140
+#: src/app/admin/page.tsx:138
 msgid "Search accounts, inspect roles, and suspend or reactivate access."
 msgstr ""
 
-#: src/app/admin/users/page.tsx:70
+#: src/app/admin/users/page.tsx:66
 msgid "Search by email, role, or id"
 msgstr ""
 
@@ -1155,11 +1346,16 @@ msgstr ""
 msgid "Search by name, website, sector, or id"
 msgstr ""
 
+#: src/app/(auth)/register/company-owner/organization/page.tsx:140
 #: src/app/admin/organizations/page.tsx:84
 msgid "Sector"
 msgstr ""
 
-#: src/app/page.tsx:284
+#: src/app/(auth)/register/company-owner/organization/schema.ts:31
+msgid "Sector must be at least 2 characters."
+msgstr ""
+
+#: src/app/page.tsx:283
 msgid "Secured €500k Funding"
 msgstr "Získané financovanie 500-tisíc €"
 
@@ -1171,7 +1367,7 @@ msgstr "BEZPEČNOSTNÁ ARCHITEKTÚRA"
 msgid "SECURITY STANDARDS"
 msgstr "BEZPEČNOSTNÉ ŠTANDARDY"
 
-#: src/app/page.tsx:101
+#: src/app/page.tsx:100
 msgid "Seed Funding Access"
 msgstr "Prístup k seed financovaniu"
 
@@ -1284,7 +1480,11 @@ msgstr "Názov zručnosti je povinný."
 msgid "Soft Skills"
 msgstr "Mäkké zručnosti"
 
-#: src/app/page.tsx:127
+#: src/app/(auth)/register/company-owner/organization/page.tsx:150
+msgid "Software development company."
+msgstr ""
+
+#: src/app/page.tsx:126
 msgid "Solve real-world challenges defined by our corporate partners. Gain professional experience while building breakthrough solutions."
 msgstr "Riešte reálne výzvy definované našimi firemnými partnermi. Získajte profesionálne skúsenosti pri tvorbe prelomových riešení."
 
@@ -1296,11 +1496,11 @@ msgstr "Špecializácia"
 msgid "Specialization is required."
 msgstr "Je potrebná špecializácia."
 
-#: src/app/page.tsx:108
+#: src/app/page.tsx:107
 msgid "Specialized Lab Infrastructure"
 msgstr "Špecializovaná laboratórna infraštruktúra"
 
-#: src/app/page.tsx:268
+#: src/app/page.tsx:267
 msgid "Specializes in market entry strategies for DeepTech startups."
 msgstr "Špecializuje sa na stratégie vstupu na trh pre DeepTech startupy."
 
@@ -1315,7 +1515,7 @@ msgstr "Startupy"
 #: src/app/admin/invites/page.tsx:150
 #: src/app/admin/organizations/[organizationId]/page.tsx:81
 #: src/app/admin/organizations/page.tsx:85
-#: src/app/admin/users/page.tsx:81
+#: src/app/admin/users/page.tsx:77
 #: src/components/admin/admin-filter-bar.tsx:48
 msgid "Status"
 msgstr ""
@@ -1344,6 +1544,10 @@ msgstr "Krok {SKILLS_STEP_NUMBER}"
 msgid "Strategic Institutions"
 msgstr "Strategické inštitúcie"
 
+#: src/app/(auth)/register/company-owner/page.tsx:110
+msgid "StrongPass123!"
+msgstr ""
+
 #: src/app/(auth)/register/select-role/page.tsx:143
 msgid "Students & Teams"
 msgstr "Študenti a tímy"
@@ -1365,11 +1569,11 @@ msgstr "Ročník štúdia"
 msgid "Subject Average"
 msgstr "Priemer z predmetov"
 
-#: src/app/page.tsx:53
+#: src/app/page.tsx:52
 msgid "Submit a challenge"
 msgstr "Odoslať výzvu"
 
-#: src/app/page.tsx:316
+#: src/app/page.tsx:315
 msgid "Submit Challenge"
 msgstr "Odoslať výzvu"
 
@@ -1377,11 +1581,11 @@ msgstr "Odoslať výzvu"
 msgid "SUPPORT"
 msgstr "PODPORA"
 
-#: src/app/admin/users/page.tsx:95
+#: src/app/admin/users/page.tsx:91
 msgid "Suspend"
 msgstr ""
 
-#: src/app/admin/page.tsx:62
+#: src/app/admin/page.tsx:60
 msgid "Suspended Users"
 msgstr ""
 
@@ -1401,7 +1605,7 @@ msgstr ""
 msgid "Talent Acquisition Pipeline"
 msgstr "Pipeline získavania talentov"
 
-#: src/app/page.tsx:204
+#: src/app/page.tsx:203
 msgid "Talent Retention"
 msgstr "Udržanie talentov"
 
@@ -1409,7 +1613,7 @@ msgstr "Udržanie talentov"
 msgid "Team Collaboration Tools"
 msgstr "Nástroje tímovej spolupráce"
 
-#: src/app/page.tsx:227
+#: src/app/page.tsx:226
 msgid "TECHCORP"
 msgstr "TECHCORP"
 
@@ -1438,6 +1642,10 @@ msgstr "Podmienky používania"
 msgid "TERMS OF SERVICE"
 msgstr "PODMIENKY POUŽÍVANIA"
 
+#: src/app/(auth)/register/company-owner/organization/page.tsx:126
+msgid "Test Company"
+msgstr ""
+
 #: src/app/(auth)/register/student/_components/registration-completion.tsx:53
 msgid "That was a lot of typing, but you made it! Your profile is officially sparkling clean and ready to go. Now, don't suffer alone—invite your colleagues to share the joy of filling out this form!"
 msgstr "Bolo to veľa písania, ale zvládli ste to! Váš profil je oficiálne krásne čistý a pripravený. Teraz netrpte sami — pozvite kolegov, aby si aj oni užili radosť z vypĺňania tohto formulára!"
@@ -1446,7 +1654,7 @@ msgstr "Bolo to veľa písania, ale zvládli ste to! Váš profil je oficiálne 
 msgid "The invite detail request failed for this organization."
 msgstr ""
 
-#: src/app/page.tsx:159
+#: src/app/page.tsx:158
 msgid "The Precision Engine Architecture"
 msgstr "Architektúra Precision Engine"
 
@@ -1462,7 +1670,7 @@ msgstr ""
 msgid "The summary queries failed. Refresh the page to try again."
 msgstr ""
 
-#: src/app/admin/users/page.tsx:58
+#: src/app/admin/users/page.tsx:54
 msgid "The user list could not be loaded."
 msgstr ""
 
@@ -1482,7 +1690,7 @@ msgstr ""
 msgid "Time to invite colleagues"
 msgstr "Čas pozvať kolegov"
 
-#: src/app/admin/page.tsx:56
+#: src/app/admin/page.tsx:54
 msgid "Total Users"
 msgstr ""
 
@@ -1514,7 +1722,7 @@ msgstr ""
 msgid "Unable to log in. Please try again."
 msgstr "Nepodarilo sa prihlásiť. Skúste to znova."
 
-#: src/components/admin/admin-shell.tsx:50
+#: src/components/admin/admin-shell.tsx:52
 msgid "Unable to log out right now."
 msgstr ""
 
@@ -1529,11 +1737,11 @@ msgstr "Nepodarilo sa zaregistrovať. Skúste to znova."
 msgid "Unable to update the organization."
 msgstr ""
 
-#: src/app/admin/users/page.tsx:123
+#: src/app/admin/users/page.tsx:119
 msgid "Unable to update the user status."
 msgstr ""
 
-#: src/app/page.tsx:229
+#: src/app/page.tsx:228
 msgid "UNIDATA"
 msgstr "UNIDATA"
 
@@ -1546,7 +1754,7 @@ msgid "University is required."
 msgstr "Univerzita je povinná."
 
 #: src/app/admin/force-change-password/page.tsx:81
-#: src/app/admin/users/page.tsx:98
+#: src/app/admin/users/page.tsx:94
 msgid "Updating..."
 msgstr ""
 
@@ -1558,12 +1766,11 @@ msgstr "Nahrajte svoje CV a pridajte odkazy na svoje profily."
 msgid "Use your admin credentials to access moderation, organization reviews, and system invites."
 msgstr ""
 
-#: src/components/admin/utils.ts:29
 #: src/components/admin/utils.ts:135
 msgid "Users"
 msgstr ""
 
-#: src/app/admin/users/page.tsx:57
+#: src/app/admin/users/page.tsx:53
 msgid "Users are unavailable"
 msgstr ""
 
@@ -1576,19 +1783,36 @@ msgstr "Používa sa existujúce CV (ID: {0})"
 msgid "Verification"
 msgstr "Overenie"
 
+#: src/app/(auth)/register/company-owner/confirm-email/page.tsx:53
+msgid "VERIFICATION STEP"
+msgstr ""
+
+#: src/app/(auth)/register/company-owner/confirm-email/page.tsx:70
+msgid "Verification token"
+msgstr ""
+
 #: src/app/(auth)/register/student/_components/email-step.tsx:52
 msgid "Verification Token (Optional for this step)"
 msgstr "Overovací token (voliteľné pre tento krok)"
 
+#: src/app/(auth)/register/company-owner/confirm-email/schema.ts:12
+msgid "Verification token must be at least 4 characters."
+msgstr ""
+
+#: src/app/(auth)/register/company-owner/confirm-email/page.tsx:49
+msgid "Verify your email address before creating your organization profile."
+msgstr ""
+
 #: src/app/admin/organizations/page.tsx:183
-#: src/app/admin/page.tsx:120
+#: src/app/admin/page.tsx:118
 msgid "View Invites"
 msgstr ""
 
-#: src/app/page.tsx:223
+#: src/app/page.tsx:222
 msgid "We collaborate with the most innovative companies and experienced mentors in the region to ensure your success."
 msgstr "Spolupracujeme s najinovatívnejšími firmami a skúsenými mentormi v regióne, aby sme zabezpečili váš úspech."
 
+#: src/app/(auth)/register/company-owner/organization/page.tsx:156
 #: src/app/admin/organizations/page.tsx:86
 msgid "Website"
 msgstr ""
@@ -1605,7 +1829,7 @@ msgstr "Aké sú vaše hlavné oblasti záujmu?"
 msgid "What kind of team role are you looking for?"
 msgstr "Akú rolu v tíme hľadáte?"
 
-#: src/app/page.tsx:158
+#: src/app/page.tsx:157
 msgid "Why NTI"
 msgstr "Prečo NTI"
 

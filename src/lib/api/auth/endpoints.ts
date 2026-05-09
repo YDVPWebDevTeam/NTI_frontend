@@ -1,6 +1,7 @@
 export const authEndpoints = {
   login: '/auth/login',
   registerStudent: '/auth/register',
+  registerCompanyOwner: '/auth/register-company-owner',
   resendConfirmationEmail: '/auth/resend-confirmation-email',
   confirmEmail: '/auth/confirm-email',
   me: '/auth/me',

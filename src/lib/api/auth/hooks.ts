@@ -2,8 +2,13 @@
 
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import type { ConfirmEmailRequest, LoginRequest, RegisterRequest } from './types';
 import { authService } from './service';
+import type {
+  ConfirmEmailRequest,
+  LoginRequest,
+  RegisterCompanyOwnerRequest,
+  RegisterRequest,
+} from './types';
 
 export function useLoginMutation() {
   return useMutation({
@@ -14,6 +19,12 @@ export function useLoginMutation() {
 export function useRegisterStudentMutation() {
   return useMutation({
     mutationFn: (payload: RegisterRequest) => authService.registerStudent(payload),
+  });
+}
+
+export function useRegisterCompanyOwnerMutation() {
+  return useMutation({
+    mutationFn: (payload: RegisterCompanyOwnerRequest) => authService.registerCompanyOwner(payload),
   });
 }
 

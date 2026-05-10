@@ -1,6 +1,6 @@
 export const authEndpoints = {
   loginAdmin: '/auth/admin/login',
-  forceChangePassword: '/auth/force-change-password',
+  forceChangePassword: '/auth/admin/force-change-password',
   refresh: '/auth/refresh',
   logout: '/auth/logout',
 } as const;

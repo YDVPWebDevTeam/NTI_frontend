@@ -7,6 +7,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { getStoredAdminPasswordChangeRequired, useAdminSessionQuery } from 'lib/api/admin/auth';
 import { isAdminRole, type AdminRole } from 'lib/api/admin/auth/types';
 import { adminQueryKeys } from 'lib/api/admin/admin-query-keys';
+import { ROUTES } from 'lib/constants';
 
 import { AdminShell, AdminShellSkeleton } from './admin-shell';
 import { AdminErrorState } from './admin-state';
@@ -30,6 +31,8 @@ export function AdminRouteGuard({ children }: { children: React.ReactNode }) {
     isLoading: sessionQuery.isLoading,
     requiresPasswordChange,
   });
+  const isAdminAuthRoute =
+    pathname === ROUTES.ADMIN.LOGIN || pathname === ROUTES.ADMIN.FORCE_CHANGE_PASSWORD;
 
   useEffect(() => {
     if (
@@ -48,7 +51,7 @@ export function AdminRouteGuard({ children }: { children: React.ReactNode }) {
     return <AdminShellSkeleton />;
   }
 
-  if (sessionQuery.isError) {
+  if (sessionQuery.isError && !isAdminAuthRoute) {
     return (
       <AdminErrorState
         title="Admin session unavailable"

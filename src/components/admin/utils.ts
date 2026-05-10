@@ -76,14 +76,6 @@ export function getAdminRouteAccessDecision({
       };
     }
 
-    if (isAdmin) {
-      return { kind: AdminRouteAccessKind.REDIRECT, redirectTo: ROUTES.ADMIN.ROOT };
-    }
-
-    if (session && !isAdmin) {
-      return { kind: AdminRouteAccessKind.REDIRECT, redirectTo: ROUTES.ROOT };
-    }
-
     return { kind: AdminRouteAccessKind.AUTH };
   }
 

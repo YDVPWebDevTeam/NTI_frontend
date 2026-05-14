@@ -6,6 +6,7 @@ import { activateDefaultLocale } from 'lib/i18n/runtime';
 import { getRequestLocale } from 'lib/i18n/server-locale';
 
 import './styles/global.css';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 activateDefaultLocale();
 
@@ -35,6 +36,8 @@ export default async function RootLayout({
     <html lang={locale} suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <AppProviders>{children}</AppProviders>
+
+        <SpeedInsights />
       </body>
     </html>
   );

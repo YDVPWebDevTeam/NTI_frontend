@@ -1,6 +1,8 @@
 'use client';
 
 import { Languages } from 'lucide-react';
+import { startTransition } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { Select, SelectContent, SelectItem, SelectTrigger } from 'components/shadcn';
 import { cn } from 'lib/utils';
@@ -23,8 +25,16 @@ export function LanguageSelector({
   triggerClassName,
   contentClassName,
 }: LanguageSelectorProps) {
+  const router = useRouter();
   const { locale, setLocale } = useLocale();
   const currentLanguage = LANGUAGES.find((language) => language.value === locale) ?? LANGUAGES[0];
+
+  function handleLocaleChange(nextLocale: string) {
+    setLocale(nextLocale as AppLocale);
+    startTransition(() => {
+      router.refresh();
+    });
+  }
 
   return (
     <div
@@ -33,7 +43,7 @@ export function LanguageSelector({
         className,
       )}
     >
-      <Select value={locale} onValueChange={(nextLocale) => setLocale(nextLocale as AppLocale)}>
+      <Select value={locale} onValueChange={handleLocaleChange}>
         <SelectTrigger
           aria-label="Change language"
           className={cn(

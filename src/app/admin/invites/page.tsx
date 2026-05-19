@@ -69,7 +69,7 @@ export default function AdminInvitesPage() {
         <CardHeader>
           <CardTitle className="text-2xl text-slate-950">{t`Create System Invite`}</CardTitle>
           <p className="text-sm leading-6 text-slate-600">
-            {t`Generate a direct invite for a target role. No invite history is shown because the backend does not expose a list endpoint yet.`}
+            {t`Generate a direct invite for a target role.`}
           </p>
         </CardHeader>
         <CardContent>
@@ -80,7 +80,7 @@ export default function AdminInvitesPage() {
                 name="email"
                 label={t`Email Address`}
                 type="email"
-                placeholder={t`person@example.com`}
+                placeholder="person@example.com"
               />
               <ControlledSelectField
                 control={form.control}

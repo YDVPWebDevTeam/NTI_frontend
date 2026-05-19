@@ -55,6 +55,7 @@ export interface ProfessionalProjectInput {
 }
 
 export interface UpdateProfessionalSkillsRequest {
+  teamName?: string;
   focusAreas: FocusArea[];
   preferredRoles: PreferredRole[];
   softSkills?: SoftSkill[];
@@ -65,6 +66,10 @@ export interface UpdateProfessionalSkillsRequest {
   cvFileId: string;
   skills: ProfessionalSkillInput[];
   projects?: ProfessionalProjectInput[];
+}
+
+export interface CompleteStudentProfileRequest {
+  teamName?: string;
 }
 
 export type DegreeLevel = 'BACHELOR' | 'MASTER' | 'PHD' | 'OTHER' | (string & {});
@@ -118,6 +123,7 @@ export interface StudentProfileDto {
   linkedinUrl?: string;
   portfolioUrl?: string;
   bio?: string;
+  teamName?: string;
   cvFileId?: string;
   profileCompletedAt?: string;
 }
@@ -153,6 +159,4 @@ export interface GetMyStudentProfileResponse {
   completion: StudentProfileCompletionDto;
 }
 
-export interface StudentProfileUpdateResponse {
-  message?: string;
-}
+export type StudentProfileUpdateResponse = GetMyStudentProfileResponse;

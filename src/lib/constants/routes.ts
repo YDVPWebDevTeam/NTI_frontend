@@ -15,6 +15,7 @@ const ADMIN_ROUTES = {
   FORCE_CHANGE_PASSWORD: '/admin/force-change-password',
   ROOT: '/admin',
   USERS: '/admin/users',
+  ACADEMIC_STRUCTURE: '/admin/academic-structure',
   ORGANIZATIONS: '/admin/organizations',
   ORGANIZATION_DETAILS: '/admin/organizations/[organizationId]',
   organizationDetails: (organizationId: string) => `/admin/organizations/${organizationId}`,
@@ -24,10 +25,11 @@ const ADMIN_ROUTES = {
 export const ROUTES = {
   ROOT: '/',
   DASHBOARD: '/dashboard',
+  INVITE: '/invite',
+  ONBOARDING_PROFILE: '/onboarding/profile',
   ONBOARDING_INVITES: '/onboarding/invites',
   TERMS_OF_SERVICE: '/terms-of-service',
   PRIVACY_POLICY: '/privacy-policy',
-  EU_FUNDING_DISCLOSURE: '/eu-funding-disclosure',
 
   HOME: {
     PROGRAMS: '/#programs',

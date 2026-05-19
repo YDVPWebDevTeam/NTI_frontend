@@ -3,13 +3,13 @@ import { Plus, Trash } from 'lucide-react';
 import type { Control } from 'react-hook-form';
 import { useFieldArray } from 'react-hook-form';
 
+import { FormSectionCard } from 'components/forms';
 import { Button } from 'components/shadcn';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from 'components/shadcn';
 import { Input } from 'components/shadcn';
 import { Textarea } from 'components/shadcn';
 import { parseCommaSeparatedList } from '../../_lib/form-value-utils';
 import type { StudentRegistrationValues } from '../../schema';
-import { RegistrationSectionCard } from '../registration-section-card';
 
 type ProjectsSummarySectionProps = {
   control: Control<StudentRegistrationValues>;
@@ -26,11 +26,25 @@ export function ProjectsSummarySection({ control }: ProjectsSummarySectionProps)
   });
 
   return (
-    <RegistrationSectionCard
+    <FormSectionCard
       title={t`Projects & Summary`}
       description={t`Showcase your best projects and tell us about yourself.`}
     >
       <div className="space-y-6">
+        <FormField
+          control={control}
+          name="teamName"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>{t`Team Name`}</FormLabel>
+              <FormControl>
+                <Input placeholder={t`Enter your team name`} {...field} value={field.value ?? ''} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <div>
           <h4 className="mb-3 text-sm font-medium">{t`Projects`}</h4>
 
@@ -171,6 +185,6 @@ export function ProjectsSummarySection({ control }: ProjectsSummarySectionProps)
           )}
         />
       </div>
-    </RegistrationSectionCard>
+    </FormSectionCard>
   );
 }

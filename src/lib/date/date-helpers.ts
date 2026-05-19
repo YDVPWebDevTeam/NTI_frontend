@@ -28,3 +28,10 @@ export function getGraduationYearOptions() {
 export function formatDate(value: DateInput, format: string = DATE_FORMATS.ISO_DATE) {
   return dayjs(value).format(format);
 }
+
+export function formatDateTime(value: string | Date, locale?: string) {
+  return new Intl.DateTimeFormat(locale, {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+  }).format(new Date(value));
+}

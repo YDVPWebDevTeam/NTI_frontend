@@ -1,1 +1,4 @@
-export { createStudentRegistrationSchema, type StudentRegistrationValues } from 'lib/auth/schemas';
+export {
+  createStudentRegistrationSchema,
+  type StudentRegistrationValues,
+} from 'features/student-profile-flow';

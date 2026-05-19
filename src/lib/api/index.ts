@@ -3,3 +3,5 @@ export * from './university';
 export * from './student-profile';
 export * from './files';
 export * from './organizations';
+export * from './invites';
+export * from './team';

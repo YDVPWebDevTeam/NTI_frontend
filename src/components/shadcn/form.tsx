@@ -156,6 +156,7 @@ const FormMessage = React.forwardRef<
     <p
       ref={ref}
       id={formMessageId}
+      aria-live="polite"
       className={cn('text-destructive text-sm font-medium', className)}
       {...props}
     >

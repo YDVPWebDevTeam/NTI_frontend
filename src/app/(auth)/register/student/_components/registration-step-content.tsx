@@ -10,7 +10,7 @@ import type { StudentRegistrationStepId } from '../_lib/registration-config';
 type RegistrationStepContentProps = {
   stepId: StudentRegistrationStepId;
   isResending: boolean;
-  onResend: (email: string) => Promise<void>;
+  onResend: (email: string) => Promise<boolean>;
 };
 
 export function RegistrationStepContent({

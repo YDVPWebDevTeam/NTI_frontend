@@ -2,12 +2,13 @@
 
 import { t } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
-import { LayoutGrid, LogOut, ShieldCheck, UserCog, Users2 } from 'lucide-react';
+import { GraduationCap, LayoutGrid, LogOut, ShieldCheck, UserCog, Users2 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
+import { AdminBrandBlock, PageSectionHeader } from 'components/layout';
 import { Button } from 'components/shadcn';
 import { adminQueryKeys } from 'lib/api/admin/admin-query-keys';
 import { authService, setStoredAdminPasswordChangeRequired } from 'lib/api/admin/auth';
@@ -26,6 +27,7 @@ type AdminShellProps = {
 const NAV_ICON_BY_HREF: Record<string, React.ReactNode> = {
   [ROUTES.ADMIN.ROOT]: <LayoutGrid className="h-4 w-4" />,
   [ROUTES.ADMIN.USERS]: <Users2 className="h-4 w-4" />,
+  [ROUTES.ADMIN.ACADEMIC_STRUCTURE]: <GraduationCap className="h-4 w-4" />,
   [ROUTES.ADMIN.ORGANIZATIONS]: <ShieldCheck className="h-4 w-4" />,
   [ROUTES.ADMIN.INVITES]: <UserCog className="h-4 w-4" />,
 };
@@ -63,10 +65,12 @@ export function AdminShell({ children, user }: AdminShellProps) {
     <div className="min-h-screen bg-[linear-gradient(180deg,#f2f5fb_0%,#ebeff8_100%)] text-slate-950">
       <div className="mx-auto grid min-h-screen max-w-[1600px] grid-cols-1 lg:grid-cols-[272px_minmax(0,1fr)]">
         <aside className="border-r border-slate-200 bg-[#0f172a] px-5 py-6 text-slate-100">
-          <div className="mb-8">
-            <p className="text-[11px] tracking-[0.16em] text-sky-200/70 uppercase">{t`NTI Admin`}</p>
-            <h1 className="mt-3 text-2xl font-semibold tracking-tight">{t`Control Center`}</h1>
-          </div>
+          <AdminBrandBlock
+            compact
+            className="mb-8"
+            eyebrow={t`NTI Admin`}
+            title={t`Control Center`}
+          />
 
           <nav className="space-y-1">
             {ADMIN_NAV_ITEMS.map((item) => {
@@ -94,14 +98,13 @@ export function AdminShell({ children, user }: AdminShellProps) {
         <div className="flex min-w-0 flex-col">
           <header className="border-b border-slate-200 bg-white/90 px-5 py-4 backdrop-blur sm:px-8">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-              <div>
-                <p className="text-[11px] font-medium tracking-[0.14em] text-slate-500 uppercase">
-                  {t`Admin Workspace`}
-                </p>
-                <h2 className="mt-1 text-2xl font-semibold tracking-tight text-slate-950">
-                  {getAdminPageTitle(pathname)}
-                </h2>
-              </div>
+              <PageSectionHeader
+                eyebrow={t`Admin Workspace`}
+                title={getAdminPageTitle(pathname)}
+                theme="admin"
+                className="flex-1"
+                titleClassName="mt-1 text-2xl"
+              />
 
               <div className="flex flex-wrap items-center gap-3">
                 <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm">

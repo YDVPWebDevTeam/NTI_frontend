@@ -1,16 +1,15 @@
 import { t } from '@lingui/core/macro';
-import type { ChangeEvent } from 'react';
 import type { Control } from 'react-hook-form';
 
+import { ControlledFileField, FormSectionCard } from 'components/forms';
 import { Checkbox } from 'components/shadcn';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from 'components/shadcn';
 import type { StudentRegistrationValues } from '../../schema';
-import { RegistrationSectionCard } from 'app/(auth)/register/student/_components/registration-section-card';
 
 type AcademicVerificationSectionProps = {
   control: Control<StudentRegistrationValues>;
   selectedAcademicEvidenceFile: unknown;
-  onAcademicEvidenceFileChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onAcademicEvidenceFileChange: (file: File | null) => void;
 };
 
 export function AcademicVerificationSection({
@@ -19,19 +18,17 @@ export function AcademicVerificationSection({
   onAcademicEvidenceFileChange,
 }: AcademicVerificationSectionProps) {
   return (
-    <RegistrationSectionCard title={t`Verification`}>
+    <FormSectionCard title={t`Verification`}>
       <div className="space-y-6">
-        <div className="space-y-2">
-          <input
-            id="academic-evidence-file-input"
-            type="file"
-            onChange={onAcademicEvidenceFileChange}
-            className="border-input bg-background block w-full rounded-md border px-3 py-2 text-sm"
-          />
-          {selectedAcademicEvidenceFile instanceof File && (
-            <p className="text-xs text-neutral-500">{selectedAcademicEvidenceFile.name}</p>
-          )}
-        </div>
+        <ControlledFileField
+          control={control}
+          name="academicEvidenceFileId"
+          label={t`Academic evidence`}
+          file={selectedAcademicEvidenceFile instanceof File ? selectedAcademicEvidenceFile : null}
+          onFileChange={onAcademicEvidenceFileChange}
+          placeholder={t`Choose academic evidence`}
+          buttonLabel={t`Browse file`}
+        />
 
         <FormField
           control={control}
@@ -54,6 +51,6 @@ export function AcademicVerificationSection({
           )}
         />
       </div>
-    </RegistrationSectionCard>
+    </FormSectionCard>
   );
 }

@@ -141,7 +141,7 @@ export default function GatewayPage() {
     {
       title: t`Regular User`,
       subtitle: t`Students & Teams`,
-      description: t`Dedicated environment for Program A participants. Focus on end-to-end innovation, collaborative architectural design, and rapid prototyping within the Incubator ecosystem.`,
+      description: t`Create a team and choose whether to develop your own idea or deliver a project for an organization.`,
       features: [
         t`Access to Program A Frameworks`,
         t`Team Collaboration Tools`,

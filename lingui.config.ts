@@ -13,6 +13,9 @@ const config: LinguiConfig = {
     },
   ],
   format: 'po',
+  formatOptions: {
+    origins: false,
+  },
 };
 
 export default config;

@@ -5,9 +5,9 @@ import { Checkbox } from 'components/shadcn';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from 'components/shadcn';
 import { Input, TagInput } from 'components/shadcn';
 import { Textarea } from 'components/shadcn';
+import { FormSectionCard } from 'components/forms';
 import type { StudentRegistrationValues } from '../../schema';
 import { parseOptionalNumber } from './constants';
-import { RegistrationSectionCard } from 'app/(auth)/register/student/_components/registration-section-card';
 
 type AcademicIndicatorsSectionProps = {
   control: Control<StudentRegistrationValues>;
@@ -19,7 +19,7 @@ export function AcademicIndicatorsSection({
   hasTransferredSubjects,
 }: AcademicIndicatorsSectionProps) {
   return (
-    <RegistrationSectionCard
+    <FormSectionCard
       title={t`Academic Indicators`}
       description={t`Help us understand your academic performance.`}
     >
@@ -68,7 +68,7 @@ export function AcademicIndicatorsSection({
           name="profileSubjectsAverage"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{t`Average grade from key subjects`}</FormLabel>
+              <FormLabel>{t`Average grade`}</FormLabel>
               <FormControl>
                 <Input
                   type="number"
@@ -79,7 +79,6 @@ export function AcademicIndicatorsSection({
                   onChange={(event) => field.onChange(parseOptionalNumber(event.target.value))}
                 />
               </FormControl>
-              <p className="text-xs text-neutral-500">{t`This is used as a supporting evaluation signal.`}</p>
               <FormMessage />
             </FormItem>
           )}
@@ -121,6 +120,6 @@ export function AcademicIndicatorsSection({
           )}
         />
       </div>
-    </RegistrationSectionCard>
+    </FormSectionCard>
   );
 }

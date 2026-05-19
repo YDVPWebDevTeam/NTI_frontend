@@ -1,9 +1,9 @@
 import { t } from '@lingui/core/macro';
 import type { Control, UseFormSetValue, UseFormClearErrors } from 'react-hook-form';
 
+import { ControlledFileField, FormSectionCard } from 'components/forms';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage, Input } from 'components/shadcn';
 import type { StudentRegistrationValues } from '../../schema';
-import { RegistrationSectionCard } from '../registration-section-card';
 
 type PortfolioResumeSectionProps = {
   control: Control<StudentRegistrationValues>;
@@ -19,61 +19,41 @@ export function PortfolioResumeSection({
   selectedCvFile,
 }: PortfolioResumeSectionProps) {
   return (
-    <RegistrationSectionCard
+    <FormSectionCard
       title={t`Portfolio & Resume`}
       description={t`Upload your CV and add links to your profiles.`}
     >
       <div className="grid gap-6 md:grid-cols-2">
-        <FormField
+        <ControlledFileField
           control={control}
           name="cvFileId"
-          render={({ field }) => {
-            const cvStatus = (() => {
-              if (selectedCvFile instanceof File) {
-                return <p className="text-xs text-neutral-500">{selectedCvFile.name}</p>;
-              }
+          className="md:col-span-2"
+          label={t`CV File`}
+          file={selectedCvFile instanceof File ? selectedCvFile : null}
+          onFileChange={(file) => {
+            if (!file) {
+              return;
+            }
 
-              if (field.value) {
-                return (
-                  <p className="text-xs text-neutral-500">
-                    {t`Using existing CV (ID: ${field.value})`}
-                  </p>
-                );
-              }
-            })();
-
-            return (
-              <FormItem className="md:col-span-2">
-                <FormLabel>{t`CV File`}</FormLabel>
-                <div className="space-y-2">
-                  <input
-                    id="cv-file-input"
-                    type="file"
-                    onChange={(event) => {
-                      const file = event.target.files?.[0];
-
-                      if (!file) {
-                        return;
-                      }
-
-                      field.onChange(undefined);
-                      setValue('cvFile', file, {
-                        shouldDirty: true,
-                        shouldTouch: true,
-                        shouldValidate: true,
-                      });
-                      clearErrors('cvFileId');
-                      event.target.value = '';
-                    }}
-                    className="border-input bg-background block w-full rounded-md border px-3 py-2 text-sm"
-                  />
-
-                  {cvStatus}
-                </div>
-                <FormMessage />
-              </FormItem>
-            );
+            setValue('cvFileId', '', {
+              shouldDirty: true,
+              shouldTouch: true,
+              shouldValidate: false,
+            });
+            setValue('cvFile', file, {
+              shouldDirty: true,
+              shouldTouch: true,
+              shouldValidate: true,
+            });
+            clearErrors('cvFileId');
           }}
+          buttonLabel={t`Browse file`}
+          placeholder={t`Choose your CV`}
+          renderStatus={(field) =>
+            field.value ? (
+              <p className="text-xs text-neutral-500">{t`Using existing CV (ID: ${field.value})`}</p>
+            ) : null
+          }
         />
 
         <FormField
@@ -122,6 +102,6 @@ export function PortfolioResumeSection({
           )}
         />
       </div>
-    </RegistrationSectionCard>
+    </FormSectionCard>
   );
 }

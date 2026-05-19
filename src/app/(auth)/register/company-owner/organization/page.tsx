@@ -128,7 +128,7 @@ export default function CreateCompanyOwnerOrganizationPage() {
             name="ico"
             label={t`ICO`}
             type="text"
-            placeholder={t`12345678…`}
+            placeholder="12345678…"
             inputMode="numeric"
             spellCheck={false}
             description={t`Enter the 8-digit company identifier.`}
@@ -156,7 +156,7 @@ export default function CreateCompanyOwnerOrganizationPage() {
             name="website"
             label={t`Website`}
             type="url"
-            placeholder={t`example.com…`}
+            placeholder="example.com…"
             autoComplete="url"
             inputMode="url"
             spellCheck={false}

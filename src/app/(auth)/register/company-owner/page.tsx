@@ -73,7 +73,7 @@ export default function RegisterCompanyOwnerPage() {
             name="email"
             label={t`Email`}
             type="email"
-            placeholder={t`owner@example.com`}
+            placeholder="owner@example.com"
           />
 
           <ControlledInputField

@@ -471,7 +471,7 @@ export default function TeamInvitesOnboardingPage() {
               <Textarea
                 value={emailsText}
                 onChange={(event) => setEmailsText(event.target.value)}
-                placeholder={t`student1@example.com\nstudent2@example.com…`}
+                placeholder="student1@example.com\nstudent2@example.com…"
                 spellCheck={false}
                 className="min-h-44 rounded-sm border-black/10 bg-white"
               />

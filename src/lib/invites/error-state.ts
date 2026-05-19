@@ -1,3 +1,4 @@
+import { t } from '@lingui/core/macro';
 import { ApiRequestError } from 'lib/api/base-client';
 
 const BAD_REQUEST_STATUS = 400;
@@ -19,8 +20,8 @@ export function getInviteValidationState(error: unknown): InviteScreenState {
 
     if (error.status === 404) {
       return {
-        title: 'Invite not found',
-        description: 'This invite link is invalid or no longer exists.',
+        title: t`Invite not found`,
+        description: t`This invite link is invalid or no longer exists.`,
       };
     }
 
@@ -29,15 +30,15 @@ export function getInviteValidationState(error: unknown): InviteScreenState {
       includesAny(message, ['expired', 'revoked', 'accepted'])
     ) {
       return {
-        title: 'Invite unavailable',
-        description: 'This invite has expired, was revoked, or has already been accepted.',
+        title: t`Invite unavailable`,
+        description: t`This invite has expired, was revoked, or has already been accepted.`,
       };
     }
   }
 
   return {
-    title: 'Invite unavailable',
-    description: 'The invite could not be validated right now. Please try again later.',
+    title: t`Invite unavailable`,
+    description: t`The invite could not be validated right now. Please try again later.`,
   };
 }
 
@@ -49,11 +50,11 @@ export function getInviteActionErrorMessage(error: unknown, fallback: string) {
   const message = error.message;
 
   if (error.status === FORBIDDEN_STATUS) {
-    return 'The authenticated account email does not match the invited email.';
+    return t`The authenticated account email does not match the invited email.`;
   }
 
   if (error.status === 404) {
-    return 'This invite is no longer available.';
+    return t`This invite is no longer available.`;
   }
 
   if (error.status === CONFLICT_STATUS) {

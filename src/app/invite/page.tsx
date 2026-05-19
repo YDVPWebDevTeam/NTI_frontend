@@ -107,8 +107,8 @@ export default function InvitePage() {
   const missingTokenState: InviteScreenState | null = token
     ? null
     : {
-        title: 'Missing invite token',
-        description: 'This invite link is incomplete. Open the full invite URL and try again.',
+        title: t`Missing invite token`,
+        description: t`This invite link is incomplete. Open the full invite URL and try again.`,
       };
 
   const routeToProfileOnboarding = () => {
@@ -133,7 +133,7 @@ export default function InvitePage() {
     } catch (error) {
       if (error instanceof ApiRequestError && error.status === USER_ALREADY_EXISTS_STATUS) {
         setRegisterError(
-          'An account with this invited email already exists. Use the existing account path instead.',
+          t`An account with this invited email already exists. Use the existing account path instead.`,
         );
 
         return;
@@ -142,7 +142,7 @@ export default function InvitePage() {
       setRegisterError(
         getInviteActionErrorMessage(
           error,
-          'Unable to create the invited account right now. Please try again.',
+          t`Unable to create the invited account right now. Please try again.`,
         ),
       );
     }
@@ -155,7 +155,7 @@ export default function InvitePage() {
     const invitedEmail = acceptedInvite?.email.trim().toLowerCase();
 
     if (invitedEmail && normalizedEmail !== invitedEmail) {
-      setExistingAccountError('Use the same email address that received this invitation.');
+      setExistingAccountError(t`Use the same email address that received this invitation.`);
 
       return;
     }
@@ -175,7 +175,7 @@ export default function InvitePage() {
       }
 
       setExistingAccountError(
-        getInviteActionErrorMessage(error, 'Unable to join the invited team right now.'),
+        getInviteActionErrorMessage(error, t`Unable to join the invited team right now.`),
       );
     }
   };

@@ -39,21 +39,21 @@ import {
   Textarea,
 } from 'components/shadcn';
 
-const STATUS_OPTIONS: Array<{ value: 'ALL' | TeamInvitationStatus; label: string }> = [
-  { value: 'ALL', label: 'All statuses' },
-  { value: 'PENDING', label: 'Pending' },
-  { value: 'ACCEPTED', label: 'Accepted' },
-  { value: 'EXPIRED', label: 'Expired' },
-  { value: 'REVOKED', label: 'Revoked' },
+const STATUS_OPTIONS: Array<'ALL' | TeamInvitationStatus> = [
+  'ALL',
+  'PENDING',
+  'ACCEPTED',
+  'EXPIRED',
+  'REVOKED',
 ];
 const MULTIPLE_ACTIVE_TEAMS_STATUS = 409;
 const INVITE_RESEND_COOLDOWN_SECONDS = 90;
 const emailSchema = z.email();
 
 function normalizeStatus(value: string | null): 'ALL' | TeamInvitationStatus {
-  const matchedStatus = STATUS_OPTIONS.find((option) => option.value === value);
+  const matchedStatus = STATUS_OPTIONS.find((option) => option === value);
 
-  return matchedStatus?.value ?? 'ALL';
+  return matchedStatus ?? 'ALL';
 }
 
 function parsePage(value: string | null) {
@@ -218,6 +218,16 @@ export default function TeamInvitesOnboardingPage() {
   }, [searchParams]);
 
   const deferredSearch = useDeferredValue(search);
+  const statusOptions = useMemo(
+    () => [
+      { value: 'ALL' as const, label: t`All statuses` },
+      { value: 'PENDING' as const, label: t`Pending` },
+      { value: 'ACCEPTED' as const, label: t`Accepted` },
+      { value: 'EXPIRED' as const, label: t`Expired` },
+      { value: 'REVOKED' as const, label: t`Revoked` },
+    ],
+    [i18n.locale],
+  );
   const teamQuery = useMyTeamQuery(true);
   const teamId = teamQuery.data?.id ?? '';
 
@@ -554,7 +564,7 @@ export default function TeamInvitesOnboardingPage() {
                     <SelectValue placeholder={t`All statuses`} />
                   </SelectTrigger>
                   <SelectContent>
-                    {STATUS_OPTIONS.map((option) => (
+                    {statusOptions.map((option) => (
                       <SelectItem key={option.value} value={option.value}>
                         {option.label}
                       </SelectItem>

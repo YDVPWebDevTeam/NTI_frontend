@@ -47,21 +47,10 @@ export default function ConfirmCompanyOwnerEmailPage() {
       eyebrow={t`EMAIL VERIFICATION`}
       title={t`Confirm your company owner account`}
       description={t`Verify your email address before creating your organization profile.`}
+      headerEyebrow={t`VERIFICATION STEP`}
+      headerTitle={t`Confirm email`}
+      headerDescription={t`Enter the verification token from your email.`}
     >
-      <div className="mb-8">
-        <p className="text-[11px] font-medium tracking-[0.12em] text-neutral-500">
-          {t`VERIFICATION STEP`}
-        </p>
-
-        <h2 className="mt-2 text-4xl font-semibold tracking-tight text-[#0c1a4f]">
-          {t`Confirm email`}
-        </h2>
-
-        <p className="mt-3 text-[15px] leading-relaxed text-neutral-600">
-          {t`Enter the verification token from your email.`}
-        </p>
-      </div>
-
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-5">
           <ControlledInputField

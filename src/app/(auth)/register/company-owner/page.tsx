@@ -59,24 +59,13 @@ export default function RegisterCompanyOwnerPage() {
 
   return (
     <CompanyOwnerAuthLayout
-      eyebrow={t`COMPANY OWNER GATEWAY`}
+      eyebrow={t`ORGANIZATION ACCESS`}
       title={t`Create your company owner account`}
       description={t`Register your account to continue with organization onboarding.`}
+      headerEyebrow={t`ACCOUNT SETUP`}
+      headerTitle={t`Register company owner`}
+      headerDescription={t`Create your company owner account to continue with organization registration.`}
     >
-      <div className="mb-8">
-        <p className="text-[11px] font-medium tracking-[0.12em] text-neutral-500">
-          {t`ACCOUNT SETUP`}
-        </p>
-
-        <h2 className="mt-2 text-4xl font-semibold tracking-tight text-[#0c1a4f]">
-          {t`Register company owner`}
-        </h2>
-
-        <p className="mt-3 text-[15px] leading-relaxed text-neutral-600">
-          {t`Create your company owner account to continue with organization registration.`}
-        </p>
-      </div>
-
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-5">
           <ControlledInputField

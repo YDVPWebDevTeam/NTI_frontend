@@ -1,7 +1,7 @@
 import React from 'react';
+import { FormSectionCard } from 'components/forms';
 import { Checkbox } from 'components/shadcn';
 import { cn, formatEnumLabel } from 'lib/utils';
-import { RegistrationSectionCard } from '../registration-section-card';
 
 type MultiSelectSectionProps<TValue extends string> = {
   title: string;
@@ -28,7 +28,7 @@ const MultiSelectSectionInner = React.forwardRef(function MultiSelectSection<TVa
 
   return (
     <div ref={ref} {...props}>
-      <RegistrationSectionCard title={title} description={description}>
+      <FormSectionCard title={title} description={description}>
         <div className="grid gap-3 sm:grid-cols-2">
           {options.map((option) => {
             const isChecked = selectedValues.includes(option);
@@ -52,7 +52,7 @@ const MultiSelectSectionInner = React.forwardRef(function MultiSelectSection<TVa
             );
           })}
         </div>
-      </RegistrationSectionCard>
+      </FormSectionCard>
     </div>
   );
 });

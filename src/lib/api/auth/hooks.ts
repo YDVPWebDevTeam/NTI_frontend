@@ -8,6 +8,7 @@ import type {
   LoginRequest,
   RegisterCompanyOwnerRequest,
   RegisterRequest,
+  RegisterViaInviteRequest,
 } from './types';
 
 export function useLoginMutation() {
@@ -19,6 +20,12 @@ export function useLoginMutation() {
 export function useRegisterStudentMutation() {
   return useMutation({
     mutationFn: (payload: RegisterRequest) => authService.registerStudent(payload),
+  });
+}
+
+export function useRegisterViaInviteMutation() {
+  return useMutation({
+    mutationFn: (payload: RegisterViaInviteRequest) => authService.registerViaInvite(payload),
   });
 }
 

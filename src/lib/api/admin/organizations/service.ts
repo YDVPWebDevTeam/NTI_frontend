@@ -1,5 +1,6 @@
 import { api } from 'lib/api/base-client';
 
+import { unwrapAdminData } from '../shared/response';
 import { adminOrganizationsEndpoints } from './endpoints';
 
 import type {
@@ -16,13 +17,19 @@ export const adminOrganizationsService = {
     );
   },
 
-  getOrganizationInvites() {
-    return api.get<OrganizationSummary[]>(adminOrganizationsEndpoints.organizationInvites);
+  async getOrganizationInvites() {
+    const response = await api.get<OrganizationSummary[] | { data: OrganizationSummary[] }>(
+      adminOrganizationsEndpoints.organizationInvites,
+    );
+
+    return unwrapAdminData(response);
   },
 
-  getOrganizationInvitesByOrganization(id: string) {
-    return api.get<OrganizationInvite[]>(
+  async getOrganizationInvitesByOrganization(id: string) {
+    const response = await api.get<OrganizationInvite[] | { data: OrganizationInvite[] }>(
       adminOrganizationsEndpoints.organizationInvitesByOrganization(id),
     );
+
+    return unwrapAdminData(response);
   },
 };

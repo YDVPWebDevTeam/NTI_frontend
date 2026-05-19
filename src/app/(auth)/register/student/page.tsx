@@ -53,6 +53,14 @@ export default function SignUpPage() {
     const isValid = await form.trigger(currentStep.fields);
 
     if (!isValid) {
+      const firstInvalidField = currentStep.fields.find(
+        (fieldName) => form.getFieldState(fieldName).invalid,
+      );
+
+      if (firstInvalidField) {
+        form.setFocus(firstInvalidField);
+      }
+
       return;
     }
 

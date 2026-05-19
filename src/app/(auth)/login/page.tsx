@@ -13,6 +13,7 @@ import { createLoginSchema, type LoginFormValues } from 'lib/auth/schemas';
 import { useLoginMutation } from 'lib/api';
 
 import { ControlledInputField, ControlledPasswordField } from 'components/forms';
+import { AuthSplitShell } from 'components/layout';
 import { Button } from 'components/shadcn';
 import { Form } from 'components/shadcn';
 
@@ -40,100 +41,68 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="mx-auto flex w-full max-w-7xl flex-1 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
-      <div className="grid w-full grid-cols-1 overflow-hidden border border-black/10 bg-[#e7e8eb] lg:grid-cols-[400px_1fr]">
-        <aside className="relative bg-[#041d67] px-6 py-8 text-white lg:px-8 lg:py-10">
-          <div
-            className="pointer-events-none absolute inset-0 opacity-25"
-            style={{
-              backgroundImage:
-                'radial-gradient(circle at 1px 1px, rgba(255,255,255,0.16) 1px, transparent 0)',
-              backgroundSize: '22px 22px',
-            }}
+    <AuthSplitShell
+      asideEyebrow={t`PLATFORM ACCESS`}
+      asideTitle={t`Welcome back to NTI`}
+      asideDescription={t`Sign in to continue with your student, team, or organization workflow.`}
+      headerEyebrow={t`SIGN IN`}
+      headerTitle={t`Access your account`}
+      headerDescription={t`Enter your credentials below to access the platform.`}
+      footerCta={
+        <>
+          <p className="text-sm font-medium text-white/70">{t`Don't have an account yet?`}</p>
+          <Button
+            asChild
+            variant="outline"
+            className="mt-4 border-white/20 bg-white/5 text-white hover:bg-white hover:text-[#041d67]"
+          >
+            <Link href={ROUTES.AUTH.REGISTER_SELECT}>
+              {t`CREATE ACCOUNT`}
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+        </>
+      }
+    >
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-5">
+          <ControlledInputField
+            control={form.control}
+            name="email"
+            label={t`Email Address`}
+            type="email"
+            placeholder={t`name@institution.edu`}
+            startIcon={<Mail className="h-4 w-4" />}
           />
 
-          <div className="relative z-10 flex h-full flex-col">
-            <div>
-              <p className="text-[11px] font-medium tracking-[0.14em] text-white/50">
-                {t`SYSTEM IMMERSION`}
-              </p>
-              <h1 className="mt-4 text-3xl font-semibold tracking-tight">
-                {t`Welcome Back to NTI Engine`}
-              </h1>
-            </div>
+          <ControlledPasswordField
+            control={form.control}
+            name="password"
+            label={t`Password`}
+            placeholder={t`Enter your password`}
+            startIcon={<Lock className="h-4 w-4" />}
+          />
 
-            <div className="mt-auto pt-16">
-              <p className="text-sm font-medium text-white/70">{t`Don't have an account yet?`}</p>
-              <Button
-                asChild
-                variant="outline"
-                className="mt-4 border-white/20 bg-white/5 text-white hover:bg-white hover:text-[#041d67]"
-              >
-                <Link href={ROUTES.AUTH.REGISTER_SELECT}>
-                  {t`CREATE ACCOUNT`}
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
+          <div className="flex justify-between pt-2">
+            <Button
+              asChild
+              variant="link"
+              className="h-auto p-0 text-[13px] font-medium text-blue-600"
+            >
+              <Link href={ROUTES.AUTH.FORGOT_PASSWORD}>{t`Forgot password?`}</Link>
+            </Button>
           </div>
-        </aside>
 
-        <section className="flex items-center bg-[#ececef] px-5 py-7 sm:px-8 sm:py-10 lg:px-12">
-          <div className="w-full max-w-120">
-            <div className="mb-8">
-              <p className="text-[11px] font-medium tracking-[0.12em] text-neutral-500">
-                {t`AUTHENTICATION GATEWAY`}
-              </p>
-              <h2 className="mt-2 text-4xl font-semibold tracking-tight text-[#0c1a4f]">
-                {t`Sign In`}
-              </h2>
-              <p className="mt-3 text-[15px] leading-relaxed text-neutral-600">
-                {t`Enter your credentials below to access the platform.`}
-              </p>
-            </div>
-
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-5">
-                <ControlledInputField
-                  control={form.control}
-                  name="email"
-                  label={t`Email Address`}
-                  type="email"
-                  placeholder={t`name@institution.edu`}
-                  startIcon={<Mail className="h-4 w-4" />}
-                />
-
-                <ControlledPasswordField
-                  control={form.control}
-                  name="password"
-                  label={t`Password`}
-                  placeholder={t`Enter your password`}
-                  startIcon={<Lock className="h-4 w-4" />}
-                />
-
-                <div className="flex justify-between pt-2">
-                  <Button
-                    asChild
-                    variant="link"
-                    className="h-auto p-0 text-[13px] font-medium text-blue-600"
-                  >
-                    <Link href={ROUTES.AUTH.FORGOT_PASSWORD}>{t`Forgot password?`}</Link>
-                  </Button>
-                </div>
-
-                <Button
-                  type="submit"
-                  disabled={isLoginPending}
-                  className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
-                >
-                  {isLoginPending ? t`SIGNING IN...` : t`ACCESS ENGINE`}
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </form>
-            </Form>
-          </div>
-        </section>
-      </div>
-    </main>
+          <Button
+            type="submit"
+            disabled={isLoginPending}
+            className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
+          >
+            {isLoginPending ? t`SIGNING IN...` : t`ACCESS PLATFORM`}
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </form>
+      </Form>
+    </AuthSplitShell>
   );
 }

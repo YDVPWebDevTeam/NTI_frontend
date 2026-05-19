@@ -8,6 +8,8 @@ import { useState } from 'react';
 import { LanguageSelector } from 'components/i18n/language-switcher';
 import { ROUTES } from 'lib/constants';
 
+import { NtiBrand } from './nti-brand';
+
 export function LandingHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -15,12 +17,7 @@ export function LandingHeader() {
     <header className="fixed top-0 z-50 w-full bg-white/80 shadow-sm backdrop-blur-md dark:bg-slate-900/80 dark:shadow-none">
       <nav className="font-manrope mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between px-6 py-4 font-bold tracking-tight">
         <div className="flex w-full items-center justify-between md:w-auto">
-          <Link
-            className="text-2xl font-black tracking-tighter text-blue-900 dark:text-white"
-            href={ROUTES.ROOT}
-          >
-            NTI
-          </Link>
+          <NtiBrand href={ROUTES.ROOT} variant="landing" size="md" />
           <button
             className="text-slate-600 md:hidden dark:text-slate-400"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

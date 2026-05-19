@@ -1,5 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 
+import { FormSectionCard } from 'components/forms';
 import type { StudentRegistrationValues } from '../schema';
 import { AcademicIndicatorsSection } from './academic/academic-indicators-section';
 import { AcademicVerificationSection } from './academic/academic-verification-section';
@@ -7,7 +8,6 @@ import { useAcademicDependentFields } from './academic/use-academic-dependent-fi
 import { t } from '@lingui/core/macro';
 import { AcademicAffiliationProgramFields } from 'app/(auth)/register/student/_components/academic/academic-affiliation-program-fields';
 import { AcademicAffiliationStudyFields } from 'app/(auth)/register/student/_components/academic/academic-affiliation-study-fields';
-import { RegistrationSectionCard } from 'app/(auth)/register/student/_components/registration-section-card';
 
 export function AcademicStep() {
   const { control, watch, setValue } = useFormContext<StudentRegistrationValues>();
@@ -36,7 +36,7 @@ export function AcademicStep() {
 
   return (
     <div className="space-y-8">
-      <RegistrationSectionCard
+      <FormSectionCard
         title={t`Study Affiliation`}
         description={t`Select your university and program details.`}
       >
@@ -57,7 +57,7 @@ export function AcademicStep() {
           />
           <AcademicAffiliationStudyFields control={control} />
         </div>
-      </RegistrationSectionCard>
+      </FormSectionCard>
 
       <AcademicIndicatorsSection
         control={control}
@@ -67,19 +67,16 @@ export function AcademicStep() {
       <AcademicVerificationSection
         control={control}
         selectedAcademicEvidenceFile={selectedAcademicEvidenceFile}
-        onAcademicEvidenceFileChange={(event) => {
-          const selectedFile = event.target.files?.[0];
-
-          if (!selectedFile) {
+        onAcademicEvidenceFileChange={(file) => {
+          if (!file) {
             return;
           }
 
-          setValue('academicEvidenceFile', selectedFile, {
+          setValue('academicEvidenceFile', file, {
             shouldDirty: true,
             shouldTouch: true,
             shouldValidate: false,
           });
-          event.target.value = '';
         }}
       />
     </div>

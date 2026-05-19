@@ -9,6 +9,7 @@ export const NAME_MIN_LENGTH = 2;
 export const NAME_MAX_LENGTH = 50;
 export const STUDY_YEAR_MAX = 8;
 export const MAX_SOFT_SKILLS = 3;
+export const PROFILE_SUBJECTS_AVERAGE_MAX = 5;
 
 type StudentSkillsValidationValues = {
   skills: Array<{ isPrimary?: boolean }>;
@@ -99,7 +100,17 @@ export function createStudentAcademicSchema() {
       .optional(),
     hasTransferredSubjects: z.boolean().default(false),
     transferredSubjectsCount: z.coerce.number().optional().nullable(),
-    profileSubjectsAverage: z.coerce.number().optional().nullable(),
+    profileSubjectsAverage: z
+      .number()
+      .min(1, { message: i18n._(msg`Average grade must be between 1 and 5.`) })
+      .max(PROFILE_SUBJECTS_AVERAGE_MAX, {
+        message: i18n._(msg`Average grade must be between 1 and 5.`),
+      })
+      .optional()
+      .nullable()
+      .refine((value) => value != null, {
+        message: i18n._(msg`Average grade is required.`),
+      }),
     relevantCourses: z.array(z.string()).optional().default([]),
     academicAchievements: z.string().optional(),
     academicEvidenceFile: z.unknown().optional().nullable(),
@@ -134,6 +145,7 @@ export function createStudentSkillsSchema() {
         .max(MAX_SOFT_SKILLS, { message: i18n._(msg`Select at most 3 soft skills.`) })
         .optional()
         .default([]),
+      teamName: z.string().optional(),
       githubUrl: z
         .string()
         .url({ message: i18n._(msg`Enter a valid URL.`) })

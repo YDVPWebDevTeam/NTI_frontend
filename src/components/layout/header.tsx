@@ -7,16 +7,13 @@ import { LanguageSelector } from 'components/i18n/language-switcher';
 import { Button } from 'components/shadcn';
 import { ROUTES } from 'lib/constants';
 
+import { NtiBrand } from './nti-brand';
+
 export function Header() {
   return (
     <header className="border-b border-black/[0.07] bg-[#f5f4f0]/90 backdrop-blur-md">
       <nav className="mx-auto flex w-full max-w-300 flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-12">
-        <Link
-          href={ROUTES.ROOT}
-          className="text-sm font-bold tracking-[0.1em] text-neutral-900 hover:text-neutral-700"
-        >
-          {t`NTI`}
-        </Link>
+        <NtiBrand href={ROUTES.ROOT} size="sm" />
 
         <div className="flex w-full flex-col items-stretch gap-3 md:w-auto md:flex-row md:items-center md:gap-6">
           <Link

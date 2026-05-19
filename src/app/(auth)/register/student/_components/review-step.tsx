@@ -99,6 +99,12 @@ export function ReviewStep() {
           <CardTitle className="text-xl text-[#0c1a4f]">{t`Professional Skills`}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4 text-sm text-neutral-600">
+          {profile?.teamName && (
+            <div>
+              <h4 className="mb-1 font-medium text-neutral-900">{t`Team Name`}</h4>
+              <p className="text-xs">{profile.teamName}</p>
+            </div>
+          )}
           {profile?.bio && (
             <div>
               <h4 className="mb-1 font-medium text-neutral-900">{t`Bio`}</h4>

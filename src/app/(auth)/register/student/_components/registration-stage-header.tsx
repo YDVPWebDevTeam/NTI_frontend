@@ -1,5 +1,6 @@
 import { t } from '@lingui/core/macro';
 
+import { PageSectionHeader } from 'components/layout';
 import { Button } from 'components/shadcn';
 
 type RegistrationStageHeaderProps = {
@@ -18,21 +19,13 @@ export function RegistrationStageHeader({
   isBusy,
 }: RegistrationStageHeaderProps) {
   return (
-    <div className="mb-7 border-b border-black/[0.07] pb-6">
-      <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-        <div>
-          <p className="text-[11px] font-medium tracking-[0.12em] text-neutral-500">
-            {t`ACTIVE STAGE`}
-          </p>
-          <h2 className="mt-2 text-4xl leading-tight font-semibold tracking-tight text-[#0c1a4f]">
-            {title}
-          </h2>
-          <p className="mt-3 max-w-170 text-[16px] leading-relaxed text-neutral-600">
-            {description}
-          </p>
-        </div>
-
-        {showRestartButton && onStartFromBeginning && (
+    <PageSectionHeader
+      bordered
+      eyebrow={t`ACTIVE STAGE`}
+      title={title}
+      description={description}
+      actions={
+        showRestartButton && onStartFromBeginning ? (
           <Button
             type="button"
             variant="ghost"
@@ -42,8 +35,8 @@ export function RegistrationStageHeader({
           >
             {t`START FROM THE BEGINNING`}
           </Button>
-        )}
-      </div>
-    </div>
+        ) : null
+      }
+    />
   );
 }

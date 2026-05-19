@@ -29,6 +29,13 @@ export interface RegisterRequest {
   password: string;
 }
 
+export interface RegisterViaInviteRequest {
+  firstName: string;
+  lastName: string;
+  password: string;
+  token: string;
+}
+
 export interface RegisterCompanyOwnerRequest {
   email: string;
   firstName: string;

@@ -11,20 +11,18 @@ import { toast } from 'sonner';
 import { filesService, uploadAndCompleteFile, useCreateOrganizationMutation } from 'lib/api';
 import { ROUTES } from 'lib/constants';
 
-import { ControlledInputField } from 'components/forms';
 import {
-  Button,
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from 'components/shadcn';
+  ControlledFileField,
+  ControlledInputField,
+  ControlledTextareaField,
+} from 'components/forms';
+import { Button, Form } from 'components/shadcn';
 
 import { CompanyOwnerAuthLayout } from '../_components/company-owner-auth-layout';
 import {
   createCompanyOwnerOrganizationSchema,
+  normalizeIco,
+  normalizeWebsite,
   type CompanyOwnerOrganizationValues,
 } from './schema';
 
@@ -34,6 +32,7 @@ export default function CreateCompanyOwnerOrganizationPage() {
   const { mutateAsync: createOrganization, isPending } = useCreateOrganizationMutation();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const form = useForm<CompanyOwnerOrganizationValues>({
     resolver: zodResolver(createCompanyOwnerOrganizationSchema()),
@@ -57,6 +56,7 @@ export default function CreateCompanyOwnerOrganizationPage() {
     }
 
     setIsSubmitting(true);
+    setSubmitError(null);
 
     try {
       let logoUrl: string | undefined;
@@ -81,16 +81,22 @@ export default function CreateCompanyOwnerOrganizationPage() {
 
       await createOrganization({
         name: values.name,
-        ico: values.ico,
+        ico: normalizeIco(values.ico),
         sector: values.sector,
         description: values.description,
-        website: values.website,
+        website: normalizeWebsite(values.website),
         logoUrl,
       });
 
       router.push(ROUTES.DASHBOARD);
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : t`Organization creation failed`);
+      const message =
+        error instanceof Error
+          ? error.message
+          : t`Unable to create the organization right now. Review the details and try again.`;
+
+      setSubmitError(message);
+      toast.error(message);
     } finally {
       setIsSubmitting(false);
     }
@@ -101,21 +107,10 @@ export default function CreateCompanyOwnerOrganizationPage() {
       eyebrow={t`ORGANIZATION SETUP`}
       title={t`Create your organization profile`}
       description={t`Add company details so your organization can be reviewed and connected to the platform.`}
+      headerEyebrow={t`COMPANY DETAILS`}
+      headerTitle={t`Create organization`}
+      headerDescription={t`Add basic information about your organization.`}
     >
-      <div className="mb-8">
-        <p className="text-[11px] font-medium tracking-[0.12em] text-neutral-500">
-          {t`COMPANY DETAILS`}
-        </p>
-
-        <h2 className="mt-2 text-4xl font-semibold tracking-tight text-[#0c1a4f]">
-          {t`Create organization`}
-        </h2>
-
-        <p className="mt-3 text-[15px] leading-relaxed text-neutral-600">
-          {t`Add basic information about your organization.`}
-        </p>
-      </div>
-
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-5">
           <ControlledInputField
@@ -123,7 +118,9 @@ export default function CreateCompanyOwnerOrganizationPage() {
             name="name"
             label={t`Company name`}
             type="text"
-            placeholder={t`Test Company`}
+            placeholder={t`Test Company…`}
+            autoComplete="organization"
+            spellCheck={false}
           />
 
           <ControlledInputField
@@ -131,7 +128,10 @@ export default function CreateCompanyOwnerOrganizationPage() {
             name="ico"
             label={t`ICO`}
             type="text"
-            placeholder={t`12345678`}
+            placeholder={t`12345678…`}
+            inputMode="numeric"
+            spellCheck={false}
+            description={t`Enter the 8-digit company identifier.`}
           />
 
           <ControlledInputField
@@ -139,15 +139,16 @@ export default function CreateCompanyOwnerOrganizationPage() {
             name="sector"
             label={t`Sector`}
             type="text"
-            placeholder={t`IT`}
+            placeholder={t`Information Technology…`}
+            spellCheck={false}
           />
 
-          <ControlledInputField
+          <ControlledTextareaField
             control={form.control}
             name="description"
             label={t`Description`}
-            type="text"
-            placeholder={t`Software development company.`}
+            placeholder={t`Describe what your organization does, who it serves, and how it will use the platform…`}
+            rows={5}
           />
 
           <ControlledInputField
@@ -155,47 +156,40 @@ export default function CreateCompanyOwnerOrganizationPage() {
             name="website"
             label={t`Website`}
             type="url"
-            placeholder={t`https://example.com`}
+            placeholder={t`example.com…`}
+            autoComplete="url"
+            inputMode="url"
+            spellCheck={false}
+            description={t`You can enter the domain only. HTTPS will be added automatically if needed.`}
           />
 
-          <FormField
+          <ControlledFileField
             control={form.control}
             name="logoFile"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t`Logo`}</FormLabel>
-
-                <FormControl>
-                  <input
-                    id="logo"
-                    type="file"
-                    accept="image/png,image/jpeg,image/webp"
-                    onChange={(event) => {
-                      const file = event.target.files?.[0] ?? null;
-
-                      field.onChange(file);
-                    }}
-                    className="border-input bg-background block w-full rounded-md border px-3 py-2 text-sm"
-                  />
-                </FormControl>
-
-                {selectedLogoFile instanceof File && (
-                  <p className="text-xs text-neutral-500">{selectedLogoFile.name}</p>
-                )}
-
-                <p className="text-xs text-gray-500">{t`PNG, JPG or WEBP. Logo is optional.`}</p>
-
-                <FormMessage />
-              </FormItem>
-            )}
+            label={t`Logo`}
+            file={selectedLogoFile instanceof File ? selectedLogoFile : null}
+            onFileChange={(file) => form.setValue('logoFile', file, { shouldDirty: true })}
+            accept="image/png,image/jpeg,image/webp"
+            description={t`PNG, JPG or WEBP. Logo is optional.`}
+            placeholder={t`Choose your logo…`}
+            buttonLabel={t`Browse file`}
           />
+
+          {submitError ? (
+            <div
+              className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+              aria-live="polite"
+            >
+              {submitError}
+            </div>
+          ) : null}
 
           <Button
             type="submit"
             disabled={isSubmitDisabled}
             className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
           >
-            {isSubmitDisabled ? t`CREATING ORGANIZATION...` : t`CREATE ORGANIZATION`}
+            {isSubmitDisabled ? t`Creating organization…` : t`Create organization`}
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </form>

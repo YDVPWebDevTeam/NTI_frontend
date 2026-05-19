@@ -8,6 +8,7 @@ import type {
   LoginRequest,
   RegisterCompanyOwnerRequest,
   RegisterRequest,
+  RegisterViaInviteRequest,
   ResendConfirmationEmailRequest,
 } from './types';
 
@@ -19,6 +20,13 @@ export const authService = {
   registerStudent(payload: RegisterRequest) {
     return api.post<AuthResponse | AuthUser, RegisterRequest>(
       authEndpoints.registerStudent,
+      payload,
+    );
+  },
+
+  registerViaInvite(payload: RegisterViaInviteRequest) {
+    return api.post<AuthResponse | AuthUser, RegisterViaInviteRequest>(
+      authEndpoints.registerViaInvite,
       payload,
     );
   },

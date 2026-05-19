@@ -3,6 +3,7 @@ import { Plus, Trash } from 'lucide-react';
 import type { Control } from 'react-hook-form';
 import { useFieldArray } from 'react-hook-form';
 
+import { FormSectionCard } from 'components/forms';
 import { Button } from 'components/shadcn';
 import { Checkbox } from 'components/shadcn';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from 'components/shadcn';
@@ -10,7 +11,6 @@ import { Input } from 'components/shadcn';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from 'components/shadcn';
 import { formatEnumLabel } from 'lib/utils';
 import type { StudentRegistrationValues } from '../../schema';
-import { RegistrationSectionCard } from '../registration-section-card';
 import { SKILL_LEVEL_OPTIONS } from './constants';
 
 type TechnicalSkillsSectionProps = {
@@ -28,7 +28,7 @@ export function TechnicalSkillsSection({ control }: TechnicalSkillsSectionProps)
   });
 
   return (
-    <RegistrationSectionCard
+    <FormSectionCard
       title={t`Technical Skills`}
       description={t`List your primary technical skills and proficiency.`}
     >
@@ -174,6 +174,6 @@ export function TechnicalSkillsSection({ control }: TechnicalSkillsSectionProps)
           )}
         />
       </div>
-    </RegistrationSectionCard>
+    </FormSectionCard>
   );
 }

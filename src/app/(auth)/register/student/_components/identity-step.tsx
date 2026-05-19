@@ -20,14 +20,18 @@ export function IdentityStep() {
           control={control}
           name="firstName"
           label={t`First Name`}
-          placeholder={t`Enter your first name`}
+          placeholder={t`Enter your first name…`}
+          autoComplete="given-name"
+          spellCheck={false}
         />
 
         <ControlledInputField
           control={control}
           name="lastName"
           label={t`Last Name`}
-          placeholder={t`Enter your last name`}
+          placeholder={t`Enter your last name…`}
+          autoComplete="family-name"
+          spellCheck={false}
         />
       </div>
 
@@ -36,14 +40,20 @@ export function IdentityStep() {
         name="email"
         label={t`Email Address`}
         type="email"
-        placeholder={t`name@institution.edu`}
+        placeholder={t`name@institution.edu…`}
+        autoComplete="email"
+        inputMode="email"
+        spellCheck={false}
       />
 
       <ControlledPasswordField
         control={control}
         name="password"
         label={t`Password`}
-        placeholder={t`Create a secure password`}
+        placeholder={t`Create a secure password…`}
+        autoComplete="new-password"
+        spellCheck={false}
+        description={t`Use at least 6 characters.`}
       />
 
       <FormField

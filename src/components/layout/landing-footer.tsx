@@ -3,6 +3,8 @@ import Link from 'next/link';
 
 import { ROUTES } from 'lib/constants';
 
+import { NtiBrand } from './nti-brand';
+
 export function LandingFooter() {
   return (
     <footer
@@ -11,7 +13,7 @@ export function LandingFooter() {
     >
       <div className="font-inter mx-auto grid max-w-7xl grid-cols-1 gap-8 px-8 py-12 text-sm antialiased md:grid-cols-4">
         <div className="space-y-4">
-          <div className="text-lg font-bold text-slate-900 dark:text-white">{t`NTI`}</div>
+          <NtiBrand href={ROUTES.ROOT} variant="landing" size="sm" />
           <p className="text-slate-500 dark:text-slate-400">
             {t`Driving innovation and economic growth through technology and academic collaboration.`}
           </p>
@@ -64,14 +66,6 @@ export function LandingFooter() {
                 {t`Terms of Service`}
               </Link>
             </li>
-            <li>
-              <Link
-                className="text-slate-500 transition-colors hover:text-blue-700 dark:text-slate-400 dark:hover:text-cyan-300"
-                href={ROUTES.EU_FUNDING_DISCLOSURE}
-              >
-                {t`EU Funding Disclosure`}
-              </Link>
-            </li>
           </ul>
         </div>
         <div>
@@ -104,8 +98,16 @@ export function LandingFooter() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-slate-200 py-6 text-center text-xs text-slate-500 dark:border-slate-800">
-        {t`© 2024 Nitriansky technologický inkubátor. All rights reserved.`}
+      <div className="border-t border-slate-200 dark:border-slate-800">
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-2 px-8 py-6 text-center">
+          <Link
+            className="text-sm font-medium text-slate-700 transition-colors hover:text-blue-700 dark:text-slate-300 dark:hover:text-cyan-300"
+            href={ROUTES.ADMIN.LOGIN}
+          >
+            {t`Admin Login`}
+          </Link>
+          <span className="text-xs text-slate-500 dark:text-slate-400">{t`© 2026 NTI. All rights reserved.`}</span>
+        </div>
       </div>
     </footer>
   );

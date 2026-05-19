@@ -9,7 +9,9 @@ import { type ControllerRenderProps } from 'react-hook-form';
 import { cn } from 'lib/utils';
 import {
   Button,
+  FileInput,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -20,12 +22,13 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
+  Textarea,
 } from 'components/shadcn';
 
 export const LABEL_CLASS_NAME =
   'text-[11px] font-medium tracking-[0.1em] text-neutral-500 uppercase';
 export const INPUT_CLASS_NAME =
-  'h-12 w-full rounded-sm border border-black/10 bg-white px-4 text-sm text-neutral-800 transition-all outline-none focus-visible:ring-blue-500';
+  'h-12 w-full rounded-sm border border-black/10 bg-white px-4 text-sm text-neutral-800 transition-colors focus-visible:ring-blue-500';
 const ICON_WRAPPER_CLASS_NAME =
   'pointer-events-none absolute top-1/2 -translate-y-1/2 text-neutral-400';
 
@@ -74,6 +77,10 @@ type SharedControlledInputProps<
   className?: string;
   inputClassName?: string;
   startIcon?: ReactNode;
+  description?: string;
+  autoComplete?: InputHTMLAttributes<HTMLInputElement>['autoComplete'];
+  inputMode?: InputHTMLAttributes<HTMLInputElement>['inputMode'];
+  spellCheck?: boolean;
 };
 
 type ControlledInputProps<
@@ -95,6 +102,10 @@ export function ControlledInputField<
   className,
   inputClassName,
   startIcon,
+  description,
+  autoComplete,
+  inputMode,
+  spellCheck,
 }: ControlledInputProps<TFieldValues, TName>) {
   return (
     <ControlledFormField
@@ -103,19 +114,25 @@ export function ControlledInputField<
       label={label}
       className={className}
       renderField={(field) => (
-        <div className="relative">
-          {startIcon ? (
-            <span className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-neutral-400">
-              {startIcon}
-            </span>
-          ) : null}
-          <Input
-            {...field}
-            value={(field.value as string | number | undefined) ?? ''}
-            type={type}
-            placeholder={placeholder}
-            className={cn(INPUT_CLASS_NAME, startIcon ? 'pl-11' : '', inputClassName)}
-          />
+        <div className="space-y-2">
+          <div className="relative">
+            {startIcon ? (
+              <span className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-neutral-400">
+                {startIcon}
+              </span>
+            ) : null}
+            <Input
+              {...field}
+              value={(field.value as string | number | undefined) ?? ''}
+              type={type}
+              placeholder={placeholder}
+              autoComplete={autoComplete}
+              inputMode={inputMode}
+              spellCheck={spellCheck}
+              className={cn(INPUT_CLASS_NAME, startIcon ? 'pl-11' : '', inputClassName)}
+            />
+          </div>
+          {description ? <FormDescription>{description}</FormDescription> : null}
         </div>
       )}
     />
@@ -143,6 +160,10 @@ export function ControlledPasswordField<
   className,
   inputClassName,
   startIcon,
+  description,
+  autoComplete,
+  inputMode,
+  spellCheck,
   toggleLabels = {
     show: t`Show password`,
     hide: t`Hide password`,
@@ -157,30 +178,89 @@ export function ControlledPasswordField<
       label={label}
       className={className}
       renderField={(field) => (
-        <div className="relative">
-          {startIcon ? (
-            <span className={cn(ICON_WRAPPER_CLASS_NAME, 'left-4')}>{startIcon}</span>
-          ) : null}
-          <Input
-            {...field}
-            value={(field.value as string | number | undefined) ?? ''}
-            type={isVisible ? 'text' : 'password'}
-            placeholder={placeholder}
-            className={cn(INPUT_CLASS_NAME, startIcon ? 'pl-11' : '', 'pr-12', inputClassName)}
-          />
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon"
-            className="absolute top-1/2 right-1 h-10 w-10 -translate-y-1/2 rounded-sm text-neutral-500 hover:bg-neutral-100 hover:text-neutral-800"
-            onClick={() => {
-              setIsVisible((current) => !current);
-            }}
-            aria-label={isVisible ? toggleLabels.hide : toggleLabels.show}
-          >
-            {isVisible ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-          </Button>
+        <div className="space-y-2">
+          <div className="relative">
+            {startIcon ? (
+              <span className={cn(ICON_WRAPPER_CLASS_NAME, 'left-4')}>{startIcon}</span>
+            ) : null}
+            <Input
+              {...field}
+              value={(field.value as string | number | undefined) ?? ''}
+              type={isVisible ? 'text' : 'password'}
+              placeholder={placeholder}
+              autoComplete={autoComplete}
+              inputMode={inputMode}
+              spellCheck={spellCheck}
+              className={cn(INPUT_CLASS_NAME, startIcon ? 'pl-11' : '', 'pr-12', inputClassName)}
+            />
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              className="absolute top-1/2 right-1 h-10 w-10 -translate-y-1/2 rounded-sm text-neutral-500 hover:bg-neutral-100 hover:text-neutral-800"
+              onClick={() => {
+                setIsVisible((current) => !current);
+              }}
+              aria-label={isVisible ? toggleLabels.hide : toggleLabels.show}
+            >
+              <span aria-hidden="true">
+                {isVisible ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+              </span>
+            </Button>
+          </div>
+          {description ? <FormDescription>{description}</FormDescription> : null}
         </div>
+      )}
+    />
+  );
+}
+
+type ControlledTextareaProps<
+  TFieldValues extends FieldValues,
+  TName extends FieldPath<TFieldValues>,
+> = SharedControlledInputProps<TFieldValues, TName> & {
+  rows?: number;
+};
+
+const DEFAULT_TEXTAREA_ROWS = 4;
+
+export function ControlledTextareaField<
+  TFieldValues extends FieldValues,
+  TName extends FieldPath<TFieldValues>,
+>({
+  control,
+  name,
+  label,
+  placeholder,
+  className,
+  inputClassName,
+  description,
+  spellCheck,
+  rows = DEFAULT_TEXTAREA_ROWS,
+}: ControlledTextareaProps<TFieldValues, TName>) {
+  return (
+    <FormField
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <FormItem className={className}>
+          <FormLabel className={LABEL_CLASS_NAME}>{label}</FormLabel>
+          <FormControl>
+            <Textarea
+              {...field}
+              value={(field.value as string | undefined) ?? ''}
+              rows={rows}
+              placeholder={placeholder}
+              spellCheck={spellCheck}
+              className={cn(
+                'min-h-28 w-full rounded-sm border border-black/10 bg-white px-4 py-3 text-sm text-neutral-800 focus-visible:ring-blue-500',
+                inputClassName,
+              )}
+            />
+          </FormControl>
+          {description ? <FormDescription>{description}</FormDescription> : null}
+          <FormMessage />
+        </FormItem>
       )}
     />
   );
@@ -240,6 +320,67 @@ export function ControlledSelectField<
             ))}
           </SelectContent>
         </Select>
+      )}
+    />
+  );
+}
+
+type ControlledFileFieldProps<
+  TFieldValues extends FieldValues,
+  TName extends FieldPath<TFieldValues>,
+> = {
+  control: Control<TFieldValues>;
+  name: TName;
+  label: string;
+  file: File | null;
+  onFileChange: (file: File | null) => void;
+  accept?: string;
+  className?: string;
+  description?: string;
+  placeholder?: string;
+  buttonLabel?: string;
+  renderStatus?: (field: ControllerRenderProps<TFieldValues, TName>) => ReactNode;
+};
+
+export function ControlledFileField<
+  TFieldValues extends FieldValues,
+  TName extends FieldPath<TFieldValues>,
+>({
+  control,
+  name,
+  label,
+  file,
+  onFileChange,
+  accept,
+  className,
+  description,
+  placeholder,
+  buttonLabel,
+  renderStatus,
+}: ControlledFileFieldProps<TFieldValues, TName>) {
+  return (
+    <FormField
+      control={control}
+      name={name}
+      render={({ field }) => (
+        <FormItem className={className}>
+          <FormLabel className={LABEL_CLASS_NAME}>{label}</FormLabel>
+          <FormControl>
+            <div className="space-y-2">
+              <FileInput
+                id={`${String(name)}-file-input`}
+                file={file}
+                onFileChange={onFileChange}
+                accept={accept}
+                placeholder={placeholder}
+                buttonLabel={buttonLabel}
+              />
+              {renderStatus ? renderStatus(field) : null}
+            </div>
+          </FormControl>
+          {description ? <FormDescription>{description}</FormDescription> : null}
+          <FormMessage />
+        </FormItem>
       )}
     />
   );

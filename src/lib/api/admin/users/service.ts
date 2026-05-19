@@ -1,12 +1,15 @@
 import { api } from 'lib/api/base-client';
 
+import { unwrapAdminData } from '../shared/response';
 import { adminUsersEndpoints } from './endpoints';
 
 import type { AdminUser, UpdateUserStatusRequest } from './types';
 
 export const adminUsersService = {
-  getUsers() {
-    return api.get<AdminUser[]>(adminUsersEndpoints.users);
+  async getUsers() {
+    const response = await api.get<AdminUser[] | { data: AdminUser[] }>(adminUsersEndpoints.users);
+
+    return unwrapAdminData(response);
   },
 
   getUserById(id: string) {

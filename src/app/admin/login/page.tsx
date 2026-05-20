@@ -12,13 +12,12 @@ import { toast } from 'sonner';
 import { AuthSplitShell } from 'components/layout';
 import { ControlledInputField, ControlledPasswordField } from 'components/forms';
 import { Button, Form } from 'components/shadcn';
-import { adminQueryKeys } from 'lib/api/admin/admin-query-keys';
 import {
-  adminLoginSchema,
-  authService,
+  adminSessionKeys,
+  loginAdmin,
   setStoredAdminPasswordChangeRequired,
-  type AdminLoginSchema,
-} from 'lib/api/admin/auth';
+} from 'lib/api-client/admin/auth';
+import { adminLoginSchema, type AdminLoginSchema } from 'lib/admin-auth-schemas';
 import { ROUTES } from 'lib/constants';
 
 export default function AdminLoginPage() {
@@ -35,10 +34,10 @@ export default function AdminLoginPage() {
 
   const handleSubmit = async (values: AdminLoginSchema) => {
     try {
-      const response = await authService.loginAdmin(values);
+      const response = await loginAdmin(values);
 
       if (response.requiresPasswordChange) {
-        queryClient.setQueryData(adminQueryKeys.authFlow(), true);
+        queryClient.setQueryData(adminSessionKeys.authFlow, true);
         setStoredAdminPasswordChangeRequired(true);
 
         router.replace(ROUTES.ADMIN.FORCE_CHANGE_PASSWORD);
@@ -46,15 +45,15 @@ export default function AdminLoginPage() {
         return;
       }
 
-      queryClient.setQueryData(adminQueryKeys.authFlow(), false);
+      queryClient.setQueryData(adminSessionKeys.authFlow, false);
       setStoredAdminPasswordChangeRequired(false);
 
       if (response.user) {
-        queryClient.setQueryData(adminQueryKeys.authSession(), {
+        queryClient.setQueryData(adminSessionKeys.authSession, {
           user: response.user,
         });
       } else {
-        await queryClient.invalidateQueries({ queryKey: adminQueryKeys.authSession() });
+        await queryClient.invalidateQueries({ queryKey: adminSessionKeys.authSession });
       }
 
       router.replace(ROUTES.ADMIN.ROOT);

@@ -18,7 +18,7 @@ import {
   formatAdminDateTime,
 } from 'components/admin';
 import { Button } from 'components/shadcn';
-import { useOrganizationInvitesByOrganization } from 'lib/api/admin/organizations';
+import { useOrganizationInvitesByOrganization } from 'lib/api-client/admin/organizations';
 import { ROUTES } from 'lib/constants';
 import { formatEnumLabel } from 'lib/utils';
 

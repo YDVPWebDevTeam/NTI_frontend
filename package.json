@@ -18,7 +18,11 @@
     "commitlint": "commitlint --edit",
     "madge": "madge --circular --extensions ts,tsx src/",
     "madge:json": "madge --circular --extensions ts,tsx --json src/",
-    "prepare": "husky"
+    "prepare": "husky",
+    "generate:openapi": "node scripts/api-codegen/fetch-openapi.mjs && node scripts/api-codegen/prepare-openapi.mjs",
+    "generate:services": "node scripts/api-codegen/generate-services.mjs",
+    "generate:public-api": "node scripts/api-codegen/generate-public-api.mjs",
+    "api-codegen": "npm run generate:openapi && npm run generate:services && npm run generate:public-api"
   },
   "config": {
     "commitizen": {
@@ -79,6 +83,8 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "madge": "^8.0.0",
+    "openapi-typescript": "^7.13.0",
+    "orval": "^7.16.1",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4",

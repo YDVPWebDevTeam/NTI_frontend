@@ -1,7 +1,7 @@
 import { t } from '@lingui/core/macro';
 
 import { Button, Card, CardContent } from 'components/shadcn';
-import type { StudentProfileCompletionDto } from 'lib/api/student-profile/types';
+import type { StudentProfileCompletionDto } from 'lib/api';
 import type { StudentOnboardingStageId } from 'features/student-profile-flow';
 
 type StudentOnboardingActionsProps = {

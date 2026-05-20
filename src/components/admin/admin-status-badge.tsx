@@ -1,7 +1,7 @@
 'use client';
 
 import { Badge } from 'components/shadcn/badge';
-import type { AdminStatus } from 'lib/api/admin/types';
+import type { AdminStatus } from 'lib/api-client/admin/types';
 import { cn } from 'lib/utils';
 
 import { StatusTone } from './types';

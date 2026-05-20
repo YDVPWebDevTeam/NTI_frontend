@@ -21,14 +21,9 @@ import {
   Form,
   Input,
 } from 'components/shadcn';
-import {
-  useAcceptInvitationMutation,
-  useLoginMutation,
-  useLogoutMutation,
-  useRegisterViaInviteMutation,
-  useValidateInviteQuery,
-} from 'lib/api';
-import { ApiRequestError } from 'lib/api/base-client';
+import { useInvitationControllerAccept, useLogin, useLogout, useRegisterViaInvite } from 'lib/api';
+import { useValidateInviteQuery } from 'lib/api-client/invite';
+import { isApiRequestError } from 'lib/api-client/openapi-runtime/client';
 import {
   NAME_MAX_LENGTH,
   NAME_MIN_LENGTH,
@@ -80,10 +75,10 @@ export default function InvitePage() {
   const loginSchema = useMemo(() => createLoginSchema(), []);
 
   const validateInvite = useValidateInviteQuery(token);
-  const registerViaInvite = useRegisterViaInviteMutation();
-  const login = useLoginMutation();
-  const logout = useLogoutMutation();
-  const acceptInvitation = useAcceptInvitationMutation();
+  const registerViaInvite = useRegisterViaInvite();
+  const login = useLogin();
+  const logout = useLogout();
+  const acceptInvitation = useInvitationControllerAccept();
 
   const registerForm = useForm<RegisterViaInviteValues>({
     resolver: zodResolver(registerSchema),
@@ -125,13 +120,15 @@ export default function InvitePage() {
 
     try {
       await registerViaInvite.mutateAsync({
-        ...values,
-        token,
+        data: {
+          ...values,
+          token,
+        },
       });
 
       routeToProfileOnboarding();
     } catch (error) {
-      if (error instanceof ApiRequestError && error.status === USER_ALREADY_EXISTS_STATUS) {
+      if (isApiRequestError(error) && error.status === USER_ALREADY_EXISTS_STATUS) {
         setRegisterError(
           t`An account with this invited email already exists. Use the existing account path instead.`,
         );
@@ -161,16 +158,15 @@ export default function InvitePage() {
     }
 
     try {
-      await login.mutateAsync(values);
-      await acceptInvitation.mutateAsync({ token });
+      await login.mutateAsync({ data: values });
+      await acceptInvitation.mutateAsync({ data: { token } });
       routeToProfileOnboarding();
     } catch (error) {
-      if (error instanceof ApiRequestError && error.status === FORBIDDEN_STATUS) {
+      if (isApiRequestError(error) && error.status === FORBIDDEN_STATUS) {
         try {
           await logout.mutateAsync();
         } finally {
-          void queryClient.invalidateQueries({ queryKey: ['auth'] });
-          void queryClient.invalidateQueries({ queryKey: ['auth', 'me'] });
+          void queryClient.invalidateQueries({ queryKey: ['/auth/me'] });
         }
       }
 

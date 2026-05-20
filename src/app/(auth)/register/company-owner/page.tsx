@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import { useRegisterCompanyOwnerMutation } from 'lib/api';
+import { useRegisterCompanyOwner } from 'lib/api';
 import { ROUTES } from 'lib/constants';
 
 import { ControlledInputField, ControlledPasswordField } from 'components/forms';
@@ -22,7 +22,7 @@ import {
 export default function RegisterCompanyOwnerPage() {
   const router = useRouter();
 
-  const { mutateAsync: registerCompanyOwner, isPending } = useRegisterCompanyOwnerMutation();
+  const { mutateAsync: registerCompanyOwner, isPending } = useRegisterCompanyOwner();
 
   const form = useForm<CompanyOwnerRegistrationValues>({
     resolver: zodResolver(createCompanyOwnerRegistrationSchema()),
@@ -38,10 +38,12 @@ export default function RegisterCompanyOwnerPage() {
   const handleSubmit = async (values: CompanyOwnerRegistrationValues) => {
     try {
       await registerCompanyOwner({
-        email: values.email,
-        firstName: values.firstName,
-        lastName: values.lastName,
-        password: values.password,
+        data: {
+          email: values.email,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          password: values.password,
+        },
       });
 
       form.reset({

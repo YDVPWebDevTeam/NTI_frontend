@@ -1,5 +1,5 @@
 import { t } from '@lingui/core/macro';
-import { ApiRequestError } from 'lib/api/base-client';
+import { isApiRequestError } from 'lib/api-client/openapi-runtime/client';
 
 const BAD_REQUEST_STATUS = 400;
 const FORBIDDEN_STATUS = 403;
@@ -15,7 +15,7 @@ function includesAny(message: string, fragments: string[]) {
 }
 
 export function getInviteValidationState(error: unknown): InviteScreenState {
-  if (error instanceof ApiRequestError) {
+  if (isApiRequestError(error)) {
     const message = error.message.toLowerCase();
 
     if (error.status === 404) {
@@ -43,7 +43,7 @@ export function getInviteValidationState(error: unknown): InviteScreenState {
 }
 
 export function getInviteActionErrorMessage(error: unknown, fallback: string) {
-  if (!(error instanceof ApiRequestError)) {
+  if (!isApiRequestError(error)) {
     return fallback;
   }
 

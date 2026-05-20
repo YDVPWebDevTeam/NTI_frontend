@@ -4,11 +4,7 @@ import { t } from '@lingui/core/macro';
 import type { UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import {
-  useConfirmEmailMutation,
-  useRegisterStudentMutation,
-  useResendConfirmationEmailMutation,
-} from 'lib/api';
+import { useConfirmEmail, useRegister, useResendConfirmationEmail } from 'lib/api';
 import { useStudentProfileSubmit } from 'features/student-profile-flow';
 import type { StudentRegistrationStepId } from '../_lib/registration-config';
 import type { StudentRegistrationValues } from '../schema';
@@ -23,10 +19,10 @@ type SubmitStepArgs = {
 type StepSubmitHandler = (args: Omit<SubmitStepArgs, 'stepId'>) => void | Promise<void>;
 
 export function useStudentRegistrationActions(form: UseFormReturn<StudentRegistrationValues>) {
-  const { mutateAsync: register, isPending: isRegisterPending } = useRegisterStudentMutation();
+  const { mutateAsync: register, isPending: isRegisterPending } = useRegister();
   const { mutateAsync: resendConfirmationEmail, isPending: isResendConfirmationPending } =
-    useResendConfirmationEmailMutation();
-  const { mutateAsync: confirmEmail, isPending: isConfirmEmailPending } = useConfirmEmailMutation();
+    useResendConfirmationEmail();
+  const { mutateAsync: confirmEmail, isPending: isConfirmEmailPending } = useConfirmEmail();
   const {
     submitAcademic,
     submitProfessional,
@@ -47,10 +43,12 @@ export function useStudentRegistrationActions(form: UseFormReturn<StudentRegistr
     const values = form.getValues();
 
     await register({
-      firstName: values.firstName,
-      lastName: values.lastName,
-      email: values.email,
-      password: values.password,
+      data: {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        email: values.email,
+        password: values.password,
+      },
     });
   };
 
@@ -62,7 +60,7 @@ export function useStudentRegistrationActions(form: UseFormReturn<StudentRegistr
       return;
     }
 
-    await confirmEmail({ token });
+    await confirmEmail({ data: { token } });
   };
 
   const submitStep = async ({
@@ -102,7 +100,7 @@ export function useStudentRegistrationActions(form: UseFormReturn<StudentRegistr
 
   const resendConfirmation = async (email: string) => {
     try {
-      await resendConfirmationEmail(email);
+      await resendConfirmationEmail({ data: { email } });
 
       toast.success(t`Confirmation email sent.`);
 

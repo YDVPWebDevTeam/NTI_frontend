@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import { useConfirmEmailMutation } from 'lib/api';
+import { useConfirmEmail } from 'lib/api';
 import { ROUTES } from 'lib/constants';
 
 import { ControlledInputField } from 'components/forms';
@@ -22,7 +22,7 @@ import {
 export default function ConfirmCompanyOwnerEmailPage() {
   const router = useRouter();
 
-  const { mutateAsync: confirmEmail, isPending } = useConfirmEmailMutation();
+  const { mutateAsync: confirmEmail, isPending } = useConfirmEmail();
 
   const form = useForm<CompanyOwnerEmailConfirmationValues>({
     resolver: zodResolver(createCompanyOwnerEmailConfirmationSchema()),
@@ -33,7 +33,9 @@ export default function ConfirmCompanyOwnerEmailPage() {
   const handleSubmit = async (values: CompanyOwnerEmailConfirmationValues) => {
     try {
       await confirmEmail({
-        token: values.token.trim(),
+        data: {
+          token: values.token.trim(),
+        },
       });
 
       router.push(ROUTES.AUTH.REGISTER_COMPANY_ORGANIZATION);

@@ -3,9 +3,9 @@ import { useEffect, useMemo, useRef } from 'react';
 import type { UseFormSetValue } from 'react-hook-form';
 
 import {
-  useFacultiesByUniversityQuery,
-  useSpecializationsByFacultyQuery,
-  useUniversitiesQuery,
+  useListFacultiesByUniversity,
+  useListSpecializationsByFaculty,
+  useListUniversities,
 } from 'lib/api';
 import type { StudentRegistrationValues } from '../../schema';
 
@@ -25,9 +25,9 @@ export function useAcademicDependentFields({
   const previousUniversityIdRef = useRef<string>('');
   const previousFacultyIdRef = useRef<string>('');
 
-  const universitiesQuery = useUniversitiesQuery({ activeOnly: true });
-  const facultiesQuery = useFacultiesByUniversityQuery(universityId || undefined);
-  const specializationsQuery = useSpecializationsByFacultyQuery(facultyId || undefined);
+  const universitiesQuery = useListUniversities({ activeOnly: true });
+  const facultiesQuery = useListFacultiesByUniversity(universityId || '');
+  const specializationsQuery = useListSpecializationsByFaculty(facultyId || '');
 
   useEffect(() => {
     if (

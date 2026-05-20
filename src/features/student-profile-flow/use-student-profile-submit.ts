@@ -4,19 +4,19 @@ import { t } from '@lingui/core/macro';
 import type { UseFormReturn } from 'react-hook-form';
 
 import {
-  uploadAndCompleteFile,
-  useCompleteUploadMutation,
-  useRequestUploadUrlMutation,
-  useUpdateAcademicInformationMutation,
-  useUpdateProfessionalSkillsMutation,
-  useUploadToPresignedUrlMutation,
+  useFilesControllerCompleteUpload,
+  useFilesControllerRequestUploadUrl,
+  useUpdateMyStudentAcademicInformation,
+  useUpdateMyStudentProfessionalSkills,
+  type FilesControllerCompleteUploadMutationBody,
+  type FilesControllerCompleteUploadMutationResult,
+  type FilesControllerRequestUploadUrlMutationBody,
+  type FilesControllerRequestUploadUrlMutationResult,
 } from 'lib/api';
-import type {
-  CompleteUploadDto,
-  RequestUploadDto,
-  UploadUrlResponse,
-  UploadedFileResponse,
-} from 'lib/api/files/types';
+import {
+  uploadAndCompleteFile,
+  useUploadToPresignedUrl as useUploadToPresignedUrlMutation,
+} from 'lib/api-client/openapi-runtime/file-upload';
 
 import {
   buildAcademicUpdatePayload,
@@ -32,9 +32,13 @@ type StudentUploadTarget = {
 };
 
 type StudentUploadDependencies = {
-  requestUploadUrl: (payload: RequestUploadDto) => Promise<UploadUrlResponse>;
+  requestUploadUrl: (
+    payload: FilesControllerRequestUploadUrlMutationBody,
+  ) => Promise<FilesControllerRequestUploadUrlMutationResult>;
   uploadToPresignedUrl: (payload: { uploadUrl: string; file: File }) => Promise<void>;
-  completeUpload: (payload: CompleteUploadDto) => Promise<UploadedFileResponse>;
+  completeUpload: (
+    payload: FilesControllerCompleteUploadMutationBody,
+  ) => Promise<FilesControllerCompleteUploadMutationResult>;
 };
 
 async function uploadStudentFile(
@@ -78,11 +82,11 @@ async function uploadStudentFile(
 }
 
 export function useStudentProfileSubmit(form: UseFormReturn<StudentRegistrationValues>) {
-  const updateAcademic = useUpdateAcademicInformationMutation();
-  const updateProfessional = useUpdateProfessionalSkillsMutation();
-  const requestUploadUrl = useRequestUploadUrlMutation();
+  const updateAcademic = useUpdateMyStudentAcademicInformation();
+  const updateProfessional = useUpdateMyStudentProfessionalSkills();
+  const requestUploadUrl = useFilesControllerRequestUploadUrl();
   const uploadToPresignedUrl = useUploadToPresignedUrlMutation();
-  const completeUpload = useCompleteUploadMutation();
+  const completeUpload = useFilesControllerCompleteUpload();
 
   const isBusy =
     updateAcademic.isPending ||
@@ -96,9 +100,9 @@ export function useStudentProfileSubmit(form: UseFormReturn<StudentRegistrationV
     const academicEvidenceFileId = await uploadStudentFile(
       form,
       {
-        requestUploadUrl: requestUploadUrl.mutateAsync,
+        requestUploadUrl: (payload) => requestUploadUrl.mutateAsync({ data: payload }),
         uploadToPresignedUrl: uploadToPresignedUrl.mutateAsync,
-        completeUpload: completeUpload.mutateAsync,
+        completeUpload: (payload) => completeUpload.mutateAsync({ data: payload }),
       },
       {
         fileField: 'academicEvidenceFile',
@@ -107,7 +111,9 @@ export function useStudentProfileSubmit(form: UseFormReturn<StudentRegistrationV
       },
     );
 
-    return updateAcademic.mutateAsync(buildAcademicUpdatePayload(values, academicEvidenceFileId));
+    return updateAcademic.mutateAsync({
+      data: buildAcademicUpdatePayload(values, academicEvidenceFileId),
+    });
   };
 
   const submitProfessional = async () => {
@@ -115,9 +121,9 @@ export function useStudentProfileSubmit(form: UseFormReturn<StudentRegistrationV
     const cvFileId = await uploadStudentFile(
       form,
       {
-        requestUploadUrl: requestUploadUrl.mutateAsync,
+        requestUploadUrl: (payload) => requestUploadUrl.mutateAsync({ data: payload }),
         uploadToPresignedUrl: uploadToPresignedUrl.mutateAsync,
-        completeUpload: completeUpload.mutateAsync,
+        completeUpload: (payload) => completeUpload.mutateAsync({ data: payload }),
       },
       {
         fileField: 'cvFile',
@@ -130,7 +136,9 @@ export function useStudentProfileSubmit(form: UseFormReturn<StudentRegistrationV
       throw new Error(t`CV file is required.`);
     }
 
-    return updateProfessional.mutateAsync(buildProfessionalSkillsPayload(values, cvFileId));
+    return updateProfessional.mutateAsync({
+      data: buildProfessionalSkillsPayload(values, cvFileId),
+    });
   };
 
   const buildCompletePayload = () => buildCompleteProfilePayload(form.getValues());

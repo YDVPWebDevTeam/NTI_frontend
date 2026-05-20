@@ -11,13 +11,12 @@ import { toast } from 'sonner';
 import { AdminBrandBlock } from 'components/layout';
 import { ControlledPasswordField } from 'components/forms';
 import { Button, Form } from 'components/shadcn';
-import { adminQueryKeys } from 'lib/api/admin/admin-query-keys';
 import {
-  forceChangePasswordSchema,
-  authService,
+  adminSessionKeys,
+  changeAdminPassword,
   setStoredAdminPasswordChangeRequired,
-  type ForceChangePasswordSchema,
-} from 'lib/api/admin/auth';
+} from 'lib/api-client/admin/auth';
+import { forceChangePasswordSchema, type ForceChangePasswordSchema } from 'lib/admin-auth-schemas';
 import { ROUTES } from 'lib/constants';
 
 export default function AdminForceChangePasswordPage() {
@@ -34,11 +33,11 @@ export default function AdminForceChangePasswordPage() {
 
   const handleSubmit = async (values: ForceChangePasswordSchema) => {
     try {
-      const session = await authService.forceChangePassword(values);
+      const session = await changeAdminPassword(values);
 
-      queryClient.setQueryData(adminQueryKeys.authFlow(), false);
+      queryClient.setQueryData(adminSessionKeys.authFlow, false);
       setStoredAdminPasswordChangeRequired(false);
-      queryClient.setQueryData(adminQueryKeys.authSession(), session);
+      queryClient.setQueryData(adminSessionKeys.authSession, { user: session.user });
       router.replace(ROUTES.ADMIN.ROOT);
     } catch (error) {
       toast.error(error instanceof Error ? error.message : t`Unable to change the password.`);

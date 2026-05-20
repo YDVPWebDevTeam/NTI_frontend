@@ -17,9 +17,9 @@ import {
   useTeamInvitationsQuery,
   type TeamInvitation,
   type TeamInvitationStatus,
-} from 'lib/api';
+} from 'lib/api-client/team-invitations';
 
-import { ApiRequestError } from 'lib/api/base-client';
+import { isApiRequestError } from 'lib/api-client/openapi-runtime/client';
 import { ROUTES } from 'lib/constants';
 import { formatDateTime } from 'lib/date';
 import { useResendCooldown } from 'lib/hooks/use-resend-cooldown';
@@ -379,15 +379,15 @@ export default function TeamInvitesOnboardingPage() {
   if (teamQuery.isError) {
     let description = t`Unable to load the current team.`;
 
-    if (teamQuery.error instanceof ApiRequestError && teamQuery.error.status === 404) {
+    if (isApiRequestError(teamQuery.error) && teamQuery.error.status === 404) {
       description = t`You do not currently have an active team.`;
     } else if (
-      teamQuery.error instanceof ApiRequestError &&
+      isApiRequestError(teamQuery.error) &&
       teamQuery.error.status === MULTIPLE_ACTIVE_TEAMS_STATUS
     ) {
       description = t`Multiple active teams were found for your account, so invite management is blocked until that is fixed.`;
-    } else if (teamQuery.error instanceof Error) {
-      description = teamQuery.error.message;
+    } else if ((teamQuery.error as unknown) instanceof Error) {
+      description = (teamQuery.error as unknown as Error).message;
     }
 
     return (

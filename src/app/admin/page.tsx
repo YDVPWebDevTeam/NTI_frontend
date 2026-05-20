@@ -12,9 +12,9 @@ import {
   AdminStatusBadge,
 } from 'components/admin';
 import { Button, Card, CardContent, CardHeader, CardTitle } from 'components/shadcn';
-import { useOrganizationInvites } from 'lib/api/admin/organizations';
-import { OrganizationStatus, UserAccountStatus } from 'lib/api/admin/types';
-import { useUsers } from 'lib/api/admin/users';
+import { useOrganizationInvites } from 'lib/api-client/admin/organizations';
+import { OrganizationStatus, UserAccountStatus } from 'lib/api-client/admin/types';
+import { useUsers } from 'lib/api-client/admin/users';
 import { ROUTES } from 'lib/constants';
 
 const ATTENTION_PREVIEW_LIMIT = 5;
@@ -108,7 +108,7 @@ export default function AdminOverviewPage() {
                     <div className="min-w-0">
                       <div className="font-medium text-slate-950">{organization.name}</div>
                       <div className="mt-1 text-sm text-slate-600">
-                        {organization.website || t`No website provided`}
+                        {organization.sector || t`No sector provided`}
                       </div>
                     </div>
                     <div className="flex flex-wrap items-center gap-3">

@@ -8,7 +8,7 @@ import {
   AdminFilterOption,
   OrganizationStatus,
   organizationStatusFilters,
-} from 'lib/api/admin/types';
+} from 'lib/api-client/admin/types';
 import {
   AdminFilterBar,
   AdminErrorState,
@@ -24,10 +24,13 @@ import {
   OrganizationRejectionForm,
 } from 'components/admin';
 import { Button } from 'components/shadcn';
-import { useChangeOrganizationStatus, useOrganizationInvites } from 'lib/api/admin/organizations';
+import {
+  useChangeOrganizationStatus,
+  useOrganizationInvites,
+} from 'lib/api-client/admin/organizations';
 import { ROUTES } from 'lib/constants';
 
-import type { OrganizationStatusFilter } from 'lib/api/admin/types';
+import type { OrganizationStatusFilter } from 'lib/api-client/admin/types';
 
 export default function AdminOrganizationsPage() {
   const organizationsQuery = useOrganizationInvites();
@@ -43,7 +46,6 @@ export default function AdminOrganizationsPage() {
       normalizedSearch.length === 0 ||
       organization.name.toLowerCase().includes(normalizedSearch) ||
       organization.id.toLowerCase().includes(normalizedSearch) ||
-      organization.website?.toLowerCase().includes(normalizedSearch) ||
       organization.sector?.toLowerCase().includes(normalizedSearch);
     const matchesStatus =
       statusFilter === AdminFilterOption.ALL || organization.status === statusFilter;
@@ -98,11 +100,6 @@ export default function AdminOrganizationsPage() {
                 <AdminTableCell>
                   <div className="font-medium text-slate-950">{organization.name}</div>
                   <div className="mt-1 font-mono text-xs text-slate-500">{organization.id}</div>
-                  {organization.description ? (
-                    <div className="mt-2 max-w-xl text-sm leading-6 text-slate-600">
-                      {organization.description}
-                    </div>
-                  ) : null}
                   {rejectingId === organization.id ? (
                     <div className="mt-3 max-w-xl">
                       <OrganizationRejectionForm
@@ -131,20 +128,7 @@ export default function AdminOrganizationsPage() {
                 <AdminTableCell>
                   <AdminStatusBadge status={organization.status} />
                 </AdminTableCell>
-                <AdminTableCell>
-                  {organization.website ? (
-                    <a
-                      href={organization.website}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-sky-700 underline-offset-4 hover:underline"
-                    >
-                      {organization.website}
-                    </a>
-                  ) : (
-                    t`Not provided`
-                  )}
-                </AdminTableCell>
+                <AdminTableCell>{t`Not provided`}</AdminTableCell>
                 <AdminTableCell className="space-y-2 text-right">
                   <div className="flex flex-wrap justify-end gap-2">
                     <Button
@@ -154,7 +138,10 @@ export default function AdminOrganizationsPage() {
                       disabled={isPendingRow}
                       onClick={() =>
                         changeStatusMutation
-                          .mutateAsync({ id: organization.id, status: OrganizationStatus.ACTIVE })
+                          .mutateAsync({
+                            id: organization.id,
+                            status: OrganizationStatus.ACTIVE,
+                          })
                           .catch((error) =>
                             handleSessionFailure(error, t`Unable to update the organization.`),
                           )

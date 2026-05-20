@@ -8,7 +8,15 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import { filesService, uploadAndCompleteFile, useCreateOrganizationMutation } from 'lib/api';
+import {
+  filesControllerCompleteUpload,
+  filesControllerRequestUploadUrl,
+  useOrganizationControllerCreate,
+} from 'lib/api';
+import {
+  uploadAndCompleteFile,
+  uploadToPresignedUrl,
+} from 'lib/api-client/openapi-runtime/file-upload';
 import { ROUTES } from 'lib/constants';
 
 import {
@@ -29,7 +37,7 @@ import {
 export default function CreateCompanyOwnerOrganizationPage() {
   const router = useRouter();
 
-  const { mutateAsync: createOrganization, isPending } = useCreateOrganizationMutation();
+  const { mutateAsync: createOrganization, isPending } = useOrganizationControllerCreate();
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -64,10 +72,9 @@ export default function CreateCompanyOwnerOrganizationPage() {
       if (values.logoFile instanceof File) {
         const uploadedLogo = await uploadAndCompleteFile(
           {
-            requestUploadUrl: (payload) => filesService.requestUploadUrl(payload),
-            uploadToPresignedUrl: ({ uploadUrl, file }) =>
-              filesService.uploadToPresignedUrl(uploadUrl, file),
-            completeUpload: (payload) => filesService.completeUpload(payload),
+            requestUploadUrl: (payload) => filesControllerRequestUploadUrl(payload),
+            uploadToPresignedUrl,
+            completeUpload: (payload) => filesControllerCompleteUpload(payload),
           },
           {
             file: values.logoFile,
@@ -80,12 +87,14 @@ export default function CreateCompanyOwnerOrganizationPage() {
       }
 
       await createOrganization({
-        name: values.name,
-        ico: normalizeIco(values.ico),
-        sector: values.sector,
-        description: values.description,
-        website: normalizeWebsite(values.website),
-        logoUrl,
+        data: {
+          name: values.name,
+          ico: normalizeIco(values.ico),
+          sector: values.sector,
+          description: values.description,
+          website: normalizeWebsite(values.website),
+          logoUrl,
+        },
       });
 
       router.push(ROUTES.DASHBOARD);

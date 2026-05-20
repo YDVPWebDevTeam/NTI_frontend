@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from 'components/shadcn';
-import { AdminFilterOption } from 'lib/api/admin/types';
+import { AdminFilterOption } from 'lib/api-client/admin/types';
 import { formatEnumLabel } from 'lib/utils';
 
 type AdminFilterBarProps<TFilter extends string> = {

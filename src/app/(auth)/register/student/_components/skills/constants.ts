@@ -1,6 +1,11 @@
-import type { FocusArea, PreferredRole, SoftSkill, SkillLevel } from 'lib/api';
+import type {
+  UpdateProfessionalSkillsDtoFocusAreasItem,
+  UpdateProfessionalSkillsDtoPreferredRolesItem,
+  ProfessionalSkillInputDtoLevel,
+  UpdateProfessionalSkillsDtoSoftSkillsItem,
+} from 'lib/api';
 
-export const FOCUS_AREA_OPTIONS: FocusArea[] = [
+export const FOCUS_AREA_OPTIONS: UpdateProfessionalSkillsDtoFocusAreasItem[] = [
   'SOFTWARE_DEVELOPMENT',
   'AI_AND_DATA',
   'WEB_APPLICATIONS',
@@ -14,7 +19,7 @@ export const FOCUS_AREA_OPTIONS: FocusArea[] = [
   'PRODUCT_PROJECT_MANAGEMENT',
 ];
 
-export const PREFERRED_ROLE_OPTIONS: PreferredRole[] = [
+export const PREFERRED_ROLE_OPTIONS: UpdateProfessionalSkillsDtoPreferredRolesItem[] = [
   'FRONTEND',
   'BACKEND',
   'FULLSTACK',
@@ -29,9 +34,13 @@ export const PREFERRED_ROLE_OPTIONS: PreferredRole[] = [
   'TEAM_LEAD',
 ];
 
-export const SKILL_LEVEL_OPTIONS: SkillLevel[] = ['BEGINNER', 'INTERMEDIATE', 'ADVANCED'];
+export const SKILL_LEVEL_OPTIONS: ProfessionalSkillInputDtoLevel[] = [
+  'BEGINNER',
+  'INTERMEDIATE',
+  'ADVANCED',
+];
 
-export const SOFT_SKILL_OPTIONS: SoftSkill[] = [
+export const SOFT_SKILL_OPTIONS: UpdateProfessionalSkillsDtoSoftSkillsItem[] = [
   'TEAMWORK',
   'COMMUNICATION',
   'LEADERSHIP',

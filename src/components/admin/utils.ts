@@ -8,7 +8,7 @@ import {
   InviteStatus,
   OrganizationStatus,
   UserAccountStatus,
-} from 'lib/api/admin/types';
+} from 'lib/api-client/admin/types';
 
 import {
   AdminRouteAccessKind,
@@ -119,7 +119,7 @@ const STATUS_TONE_MAP: Partial<Record<AdminStatusValue, StatusTone>> = {
 };
 
 export function getStatusTone(status: AdminStatus): StatusTone {
-  return STATUS_TONE_MAP[status as AdminStatusValue] ?? StatusTone.NEUTRAL;
+  return STATUS_TONE_MAP[status] ?? StatusTone.NEUTRAL;
 }
 
 export function getAdminPageTitle(pathname: string) {

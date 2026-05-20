@@ -3,7 +3,11 @@
 import { t } from '@lingui/core/macro';
 import { useState } from 'react';
 
-import { AdminFilterOption, UserAccountStatus, userStatusFilters } from 'lib/api/admin/types';
+import {
+  AdminFilterOption,
+  UserAccountStatus,
+  userStatusFilters,
+} from 'lib/api-client/admin/types';
 import {
   AdminFilterBar,
   AdminErrorState,
@@ -18,11 +22,11 @@ import {
   AdminTableRow,
 } from 'components/admin';
 import { Button } from 'components/shadcn';
-import { UserRole } from 'lib/api/admin/auth';
-import { useChangeUserStatus, useUsers } from 'lib/api/admin/users';
+import { UserRole } from 'lib/api';
+import { useChangeUserStatus, useUsers } from 'lib/api-client/admin/users';
 import { formatEnumLabel } from 'lib/utils';
 
-import type { UserStatusFilter } from 'lib/api/admin/types';
+import type { UserStatusFilter } from 'lib/api-client/admin/types';
 
 export default function AdminUsersPage() {
   const usersQuery = useUsers();

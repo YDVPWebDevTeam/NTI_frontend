@@ -4,9 +4,13 @@ import { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
 
-import { getStoredAdminPasswordChangeRequired, useAdminSessionQuery } from 'lib/api/admin/auth';
-import { isAdminRole, type AdminRole } from 'lib/api/admin/auth/types';
-import { adminQueryKeys } from 'lib/api/admin/admin-query-keys';
+import {
+  adminSessionKeys,
+  getStoredAdminPasswordChangeRequired,
+  isAdminRole,
+  type AdminRole,
+  useAdminSessionQuery,
+} from 'lib/api-client/admin/auth';
 import { ROUTES } from 'lib/constants';
 
 import { AdminShell, AdminShellSkeleton } from './admin-shell';
@@ -20,7 +24,7 @@ export function AdminRouteGuard({ children }: { children: React.ReactNode }) {
   const queryClient = useQueryClient();
   const sessionQuery = useAdminSessionQuery();
   const requiresPasswordChange = Boolean(
-    queryClient.getQueryData<boolean>(adminQueryKeys.authFlow()) === true ||
+    queryClient.getQueryData<boolean>(adminSessionKeys.authFlow) === true ||
     getStoredAdminPasswordChangeRequired(),
   );
 

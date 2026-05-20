@@ -24,6 +24,7 @@ export default [
       '**/out/**',
       '**/build/**',
       '**/dist/**',
+      'src/lib/api/**',
       'eslint.config.mjs',
       'next.config.ts',
       'postcss.config.mjs',
@@ -50,6 +51,22 @@ export default [
       '@typescript-eslint/no-unsafe-call': 'warn',
       '@typescript-eslint/await-thenable': 'error',
       '@typescript-eslint/no-misused-promises': 'off',
+    },
+  },
+
+  {
+    files: ['scripts/api-codegen/orval.config.cjs', 'src/lib/api-client/openapi-runtime/runtime.js'],
+    languageOptions: {
+      sourceType: 'commonjs',
+      globals: {
+        __dirname: 'readonly',
+        module: 'readonly',
+        require: 'readonly',
+        process: 'readonly',
+      },
+    },
+    rules: {
+      '@typescript-eslint/no-require-imports': 'off',
     },
   },
 

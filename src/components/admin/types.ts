@@ -1,5 +1,4 @@
-import type { AuthSessionResponse } from 'lib/api/admin/auth';
-import type { AdminRole } from 'lib/api/admin/auth/types';
+import type { AdminRole, AuthSessionResponse } from 'lib/api-client/admin/auth';
 
 export type AdminNavItem = {
   href: string;

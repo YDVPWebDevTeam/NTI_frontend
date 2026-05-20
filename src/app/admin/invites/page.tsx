@@ -18,15 +18,18 @@ import {
 } from 'components/admin';
 import { ControlledInputField, ControlledSelectField } from 'components/forms';
 import { Button, Card, CardContent, CardHeader, CardTitle, Form } from 'components/shadcn';
-import { adminQueryKeys } from 'lib/api/admin/admin-query-keys';
-import { isApiRequestError, isAuthErrorStatus } from 'lib/api/base-client';
-import { UserRole } from 'lib/api/admin/auth';
+import { UserRole } from 'lib/api';
+import {
+  clearAdminApiCache,
+  isApiRequestError,
+  isAuthErrorStatus,
+} from 'lib/api-client/admin/auth';
 import {
   createSystemInviteSchema,
   systemInviteRoles,
   useCreateSystemInvite,
   type CreateSystemInviteSchema,
-} from 'lib/api/admin/system-invites';
+} from 'lib/api-client/admin/system-invites';
 import { ROUTES } from 'lib/constants';
 import { formatEnumLabel } from 'lib/utils';
 
@@ -38,7 +41,7 @@ export default function AdminInvitesPage() {
     resolver: zodResolver(createSystemInviteSchema),
     defaultValues: {
       email: '',
-      roleToAssign: UserRole.STUDENT,
+      roleToAssign: UserRole.ADMIN,
     },
     mode: 'onChange',
   });
@@ -51,8 +54,7 @@ export default function AdminInvitesPage() {
       toast.success(t`System invite created.`);
     } catch (error) {
       if (isApiRequestError(error) && isAuthErrorStatus(error.status)) {
-        await queryClient.cancelQueries({ queryKey: adminQueryKeys.all });
-        queryClient.removeQueries({ queryKey: adminQueryKeys.all });
+        clearAdminApiCache(queryClient);
         toast.error(t`Your admin session has expired.`);
         router.replace(ROUTES.ADMIN.LOGIN);
 

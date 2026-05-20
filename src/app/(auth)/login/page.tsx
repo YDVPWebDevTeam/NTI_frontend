@@ -10,7 +10,7 @@ import { toast } from 'sonner';
 
 import { ROUTES } from 'lib/constants';
 import { createLoginSchema, type LoginFormValues } from 'lib/auth/schemas';
-import { useLoginMutation } from 'lib/api';
+import { useLogin } from 'lib/api';
 
 import { ControlledInputField, ControlledPasswordField } from 'components/forms';
 import { AuthSplitShell } from 'components/layout';
@@ -19,7 +19,7 @@ import { Form } from 'components/shadcn';
 
 export default function LoginPage() {
   const router = useRouter();
-  const { isPending: isLoginPending, mutateAsync: login } = useLoginMutation();
+  const { isPending: isLoginPending, mutateAsync: login } = useLogin();
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(createLoginSchema()),
@@ -32,7 +32,7 @@ export default function LoginPage() {
 
   const handleSubmit = async (values: LoginFormValues) => {
     try {
-      await login(values);
+      await login({ data: values });
 
       router.push(ROUTES.DASHBOARD);
     } catch (error) {

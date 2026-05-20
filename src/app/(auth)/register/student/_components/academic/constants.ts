@@ -1,8 +1,19 @@
-import type { DegreeLevel, StudyMode } from 'lib/api';
+import type {
+  UpdateAcademicInformationDtoDegreeLevel,
+  UpdateAcademicInformationDtoStudyMode,
+} from 'lib/api';
 import { getGraduationYearOptions } from 'lib/date';
 
-export const DEGREE_LEVEL_OPTIONS: DegreeLevel[] = ['BACHELOR', 'MASTER', 'PHD', 'OTHER'];
-export const STUDY_MODE_OPTIONS: StudyMode[] = ['FULL_TIME', 'PART_TIME'];
+export const DEGREE_LEVEL_OPTIONS: UpdateAcademicInformationDtoDegreeLevel[] = [
+  'BACHELOR',
+  'MASTER',
+  'PHD',
+  'OTHER',
+];
+export const STUDY_MODE_OPTIONS: UpdateAcademicInformationDtoStudyMode[] = [
+  'FULL_TIME',
+  'PART_TIME',
+];
 
 export const GRADUATION_YEAR_OPTIONS = getGraduationYearOptions();
 

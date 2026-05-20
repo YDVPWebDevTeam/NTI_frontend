@@ -10,10 +10,13 @@ import { toast } from 'sonner';
 
 import { AdminBrandBlock, PageSectionHeader } from 'components/layout';
 import { Button } from 'components/shadcn';
-import { adminQueryKeys } from 'lib/api/admin/admin-query-keys';
-import { authService, setStoredAdminPasswordChangeRequired } from 'lib/api/admin/auth';
+import {
+  clearAdminApiCache,
+  logoutAdmin,
+  setStoredAdminPasswordChangeRequired,
+} from 'lib/api-client/admin/auth';
 import { ROUTES } from 'lib/constants';
-import { isApiRequestError, isAuthErrorStatus } from 'lib/api/base-client';
+import { isApiRequestError, isAuthErrorStatus } from 'lib/api-client/openapi-runtime/client';
 import { cn } from 'lib/utils';
 
 import type { AdminNavItem, AdminSessionUser } from './types';
@@ -48,14 +51,13 @@ export function AdminShell({ children, user }: AdminShellProps) {
 
   const handleLogout = async () => {
     try {
-      await authService.logout();
+      await logoutAdmin();
     } catch (error) {
       if (!isApiRequestError(error) || !isAuthErrorStatus(error.status)) {
         toast.error(error instanceof Error ? error.message : t`Unable to log out right now.`);
       }
     } finally {
-      await queryClient.cancelQueries({ queryKey: adminQueryKeys.all });
-      queryClient.removeQueries({ queryKey: adminQueryKeys.all });
+      clearAdminApiCache(queryClient);
       setStoredAdminPasswordChangeRequired(false);
       router.replace(ROUTES.ADMIN.LOGIN);
     }

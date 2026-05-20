@@ -1,12 +1,16 @@
 import { t } from '@lingui/core/macro';
-import { useMyStudentProfileQuery } from 'lib/api';
+import { useGetMyStudentProfile } from 'lib/api';
 import { Badge } from 'components/shadcn';
 import { Card, CardContent, CardHeader, CardTitle } from 'components/shadcn';
 import { Loader2 } from 'lucide-react';
 import { formatEnumLabel } from 'lib/utils';
 
 export function ReviewStep() {
-  const { data, isLoading, error } = useMyStudentProfileQuery(true);
+  const { data, isLoading, error } = useGetMyStudentProfile({
+    query: {
+      enabled: true,
+    },
+  });
 
   if (isLoading) {
     return (
@@ -99,12 +103,6 @@ export function ReviewStep() {
           <CardTitle className="text-xl text-[#0c1a4f]">{t`Professional Skills`}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4 text-sm text-neutral-600">
-          {profile?.teamName && (
-            <div>
-              <h4 className="mb-1 font-medium text-neutral-900">{t`Team Name`}</h4>
-              <p className="text-xs">{profile.teamName}</p>
-            </div>
-          )}
           {profile?.bio && (
             <div>
               <h4 className="mb-1 font-medium text-neutral-900">{t`Bio`}</h4>

@@ -1,9 +1,15 @@
 import type {
-  CompleteStudentProfileRequest,
-  GetMyStudentProfileResponse,
-  UpdateAcademicInformationRequest,
-  UpdateProfessionalSkillsRequest,
-} from 'lib/api/student-profile/types';
+  CompleteMyStudentProfileMutationBody,
+  GetMyStudentProfileQueryResult,
+  ProfessionalSkillInputDtoLevel,
+  UpdateAcademicInformationDtoDegreeLevel,
+  UpdateAcademicInformationDtoStudyMode,
+  UpdateProfessionalSkillsDtoFocusAreasItem,
+  UpdateProfessionalSkillsDtoPreferredRolesItem,
+  UpdateProfessionalSkillsDtoSoftSkillsItem,
+  UpdateMyStudentAcademicInformationMutationBody,
+  UpdateMyStudentProfessionalSkillsMutationBody,
+} from 'lib/api';
 import { getCurrentYear } from 'lib/date';
 
 import { getStudentProfileDefaultValues } from './default-values';
@@ -20,7 +26,7 @@ function filterNonEmptyStrings(values: string[]) {
 }
 
 export function mapStudentProfileToFormValues(
-  profileData: GetMyStudentProfileResponse,
+  profileData: GetMyStudentProfileQueryResult,
 ): StudentRegistrationValues {
   const defaults = getStudentProfileDefaultValues();
   const { user, profile, skills, projects } = profileData;
@@ -58,7 +64,7 @@ export function mapStudentProfileToFormValues(
     focusAreas: profile.focusAreas ?? [],
     preferredRoles: profile.preferredRoles ?? [],
     softSkills: (profile.softSkills ?? []) as StudentRegistrationValues['softSkills'],
-    teamName: profile.teamName ?? '',
+    teamName: '',
     githubUrl: profile.githubUrl ?? '',
     linkedinUrl: profile.linkedinUrl ?? '',
     portfolioUrl: profile.portfolioUrl ?? '',
@@ -83,13 +89,15 @@ export function mapStudentProfileToFormValues(
 export function buildAcademicUpdatePayload(
   values: StudentRegistrationValues,
   academicEvidenceFileId?: string,
-): UpdateAcademicInformationRequest {
+): UpdateMyStudentAcademicInformationMutationBody {
   return {
     universityId: values.universityId,
     facultyId: values.facultyId,
     specializationId: values.specializationId,
-    degreeLevel: values.degreeLevel,
-    studyMode: toOptionalString(values.studyMode),
+    degreeLevel: values.degreeLevel as UpdateAcademicInformationDtoDegreeLevel,
+    studyMode: toOptionalString(values.studyMode) as
+      | UpdateAcademicInformationDtoStudyMode
+      | undefined,
     studyYear: values.studyYear,
     expectedGraduationYear: values.expectedGraduationYear || undefined,
     hasTransferredSubjects: values.hasTransferredSubjects,
@@ -105,12 +113,14 @@ export function buildAcademicUpdatePayload(
 export function buildProfessionalSkillsPayload(
   values: StudentRegistrationValues,
   cvFileId: string,
-): UpdateProfessionalSkillsRequest {
+): UpdateMyStudentProfessionalSkillsMutationBody {
   return {
     teamName: toOptionalString(values.teamName),
-    focusAreas: values.focusAreas,
-    preferredRoles: values.preferredRoles,
-    softSkills: filterNonEmptyStrings(values.softSkills),
+    focusAreas: values.focusAreas as UpdateProfessionalSkillsDtoFocusAreasItem[],
+    preferredRoles: values.preferredRoles as UpdateProfessionalSkillsDtoPreferredRolesItem[],
+    softSkills: filterNonEmptyStrings(
+      values.softSkills,
+    ) as UpdateProfessionalSkillsDtoSoftSkillsItem[],
     githubUrl: toOptionalString(values.githubUrl),
     linkedinUrl: toOptionalString(values.linkedinUrl),
     portfolioUrl: toOptionalString(values.portfolioUrl),
@@ -119,7 +129,7 @@ export function buildProfessionalSkillsPayload(
     skills: values.skills.map((skill) => ({
       ...skill,
       experienceMonths: skill.experienceMonths ?? undefined,
-      level: skill.level,
+      level: skill.level as ProfessionalSkillInputDtoLevel,
     })),
     projects: values.projects.map((project) => ({
       ...project,
@@ -131,8 +141,8 @@ export function buildProfessionalSkillsPayload(
 
 export function buildCompleteProfilePayload(
   values: StudentRegistrationValues,
-): CompleteStudentProfileRequest {
+): CompleteMyStudentProfileMutationBody {
   return {
-    teamName: toOptionalString(values.teamName),
+    teamName: toOptionalString(values.teamName) ?? '',
   };
 }

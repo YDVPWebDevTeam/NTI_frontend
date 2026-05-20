@@ -5,9 +5,13 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
-import { adminQueryKeys } from 'lib/api/admin/admin-query-keys';
-import { setStoredAdminPasswordChangeRequired } from 'lib/api/admin/auth';
-import { isApiRequestError, isAuthErrorStatus } from 'lib/api/base-client';
+import {
+  adminSessionKeys,
+  clearAdminApiCache,
+  setStoredAdminPasswordChangeRequired,
+  isApiRequestError,
+  isAuthErrorStatus,
+} from 'lib/api-client/admin/auth';
 import { ROUTES } from 'lib/constants';
 
 export function useHandleAdminSessionFailure() {
@@ -16,8 +20,8 @@ export function useHandleAdminSessionFailure() {
 
   return async (error: unknown, fallbackMessage: string) => {
     if (isApiRequestError(error) && isAuthErrorStatus(error.status)) {
-      await queryClient.cancelQueries({ queryKey: adminQueryKeys.all });
-      queryClient.removeQueries({ queryKey: adminQueryKeys.all });
+      await queryClient.cancelQueries({ queryKey: adminSessionKeys.authSession });
+      clearAdminApiCache(queryClient);
       setStoredAdminPasswordChangeRequired(false);
       toast.error(t`Your admin session has expired.`);
       router.replace(ROUTES.ADMIN.LOGIN);

@@ -1,6 +1,6 @@
 import { t } from '@lingui/core/macro';
 
-import type { StudentProfileCompletionDto } from 'lib/api/student-profile/types';
+import type { StudentProfileCompletionDto } from 'lib/api';
 
 import type { StudentRegistrationValues } from './types';
 

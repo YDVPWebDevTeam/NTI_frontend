@@ -67,7 +67,7 @@ import {
   type FacultyFormSchema,
   type SpecializationFormSchema,
   type UniversityFormSchema,
-} from 'lib/api/admin/academic-structure';
+} from 'lib/api-client/admin/academic-structure';
 import { cn } from 'lib/utils';
 
 const UNIVERSITY_FORM_DEFAULTS: UniversityFormSchema = {

@@ -21,8 +21,8 @@ import {
   useStudentProfileSubmit,
 } from 'features/student-profile-flow';
 import { Form } from 'components/shadcn';
-import { useCompleteProfileMutation, useMyStudentProfileQuery } from 'lib/api';
-import { ApiRequestError } from 'lib/api/base-client';
+import { useCompleteMyStudentProfile, useGetMyStudentProfile } from 'lib/api';
+import { isApiRequestError } from 'lib/api-client/openapi-runtime/client';
 import { ROUTES } from 'lib/constants';
 
 import { RegistrationStageHeader } from 'app/(auth)/register/student/_components/registration-stage-header';
@@ -46,8 +46,12 @@ export default function StudentProfileOnboardingPage() {
     mode: 'onChange',
   });
 
-  const profileQuery = useMyStudentProfileQuery(true);
-  const completeProfile = useCompleteProfileMutation();
+  const profileQuery = useGetMyStudentProfile({
+    query: {
+      enabled: true,
+    },
+  });
+  const completeProfile = useCompleteMyStudentProfile();
   const {
     submitAcademic,
     submitProfessional,
@@ -76,7 +80,7 @@ export default function StudentProfileOnboardingPage() {
   }, [form, profileQuery.data, router]);
 
   useEffect(() => {
-    if (!(profileQuery.error instanceof ApiRequestError)) {
+    if (!isApiRequestError(profileQuery.error)) {
       return;
     }
 
@@ -128,7 +132,7 @@ export default function StudentProfileOnboardingPage() {
 
   const handleCompleteProfile = async () => {
     try {
-      await completeProfile.mutateAsync(buildCompletePayload());
+      await completeProfile.mutateAsync({ data: buildCompletePayload() });
       toast.success(t`Profile completed.`);
 
       startTransition(() => {
@@ -144,12 +148,12 @@ export default function StudentProfileOnboardingPage() {
   }
 
   if (profileQuery.isError) {
+    const profileError = profileQuery.error as unknown;
+
     return (
       <StudentOnboardingErrorState
         message={
-          profileQuery.error instanceof Error
-            ? profileQuery.error.message
-            : t`Unable to load your profile.`
+          profileError instanceof Error ? profileError.message : t`Unable to load your profile.`
         }
         onRetry={() => void profileQuery.refetch()}
       />

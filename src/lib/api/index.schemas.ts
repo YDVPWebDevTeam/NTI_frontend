@@ -3082,7 +3082,18 @@ export interface ProgramAMentorshipNoteDto {
   author: MentorshipNoteAuthorDto;
 }
 
-export type ApplicationSectionDtoValueJson = { [key: string]: unknown };
+export type ApplicationSectionKey = typeof ApplicationSectionKey[keyof typeof ApplicationSectionKey];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ApplicationSectionKey = {
+  profile: 'profile',
+} as const;
+
+export interface ApplicationProfileSectionValueDto {
+  /** Human-readable application profile name. */
+  name: string;
+}
 
 /**
  * @nullable
@@ -3092,8 +3103,8 @@ export type ApplicationSectionDtoActiveVersion = { [key: string]: unknown } | nu
 export interface ApplicationSectionDto {
   id: string;
   applicationId: string;
-  key: string;
-  valueJson: ApplicationSectionDtoValueJson;
+  key: ApplicationSectionKey;
+  valueJson: ApplicationProfileSectionValueDto;
   version: number;
   /** @nullable */
   activeVersion?: ApplicationSectionDtoActiveVersion;
@@ -3101,19 +3112,15 @@ export interface ApplicationSectionDto {
   updatedAt: string;
 }
 
-export type UpsertApplicationSectionDtoValueJson = { [key: string]: unknown };
-
 export interface UpsertApplicationSectionDto {
-  valueJson: UpsertApplicationSectionDtoValueJson;
+  valueJson: ApplicationProfileSectionValueDto;
 }
-
-export type ApplicationSectionHistoryDtoValueJson = { [key: string]: unknown };
 
 export interface ApplicationSectionHistoryDto {
   id: string;
   sectionId: string;
   version: number;
-  valueJson: ApplicationSectionHistoryDtoValueJson;
+  valueJson: ApplicationProfileSectionValueDto;
   savedById: string;
   createdAt: string;
 }

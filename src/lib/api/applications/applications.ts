@@ -30,6 +30,7 @@ import type {
   ApplicationEvaluationDto,
   ApplicationSectionDto,
   ApplicationSectionHistoryDto,
+  ApplicationSectionKey,
   ApplicationsControllerListActivePublicCallsParams,
   ApplicationsControllerListPublicCallsParams,
   AssignMentorDto,
@@ -1656,7 +1657,7 @@ export function useApplicationsControllerListSections<TData = Awaited<ReturnType
  */
 export const applicationsControllerUpsertSection = (
     applicationId: string,
-    key: string,
+    key: ApplicationSectionKey,
     upsertApplicationSectionDto: UpsertApplicationSectionDto,
  options?: SecondParameter<typeof orvalMutator>,) => {
       
@@ -1672,8 +1673,8 @@ export const applicationsControllerUpsertSection = (
 
 
 export const getApplicationsControllerUpsertSectionMutationOptions = <TError = void,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof applicationsControllerUpsertSection>>, TError,{applicationId: string;key: string;data: UpsertApplicationSectionDto}, TContext>, request?: SecondParameter<typeof orvalMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof applicationsControllerUpsertSection>>, TError,{applicationId: string;key: string;data: UpsertApplicationSectionDto}, TContext> => {
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof applicationsControllerUpsertSection>>, TError,{applicationId: string;key: ApplicationSectionKey;data: UpsertApplicationSectionDto}, TContext>, request?: SecondParameter<typeof orvalMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof applicationsControllerUpsertSection>>, TError,{applicationId: string;key: ApplicationSectionKey;data: UpsertApplicationSectionDto}, TContext> => {
 
 const mutationKey = ['applicationsControllerUpsertSection'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
@@ -1685,7 +1686,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof applicationsControllerUpsertSection>>, {applicationId: string;key: string;data: UpsertApplicationSectionDto}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof applicationsControllerUpsertSection>>, {applicationId: string;key: ApplicationSectionKey;data: UpsertApplicationSectionDto}> = (props) => {
           const {applicationId,key,data} = props ?? {};
 
           return  applicationsControllerUpsertSection(applicationId,key,data,requestOptions)
@@ -1704,11 +1705,11 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
  * @summary Upsert application section
  */
 export const useApplicationsControllerUpsertSection = <TError = void,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof applicationsControllerUpsertSection>>, TError,{applicationId: string;key: string;data: UpsertApplicationSectionDto}, TContext>, request?: SecondParameter<typeof orvalMutator>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof applicationsControllerUpsertSection>>, TError,{applicationId: string;key: ApplicationSectionKey;data: UpsertApplicationSectionDto}, TContext>, request?: SecondParameter<typeof orvalMutator>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof applicationsControllerUpsertSection>>,
         TError,
-        {applicationId: string;key: string;data: UpsertApplicationSectionDto},
+        {applicationId: string;key: ApplicationSectionKey;data: UpsertApplicationSectionDto},
         TContext
       > => {
 
@@ -1722,7 +1723,7 @@ export const useApplicationsControllerUpsertSection = <TError = void,
  */
 export const applicationsControllerGetSectionHistory = (
     applicationId: string,
-    key: string,
+    key: ApplicationSectionKey,
  options?: SecondParameter<typeof orvalMutator>,signal?: AbortSignal
 ) => {
       
@@ -1737,7 +1738,7 @@ export const applicationsControllerGetSectionHistory = (
 
 
 export const getApplicationsControllerGetSectionHistoryQueryKey = (applicationId?: string,
-    key?: string,) => {
+    key?: ApplicationSectionKey,) => {
     return [
     `/applications/${applicationId}/sections/${key}/history`
     ] as const;
@@ -1745,7 +1746,7 @@ export const getApplicationsControllerGetSectionHistoryQueryKey = (applicationId
 
     
 export const getApplicationsControllerGetSectionHistoryQueryOptions = <TData = Awaited<ReturnType<typeof applicationsControllerGetSectionHistory>>, TError = void>(applicationId: string,
-    key: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerGetSectionHistory>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+    key: ApplicationSectionKey, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerGetSectionHistory>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
@@ -1769,7 +1770,7 @@ export type ApplicationsControllerGetSectionHistoryQueryError = void
 
 export function useApplicationsControllerGetSectionHistory<TData = Awaited<ReturnType<typeof applicationsControllerGetSectionHistory>>, TError = void>(
  applicationId: string,
-    key: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerGetSectionHistory>>, TError, TData>> & Pick<
+    key: ApplicationSectionKey, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerGetSectionHistory>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
           Awaited<ReturnType<typeof applicationsControllerGetSectionHistory>>,
           TError,
@@ -1780,7 +1781,7 @@ export function useApplicationsControllerGetSectionHistory<TData = Awaited<Retur
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useApplicationsControllerGetSectionHistory<TData = Awaited<ReturnType<typeof applicationsControllerGetSectionHistory>>, TError = void>(
  applicationId: string,
-    key: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerGetSectionHistory>>, TError, TData>> & Pick<
+    key: ApplicationSectionKey, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerGetSectionHistory>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
           Awaited<ReturnType<typeof applicationsControllerGetSectionHistory>>,
           TError,
@@ -1791,7 +1792,7 @@ export function useApplicationsControllerGetSectionHistory<TData = Awaited<Retur
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 export function useApplicationsControllerGetSectionHistory<TData = Awaited<ReturnType<typeof applicationsControllerGetSectionHistory>>, TError = void>(
  applicationId: string,
-    key: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerGetSectionHistory>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+    key: ApplicationSectionKey, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerGetSectionHistory>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 /**
@@ -1800,7 +1801,7 @@ export function useApplicationsControllerGetSectionHistory<TData = Awaited<Retur
 
 export function useApplicationsControllerGetSectionHistory<TData = Awaited<ReturnType<typeof applicationsControllerGetSectionHistory>>, TError = void>(
  applicationId: string,
-    key: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerGetSectionHistory>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+    key: ApplicationSectionKey, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerGetSectionHistory>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
  , queryClient?: QueryClient 
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
@@ -1822,7 +1823,7 @@ export function useApplicationsControllerGetSectionHistory<TData = Awaited<Retur
  */
 export const applicationsControllerSetActiveVersion = (
     applicationId: string,
-    key: string,
+    key: ApplicationSectionKey,
     setActiveSectionVersionDto: SetActiveSectionVersionDto,
  options?: SecondParameter<typeof orvalMutator>,) => {
       
@@ -1838,8 +1839,8 @@ export const applicationsControllerSetActiveVersion = (
 
 
 export const getApplicationsControllerSetActiveVersionMutationOptions = <TError = void,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof applicationsControllerSetActiveVersion>>, TError,{applicationId: string;key: string;data: SetActiveSectionVersionDto}, TContext>, request?: SecondParameter<typeof orvalMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof applicationsControllerSetActiveVersion>>, TError,{applicationId: string;key: string;data: SetActiveSectionVersionDto}, TContext> => {
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof applicationsControllerSetActiveVersion>>, TError,{applicationId: string;key: ApplicationSectionKey;data: SetActiveSectionVersionDto}, TContext>, request?: SecondParameter<typeof orvalMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof applicationsControllerSetActiveVersion>>, TError,{applicationId: string;key: ApplicationSectionKey;data: SetActiveSectionVersionDto}, TContext> => {
 
 const mutationKey = ['applicationsControllerSetActiveVersion'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
@@ -1851,7 +1852,7 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof applicationsControllerSetActiveVersion>>, {applicationId: string;key: string;data: SetActiveSectionVersionDto}> = (props) => {
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof applicationsControllerSetActiveVersion>>, {applicationId: string;key: ApplicationSectionKey;data: SetActiveSectionVersionDto}> = (props) => {
           const {applicationId,key,data} = props ?? {};
 
           return  applicationsControllerSetActiveVersion(applicationId,key,data,requestOptions)
@@ -1870,11 +1871,11 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
  * @summary Set active section version
  */
 export const useApplicationsControllerSetActiveVersion = <TError = void,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof applicationsControllerSetActiveVersion>>, TError,{applicationId: string;key: string;data: SetActiveSectionVersionDto}, TContext>, request?: SecondParameter<typeof orvalMutator>}
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof applicationsControllerSetActiveVersion>>, TError,{applicationId: string;key: ApplicationSectionKey;data: SetActiveSectionVersionDto}, TContext>, request?: SecondParameter<typeof orvalMutator>}
  , queryClient?: QueryClient): UseMutationResult<
         Awaited<ReturnType<typeof applicationsControllerSetActiveVersion>>,
         TError,
-        {applicationId: string;key: string;data: SetActiveSectionVersionDto},
+        {applicationId: string;key: ApplicationSectionKey;data: SetActiveSectionVersionDto},
         TContext
       > => {
 

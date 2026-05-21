@@ -21,9 +21,9 @@ import {
   useStudentProfileSubmit,
 } from 'features/student-profile-flow';
 import { Form } from 'components/shadcn';
-import { useGetMyStudentProfile } from 'lib/api';
-import { isApiRequestError } from 'lib/api-client/openapi-runtime/client';
+import { UserRole, useGetMyStudentProfile } from 'lib/api';
 import { ROUTES } from 'lib/constants';
+import { useAuthenticatedUser } from 'lib/student-dashboard/use-authenticated-user';
 
 import { RegistrationStageHeader } from 'app/(auth)/register/student/_components/registration-stage-header';
 import { StudentOnboardingActions } from './_components/student-onboarding-actions';
@@ -39,6 +39,7 @@ export default function StudentProfileOnboardingPage() {
   const pathname = usePathname();
   const { i18n } = useLingui();
   const [selectedStage, setSelectedStage] = useState<StudentOnboardingStageId | null>(null);
+  const { isLoading: isAuthLoading } = useAuthenticatedUser([UserRole.STUDENT]);
 
   const schema = useMemo(() => createStudentRegistrationSchema(), [i18n.locale]);
   const form = useForm<StudentRegistrationValues>({
@@ -49,7 +50,7 @@ export default function StudentProfileOnboardingPage() {
 
   const profileQuery = useGetMyStudentProfile({
     query: {
-      enabled: true,
+      enabled: !isAuthLoading,
     },
   });
   const {
@@ -73,16 +74,6 @@ export default function StudentProfileOnboardingPage() {
 
     form.reset(mapStudentProfileToFormValues(profileQuery.data));
   }, [form, profileQuery.data]);
-
-  useEffect(() => {
-    if (!isApiRequestError(profileQuery.error)) {
-      return;
-    }
-
-    if (profileQuery.error.status === 401) {
-      router.replace(ROUTES.AUTH.LOGIN);
-    }
-  }, [profileQuery.error, router]);
 
   const isBusy = isProfileSubmitBusy;
 
@@ -125,7 +116,7 @@ export default function StudentProfileOnboardingPage() {
     }
   };
 
-  if (profileQuery.isLoading) {
+  if (isAuthLoading || profileQuery.isLoading) {
     return <StudentOnboardingLoadingState />;
   }
 

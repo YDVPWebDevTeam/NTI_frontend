@@ -117,7 +117,7 @@ export function StudentWorkspaceLayout({ children }: StudentWorkspaceLayoutProps
   const router = useRouter();
   const queryClient = useQueryClient();
   const logout = useLogout();
-  const { me } = useAuthenticatedUser();
+  const { me, isLoading } = useAuthenticatedUser();
   const studentProfileQuery = useGetMyStudentProfile({
     query: {
       enabled: isStudentRole(me?.role),
@@ -149,6 +149,59 @@ export function StudentWorkspaceLayout({ children }: StudentWorkspaceLayoutProps
       toast.error(error instanceof Error ? error.message : t`Unable to log out right now.`);
     }
   };
+
+  if (isLoading || !me) {
+    return (
+      <main className="mx-auto flex min-h-screen w-full max-w-4xl items-center px-4">
+        <StudentStatusCard
+          title={t`Loading workspace`}
+          description={t`Resolving your authenticated workspace.`}
+        />
+      </main>
+    );
+  }
+
+  if (!isStudentRole(me.role)) {
+    return (
+      <main className="min-h-screen bg-[linear-gradient(180deg,#f8faff_0%,#f2f6ff_45%,#f8fbff_100%)]">
+        <header className="sticky top-0 z-40 border-b border-[#dfe7fa] bg-white/92 backdrop-blur-xl">
+          <div className="flex w-full items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+            <Link
+              href={ROUTES.ROOT}
+              className="flex items-center gap-3 rounded-2xl transition hover:opacity-85"
+              aria-label="Go to site home"
+            >
+              <NtiBrand size="sm" />
+              <div className="min-w-0 text-left">
+                <p className="truncate text-sm font-semibold tracking-[0.12em] text-[#101a2e] uppercase">
+                  {displayName}
+                </p>
+                <p className="truncate text-xs text-[#60718d]">{roleLabel}</p>
+              </div>
+            </Link>
+
+            <div className="flex items-center gap-3">
+              <LanguageSwitcher
+                className="border border-[#d8e4fb] bg-[#f8fbff] shadow-none"
+                triggerClassName="bg-transparent text-[#10213d] hover:bg-[#eef4ff]"
+              />
+              <Button
+                variant="outline"
+                className="rounded-2xl border-[#d8e4fb] bg-white/90 text-[#122039] hover:bg-[#f5f8ff]"
+                disabled={logout.isPending}
+                onClick={() => void handleLogout()}
+              >
+                <LogOut className="h-4 w-4" />
+                {t`Log out`}
+              </Button>
+            </div>
+          </div>
+        </header>
+
+        <div className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 lg:px-8">{children}</div>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-[linear-gradient(180deg,#f8faff_0%,#f2f6ff_45%,#f8fbff_100%)]">

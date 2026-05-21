@@ -1,10 +1,10 @@
 'use client';
 
-import { use } from 'react';
-import { useState } from 'react';
+import { use, useState } from 'react';
 import { toast } from 'sonner';
 
 import {
+  type ApplicationProfileSectionValueDto,
   type ApplicationSectionDto,
   type AttachApplicationDocumentDtoDocumentType,
   UserRole,
@@ -34,16 +34,13 @@ import {
   uploadAndCompleteFile,
   useUploadToPresignedUrl,
 } from 'lib/api-client/openapi-runtime/file-upload';
+import { isApiRequestError } from 'lib/api-client/openapi-runtime/client';
 import {
   formatUnknownDate,
   isApiNotFoundError,
   normalizeUnknownText,
 } from 'lib/student-dashboard/normalizers';
 import { useAuthenticatedUser } from 'lib/student-dashboard/use-authenticated-user';
-
-type SectionFormModel = {
-  rawJson: string;
-};
 
 type NeedsInfoReplyPayload = {
   message: string;
@@ -53,7 +50,32 @@ type ResubmitPayload = {
   note?: string;
 };
 
-const JSON_INDENT_SPACES = 2;
+const FORBIDDEN_STATUS = 403;
+
+function getErrorMessage(error: unknown, fallbackMessage: string) {
+  if (error instanceof Error && error.message) {
+    return error.message;
+  }
+
+  return fallbackMessage;
+}
+
+function RetryNotice({
+  message,
+  onRetry,
+}: {
+  message: string;
+  onRetry: () => void | Promise<unknown>;
+}) {
+  return (
+    <div className="space-y-3 rounded-2xl border border-black/10 bg-[#f7f8fa] p-4 text-sm text-neutral-700">
+      <p>{message}</p>
+      <Button size="sm" variant="outline" onClick={() => void onRetry()}>
+        Retry
+      </Button>
+    </div>
+  );
+}
 
 function ApplicationSectionEditor({
   applicationId,
@@ -64,9 +86,9 @@ function ApplicationSectionEditor({
   section: ApplicationSectionDto;
   canEdit: boolean;
 }) {
-  const [formState, setFormState] = useState<SectionFormModel>({
-    rawJson: JSON.stringify(section.valueJson, null, JSON_INDENT_SPACES),
-  });
+  const [profileSection, setProfileSection] = useState<ApplicationProfileSectionValueDto>(
+    section.valueJson,
+  );
   const saveSection = useApplicationsControllerUpsertSection();
   const historyQuery = useApplicationsControllerGetSectionHistory(applicationId, section.key, {
     query: {
@@ -80,13 +102,21 @@ function ApplicationSectionEditor({
         <p className="font-semibold text-neutral-950">{section.key}</p>
         <p className="text-xs text-neutral-500">version {section.version}</p>
       </div>
-      <Textarea
-        className="mt-3 font-mono text-xs"
-        rows={10}
-        value={formState.rawJson}
-        disabled={!canEdit}
-        onChange={(event) => setFormState({ rawJson: event.target.value })}
-      />
+      <label className="mt-3 block space-y-2">
+        <span className="text-xs font-medium tracking-[0.12em] text-neutral-500 uppercase">
+          Name
+        </span>
+        <Input
+          value={profileSection.name}
+          disabled={!canEdit}
+          onChange={(event) =>
+            setProfileSection((currentValue) => ({
+              ...currentValue,
+              name: event.target.value,
+            }))
+          }
+        />
+      </label>
       <div className="mt-3 flex items-center justify-between gap-3">
         <p className="text-xs text-neutral-500">
           {historyQuery.data?.length ?? 0} historical version(s)
@@ -99,7 +129,7 @@ function ApplicationSectionEditor({
               await saveSection.mutateAsync({
                 applicationId,
                 key: section.key,
-                data: { valueJson: JSON.parse(formState.rawJson) as Record<string, unknown> },
+                data: { valueJson: profileSection },
               });
               await historyQuery.refetch();
               toast.success(`Saved ${section.key}.`);
@@ -136,6 +166,7 @@ export default function ApplicationDetailPage({ params }: { params: Promise<{ id
       retry: false,
     },
   });
+  const hasTeamLoadError = teamQuery.isError && !isApiNotFoundError(teamQuery.error);
   const team = isApiNotFoundError(teamQuery.error) ? null : (teamQuery.data ?? null);
   const isLead = Boolean(
     me &&
@@ -181,7 +212,7 @@ export default function ApplicationDetailPage({ params }: { params: Promise<{ id
   const replyToNeedsInfo = useApplicationsControllerReplyToNeedsInfoItem();
   const resubmitApplication = useApplicationsControllerResubmit();
 
-  if (isLoading) {
+  if (isLoading || applicationQuery.isLoading) {
     return (
       <main className="mx-auto flex min-h-screen w-full max-w-4xl items-center px-4">
         <StudentStatusCard
@@ -189,6 +220,42 @@ export default function ApplicationDetailPage({ params }: { params: Promise<{ id
           description="Resolving your student session and Program A application detail."
         />
       </main>
+    );
+  }
+
+  if (applicationQuery.isError) {
+    const applicationError = applicationQuery.error;
+    const notFound = isApiNotFoundError(applicationError);
+    const isForbidden =
+      isApiRequestError(applicationError) && applicationError.status === FORBIDDEN_STATUS;
+    let errorTitle = 'Unable to load application';
+    let errorDescription = getErrorMessage(
+      applicationError,
+      'The application detail request failed. Retry the request and confirm that the application is still available.',
+    );
+
+    if (notFound) {
+      errorTitle = 'Application not found';
+      errorDescription = 'This application does not exist or is no longer available.';
+    } else if (isForbidden) {
+      errorTitle = 'Access denied';
+      errorDescription = 'Your account cannot access this application.';
+    }
+
+    return (
+      <StudentPageShell
+        title="Program A application"
+        description="Application detail needs a valid accessible application before the rest of the workflow can render."
+      >
+        <StudentStatusCard title={errorTitle} description={errorDescription} />
+        {notFound || isForbidden ? null : (
+          <div className="flex justify-center">
+            <Button variant="outline" onClick={() => void applicationQuery.refetch()}>
+              Retry
+            </Button>
+          </div>
+        )}
+      </StudentPageShell>
     );
   }
 
@@ -232,6 +299,15 @@ export default function ApplicationDetailPage({ params }: { params: Promise<{ id
               Lead-only actions stay disabled unless the current team lead matches the application
               team.
             </p>
+            {hasTeamLoadError ? (
+              <RetryNotice
+                message={getErrorMessage(
+                  teamQuery.error,
+                  'The current team context could not be loaded, so lead-only actions remain unavailable until this is retried.',
+                )}
+                onRetry={() => teamQuery.refetch()}
+              />
+            ) : null}
             <div className="flex flex-wrap gap-2">
               <Button
                 size="sm"
@@ -290,57 +366,98 @@ export default function ApplicationDetailPage({ params }: { params: Promise<{ id
 
       <div className="grid gap-6 lg:grid-cols-2">
         <StudentSectionCard title="Document completeness">
-          <div className="space-y-3 text-sm text-neutral-700">
-            <p>
-              Complete:{' '}
-              <span className="font-medium text-neutral-950">
-                {completenessQuery.data?.isComplete ? 'Yes' : 'No'}
-              </span>
-            </p>
-            <p>Required by call: {(requiredDocumentsQuery.data?.requiredDocuments ?? []).length}</p>
-            <div>
-              <p className="font-medium text-neutral-950">Missing</p>
-              <ul className="mt-2 space-y-1 text-sm text-neutral-600">
-                {(completenessQuery.data?.missingDocuments ?? []).map((item, index) => (
-                  <li key={`${item.documentType}-${index}`}>
-                    {item.documentType} · {item.documentScope}
-                  </li>
-                ))}
-              </ul>
+          {completenessQuery.isError ? (
+            <RetryNotice
+              message={getErrorMessage(
+                completenessQuery.error,
+                'Document completeness could not be loaded for this application.',
+              )}
+              onRetry={() => completenessQuery.refetch()}
+            />
+          ) : (
+            <div className="space-y-3 text-sm text-neutral-700">
+              {requiredDocumentsQuery.isError ? (
+                <RetryNotice
+                  message={getErrorMessage(
+                    requiredDocumentsQuery.error,
+                    'The required documents for this call could not be loaded.',
+                  )}
+                  onRetry={() => requiredDocumentsQuery.refetch()}
+                />
+              ) : null}
+              <p>
+                Complete:{' '}
+                <span className="font-medium text-neutral-950">
+                  {completenessQuery.data?.isComplete ? 'Yes' : 'No'}
+                </span>
+              </p>
+              <p>
+                Required by call: {(requiredDocumentsQuery.data?.requiredDocuments ?? []).length}
+              </p>
+              <div>
+                <p className="font-medium text-neutral-950">Missing</p>
+                <ul className="mt-2 space-y-1 text-sm text-neutral-600">
+                  {(completenessQuery.data?.missingDocuments ?? []).map((item, index) => (
+                    <li key={`${item.documentType}-${index}`}>
+                      {item.documentType} · {item.documentScope}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>
+          )}
         </StudentSectionCard>
 
         <StudentSectionCard title="Eligibility signals">
-          <div className="space-y-3">
-            {(eligibilityQuery.data?.signals ?? []).map((signal) => (
-              <div
-                key={signal.code}
-                className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4"
-              >
-                <p className="font-semibold text-neutral-950">
-                  {signal.code} · {signal.passed ? 'Passed' : 'Failed'}
-                </p>
-                <p className="mt-1 text-sm text-neutral-600">
-                  {normalizeUnknownText(signal.reason) ?? 'No reason provided.'}
-                </p>
-              </div>
-            ))}
-          </div>
+          {eligibilityQuery.isError ? (
+            <RetryNotice
+              message={getErrorMessage(
+                eligibilityQuery.error,
+                'Eligibility signals could not be loaded for this application.',
+              )}
+              onRetry={() => eligibilityQuery.refetch()}
+            />
+          ) : (
+            <div className="space-y-3">
+              {(eligibilityQuery.data?.signals ?? []).map((signal) => (
+                <div
+                  key={signal.code}
+                  className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4"
+                >
+                  <p className="font-semibold text-neutral-950">
+                    {signal.code} · {signal.passed ? 'Passed' : 'Failed'}
+                  </p>
+                  <p className="mt-1 text-sm text-neutral-600">
+                    {normalizeUnknownText(signal.reason) ?? 'No reason provided.'}
+                  </p>
+                </div>
+              ))}
+            </div>
+          )}
         </StudentSectionCard>
       </div>
 
       <StudentSectionCard title="Sections">
-        <div className="space-y-4">
-          {(sectionsQuery.data ?? []).map((section) => (
-            <ApplicationSectionEditor
-              key={section.id}
-              applicationId={id}
-              section={section}
-              canEdit={isLead}
-            />
-          ))}
-        </div>
+        {sectionsQuery.isError ? (
+          <RetryNotice
+            message={getErrorMessage(
+              sectionsQuery.error,
+              'Application sections could not be loaded.',
+            )}
+            onRetry={() => sectionsQuery.refetch()}
+          />
+        ) : (
+          <div className="space-y-4">
+            {(sectionsQuery.data ?? []).map((section) => (
+              <ApplicationSectionEditor
+                key={`${section.id}-${section.version}`}
+                applicationId={id}
+                section={section}
+                canEdit={isLead}
+              />
+            ))}
+          </div>
+        )}
       </StudentSectionCard>
 
       <StudentSectionCard
@@ -425,65 +542,78 @@ export default function ApplicationDetailPage({ params }: { params: Promise<{ id
       </StudentSectionCard>
 
       <StudentSectionCard title="Needs-info thread">
-        <div className="space-y-4">
-          {(needsInfoQuery.data?.items ?? []).map((item) => (
-            <div key={item.id} className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4">
-              <p className="font-semibold text-neutral-950">{item.status}</p>
-              <p className="mt-1 text-sm text-neutral-700">{item.message}</p>
-              <div className="mt-3 space-y-2">
-                {item.replies.map((reply) => (
-                  <div key={reply.id} className="rounded-xl bg-white p-3 text-sm text-neutral-700">
-                    {reply.message}
-                  </div>
-                ))}
-              </div>
-              <Textarea
-                className="mt-3"
-                rows={3}
-                value={needsInfoReplyText[item.id] ?? ''}
-                onChange={(event) =>
-                  setNeedsInfoReplyText((current) => ({
-                    ...current,
-                    [item.id]: event.target.value,
-                  }))
-                }
-                placeholder="Reply to this needs-info item"
-              />
-              <div className="mt-3">
-                <Button
-                  size="sm"
-                  disabled={
-                    !isLead || !needsInfoReplyText[item.id]?.trim() || replyToNeedsInfo.isPending
+        {needsInfoQuery.isError ? (
+          <RetryNotice
+            message={getErrorMessage(
+              needsInfoQuery.error,
+              'The needs-info thread could not be loaded.',
+            )}
+            onRetry={() => needsInfoQuery.refetch()}
+          />
+        ) : (
+          <div className="space-y-4">
+            {(needsInfoQuery.data?.items ?? []).map((item) => (
+              <div key={item.id} className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4">
+                <p className="font-semibold text-neutral-950">{item.status}</p>
+                <p className="mt-1 text-sm text-neutral-700">{item.message}</p>
+                <div className="mt-3 space-y-2">
+                  {item.replies.map((reply) => (
+                    <div
+                      key={reply.id}
+                      className="rounded-xl bg-white p-3 text-sm text-neutral-700"
+                    >
+                      {reply.message}
+                    </div>
+                  ))}
+                </div>
+                <Textarea
+                  className="mt-3"
+                  rows={3}
+                  value={needsInfoReplyText[item.id] ?? ''}
+                  onChange={(event) =>
+                    setNeedsInfoReplyText((current) => ({
+                      ...current,
+                      [item.id]: event.target.value,
+                    }))
                   }
-                  onClick={async () => {
-                    const payload: NeedsInfoReplyPayload = {
-                      message: needsInfoReplyText[item.id].trim(),
-                    };
-
-                    try {
-                      await replyToNeedsInfo.mutateAsync({
-                        id,
-                        itemId: item.id,
-                        data: payload as Record<string, unknown>,
-                      });
-                      setNeedsInfoReplyText((current) => ({ ...current, [item.id]: '' }));
-                      await needsInfoQuery.refetch();
-                      toast.success('Needs-info reply posted.');
-                    } catch (error) {
-                      toast.error(
-                        error instanceof Error
-                          ? error.message
-                          : 'Unable to reply to the needs-info item.',
-                      );
+                  placeholder="Reply to this needs-info item"
+                />
+                <div className="mt-3">
+                  <Button
+                    size="sm"
+                    disabled={
+                      !isLead || !needsInfoReplyText[item.id]?.trim() || replyToNeedsInfo.isPending
                     }
-                  }}
-                >
-                  Send reply
-                </Button>
+                    onClick={async () => {
+                      const payload: NeedsInfoReplyPayload = {
+                        message: needsInfoReplyText[item.id].trim(),
+                      };
+
+                      try {
+                        await replyToNeedsInfo.mutateAsync({
+                          id,
+                          itemId: item.id,
+                          data: payload as Record<string, unknown>,
+                        });
+                        setNeedsInfoReplyText((current) => ({ ...current, [item.id]: '' }));
+                        await needsInfoQuery.refetch();
+                        toast.success('Needs-info reply posted.');
+                      } catch (error) {
+                        toast.error(
+                          error instanceof Error
+                            ? error.message
+                            : 'Unable to reply to the needs-info item.',
+                        );
+                      }
+                    }}
+                  >
+                    Send reply
+                  </Button>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </StudentSectionCard>
     </StudentPageShell>
   );

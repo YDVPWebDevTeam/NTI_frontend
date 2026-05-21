@@ -18,11 +18,7 @@ import {
   useUploadToPresignedUrl as useUploadToPresignedUrlMutation,
 } from 'lib/api-client/openapi-runtime/file-upload';
 
-import {
-  buildAcademicUpdatePayload,
-  buildCompleteProfilePayload,
-  buildProfessionalSkillsPayload,
-} from './mappers';
+import { buildAcademicUpdatePayload, buildProfessionalSkillsPayload } from './mappers';
 import type { StudentRegistrationValues } from './types';
 
 type StudentUploadTarget = {
@@ -141,12 +137,9 @@ export function useStudentProfileSubmit(form: UseFormReturn<StudentRegistrationV
     });
   };
 
-  const buildCompletePayload = () => buildCompleteProfilePayload(form.getValues());
-
   return {
     submitAcademic,
     submitProfessional,
-    buildCompletePayload,
     isBusy,
     isAcademicPending: updateAcademic.isPending,
     isProfessionalPending: updateProfessional.isPending,

@@ -5,7 +5,7 @@ import type { StudentProfileCompletionDto } from 'lib/api';
 import type { StudentRegistrationValues } from './types';
 
 export type StudentRegistrationStepId = 'identity' | 'email' | 'academic' | 'skills' | 'review';
-export type StudentOnboardingStageId = 'academic' | 'skills' | 'complete';
+export type StudentOnboardingStageId = 'academic' | 'skills';
 
 export const STUDENT_PROFILE_FIELD_GROUPS = {
   identity: ['firstName', 'lastName', 'email', 'password', 'acceptTerms'],
@@ -30,7 +30,6 @@ export const STUDENT_PROFILE_FIELD_GROUPS = {
     'focusAreas',
     'preferredRoles',
     'softSkills',
-    'teamName',
     'githubUrl',
     'linkedinUrl',
     'portfolioUrl',
@@ -105,25 +104,17 @@ export function getStudentRegistrationSteps(): RegistrationStepConfig[] {
 }
 
 export function getStudentOnboardingStageMeta(stageId: StudentOnboardingStageId) {
-  switch (stageId) {
-    case 'academic':
-      return {
-        title: t`Academic Information`,
-        description: t`Save your academic section first so professional data can be attached to a valid student profile.`,
-      };
-
-    case 'skills':
-      return {
-        title: t`Professional Skills`,
-        description: t`Add your CV, skills, and supporting professional details.`,
-      };
-
-    default:
-      return {
-        title: t`Completion`,
-        description: t`Review the completion state and finalize the profile when both sections are complete.`,
-      };
+  if (stageId === 'academic') {
+    return {
+      title: t`Academic Information`,
+      description: t`Save your academic section first so professional data can be attached to a valid student profile.`,
+    };
   }
+
+  return {
+    title: t`Professional Skills`,
+    description: t`Add your CV, skills, and supporting professional details.`,
+  };
 }
 
 export function getStudentOnboardingStages(
@@ -142,12 +133,6 @@ export function getStudentOnboardingStages(
       description: t`CV, technical skills, roles, links, and projects.`,
       completed: completion.professionalSkillsCompleted,
     },
-    {
-      id: 'complete',
-      title: t`Complete profile`,
-      description: t`Final review and completion once both sections are ready.`,
-      completed: completion.profileCompleted,
-    },
   ];
 }
 
@@ -162,5 +147,5 @@ export function getNextStudentOnboardingStage(
     return 'skills';
   }
 
-  return 'complete';
+  return 'skills';
 }

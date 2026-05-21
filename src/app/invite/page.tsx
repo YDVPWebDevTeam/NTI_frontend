@@ -2,6 +2,7 @@
 
 import { t } from '@lingui/core/macro';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQuery } from '@tanstack/react-query';
 import { useQueryClient } from '@tanstack/react-query';
 import { ArrowRight, Loader2, Lock, Mail, UserPlus } from 'lucide-react';
 import Link from 'next/link';
@@ -21,8 +22,13 @@ import {
   Form,
   Input,
 } from 'components/shadcn';
-import { useInvitationControllerAccept, useLogin, useLogout, useRegisterViaInvite } from 'lib/api';
-import { useValidateInviteQuery } from 'lib/api-client/invite';
+import {
+  invitesControllerValidateToken,
+  useInvitationControllerAccept,
+  useLogin,
+  useLogout,
+  useRegisterViaInvite,
+} from 'lib/api';
 import { isApiRequestError } from 'lib/api-client/openapi-runtime/client';
 import {
   NAME_MAX_LENGTH,
@@ -74,7 +80,12 @@ export default function InvitePage() {
   const registerSchema = useMemo(() => createRegisterViaInviteSchema(), []);
   const loginSchema = useMemo(() => createLoginSchema(), []);
 
-  const validateInvite = useValidateInviteQuery(token);
+  const validateInvite = useQuery({
+    queryKey: ['invites/validate', token],
+    queryFn: () => invitesControllerValidateToken({ token }),
+    enabled: token.length > 0,
+    retry: false,
+  });
   const registerViaInvite = useRegisterViaInvite();
   const login = useLogin();
   const logout = useLogout();

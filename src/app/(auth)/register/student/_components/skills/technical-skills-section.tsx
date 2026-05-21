@@ -17,6 +17,24 @@ type TechnicalSkillsSectionProps = {
   control: Control<StudentRegistrationValues>;
 };
 
+type SkillsFieldArrayMessageProps = {
+  control: Control<StudentRegistrationValues>;
+};
+
+function SkillsFieldArrayMessage({ control }: SkillsFieldArrayMessageProps) {
+  return (
+    <FormField
+      control={control}
+      name="skills"
+      render={() => (
+        <FormItem>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  );
+}
+
 export function TechnicalSkillsSection({ control }: TechnicalSkillsSectionProps) {
   const {
     fields: skillsFields,
@@ -164,15 +182,7 @@ export function TechnicalSkillsSection({ control }: TechnicalSkillsSectionProps)
           {t`Add Skill`}
         </Button>
 
-        <FormField
-          control={control}
-          name="skills"
-          render={() => (
-            <FormItem>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <SkillsFieldArrayMessage control={control} />
       </div>
     </FormSectionCard>
   );

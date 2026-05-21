@@ -17,7 +17,7 @@ export function StudentOnboardingStageList({
   onStageChange,
 }: StudentOnboardingStageListProps) {
   return (
-    <div className="mt-6 grid gap-4 md:grid-cols-3">
+    <div className="mt-6 grid gap-4 md:grid-cols-2">
       {stages.map((stage) => {
         const isActive = activeStage === stage.id;
 

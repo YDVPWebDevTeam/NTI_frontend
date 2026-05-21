@@ -2389,7 +2389,6 @@ export interface StudentProfileDataDto {
   portfolioUrl?: string;
   bio?: string;
   cvFileId?: string;
-  profileCompletedAt?: string;
 }
 
 export type StudentSkillDtoLevel = typeof StudentSkillDtoLevel[keyof typeof StudentSkillDtoLevel];
@@ -2554,8 +2553,6 @@ export const UpdateProfessionalSkillsDtoSoftSkillsItem = {
 } as const;
 
 export interface UpdateProfessionalSkillsDto {
-  /** Optional personal team name to use when the standalone student team is first created. */
-  teamName?: string;
   /**
    * @minItems 1
    * @maxItems 3
@@ -2576,11 +2573,6 @@ export interface UpdateProfessionalSkillsDto {
   skills: ProfessionalSkillInputDto[];
   /** @maxItems 5 */
   projects?: ProfessionalProjectInputDto[];
-}
-
-export interface CompleteStudentProfileDto {
-  /** Personal team name to create or apply on profile completion. */
-  teamName: string;
 }
 
 export interface UniversityLookupDto {

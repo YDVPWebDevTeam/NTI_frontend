@@ -11,7 +11,7 @@ import {
   Users,
 } from 'lucide-react';
 
-import { LandingFooter, LandingHeader } from 'components/layout';
+import { LandingAuthActions, LandingFooter, LandingHeader } from 'components/layout';
 import { fetchLandingPageContent, type LandingPageContent } from 'lib/cms/landing-page';
 import { getRequestLocale } from 'lib/i18n/server-locale';
 
@@ -112,20 +112,24 @@ export default async function HomePage() {
               <p className="text-on-surface-variant max-w-2xl text-lg leading-relaxed md:text-xl">
                 {content.hero.description}
               </p>
-              <div className="flex flex-col gap-4 pt-4 sm:flex-row">
-                <Link
-                  href={content.hero.primaryCTA.href}
-                  className="primary-gradient w-full rounded-lg px-8 py-4 text-center font-bold text-white shadow-xl transition-all hover:shadow-2xl sm:w-auto"
-                >
-                  {content.hero.primaryCTA.label}
-                </Link>
-                <Link
-                  href={content.hero.secondaryCTA.href}
-                  className="bg-surface-container-highest text-primary hover:bg-surface-container-high w-full rounded-lg px-8 py-4 text-center font-bold transition-all sm:w-auto"
-                >
-                  {content.hero.secondaryCTA.label}
-                </Link>
-              </div>
+              <LandingAuthActions
+                className="flex flex-col gap-4 pt-4 sm:flex-row"
+                authenticatedClassName="primary-gradient w-full rounded-lg px-8 py-4 text-center font-bold text-white shadow-xl transition-all hover:shadow-2xl sm:w-auto"
+                unauthenticatedActions={[
+                  {
+                    className:
+                      'primary-gradient w-full rounded-lg px-8 py-4 text-center font-bold text-white shadow-xl transition-all hover:shadow-2xl sm:w-auto',
+                    href: content.hero.primaryCTA.href,
+                    label: content.hero.primaryCTA.label,
+                  },
+                  {
+                    className:
+                      'bg-surface-container-highest text-primary hover:bg-surface-container-high w-full rounded-lg px-8 py-4 text-center font-bold transition-all sm:w-auto',
+                    href: content.hero.secondaryCTA.href,
+                    label: content.hero.secondaryCTA.label,
+                  },
+                ]}
+              />
               <Link
                 className="text-primary inline-flex items-center gap-2 font-bold hover:underline"
                 href={content.hero.learnMoreCTA.href}
@@ -319,20 +323,24 @@ export default async function HomePage() {
               <p className="mx-auto mb-12 max-w-2xl text-lg leading-relaxed text-blue-100 md:text-xl">
                 {content.finalCTA.description}
               </p>
-              <div className="mx-auto flex w-full flex-col justify-center gap-6 sm:w-auto sm:flex-row">
-                <Link
-                  href={content.finalCTA.primaryCTA.href}
-                  className="text-primary w-full rounded-lg bg-white px-10 py-5 text-sm font-black tracking-wider uppercase shadow-xl transition-all hover:-translate-y-1 sm:w-auto"
-                >
-                  {content.finalCTA.primaryCTA.label}
-                </Link>
-                <Link
-                  href={content.finalCTA.secondaryCTA.href}
-                  className="bg-tertiary-fixed-dim text-on-tertiary-fixed w-full rounded-lg px-10 py-5 text-sm font-black tracking-wider uppercase shadow-xl transition-all hover:-translate-y-1 sm:w-auto"
-                >
-                  {content.finalCTA.secondaryCTA.label}
-                </Link>
-              </div>
+              <LandingAuthActions
+                className="mx-auto flex w-full flex-col justify-center gap-6 sm:w-auto sm:flex-row"
+                authenticatedClassName="text-primary w-full rounded-lg bg-white px-10 py-5 text-center text-sm font-black tracking-wider uppercase shadow-xl transition-all hover:-translate-y-1 sm:w-auto"
+                unauthenticatedActions={[
+                  {
+                    className:
+                      'text-primary w-full rounded-lg bg-white px-10 py-5 text-center text-sm font-black tracking-wider uppercase shadow-xl transition-all hover:-translate-y-1 sm:w-auto',
+                    href: content.finalCTA.primaryCTA.href,
+                    label: content.finalCTA.primaryCTA.label,
+                  },
+                  {
+                    className:
+                      'bg-tertiary-fixed-dim text-on-tertiary-fixed w-full rounded-lg px-10 py-5 text-center text-sm font-black tracking-wider uppercase shadow-xl transition-all hover:-translate-y-1 sm:w-auto',
+                    href: content.finalCTA.secondaryCTA.href,
+                    label: content.finalCTA.secondaryCTA.label,
+                  },
+                ]}
+              />
             </div>
           </div>
         </div>

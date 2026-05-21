@@ -32,9 +32,18 @@ const FormField = <
 >({
   ...props
 }: ControllerProps<TFieldValues, TName>) => {
+  const form = useFormContext<TFieldValues>();
+  const control = props.control ?? form?.control;
+
+  if (!control) {
+    throw new Error(
+      'FormField requires a form control. Wrap fields with <Form {...form}> or pass control.',
+    );
+  }
+
   return (
     <FormFieldContext.Provider value={{ name: props.name }}>
-      <Controller {...props} />
+      <Controller {...props} control={control} />
     </FormFieldContext.Provider>
   );
 };

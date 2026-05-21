@@ -31,20 +31,6 @@ export function ProjectsSummarySection({ control }: ProjectsSummarySectionProps)
       description={t`Showcase your best projects and tell us about yourself.`}
     >
       <div className="space-y-6">
-        <FormField
-          control={control}
-          name="teamName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>{t`Team Name`}</FormLabel>
-              <FormControl>
-                <Input placeholder={t`Enter your team name`} {...field} value={field.value ?? ''} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
         <div>
           <h4 className="mb-3 text-sm font-medium">{t`Projects`}</h4>
 

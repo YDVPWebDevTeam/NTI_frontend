@@ -1,5 +1,6 @@
 'use client';
 
+import { t } from '@lingui/core/macro';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
@@ -36,13 +37,6 @@ type StudentPageShellProps = {
 type StudentWorkspaceLayoutProps = {
   children: ReactNode;
 };
-
-const STUDENT_NAV_ITEMS = [
-  { href: ROUTES.DASHBOARD, label: 'Dashboard', icon: LayoutGrid },
-  { href: ROUTES.PROFILE, label: 'Profile', icon: UserRound },
-  { href: ROUTES.TEAM, label: 'Team', icon: Users },
-  { href: ROUTES.PROGRAM_B_BACKLOG, label: 'Program B backlog', icon: Rocket },
-] as const;
 
 function isNavItemActive(pathname: string, href: string) {
   if (href === ROUTES.DASHBOARD) {
@@ -91,11 +85,19 @@ function StudentNavItem({
   );
 }
 
-function StudentSidebar({ pathname, onNavigate }: { pathname: string; onNavigate?: () => void }) {
+function StudentSidebar({
+  pathname,
+  onNavigate,
+  items,
+}: {
+  pathname: string;
+  onNavigate?: () => void;
+  items: ReadonlyArray<{ href: string; label: string; icon: LucideIcon }>;
+}) {
   return (
     <div className="flex flex-col">
       <nav className="space-y-2">
-        {STUDENT_NAV_ITEMS.map((item) => (
+        {items.map((item) => (
           <StudentNavItem
             key={item.href}
             href={item.href}
@@ -123,11 +125,17 @@ export function StudentWorkspaceLayout({ children }: StudentWorkspaceLayoutProps
   });
   const [mobileNavState, setMobileNavState] = useState({ open: false, pathname });
   const isMobileNavOpen = mobileNavState.open && mobileNavState.pathname === pathname;
+  const studentNavItems = [
+    { href: ROUTES.DASHBOARD, label: t`Dashboard`, icon: LayoutGrid },
+    { href: ROUTES.PROFILE, label: t`Profile`, icon: UserRound },
+    { href: ROUTES.TEAM, label: t`Team`, icon: Users },
+    { href: ROUTES.PROGRAM_B_BACKLOG, label: t`Program B backlog`, icon: Rocket },
+  ] as const;
   const studentUser = studentProfileQuery.data?.user;
   const displayName =
     studentUser && (studentUser.firstName || studentUser.lastName)
       ? `${studentUser.firstName} ${studentUser.lastName}`.trim()
-      : (me?.email ?? 'Signed-in user');
+      : (me?.email ?? t`Signed-in user`);
   const roleLabel = me ? formatEnumLabel(me.role) : '';
 
   const handleLogout = async () => {
@@ -138,7 +146,7 @@ export function StudentWorkspaceLayout({ children }: StudentWorkspaceLayoutProps
       await queryClient.invalidateQueries();
       router.replace(ROUTES.ROOT);
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Unable to log out right now.');
+      toast.error(error instanceof Error ? error.message : t`Unable to log out right now.`);
     }
   };
 
@@ -172,7 +180,7 @@ export function StudentWorkspaceLayout({ children }: StudentWorkspaceLayoutProps
               onClick={() => void handleLogout()}
             >
               <LogOut className="h-4 w-4" />
-              Log out
+              {t`Log out`}
             </Button>
           </div>
 
@@ -182,7 +190,7 @@ export function StudentWorkspaceLayout({ children }: StudentWorkspaceLayoutProps
               size="icon"
               className="shrink-0 rounded-2xl border-[#dce6fb] bg-white/90"
               onClick={() => setMobileNavState({ open: !isMobileNavOpen, pathname })}
-              aria-label={isMobileNavOpen ? 'Close navigation' : 'Open navigation'}
+              aria-label={isMobileNavOpen ? t`Close navigation` : t`Open navigation`}
             >
               {isMobileNavOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
@@ -198,7 +206,7 @@ export function StudentWorkspaceLayout({ children }: StudentWorkspaceLayoutProps
       >
         <button
           type="button"
-          aria-label="Close navigation"
+          aria-label={t`Close navigation`}
           className={cn(
             'absolute inset-0 bg-[#0f172a]/35 backdrop-blur-[2px] transition-opacity duration-300 ease-out',
             isMobileNavOpen ? 'opacity-100' : 'opacity-0',
@@ -214,14 +222,17 @@ export function StudentWorkspaceLayout({ children }: StudentWorkspaceLayoutProps
           <div className="flex h-full flex-col overflow-y-auto">
             <StudentSidebar
               pathname={pathname}
+              items={studentNavItems}
               onNavigate={() => setMobileNavState({ open: false, pathname })}
             />
             <div className="mt-auto space-y-4 rounded-[1.5rem] border border-[#cdddff] bg-[linear-gradient(135deg,#ffffff_0%,#f3f8ff_100%)] p-5 shadow-[0_18px_36px_rgba(19,27,46,0.1)]">
               <div>
                 <p className="text-[10px] font-semibold tracking-[0.22em] text-[#5c74a3] uppercase">
-                  Language
+                  {t`Language`}
                 </p>
-                <p className="mt-1.5 text-sm font-medium text-[#314361]">Switch the app locale.</p>
+                <p className="mt-1.5 text-sm font-medium text-[#314361]">
+                  {t`Switch the app locale.`}
+                </p>
               </div>
               <LanguageSwitcher
                 className="w-full border border-[#cddfff] bg-white shadow-none"
@@ -234,7 +245,7 @@ export function StudentWorkspaceLayout({ children }: StudentWorkspaceLayoutProps
                 onClick={() => void handleLogout()}
               >
                 <LogOut className="h-4 w-4" />
-                Log out
+                {t`Log out`}
               </Button>
             </div>
           </div>
@@ -244,7 +255,7 @@ export function StudentWorkspaceLayout({ children }: StudentWorkspaceLayoutProps
       <div className="flex w-full gap-8 px-4 py-6 sm:px-6 lg:px-8">
         <aside className="hidden w-full max-w-[19rem] self-start lg:block">
           <div className="sticky top-24">
-            <StudentSidebar pathname={pathname} />
+            <StudentSidebar pathname={pathname} items={studentNavItems} />
           </div>
         </aside>
 
@@ -254,15 +265,14 @@ export function StudentWorkspaceLayout({ children }: StudentWorkspaceLayoutProps
       <footer className="border-t border-[#dfe7fa] bg-white/80">
         <div className="flex w-full flex-col gap-3 px-4 py-5 text-sm text-[#60718d] sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
           <p>
-            NTI student workspace. Separate flows for profile completion, team coordination, and
-            program work.
+            {t`NTI student workspace. Separate flows for profile completion, team coordination, and program work.`}
           </p>
           <div className="flex flex-wrap gap-4">
             <Link href={ROUTES.PRIVACY_POLICY} className="transition hover:text-[#123a82]">
-              Privacy policy
+              {t`Privacy policy`}
             </Link>
             <Link href={ROUTES.TERMS_OF_SERVICE} className="transition hover:text-[#123a82]">
-              Terms of service
+              {t`Terms of service`}
             </Link>
           </div>
         </div>
@@ -274,7 +284,7 @@ export function StudentWorkspaceLayout({ children }: StudentWorkspaceLayoutProps
 export function StudentPageShell({
   title,
   description,
-  eyebrow = 'Student workspace',
+  eyebrow = t`Student workspace`,
   actions,
   children,
 }: StudentPageShellProps) {

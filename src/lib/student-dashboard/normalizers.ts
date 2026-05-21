@@ -1,3 +1,5 @@
+import { t } from '@lingui/core/macro';
+
 import { formatDateTime } from 'lib/date';
 import { isApiRequestError } from 'lib/api-client/openapi-runtime/client';
 
@@ -60,7 +62,7 @@ export function formatUnknownDate(value: unknown, locale?: string): string {
   const normalizedDate = normalizeUnknownDate(value);
 
   if (!normalizedDate) {
-    return 'Not available';
+    return t`Not available`;
   }
 
   try {

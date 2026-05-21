@@ -1,8 +1,9 @@
 'use client';
 
+import { t } from '@lingui/core/macro';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { toast } from 'sonner';
 
 import {
@@ -23,8 +24,8 @@ import {
 } from 'components/student-dashboard/page-shell';
 import { ROUTES } from 'lib/constants';
 import {
-  listDraftRegistryEntries,
   saveDraftRegistryEntry,
+  useDraftRegistryStore,
 } from 'lib/student-dashboard/draft-registry';
 import {
   formatUnknownDate,
@@ -75,7 +76,6 @@ function SafeFallback({ role }: { role: string }) {
 export default function DashboardPage() {
   const router = useRouter();
   const { me, isLoading } = useAuthenticatedUser();
-  const [draftRegistryVersion, setDraftRegistryVersion] = useState(0);
 
   const profileQuery = useGetMyStudentProfile({
     query: {
@@ -123,13 +123,20 @@ export default function DashboardPage() {
   const createDraft = useApplicationsControllerCreateDraft();
 
   const hasNoTeam = isApiNotFoundError(teamQuery.error);
+  const hasTeamLoadError = teamQuery.isError && !hasNoTeam;
   const team = hasNoTeam ? null : (teamQuery.data ?? null);
   const isLead = Boolean(me && team && team.leaderId === me.id);
   const isLocked = Boolean(team?.lockedAt);
-  const draftEntries = useMemo(
-    () => listDraftRegistryEntries(team?.id),
-    [draftRegistryVersion, team?.id],
-  );
+  const draftRegistryEntries = useDraftRegistryStore((state) => state.entries);
+  const draftEntries = useMemo(() => {
+    const entries = Object.values(draftRegistryEntries);
+
+    if (!team?.id) {
+      return entries;
+    }
+
+    return entries.filter((entry) => entry.teamId === team.id);
+  }, [draftRegistryEntries, team?.id]);
   const draftRegistryMap = useMemo(
     () => new Map(draftEntries.map((entry) => [entry.callId, entry])),
     [draftEntries],
@@ -139,8 +146,8 @@ export default function DashboardPage() {
     return (
       <main className="mx-auto flex min-h-screen w-full max-w-4xl items-center px-4">
         <StudentStatusCard
-          title="Loading dashboard"
-          description="Resolving your authenticated role and workspace."
+          title={t`Loading dashboard`}
+          description={t`Resolving your authenticated role and workspace.`}
         />
       </main>
     );
@@ -154,21 +161,42 @@ export default function DashboardPage() {
     return <SafeFallback role={me.role} />;
   }
 
+  if (hasTeamLoadError) {
+    return (
+      <StudentPageShell
+        title={t`Dashboard`}
+        description={t`A lighter student workspace with separate flows for foundation setup, Program A applications, and Program B opportunities.`}
+      >
+        <div className="space-y-4">
+          <StudentStatusCard
+            title={t`Unable to load team data`}
+            description={t`The current team could not be loaded right now. Retry the request instead of treating this as no team.`}
+          />
+          <div className="flex justify-center">
+            <Button variant="outline" onClick={() => void teamQuery.refetch()}>
+              {t`Retry`}
+            </Button>
+          </div>
+        </div>
+      </StudentPageShell>
+    );
+  }
+
   const profile = profileQuery.data;
   const backlogPreview = backlogQuery.data?.data ?? [];
   const projectPreview = (projectsQuery.data ?? []).slice(0, PROGRAM_B_PROJECT_PREVIEW_LIMIT);
   const activeCalls = callsQuery.data?.data ?? [];
-  let teamAccessLabel = 'No team';
+  let teamAccessLabel = t`No team`;
   let teamLockLabel: string | null = null;
 
   if (team) {
-    teamAccessLabel = isLead ? 'Team lead' : 'Member';
-    teamLockLabel = isLocked ? `Locked since ${formatUnknownDate(team.lockedAt)}` : null;
+    teamAccessLabel = isLead ? t`Team lead` : t`Member`;
+    teamLockLabel = isLocked ? t`Locked since ${formatUnknownDate(team.lockedAt)}` : null;
   }
 
   const handleCreateDraft = async (callId: string) => {
     if (!team) {
-      toast.error('Create a team before starting a Program A draft.');
+      toast.error(t`Create a team before starting a Program A draft.`);
 
       return;
     }
@@ -182,70 +210,71 @@ export default function DashboardPage() {
       });
 
       saveDraftRegistryEntry(application.id, team.id, callId);
-      setDraftRegistryVersion((current) => current + 1);
       router.push(ROUTES.studentApplication(application.id));
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Unable to create a draft application.');
+      toast.error(
+        error instanceof Error ? error.message : t`Unable to create a draft application.`,
+      );
     }
   };
 
   return (
     <StudentPageShell
-      title="Dashboard"
-      description="A lighter student workspace with separate flows for foundation setup, Program A applications, and Program B opportunities."
+      title={t`Dashboard`}
+      description={t`A lighter student workspace with separate flows for foundation setup, Program A applications, and Program B opportunities.`}
       actions={
         <>
           <Button asChild variant="outline">
-            <Link href={ROUTES.PROFILE}>Edit profile</Link>
+            <Link href={ROUTES.PROFILE}>{t`Edit profile`}</Link>
           </Button>
           <Button asChild>
-            <Link href={ROUTES.TEAM}>{team ? 'Open team workspace' : 'Set up team'}</Link>
+            <Link href={ROUTES.TEAM}>{team ? t`Open team workspace` : t`Set up team`}</Link>
           </Button>
         </>
       }
     >
       <div className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
         <StudentSectionCard
-          title="Foundation"
-          description="Everything that affects access across the rest of the student area."
+          title={t`Foundation`}
+          description={t`Everything that affects access across the rest of the student area.`}
         >
           <div className="space-y-5">
             <StudentKeyValueList
               items={[
                 {
-                  label: 'Profile status',
-                  value: profile?.completion.profileCompleted ? 'Complete' : 'Incomplete',
+                  label: t`Profile status`,
+                  value: profile?.completion.profileCompleted ? t`Complete` : t`Incomplete`,
                 },
                 {
-                  label: 'Academic section',
+                  label: t`Academic section`,
                   value: profile?.completion.academicInformationCompleted
-                    ? 'Complete'
-                    : 'Needs attention',
+                    ? t`Complete`
+                    : t`Needs attention`,
                 },
                 {
-                  label: 'Skills section',
+                  label: t`Skills section`,
                   value: profile?.completion.professionalSkillsCompleted
-                    ? 'Complete'
-                    : 'Needs attention',
+                    ? t`Complete`
+                    : t`Needs attention`,
                 },
-                { label: 'Team access', value: teamAccessLabel },
-                ...(teamLockLabel ? [{ label: 'Team lock', value: teamLockLabel }] : []),
+                { label: t`Team access`, value: teamAccessLabel },
+                ...(teamLockLabel ? [{ label: t`Team lock`, value: teamLockLabel }] : []),
               ]}
             />
             <div className="flex flex-wrap gap-3">
               <Button asChild size="sm" variant="outline">
-                <Link href={ROUTES.PROFILE}>Open profile</Link>
+                <Link href={ROUTES.PROFILE}>{t`Open profile`}</Link>
               </Button>
               <Button asChild size="sm" variant="outline">
-                <Link href={ROUTES.TEAM}>Open team</Link>
+                <Link href={ROUTES.TEAM}>{t`Open team`}</Link>
               </Button>
             </div>
           </div>
         </StudentSectionCard>
 
         <StudentSectionCard
-          title="Next steps"
-          description="The fastest actions to keep the workflow moving."
+          title={t`Next steps`}
+          description={t`The fastest actions to keep the workflow moving.`}
         >
           <div className="grid gap-4 md:grid-cols-2">
             <div className="rounded-[1.5rem] border border-[#dce5fb] bg-[#f8faff] p-5">
@@ -281,8 +310,8 @@ export default function DashboardPage() {
 
       <div className="grid gap-6 xl:grid-cols-2">
         <StudentSectionCard
-          title="Program A flow"
-          description="Open calls, draft recovery, and application-start actions live here."
+          title={t`Program A flow`}
+          description={t`Open calls, draft recovery, and application-start actions live here.`}
         >
           <div className="space-y-4">
             {activeCalls.map((call) => {

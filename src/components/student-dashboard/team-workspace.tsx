@@ -1,5 +1,6 @@
 'use client';
 
+import { t } from '@lingui/core/macro';
 import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -77,7 +78,9 @@ export function TeamWorkspace({ title, description }: TeamWorkspaceProps) {
       enabled: Boolean(me),
     },
   });
-  const team = isApiNotFoundError(teamQuery.error) ? null : (teamQuery.data ?? null);
+  const hasNoTeam = isApiNotFoundError(teamQuery.error);
+  const hasTeamLoadError = teamQuery.isError && !hasNoTeam;
+  const team = hasNoTeam ? null : (teamQuery.data ?? null);
   const isLead = Boolean(me && team && team.leaderId === me.id);
   const isLocked = Boolean(team?.lockedAt);
   const invitationsQuery = useInvitationControllerListInvites(
@@ -112,6 +115,24 @@ export function TeamWorkspace({ title, description }: TeamWorkspaceProps) {
           description="Resolving your student session."
         />
       </main>
+    );
+  }
+
+  if (hasTeamLoadError) {
+    return (
+      <StudentPageShell title={title} description={description}>
+        <div className="space-y-4">
+          <StudentStatusCard
+            title={t`Unable to load team workspace`}
+            description={t`The current team could not be loaded right now. Retry the request instead of showing the empty-team state.`}
+          />
+          <div className="flex justify-center">
+            <Button variant="outline" onClick={() => void teamQuery.refetch()}>
+              {t`Retry`}
+            </Button>
+          </div>
+        </div>
+      </StudentPageShell>
     );
   }
 

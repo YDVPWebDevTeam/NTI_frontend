@@ -16,7 +16,7 @@ import {
 
 import { Badge, Button, Card, CardContent, CardHeader, CardTitle, Input } from 'components/shadcn';
 
-export default function DashboardPage() {
+export default function OrganizationInviteDashboard() {
   const queryClient = useQueryClient();
 
   const [email, setEmail] = useState('');

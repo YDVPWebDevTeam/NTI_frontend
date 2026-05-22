@@ -2389,7 +2389,6 @@ export interface StudentProfileDataDto {
   portfolioUrl?: string;
   bio?: string;
   cvFileId?: string;
-  profileCompletedAt?: string;
 }
 
 export type StudentSkillDtoLevel = typeof StudentSkillDtoLevel[keyof typeof StudentSkillDtoLevel];
@@ -2554,8 +2553,6 @@ export const UpdateProfessionalSkillsDtoSoftSkillsItem = {
 } as const;
 
 export interface UpdateProfessionalSkillsDto {
-  /** Optional personal team name to use when the standalone student team is first created. */
-  teamName?: string;
   /**
    * @minItems 1
    * @maxItems 3
@@ -2576,11 +2573,6 @@ export interface UpdateProfessionalSkillsDto {
   skills: ProfessionalSkillInputDto[];
   /** @maxItems 5 */
   projects?: ProfessionalProjectInputDto[];
-}
-
-export interface CompleteStudentProfileDto {
-  /** Personal team name to create or apply on profile completion. */
-  teamName: string;
 }
 
 export interface UniversityLookupDto {
@@ -3090,7 +3082,18 @@ export interface ProgramAMentorshipNoteDto {
   author: MentorshipNoteAuthorDto;
 }
 
-export type ApplicationSectionDtoValueJson = { [key: string]: unknown };
+export type ApplicationSectionKey = typeof ApplicationSectionKey[keyof typeof ApplicationSectionKey];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ApplicationSectionKey = {
+  profile: 'profile',
+} as const;
+
+export interface ApplicationProfileSectionValueDto {
+  /** Human-readable application profile name. */
+  name: string;
+}
 
 /**
  * @nullable
@@ -3100,8 +3103,8 @@ export type ApplicationSectionDtoActiveVersion = { [key: string]: unknown } | nu
 export interface ApplicationSectionDto {
   id: string;
   applicationId: string;
-  key: string;
-  valueJson: ApplicationSectionDtoValueJson;
+  key: ApplicationSectionKey;
+  valueJson: ApplicationProfileSectionValueDto;
   version: number;
   /** @nullable */
   activeVersion?: ApplicationSectionDtoActiveVersion;
@@ -3109,19 +3112,15 @@ export interface ApplicationSectionDto {
   updatedAt: string;
 }
 
-export type UpsertApplicationSectionDtoValueJson = { [key: string]: unknown };
-
 export interface UpsertApplicationSectionDto {
-  valueJson: UpsertApplicationSectionDtoValueJson;
+  valueJson: ApplicationProfileSectionValueDto;
 }
-
-export type ApplicationSectionHistoryDtoValueJson = { [key: string]: unknown };
 
 export interface ApplicationSectionHistoryDto {
   id: string;
   sectionId: string;
   version: number;
-  valueJson: ApplicationSectionHistoryDtoValueJson;
+  valueJson: ApplicationProfileSectionValueDto;
   savedById: string;
   createdAt: string;
 }

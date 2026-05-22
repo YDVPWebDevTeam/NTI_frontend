@@ -3,6 +3,7 @@ export * from './auth-split-shell';
 export * from './footer';
 export * from './header';
 export * from './landing-footer';
+export * from './landing-auth-actions';
 export * from './landing-header';
 export * from './nti-brand';
 export * from './nti-logo';

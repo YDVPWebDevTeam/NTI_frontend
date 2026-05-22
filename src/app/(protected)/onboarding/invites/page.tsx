@@ -24,6 +24,7 @@ import {
 } from 'lib/api';
 
 import { ROUTES } from 'lib/constants';
+import { formatEnumLabel } from 'lib/utils';
 import { Badge, Button, Card, CardContent, CardHeader, CardTitle, Input } from 'components/shadcn';
 
 type InviteMode = 'create-account' | 'existing-account';
@@ -57,6 +58,7 @@ export default function OrganizationInviteOnboardingPage() {
   const [existingAccountPassword, setExistingAccountPassword] = useState('');
 
   const validateInvite = useOrganizationControllerValidateInvite();
+  const validateInviteMutation = validateInvite.mutate;
   const acceptOrganizationInvite = useAcceptOrganizationInvite();
   const login = useLogin();
   const acceptExistingAccountInvite = useOrganizationControllerAcceptInvite();
@@ -71,7 +73,7 @@ export default function OrganizationInviteOnboardingPage() {
       return;
     }
 
-    validateInvite.mutate(
+    validateInviteMutation(
       {
         data: {
           token,
@@ -89,7 +91,7 @@ export default function OrganizationInviteOnboardingPage() {
         },
       },
     );
-  }, [token, validateInvite]);
+  }, [token, validateInviteMutation]);
 
   const invitation = validatedInvitation?.token === token ? validatedInvitation.data : undefined;
 
@@ -302,7 +304,7 @@ export default function OrganizationInviteOnboardingPage() {
                     </div>
 
                     <Badge className="bg-[#dce8ff] text-[#0c3fa3] hover:bg-[#dce8ff]">
-                      {invitation.roleToAssign}
+                      {formatEnumLabel(invitation.roleToAssign)}
                     </Badge>
                   </div>
                 </div>

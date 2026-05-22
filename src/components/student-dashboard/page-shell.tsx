@@ -2,7 +2,7 @@
 
 import { t } from '@lingui/core/macro';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
 import { type ReactNode, useState } from 'react';
 import {
@@ -115,6 +115,7 @@ function StudentSidebar({
 export function StudentWorkspaceLayout({ children }: StudentWorkspaceLayoutProps) {
   const pathname = usePathname();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const queryClient = useQueryClient();
   const logout = useLogout();
   const { me, isLoading } = useAuthenticatedUser();
@@ -137,6 +138,8 @@ export function StudentWorkspaceLayout({ children }: StudentWorkspaceLayoutProps
       ? `${studentUser.firstName} ${studentUser.lastName}`.trim()
       : (me?.email ?? t`Signed-in user`);
   const roleLabel = me ? formatEnumLabel(me.role) : '';
+  const inviteToken = searchParams.get('token')?.trim() ?? '';
+  const bypassAuthGuard = pathname === ROUTES.ONBOARDING_INVITES && inviteToken.length > 0;
 
   const handleLogout = async () => {
     try {
@@ -149,6 +152,10 @@ export function StudentWorkspaceLayout({ children }: StudentWorkspaceLayoutProps
       toast.error(error instanceof Error ? error.message : t`Unable to log out right now.`);
     }
   };
+
+  if (bypassAuthGuard) {
+    return children;
+  }
 
   if (isLoading || !me) {
     return (

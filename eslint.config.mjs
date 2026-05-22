@@ -69,6 +69,16 @@ export default [
       '@typescript-eslint/no-require-imports': 'off',
     },
   },
+  {
+    files: ['scripts/**/*.mjs'],
+    languageOptions: {
+      globals: {
+        Buffer: 'readonly',
+        console: 'readonly',
+        process: 'readonly',
+      },
+    },
+  },
 
   // Main rules for all source files
   {

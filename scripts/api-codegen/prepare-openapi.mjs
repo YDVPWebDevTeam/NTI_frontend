@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/* global console */
 
 import { readFileSync, writeFileSync } from 'fs';
 

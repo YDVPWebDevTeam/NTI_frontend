@@ -52,7 +52,7 @@ import type {
   PublicCallsResponseDto,
   ResubmitApplicationDto,
   SetActiveSectionVersionDto,
-  UpsertApplicationSectionDto
+  UpsertIdeaOverviewSectionDto
 } from '../index.schemas';
 
 import { orvalMutator } from '../../api-client/openapi-runtime/runtime';
@@ -1652,31 +1652,30 @@ export function useApplicationsControllerListSections<TData = Awaited<ReturnType
 
 
 /**
- * Creates or updates one application section and stores its history snapshot.
- * @summary Upsert application section
+ * Creates or updates the idea overview section and stores its history snapshot.
+ * @summary Upsert idea overview section
  */
-export const applicationsControllerUpsertSection = (
+export const applicationsControllerUpsertIdeaOverviewSection = (
     applicationId: string,
-    key: ApplicationSectionKey,
-    upsertApplicationSectionDto: UpsertApplicationSectionDto,
+    upsertIdeaOverviewSectionDto: UpsertIdeaOverviewSectionDto,
  options?: SecondParameter<typeof orvalMutator>,) => {
       
       
       return orvalMutator<ApplicationSectionDto>(
-      {url: `/applications/${applicationId}/sections/${key}`, method: 'PUT',
+      {url: `/applications/${applicationId}/sections/idea_overview`, method: 'PUT',
       headers: {'Content-Type': 'application/json', },
-      data: upsertApplicationSectionDto
+      data: upsertIdeaOverviewSectionDto
     },
       options);
     }
   
 
 
-export const getApplicationsControllerUpsertSectionMutationOptions = <TError = void,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof applicationsControllerUpsertSection>>, TError,{applicationId: string;key: ApplicationSectionKey;data: UpsertApplicationSectionDto}, TContext>, request?: SecondParameter<typeof orvalMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof applicationsControllerUpsertSection>>, TError,{applicationId: string;key: ApplicationSectionKey;data: UpsertApplicationSectionDto}, TContext> => {
+export const getApplicationsControllerUpsertIdeaOverviewSectionMutationOptions = <TError = void,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof applicationsControllerUpsertIdeaOverviewSection>>, TError,{applicationId: string;data: UpsertIdeaOverviewSectionDto}, TContext>, request?: SecondParameter<typeof orvalMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof applicationsControllerUpsertIdeaOverviewSection>>, TError,{applicationId: string;data: UpsertIdeaOverviewSectionDto}, TContext> => {
 
-const mutationKey = ['applicationsControllerUpsertSection'];
+const mutationKey = ['applicationsControllerUpsertIdeaOverviewSection'];
 const {mutation: mutationOptions, request: requestOptions} = options ?
       options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
       options
@@ -1686,10 +1685,10 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       
 
 
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof applicationsControllerUpsertSection>>, {applicationId: string;key: ApplicationSectionKey;data: UpsertApplicationSectionDto}> = (props) => {
-          const {applicationId,key,data} = props ?? {};
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof applicationsControllerUpsertIdeaOverviewSection>>, {applicationId: string;data: UpsertIdeaOverviewSectionDto}> = (props) => {
+          const {applicationId,data} = props ?? {};
 
-          return  applicationsControllerUpsertSection(applicationId,key,data,requestOptions)
+          return  applicationsControllerUpsertIdeaOverviewSection(applicationId,data,requestOptions)
         }
 
         
@@ -1697,23 +1696,23 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
 
   return  { mutationFn, ...mutationOptions }}
 
-    export type ApplicationsControllerUpsertSectionMutationResult = NonNullable<Awaited<ReturnType<typeof applicationsControllerUpsertSection>>>
-    export type ApplicationsControllerUpsertSectionMutationBody = UpsertApplicationSectionDto
-    export type ApplicationsControllerUpsertSectionMutationError = void
+    export type ApplicationsControllerUpsertIdeaOverviewSectionMutationResult = NonNullable<Awaited<ReturnType<typeof applicationsControllerUpsertIdeaOverviewSection>>>
+    export type ApplicationsControllerUpsertIdeaOverviewSectionMutationBody = UpsertIdeaOverviewSectionDto
+    export type ApplicationsControllerUpsertIdeaOverviewSectionMutationError = void
 
     /**
- * @summary Upsert application section
+ * @summary Upsert idea overview section
  */
-export const useApplicationsControllerUpsertSection = <TError = void,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof applicationsControllerUpsertSection>>, TError,{applicationId: string;key: ApplicationSectionKey;data: UpsertApplicationSectionDto}, TContext>, request?: SecondParameter<typeof orvalMutator>}
+export const useApplicationsControllerUpsertIdeaOverviewSection = <TError = void,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof applicationsControllerUpsertIdeaOverviewSection>>, TError,{applicationId: string;data: UpsertIdeaOverviewSectionDto}, TContext>, request?: SecondParameter<typeof orvalMutator>}
  , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof applicationsControllerUpsertSection>>,
+        Awaited<ReturnType<typeof applicationsControllerUpsertIdeaOverviewSection>>,
         TError,
-        {applicationId: string;key: ApplicationSectionKey;data: UpsertApplicationSectionDto},
+        {applicationId: string;data: UpsertIdeaOverviewSectionDto},
         TContext
       > => {
 
-      const mutationOptions = getApplicationsControllerUpsertSectionMutationOptions(options);
+      const mutationOptions = getApplicationsControllerUpsertIdeaOverviewSectionMutationOptions(options);
 
       return useMutation(mutationOptions, queryClient);
     }

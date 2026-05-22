@@ -14,6 +14,7 @@ import {
   type ProgramBBacklogControllerListPublishedQueryResult,
   type ProgramBProjectsControllerListMyQueryResult,
   type TeamDetailDto,
+  UserRole,
   useApplicationsControllerCreateDraft,
   useApplicationsControllerListActivePublicCalls,
   useGetMyStudentProfile,
@@ -46,7 +47,23 @@ import OrganizationInviteDashboard from 'components/organization-dashboard/organ
 const PROGRAM_B_PROJECT_PREVIEW_LIMIT = 3;
 const PROGRAM_B_BACKLOG_PREVIEW_LIMIT = 3;
 
-function OrganizationDashboardPlaceholder() {
+function OrganizationDashboardPlaceholder({ role }: { role: AuthenticatedUserDto['role'] }) {
+  if (role !== UserRole.COMPANY_OWNER) {
+    return (
+      <main className="mx-auto flex min-h-screen w-full max-w-4xl flex-col justify-center px-4 py-8">
+        <section className="rounded-3xl border border-black/10 bg-white p-8 shadow-sm">
+          <h1 className="text-3xl font-semibold tracking-tight text-neutral-950">
+            Organization dashboard
+          </h1>
+          <p className="mt-3 text-sm leading-6 text-neutral-600">
+            Invitation management is available only to the company owner account. Your current role
+            is <span className="font-semibold text-neutral-900">{role}</span>.
+          </p>
+        </section>
+      </main>
+    );
+  }
+
   return <OrganizationInviteDashboard />;
 }
 
@@ -519,7 +536,7 @@ export default function DashboardPage() {
   }
 
   if (isOrganizationRole(me.role)) {
-    return <OrganizationDashboardPlaceholder />;
+    return <OrganizationDashboardPlaceholder role={me.role} />;
   }
 
   if (!isStudentRole(me.role)) {

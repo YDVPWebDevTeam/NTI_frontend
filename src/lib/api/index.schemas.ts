@@ -2594,6 +2594,34 @@ export interface SpecializationLookupDto {
   degreeLabel?: string;
 }
 
+export type RequiredDocumentTypeDtoDocumentType = typeof RequiredDocumentTypeDtoDocumentType[keyof typeof RequiredDocumentTypeDtoDocumentType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const RequiredDocumentTypeDtoDocumentType = {
+  EXECUTIVE_SUMMARY: 'EXECUTIVE_SUMMARY',
+  TECHNICAL_ARCHITECTURE: 'TECHNICAL_ARCHITECTURE',
+  ROADMAP: 'ROADMAP',
+  BUDGET: 'BUDGET',
+  RISK_ANALYSIS: 'RISK_ANALYSIS',
+  MONETIZATION_MODEL: 'MONETIZATION_MODEL',
+  CV: 'CV',
+  MOTIVATION_LETTER: 'MOTIVATION_LETTER',
+  SOLUTION_PROPOSAL: 'SOLUTION_PROPOSAL',
+  OTHER: 'OTHER',
+} as const;
+
+export interface RequiredDocumentTypeDto {
+  id: string;
+  documentType: RequiredDocumentTypeDtoDocumentType;
+  isRequired: boolean;
+}
+
+export interface ProgramACallOptionDto {
+  value: string;
+  label: string;
+}
+
 export type PublicCallDtoType = typeof PublicCallDtoType[keyof typeof PublicCallDtoType];
 
 
@@ -2614,6 +2642,21 @@ export const PublicCallDtoStatus = {
   ARCHIVED: 'ARCHIVED',
 } as const;
 
+/**
+ * @nullable
+ */
+export type PublicCallDtoMinTeamSize = { [key: string]: unknown } | null;
+
+/**
+ * @nullable
+ */
+export type PublicCallDtoMaxTransferredSubjects = { [key: string]: unknown } | null;
+
+/**
+ * @nullable
+ */
+export type PublicCallDtoMaxProfileSubjectsAverage = { [key: string]: unknown } | null;
+
 export interface PublicCallDto {
   id: string;
   title: string;
@@ -2625,6 +2668,15 @@ export interface PublicCallDto {
   closesAt?: string | null;
   createdAt: string;
   updatedAt: string;
+  requiredDocumentTypes: RequiredDocumentTypeDto[];
+  /** @nullable */
+  minTeamSize?: PublicCallDtoMinTeamSize;
+  /** @nullable */
+  maxTransferredSubjects?: PublicCallDtoMaxTransferredSubjects;
+  /** @nullable */
+  maxProfileSubjectsAverage?: PublicCallDtoMaxProfileSubjectsAverage;
+  categories: ProgramACallOptionDto[];
+  stackTags: ProgramACallOptionDto[];
 }
 
 export interface PublicCallsResponseDto {
@@ -3088,6 +3140,7 @@ export type ApplicationSectionKey = typeof ApplicationSectionKey[keyof typeof Ap
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ApplicationSectionKey = {
   profile: 'profile',
+  idea_overview: 'idea_overview',
 } as const;
 
 export interface ApplicationProfileSectionValueDto {
@@ -3112,8 +3165,15 @@ export interface ApplicationSectionDto {
   updatedAt: string;
 }
 
-export interface UpsertApplicationSectionDto {
-  valueJson: ApplicationProfileSectionValueDto;
+export interface UpsertIdeaOverviewSectionDto {
+  /** Problem the team is solving. */
+  problem: string;
+  /** Proposed solution for the problem. */
+  solution: string;
+  /** Primary user segment. */
+  targetUsers: string;
+  /** Core value proposition. */
+  valueProposition: string;
 }
 
 export interface ApplicationSectionHistoryDto {
@@ -3143,6 +3203,11 @@ export interface OptionalApplicationTransitionNoteDto {
 export interface ApplicationLifecycleTransitionDto {
   /** Reason for the lifecycle transition. */
   reason: string;
+}
+
+export interface ProgramACallOptionInputDto {
+  value: string;
+  label: string;
 }
 
 export type CreateAdminCallDtoType = typeof CreateAdminCallDtoType[keyof typeof CreateAdminCallDtoType];
@@ -3182,6 +3247,8 @@ export interface CreateAdminCallDto {
   minTeamSize?: number;
   maxTransferredSubjects?: number;
   maxProfileSubjectsAverage?: number;
+  categories?: ProgramACallOptionInputDto[];
+  stackTags?: ProgramACallOptionInputDto[];
 }
 
 export type UpdateAdminCallDtoType = typeof UpdateAdminCallDtoType[keyof typeof UpdateAdminCallDtoType];
@@ -3221,29 +3288,8 @@ export interface UpdateAdminCallDto {
   minTeamSize?: number;
   maxTransferredSubjects?: number;
   maxProfileSubjectsAverage?: number;
-}
-
-export type RequiredDocumentTypeDtoDocumentType = typeof RequiredDocumentTypeDtoDocumentType[keyof typeof RequiredDocumentTypeDtoDocumentType];
-
-
-// eslint-disable-next-line @typescript-eslint/no-redeclare
-export const RequiredDocumentTypeDtoDocumentType = {
-  EXECUTIVE_SUMMARY: 'EXECUTIVE_SUMMARY',
-  TECHNICAL_ARCHITECTURE: 'TECHNICAL_ARCHITECTURE',
-  ROADMAP: 'ROADMAP',
-  BUDGET: 'BUDGET',
-  RISK_ANALYSIS: 'RISK_ANALYSIS',
-  MONETIZATION_MODEL: 'MONETIZATION_MODEL',
-  CV: 'CV',
-  MOTIVATION_LETTER: 'MOTIVATION_LETTER',
-  SOLUTION_PROPOSAL: 'SOLUTION_PROPOSAL',
-  OTHER: 'OTHER',
-} as const;
-
-export interface RequiredDocumentTypeDto {
-  id: string;
-  documentType: RequiredDocumentTypeDtoDocumentType;
-  isRequired: boolean;
+  categories?: ProgramACallOptionInputDto[];
+  stackTags?: ProgramACallOptionInputDto[];
 }
 
 export type RequiredDocumentsResponseDtoProgramType = typeof RequiredDocumentsResponseDtoProgramType[keyof typeof RequiredDocumentsResponseDtoProgramType];
@@ -3259,6 +3305,198 @@ export interface RequiredDocumentsResponseDto {
   callId: string;
   programType: RequiredDocumentsResponseDtoProgramType;
   requiredDocuments: RequiredDocumentTypeDto[];
+}
+
+export interface StatusCountDto {
+  status: string;
+  count: number;
+}
+
+export interface ReportsDashboardDto {
+  applicationsByStatus: StatusCountDto[];
+  activeProjectsCount: number;
+  organizationsByStatus: StatusCountDto[];
+  callsOpenCount: number;
+  decisionsLast30Days: number;
+}
+
+export type ApplicationsReportRowDtoProgramType = typeof ApplicationsReportRowDtoProgramType[keyof typeof ApplicationsReportRowDtoProgramType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ApplicationsReportRowDtoProgramType = {
+  PROGRAM_A: 'PROGRAM_A',
+  PROGRAM_B: 'PROGRAM_B',
+} as const;
+
+export type ApplicationsReportRowDtoStatus = typeof ApplicationsReportRowDtoStatus[keyof typeof ApplicationsReportRowDtoStatus];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ApplicationsReportRowDtoStatus = {
+  DRAFT: 'DRAFT',
+  SUBMITTED: 'SUBMITTED',
+  FORMALLY_VERIFIED: 'FORMALLY_VERIFIED',
+  EVALUATING: 'EVALUATING',
+  NEEDS_INFO: 'NEEDS_INFO',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  ONBOARDING: 'ONBOARDING',
+  ACTIVE_PROJECT: 'ACTIVE_PROJECT',
+  PAUSED: 'PAUSED',
+  COMPLETED: 'COMPLETED',
+  ARCHIVED: 'ARCHIVED',
+} as const;
+
+/**
+ * @nullable
+ */
+export type ApplicationsReportRowDtoSubmittedAt = { [key: string]: unknown } | null;
+
+/**
+ * @nullable
+ */
+export type ApplicationsReportRowDtoDecidedAt = { [key: string]: unknown } | null;
+
+export interface ApplicationsReportRowDto {
+  id: string;
+  programType: ApplicationsReportRowDtoProgramType;
+  callTitle: string;
+  teamName: string;
+  createdByEmail: string;
+  status: ApplicationsReportRowDtoStatus;
+  /** @nullable */
+  submittedAt?: ApplicationsReportRowDtoSubmittedAt;
+  /** @nullable */
+  decidedAt?: ApplicationsReportRowDtoDecidedAt;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type ReportsListMetaDtoOrder = typeof ReportsListMetaDtoOrder[keyof typeof ReportsListMetaDtoOrder];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ReportsListMetaDtoOrder = {
+  asc: 'asc',
+  desc: 'desc',
+} as const;
+
+export interface ReportsListMetaDto {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+  sort: string;
+  order: ReportsListMetaDtoOrder;
+}
+
+export interface ApplicationsReportResponseDto {
+  data: ApplicationsReportRowDto[];
+  meta: ReportsListMetaDto;
+}
+
+export type ProgramBReportRowDtoStatus = typeof ProgramBReportRowDtoStatus[keyof typeof ProgramBReportRowDtoStatus];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ProgramBReportRowDtoStatus = {
+  SUBMITTED: 'SUBMITTED',
+  WITHDRAWN: 'WITHDRAWN',
+  SHORTLISTED: 'SHORTLISTED',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED',
+  PROJECT_CREATED: 'PROJECT_CREATED',
+} as const;
+
+/**
+ * @nullable
+ */
+export type ProgramBReportRowDtoShortlistedAt = { [key: string]: unknown } | null;
+
+/**
+ * @nullable
+ */
+export type ProgramBReportRowDtoAcceptedAt = { [key: string]: unknown } | null;
+
+/**
+ * @nullable
+ */
+export type ProgramBReportRowDtoRejectedAt = { [key: string]: unknown } | null;
+
+/**
+ * @nullable
+ */
+export type ProgramBReportRowDtoWithdrawnAt = { [key: string]: unknown } | null;
+
+export interface ProgramBReportRowDto {
+  id: string;
+  organizationName: string;
+  backlogTitle: string;
+  teamName: string;
+  createdByEmail: string;
+  status: ProgramBReportRowDtoStatus;
+  submittedAt: string;
+  /** @nullable */
+  shortlistedAt?: ProgramBReportRowDtoShortlistedAt;
+  /** @nullable */
+  acceptedAt?: ProgramBReportRowDtoAcceptedAt;
+  /** @nullable */
+  rejectedAt?: ProgramBReportRowDtoRejectedAt;
+  /** @nullable */
+  withdrawnAt?: ProgramBReportRowDtoWithdrawnAt;
+  createdAt: string;
+}
+
+export interface ProgramBReportResponseDto {
+  data: ProgramBReportRowDto[];
+  meta: ReportsListMetaDto;
+}
+
+export interface ReportExportAcceptedDto {
+  exportJobId: string;
+}
+
+export type ExportJobStatusDtoStatus = typeof ExportJobStatusDtoStatus[keyof typeof ExportJobStatusDtoStatus];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ExportJobStatusDtoStatus = {
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED',
+} as const;
+
+export type ExportJobStatusDtoDataset = typeof ExportJobStatusDtoDataset[keyof typeof ExportJobStatusDtoDataset];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ExportJobStatusDtoDataset = {
+  applications: 'applications',
+  'program-b': 'program-b',
+} as const;
+
+export type ExportJobStatusDtoFormat = typeof ExportJobStatusDtoFormat[keyof typeof ExportJobStatusDtoFormat];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ExportJobStatusDtoFormat = {
+  csv: 'csv',
+  xlsx: 'xlsx',
+  pdf: 'pdf',
+} as const;
+
+export interface ExportJobStatusDto {
+  id: string;
+  status: ExportJobStatusDtoStatus;
+  dataset: ExportJobStatusDtoDataset;
+  format: ExportJobStatusDtoFormat;
+  createdAt: string;
+  completedAt?: string;
+  errorMessage?: string;
+  downloadUrl?: string;
+  downloadUrlExpiresAt?: string;
 }
 
 export type AdminListUsersParams = {
@@ -3786,4 +4024,268 @@ export const AdminCallsControllerListOrder = {
   asc: 'asc',
   desc: 'desc',
 } as const;
+
+export type ReportsControllerGetApplicationsParams = {
+/**
+ * Inclusive lower bound for Application.createdAt filtering.
+ */
+dateFrom?: string;
+/**
+ * Inclusive upper bound for Application.createdAt filtering.
+ */
+dateTo?: string;
+/**
+ * Filter by application call program type.
+ */
+programType?: ReportsControllerGetApplicationsProgramType;
+/**
+ * Filter by application lifecycle status.
+ */
+status?: ReportsControllerGetApplicationsStatus;
+/**
+ * Sortable applications report fields. Date filters apply to createdAt.
+ */
+sort?: ReportsControllerGetApplicationsSort;
+order?: ReportsControllerGetApplicationsOrder;
+/**
+ * Page number, defaults to 1.
+ */
+page?: unknown;
+/**
+ * Page size, defaults to 20 and cannot exceed 100.
+ */
+limit?: unknown;
+};
+
+export type ReportsControllerGetApplicationsProgramType = typeof ReportsControllerGetApplicationsProgramType[keyof typeof ReportsControllerGetApplicationsProgramType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ReportsControllerGetApplicationsProgramType = {
+  PROGRAM_A: 'PROGRAM_A',
+  PROGRAM_B: 'PROGRAM_B',
+} as const;
+
+export type ReportsControllerGetApplicationsStatus = typeof ReportsControllerGetApplicationsStatus[keyof typeof ReportsControllerGetApplicationsStatus];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ReportsControllerGetApplicationsStatus = {
+  DRAFT: 'DRAFT',
+  SUBMITTED: 'SUBMITTED',
+  FORMALLY_VERIFIED: 'FORMALLY_VERIFIED',
+  EVALUATING: 'EVALUATING',
+  NEEDS_INFO: 'NEEDS_INFO',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  ONBOARDING: 'ONBOARDING',
+  ACTIVE_PROJECT: 'ACTIVE_PROJECT',
+  PAUSED: 'PAUSED',
+  COMPLETED: 'COMPLETED',
+  ARCHIVED: 'ARCHIVED',
+} as const;
+
+export type ReportsControllerGetApplicationsSort = typeof ReportsControllerGetApplicationsSort[keyof typeof ReportsControllerGetApplicationsSort];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ReportsControllerGetApplicationsSort = {
+  createdAt: 'createdAt',
+  submittedAt: 'submittedAt',
+  decidedAt: 'decidedAt',
+  status: 'status',
+} as const;
+
+export type ReportsControllerGetApplicationsOrder = typeof ReportsControllerGetApplicationsOrder[keyof typeof ReportsControllerGetApplicationsOrder];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ReportsControllerGetApplicationsOrder = {
+  asc: 'asc',
+  desc: 'desc',
+} as const;
+
+export type ReportsControllerGetProgramBParams = {
+/**
+ * Inclusive lower bound for ProgramBTeamApplication.createdAt filtering.
+ */
+dateFrom?: string;
+/**
+ * Inclusive upper bound for ProgramBTeamApplication.createdAt filtering.
+ */
+dateTo?: string;
+/**
+ * Filter by Program B team application status.
+ */
+status?: ReportsControllerGetProgramBStatus;
+/**
+ * Sortable Program B report fields. Date filters apply to createdAt.
+ */
+sort?: ReportsControllerGetProgramBSort;
+order?: ReportsControllerGetProgramBOrder;
+/**
+ * Page number, defaults to 1.
+ */
+page?: unknown;
+/**
+ * Page size, defaults to 20 and cannot exceed 100.
+ */
+limit?: unknown;
+};
+
+export type ReportsControllerGetProgramBStatus = typeof ReportsControllerGetProgramBStatus[keyof typeof ReportsControllerGetProgramBStatus];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ReportsControllerGetProgramBStatus = {
+  SUBMITTED: 'SUBMITTED',
+  WITHDRAWN: 'WITHDRAWN',
+  SHORTLISTED: 'SHORTLISTED',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED',
+  PROJECT_CREATED: 'PROJECT_CREATED',
+} as const;
+
+export type ReportsControllerGetProgramBSort = typeof ReportsControllerGetProgramBSort[keyof typeof ReportsControllerGetProgramBSort];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ReportsControllerGetProgramBSort = {
+  createdAt: 'createdAt',
+  submittedAt: 'submittedAt',
+  status: 'status',
+} as const;
+
+export type ReportsControllerGetProgramBOrder = typeof ReportsControllerGetProgramBOrder[keyof typeof ReportsControllerGetProgramBOrder];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ReportsControllerGetProgramBOrder = {
+  asc: 'asc',
+  desc: 'desc',
+} as const;
+
+export type ReportsControllerExportReportParams = {
+/**
+ * Report dataset to export.
+ */
+dataset: ReportsControllerExportReportDataset;
+/**
+ * Export file format.
+ */
+format: ReportsControllerExportReportFormat;
+/**
+ * Optional inclusive lower date filter.
+ */
+dateFrom?: string;
+/**
+ * Optional inclusive upper date filter.
+ */
+dateTo?: string;
+/**
+ * Applications export only. Filters by call program type.
+ */
+programType?: ReportsControllerExportReportProgramType;
+/**
+ * Dataset-specific status filter. Use ApplicationStatus for applications or ProgramBTeamApplicationStatus for program-b.
+ */
+status?: ReportsControllerExportReportStatus;
+/**
+ * Dataset-specific export sort field.
+ */
+sort?: ReportsControllerExportReportSort;
+/**
+ * Export sort direction.
+ */
+order?: ReportsControllerExportReportOrder;
+};
+
+export type ReportsControllerExportReportDataset = typeof ReportsControllerExportReportDataset[keyof typeof ReportsControllerExportReportDataset];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ReportsControllerExportReportDataset = {
+  applications: 'applications',
+  'program-b': 'program-b',
+} as const;
+
+export type ReportsControllerExportReportFormat = typeof ReportsControllerExportReportFormat[keyof typeof ReportsControllerExportReportFormat];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ReportsControllerExportReportFormat = {
+  csv: 'csv',
+  xlsx: 'xlsx',
+  pdf: 'pdf',
+} as const;
+
+export type ReportsControllerExportReportProgramType = typeof ReportsControllerExportReportProgramType[keyof typeof ReportsControllerExportReportProgramType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ReportsControllerExportReportProgramType = {
+  PROGRAM_A: 'PROGRAM_A',
+  PROGRAM_B: 'PROGRAM_B',
+} as const;
+
+export type ReportsControllerExportReportStatus = typeof ReportsControllerExportReportStatus[keyof typeof ReportsControllerExportReportStatus];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ReportsControllerExportReportStatus = {
+  DRAFT: 'DRAFT',
+  SUBMITTED: 'SUBMITTED',
+  FORMALLY_VERIFIED: 'FORMALLY_VERIFIED',
+  EVALUATING: 'EVALUATING',
+  NEEDS_INFO: 'NEEDS_INFO',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  ONBOARDING: 'ONBOARDING',
+  ACTIVE_PROJECT: 'ACTIVE_PROJECT',
+  PAUSED: 'PAUSED',
+  COMPLETED: 'COMPLETED',
+  ARCHIVED: 'ARCHIVED',
+  WITHDRAWN: 'WITHDRAWN',
+  SHORTLISTED: 'SHORTLISTED',
+  ACCEPTED: 'ACCEPTED',
+  PROJECT_CREATED: 'PROJECT_CREATED',
+} as const;
+
+export type ReportsControllerExportReportSort = typeof ReportsControllerExportReportSort[keyof typeof ReportsControllerExportReportSort];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ReportsControllerExportReportSort = {
+  createdAt: 'createdAt',
+  submittedAt: 'submittedAt',
+  decidedAt: 'decidedAt',
+  status: 'status',
+} as const;
+
+export type ReportsControllerExportReportOrder = typeof ReportsControllerExportReportOrder[keyof typeof ReportsControllerExportReportOrder];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ReportsControllerExportReportOrder = {
+  asc: 'asc',
+  desc: 'desc',
+} as const;
+
+export type ReportsControllerDownloadExportJobParams = {
+/**
+ * Short-lived download token returned by export job status.
+ */
+token: string;
+};
+
+export type ReportsControllerExportAuditPdfParams = {
+/**
+ * Required inclusive lower bound for audit event createdAt.
+ */
+dateFrom: string;
+/**
+ * Required inclusive upper bound for audit event createdAt. The total requested window must not exceed 31 days.
+ */
+dateTo: string;
+};
 

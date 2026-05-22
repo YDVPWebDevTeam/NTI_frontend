@@ -15,6 +15,7 @@ import {
 } from 'lib/api';
 
 import { Badge, Button, Card, CardContent, CardHeader, CardTitle, Input } from 'components/shadcn';
+import { formatEnumLabel } from 'lib/utils';
 
 export default function OrganizationInviteDashboard() {
   const queryClient = useQueryClient();
@@ -46,6 +47,11 @@ export default function OrganizationInviteDashboard() {
 
   const normalizedEmail = email.trim().toLowerCase();
   const invites = invitesQuery.data?.data ?? [];
+  let organizationDetails = t`Members and invitations will appear here after API integration.`;
+
+  if (organization) {
+    organizationDetails = organization.ico ? t`ICO: ${organization.ico}` : '';
+  }
 
   const isSubmitDisabled =
     !organizationId || !normalizedEmail || createInvite.isPending || organizationQuery.isLoading;
@@ -175,17 +181,11 @@ export default function OrganizationInviteDashboard() {
                       : (organization?.name ?? t`No organization found`)}
                   </h2>
 
-                  <p className="text-on-surface-variant mt-1 text-sm">
-                    {!organization
-                      ? t`Members and invitations will appear here after API integration.`
-                      : organization.ico
-                        ? t`ICO: ${organization.ico}`
-                        : null}
-                  </p>
+                  <p className="text-on-surface-variant mt-1 text-sm">{organizationDetails}</p>
 
                   {organization?.status ? (
                     <Badge className="mt-3 bg-[#dce8ff] text-[#0c3fa3] hover:bg-[#dce8ff]">
-                      {organization.status}
+                      {formatEnumLabel(organization.status)}
                     </Badge>
                   ) : null}
 
@@ -309,7 +309,7 @@ export default function OrganizationInviteDashboard() {
                           <p className="text-base font-semibold text-[#0c1a4f]">{invite.email}</p>
 
                           <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100">
-                            {invite.status}
+                            {formatEnumLabel(invite.status)}
                           </Badge>
                         </div>
 

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { t } from '@lingui/core/macro';
 import { Upload, X } from 'lucide-react';
 
 import { Button } from './button';
@@ -22,8 +23,8 @@ export function FileInput({
   accept,
   className,
   disabled,
-  placeholder = 'Choose a file',
-  buttonLabel = 'Browse',
+  placeholder = t`Choose a file`,
+  buttonLabel = t`Browse`,
 }: FileInputProps) {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
@@ -53,7 +54,9 @@ export function FileInput({
             {file ? file.name : placeholder}
           </p>
           <p className="text-xs text-neutral-500">
-            {file ? 'Selected file will be uploaded after you continue.' : 'No file selected yet.'}
+            {file
+              ? t`Selected file will be uploaded after you continue.`
+              : t`No file selected yet.`}
           </p>
         </div>
 

@@ -1,5 +1,6 @@
 'use client';
 
+import { t } from '@lingui/core/macro';
 import { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
@@ -58,9 +59,9 @@ export function AdminRouteGuard({ children }: { children: React.ReactNode }) {
   if (sessionQuery.isError && !isAdminAuthRoute) {
     return (
       <AdminErrorState
-        title="Admin session unavailable"
-        description="The admin session could not be verified. Retry once the connection is available."
-        actionLabel="Retry"
+        title={t`Admin session unavailable`}
+        description={t`The admin session could not be verified. Retry once the connection is available.`}
+        actionLabel={t`Retry`}
         onAction={() => void sessionQuery.refetch()}
       />
     );

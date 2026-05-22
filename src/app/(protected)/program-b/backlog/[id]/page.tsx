@@ -1,5 +1,6 @@
 'use client';
 
+import { t } from '@lingui/core/macro';
 import Link from 'next/link';
 import { use, useState } from 'react';
 import { toast } from 'sonner';
@@ -13,7 +14,7 @@ import {
   useProgramBTeamApplicationWithdrawalControllerWithdraw,
   useTeamControllerFindCurrentForUser,
 } from 'lib/api';
-import { Button, Input, Textarea } from 'components/shadcn';
+import { Button } from 'components/shadcn';
 import {
   StudentPageShell,
   StudentSectionCard,
@@ -26,6 +27,7 @@ import {
   normalizeUnknownText,
 } from 'lib/student-dashboard/normalizers';
 import { useAuthenticatedUser } from 'lib/student-dashboard/use-authenticated-user';
+import { DocumentsSection, TeamApplicationSection } from './backlog-detail-sections';
 
 export default function ProgramBBacklogDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
@@ -45,6 +47,7 @@ export default function ProgramBBacklogDetailPage({ params }: { params: Promise<
       retry: false,
     },
   });
+  const hasTeamLoadError = teamQuery.isError && !isApiNotFoundError(teamQuery.error);
   const team = isApiNotFoundError(teamQuery.error) ? null : (teamQuery.data ?? null);
   const isLead = Boolean(me && team && team.leaderId === me.id);
   const myApplicationQuery = useProgramBTeamApplicationControllerGetMy(
@@ -67,10 +70,31 @@ export default function ProgramBBacklogDetailPage({ params }: { params: Promise<
     return (
       <main className="mx-auto flex min-h-screen w-full max-w-4xl items-center px-4">
         <StudentStatusCard
-          title="Loading backlog item"
-          description="Resolving your student session and backlog item."
+          title={t`Loading backlog item`}
+          description={t`Resolving your student session and backlog item.`}
         />
       </main>
+    );
+  }
+
+  if (hasTeamLoadError) {
+    return (
+      <StudentPageShell
+        title={t`Program B backlog item`}
+        description={t`Published Program B opportunity detail.`}
+      >
+        <div className="space-y-4">
+          <StudentStatusCard
+            title={t`Unable to load team data`}
+            description={t`Your team data could not be loaded right now, so lead-only actions cannot be resolved.`}
+          />
+          <div className="flex justify-center">
+            <Button variant="outline" onClick={() => void teamQuery.refetch()}>
+              {t`Retry`}
+            </Button>
+          </div>
+        </div>
+      </StudentPageShell>
     );
   }
 
@@ -78,188 +102,110 @@ export default function ProgramBBacklogDetailPage({ params }: { params: Promise<
   const existingApplication = isApiNotFoundError(myApplicationQuery.error)
     ? null
     : (myApplicationQuery.data ?? null);
-  let teamApplicationContent = (
-    <p className="text-sm text-neutral-600">
-      Only the current team lead can apply or withdraw for Program B opportunities.
-    </p>
-  );
-
-  if (existingApplication) {
-    teamApplicationContent = (
-      <div className="space-y-4">
-        <p className="text-sm text-neutral-700">
-          Current status:{' '}
-          <span className="font-semibold text-neutral-950">{existingApplication.status}</span>
-        </p>
-        <p className="text-sm text-neutral-700">
-          Submitted:{' '}
-          <span className="font-semibold text-neutral-950">
-            {formatUnknownDate(existingApplication.submittedAt)}
-          </span>
-        </p>
-        <Button
-          size="sm"
-          variant="outline"
-          disabled={!isLead || withdrawApplication.isPending}
-          onClick={async () => {
-            try {
-              await withdrawApplication.mutateAsync({
-                applicationId: existingApplication.id,
-              });
-
-              await myApplicationQuery.refetch();
-              toast.success('Application withdrawn.');
-            } catch (error) {
-              toast.error(
-                error instanceof Error ? error.message : 'Unable to withdraw the application.',
-              );
-            }
-          }}
-        >
-          Withdraw application
-        </Button>
-      </div>
-    );
-  } else if (isLead) {
-    teamApplicationContent = (
-      <div className="space-y-4">
-        <Textarea
-          value={motivation}
-          onChange={(event) => setMotivation(event.target.value)}
-          placeholder="Motivation"
-          rows={4}
-        />
-        <Textarea
-          value={proposalText}
-          onChange={(event) => setProposalText(event.target.value)}
-          placeholder="Proposal text"
-          rows={5}
-        />
-        <Input
-          value={cvFileIds}
-          onChange={(event) => setCvFileIds(event.target.value)}
-          placeholder="Comma-separated CV file ids"
-        />
-        <Button
-          disabled={
-            !team || !motivation.trim() || !proposalText.trim() || submitApplication.isPending
-          }
-          onClick={async () => {
-            if (!team) {
-              return;
-            }
-
-            try {
-              await submitApplication.mutateAsync({
-                backlogItemId: id,
-                data: {
-                  teamId: team.id,
-                  motivation: motivation.trim(),
-                  proposalText: proposalText.trim(),
-                  cvFileIds: cvFileIds
-                    .split(',')
-                    .map((entry) => entry.trim())
-                    .filter(Boolean),
-                },
-              });
-
-              await myApplicationQuery.refetch();
-              toast.success('Team application submitted.');
-            } catch (error) {
-              toast.error(
-                error instanceof Error
-                  ? error.message
-                  : 'Unable to submit the team application right now.',
-              );
-            }
-          }}
-        >
-          Submit application
-        </Button>
-      </div>
-    );
-  }
 
   return (
     <StudentPageShell
-      title={normalizeUnknownText(item?.title) ?? 'Program B backlog item'}
+      title={normalizeUnknownText(item?.title) ?? t`Program B backlog item`}
       description={
-        normalizeUnknownText(item?.description) ?? 'Published Program B opportunity detail.'
+        normalizeUnknownText(item?.description) ?? t`Published Program B opportunity detail.`
       }
     >
-      <StudentSectionCard title="Overview">
+      <StudentSectionCard title={t`Overview`}>
         <div className="space-y-3 text-sm text-neutral-700">
           <p>
-            Status: <span className="font-medium text-neutral-950">{item?.status}</span>
+            {t`Status:`} <span className="font-medium text-neutral-950">{item?.status}</span>
           </p>
           <p>
-            Budget:{' '}
+            {t`Budget:`}{' '}
             <span className="font-medium text-neutral-950">
-              {normalizeUnknownText(item?.budget) ?? 'Not specified'}
+              {normalizeUnknownText(item?.budget) ?? t`Not specified`}
             </span>
           </p>
           <p>
-            Expected outcomes:{' '}
+            {t`Expected outcomes:`}{' '}
             <span className="font-medium text-neutral-950">
-              {normalizeUnknownText(item?.expectedOutcomes) ?? 'Not specified'}
+              {normalizeUnknownText(item?.expectedOutcomes) ?? t`Not specified`}
             </span>
           </p>
           <p>
-            Last updated:{' '}
+            {t`Last updated:`}{' '}
             <span className="font-medium text-neutral-950">
-              {item ? formatUnknownDate(item.updatedAt) : 'Not available'}
+              {item ? formatUnknownDate(item.updatedAt) : t`Not available`}
             </span>
           </p>
         </div>
       </StudentSectionCard>
 
-      <StudentSectionCard title="Documents">
-        <div className="space-y-3">
-          {(item?.documents ?? []).map((document) => (
-            <div
-              key={document.id}
-              className="flex flex-col gap-3 rounded-2xl border border-black/10 bg-[#f7f8fa] p-4 sm:flex-row sm:items-center sm:justify-between"
-            >
-              <div>
-                <p className="font-semibold text-neutral-950">{document.name}</p>
-                <p className="text-sm text-neutral-600">
-                  {document.category} · {document.status}
-                </p>
-              </div>
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={async () => {
-                  try {
-                    const download = await downloadDocument.mutateAsync({
-                      id,
-                      documentId: document.id,
-                    });
+      <DocumentsSection
+        item={item}
+        onOpenDocument={async (documentId) => {
+          try {
+            const download = await downloadDocument.mutateAsync({ id, documentId });
 
-                    window.open(download.downloadUrl, '_blank', 'noopener,noreferrer');
-                  } catch (error) {
-                    toast.error(
-                      error instanceof Error ? error.message : 'Unable to open the document.',
-                    );
-                  }
-                }}
-              >
-                Open document
-              </Button>
-            </div>
-          ))}
-        </div>
-      </StudentSectionCard>
+            window.open(download.downloadUrl, '_blank', 'noopener,noreferrer');
+          } catch (error) {
+            toast.error(error instanceof Error ? error.message : t`Unable to open the document.`);
+          }
+        }}
+      />
 
-      <StudentSectionCard
-        title="Team application"
-        description="Lead-only apply and withdraw actions use the generated team application endpoints."
-      >
-        {teamApplicationContent}
-      </StudentSectionCard>
+      <TeamApplicationSection
+        existingApplication={existingApplication}
+        isLead={isLead}
+        team={team}
+        motivation={motivation}
+        proposalText={proposalText}
+        cvFileIds={cvFileIds}
+        setMotivation={setMotivation}
+        setProposalText={setProposalText}
+        setCvFileIds={setCvFileIds}
+        onSubmit={async () => {
+          if (!team) {
+            return;
+          }
+          try {
+            await submitApplication.mutateAsync({
+              backlogItemId: id,
+              data: {
+                teamId: team.id,
+                motivation: motivation.trim(),
+                proposalText: proposalText.trim(),
+                cvFileIds: cvFileIds
+                  .split(',')
+                  .map((entry) => entry.trim())
+                  .filter(Boolean),
+              },
+            });
+            await myApplicationQuery.refetch();
+            toast.success(t`Team application submitted.`);
+          } catch (error) {
+            toast.error(
+              error instanceof Error
+                ? error.message
+                : t`Unable to submit the team application right now.`,
+            );
+          }
+        }}
+        onWithdraw={async () => {
+          if (!existingApplication) {
+            return;
+          }
+          try {
+            await withdrawApplication.mutateAsync({ applicationId: existingApplication.id });
+            await myApplicationQuery.refetch();
+            toast.success(t`Application withdrawn.`);
+          } catch (error) {
+            toast.error(
+              error instanceof Error ? error.message : t`Unable to withdraw the application.`,
+            );
+          }
+        }}
+        isSubmitting={submitApplication.isPending}
+        isWithdrawing={withdrawApplication.isPending}
+      />
 
       <Button asChild variant="outline" size="sm">
-        <Link href={ROUTES.PROGRAM_B_BACKLOG}>Back to backlog</Link>
+        <Link href={ROUTES.PROGRAM_B_BACKLOG}>{t`Back to backlog`}</Link>
       </Button>
     </StudentPageShell>
   );

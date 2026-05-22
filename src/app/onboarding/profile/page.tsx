@@ -140,6 +140,7 @@ export default function StudentProfileOnboardingPage() {
   const stageMeta = getStudentOnboardingStageMeta(activeStage);
   const stages = getStudentOnboardingStages(profileQuery.data.completion);
   const isProfileUpdateFlow = pathname === ROUTES.PROFILE;
+  const shouldShowContinueOnly = !isProfileUpdateFlow && isOnboardingComplete;
 
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-1 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
@@ -169,7 +170,7 @@ export default function StudentProfileOnboardingPage() {
               <StudentOnboardingActions
                 activeStage={activeStage}
                 isBusy={isBusy}
-                isComplete={isOnboardingComplete}
+                isComplete={shouldShowContinueOnly}
                 onContinue={() => router.replace(ROUTES.DASHBOARD)}
                 onStageChange={setSelectedStage}
                 onSaveAcademic={() => void saveStage('academic')}

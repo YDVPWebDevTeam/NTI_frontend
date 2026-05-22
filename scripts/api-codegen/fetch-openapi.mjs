@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/* global Buffer, console */
 
 import { writeFileSync } from 'fs';
 

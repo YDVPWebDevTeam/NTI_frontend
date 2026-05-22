@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/* global console */
 
 import { spawnSync } from 'child_process';
 import { existsSync, rmSync } from 'fs';

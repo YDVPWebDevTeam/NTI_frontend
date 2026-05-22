@@ -21,8 +21,9 @@
     "prepare": "husky",
     "generate:openapi": "node scripts/api-codegen/fetch-openapi.mjs && node scripts/api-codegen/prepare-openapi.mjs",
     "generate:services": "node scripts/api-codegen/generate-services.mjs",
+    "generate:compat": "node scripts/api-codegen/generate-compat.mjs",
     "generate:public-api": "node scripts/api-codegen/generate-public-api.mjs",
-    "api-codegen": "npm run generate:openapi && npm run generate:services && npm run generate:public-api"
+    "api-codegen": "npm run generate:openapi && npm run generate:services && npm run generate:compat && npm run generate:public-api"
   },
   "config": {
     "commitizen": {

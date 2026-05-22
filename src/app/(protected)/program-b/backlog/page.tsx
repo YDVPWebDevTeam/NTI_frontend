@@ -1,5 +1,6 @@
 'use client';
 
+import { t } from '@lingui/core/macro';
 import Link from 'next/link';
 import { useDeferredValue, useState } from 'react';
 
@@ -46,8 +47,8 @@ export default function ProgramBBacklogPage() {
     return (
       <main className="mx-auto flex min-h-screen w-full max-w-4xl items-center px-4">
         <StudentStatusCard
-          title="Loading Program B backlog"
-          description="Resolving your student session and backlog filters."
+          title={t`Loading Program B backlog`}
+          description={t`Resolving your student session and backlog filters.`}
         />
       </main>
     );
@@ -55,12 +56,12 @@ export default function ProgramBBacklogPage() {
 
   return (
     <StudentPageShell
-      title="Program B backlog"
-      description="Searchable, sortable, paginated list of published Program B opportunities backed by generated backlog hooks."
+      title={t`Program B backlog`}
+      description={t`Searchable, sortable, paginated list of published Program B opportunities backed by generated backlog hooks.`}
     >
       <StudentSectionCard
-        title="Filters"
-        description="Filtering is local UI state mapped into generated query params."
+        title={t`Filters`}
+        description={t`Filtering is local UI state mapped into generated query params.`}
       >
         <div className="grid gap-3 md:grid-cols-3">
           <Input
@@ -69,7 +70,7 @@ export default function ProgramBBacklogPage() {
               setQuery(event.target.value);
               setPage(1);
             }}
-            placeholder="Search title or description"
+            placeholder={t`Search title or description`}
           />
           <select
             className="rounded-md border border-black/10 bg-white px-3 py-2 text-sm"
@@ -78,10 +79,10 @@ export default function ProgramBBacklogPage() {
               setSort(event.target.value as ProgramBBacklogControllerListPublishedSort)
             }
           >
-            <option value="updatedAt">Updated at</option>
-            <option value="createdAt">Created at</option>
-            <option value="budget">Budget</option>
-            <option value="title">Title</option>
+            <option value="updatedAt">{t`Updated at`}</option>
+            <option value="createdAt">{t`Created at`}</option>
+            <option value="budget">{t`Budget`}</option>
+            <option value="title">{t`Title`}</option>
           </select>
           <select
             className="rounded-md border border-black/10 bg-white px-3 py-2 text-sm"
@@ -90,8 +91,8 @@ export default function ProgramBBacklogPage() {
               setOrder(event.target.value as ProgramBBacklogControllerListPublishedOrder)
             }
           >
-            <option value="desc">Descending</option>
-            <option value="asc">Ascending</option>
+            <option value="desc">{t`Descending`}</option>
+            <option value="asc">{t`Ascending`}</option>
           </select>
         </div>
       </StudentSectionCard>
@@ -100,34 +101,35 @@ export default function ProgramBBacklogPage() {
         {(backlogQuery.data?.data ?? []).map((item) => (
           <StudentSectionCard
             key={item.id}
-            title={normalizeUnknownText(item.title) ?? 'Untitled backlog item'}
-            description={normalizeUnknownText(item.description) ?? 'No description provided.'}
+            title={normalizeUnknownText(item.title) ?? t`Untitled backlog item`}
+            description={normalizeUnknownText(item.description) ?? t`No description provided.`}
           >
             <div className="space-y-3 text-sm text-neutral-700">
               <p>
-                Status: <span className="font-medium text-neutral-950">{item.status}</span>
+                {t`Status:`} <span className="font-medium text-neutral-950">{item.status}</span>
               </p>
               <p>
-                Budget:{' '}
+                {t`Budget:`}{' '}
                 <span className="font-medium text-neutral-950">
-                  {normalizeUnknownText(item.budget) ?? 'Not specified'}
+                  {normalizeUnknownText(item.budget) ?? t`Not specified`}
                 </span>
               </p>
               <Link
                 href={ROUTES.programBBacklogDetail(item.id)}
                 className="inline-flex rounded-md border border-black/10 px-3 py-2 text-sm font-medium text-[#1e58d5] transition hover:border-[#1e58d5]"
               >
-                Open detail
+                {t`Open detail`}
               </Link>
             </div>
           </StudentSectionCard>
         ))}
       </div>
 
-      <StudentSectionCard title="Pagination">
+      <StudentSectionCard title={t`Pagination`}>
         <div className="flex items-center justify-between text-sm text-neutral-700">
           <span>
-            Page {backlogQuery.data?.meta.page ?? page} of {backlogQuery.data?.meta.totalPages ?? 1}
+            {t`Page`} {backlogQuery.data?.meta.page ?? page} {t`of`}{' '}
+            {backlogQuery.data?.meta.totalPages ?? 1}
           </span>
           <div className="flex gap-2">
             <button
@@ -135,14 +137,14 @@ export default function ProgramBBacklogPage() {
               disabled={page <= 1}
               onClick={() => setPage((current) => Math.max(1, current - 1))}
             >
-              Previous
+              {t`Previous`}
             </button>
             <button
               className="rounded-md border border-black/10 px-3 py-2 disabled:opacity-40"
               disabled={page >= (backlogQuery.data?.meta.totalPages ?? 1)}
               onClick={() => setPage((current) => current + 1)}
             >
-              Next
+              {t`Next`}
             </button>
           </div>
         </div>

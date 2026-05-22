@@ -1,619 +1,495 @@
 'use client';
 
 import { t } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
-import { useQueryClient } from '@tanstack/react-query';
+import {
+  AlertTriangle,
+  ArrowRight,
+  Building2,
+  CheckCircle2,
+  Loader2,
+  Mail,
+  ShieldCheck,
+  UserPlus,
+} from 'lucide-react';
 import Link from 'next/link';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useDeferredValue, useEffect, useMemo, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
-import { z } from 'zod';
 
 import {
-  useCreateTeamInvitationsMutation,
-  useMyTeamQuery,
-  useRevokeTeamInvitationMutation,
-  useResendTeamInvitationMutation,
-  useTeamInvitationsQuery,
-  type TeamInvitation,
-  type TeamInvitationStatus,
-} from 'lib/api-client/team-invitations';
+  useAcceptOrganizationInvite,
+  useLogin,
+  useOrganizationControllerAcceptInvite,
+  useOrganizationControllerValidateInvite,
+} from 'lib/api';
 
-import { isApiRequestError } from 'lib/api-client/openapi-runtime/client';
 import { ROUTES } from 'lib/constants';
-import { formatDateTime } from 'lib/date';
-import { useResendCooldown } from 'lib/hooks/use-resend-cooldown';
-import {
-  Badge,
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  Input,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Textarea,
-} from 'components/shadcn';
+import { Badge, Button, Card, CardContent, CardHeader, CardTitle, Input } from 'components/shadcn';
 
-const STATUS_OPTIONS: Array<'ALL' | TeamInvitationStatus> = [
-  'ALL',
-  'PENDING',
-  'ACCEPTED',
-  'EXPIRED',
-  'REVOKED',
-];
-const MULTIPLE_ACTIVE_TEAMS_STATUS = 409;
-const INVITE_RESEND_COOLDOWN_SECONDS = 90;
-const emailSchema = z.email();
+type InviteMode = 'create-account' | 'existing-account';
 
-function normalizeStatus(value: string | null): 'ALL' | TeamInvitationStatus {
-  const matchedStatus = STATUS_OPTIONS.find((option) => option === value);
-
-  return matchedStatus ?? 'ALL';
-}
-
-function parsePage(value: string | null) {
-  const parsedValue = Number(value);
-
-  return Number.isFinite(parsedValue) && parsedValue > 0 ? parsedValue : 1;
-}
-
-function parseEmails(value: string) {
-  const allEmails = value
-    .split(/[\n,\s]+/)
-    .map((item) => item.trim().toLowerCase())
-    .filter(Boolean);
-  const uniqueEmails = Array.from(new Set(allEmails));
-  const validEmails = uniqueEmails.filter((email) => emailSchema.safeParse(email).success);
-  const invalidEmails = uniqueEmails.filter((email) => !emailSchema.safeParse(email).success);
-
-  return {
-    allCount: allEmails.length,
-    duplicateCount: allEmails.length - uniqueEmails.length,
-    validEmails,
-    invalidEmails,
-  };
-}
-
-function getStatusBadgeVariant(status: TeamInvitationStatus) {
-  switch (status) {
-    case 'ACCEPTED':
-      return 'bg-emerald-100 text-emerald-800';
-
-    case 'EXPIRED':
-      return 'bg-amber-100 text-amber-800';
-
-    case 'REVOKED':
-      return 'bg-red-100 text-red-800';
-
-    default:
-      return 'bg-blue-100 text-blue-800';
-  }
-}
-
-type TeamInvitationRowProps = {
-  invitation: TeamInvitation;
-  locale: string;
-  isResending: boolean;
-  isRevoking: boolean;
-  onResend: (invitationId: string) => Promise<boolean>;
-  onRevoke: (invitationId: string) => Promise<boolean>;
+type CreateAccountForm = {
+  firstName: string;
+  lastName: string;
+  password: string;
+  confirmPassword: string;
 };
 
-function TeamInvitationRow({
-  invitation,
-  locale,
-  isResending,
-  isRevoking,
-  onResend,
-  onRevoke,
-}: TeamInvitationRowProps) {
-  const { isCoolingDown, remainingSeconds, startCooldown } = useResendCooldown(
-    `team-invite-resend:${invitation.id}`,
-    INVITE_RESEND_COOLDOWN_SECONDS,
-  );
-  const canManageInvitation = invitation.status === 'PENDING';
+const MIN_NAME_LENGTH = 2;
+const MIN_PASSWORD_LENGTH = 8;
 
-  let resendLabel = t`Resend`;
+const initialCreateAccountForm: CreateAccountForm = {
+  firstName: '',
+  lastName: '',
+  password: '',
+  confirmPassword: '',
+};
 
-  if (isResending) {
-    resendLabel = t`Sending…`;
-  } else if (isCoolingDown) {
-    resendLabel = t`Resend in ${remainingSeconds}s`;
-  }
-
-  return (
-    <div className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4 shadow-sm">
-      <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-        <div className="min-w-0 space-y-3">
-          <div className="flex flex-wrap items-center gap-3">
-            <p className="min-w-0 text-base font-semibold break-words text-[#0c1a4f]">
-              {invitation.email}
-            </p>
-            <Badge className={getStatusBadgeVariant(invitation.status)}>{invitation.status}</Badge>
-          </div>
-
-          <div className="grid gap-2 text-sm text-neutral-600 sm:grid-cols-2">
-            <p>
-              <span className="font-medium text-neutral-900">{t`Created`}:</span>{' '}
-              {formatDateTime(invitation.createdAt, locale)}
-            </p>
-            <p>
-              <span className="font-medium text-neutral-900">{t`Expires`}:</span>{' '}
-              {formatDateTime(invitation.expiresAt, locale)}
-            </p>
-          </div>
-
-          {isCoolingDown && canManageInvitation ? (
-            <p className="text-sm text-neutral-500" aria-live="polite">
-              {t`This invite was just resent. Wait for the countdown before sending it again.`}
-            </p>
-          ) : null}
-        </div>
-
-        <div className="flex flex-wrap gap-2">
-          <Button
-            type="button"
-            variant="outline"
-            disabled={isResending || isRevoking || isCoolingDown || !canManageInvitation}
-            onClick={async () => {
-              const wasResent = await onResend(invitation.id);
-
-              if (wasResent) {
-                startCooldown();
-              }
-            }}
-          >
-            {resendLabel}
-          </Button>
-          <Button
-            type="button"
-            variant="outline"
-            disabled={isResending || isRevoking || !canManageInvitation}
-            onClick={async () => {
-              const confirmed = window.confirm(
-                t`Revoke this invitation? The recipient will no longer be able to use the current invite link.`,
-              );
-
-              if (!confirmed) {
-                return;
-              }
-
-              await onRevoke(invitation.id);
-            }}
-          >
-            {isRevoking ? t`Revoking…` : t`Revoke`}
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default function TeamInvitesOnboardingPage() {
-  const { i18n } = useLingui();
-  const queryClient = useQueryClient();
+export default function OrganizationInviteOnboardingPage() {
   const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const [emailsText, setEmailsText] = useState('');
-  const [createError, setCreateError] = useState<string | null>(null);
-  const [status, setStatus] = useState<'ALL' | TeamInvitationStatus>(() =>
-    normalizeStatus(searchParams.get('status')),
-  );
-  const [search, setSearch] = useState(() => searchParams.get('q') ?? '');
-  const [page, setPage] = useState(() => parsePage(searchParams.get('page')));
-  const [activeResendId, setActiveResendId] = useState<string | null>(null);
-  const [activeRevokeId, setActiveRevokeId] = useState<string | null>(null);
+  const token = searchParams.get('token')?.trim() ?? '';
+
+  const [mode, setMode] = useState<InviteMode>('create-account');
+  const [createAccountForm, setCreateAccountForm] =
+    useState<CreateAccountForm>(initialCreateAccountForm);
+  const [existingAccountPassword, setExistingAccountPassword] = useState('');
+
+  const validateInvite = useOrganizationControllerValidateInvite();
+  const acceptOrganizationInvite = useAcceptOrganizationInvite();
+  const login = useLogin();
+  const acceptExistingAccountInvite = useOrganizationControllerAcceptInvite();
+
+  const validateInviteMutation = validateInvite.mutateAsync;
 
   useEffect(() => {
-    setSearch(searchParams.get('q') ?? '');
-    setStatus(normalizeStatus(searchParams.get('status')));
-    setPage(parsePage(searchParams.get('page')));
-  }, [searchParams]);
-
-  const deferredSearch = useDeferredValue(search);
-  const statusOptions = useMemo(
-    () => [
-      { value: 'ALL' as const, label: t`All statuses` },
-      { value: 'PENDING' as const, label: t`Pending` },
-      { value: 'ACCEPTED' as const, label: t`Accepted` },
-      { value: 'EXPIRED' as const, label: t`Expired` },
-      { value: 'REVOKED' as const, label: t`Revoked` },
-    ],
-    [i18n.locale],
-  );
-  const teamQuery = useMyTeamQuery(true);
-  const teamId = teamQuery.data?.id ?? '';
-
-  const invitationFilters = useMemo(
-    () => ({
-      page,
-      limit: 10,
-      q: deferredSearch || undefined,
-      status: status === 'ALL' ? undefined : status,
-      sort: 'createdAt' as const,
-      order: 'desc' as const,
-    }),
-    [deferredSearch, page, status],
-  );
-
-  const parsedEmails = useMemo(() => parseEmails(emailsText), [emailsText]);
-  const invitationsQuery = useTeamInvitationsQuery(teamId, invitationFilters, Boolean(teamId));
-  const createInvitations = useCreateTeamInvitationsMutation();
-  const resendInvitation = useResendTeamInvitationMutation();
-  const revokeInvitation = useRevokeTeamInvitationMutation();
-
-  const updateUrlState = (nextValues: {
-    q?: string;
-    status?: 'ALL' | TeamInvitationStatus;
-    page?: number;
-  }) => {
-    const params = new URLSearchParams(searchParams.toString());
-    const nextSearch = nextValues.q ?? search;
-    const nextStatus = nextValues.status ?? status;
-    const nextPage = nextValues.page ?? page;
-
-    if (nextSearch.trim()) {
-      params.set('q', nextSearch.trim());
-    } else {
-      params.delete('q');
-    }
-
-    if (nextStatus === 'ALL') {
-      params.delete('status');
-    } else {
-      params.set('status', nextStatus);
-    }
-
-    if (nextPage > 1) {
-      params.set('page', String(nextPage));
-    } else {
-      params.delete('page');
-    }
-
-    const query = params.toString();
-
-    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
-  };
-
-  const refreshInvites = async () => {
-    await queryClient.invalidateQueries({ queryKey: ['teams', teamId, 'invitations'] });
-  };
-
-  const handleCreateInvites = async () => {
-    if (parsedEmails.validEmails.length === 0 || parsedEmails.invalidEmails.length > 0 || !teamId) {
+    if (!token) {
       return;
     }
 
-    setCreateError(null);
+    void validateInviteMutation({
+      data: {
+        token,
+      },
+    });
+  }, [token, validateInviteMutation]);
+
+  const invitation = validateInvite.data;
+
+  const isCreateAccountFormValid = useMemo(() => {
+    const firstName = createAccountForm.firstName.trim();
+    const lastName = createAccountForm.lastName.trim();
+    const password = createAccountForm.password;
+    const confirmPassword = createAccountForm.confirmPassword;
+
+    return (
+      firstName.length >= MIN_NAME_LENGTH &&
+      lastName.length >= MIN_NAME_LENGTH &&
+      password.length >= MIN_PASSWORD_LENGTH &&
+      confirmPassword.length >= MIN_PASSWORD_LENGTH &&
+      password === confirmPassword
+    );
+  }, [createAccountForm]);
+
+  const isExistingAccountFormValid = existingAccountPassword.length >= MIN_PASSWORD_LENGTH;
+
+  const isCreateAccountPending = acceptOrganizationInvite.isPending;
+  const isExistingAccountPending = login.isPending || acceptExistingAccountInvite.isPending;
+
+  const handleCreateAccountSubmit = async () => {
+    if (!token || !isCreateAccountFormValid) {
+      return;
+    }
 
     try {
-      const response = await createInvitations.mutateAsync({
-        teamId,
-        payload: { emails: parsedEmails.validEmails },
+      await acceptOrganizationInvite.mutateAsync({
+        data: {
+          token,
+          firstName: createAccountForm.firstName.trim(),
+          lastName: createAccountForm.lastName.trim(),
+          password: createAccountForm.password,
+          confirmPassword: createAccountForm.confirmPassword,
+        },
       });
 
-      setEmailsText('');
-      toast.success(
-        response.createdCount === 1
-          ? t`1 invitation created.`
-          : t`${response.createdCount} invitations created.`,
-      );
-
-      await refreshInvites();
+      toast.success(t`Organization invitation accepted.`);
+      router.push(ROUTES.DASHBOARD);
     } catch (error) {
-      const message =
+      toast.error(error instanceof Error ? error.message : t`Unable to accept invitation.`);
+    }
+  };
+
+  const handleExistingAccountSubmit = async () => {
+    if (!token || !invitation?.email || !isExistingAccountFormValid) {
+      return;
+    }
+
+    try {
+      await login.mutateAsync({
+        data: {
+          email: invitation.email,
+          password: existingAccountPassword,
+        },
+      });
+
+      await acceptExistingAccountInvite.mutateAsync({
+        data: {
+          token,
+        },
+      });
+
+      toast.success(t`Organization invitation accepted.`);
+      router.push(ROUTES.DASHBOARD);
+    } catch (error) {
+      toast.error(
         error instanceof Error
           ? error.message
-          : t`Unable to create invitations right now. Review the email list and try again.`;
-
-      setCreateError(message);
-      toast.error(message);
-    }
-  };
-
-  const handleResend = async (invitationId: string) => {
-    if (!teamId) {
-      return false;
-    }
-
-    setActiveResendId(invitationId);
-
-    try {
-      await resendInvitation.mutateAsync({ teamId, invitationId });
-      toast.success(t`Invitation resent.`);
-
-      await refreshInvites();
-
-      return true;
-    } catch (error) {
-      toast.error(
-        error instanceof Error ? error.message : t`Unable to resend the invitation right now.`,
+          : t`Unable to sign in and accept the organization invitation.`,
       );
-
-      return false;
-    } finally {
-      setActiveResendId(null);
     }
   };
 
-  const handleRevoke = async (invitationId: string) => {
-    if (!teamId) {
-      return false;
-    }
-
-    setActiveRevokeId(invitationId);
-
-    try {
-      await revokeInvitation.mutateAsync({ teamId, invitationId });
-      toast.success(t`Invitation revoked.`);
-
-      await refreshInvites();
-
-      return true;
-    } catch (error) {
-      toast.error(
-        error instanceof Error ? error.message : t`Unable to revoke the invitation right now.`,
-      );
-
-      return false;
-    } finally {
-      setActiveRevokeId(null);
-    }
+  const updateCreateAccountField = (field: keyof CreateAccountForm, value: string) => {
+    setCreateAccountForm((currentValue) => ({
+      ...currentValue,
+      [field]: value,
+    }));
   };
 
-  if (teamQuery.isLoading) {
-    return (
-      <main className="mx-auto flex min-h-screen w-full max-w-5xl items-center justify-center px-4">
-        <p className="text-sm text-neutral-600">{t`Loading current team…`}</p>
-      </main>
-    );
-  }
-
-  if (teamQuery.isError) {
-    let description = t`Unable to load the current team.`;
-
-    if (isApiRequestError(teamQuery.error) && teamQuery.error.status === 404) {
-      description = t`You do not currently have an active team.`;
-    } else if (
-      isApiRequestError(teamQuery.error) &&
-      teamQuery.error.status === MULTIPLE_ACTIVE_TEAMS_STATUS
-    ) {
-      description = t`Multiple active teams were found for your account, so invite management is blocked until that is fixed.`;
-    } else if ((teamQuery.error as unknown) instanceof Error) {
-      description = (teamQuery.error as unknown as Error).message;
-    }
-
-    return (
-      <main className="mx-auto flex min-h-screen w-full max-w-4xl items-center px-4">
-        <Card className="w-full border-red-200 bg-red-50 shadow-none">
-          <CardContent className="space-y-4 p-6 text-red-700">
-            <h1 className="text-2xl font-semibold">{t`Team invite management is unavailable`}</h1>
-            <p>{description}</p>
-            <Button type="button" onClick={() => void teamQuery.refetch()}>
-              {t`Retry`}
-            </Button>
-          </CardContent>
-        </Card>
-      </main>
-    );
-  }
-
-  const team = teamQuery.data;
-
-  if (!team) {
-    return null;
-  }
-
-  const memberSummary = team.members?.length
-    ? t`${team.members.length} members currently attached to this team.`
-    : t`No member summary was returned for this team.`;
-  const invitationList = invitationsQuery.data?.data ?? [];
-  const meta = invitationsQuery.data?.meta;
-  const canCreateInvitations =
-    parsedEmails.validEmails.length > 0 && parsedEmails.invalidEmails.length === 0;
-
-  let invitationContent = null;
-
-  if (invitationsQuery.isLoading) {
-    invitationContent = <p className="text-sm text-neutral-600">{t`Loading invitations…`}</p>;
-  } else if (invitationList.length === 0) {
-    invitationContent = (
-      <div className="rounded-xl border border-dashed border-black/15 bg-[#f6f7f8] p-6 text-sm text-neutral-600">
-        {t`No invitations match the current filters.`}
-      </div>
-    );
-  } else {
-    invitationContent = invitationList.map((invitation) => (
-      <TeamInvitationRow
-        key={invitation.id}
-        invitation={invitation}
-        locale={i18n.locale}
-        isResending={activeResendId === invitation.id}
-        isRevoking={activeRevokeId === invitation.id}
-        onResend={handleResend}
-        onRevoke={handleRevoke}
-      />
-    ));
-  }
+  const passwordMismatch =
+    createAccountForm.confirmPassword.length > 0 &&
+    createAccountForm.password !== createAccountForm.confirmPassword;
 
   return (
-    <main className="mx-auto flex w-full max-w-6xl flex-1 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
-      <div className="grid w-full gap-6 xl:grid-cols-[minmax(0,380px)_minmax(0,1fr)]">
-        <Card className="border-black/10 bg-white shadow-sm">
-          <CardHeader className="space-y-4">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-              <div>
-                <CardTitle className="text-2xl text-[#0c1a4f]">{t`Invite teammates`}</CardTitle>
-                <p className="mt-2 text-sm leading-6 text-neutral-600">
-                  {t`Create one or more student invitations for your current team. Separate emails with commas, spaces, or new lines.`}
-                </p>
-              </div>
-
-              <Button asChild type="button" variant="outline" className="shrink-0">
-                <Link href={ROUTES.DASHBOARD}>{t`Continue to dashboard`}</Link>
-              </Button>
-            </div>
-
-            <div className="rounded-xl border border-[#1e58d5]/12 bg-[#f4f8ff] px-4 py-3 text-sm text-[#23407b]">
-              {t`This step is optional. You can continue to the dashboard now and come back to invites later.`}
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-5">
-            <div className="rounded-2xl border border-black/10 bg-[#f5f6f8] p-4">
-              <p className="text-xs font-medium tracking-[0.1em] text-neutral-500 uppercase">
-                {t`Current team`}
-              </p>
-              <h2 className="mt-2 text-xl font-semibold text-[#0c1a4f]">{team.name}</h2>
-              <p className="mt-1 text-sm text-neutral-600">{memberSummary}</p>
-            </div>
-
-            <div className="space-y-2">
-              <label className="text-[11px] font-medium tracking-[0.1em] text-neutral-500 uppercase">
-                {t`Emails`}
-              </label>
-              <Textarea
-                value={emailsText}
-                onChange={(event) => setEmailsText(event.target.value)}
-                placeholder="student1@example.com\nstudent2@example.com…"
-                spellCheck={false}
-                className="min-h-44 rounded-sm border-black/10 bg-white"
-              />
-            </div>
-
-            <div className="rounded-xl border border-black/10 bg-[#f8fafc] px-4 py-3 text-sm text-neutral-600">
-              <p>
-                {t`Valid emails`}:{' '}
-                <span className="font-medium text-neutral-900">
-                  {parsedEmails.validEmails.length}
-                </span>
-              </p>
-              {parsedEmails.duplicateCount > 0 ? (
-                <p className="mt-1">{t`Duplicate entries will be ignored automatically.`}</p>
-              ) : null}
-              {parsedEmails.invalidEmails.length > 0 ? (
-                <p className="mt-1 text-red-700" aria-live="polite">
-                  {t`Fix invalid emails before creating invites:`}{' '}
-                  {parsedEmails.invalidEmails.join(', ')}
-                </p>
-              ) : null}
-            </div>
-
-            {createError ? (
-              <div
-                className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
-                aria-live="polite"
-              >
-                {createError}
-              </div>
-            ) : null}
-
-            <Button
-              type="button"
-              disabled={createInvitations.isPending || !canCreateInvitations}
-              onClick={() => void handleCreateInvites()}
-              className="w-full bg-[#1e58d5] hover:bg-[#245fdc]"
-            >
-              {createInvitations.isPending ? t`Creating…` : t`Create invitations`}
-            </Button>
-          </CardContent>
-        </Card>
-
-        <Card className="border-black/10 bg-white shadow-sm">
-          <CardHeader className="space-y-4">
-            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-              <div>
-                <CardTitle className="text-2xl text-[#0c1a4f]">{t`Current invitations`}</CardTitle>
-                <p className="mt-2 text-sm text-neutral-600">
-                  {t`Track invite state, resend pending invites, and revoke active ones.`}
-                </p>
-              </div>
-
-              <div className="grid gap-3 md:grid-cols-[220px_180px]">
-                <Input
-                  value={search}
-                  onChange={(event) => {
-                    const nextValue = event.target.value;
-
-                    setPage(1);
-                    setSearch(nextValue);
-                    updateUrlState({ q: nextValue, page: 1 });
-                  }}
-                  placeholder={t`Search by email…`}
-                  autoComplete="off"
-                  inputMode="email"
-                  spellCheck={false}
-                />
-                <Select
-                  value={status}
-                  onValueChange={(value) => {
-                    const nextStatus = value as 'ALL' | TeamInvitationStatus;
-
-                    setPage(1);
-                    setStatus(nextStatus);
-                    updateUrlState({ status: nextStatus, page: 1 });
-                  }}
-                >
-                  <SelectTrigger className="h-10 rounded-sm border-black/10 bg-white">
-                    <SelectValue placeholder={t`All statuses`} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {statusOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {invitationContent}
-
-            {meta ? (
-              <div className="flex items-center justify-between gap-4 border-t border-black/8 pt-4 text-sm text-neutral-600">
-                <span>
-                  {t`Page`} {meta.page} {t`of`} {meta.totalPages}
-                </span>
-                <div className="flex gap-2">
-                  <Button
-                    type="button"
-                    variant="outline"
-                    disabled={page <= 1}
-                    onClick={() => {
-                      const nextPage = Math.max(page - 1, 1);
-
-                      setPage(nextPage);
-                      updateUrlState({ page: nextPage });
-                    }}
-                  >
-                    {t`Previous`}
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    disabled={page >= meta.totalPages}
-                    onClick={() => {
-                      const nextPage = page + 1;
-
-                      setPage(nextPage);
-                      updateUrlState({ page: nextPage });
-                    }}
-                  >
-                    {t`Next`}
-                  </Button>
+    <main className="bg-surface text-on-surface min-h-screen">
+      <div className="grid min-h-screen lg:grid-cols-[minmax(360px,0.95fr)_minmax(0,1.05fr)]">
+        <section className="relative overflow-hidden bg-[#061742] px-6 py-10 text-white sm:px-10 lg:px-14">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(58,115,255,0.36),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(0,184,148,0.22),transparent_32%)]" />
+          <div className="relative z-10 flex min-h-full flex-col justify-between gap-16">
+            <div>
+              <Link href="/" className="inline-flex items-center gap-3">
+                {' '}
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/20">
+                  <ShieldCheck className="h-6 w-6" />
                 </div>
+                <span className="font-headline text-xl font-bold tracking-tight">NTI</span>
+              </Link>
+
+              <div className="mt-16 max-w-xl">
+                <Badge className="mb-6 bg-white/12 text-white hover:bg-white/12">
+                  <UserPlus className="mr-2 h-4 w-4" />
+                  {t`Organization invitation`}
+                </Badge>
+
+                <h1 className="font-headline text-4xl font-bold tracking-tight sm:text-5xl">
+                  {t`Join your company workspace`}
+                </h1>
+
+                <p className="mt-5 text-base leading-8 text-white/72">
+                  {t`Create an employee account or sign in with your existing account to accept this organization invitation.`}
+                </p>
               </div>
-            ) : null}
-          </CardContent>
-        </Card>
+            </div>
+
+            <div className="grid gap-4 text-sm text-white/72 sm:grid-cols-2">
+              <div className="rounded-2xl border border-white/10 bg-white/8 p-4 backdrop-blur">
+                <p className="font-semibold text-white">{t`Secure onboarding`}</p>
+                <p className="mt-2">{t`Your invitation token is verified before account setup.`}</p>
+              </div>
+
+              <div className="rounded-2xl border border-white/10 bg-white/8 p-4 backdrop-blur">
+                <p className="font-semibold text-white">{t`Employee access`}</p>
+                <p className="mt-2">{t`The invite assigns the company employee role automatically.`}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="flex items-center justify-center px-4 py-10 sm:px-6 lg:px-12">
+          <Card className="bg-surface-container-lowest w-full max-w-xl rounded-2xl border border-black/10 shadow-sm">
+            <CardHeader className="space-y-5">
+              <div className="bg-primary/10 text-primary flex h-12 w-12 items-center justify-center rounded-xl">
+                <Building2 className="h-6 w-6" />
+              </div>
+
+              <div>
+                <CardTitle className="font-headline text-3xl text-[#0c1a4f]">
+                  {t`Accept organization invite`}
+                </CardTitle>
+
+                <p className="text-on-surface-variant mt-2 text-sm leading-6">
+                  {t`Use the invitation details below to join the organization workspace.`}
+                </p>
+              </div>
+            </CardHeader>
+
+            <CardContent className="space-y-6">
+              {token ? null : (
+                <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                  <div className="flex gap-3">
+                    <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
+                    <div>
+                      <p className="font-semibold">{t`Missing invitation token`}</p>
+                      <p className="mt-1">
+                        {t`Open the full invitation link from your email and try again.`}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {token && validateInvite.isPending ? (
+                <div className="flex items-center gap-3 rounded-xl border border-black/10 bg-[#f7f8fa] px-4 py-3 text-sm text-neutral-600">
+                  <Loader2 className="h-4 w-4 animate-spin text-[#1e58d5]" />
+                  {t`Validating invitation…`}
+                </div>
+              ) : null}
+
+              {token && validateInvite.isError ? (
+                <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                  <div className="flex gap-3">
+                    <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
+                    <div>
+                      <p className="font-semibold">{t`Invitation is not available`}</p>
+                      <p className="mt-1">
+                        {t`The invitation link may be expired, revoked, or invalid.`}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+
+              {invitation ? (
+                <div className="bg-surface-container-low rounded-2xl border border-black/10 p-4">
+                  <p className="text-[11px] font-medium tracking-[0.12em] text-neutral-500 uppercase">
+                    {t`Invitation details`}
+                  </p>
+
+                  <div className="mt-3 space-y-3">
+                    <div>
+                      <p className="text-xs text-neutral-500">{t`Organization`}</p>
+                      <p className="text-lg font-semibold text-[#0c1a4f]">
+                        {invitation.organizationName}
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="text-xs text-neutral-500">{t`Invited email`}</p>
+                      <p className="flex items-center gap-2 text-sm font-medium text-neutral-900">
+                        <Mail className="h-4 w-4 text-neutral-400" />
+                        {invitation.email}
+                      </p>
+                    </div>
+
+                    <Badge className="bg-[#dce8ff] text-[#0c3fa3] hover:bg-[#dce8ff]">
+                      {invitation.roleToAssign}
+                    </Badge>
+                  </div>
+                </div>
+              ) : null}
+
+              {invitation ? (
+                <>
+                  <div className="bg-surface-container-low grid gap-2 rounded-xl p-1 sm:grid-cols-2">
+                    <Button
+                      type="button"
+                      variant={mode === 'create-account' ? 'default' : 'ghost'}
+                      onClick={() => setMode('create-account')}
+                      className={
+                        mode === 'create-account'
+                          ? 'h-11 rounded-lg bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]'
+                          : 'h-11 rounded-lg text-[12px] font-semibold tracking-widest text-[#0c1a4f]'
+                      }
+                    >
+                      {t`CREATE ACCOUNT`}
+                    </Button>
+
+                    <Button
+                      type="button"
+                      variant={mode === 'existing-account' ? 'default' : 'ghost'}
+                      onClick={() => setMode('existing-account')}
+                      className={
+                        mode === 'existing-account'
+                          ? 'h-11 rounded-lg bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]'
+                          : 'h-11 rounded-lg text-[12px] font-semibold tracking-widest text-[#0c1a4f]'
+                      }
+                    >
+                      {t`I HAVE ACCOUNT`}
+                    </Button>
+                  </div>
+
+                  {mode === 'create-account' ? (
+                    <form
+                      className="space-y-4"
+                      onSubmit={(event) => {
+                        event.preventDefault();
+                        void handleCreateAccountSubmit();
+                      }}
+                    >
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <div className="space-y-2">
+                          <label
+                            htmlFor="first-name"
+                            className="text-[11px] font-medium tracking-[0.12em] text-neutral-500 uppercase"
+                          >
+                            {t`First name`}
+                          </label>
+                          <Input
+                            id="first-name"
+                            value={createAccountForm.firstName}
+                            onChange={(event) =>
+                              updateCreateAccountField('firstName', event.target.value)
+                            }
+                            autoComplete="given-name"
+                            className="h-12 rounded-sm border-black/10 bg-white"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <label
+                            htmlFor="last-name"
+                            className="text-[11px] font-medium tracking-[0.12em] text-neutral-500 uppercase"
+                          >
+                            {t`Last name`}
+                          </label>
+                          <Input
+                            id="last-name"
+                            value={createAccountForm.lastName}
+                            onChange={(event) =>
+                              updateCreateAccountField('lastName', event.target.value)
+                            }
+                            autoComplete="family-name"
+                            className="h-12 rounded-sm border-black/10 bg-white"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <label
+                          htmlFor="new-password"
+                          className="text-[11px] font-medium tracking-[0.12em] text-neutral-500 uppercase"
+                        >
+                          {t`Password`}
+                        </label>
+                        <Input
+                          id="new-password"
+                          value={createAccountForm.password}
+                          onChange={(event) =>
+                            updateCreateAccountField('password', event.target.value)
+                          }
+                          type="password"
+                          autoComplete="new-password"
+                          className="h-12 rounded-sm border-black/10 bg-white"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <label
+                          htmlFor="confirm-password"
+                          className="text-[11px] font-medium tracking-[0.12em] text-neutral-500 uppercase"
+                        >
+                          {t`Confirm password`}
+                        </label>
+                        <Input
+                          id="confirm-password"
+                          value={createAccountForm.confirmPassword}
+                          onChange={(event) =>
+                            updateCreateAccountField('confirmPassword', event.target.value)
+                          }
+                          type="password"
+                          autoComplete="new-password"
+                          className="h-12 rounded-sm border-black/10 bg-white"
+                        />
+                        {passwordMismatch ? (
+                          <p className="text-sm text-red-700" aria-live="polite">
+                            {t`Passwords do not match.`}
+                          </p>
+                        ) : null}
+                      </div>
+
+                      <Button
+                        type="submit"
+                        disabled={!isCreateAccountFormValid || isCreateAccountPending}
+                        className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
+                      >
+                        {isCreateAccountPending ? t`JOINING...` : t`JOIN ORGANIZATION`}
+                        {isCreateAccountPending ? (
+                          <Loader2 className="ml-2 h-4 w-4 animate-spin" />
+                        ) : (
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        )}
+                      </Button>
+                    </form>
+                  ) : (
+                    <form
+                      className="space-y-4"
+                      onSubmit={(event) => {
+                        event.preventDefault();
+                        void handleExistingAccountSubmit();
+                      }}
+                    >
+                      <div className="rounded-xl border border-[#1e58d5]/15 bg-[#f4f8ff] px-4 py-3 text-sm text-[#23407b]">
+                        <div className="flex gap-3">
+                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" />
+                          <p>
+                            {t`Sign in with the account that uses the invited email address. After login, the invitation will be accepted automatically.`}
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <label
+                          htmlFor="existing-email"
+                          className="text-[11px] font-medium tracking-[0.12em] text-neutral-500 uppercase"
+                        >
+                          {t`Email`}
+                        </label>
+                        <Input
+                          id="existing-email"
+                          value={invitation.email}
+                          disabled
+                          type="email"
+                          className="h-12 rounded-sm border-black/10 bg-neutral-100"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <label
+                          htmlFor="existing-password"
+                          className="text-[11px] font-medium tracking-[0.12em] text-neutral-500 uppercase"
+                        >
+                          {t`Password`}
+                        </label>
+                        <Input
+                          id="existing-password"
+                          value={existingAccountPassword}
+                          onChange={(event) => setExistingAccountPassword(event.target.value)}
+                          type="password"
+                          autoComplete="current-password"
+                          className="h-12 rounded-sm border-black/10 bg-white"
+                        />
+                      </div>
+
+                      <Button
+                        type="submit"
+                        disabled={!isExistingAccountFormValid || isExistingAccountPending}
+                        className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
+                      >
+                        {isExistingAccountPending ? t`ACCEPTING...` : t`SIGN IN AND ACCEPT`}
+                        {isExistingAccountPending ? (
+                          <Loader2 className="ml-2 h-4 w-4 animate-spin" />
+                        ) : (
+                          <ArrowRight className="ml-2 h-4 w-4" />
+                        )}
+                      </Button>
+                    </form>
+                  )}
+                </>
+              ) : null}
+            </CardContent>
+          </Card>
+        </section>
       </div>
     </main>
   );

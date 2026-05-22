@@ -20,6 +20,8 @@ export default function DashboardPage() {
   const queryClient = useQueryClient();
 
   const [email, setEmail] = useState('');
+  const [activeResendInviteId, setActiveResendInviteId] = useState<string | null>(null);
+  const [activeRevokeInviteId, setActiveRevokeInviteId] = useState<string | null>(null);
 
   const organizationQuery = useOrganizationControllerGetMyOrganization();
   const createInvite = useOrganizationControllerCreateInvite();
@@ -82,6 +84,8 @@ export default function DashboardPage() {
       return;
     }
 
+    setActiveResendInviteId(inviteId);
+
     try {
       await resendInvite.mutateAsync({
         id: organizationId,
@@ -92,6 +96,8 @@ export default function DashboardPage() {
       await refreshInvites();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : t`Unable to resend invitation.`);
+    } finally {
+      setActiveResendInviteId(null);
     }
   };
 
@@ -99,6 +105,8 @@ export default function DashboardPage() {
     if (!organizationId) {
       return;
     }
+
+    setActiveRevokeInviteId(inviteId);
 
     try {
       await revokeInvite.mutateAsync({
@@ -110,6 +118,8 @@ export default function DashboardPage() {
       await refreshInvites();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : t`Unable to revoke invitation.`);
+    } finally {
+      setActiveRevokeInviteId(null);
     }
   };
 
@@ -131,15 +141,6 @@ export default function DashboardPage() {
                 {t`Invite employees to join your organization, track pending invitations, and manage organization members from one place.`}
               </p>
             </div>
-
-            <Button
-              type="button"
-              disabled={!organizationId}
-              className="h-12 rounded-sm bg-[#1e58d5] px-6 text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
-            >
-              {t`OPEN ORGANIZATION`}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
           </div>
         </section>
 
@@ -290,56 +291,62 @@ export default function DashboardPage() {
                 </div>
               ) : null}
 
-              {invites.map((invite) => (
-                <div
-                  key={invite.id}
-                  className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4 shadow-sm"
-                >
-                  <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-                    <div className="space-y-3">
-                      <div className="flex flex-wrap items-center gap-3">
-                        <p className="text-base font-semibold text-[#0c1a4f]">{invite.email}</p>
+              {invites.map((invite) => {
+                const isResendingInvite = activeResendInviteId === invite.id;
+                const isRevokingInvite = activeRevokeInviteId === invite.id;
+                const isPendingInvite = invite.status === 'PENDING';
 
-                        <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100">
-                          {invite.status}
-                        </Badge>
+                return (
+                  <div
+                    key={invite.id}
+                    className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4 shadow-sm"
+                  >
+                    <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                      <div className="space-y-3">
+                        <div className="flex flex-wrap items-center gap-3">
+                          <p className="text-base font-semibold text-[#0c1a4f]">{invite.email}</p>
+
+                          <Badge className="bg-blue-100 text-blue-800 hover:bg-blue-100">
+                            {invite.status}
+                          </Badge>
+                        </div>
+
+                        <div className="grid gap-2 text-sm text-neutral-600 sm:grid-cols-2">
+                          <p>
+                            <span className="font-medium text-neutral-900">{t`Created:`}</span>{' '}
+                            {new Date(invite.createdAt).toLocaleDateString()}
+                          </p>
+
+                          <p>
+                            <span className="font-medium text-neutral-900">{t`Expires:`}</span>{' '}
+                            {new Date(invite.expiresAt).toLocaleDateString()}
+                          </p>
+                        </div>
                       </div>
 
-                      <div className="grid gap-2 text-sm text-neutral-600 sm:grid-cols-2">
-                        <p>
-                          <span className="font-medium text-neutral-900">{t`Created:`}</span>{' '}
-                          {new Date(invite.createdAt).toLocaleDateString()}
-                        </p>
+                      <div className="flex flex-wrap gap-2">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          disabled={!isPendingInvite || isResendingInvite}
+                          onClick={() => void handleResendInvite(invite.id)}
+                        >
+                          {isResendingInvite ? t`Resending...` : t`Resend`}
+                        </Button>
 
-                        <p>
-                          <span className="font-medium text-neutral-900">{t`Expires:`}</span>{' '}
-                          {new Date(invite.expiresAt).toLocaleDateString()}
-                        </p>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          disabled={!isPendingInvite || isRevokingInvite}
+                          onClick={() => void handleRevokeInvite(invite.id)}
+                        >
+                          {isRevokingInvite ? t`Revoking...` : t`Revoke`}
+                        </Button>
                       </div>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2">
-                      <Button
-                        type="button"
-                        variant="outline"
-                        disabled={invite.status !== 'PENDING' || resendInvite.isPending}
-                        onClick={() => void handleResendInvite(invite.id)}
-                      >
-                        {resendInvite.isPending ? t`Resending...` : t`Resend`}
-                      </Button>
-
-                      <Button
-                        type="button"
-                        variant="outline"
-                        disabled={invite.status !== 'PENDING' || revokeInvite.isPending}
-                        onClick={() => void handleRevokeInvite(invite.id)}
-                      >
-                        {revokeInvite.isPending ? t`Revoking...` : t`Revoke`}
-                      </Button>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </CardContent>
           </Card>
         </section>

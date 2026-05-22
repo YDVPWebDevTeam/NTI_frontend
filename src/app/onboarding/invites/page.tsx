@@ -61,21 +61,37 @@ export default function OrganizationInviteOnboardingPage() {
   const login = useLogin();
   const acceptExistingAccountInvite = useOrganizationControllerAcceptInvite();
 
-  const validateInviteMutation = validateInvite.mutateAsync;
+  const [validatedInvitation, setValidatedInvitation] = useState<{
+    token: string;
+    data: typeof validateInvite.data;
+  }>();
 
   useEffect(() => {
     if (!token) {
       return;
     }
 
-    void validateInviteMutation({
-      data: {
-        token,
+    validateInvite.mutate(
+      {
+        data: {
+          token,
+        },
       },
-    });
-  }, [token, validateInviteMutation]);
+      {
+        onSuccess: (data) => {
+          setValidatedInvitation({
+            token,
+            data,
+          });
+        },
+        onError: () => {
+          setValidatedInvitation(undefined);
+        },
+      },
+    );
+  }, [token, validateInvite]);
 
-  const invitation = validateInvite.data;
+  const invitation = validatedInvitation?.token === token ? validatedInvitation.data : undefined;
 
   const isCreateAccountFormValid = useMemo(() => {
     const firstName = createAccountForm.firstName.trim();
@@ -166,13 +182,14 @@ export default function OrganizationInviteOnboardingPage() {
       <div className="grid min-h-screen lg:grid-cols-[minmax(360px,0.95fr)_minmax(0,1.05fr)]">
         <section className="relative overflow-hidden bg-[#061742] px-6 py-10 text-white sm:px-10 lg:px-14">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(58,115,255,0.36),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(0,184,148,0.22),transparent_32%)]" />
+
           <div className="relative z-10 flex min-h-full flex-col justify-between gap-16">
             <div>
               <Link href="/" className="inline-flex items-center gap-3">
-                {' '}
                 <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/10 ring-1 ring-white/20">
                   <ShieldCheck className="h-6 w-6" />
                 </div>
+
                 <span className="font-headline text-xl font-bold tracking-tight">NTI</span>
               </Link>
 
@@ -229,6 +246,7 @@ export default function OrganizationInviteOnboardingPage() {
                 <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
                   <div className="flex gap-3">
                     <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
+
                     <div>
                       <p className="font-semibold">{t`Missing invitation token`}</p>
                       <p className="mt-1">
@@ -250,6 +268,7 @@ export default function OrganizationInviteOnboardingPage() {
                 <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
                   <div className="flex gap-3">
                     <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
+
                     <div>
                       <p className="font-semibold">{t`Invitation is not available`}</p>
                       <p className="mt-1">
@@ -335,6 +354,7 @@ export default function OrganizationInviteOnboardingPage() {
                           >
                             {t`First name`}
                           </label>
+
                           <Input
                             id="first-name"
                             value={createAccountForm.firstName}
@@ -353,6 +373,7 @@ export default function OrganizationInviteOnboardingPage() {
                           >
                             {t`Last name`}
                           </label>
+
                           <Input
                             id="last-name"
                             value={createAccountForm.lastName}
@@ -372,6 +393,7 @@ export default function OrganizationInviteOnboardingPage() {
                         >
                           {t`Password`}
                         </label>
+
                         <Input
                           id="new-password"
                           value={createAccountForm.password}
@@ -391,6 +413,7 @@ export default function OrganizationInviteOnboardingPage() {
                         >
                           {t`Confirm password`}
                         </label>
+
                         <Input
                           id="confirm-password"
                           value={createAccountForm.confirmPassword}
@@ -401,6 +424,7 @@ export default function OrganizationInviteOnboardingPage() {
                           autoComplete="new-password"
                           className="h-12 rounded-sm border-black/10 bg-white"
                         />
+
                         {passwordMismatch ? (
                           <p className="text-sm text-red-700" aria-live="polite">
                             {t`Passwords do not match.`}
@@ -414,6 +438,7 @@ export default function OrganizationInviteOnboardingPage() {
                         className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
                       >
                         {isCreateAccountPending ? t`JOINING...` : t`JOIN ORGANIZATION`}
+
                         {isCreateAccountPending ? (
                           <Loader2 className="ml-2 h-4 w-4 animate-spin" />
                         ) : (
@@ -432,6 +457,7 @@ export default function OrganizationInviteOnboardingPage() {
                       <div className="rounded-xl border border-[#1e58d5]/15 bg-[#f4f8ff] px-4 py-3 text-sm text-[#23407b]">
                         <div className="flex gap-3">
                           <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" />
+
                           <p>
                             {t`Sign in with the account that uses the invited email address. After login, the invitation will be accepted automatically.`}
                           </p>
@@ -445,6 +471,7 @@ export default function OrganizationInviteOnboardingPage() {
                         >
                           {t`Email`}
                         </label>
+
                         <Input
                           id="existing-email"
                           value={invitation.email}
@@ -461,6 +488,7 @@ export default function OrganizationInviteOnboardingPage() {
                         >
                           {t`Password`}
                         </label>
+
                         <Input
                           id="existing-password"
                           value={existingAccountPassword}
@@ -477,6 +505,7 @@ export default function OrganizationInviteOnboardingPage() {
                         className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
                       >
                         {isExistingAccountPending ? t`ACCEPTING...` : t`SIGN IN AND ACCEPT`}
+
                         {isExistingAccountPending ? (
                           <Loader2 className="ml-2 h-4 w-4 animate-spin" />
                         ) : (

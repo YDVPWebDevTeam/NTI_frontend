@@ -176,9 +176,11 @@ export default function OrganizationInviteDashboard() {
                   </h2>
 
                   <p className="text-on-surface-variant mt-1 text-sm">
-                    {organization
-                      ? t`ICO: ${organization.ico}`
-                      : t`Members and invitations will appear here after API integration.`}
+                    {!organization
+                      ? t`Members and invitations will appear here after API integration.`
+                      : organization.ico
+                        ? t`ICO: ${organization.ico}`
+                        : null}
                   </p>
 
                   {organization?.status ? (

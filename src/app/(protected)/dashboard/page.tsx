@@ -22,6 +22,7 @@ import {
   useProgramBProjectsControllerListMy,
   useTeamControllerFindCurrentForUser,
 } from 'lib/api';
+import OrganizationInviteDashboard from 'components/organization-dashboard/organization-invite-dashboard';
 import { Button } from 'components/shadcn';
 import {
   StudentKeyValueList,
@@ -42,7 +43,6 @@ import {
 } from 'lib/student-dashboard/normalizers';
 import { useAuthenticatedUser } from 'lib/student-dashboard/use-authenticated-user';
 import { isOrganizationRole, isStudentRole } from 'lib/student-dashboard/access';
-import OrganizationInviteDashboard from 'components/organization-dashboard/organization-invite-dashboard';
 
 const PROGRAM_B_PROJECT_PREVIEW_LIMIT = 3;
 const PROGRAM_B_BACKLOG_PREVIEW_LIMIT = 3;

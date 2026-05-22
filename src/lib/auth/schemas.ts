@@ -145,7 +145,6 @@ export function createStudentSkillsSchema() {
         .max(MAX_SOFT_SKILLS, { message: i18n._(msg`Select at most 3 soft skills.`) })
         .optional()
         .default([]),
-      teamName: z.string().optional(),
       githubUrl: z
         .string()
         .url({ message: i18n._(msg`Enter a valid URL.`) })

@@ -25,6 +25,11 @@ const ADMIN_ROUTES = {
 export const ROUTES = {
   ROOT: '/',
   DASHBOARD: '/dashboard',
+  PROFILE: '/profile',
+  TEAM: '/team',
+  PROGRAM_B_BACKLOG: '/program-b/backlog',
+  PROGRAM_B_PROJECTS: '/program-b/projects',
+  APPLICATIONS: '/applications',
   INVITE: '/invite',
   ONBOARDING_PROFILE: '/onboarding/profile',
   ONBOARDING_INVITES: '/onboarding/invites',
@@ -45,6 +50,10 @@ export const ROUTES = {
     LINKEDIN: 'https://www.linkedin.com',
     TWITTER: 'https://x.com',
   },
+
+  studentApplication: (applicationId: string) => `/applications/${applicationId}`,
+  programBBacklogDetail: (backlogItemId: string) => `/program-b/backlog/${backlogItemId}`,
+  programBProjectDetail: (projectId: string) => `/program-b/projects/${projectId}`,
 
   ADMIN: ADMIN_ROUTES,
   AUTH: AUTH_ROUTES,

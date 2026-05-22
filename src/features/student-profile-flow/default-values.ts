@@ -28,7 +28,6 @@ export function getStudentProfileDefaultValues(): StudentRegistrationValues {
     focusAreas: [],
     preferredRoles: [],
     softSkills: [],
-    teamName: '',
     githubUrl: '',
     linkedinUrl: '',
     portfolioUrl: '',

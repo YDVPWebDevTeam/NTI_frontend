@@ -1,5 +1,4 @@
 import type {
-  CompleteMyStudentProfileMutationBody,
   GetMyStudentProfileQueryResult,
   ProfessionalSkillInputDtoLevel,
   UpdateAcademicInformationDtoDegreeLevel,
@@ -64,7 +63,6 @@ export function mapStudentProfileToFormValues(
     focusAreas: profile.focusAreas ?? [],
     preferredRoles: profile.preferredRoles ?? [],
     softSkills: (profile.softSkills ?? []) as StudentRegistrationValues['softSkills'],
-    teamName: '',
     githubUrl: profile.githubUrl ?? '',
     linkedinUrl: profile.linkedinUrl ?? '',
     portfolioUrl: profile.portfolioUrl ?? '',
@@ -115,7 +113,6 @@ export function buildProfessionalSkillsPayload(
   cvFileId: string,
 ): UpdateMyStudentProfessionalSkillsMutationBody {
   return {
-    teamName: toOptionalString(values.teamName),
     focusAreas: values.focusAreas as UpdateProfessionalSkillsDtoFocusAreasItem[],
     preferredRoles: values.preferredRoles as UpdateProfessionalSkillsDtoPreferredRolesItem[],
     softSkills: filterNonEmptyStrings(
@@ -136,13 +133,5 @@ export function buildProfessionalSkillsPayload(
       technologies: filterNonEmptyStrings(project.technologies ?? []),
       projectUrl: toOptionalString(project.projectUrl),
     })),
-  };
-}
-
-export function buildCompleteProfilePayload(
-  values: StudentRegistrationValues,
-): CompleteMyStudentProfileMutationBody {
-  return {
-    teamName: toOptionalString(values.teamName) ?? '',
   };
 }

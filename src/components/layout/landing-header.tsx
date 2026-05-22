@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { LanguageSelector } from 'components/i18n/language-switcher';
 import { ROUTES } from 'lib/constants';
 
+import { LandingAuthActions } from './landing-auth-actions';
 import { NtiBrand } from './nti-brand';
 
 export function LandingHeader() {
@@ -58,18 +59,24 @@ export function LandingHeader() {
             triggerClassName="text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/70"
             contentClassName="border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900"
           />
-          <Link
-            className="w-full px-4 py-2 text-center font-bold text-slate-600 transition-all hover:text-blue-900 md:w-auto dark:text-slate-400"
-            href={ROUTES.AUTH.LOGIN}
-          >
-            {t`Login`}
-          </Link>
-          <Link
-            className="primary-gradient w-full scale-95 rounded-lg px-6 py-2.5 text-center text-white shadow-lg transition-transform active:opacity-80 md:w-auto"
-            href={ROUTES.AUTH.REGISTER_SELECT}
-          >
-            {t`Register`}
-          </Link>
+          <LandingAuthActions
+            className="flex w-full flex-col items-center gap-3 md:w-auto md:flex-row"
+            authenticatedClassName="primary-gradient w-full scale-95 rounded-lg px-6 py-2.5 text-center text-white shadow-lg transition-transform active:opacity-80 md:w-auto"
+            unauthenticatedActions={[
+              {
+                className:
+                  'w-full px-4 py-2 text-center font-bold text-slate-600 transition-all hover:text-blue-900 md:w-auto dark:text-slate-400',
+                href: ROUTES.AUTH.LOGIN,
+                label: t`Login`,
+              },
+              {
+                className:
+                  'primary-gradient w-full scale-95 rounded-lg px-6 py-2.5 text-center text-white shadow-lg transition-transform active:opacity-80 md:w-auto',
+                href: ROUTES.AUTH.REGISTER_SELECT,
+                label: t`Register`,
+              },
+            ]}
+          />
         </div>
       </nav>
     </header>

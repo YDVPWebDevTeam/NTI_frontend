@@ -16,18 +16,10 @@ msgstr ""
 msgid " and institutional data processing terms required for platform access."
 msgstr " and institutional data processing terms required for platform access."
 
-#. placeholder {0}: response.createdCount
-msgid "{0} invitations created."
-msgstr "{0} invitations created."
-
 #. placeholder {0}: selectedFaculty.name
 #. placeholder {0}: selectedUniversity.name
 msgid "{0} is currently selected."
 msgstr "{0} is currently selected."
-
-#. placeholder {0}: team.members.length
-msgid "{0} members currently attached to this team."
-msgstr "{0} members currently attached to this team."
 
 msgid "{activeOrganizations} organizations are currently active."
 msgstr "{activeOrganizations} organizations are currently active."
@@ -37,9 +29,6 @@ msgstr "{activeUsers} active accounts across the platform."
 
 msgid "© 2026 NTI. All rights reserved."
 msgstr "© 2026 NTI. All rights reserved."
-
-msgid "1 invitation created."
-msgstr "1 invitation created."
 
 msgid "100% Complete"
 msgstr "100% Complete"
@@ -70,9 +59,6 @@ msgstr "Academic Information"
 
 msgid "Academic information saved."
 msgstr "Academic information saved."
-
-msgid "Academic section"
-msgstr "Academic section"
 
 msgid "Academic Structure"
 msgstr "Academic Structure"
@@ -169,6 +155,9 @@ msgstr "All statuses"
 
 msgid "Already have an account?"
 msgstr "Already have an account?"
+
+msgid "An account with this invited email already exists. Use the existing account path instead."
+msgstr "An account with this invited email already exists. Use the existing account path instead."
 
 msgid "Approve"
 msgstr "Approve"
@@ -275,17 +264,8 @@ msgstr "Company Partner"
 msgid "Complete"
 msgstr "Complete"
 
-msgid "Complete profile"
-msgstr "Complete profile"
-
 msgid "Complete your student profile"
 msgstr "Complete your student profile"
-
-msgid "Completing…"
-msgstr "Completing…"
-
-msgid "Completion"
-msgstr "Completion"
 
 msgid "COMPLIANT"
 msgstr "COMPLIANT"
@@ -326,9 +306,6 @@ msgstr "Continue as Company Partner"
 msgid "Continue as Regular User"
 msgstr "Continue as Regular User"
 
-msgid "Continue to dashboard"
-msgstr "Continue to dashboard"
-
 msgid "Control Center"
 msgstr "Control Center"
 
@@ -362,14 +339,8 @@ msgstr "Create an invite to inspect the returned metadata here."
 msgid "Create Faculty"
 msgstr "Create Faculty"
 
-msgid "Create invitations"
-msgstr "Create invitations"
-
 msgid "Create Invite"
 msgstr "Create Invite"
-
-msgid "Create one or more student invitations for your current team. Separate emails with commas, spaces, or new lines."
-msgstr "Create one or more student invitations for your current team. Separate emails with commas, spaces, or new lines."
 
 msgid "Create organization"
 msgstr "Create organization"
@@ -416,17 +387,8 @@ msgstr "Creating organization…"
 msgid "Creating..."
 msgstr "Creating..."
 
-msgid "Creating…"
-msgstr "Creating…"
-
-msgid "Current invitations"
-msgstr "Current invitations"
-
 msgid "Current Search"
 msgstr "Current Search"
-
-msgid "Current team"
-msgstr "Current team"
 
 msgid "Current Year of Study"
 msgstr "Current Year of Study"
@@ -439,6 +401,9 @@ msgstr "CV file is required."
 
 msgid "CV, technical skills, roles, links, and projects."
 msgstr "CV, technical skills, roles, links, and projects."
+
+msgid "Dashboard"
+msgstr "Dashboard"
 
 msgid "Degree / Code"
 msgstr "Degree / Code"
@@ -491,9 +456,6 @@ msgstr "Don't have an account yet?"
 msgid "Driving innovation and economic growth through technology and academic collaboration."
 msgstr "Driving innovation and economic growth through technology and academic collaboration."
 
-msgid "Duplicate entries will be ignored automatically."
-msgstr "Duplicate entries will be ignored automatically."
-
 msgid "E.g. Algorithms, Distributed Systems, UX Design"
 msgstr "E.g. Algorithms, Distributed Systems, UX Design"
 
@@ -503,14 +465,8 @@ msgstr "E.g. competitions, awards, scholarships..."
 msgid "e.g., React"
 msgstr "e.g., React"
 
-msgid "Edit academic information"
-msgstr "Edit academic information"
-
 msgid "Edit Faculty"
 msgstr "Edit Faculty"
-
-msgid "Edit professional skills"
-msgstr "Edit professional skills"
 
 msgid "Edit Specialization"
 msgstr "Edit Specialization"
@@ -535,9 +491,6 @@ msgstr "Email confirmation failed"
 
 msgid "EMAIL VERIFICATION"
 msgstr "EMAIL VERIFICATION"
-
-msgid "Emails"
-msgstr "Emails"
 
 msgid "Enable"
 msgstr "Enable"
@@ -583,9 +536,6 @@ msgstr "Enter your password"
 
 msgid "Enter your password…"
 msgstr "Enter your password…"
-
-msgid "Enter your team name"
-msgstr "Enter your team name"
 
 msgid "Enterprise Data Analytics"
 msgstr "Enterprise Data Analytics"
@@ -665,9 +615,6 @@ msgstr "Filter specializations on this page"
 msgid "Filter universities"
 msgstr "Filter universities"
 
-msgid "Final review and completion once both sections are ready."
-msgstr "Final review and completion once both sections are ready."
-
 msgid "FINISH REGISTRATION"
 msgstr "FINISH REGISTRATION"
 
@@ -682,9 +629,6 @@ msgstr "First name must be at least 2 characters."
 
 msgid "First name must be at most 50 characters."
 msgstr "First name must be at most 50 characters."
-
-msgid "Fix invalid emails before creating invites:"
-msgstr "Fix invalid emails before creating invites:"
 
 msgid "Focus Areas"
 msgstr "Focus Areas"
@@ -709,6 +653,9 @@ msgstr "Generate a direct invite for any supported platform role."
 
 msgid "GitHub Profile"
 msgstr "GitHub Profile"
+
+msgid "Go to dashboard"
+msgstr "Go to dashboard"
 
 msgid "Help us understand your academic performance."
 msgstr "Help us understand your academic performance."
@@ -767,17 +714,14 @@ msgstr "Innovation Repository"
 msgid "Invalid organization id"
 msgstr "Invalid organization id"
 
-msgid "Invitation resent."
-msgstr "Invitation resent."
-
-msgid "Invitation revoked."
-msgstr "Invitation revoked."
-
 msgid "INVITE COLLEAGUES"
 msgstr "INVITE COLLEAGUES"
 
 msgid "Invite Id"
 msgstr "Invite Id"
+
+msgid "Invite not found"
+msgstr "Invite not found"
 
 msgid "INVITE ONBOARDING"
 msgstr "INVITE ONBOARDING"
@@ -785,8 +729,8 @@ msgstr "INVITE ONBOARDING"
 msgid "Invite Status"
 msgstr "Invite Status"
 
-msgid "Invite teammates"
-msgstr "Invite teammates"
+msgid "Invite unavailable"
+msgstr "Invite unavailable"
 
 msgid "Invited email"
 msgstr "Invited email"
@@ -802,6 +746,9 @@ msgstr "Join your invited team"
 
 msgid "JOINING TEAM..."
 msgstr "JOINING TEAM..."
+
+msgid "Keep your academic and professional information up to date."
+msgstr "Keep your academic and professional information up to date."
 
 msgid "Last name"
 msgstr "Last name"
@@ -842,14 +789,8 @@ msgstr "Loading academic structure..."
 msgid "Loading admin data..."
 msgstr "Loading admin data..."
 
-msgid "Loading current team…"
-msgstr "Loading current team…"
-
 msgid "Loading faculties..."
 msgstr "Loading faculties..."
-
-msgid "Loading invitations…"
-msgstr "Loading invitations…"
 
 msgid "Loading profile onboarding..."
 msgstr "Loading profile onboarding..."
@@ -902,14 +843,14 @@ msgstr "Mentoring"
 msgid "Mentors"
 msgstr "Mentors"
 
+msgid "Missing invite token"
+msgstr "Missing invite token"
+
 msgid "Most recent response from the invite endpoint."
 msgstr "Most recent response from the invite endpoint."
 
 msgid "MULTI-FACTOR"
 msgstr "MULTI-FACTOR"
-
-msgid "Multiple active teams were found for your account, so invite management is blocked until that is fixed."
-msgstr "Multiple active teams were found for your account, so invite management is blocked until that is fixed."
 
 msgid "Must be a valid email address."
 msgstr "Must be a valid email address."
@@ -938,9 +879,6 @@ msgstr "New Password"
 msgid "News"
 msgstr "News"
 
-msgid "Next"
-msgstr "Next"
-
 msgid "NEXT STEP"
 msgstr "NEXT STEP"
 
@@ -959,12 +897,6 @@ msgstr "No faculties available"
 msgid "No faculties found"
 msgstr "No faculties found"
 
-msgid "No invitations match the current filters."
-msgstr "No invitations match the current filters."
-
-msgid "No member summary was returned for this team."
-msgstr "No member summary was returned for this team."
-
 msgid "No organization invites found"
 msgstr "No organization invites found"
 
@@ -973,6 +905,9 @@ msgstr "No organizations match the current filters."
 
 msgid "No organizations need review"
 msgstr "No organizations need review"
+
+msgid "No sector provided"
+msgstr "No sector provided"
 
 msgid "No short name"
 msgstr "No short name"
@@ -995,9 +930,6 @@ msgstr "No university selected"
 msgid "No users match the current filters."
 msgstr "No users match the current filters."
 
-msgid "No website provided"
-msgstr "No website provided"
-
 msgid "None"
 msgstr "None"
 
@@ -1012,9 +944,6 @@ msgstr "NTI Admin"
 
 msgid "Number of transferred subjects"
 msgstr "Number of transferred subjects"
-
-msgid "of"
-msgstr "of"
 
 msgid "Open menu"
 msgstr "Open menu"
@@ -1070,9 +999,6 @@ msgstr "Organizations waiting for review or already rejected."
 msgid "Overview"
 msgstr "Overview"
 
-msgid "Page"
-msgstr "Page"
-
 msgid "Password"
 msgstr "Password"
 
@@ -1121,9 +1047,6 @@ msgstr "POST-INVITE ONBOARDING"
 msgid "Preferred Roles"
 msgstr "Preferred Roles"
 
-msgid "Previous"
-msgstr "Previous"
-
 msgid "PREVIOUS STEP"
 msgstr "PREVIOUS STEP"
 
@@ -1138,9 +1061,6 @@ msgstr "PRIVACY POLICY"
 
 msgid "PROCESSING..."
 msgstr "PROCESSING..."
-
-msgid "Professional section"
-msgstr "Professional section"
 
 msgid "Professional skills"
 msgstr "Professional skills"
@@ -1157,14 +1077,14 @@ msgstr "Professional Summary"
 msgid "Proficiency"
 msgstr "Proficiency"
 
-msgid "Profile completed."
-msgstr "Profile completed."
-
 msgid "Profile Nailed"
 msgstr "Profile Nailed"
 
 msgid "Profile onboarding is unavailable"
 msgstr "Profile onboarding is unavailable"
+
+msgid "PROFILE SETTINGS"
+msgstr "PROFILE SETTINGS"
 
 msgid "Program B Challenge Management"
 msgstr "Program B Challenge Management"
@@ -1189,9 +1109,6 @@ msgstr "Protected"
 
 msgid "Quick Links"
 msgstr "Quick Links"
-
-msgid "Ready for final completion."
-msgstr "Ready for final completion."
 
 msgid "Recent organizations that still need an operational decision."
 msgstr "Recent organizations that still need an operational decision."
@@ -1226,12 +1143,6 @@ msgstr "Relevant Courses"
 msgid "Repeat the new password"
 msgstr "Repeat the new password"
 
-msgid "Request failed"
-msgstr "Request failed"
-
-msgid "Resend"
-msgstr "Resend"
-
 msgid "Resend confirmation email"
 msgstr "Resend confirmation email"
 
@@ -1253,20 +1164,8 @@ msgstr "Review Organizations"
 msgid "Review Queue"
 msgstr "Review Queue"
 
-msgid "Review the completion state and finalize the profile when both sections are complete."
-msgstr "Review the completion state and finalize the profile when both sections are complete."
-
-msgid "Revoke"
-msgstr "Revoke"
-
-msgid "Revoke this invitation? The recipient will no longer be able to use the current invite link."
-msgstr "Revoke this invitation? The recipient will no longer be able to use the current invite link."
-
 msgid "Revoked"
 msgstr "Revoked"
-
-msgid "Revoking…"
-msgstr "Revoking…"
 
 msgid "Role"
 msgstr "Role"
@@ -1306,9 +1205,6 @@ msgstr "Search accounts, inspect roles, and suspend or reactivate access."
 
 msgid "Search by email, role, or id"
 msgstr "Search by email, role, or id"
-
-msgid "Search by email…"
-msgstr "Search by email…"
 
 msgid "Search by name, website, sector, or id"
 msgstr "Search by name, website, sector, or id"
@@ -1514,12 +1410,6 @@ msgstr "Step {REVIEW_STEP_NUMBER}"
 msgid "Step {SKILLS_STEP_NUMBER}"
 msgstr "Step {SKILLS_STEP_NUMBER}"
 
-msgid "Still incomplete. Return to the academic stage to finish it."
-msgstr "Still incomplete. Return to the academic stage to finish it."
-
-msgid "Still incomplete. Return to the professional stage to finish it."
-msgstr "Still incomplete. Return to the professional stage to finish it."
-
 msgid "Strategic Institutions"
 msgstr "Strategic Institutions"
 
@@ -1568,12 +1458,6 @@ msgstr "Team Collaboration Tools"
 msgid "TEAM INVITE"
 msgstr "TEAM INVITE"
 
-msgid "Team invite management is unavailable"
-msgstr "Team invite management is unavailable"
-
-msgid "Team Name"
-msgstr "Team Name"
-
 msgid "Technical Skills"
 msgstr "Technical Skills"
 
@@ -1598,8 +1482,14 @@ msgstr "Test Company…"
 msgid "That was a lot of typing, but you made it! Your profile is officially sparkling clean and ready to go. Now, don't suffer alone—invite your colleagues to share the joy of filling out this form!"
 msgstr "That was a lot of typing, but you made it! Your profile is officially sparkling clean and ready to go. Now, don't suffer alone—invite your colleagues to share the joy of filling out this form!"
 
+msgid "The authenticated account email does not match the invited email."
+msgstr "The authenticated account email does not match the invited email."
+
 msgid "The faculty will be created under the selected university."
 msgstr "The faculty will be created under the selected university."
+
+msgid "The invite could not be validated right now. Please try again later."
+msgstr "The invite could not be validated right now. Please try again later."
 
 msgid "The invite detail request failed for this organization."
 msgstr "The invite detail request failed for this organization."
@@ -1634,14 +1524,20 @@ msgstr "This account must update its password before the admin session can conti
 msgid "This flow validates the invite first, then gets you into the invited team and your student profile onboarding."
 msgstr "This flow validates the invite first, then gets you into the invited team and your student profile onboarding."
 
-msgid "This invite was just resent. Wait for the countdown before sending it again."
-msgstr "This invite was just resent. Wait for the countdown before sending it again."
+msgid "This invite has expired, was revoked, or has already been accepted."
+msgstr "This invite has expired, was revoked, or has already been accepted."
+
+msgid "This invite is no longer available."
+msgstr "This invite is no longer available."
+
+msgid "This invite link is incomplete. Open the full invite URL and try again."
+msgstr "This invite link is incomplete. Open the full invite URL and try again."
+
+msgid "This invite link is invalid or no longer exists."
+msgstr "This invite link is invalid or no longer exists."
 
 msgid "This organization has no invite records available right now."
 msgstr "This organization has no invite records available right now."
-
-msgid "This step is optional. You can continue to the dashboard now and come back to invites later."
-msgstr "This step is optional. You can continue to the dashboard now and come back to invites later."
 
 msgid "Time to invite colleagues"
 msgstr "Time to invite colleagues"
@@ -1652,9 +1548,6 @@ msgstr "Top-level academic institutions currently visible in the directory."
 msgid "Total Users"
 msgstr "Total Users"
 
-msgid "Track invite state, resend pending invites, and revoke active ones."
-msgstr "Track invite state, resend pending invites, and revoke active ones."
-
 msgid "Transferred Subjects"
 msgstr "Transferred Subjects"
 
@@ -1664,14 +1557,11 @@ msgstr "Twitter"
 msgid "Unable to change the password."
 msgstr "Unable to change the password."
 
-msgid "Unable to complete the profile."
-msgstr "Unable to complete the profile."
-
-msgid "Unable to create invitations right now. Review the email list and try again."
-msgstr "Unable to create invitations right now. Review the email list and try again."
-
 msgid "Unable to create the invite."
 msgstr "Unable to create the invite."
+
+msgid "Unable to create the invited account right now. Please try again."
+msgstr "Unable to create the invited account right now. Please try again."
 
 msgid "Unable to create the organization right now. Review the details and try again."
 msgstr "Unable to create the organization right now. Review the details and try again."
@@ -1685,11 +1575,11 @@ msgstr "Unable to delete the specialization."
 msgid "Unable to delete the university."
 msgstr "Unable to delete the university."
 
+msgid "Unable to join the invited team right now."
+msgstr "Unable to join the invited team right now."
+
 msgid "Unable to load profile data for review."
 msgstr "Unable to load profile data for review."
-
-msgid "Unable to load the current team."
-msgstr "Unable to load the current team."
 
 msgid "Unable to load your profile."
 msgstr "Unable to load your profile."
@@ -1708,12 +1598,6 @@ msgstr "Unable to register. Please try again."
 
 msgid "Unable to resend the confirmation email right now."
 msgstr "Unable to resend the confirmation email right now."
-
-msgid "Unable to resend the invitation right now."
-msgstr "Unable to resend the invitation right now."
-
-msgid "Unable to revoke the invitation right now."
-msgstr "Unable to revoke the invitation right now."
 
 msgid "Unable to save academic information."
 msgstr "Unable to save academic information."
@@ -1787,6 +1671,9 @@ msgstr "Update Specialization"
 msgid "Update University"
 msgstr "Update University"
 
+msgid "Update your student profile"
+msgstr "Update your student profile"
+
 msgid "Updating..."
 msgstr "Updating..."
 
@@ -1820,9 +1707,6 @@ msgstr "Users are unavailable"
 #. placeholder {0}: field.value
 msgid "Using existing CV (ID: {0})"
 msgstr "Using existing CV (ID: {0})"
-
-msgid "Valid emails"
-msgstr "Valid emails"
 
 msgid "Validating invite..."
 msgstr "Validating invite..."
@@ -1875,17 +1759,14 @@ msgstr "Year of study must be between 1 and 8."
 msgid "Yes"
 msgstr "Yes"
 
-msgid "You already joined the invited team. Finish the academic and professional sections, then use the final completion action to unlock the main app."
-msgstr "You already joined the invited team. Finish the academic and professional sections, then use the final completion action to unlock the main app."
+msgid "You already joined the invited team. Finish the academic and professional sections to unlock the main app."
+msgstr "You already joined the invited team. Finish the academic and professional sections to unlock the main app."
 
 msgid "You can enter the domain only. HTTPS will be added automatically if needed."
 msgstr "You can enter the domain only. HTTPS will be added automatically if needed."
 
 msgid "You can request another email after the countdown finishes."
 msgstr "You can request another email after the countdown finishes."
-
-msgid "You do not currently have an active team."
-msgstr "You do not currently have an active team."
 
 msgid "You must accept the academic declaration."
 msgstr "You must accept the academic declaration."

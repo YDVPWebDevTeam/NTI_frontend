@@ -25,7 +25,6 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
-  CompleteStudentProfileDto,
   GetMyStudentProfileResponseDto,
   UpdateAcademicInformationDto,
   UpdateProfessionalSkillsDto
@@ -256,71 +255,6 @@ export const useUpdateMyStudentProfessionalSkills = <TError = void,
       > => {
 
       const mutationOptions = getUpdateMyStudentProfessionalSkillsMutationOptions(options);
-
-      return useMutation(mutationOptions, queryClient);
-    }
-    /**
- * Marks profile as complete when required academic and professional sections are filled.
- * @summary Mark profile as complete
- */
-export const completeMyStudentProfile = (
-    completeStudentProfileDto: CompleteStudentProfileDto,
- options?: SecondParameter<typeof orvalMutator>,signal?: AbortSignal
-) => {
-      
-      
-      return orvalMutator<GetMyStudentProfileResponseDto>(
-      {url: `/student-profile/me/complete`, method: 'POST',
-      headers: {'Content-Type': 'application/json', },
-      data: completeStudentProfileDto, signal
-    },
-      options);
-    }
-  
-
-
-export const getCompleteMyStudentProfileMutationOptions = <TError = void,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof completeMyStudentProfile>>, TError,{data: CompleteStudentProfileDto}, TContext>, request?: SecondParameter<typeof orvalMutator>}
-): UseMutationOptions<Awaited<ReturnType<typeof completeMyStudentProfile>>, TError,{data: CompleteStudentProfileDto}, TContext> => {
-
-const mutationKey = ['completeMyStudentProfile'];
-const {mutation: mutationOptions, request: requestOptions} = options ?
-      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
-      options
-      : {...options, mutation: {...options.mutation, mutationKey}}
-      : {mutation: { mutationKey, }, request: undefined};
-
-      
-
-
-      const mutationFn: MutationFunction<Awaited<ReturnType<typeof completeMyStudentProfile>>, {data: CompleteStudentProfileDto}> = (props) => {
-          const {data} = props ?? {};
-
-          return  completeMyStudentProfile(data,requestOptions)
-        }
-
-        
-
-
-  return  { mutationFn, ...mutationOptions }}
-
-    export type CompleteMyStudentProfileMutationResult = NonNullable<Awaited<ReturnType<typeof completeMyStudentProfile>>>
-    export type CompleteMyStudentProfileMutationBody = CompleteStudentProfileDto
-    export type CompleteMyStudentProfileMutationError = void
-
-    /**
- * @summary Mark profile as complete
- */
-export const useCompleteMyStudentProfile = <TError = void,
-    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof completeMyStudentProfile>>, TError,{data: CompleteStudentProfileDto}, TContext>, request?: SecondParameter<typeof orvalMutator>}
- , queryClient?: QueryClient): UseMutationResult<
-        Awaited<ReturnType<typeof completeMyStudentProfile>>,
-        TError,
-        {data: CompleteStudentProfileDto},
-        TContext
-      > => {
-
-      const mutationOptions = getCompleteMyStudentProfileMutationOptions(options);
 
       return useMutation(mutationOptions, queryClient);
     }

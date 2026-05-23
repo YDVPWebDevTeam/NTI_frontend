@@ -11,11 +11,11 @@ import {
   getStudentProfileDefaultValues,
   getStudentRegistrationSteps,
   type StudentRegistrationValues,
-} from 'features/student-profile-flow';
+} from 'features/student-profile';
+import { RegistrationStageHeader } from 'features/student-profile';
 import { useStudentRegistrationStore } from 'store/student-registration-store';
 import { RegistrationActions } from './_components/registration-actions';
 import { RegistrationCompletion } from './_components/registration-completion';
-import { RegistrationStageHeader } from './_components/registration-stage-header';
 import { RegistrationStepContent } from './_components/registration-step-content';
 import { RegistrationStepper } from './_components/registration-stepper';
 import { useStudentRegistrationActions } from './_hooks/use-student-registration-actions';

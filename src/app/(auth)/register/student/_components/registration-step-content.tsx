@@ -1,11 +1,10 @@
 import type { ReactNode } from 'react';
-import type { StudentRegistrationStepId } from 'features/student-profile-flow';
+import type { StudentRegistrationStepId } from 'features/student-profile';
 
-import { AcademicStep } from './academic-step';
+import { AcademicStep, SkillsStep } from 'features/student-profile';
 import { EmailStep } from './email-step';
 import { IdentityStep } from './identity-step';
 import { ReviewStep } from './review-step';
-import { SkillsStep } from './skills-step';
 
 type RegistrationStepContentProps = {
   stepId: StudentRegistrationStepId;

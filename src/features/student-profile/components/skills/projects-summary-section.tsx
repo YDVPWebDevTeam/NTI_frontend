@@ -8,7 +8,7 @@ import { Button } from 'components/shadcn';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from 'components/shadcn';
 import { Input } from 'components/shadcn';
 import { Textarea } from 'components/shadcn';
-import { parseCommaSeparatedList } from '../../_lib/form-value-utils';
+import { parseCommaSeparatedList } from '../../lib/form-value-utils';
 import type { StudentRegistrationValues } from 'lib/auth/schemas';
 
 type ProjectsSummarySectionProps = {

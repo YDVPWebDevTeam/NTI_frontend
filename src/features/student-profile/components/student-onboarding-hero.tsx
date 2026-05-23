@@ -1,10 +1,7 @@
 import { t } from '@lingui/core/macro';
 
 import { PageSectionHeader } from 'components/layout';
-import type {
-  OnboardingStageConfig,
-  StudentOnboardingStageId,
-} from 'features/student-profile-flow';
+import type { OnboardingStageConfig, StudentOnboardingStageId } from '../lib/config';
 
 import { StudentOnboardingStageList } from './student-onboarding-stage-list';
 

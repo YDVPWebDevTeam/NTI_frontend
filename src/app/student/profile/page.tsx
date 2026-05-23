@@ -1,4 +1,4 @@
-import { StudentProfilePage } from 'features/student-workspace/routes/student-profile-page';
+import { StudentProfilePage } from 'features/student-profile';
 
 export default function StudentProfileRoutePage() {
   return <StudentProfilePage />;

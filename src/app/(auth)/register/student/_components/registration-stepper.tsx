@@ -7,7 +7,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 
-import type { RegistrationStepConfig } from 'features/student-profile-flow';
+import type { RegistrationStepConfig } from 'features/student-profile';
 import { cn } from 'lib/utils';
 
 type RegistrationStepperProps = {

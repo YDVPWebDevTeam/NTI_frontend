@@ -1,9 +1,6 @@
 import { t } from '@lingui/core/macro';
 
-import type {
-  OnboardingStageConfig,
-  StudentOnboardingStageId,
-} from 'features/student-profile-flow';
+import type { OnboardingStageConfig, StudentOnboardingStageId } from '../lib/config';
 
 type StudentOnboardingStageListProps = {
   stages: OnboardingStageConfig[];

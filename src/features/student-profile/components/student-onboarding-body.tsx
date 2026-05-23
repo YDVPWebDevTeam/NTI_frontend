@@ -1,7 +1,7 @@
-import type { StudentOnboardingStageId } from 'features/student-profile-flow';
+import type { StudentOnboardingStageId } from '../lib/config';
 
-import { AcademicStep } from 'app/(auth)/register/student/_components/academic-step';
-import { SkillsStep } from 'app/(auth)/register/student/_components/skills-step';
+import { AcademicStep } from './academic-step';
+import { SkillsStep } from './skills-step';
 
 type StudentOnboardingBodyProps = {
   activeStage: StudentOnboardingStageId;

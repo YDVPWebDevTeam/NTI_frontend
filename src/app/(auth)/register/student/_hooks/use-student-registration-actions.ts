@@ -6,10 +6,7 @@ import { toast } from 'sonner';
 
 import { useConfirmEmail, useRegister, useResendConfirmationEmail } from 'lib/api';
 import type { StudentRegistrationValues } from 'lib/auth/schemas';
-import {
-  useStudentProfileSubmit,
-  type StudentRegistrationStepId,
-} from 'features/student-profile-flow';
+import { useStudentProfileSubmit, type StudentRegistrationStepId } from 'features/student-profile';
 
 type SubmitStepArgs = {
   stepId: StudentRegistrationStepId;

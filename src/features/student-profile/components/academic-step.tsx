@@ -6,8 +6,8 @@ import { AcademicIndicatorsSection } from './academic/academic-indicators-sectio
 import { AcademicVerificationSection } from './academic/academic-verification-section';
 import { useAcademicDependentFields } from './academic/use-academic-dependent-fields';
 import { t } from '@lingui/core/macro';
-import { AcademicAffiliationProgramFields } from 'app/(auth)/register/student/_components/academic/academic-affiliation-program-fields';
-import { AcademicAffiliationStudyFields } from 'app/(auth)/register/student/_components/academic/academic-affiliation-study-fields';
+import { AcademicAffiliationProgramFields } from './academic/academic-affiliation-program-fields';
+import { AcademicAffiliationStudyFields } from './academic/academic-affiliation-study-fields';
 
 export function AcademicStep() {
   const { control, watch, setValue } = useFormContext<StudentRegistrationValues>();

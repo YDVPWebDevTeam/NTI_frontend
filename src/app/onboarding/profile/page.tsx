@@ -2,7 +2,7 @@
 
 import { UserRole } from 'lib/api';
 import { StudentStatusCard } from 'components/student-dashboard/page-shell-primitives';
-import { StudentProfilePage } from 'features/student-workspace/routes/student-profile-page';
+import { StudentProfilePage } from 'features/student-profile';
 import { useAuthenticatedUser } from 'lib/student-dashboard/use-authenticated-user';
 
 export default function OnboardingProfilePage() {

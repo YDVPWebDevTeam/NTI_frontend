@@ -1,7 +1,7 @@
 import { t } from '@lingui/core/macro';
 
 import { Button } from 'components/shadcn';
-import type { StudentOnboardingStageId } from 'features/student-profile-flow';
+import type { StudentOnboardingStageId } from '../lib/config';
 
 type StudentOnboardingActionsProps = {
   activeStage: StudentOnboardingStageId;

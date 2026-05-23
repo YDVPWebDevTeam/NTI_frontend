@@ -9,29 +9,28 @@ import { type Resolver, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import {
-  createStudentRegistrationSchema,
   getNextStudentOnboardingStage,
   getStudentOnboardingStageMeta,
   getStudentOnboardingStages,
-  getStudentProfileDefaultValues,
-  mapStudentProfileToFormValues,
   STUDENT_PROFILE_FIELD_GROUPS,
   type StudentOnboardingStageId,
-  type StudentRegistrationValues,
-  useStudentProfileSubmit,
-} from 'features/student-profile-flow';
+} from '../lib/config';
+import { getStudentProfileDefaultValues } from '../lib/default-values';
+import { mapStudentProfileToFormValues } from '../lib/mappers';
+import { useStudentProfileSubmit } from '../hooks/use-student-profile-submit';
+import { createStudentRegistrationSchema, type StudentRegistrationValues } from 'lib/auth/schemas';
 import { Form } from 'components/shadcn';
 import { useGetMyStudentProfile } from 'lib/api';
 import { ROUTES } from 'lib/constants';
 
-import { RegistrationStageHeader } from 'app/(auth)/register/student/_components/registration-stage-header';
-import { StudentOnboardingActions } from 'app/onboarding/profile/_components/student-onboarding-actions';
-import { StudentOnboardingBody } from 'app/onboarding/profile/_components/student-onboarding-body';
-import { StudentOnboardingHero } from 'app/onboarding/profile/_components/student-onboarding-hero';
+import { RegistrationStageHeader } from './registration-stage-header';
+import { StudentOnboardingActions } from './student-onboarding-actions';
+import { StudentOnboardingBody } from './student-onboarding-body';
+import { StudentOnboardingHero } from './student-onboarding-hero';
 import {
   StudentOnboardingErrorState,
   StudentOnboardingLoadingState,
-} from 'app/onboarding/profile/_components/student-onboarding-state';
+} from './student-onboarding-state';
 
 export function StudentProfilePage() {
   const router = useRouter();

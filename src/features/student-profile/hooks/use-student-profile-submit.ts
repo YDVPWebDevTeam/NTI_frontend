@@ -19,7 +19,7 @@ import {
   useUploadToPresignedUrl as useUploadToPresignedUrlMutation,
 } from 'lib/api-client/openapi-runtime/file-upload';
 
-import { buildAcademicUpdatePayload, buildProfessionalSkillsPayload } from './mappers';
+import { buildAcademicUpdatePayload, buildProfessionalSkillsPayload } from '../lib/mappers';
 
 type StudentUploadTarget = {
   fileField: 'academicEvidenceFile' | 'cvFile';

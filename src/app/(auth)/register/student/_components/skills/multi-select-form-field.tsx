@@ -1,8 +1,8 @@
 import type { Control, FieldPath } from 'react-hook-form';
 
 import { FormControl, FormDescription, FormField, FormItem, FormMessage } from 'components/shadcn';
+import type { StudentRegistrationValues } from 'lib/auth/schemas';
 import { toggleArraySelection } from '../../_lib/form-value-utils';
-import type { StudentRegistrationValues } from '../../schema';
 import { MultiSelectSection } from './multi-select-section';
 
 type MultiSelectFormFieldProps<TValue extends string> = {

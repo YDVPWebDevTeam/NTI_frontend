@@ -74,7 +74,7 @@ export function RegistrationCompletion({ onInviteClick }: RegistrationCompletion
             asChild
             className="h-14 rounded-full bg-[#1e58d5] px-8 text-[12px] font-bold tracking-[0.15em] text-white shadow-md transition-all hover:bg-[#245fdc] hover:shadow-lg"
           >
-            <Link href={ROUTES.ONBOARDING_INVITES} onClick={onInviteClick}>
+            <Link href={ROUTES.STUDENT.TEAM} onClick={onInviteClick}>
               {t`INVITE COLLEAGUES`}
               <ArrowRight className="ml-1 h-4 w-4" />
             </Link>

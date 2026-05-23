@@ -3195,6 +3195,44 @@ export interface SetActiveSectionVersionDto {
   version: SetActiveSectionVersionDtoVersion;
 }
 
+export type CreateProgramAMilestoneDtoStatus = typeof CreateProgramAMilestoneDtoStatus[keyof typeof CreateProgramAMilestoneDtoStatus];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const CreateProgramAMilestoneDtoStatus = {
+  PLANNED: 'PLANNED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  DONE: 'DONE',
+  BLOCKED: 'BLOCKED',
+} as const;
+
+export interface CreateProgramAMilestoneDto {
+  title: string;
+  description?: string;
+  dueAt?: string;
+  status?: CreateProgramAMilestoneDtoStatus;
+  progressNote?: string;
+}
+
+export type UpdateProgramAMilestoneDtoStatus = typeof UpdateProgramAMilestoneDtoStatus[keyof typeof UpdateProgramAMilestoneDtoStatus];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const UpdateProgramAMilestoneDtoStatus = {
+  PLANNED: 'PLANNED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  DONE: 'DONE',
+  BLOCKED: 'BLOCKED',
+} as const;
+
+export interface UpdateProgramAMilestoneDto {
+  title?: string;
+  description?: string;
+  dueAt?: string;
+  status?: UpdateProgramAMilestoneDtoStatus;
+  progressNote?: string;
+}
+
 export interface OptionalApplicationTransitionNoteDto {
   /** Optional reviewer note stored with the transition. */
   reason?: string;
@@ -3305,6 +3343,189 @@ export interface RequiredDocumentsResponseDto {
   callId: string;
   programType: RequiredDocumentsResponseDtoProgramType;
   requiredDocuments: RequiredDocumentTypeDto[];
+}
+
+export type ProgramBCompanyOrganizationDtoStatus = typeof ProgramBCompanyOrganizationDtoStatus[keyof typeof ProgramBCompanyOrganizationDtoStatus];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ProgramBCompanyOrganizationDtoStatus = {
+  PENDING: 'PENDING',
+  ACTIVE: 'ACTIVE',
+  REJECTED: 'REJECTED',
+  SUSPENDED: 'SUSPENDED',
+} as const;
+
+export interface ProgramBCompanyOrganizationDto {
+  id: string;
+  name: string;
+  status: ProgramBCompanyOrganizationDtoStatus;
+}
+
+export interface ProgramBCompanyBacklogCountsDto {
+  total: number;
+  draft: number;
+  published: number;
+  archived: number;
+  withoutProductOwner: number;
+}
+
+export interface ProgramBCompanyProjectCountsDto {
+  total: number;
+  active: number;
+  completed: number;
+  awaitingFinalAcceptance: number;
+  overdueMilestones: number;
+}
+
+export interface ProgramBCompanyCandidateCountsDto {
+  submitted: number;
+  shortlisted: number;
+  accepted: number;
+  rejected: number;
+  pendingReview: number;
+}
+
+export type ProgramBCompanyPendingActionDtoCode = typeof ProgramBCompanyPendingActionDtoCode[keyof typeof ProgramBCompanyPendingActionDtoCode];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ProgramBCompanyPendingActionDtoCode = {
+  ASSIGN_PRODUCT_OWNER: 'ASSIGN_PRODUCT_OWNER',
+  REVIEW_CANDIDATES: 'REVIEW_CANDIDATES',
+  FINAL_ACCEPTANCE: 'FINAL_ACCEPTANCE',
+  OVERDUE_MILESTONE: 'OVERDUE_MILESTONE',
+} as const;
+
+export interface ProgramBCompanyPendingActionDto {
+  code: ProgramBCompanyPendingActionDtoCode;
+  count: number;
+}
+
+export interface ProgramBCompanyOverviewDto {
+  organization: ProgramBCompanyOrganizationDto;
+  backlog: ProgramBCompanyBacklogCountsDto;
+  projects: ProgramBCompanyProjectCountsDto;
+  candidates: ProgramBCompanyCandidateCountsDto;
+  pendingActions: ProgramBCompanyPendingActionDto[];
+  updatedAt: string;
+}
+
+export interface CompanyProductOwnerSummaryDto {
+  id: string;
+  fullName: string;
+}
+
+export type CompanyBacklogSummaryItemDtoStatus = typeof CompanyBacklogSummaryItemDtoStatus[keyof typeof CompanyBacklogSummaryItemDtoStatus];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const CompanyBacklogSummaryItemDtoStatus = {
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED',
+  IN_PAIRING: 'IN_PAIRING',
+  ASSIGNED: 'ASSIGNED',
+  IN_REALIZATION: 'IN_REALIZATION',
+  CLOSED: 'CLOSED',
+  ARCHIVED: 'ARCHIVED',
+} as const;
+
+/**
+ * @nullable
+ */
+export type CompanyBacklogSummaryItemDtoBudget = { [key: string]: unknown } | null;
+
+/**
+ * @nullable
+ */
+export type CompanyBacklogSummaryItemDtoProductOwner = CompanyProductOwnerSummaryDto | null;
+
+export interface CompanyBacklogSummaryItemDto {
+  id: string;
+  title: string;
+  status: CompanyBacklogSummaryItemDtoStatus;
+  /** @nullable */
+  budget?: CompanyBacklogSummaryItemDtoBudget;
+  /** @nullable */
+  productOwner?: CompanyBacklogSummaryItemDtoProductOwner;
+  candidatesCount: number;
+  pendingCandidatesCount: number;
+  updatedAt: string;
+}
+
+export interface CompanyBacklogSummaryDto {
+  items: CompanyBacklogSummaryItemDto[];
+  total: number;
+}
+
+export interface CompanyMentorSummaryDto {
+  id: string;
+  fullName: string;
+}
+
+export type CompanyNextMilestoneSummaryDtoStatus = typeof CompanyNextMilestoneSummaryDtoStatus[keyof typeof CompanyNextMilestoneSummaryDtoStatus];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const CompanyNextMilestoneSummaryDtoStatus = {
+  PLANNED: 'PLANNED',
+  IN_PROGRESS: 'IN_PROGRESS',
+  DONE: 'DONE',
+  BLOCKED: 'BLOCKED',
+} as const;
+
+export interface CompanyNextMilestoneSummaryDto {
+  id: string;
+  title: string;
+  /** @nullable */
+  dueAt?: string | null;
+  status: CompanyNextMilestoneSummaryDtoStatus;
+}
+
+export type CompanyProjectSummaryItemDtoStatus = typeof CompanyProjectSummaryItemDtoStatus[keyof typeof CompanyProjectSummaryItemDtoStatus];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const CompanyProjectSummaryItemDtoStatus = {
+  ACTIVE: 'ACTIVE',
+  BLOCKED: 'BLOCKED',
+  COMPLETED: 'COMPLETED',
+  CLOSED: 'CLOSED',
+} as const;
+
+/**
+ * @nullable
+ */
+export type CompanyProjectSummaryItemDtoMentor = CompanyMentorSummaryDto | null;
+
+/**
+ * @nullable
+ */
+export type CompanyProjectSummaryItemDtoProgressPercent = { [key: string]: unknown } | null;
+
+/**
+ * @nullable
+ */
+export type CompanyProjectSummaryItemDtoNextMilestone = CompanyNextMilestoneSummaryDto | null;
+
+export interface CompanyProjectSummaryItemDto {
+  id: string;
+  title: string;
+  status: CompanyProjectSummaryItemDtoStatus;
+  teamName: string;
+  /** @nullable */
+  mentor?: CompanyProjectSummaryItemDtoMentor;
+  /** @nullable */
+  progressPercent?: CompanyProjectSummaryItemDtoProgressPercent;
+  /** @nullable */
+  nextMilestone?: CompanyProjectSummaryItemDtoNextMilestone;
+  awaitingFinalAcceptance: boolean;
+  updatedAt: string;
+}
+
+export interface CompanyProjectSummaryDto {
+  items: CompanyProjectSummaryItemDto[];
+  total: number;
 }
 
 export interface StatusCountDto {
@@ -4021,6 +4242,103 @@ export type AdminCallsControllerListOrder = typeof AdminCallsControllerListOrder
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
 export const AdminCallsControllerListOrder = {
+  asc: 'asc',
+  desc: 'desc',
+} as const;
+
+export type ProgramBCompanyOverviewControllerGetBacklogSummaryParams = {
+limit?: number;
+/**
+ * Optional backlog status filter.
+ */
+status?: ProgramBCompanyOverviewControllerGetBacklogSummaryStatus;
+/**
+ * Deterministic summary sort field.
+ */
+sort?: ProgramBCompanyOverviewControllerGetBacklogSummarySort;
+/**
+ * Sort direction.
+ */
+order?: ProgramBCompanyOverviewControllerGetBacklogSummaryOrder;
+};
+
+export type ProgramBCompanyOverviewControllerGetBacklogSummaryStatus = typeof ProgramBCompanyOverviewControllerGetBacklogSummaryStatus[keyof typeof ProgramBCompanyOverviewControllerGetBacklogSummaryStatus];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ProgramBCompanyOverviewControllerGetBacklogSummaryStatus = {
+  DRAFT: 'DRAFT',
+  PUBLISHED: 'PUBLISHED',
+  IN_PAIRING: 'IN_PAIRING',
+  ASSIGNED: 'ASSIGNED',
+  IN_REALIZATION: 'IN_REALIZATION',
+  CLOSED: 'CLOSED',
+  ARCHIVED: 'ARCHIVED',
+} as const;
+
+export type ProgramBCompanyOverviewControllerGetBacklogSummarySort = typeof ProgramBCompanyOverviewControllerGetBacklogSummarySort[keyof typeof ProgramBCompanyOverviewControllerGetBacklogSummarySort];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ProgramBCompanyOverviewControllerGetBacklogSummarySort = {
+  updatedAt: 'updatedAt',
+  createdAt: 'createdAt',
+  budget: 'budget',
+  title: 'title',
+} as const;
+
+export type ProgramBCompanyOverviewControllerGetBacklogSummaryOrder = typeof ProgramBCompanyOverviewControllerGetBacklogSummaryOrder[keyof typeof ProgramBCompanyOverviewControllerGetBacklogSummaryOrder];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ProgramBCompanyOverviewControllerGetBacklogSummaryOrder = {
+  asc: 'asc',
+  desc: 'desc',
+} as const;
+
+export type ProgramBCompanyOverviewControllerGetProjectSummaryParams = {
+limit?: number;
+/**
+ * Optional project status filter.
+ */
+status?: ProgramBCompanyOverviewControllerGetProjectSummaryStatus;
+/**
+ * Deterministic summary sort field.
+ */
+sort?: ProgramBCompanyOverviewControllerGetProjectSummarySort;
+/**
+ * Sort direction.
+ */
+order?: ProgramBCompanyOverviewControllerGetProjectSummaryOrder;
+};
+
+export type ProgramBCompanyOverviewControllerGetProjectSummaryStatus = typeof ProgramBCompanyOverviewControllerGetProjectSummaryStatus[keyof typeof ProgramBCompanyOverviewControllerGetProjectSummaryStatus];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ProgramBCompanyOverviewControllerGetProjectSummaryStatus = {
+  ACTIVE: 'ACTIVE',
+  BLOCKED: 'BLOCKED',
+  COMPLETED: 'COMPLETED',
+  CLOSED: 'CLOSED',
+} as const;
+
+export type ProgramBCompanyOverviewControllerGetProjectSummarySort = typeof ProgramBCompanyOverviewControllerGetProjectSummarySort[keyof typeof ProgramBCompanyOverviewControllerGetProjectSummarySort];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ProgramBCompanyOverviewControllerGetProjectSummarySort = {
+  updatedAt: 'updatedAt',
+  createdAt: 'createdAt',
+  title: 'title',
+  teamName: 'teamName',
+} as const;
+
+export type ProgramBCompanyOverviewControllerGetProjectSummaryOrder = typeof ProgramBCompanyOverviewControllerGetProjectSummaryOrder[keyof typeof ProgramBCompanyOverviewControllerGetProjectSummaryOrder];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ProgramBCompanyOverviewControllerGetProjectSummaryOrder = {
   asc: 'asc',
   desc: 'desc',
 } as const;

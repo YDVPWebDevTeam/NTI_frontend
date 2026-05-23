@@ -9,10 +9,10 @@ import type {
   UpdateMyStudentAcademicInformationMutationBody,
   UpdateMyStudentProfessionalSkillsMutationBody,
 } from 'lib/api';
+import type { StudentRegistrationValues } from 'lib/auth/schemas';
 import { getCurrentYear } from 'lib/date';
 
 import { getStudentProfileDefaultValues } from './default-values';
-import type { StudentRegistrationValues } from './types';
 
 function toOptionalString(value?: string | null) {
   const normalized = value?.trim();

@@ -3,7 +3,7 @@ import type { Control, UseFormSetValue, UseFormClearErrors } from 'react-hook-fo
 
 import { ControlledFileField, FormSectionCard } from 'components/forms';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage, Input } from 'components/shadcn';
-import type { StudentRegistrationValues } from '../../schema';
+import type { StudentRegistrationValues } from 'lib/auth/schemas';
 
 type PortfolioResumeSectionProps = {
   control: Control<StudentRegistrationValues>;

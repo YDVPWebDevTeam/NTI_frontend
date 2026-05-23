@@ -2,7 +2,7 @@ import { t } from '@lingui/core/macro';
 import { useFormContext } from 'react-hook-form';
 
 import { MAX_SOFT_SKILLS } from 'lib/auth/schemas';
-import type { StudentRegistrationValues } from '../schema';
+import type { StudentRegistrationValues } from 'lib/auth/schemas';
 import { MultiSelectFormField } from './skills/multi-select-form-field';
 import { PortfolioResumeSection } from './skills/portfolio-resume-section';
 import { ProjectsSummarySection } from './skills/projects-summary-section';

@@ -97,7 +97,7 @@ export default function CreateCompanyOwnerOrganizationPage() {
         },
       });
 
-      router.push(ROUTES.DASHBOARD);
+      router.push(ROUTES.COMPANY.ROOT);
     } catch (error) {
       const message =
         error instanceof Error

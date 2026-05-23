@@ -9,7 +9,7 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from 'compon
 import { Input } from 'components/shadcn';
 import { Textarea } from 'components/shadcn';
 import { parseCommaSeparatedList } from '../../_lib/form-value-utils';
-import type { StudentRegistrationValues } from '../../schema';
+import type { StudentRegistrationValues } from 'lib/auth/schemas';
 
 type ProjectsSummarySectionProps = {
   control: Control<StudentRegistrationValues>;

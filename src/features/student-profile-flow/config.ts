@@ -1,8 +1,7 @@
 import { t } from '@lingui/core/macro';
 
 import type { StudentProfileCompletionDto } from 'lib/api';
-
-import type { StudentRegistrationValues } from './types';
+import type { StudentRegistrationValues } from 'lib/auth/schemas';
 
 export type StudentRegistrationStepId = 'identity' | 'email' | 'academic' | 'skills' | 'review';
 export type StudentOnboardingStageId = 'academic' | 'skills';

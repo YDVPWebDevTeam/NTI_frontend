@@ -5,9 +5,11 @@ import type { UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { useConfirmEmail, useRegister, useResendConfirmationEmail } from 'lib/api';
-import { useStudentProfileSubmit } from 'features/student-profile-flow';
-import type { StudentRegistrationStepId } from '../_lib/registration-config';
-import type { StudentRegistrationValues } from '../schema';
+import type { StudentRegistrationValues } from 'lib/auth/schemas';
+import {
+  useStudentProfileSubmit,
+  type StudentRegistrationStepId,
+} from 'features/student-profile-flow';
 
 type SubmitStepArgs = {
   stepId: StudentRegistrationStepId;

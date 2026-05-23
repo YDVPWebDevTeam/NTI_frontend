@@ -2,8 +2,7 @@
 
 import { t } from '@lingui/core/macro';
 import Link from 'next/link';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useQueryClient } from '@tanstack/react-query';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import type { ReactNode } from 'react';
 import {
@@ -16,20 +15,18 @@ import {
   X,
   type LucideIcon,
 } from 'lucide-react';
-import { toast } from 'sonner';
 
 import { NtiBrand } from 'components/layout';
 import { LanguageSwitcher } from 'components/i18n/language-switcher';
 import { Button } from 'components/shadcn';
-import { getGetMeQueryKey, useGetMyStudentProfile, useLogout } from 'lib/api';
+import { useWorkspaceLogout } from 'components/workspace/use-workspace-logout';
+import { useGetMyStudentProfile } from 'lib/api';
 import { ROUTES } from 'lib/constants';
-import { isStudentRole } from 'lib/student-dashboard/access';
-import { useAuthenticatedUser } from 'lib/student-dashboard/use-authenticated-user';
+import { useStudentWorkspaceUser } from 'lib/student-dashboard/student-workspace-user-context';
 import { cn, formatEnumLabel } from 'lib/utils';
-import { StudentStatusCard } from './page-shell-primitives';
 
 function isNavItemActive(pathname: string, href: string) {
-  if (href === ROUTES.DASHBOARD) {
+  if (href === ROUTES.STUDENT.DASHBOARD) {
     return pathname === href;
   }
 
@@ -104,57 +101,25 @@ function StudentSidebar({
 
 export function StudentWorkspaceLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const queryClient = useQueryClient();
-  const logout = useLogout();
-  const { me, isLoading } = useAuthenticatedUser();
+  const me = useStudentWorkspaceUser();
+  const { handleLogout, isPending: isLogoutPending } = useWorkspaceLogout();
   const studentProfileQuery = useGetMyStudentProfile({
-    query: { enabled: isStudentRole(me?.role) },
+    query: { enabled: true },
   });
   const [mobileNavState, setMobileNavState] = useState({ open: false, pathname });
   const isMobileNavOpen = mobileNavState.open && mobileNavState.pathname === pathname;
   const studentNavItems = [
-    { href: ROUTES.DASHBOARD, label: t`Dashboard`, icon: LayoutGrid },
-    { href: ROUTES.PROFILE, label: t`Profile`, icon: UserRound },
-    { href: ROUTES.TEAM, label: t`Team`, icon: Users },
-    { href: ROUTES.PROGRAM_B_BACKLOG, label: t`Program B backlog`, icon: Rocket },
+    { href: ROUTES.STUDENT.DASHBOARD, label: t`Dashboard`, icon: LayoutGrid },
+    { href: ROUTES.STUDENT.PROFILE, label: t`Profile`, icon: UserRound },
+    { href: ROUTES.STUDENT.TEAM, label: t`Team`, icon: Users },
+    { href: ROUTES.STUDENT.PROGRAM_B_BACKLOG, label: t`Program B backlog`, icon: Rocket },
   ] as const;
   const studentUser = studentProfileQuery.data?.user;
   const displayName =
     studentUser && (studentUser.firstName || studentUser.lastName)
       ? `${studentUser.firstName} ${studentUser.lastName}`.trim()
-      : (me?.email ?? t`Signed-in user`);
-  const roleLabel = me ? formatEnumLabel(me.role) : '';
-  const inviteToken = searchParams.get('token')?.trim() ?? '';
-  const bypassAuthGuard = pathname === ROUTES.ONBOARDING_INVITES && inviteToken.length > 0;
-
-  const handleLogout = async () => {
-    try {
-      await logout.mutateAsync();
-      await queryClient.cancelQueries({ queryKey: getGetMeQueryKey() });
-      queryClient.removeQueries({ queryKey: getGetMeQueryKey(), exact: true });
-      await queryClient.invalidateQueries();
-      router.replace(ROUTES.ROOT);
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : t`Unable to log out right now.`);
-    }
-  };
-
-  if (bypassAuthGuard) {
-    return children;
-  }
-
-  if (isLoading || !me) {
-    return (
-      <main className="mx-auto flex min-h-screen w-full max-w-4xl items-center px-4">
-        <StudentStatusCard
-          title={t`Loading workspace`}
-          description={t`Resolving your authenticated workspace.`}
-        />
-      </main>
-    );
-  }
+      : (me.email ?? t`Signed-in user`);
+  const roleLabel = formatEnumLabel(me.role);
 
   const shellBody = (
     <>
@@ -182,7 +147,7 @@ export function StudentWorkspaceLayout({ children }: { children: ReactNode }) {
             <Button
               variant="outline"
               className="rounded-2xl border-[#d8e4fb] bg-white/90 text-[#122039] hover:bg-[#f5f8ff]"
-              disabled={logout.isPending}
+              disabled={isLogoutPending}
               onClick={() => void handleLogout()}
             >
               <LogOut className="h-4 w-4" />
@@ -247,7 +212,7 @@ export function StudentWorkspaceLayout({ children }: { children: ReactNode }) {
               <Button
                 variant="outline"
                 className="w-full justify-start rounded-xl border-[#cddfff] bg-white text-[#122039] hover:bg-[#f3f7ff]"
-                disabled={logout.isPending}
+                disabled={isLogoutPending}
                 onClick={() => void handleLogout()}
               >
                 <LogOut className="h-4 w-4" />
@@ -268,14 +233,6 @@ export function StudentWorkspaceLayout({ children }: { children: ReactNode }) {
       </div>
     </>
   );
-
-  if (!isStudentRole(me.role)) {
-    return (
-      <main className="min-h-screen bg-[linear-gradient(180deg,#f8faff_0%,#f2f6ff_45%,#f8fbff_100%)]">
-        {shellBody}
-      </main>
-    );
-  }
 
   return (
     <main className="min-h-screen bg-[linear-gradient(180deg,#f8faff_0%,#f2f6ff_45%,#f8fbff_100%)]">

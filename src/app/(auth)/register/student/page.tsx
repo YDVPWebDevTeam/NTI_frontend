@@ -6,16 +6,19 @@ import { type FormEvent, useEffect, useMemo } from 'react';
 import { type Resolver, useForm } from 'react-hook-form';
 
 import { Form } from 'components/shadcn';
+import {
+  createStudentRegistrationSchema,
+  getStudentProfileDefaultValues,
+  getStudentRegistrationSteps,
+  type StudentRegistrationValues,
+} from 'features/student-profile-flow';
 import { useStudentRegistrationStore } from 'store/student-registration-store';
 import { RegistrationActions } from './_components/registration-actions';
 import { RegistrationCompletion } from './_components/registration-completion';
 import { RegistrationStageHeader } from './_components/registration-stage-header';
 import { RegistrationStepContent } from './_components/registration-step-content';
 import { RegistrationStepper } from './_components/registration-stepper';
-import { getStudentRegistrationDefaultValues } from './_lib/default-values';
-import { getStudentRegistrationSteps } from './_lib/registration-config';
 import { useStudentRegistrationActions } from './_hooks/use-student-registration-actions';
-import { createStudentRegistrationSchema, type StudentRegistrationValues } from './schema';
 
 export default function SignUpPage() {
   const { i18n } = useLingui();
@@ -42,7 +45,7 @@ export default function SignUpPage() {
 
   const form = useForm<StudentRegistrationValues>({
     resolver: zodResolver(studentRegistrationSchema) as Resolver<StudentRegistrationValues>,
-    defaultValues: getStudentRegistrationDefaultValues(),
+    defaultValues: getStudentProfileDefaultValues(),
     mode: 'onChange',
   });
 

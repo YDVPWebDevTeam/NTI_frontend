@@ -8,20 +8,21 @@ import {
   useInvitationControllerListInvites,
   useInvitationControllerResendInvitation,
   useInvitationControllerRevokeInvitation,
+  useTeamControllerCreate,
   useTeamControllerFindCurrentForUser,
   useTeamControllerRemoveMember,
   useTeamControllerTransferLeadership,
   useTeamControllerUpdate,
-  UserRole,
 } from 'lib/api';
 import { Button } from 'components/shadcn';
 import { isApiNotFoundError } from 'lib/student-dashboard/normalizers';
-import { useAuthenticatedUser } from 'lib/student-dashboard/use-authenticated-user';
-import { StudentPageShell, StudentSectionCard, StudentStatusCard } from './page-shell';
+import { useStudentWorkspaceUser } from 'lib/student-dashboard/student-workspace-user-context';
+import { StudentPageShell, StudentSectionCard, StudentStatusCard } from './page-shell-primitives';
 import {
   InvitationsSection,
   LeadershipTransferSection,
   MembersSection,
+  TeamCreationSection,
   TeamLeadOnboardingGuide,
   TeamOverviewSection,
   type TeamWorkspaceMode,
@@ -37,7 +38,7 @@ function TeamWorkspaceView({
   title,
   description,
 }: TeamWorkspaceProps & { mode: TeamWorkspaceMode }) {
-  const { me, isLoading } = useAuthenticatedUser([UserRole.STUDENT]);
+  const me = useStudentWorkspaceUser();
   const [teamName, setTeamName] = useState('');
   const [inviteEmails, setInviteEmails] = useState('');
   const [newLeaderId, setNewLeaderId] = useState('');
@@ -63,6 +64,7 @@ function TeamWorkspaceView({
     },
   );
 
+  const createTeam = useTeamControllerCreate();
   const renameTeam = useTeamControllerUpdate();
   const createInvites = useInvitationControllerCreateInvites();
   const resendInvite = useInvitationControllerResendInvitation();
@@ -74,24 +76,13 @@ function TeamWorkspaceView({
   const canManageTeam = mode === 'management';
   const canManageInvites = isLead;
 
-  if (isLoading) {
-    return (
-      <main className="mx-auto flex min-h-screen w-full max-w-4xl items-center px-4">
-        <StudentStatusCard
-          title={t`Loading team workspace`}
-          description={t`Resolving your student session.`}
-        />
-      </main>
-    );
-  }
-
   if (hasTeamLoadError) {
     return (
       <StudentPageShell title={title} description={description}>
         <div className="space-y-4">
           <StudentStatusCard
             title={t`Unable to load team workspace`}
-            description={t`The current team could not be loaded right now. Retry the request instead of showing the empty-team state.`}
+            description={t`We couldn't load your team right now. Please try again.`}
           />
           <div className="flex justify-center">
             <Button variant="outline" onClick={() => void teamQuery.refetch()}>
@@ -109,16 +100,21 @@ function TeamWorkspaceView({
         <>
           <StudentStatusCard
             title={t`No active team`}
-            description={t`The generated \`/teams/me\` endpoint returned no active team for this user. Finish profile onboarding and create a team first.`}
+            description={t`You don't have a team yet. Complete your profile onboarding and create a team first.`}
           />
           <TeamLeadOnboardingGuide mode={mode} />
+          <TeamCreationSection
+            createTeam={createTeam}
+            currentUserEmail={me?.email}
+            inviteEmails={inviteEmails}
+            setInviteEmails={setInviteEmails}
+            setTeamName={setTeamName}
+            teamName={teamName}
+            teamQuery={teamQuery}
+          />
         </>
       </StudentPageShell>
     );
-  }
-
-  if (!me) {
-    return null;
   }
 
   return (
@@ -162,7 +158,7 @@ function TeamWorkspaceView({
         ) : (
           <StudentSectionCard
             title={t`Invite teammates`}
-            description={t`This onboarding step is focused on filling the team once the lead account is ready.`}
+            description={t`Once the team lead is ready, this step is for inviting teammates.`}
           >
             <div className="space-y-3 text-sm text-neutral-700">
               <p>
@@ -219,7 +215,7 @@ export function TeamInviteOnboardingWorkspace() {
     <TeamWorkspaceView
       mode="invite-onboarding"
       title={t`Team invites`}
-      description={t`This onboarding step stays focused on inviting teammates once the lead account is ready.`}
+      description={t`This step is for inviting teammates once the team lead is ready.`}
     />
   );
 }

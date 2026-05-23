@@ -22,17 +22,44 @@ const ADMIN_ROUTES = {
   INVITES: '/admin/invites',
 } as const;
 
+const STUDENT_ROUTES = {
+  ROOT: '/student/dashboard',
+  DASHBOARD: '/student/dashboard',
+  PROFILE: '/student/profile',
+  TEAM: '/student/team',
+  APPLICATIONS: '/student/applications',
+  PROGRAM_B_BACKLOG: '/student/program-b/backlog',
+  PROGRAM_B_PROJECTS: '/student/program-b/projects',
+  studentApplication: (applicationId: string) => `/student/applications/${applicationId}`,
+  programBBacklogDetail: (backlogItemId: string) => `/student/program-b/backlog/${backlogItemId}`,
+  programBProjectDetail: (projectId: string) => `/student/program-b/projects/${projectId}`,
+} as const;
+
+const COMPANY_ROUTES = {
+  ROOT: '/company/dashboard',
+  DASHBOARD: '/company/dashboard',
+  ORGANIZATION: '/company/organization',
+  PROGRAM_B_BACKLOG: '/company/program-b/backlog',
+  PROGRAM_B_PROJECTS: '/company/program-b/projects',
+  programBBacklogDetail: (backlogItemId: string) => `/company/program-b/backlog/${backlogItemId}`,
+  programBProjectDetail: (projectId: string) => `/company/program-b/projects/${projectId}`,
+} as const;
+
+const MENTOR_ROUTES = {
+  ROOT: '/mentor/dashboard',
+  DASHBOARD: '/mentor/dashboard',
+} as const;
+
+const REVIEW_ROUTES = {
+  ROOT: '/review/dashboard',
+  DASHBOARD: '/review/dashboard',
+} as const;
+
 export const ROUTES = {
   ROOT: '/',
-  DASHBOARD: '/dashboard',
-  PROFILE: '/profile',
-  TEAM: '/team',
-  PROGRAM_B_BACKLOG: '/program-b/backlog',
-  PROGRAM_B_PROJECTS: '/program-b/projects',
-  APPLICATIONS: '/applications',
-  INVITE: '/invite',
+  TEAM_INVITE_ONBOARDING: '/invite',
   ONBOARDING_PROFILE: '/onboarding/profile',
-  ONBOARDING_INVITES: '/onboarding/invites',
+  ORGANIZATION_INVITE_ONBOARDING: '/onboarding/invites',
   TERMS_OF_SERVICE: '/terms-of-service',
   PRIVACY_POLICY: '/privacy-policy',
 
@@ -51,10 +78,10 @@ export const ROUTES = {
     TWITTER: 'https://x.com',
   },
 
-  studentApplication: (applicationId: string) => `/applications/${applicationId}`,
-  programBBacklogDetail: (backlogItemId: string) => `/program-b/backlog/${backlogItemId}`,
-  programBProjectDetail: (projectId: string) => `/program-b/projects/${projectId}`,
-
   ADMIN: ADMIN_ROUTES,
   AUTH: AUTH_ROUTES,
+  STUDENT: STUDENT_ROUTES,
+  COMPANY: COMPANY_ROUTES,
+  MENTOR: MENTOR_ROUTES,
+  REVIEW: REVIEW_ROUTES,
 } as const;

@@ -19,11 +19,8 @@ import {
 import { ControlledInputField, ControlledSelectField } from 'components/forms';
 import { Button, Card, CardContent, CardHeader, CardTitle, Form } from 'components/shadcn';
 import { UserRole } from 'lib/api';
-import {
-  clearAdminApiCache,
-  isApiRequestError,
-  isAuthErrorStatus,
-} from 'lib/api-client/admin/auth';
+import { clearAdminApiCache } from 'lib/api-client/admin/auth';
+import { isApiRequestError, isAuthErrorStatus } from 'lib/api-client/openapi-runtime/client';
 import {
   createSystemInviteSchema,
   systemInviteRoles,
@@ -52,7 +49,7 @@ export default function AdminInvitesPage() {
     try {
       await createInviteMutation.mutateAsync(values);
       toast.success(t`System invite created.`);
-    } catch (error) {
+    } catch (error: unknown) {
       if (isApiRequestError(error) && isAuthErrorStatus(error.status)) {
         clearAdminApiCache(queryClient);
         toast.error(t`Your admin session has expired.`);

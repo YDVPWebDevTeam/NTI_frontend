@@ -3,6 +3,7 @@
 import { t } from '@lingui/core/macro';
 import type { UseFormReturn } from 'react-hook-form';
 
+import type { StudentRegistrationValues } from 'lib/auth/schemas';
 import {
   useFilesControllerCompleteUpload,
   useFilesControllerRequestUploadUrl,
@@ -19,7 +20,6 @@ import {
 } from 'lib/api-client/openapi-runtime/file-upload';
 
 import { buildAcademicUpdatePayload, buildProfessionalSkillsPayload } from './mappers';
-import type { StudentRegistrationValues } from './types';
 
 type StudentUploadTarget = {
   fileField: 'academicEvidenceFile' | 'cvFile';

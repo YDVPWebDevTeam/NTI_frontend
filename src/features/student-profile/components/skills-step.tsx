@@ -1,3 +1,5 @@
+'use client';
+
 import { t } from '@lingui/core/macro';
 import { useFormContext } from 'react-hook-form';
 

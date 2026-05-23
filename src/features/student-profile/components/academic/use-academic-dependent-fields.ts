@@ -1,3 +1,5 @@
+'use client';
+
 import { t } from '@lingui/core/macro';
 import { useEffect, useMemo, useRef } from 'react';
 import type { UseFormSetValue } from 'react-hook-form';

@@ -1,3 +1,5 @@
+'use client';
+
 import { t } from '@lingui/core/macro';
 import { Plus, Trash } from 'lucide-react';
 import type { Control } from 'react-hook-form';

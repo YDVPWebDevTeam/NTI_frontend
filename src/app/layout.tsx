@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 
 import { AppProviders } from 'components/providers';
 import { activateDefaultLocale } from 'lib/i18n/runtime';
@@ -10,16 +9,6 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import './styles/global.css';
 
 activateDefaultLocale();
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
 
 export const metadata: Metadata = {
   applicationName: 'NTI - innovation hub',
@@ -65,7 +54,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className="antialiased">
         <AppProviders>{children}</AppProviders>
 
         <SpeedInsights />

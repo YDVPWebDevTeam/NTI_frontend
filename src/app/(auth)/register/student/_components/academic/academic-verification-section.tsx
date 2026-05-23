@@ -4,7 +4,7 @@ import type { Control } from 'react-hook-form';
 import { ControlledFileField, FormSectionCard } from 'components/forms';
 import { Checkbox } from 'components/shadcn';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from 'components/shadcn';
-import type { StudentRegistrationValues } from '../../schema';
+import type { StudentRegistrationValues } from 'lib/auth/schemas';
 
 type AcademicVerificationSectionProps = {
   control: Control<StudentRegistrationValues>;

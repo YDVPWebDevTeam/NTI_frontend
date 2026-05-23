@@ -6,7 +6,7 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from 'compon
 import { Input, TagInput } from 'components/shadcn';
 import { Textarea } from 'components/shadcn';
 import { FormSectionCard } from 'components/forms';
-import type { StudentRegistrationValues } from '../../schema';
+import type { StudentRegistrationValues } from 'lib/auth/schemas';
 import { parseOptionalNumber } from './constants';
 
 type AcademicIndicatorsSectionProps = {

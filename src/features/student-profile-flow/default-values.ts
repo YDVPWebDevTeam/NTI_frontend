@@ -1,6 +1,5 @@
 import { getCurrentYear } from 'lib/date';
-
-import type { StudentRegistrationValues } from './types';
+import type { StudentRegistrationValues } from 'lib/auth/schemas';
 
 export function getStudentProfileDefaultValues(): StudentRegistrationValues {
   return {

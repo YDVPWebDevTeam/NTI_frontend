@@ -29,8 +29,10 @@ import type {
   ApplicationDetailDto,
   ApplicationLifecycleTransitionDto,
   CreateAdminCallDto,
+  CreateProgramAMilestoneDto,
   OptionalApplicationTransitionNoteDto,
-  UpdateAdminCallDto
+  UpdateAdminCallDto,
+  UpdateProgramAMilestoneDto
 } from '../index.schemas';
 
 import { orvalMutator } from '../../api-client/openapi-runtime/runtime';
@@ -40,7 +42,297 @@ type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
 
 
 
-/**
+export const adminApplicationsControllerListProgramAApplications = (
+    
+ options?: SecondParameter<typeof orvalMutator>,signal?: AbortSignal
+) => {
+      
+      
+      return orvalMutator<void>(
+      {url: `/admin/applications/program-a`, method: 'GET', signal
+    },
+      options);
+    }
+  
+
+
+
+export const getAdminApplicationsControllerListProgramAApplicationsQueryKey = () => {
+    return [
+    `/admin/applications/program-a`
+    ] as const;
+    }
+
+    
+export const getAdminApplicationsControllerListProgramAApplicationsQueryOptions = <TData = Awaited<ReturnType<typeof adminApplicationsControllerListProgramAApplications>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof adminApplicationsControllerListProgramAApplications>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getAdminApplicationsControllerListProgramAApplicationsQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof adminApplicationsControllerListProgramAApplications>>> = ({ signal }) => adminApplicationsControllerListProgramAApplications(requestOptions, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof adminApplicationsControllerListProgramAApplications>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type AdminApplicationsControllerListProgramAApplicationsQueryResult = NonNullable<Awaited<ReturnType<typeof adminApplicationsControllerListProgramAApplications>>>
+export type AdminApplicationsControllerListProgramAApplicationsQueryError = unknown
+
+
+export function useAdminApplicationsControllerListProgramAApplications<TData = Awaited<ReturnType<typeof adminApplicationsControllerListProgramAApplications>>, TError = unknown>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof adminApplicationsControllerListProgramAApplications>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof adminApplicationsControllerListProgramAApplications>>,
+          TError,
+          Awaited<ReturnType<typeof adminApplicationsControllerListProgramAApplications>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useAdminApplicationsControllerListProgramAApplications<TData = Awaited<ReturnType<typeof adminApplicationsControllerListProgramAApplications>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof adminApplicationsControllerListProgramAApplications>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof adminApplicationsControllerListProgramAApplications>>,
+          TError,
+          Awaited<ReturnType<typeof adminApplicationsControllerListProgramAApplications>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useAdminApplicationsControllerListProgramAApplications<TData = Awaited<ReturnType<typeof adminApplicationsControllerListProgramAApplications>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof adminApplicationsControllerListProgramAApplications>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+
+export function useAdminApplicationsControllerListProgramAApplications<TData = Awaited<ReturnType<typeof adminApplicationsControllerListProgramAApplications>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof adminApplicationsControllerListProgramAApplications>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getAdminApplicationsControllerListProgramAApplicationsQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+export const adminApplicationsControllerListProgramAMilestones = (
+    id: string,
+ options?: SecondParameter<typeof orvalMutator>,signal?: AbortSignal
+) => {
+      
+      
+      return orvalMutator<void>(
+      {url: `/admin/applications/${id}/program-a-milestones`, method: 'GET', signal
+    },
+      options);
+    }
+  
+
+
+
+export const getAdminApplicationsControllerListProgramAMilestonesQueryKey = (id?: string,) => {
+    return [
+    `/admin/applications/${id}/program-a-milestones`
+    ] as const;
+    }
+
+    
+export const getAdminApplicationsControllerListProgramAMilestonesQueryOptions = <TData = Awaited<ReturnType<typeof adminApplicationsControllerListProgramAMilestones>>, TError = unknown>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof adminApplicationsControllerListProgramAMilestones>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getAdminApplicationsControllerListProgramAMilestonesQueryKey(id);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof adminApplicationsControllerListProgramAMilestones>>> = ({ signal }) => adminApplicationsControllerListProgramAMilestones(id, requestOptions, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof adminApplicationsControllerListProgramAMilestones>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type AdminApplicationsControllerListProgramAMilestonesQueryResult = NonNullable<Awaited<ReturnType<typeof adminApplicationsControllerListProgramAMilestones>>>
+export type AdminApplicationsControllerListProgramAMilestonesQueryError = unknown
+
+
+export function useAdminApplicationsControllerListProgramAMilestones<TData = Awaited<ReturnType<typeof adminApplicationsControllerListProgramAMilestones>>, TError = unknown>(
+ id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof adminApplicationsControllerListProgramAMilestones>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof adminApplicationsControllerListProgramAMilestones>>,
+          TError,
+          Awaited<ReturnType<typeof adminApplicationsControllerListProgramAMilestones>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useAdminApplicationsControllerListProgramAMilestones<TData = Awaited<ReturnType<typeof adminApplicationsControllerListProgramAMilestones>>, TError = unknown>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof adminApplicationsControllerListProgramAMilestones>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof adminApplicationsControllerListProgramAMilestones>>,
+          TError,
+          Awaited<ReturnType<typeof adminApplicationsControllerListProgramAMilestones>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useAdminApplicationsControllerListProgramAMilestones<TData = Awaited<ReturnType<typeof adminApplicationsControllerListProgramAMilestones>>, TError = unknown>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof adminApplicationsControllerListProgramAMilestones>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+
+export function useAdminApplicationsControllerListProgramAMilestones<TData = Awaited<ReturnType<typeof adminApplicationsControllerListProgramAMilestones>>, TError = unknown>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof adminApplicationsControllerListProgramAMilestones>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getAdminApplicationsControllerListProgramAMilestonesQueryOptions(id,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+export const adminApplicationsControllerCreateProgramAMilestone = (
+    id: string,
+    createProgramAMilestoneDto: CreateProgramAMilestoneDto,
+ options?: SecondParameter<typeof orvalMutator>,signal?: AbortSignal
+) => {
+      
+      
+      return orvalMutator<void>(
+      {url: `/admin/applications/${id}/program-a-milestones`, method: 'POST',
+      headers: {'Content-Type': 'application/json', },
+      data: createProgramAMilestoneDto, signal
+    },
+      options);
+    }
+  
+
+
+export const getAdminApplicationsControllerCreateProgramAMilestoneMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof adminApplicationsControllerCreateProgramAMilestone>>, TError,{id: string;data: CreateProgramAMilestoneDto}, TContext>, request?: SecondParameter<typeof orvalMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof adminApplicationsControllerCreateProgramAMilestone>>, TError,{id: string;data: CreateProgramAMilestoneDto}, TContext> => {
+
+const mutationKey = ['adminApplicationsControllerCreateProgramAMilestone'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof adminApplicationsControllerCreateProgramAMilestone>>, {id: string;data: CreateProgramAMilestoneDto}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  adminApplicationsControllerCreateProgramAMilestone(id,data,requestOptions)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type AdminApplicationsControllerCreateProgramAMilestoneMutationResult = NonNullable<Awaited<ReturnType<typeof adminApplicationsControllerCreateProgramAMilestone>>>
+    export type AdminApplicationsControllerCreateProgramAMilestoneMutationBody = CreateProgramAMilestoneDto
+    export type AdminApplicationsControllerCreateProgramAMilestoneMutationError = unknown
+
+    export const useAdminApplicationsControllerCreateProgramAMilestone = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof adminApplicationsControllerCreateProgramAMilestone>>, TError,{id: string;data: CreateProgramAMilestoneDto}, TContext>, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof adminApplicationsControllerCreateProgramAMilestone>>,
+        TError,
+        {id: string;data: CreateProgramAMilestoneDto},
+        TContext
+      > => {
+
+      const mutationOptions = getAdminApplicationsControllerCreateProgramAMilestoneMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    export const adminApplicationsControllerUpdateProgramAMilestone = (
+    id: string,
+    milestoneId: string,
+    updateProgramAMilestoneDto: UpdateProgramAMilestoneDto,
+ options?: SecondParameter<typeof orvalMutator>,) => {
+      
+      
+      return orvalMutator<void>(
+      {url: `/admin/applications/${id}/program-a-milestones/${milestoneId}`, method: 'PATCH',
+      headers: {'Content-Type': 'application/json', },
+      data: updateProgramAMilestoneDto
+    },
+      options);
+    }
+  
+
+
+export const getAdminApplicationsControllerUpdateProgramAMilestoneMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof adminApplicationsControllerUpdateProgramAMilestone>>, TError,{id: string;milestoneId: string;data: UpdateProgramAMilestoneDto}, TContext>, request?: SecondParameter<typeof orvalMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof adminApplicationsControllerUpdateProgramAMilestone>>, TError,{id: string;milestoneId: string;data: UpdateProgramAMilestoneDto}, TContext> => {
+
+const mutationKey = ['adminApplicationsControllerUpdateProgramAMilestone'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof adminApplicationsControllerUpdateProgramAMilestone>>, {id: string;milestoneId: string;data: UpdateProgramAMilestoneDto}> = (props) => {
+          const {id,milestoneId,data} = props ?? {};
+
+          return  adminApplicationsControllerUpdateProgramAMilestone(id,milestoneId,data,requestOptions)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type AdminApplicationsControllerUpdateProgramAMilestoneMutationResult = NonNullable<Awaited<ReturnType<typeof adminApplicationsControllerUpdateProgramAMilestone>>>
+    export type AdminApplicationsControllerUpdateProgramAMilestoneMutationBody = UpdateProgramAMilestoneDto
+    export type AdminApplicationsControllerUpdateProgramAMilestoneMutationError = unknown
+
+    export const useAdminApplicationsControllerUpdateProgramAMilestone = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof adminApplicationsControllerUpdateProgramAMilestone>>, TError,{id: string;milestoneId: string;data: UpdateProgramAMilestoneDto}, TContext>, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof adminApplicationsControllerUpdateProgramAMilestone>>,
+        TError,
+        {id: string;milestoneId: string;data: UpdateProgramAMilestoneDto},
+        TContext
+      > => {
+
+      const mutationOptions = getAdminApplicationsControllerUpdateProgramAMilestoneMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    /**
  * Moves a Program A application from SUBMITTED to FORMALLY_VERIFIED. Reviewer-side users only.
  * @summary Formal verify Program A application
  */

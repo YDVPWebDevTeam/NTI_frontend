@@ -6,7 +6,7 @@ import type { ReactNode } from 'react';
 
 import { useGetMe } from 'lib/api';
 import { isApiRequestError } from 'lib/api-client/openapi-runtime/client';
-import { ROUTES } from 'lib/constants';
+import { getDefaultRouteForRole } from 'lib/auth/access';
 
 type LandingAuthAction = {
   className: string;
@@ -44,7 +44,7 @@ export function LandingAuthActions({
 
   if (meQuery.data) {
     return (
-      <Link className={authenticatedClassName} href={ROUTES.DASHBOARD}>
+      <Link className={authenticatedClassName} href={getDefaultRouteForRole(meQuery.data.role)}>
         {t`Dashboard`}
       </Link>
     );

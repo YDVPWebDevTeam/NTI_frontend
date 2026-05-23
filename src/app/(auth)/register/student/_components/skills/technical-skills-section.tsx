@@ -1,7 +1,7 @@
 import { t } from '@lingui/core/macro';
 import { Plus, Trash } from 'lucide-react';
 import type { Control } from 'react-hook-form';
-import { useFieldArray } from 'react-hook-form';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 
 import { FormSectionCard } from 'components/forms';
 import { Button } from 'components/shadcn';
@@ -10,29 +10,22 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from 'compon
 import { Input } from 'components/shadcn';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from 'components/shadcn';
 import { formatEnumLabel } from 'lib/utils';
-import type { StudentRegistrationValues } from '../../schema';
+import type { StudentRegistrationValues } from 'lib/auth/schemas';
 import { SKILL_LEVEL_OPTIONS } from './constants';
 
 type TechnicalSkillsSectionProps = {
   control: Control<StudentRegistrationValues>;
 };
 
-type SkillsFieldArrayMessageProps = {
-  control: Control<StudentRegistrationValues>;
-};
+function SkillsFieldArrayMessage() {
+  const { getFieldState, formState } = useFormContext<StudentRegistrationValues>();
+  const error = getFieldState('skills', formState).error;
 
-function SkillsFieldArrayMessage({ control }: SkillsFieldArrayMessageProps) {
-  return (
-    <FormField
-      control={control}
-      name="skills"
-      render={() => (
-        <FormItem>
-          <FormMessage />
-        </FormItem>
-      )}
-    />
-  );
+  if (!error?.message) {
+    return null;
+  }
+
+  return <p className="text-destructive text-sm font-medium">{String(error.message)}</p>;
 }
 
 export function TechnicalSkillsSection({ control }: TechnicalSkillsSectionProps) {
@@ -182,7 +175,7 @@ export function TechnicalSkillsSection({ control }: TechnicalSkillsSectionProps)
           {t`Add Skill`}
         </Button>
 
-        <SkillsFieldArrayMessage control={control} />
+        <SkillsFieldArrayMessage />
       </div>
     </FormSectionCard>
   );

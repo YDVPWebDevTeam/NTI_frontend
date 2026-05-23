@@ -14,11 +14,7 @@ import {
   type AdminLoginMutationResult,
   type AuthenticatedUserDto,
 } from 'lib/api';
-import {
-  ApiRequestError,
-  isApiRequestError,
-  isAuthErrorStatus,
-} from 'lib/api-client/openapi-runtime/client';
+import { isApiRequestError, isAuthErrorStatus } from 'lib/api-client/openapi-runtime/client';
 
 const ADMIN_PASSWORD_CHANGE_STORAGE_KEY = 'nti.admin.requires-password-change';
 
@@ -118,5 +114,3 @@ export function useAdminSessionQuery() {
     isAdmin: isAdminRole(query.data?.user.role),
   };
 }
-
-export { ApiRequestError, isApiRequestError, isAuthErrorStatus };

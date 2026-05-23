@@ -9,9 +9,8 @@ import {
   adminSessionKeys,
   clearAdminApiCache,
   setStoredAdminPasswordChangeRequired,
-  isApiRequestError,
-  isAuthErrorStatus,
 } from 'lib/api-client/admin/auth';
+import { isApiRequestError, isAuthErrorStatus } from 'lib/api-client/openapi-runtime/client';
 import { ROUTES } from 'lib/constants';
 
 export function useHandleAdminSessionFailure() {

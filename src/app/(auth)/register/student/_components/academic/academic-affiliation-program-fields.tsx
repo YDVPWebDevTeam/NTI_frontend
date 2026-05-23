@@ -3,7 +3,7 @@ import type { Control } from 'react-hook-form';
 
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from 'components/shadcn';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from 'components/shadcn';
-import type { StudentRegistrationValues } from '../../schema';
+import type { StudentRegistrationValues } from 'lib/auth/schemas';
 
 type AcademicAffiliationProgramFieldsProps = {
   control: Control<StudentRegistrationValues>;

@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useGetMe, type UserRole } from 'lib/api';
 import { isApiRequestError } from 'lib/api-client/openapi-runtime/client';
 import { ROUTES } from 'lib/constants';
-import { getDashboardRouteForRole } from './access';
+import { getDefaultRouteForRole } from 'lib/auth/access';
 
 export function useAuthenticatedUser(allowedRoles?: UserRole[]) {
   const router = useRouter();
@@ -32,7 +32,7 @@ export function useAuthenticatedUser(allowedRoles?: UserRole[]) {
     }
 
     if (!allowedRoles.includes(meQuery.data.role)) {
-      router.replace(getDashboardRouteForRole(meQuery.data.role));
+      router.replace(getDefaultRouteForRole(meQuery.data.role));
     }
   }, [allowedRoles, meQuery.data, router]);
 

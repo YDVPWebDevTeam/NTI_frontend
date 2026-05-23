@@ -7,7 +7,7 @@ import {
   useListSpecializationsByFaculty,
   useListUniversities,
 } from 'lib/api';
-import type { StudentRegistrationValues } from '../../schema';
+import type { StudentRegistrationValues } from 'lib/auth/schemas';
 
 type UseAcademicDependentFieldsArgs = {
   universityId: string;

@@ -7,7 +7,7 @@ import { useFormContext } from 'react-hook-form';
 import { ControlledInputField } from 'components/forms';
 import { Button } from 'components/shadcn';
 import { useResendCooldown } from 'lib/hooks/use-resend-cooldown';
-import type { StudentRegistrationValues } from '../schema';
+import type { StudentRegistrationValues } from 'lib/auth/schemas';
 
 const RESEND_CONFIRMATION_COOLDOWN_SECONDS = 60;
 

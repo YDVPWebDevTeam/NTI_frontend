@@ -2,15 +2,17 @@
 
 import { t } from '@lingui/core/macro';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
 import { ArrowRight, Lock, Mail } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
+import { getDefaultRouteForRole } from 'lib/auth/access';
+import { getGetMeQueryOptions, useLogin } from 'lib/api';
 import { ROUTES } from 'lib/constants';
 import { createLoginSchema, type LoginFormValues } from 'lib/auth/schemas';
-import { useLogin } from 'lib/api';
 
 import { ControlledInputField, ControlledPasswordField } from 'components/forms';
 import { AuthSplitShell } from 'components/layout';
@@ -19,6 +21,7 @@ import { Form } from 'components/shadcn';
 
 export default function LoginPage() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { isPending: isLoginPending, mutateAsync: login } = useLogin();
 
   const form = useForm<LoginFormValues>({
@@ -33,8 +36,15 @@ export default function LoginPage() {
   const handleSubmit = async (values: LoginFormValues) => {
     try {
       await login({ data: values });
+      const me = await queryClient.fetchQuery(
+        getGetMeQueryOptions({
+          query: {
+            retry: false,
+          },
+        }),
+      );
 
-      router.push(ROUTES.DASHBOARD);
+      router.push(getDefaultRouteForRole(me.role));
     } catch (error) {
       toast.error(error instanceof Error ? error.message : t`Unable to log in. Please try again.`);
     }

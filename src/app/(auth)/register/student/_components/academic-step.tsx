@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 
 import { FormSectionCard } from 'components/forms';
-import type { StudentRegistrationValues } from '../schema';
+import type { StudentRegistrationValues } from 'lib/auth/schemas';
 import { AcademicIndicatorsSection } from './academic/academic-indicators-section';
 import { AcademicVerificationSection } from './academic/academic-verification-section';
 import { useAcademicDependentFields } from './academic/use-academic-dependent-fields';

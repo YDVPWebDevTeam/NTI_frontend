@@ -5,7 +5,7 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from 'compon
 import { Input } from 'components/shadcn';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from 'components/shadcn';
 import { formatEnumLabel } from 'lib/utils';
-import type { StudentRegistrationValues } from '../../schema';
+import type { StudentRegistrationValues } from 'lib/auth/schemas';
 import { DEGREE_LEVEL_OPTIONS, GRADUATION_YEAR_OPTIONS, STUDY_MODE_OPTIONS } from './constants';
 
 type AcademicAffiliationStudyFieldsProps = {

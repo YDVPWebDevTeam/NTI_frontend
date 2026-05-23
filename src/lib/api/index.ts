@@ -15,6 +15,7 @@ export * from './invites/invites';
 export * from './organization-documents/organization-documents';
 export * from './organizations/organizations';
 export * from './program-b-backlog/program-b-backlog';
+export * from './program-b-company-overview/program-b-company-overview';
 export * from './program-b-projects/program-b-projects';
 export * from './program-b-team-applications/program-b-team-applications';
 export * from './reports/reports';

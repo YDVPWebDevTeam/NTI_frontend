@@ -6,9 +6,11 @@ import { toast } from 'sonner';
 import type { AuthenticatedUserDto, TeamDetailDto, TeamInviteItemDto } from 'lib/api';
 import { Button, Input, Textarea } from 'components/shadcn';
 import { formatDateTime } from 'lib/date';
-import { StudentSectionCard } from './page-shell';
+import { StudentSectionCard } from './page-shell-primitives';
 
 export type TeamWorkspaceMode = 'management' | 'invite-onboarding';
+
+const MIN_TEAMMATES_FOR_TEAM_CREATION = 2;
 
 type MutationLike<TPayload> = {
   isPending: boolean;
@@ -36,23 +38,100 @@ export function parseEmails(input: string) {
 export function TeamLeadOnboardingGuide({ mode }: { mode: TeamWorkspaceMode }) {
   const description =
     mode === 'invite-onboarding'
-      ? t`Before you can invite teammates, create the team through \`POST /teams\` with the team name and teammate emails.`
-      : t`If you are onboarding as the team lead, create the team through \`POST /teams\` with the team name and teammate emails.`;
+      ? t`Create the team first, then the invited students can join through their email links.`
+      : t`If you are onboarding as the team lead, create the team here and send the first teammate invites immediately.`;
 
   return (
     <StudentSectionCard title={t`Create your team`} description={description}>
       <div className="space-y-4 text-sm text-neutral-700">
-        <div className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4">
-          <p className="font-semibold text-neutral-950">{t`Create team`}</p>
-          <p className="mt-1 text-neutral-600">
-            <code>POST /teams</code>
-          </p>
-          <pre className="mt-3 overflow-x-auto rounded-xl bg-[#101a2e] p-4 text-xs leading-6 text-white">
-            <code>{`{
-  "name": "Alpha Team",
-  "emails": ["a@nti.sk", "b@nti.sk"]
-}`}</code>
-          </pre>
+        <p>{t`Team creation requires a team name and at least two teammate email addresses.`}</p>
+      </div>
+    </StudentSectionCard>
+  );
+}
+
+export function TeamCreationSection({
+  createTeam,
+  currentUserEmail,
+  inviteEmails,
+  setInviteEmails,
+  setTeamName,
+  teamName,
+  teamQuery,
+}: {
+  createTeam: MutationLike<{ data: { name: string; emails: string[] } }>;
+  currentUserEmail?: string;
+  inviteEmails: string;
+  setInviteEmails: (value: string) => void;
+  setTeamName: (value: string) => void;
+  teamName: string;
+  teamQuery: QueryLike<unknown>;
+}) {
+  const normalizedCurrentUserEmail = currentUserEmail?.trim().toLowerCase() ?? '';
+  const description = t`Create the team first, then start inviting the rest of the student members.`;
+
+  return (
+    <StudentSectionCard title={t`Create your team`} description={description}>
+      <div className="space-y-4">
+        <Input
+          value={teamName}
+          onChange={(event) => setTeamName(event.target.value)}
+          placeholder={t`Alpha Team`}
+        />
+        <Textarea
+          value={inviteEmails}
+          onChange={(event) => setInviteEmails(event.target.value)}
+          placeholder={t`name@example.com, teammate@example.com`}
+          rows={5}
+        />
+        <p className="text-sm text-neutral-600">
+          {t`Add at least two teammate emails. Your own account will be added automatically as the team lead.`}
+        </p>
+        <div className="flex flex-wrap gap-2">
+          <Button
+            disabled={createTeam.isPending || !teamName.trim()}
+            onClick={async () => {
+              const parsed = parseEmails(inviteEmails);
+              const teammateEmails = parsed.validEmails.filter(
+                (email) => email !== normalizedCurrentUserEmail,
+              );
+
+              if (!teamName.trim()) {
+                toast.error(t`Team name is required.`);
+
+                return;
+              }
+
+              if (parsed.invalidEmails.length > 0) {
+                toast.error(t`Invalid emails: ${parsed.invalidEmails.join(', ')}`);
+
+                return;
+              }
+
+              if (teammateEmails.length < MIN_TEAMMATES_FOR_TEAM_CREATION) {
+                toast.error(t`Add at least two valid teammate email addresses.`);
+
+                return;
+              }
+
+              try {
+                await createTeam.mutateAsync({
+                  data: {
+                    name: teamName.trim(),
+                    emails: teammateEmails,
+                  },
+                });
+                setTeamName('');
+                setInviteEmails('');
+                await teamQuery.refetch();
+                toast.success(t`Team created.`);
+              } catch (error) {
+                toast.error(error instanceof Error ? error.message : t`Unable to create team.`);
+              }
+            }}
+          >
+            {createTeam.isPending ? t`Creating...` : t`Create team`}
+          </Button>
         </div>
       </div>
     </StudentSectionCard>
@@ -298,7 +377,7 @@ export function InvitationsSection({
   return (
     <StudentSectionCard
       title={t`Invitations`}
-      description={t`Lead-only invitation management is backed directly by the generated team invitation hooks.`}
+      description={t`Only team leads can manage invitations.`}
     >
       <div className="space-y-4">
         <Textarea

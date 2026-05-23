@@ -7,8 +7,8 @@ import { useFormContext } from 'react-hook-form';
 import { ControlledInputField, ControlledPasswordField } from 'components/forms';
 import { Checkbox } from 'components/shadcn';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from 'components/shadcn';
+import type { StudentRegistrationValues } from 'lib/auth/schemas';
 import { ROUTES } from 'lib/constants';
-import type { StudentRegistrationValues } from '../schema';
 
 export function IdentityStep() {
   const { control } = useFormContext<StudentRegistrationValues>();

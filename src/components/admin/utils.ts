@@ -25,6 +25,10 @@ export const ADMIN_NAV_ITEMS: AdminNavItem[] = [
     exact: true,
   },
   {
+    href: ROUTES.ADMIN.REPORTS,
+    label: 'Reports',
+  },
+  {
     href: ROUTES.ADMIN.USERS,
     label: 'Users',
   },
@@ -129,6 +133,10 @@ export function getAdminPageTitle(pathname: string) {
 
   if (pathname === ROUTES.ADMIN.USERS) {
     return t`Users`;
+  }
+
+  if (pathname === ROUTES.ADMIN.REPORTS) {
+    return t`Reports`;
   }
 
   if (pathname === ROUTES.ADMIN.ACADEMIC_STRUCTURE) {

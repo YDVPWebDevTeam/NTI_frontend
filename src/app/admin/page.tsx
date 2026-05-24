@@ -133,19 +133,24 @@ export default function AdminOverviewPage() {
           <CardContent className="space-y-3">
             {[
               {
+                href: ROUTES.ADMIN.REPORTS,
+                title: t`Open Reports`,
+                description: t`Inspect KPI rollups, compare report datasets, and manage export jobs.`,
+              },
+              {
                 href: ROUTES.ADMIN.USERS,
                 title: t`Manage Users`,
                 description: t`Search accounts, inspect roles, and suspend or reactivate access.`,
               },
               {
-                href: ROUTES.ADMIN.ORGANIZATIONS,
-                title: t`Review Organizations`,
-                description: t`Approve or reject organization onboarding requests.`,
-              },
-              {
                 href: ROUTES.ADMIN.INVITES,
                 title: t`Create System Invite`,
                 description: t`Generate a direct invite for any supported platform role.`,
+              },
+              {
+                href: ROUTES.ADMIN.ORGANIZATIONS,
+                title: t`Review Organizations`,
+                description: t`Approve or reject organization onboarding requests.`,
               },
             ].map((link) => (
               <Link

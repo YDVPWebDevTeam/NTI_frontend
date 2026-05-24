@@ -2,7 +2,15 @@
 
 import { t } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
-import { GraduationCap, LayoutGrid, LogOut, ShieldCheck, UserCog, Users2 } from 'lucide-react';
+import {
+  FileSpreadsheet,
+  GraduationCap,
+  LayoutGrid,
+  LogOut,
+  ShieldCheck,
+  UserCog,
+  Users2,
+} from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useQueryClient } from '@tanstack/react-query';
@@ -29,6 +37,7 @@ type AdminShellProps = {
 
 const NAV_ICON_BY_HREF: Record<string, React.ReactNode> = {
   [ROUTES.ADMIN.ROOT]: <LayoutGrid className="h-4 w-4" />,
+  [ROUTES.ADMIN.REPORTS]: <FileSpreadsheet className="h-4 w-4" />,
   [ROUTES.ADMIN.USERS]: <Users2 className="h-4 w-4" />,
   [ROUTES.ADMIN.ACADEMIC_STRUCTURE]: <GraduationCap className="h-4 w-4" />,
   [ROUTES.ADMIN.ORGANIZATIONS]: <ShieldCheck className="h-4 w-4" />,

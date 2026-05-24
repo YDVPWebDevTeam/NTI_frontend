@@ -3345,6 +3345,38 @@ export interface RequiredDocumentsResponseDto {
   requiredDocuments: RequiredDocumentTypeDto[];
 }
 
+export interface ChangePasswordDto {
+  /**
+   * Current password of the authenticated account.
+   * @minLength 8
+   * @maxLength 128
+   */
+  currentPassword: string;
+  /**
+   * New password that will replace the current password.
+   * @minLength 8
+   * @maxLength 128
+   */
+  newPassword: string;
+  /** Must match `newPassword`. */
+  confirmNewPassword: string;
+}
+
+export interface AccountMessageResponseDto {
+  /** Human-readable response message. */
+  message: string;
+}
+
+export interface ChangeEmailRequestDto {
+  /** New email address that should replace the current one. */
+  newEmail: string;
+}
+
+export interface ChangeEmailConfirmDto {
+  /** Single-use email-change confirmation token. */
+  token: string;
+}
+
 export type ProgramBCompanyOrganizationDtoStatus = typeof ProgramBCompanyOrganizationDtoStatus[keyof typeof ProgramBCompanyOrganizationDtoStatus];
 
 

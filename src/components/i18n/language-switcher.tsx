@@ -51,9 +51,9 @@ export function LanguageSelector({
             triggerClassName,
           )}
         >
-          <div className="flex items-center gap-2">
-            <Languages className="h-4 w-4 shrink-0 text-slate-600" />
-            <span className="font-medium text-slate-800">{currentLanguage.label}</span>
+          <div className="flex items-center gap-2 text-inherit">
+            <Languages className="h-4 w-4 shrink-0" />
+            <span className="font-medium">{currentLanguage.label}</span>
           </div>
         </SelectTrigger>
         <SelectContent

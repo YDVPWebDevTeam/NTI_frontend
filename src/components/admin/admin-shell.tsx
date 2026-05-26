@@ -1,7 +1,6 @@
 'use client';
 
 import { t } from '@lingui/core/macro';
-import { useLingui } from '@lingui/react';
 import {
   FileSpreadsheet,
   GraduationCap,
@@ -17,6 +16,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
 import { AdminBrandBlock, PageSectionHeader } from 'components/layout';
+import { LanguageSwitcher } from 'components/i18n/language-switcher';
 import { Button } from 'components/shadcn';
 import {
   clearAdminApiCache,
@@ -28,7 +28,7 @@ import { isApiRequestError, isAuthErrorStatus } from 'lib/api-client/openapi-run
 import { cn } from 'lib/utils';
 
 import type { AdminNavItem, AdminSessionUser } from './types';
-import { ADMIN_NAV_ITEMS, getAdminPageTitle } from './utils';
+import { ADMIN_NAV_ITEMS, getAdminNavLabel, getAdminPageTitle } from './utils';
 
 type AdminShellProps = {
   children: React.ReactNode;
@@ -52,8 +52,34 @@ function isActiveNavItem(item: AdminNavItem, pathname: string) {
   return pathname === item.href || pathname.startsWith(`${item.href}/`);
 }
 
+function getTranslatedAdminNavLabel(href: string) {
+  const label = getAdminNavLabel(href);
+
+  switch (label) {
+    case 'Overview':
+      return t`Overview`;
+
+    case 'Reports':
+      return t`Reports`;
+
+    case 'Users':
+      return t`Users`;
+
+    case 'Academic Structure':
+      return t`Academic Structure`;
+
+    case 'Organizations':
+      return t`Organizations`;
+
+    case 'Invites':
+      return t`Invites`;
+
+    default:
+      return label;
+  }
+}
+
 export function AdminShell({ children, user }: AdminShellProps) {
-  const { i18n } = useLingui();
   const pathname = usePathname();
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -76,34 +102,50 @@ export function AdminShell({ children, user }: AdminShellProps) {
     <div className="min-h-screen bg-[linear-gradient(180deg,#f2f5fb_0%,#ebeff8_100%)] text-slate-950">
       <div className="mx-auto grid min-h-screen max-w-[1600px] grid-cols-1 lg:grid-cols-[272px_minmax(0,1fr)]">
         <aside className="border-r border-slate-200 bg-[#0f172a] px-5 py-6 text-slate-100">
-          <AdminBrandBlock
-            compact
-            className="mb-8"
-            eyebrow={t`NTI Admin`}
-            title={t`Control Center`}
-          />
+          <div className="flex h-full flex-col">
+            <AdminBrandBlock
+              compact
+              className="mb-8"
+              eyebrow={t`NTI Admin`}
+              title={t`Control Center`}
+            />
 
-          <nav className="space-y-1">
-            {ADMIN_NAV_ITEMS.map((item) => {
-              const isActive = isActiveNavItem(item, pathname);
+            <nav className="space-y-1">
+              {ADMIN_NAV_ITEMS.map((item) => {
+                const isActive = isActiveNavItem(item, pathname);
 
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    'flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors',
-                    isActive
-                      ? 'bg-sky-400/15 text-white'
-                      : 'text-slate-300 hover:bg-white/5 hover:text-white',
-                  )}
-                >
-                  <span>{NAV_ICON_BY_HREF[item.href]}</span>
-                  <span>{i18n._(item.label)}</span>
-                </Link>
-              );
-            })}
-          </nav>
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={cn(
+                      'flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors',
+                      isActive
+                        ? 'bg-sky-400/15 text-white'
+                        : 'text-slate-300 hover:bg-white/5 hover:text-white',
+                    )}
+                  >
+                    <span>{NAV_ICON_BY_HREF[item.href]}</span>
+                    <span>{getTranslatedAdminNavLabel(item.href)}</span>
+                  </Link>
+                );
+              })}
+            </nav>
+
+            <div className="mt-auto pt-6">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <p className="text-[11px] font-medium tracking-[0.12em] text-slate-400 uppercase">
+                  {t`Language`}
+                </p>
+                <p className="mt-1 text-sm text-slate-300">{t`Switch the app locale.`}</p>
+                <LanguageSwitcher
+                  className="mt-4 w-full border border-white/10 bg-white/8 shadow-none"
+                  triggerClassName="w-full justify-between bg-transparent text-slate-100 hover:bg-white/10"
+                  contentClassName="border border-slate-200/80 bg-white"
+                />
+              </div>
+            </div>
+          </div>
         </aside>
 
         <div className="flex min-w-0 flex-col">

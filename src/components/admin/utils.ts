@@ -46,6 +46,34 @@ export const ADMIN_NAV_ITEMS: AdminNavItem[] = [
   },
 ];
 
+export function getAdminNavLabel(href: string) {
+  if (href === ROUTES.ADMIN.ROOT) {
+    return 'Overview';
+  }
+
+  if (href === ROUTES.ADMIN.REPORTS) {
+    return 'Reports';
+  }
+
+  if (href === ROUTES.ADMIN.USERS) {
+    return 'Users';
+  }
+
+  if (href === ROUTES.ADMIN.ACADEMIC_STRUCTURE) {
+    return 'Academic Structure';
+  }
+
+  if (href === ROUTES.ADMIN.ORGANIZATIONS) {
+    return 'Organizations';
+  }
+
+  if (href === ROUTES.ADMIN.INVITES) {
+    return 'Invites';
+  }
+
+  return href;
+}
+
 export function getAdminRouteAccessDecision({
   pathname,
   session,

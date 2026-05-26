@@ -293,6 +293,24 @@ export default function AdminReportsPage() {
       applicationsQuery.isLoading) ||
       (selectedDataset === ReportsControllerExportReportDataset['program-b'] &&
         programBQuery.isLoading));
+  const activeDatasetTotalRows = activeDatasetQuery.data?.meta.total ?? 0;
+  const isExportDisabled =
+    isExporting ||
+    activeDatasetQuery.isLoading ||
+    activeDatasetQuery.isError ||
+    activeDatasetTotalRows === 0;
+
+  const handleExportClick = () => {
+    if (isExportDisabled) {
+      if (activeDatasetTotalRows === 0) {
+        toast.error(t`There is no data to export for the current filters.`);
+      }
+
+      return;
+    }
+
+    void handleExport();
+  };
 
   if (isInitialLoading) {
     return <AdminLoadingState label={t`Loading reports...`} />;
@@ -472,6 +490,11 @@ export default function AdminReportsPage() {
                 <div className="mt-1">
                   {t`Filters applied to the table are reused for the export request.`}
                 </div>
+                {activeDatasetTotalRows === 0 ? (
+                  <div className="mt-2 text-rose-600">
+                    {t`Export is unavailable until the current filters return at least one row.`}
+                  </div>
+                ) : null}
               </div>
 
               <div>
@@ -498,8 +521,8 @@ export default function AdminReportsPage() {
               <Button
                 type="button"
                 className="w-full"
-                disabled={isExporting}
-                onClick={() => void handleExport()}
+                disabled={isExportDisabled}
+                onClick={handleExportClick}
               >
                 <FileDown className="h-4 w-4" />
                 {isExporting ? t`Preparing export...` : t`Export dataset`}

@@ -17,9 +17,11 @@ import { formatEnumLabel } from 'lib/utils';
 
 import { formatAdminDateTime } from './utils';
 import type {
+  ApplicationOrder,
   ApplicationSort,
   ApplicationStatusFilter,
   ExportFormat,
+  ProgramBOrder,
   ProgramBSort,
   ProgramBStatusFilter,
   ProgramTypeFilter,
@@ -78,25 +80,6 @@ export const PROGRAM_B_SORT_OPTIONS: readonly ProgramBSort[] = [
   ReportsControllerGetProgramBSort.status,
 ];
 
-const SORT_LABELS: Record<string, string> = {
-  createdAt: 'Created',
-  submittedAt: 'Submitted',
-  decidedAt: 'Decided',
-  status: 'Status',
-};
-
-const ORDER_LABELS: Record<string, string> = {
-  asc: 'Ascending',
-  desc: 'Descending',
-};
-
-export const EXPORT_STATUS_LABELS: Record<string, string> = {
-  [ExportJobStatusDtoStatus.PENDING]: 'Pending',
-  [ExportJobStatusDtoStatus.PROCESSING]: 'Running',
-  [ExportJobStatusDtoStatus.COMPLETED]: 'Complete',
-  [ExportJobStatusDtoStatus.FAILED]: 'Failed',
-};
-
 export const EXPORT_STATUS_CLASS_NAMES: Record<string, string> = {
   [ExportJobStatusDtoStatus.PENDING]: 'border-amber-200 bg-amber-100 text-amber-800',
   [ExportJobStatusDtoStatus.PROCESSING]: 'border-sky-200 bg-sky-100 text-sky-800',
@@ -110,12 +93,55 @@ export function getDatasetLabel(dataset: ReportDataset) {
     : t`Program B`;
 }
 
-export function getSortLabel(sort: string) {
-  return SORT_LABELS[sort] ?? sort;
+export function getSortLabel(sort: ApplicationSort | ProgramBSort) {
+  if (sort === 'createdAt') {
+    return t`Created`;
+  }
+
+  if (sort === 'submittedAt') {
+    return t`Submitted`;
+  }
+
+  if (sort === 'decidedAt') {
+    return t`Decided`;
+  }
+
+  if (sort === 'status') {
+    return t`Status`;
+  }
+
+  return sort;
 }
 
-export function getOrderLabel(order: string) {
-  return ORDER_LABELS[order] ?? formatEnumLabel(order);
+export function getOrderLabel(order: ApplicationOrder | ProgramBOrder) {
+  if (order === 'asc') {
+    return t`Ascending`;
+  }
+
+  if (order === 'desc') {
+    return t`Descending`;
+  }
+
+  return formatEnumLabel(order);
+}
+
+export function getExportStatusLabel(status: ExportJobStatusDtoStatus) {
+  switch (status) {
+    case ExportJobStatusDtoStatus.PENDING:
+      return t`Pending`;
+
+    case ExportJobStatusDtoStatus.PROCESSING:
+      return t`Running`;
+
+    case ExportJobStatusDtoStatus.COMPLETED:
+      return t`Complete`;
+
+    case ExportJobStatusDtoStatus.FAILED:
+      return t`Failed`;
+
+    default:
+      return formatEnumLabel(status);
+  }
 }
 
 export function getDefaultExportFilename(dataset: ReportDataset, format: ExportFormat) {

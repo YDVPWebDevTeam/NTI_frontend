@@ -1,5 +1,6 @@
 // This file is auto-generated. Do not edit manually.
 export * from './academic-structure/academic-structure';
+export * from './account/account';
 export * from './admin-academic-structure/admin-academic-structure';
 export * from './admin-auth/admin-auth';
 export * from './admin-organizations/admin-organizations';

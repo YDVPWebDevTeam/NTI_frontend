@@ -25,6 +25,10 @@ export const ADMIN_NAV_ITEMS: AdminNavItem[] = [
     exact: true,
   },
   {
+    href: ROUTES.ADMIN.REPORTS,
+    label: 'Reports',
+  },
+  {
     href: ROUTES.ADMIN.USERS,
     label: 'Users',
   },
@@ -41,6 +45,34 @@ export const ADMIN_NAV_ITEMS: AdminNavItem[] = [
     label: 'Invites',
   },
 ];
+
+export function getAdminNavLabel(href: string) {
+  if (href === ROUTES.ADMIN.ROOT) {
+    return 'Overview';
+  }
+
+  if (href === ROUTES.ADMIN.REPORTS) {
+    return 'Reports';
+  }
+
+  if (href === ROUTES.ADMIN.USERS) {
+    return 'Users';
+  }
+
+  if (href === ROUTES.ADMIN.ACADEMIC_STRUCTURE) {
+    return 'Academic Structure';
+  }
+
+  if (href === ROUTES.ADMIN.ORGANIZATIONS) {
+    return 'Organizations';
+  }
+
+  if (href === ROUTES.ADMIN.INVITES) {
+    return 'Invites';
+  }
+
+  return href;
+}
 
 export function getAdminRouteAccessDecision({
   pathname,
@@ -129,6 +161,10 @@ export function getAdminPageTitle(pathname: string) {
 
   if (pathname === ROUTES.ADMIN.USERS) {
     return t`Users`;
+  }
+
+  if (pathname === ROUTES.ADMIN.REPORTS) {
+    return t`Reports`;
   }
 
   if (pathname === ROUTES.ADMIN.ACADEMIC_STRUCTURE) {

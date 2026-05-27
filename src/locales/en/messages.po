@@ -267,9 +267,6 @@ msgstr "Backlog items"
 msgid "Backlog preview"
 msgstr "Backlog preview"
 
-#~ msgid "Before you can invite teammates, create the team through `POST /teams` with the team name and teammate emails."
-#~ msgstr "Before you can invite teammates, create the team through `POST /teams` with the team name and teammate emails."
-
 msgid "Bio"
 msgstr "Bio"
 
@@ -341,9 +338,6 @@ msgstr "Close navigation"
 
 msgid "Closes"
 msgstr "Closes"
-
-#~ msgid "Closes {0}"
-#~ msgstr "Closes {0}"
 
 msgid "Code"
 msgstr "Code"
@@ -988,9 +982,6 @@ msgstr "IDENTITY VERIFICATION"
 msgid "If you are onboarding as the team lead, create the team here and send the first teammate invites immediately."
 msgstr "If you are onboarding as the team lead, create the team here and send the first teammate invites immediately."
 
-#~ msgid "If you are onboarding as the team lead, create the team through `POST /teams` with the team name and teammate emails."
-#~ msgstr "If you are onboarding as the team lead, create the team through `POST /teams` with the team name and teammate emails."
-
 msgid "immediately"
 msgstr "immediately"
 
@@ -1133,9 +1124,6 @@ msgstr "Lead access:"
 msgid "Lead-only apply and withdraw actions use the generated team application endpoints."
 msgstr "Lead-only apply and withdraw actions use the generated team application endpoints."
 
-#~ msgid "Lead-only invitation management is backed directly by the generated team invitation hooks."
-#~ msgstr "Lead-only invitation management is backed directly by the generated team invitation hooks."
-
 msgid "Leader"
 msgstr "Leader"
 
@@ -1172,12 +1160,6 @@ msgstr "Loading academic structure..."
 msgid "Loading admin data..."
 msgstr "Loading admin data..."
 
-#~ msgid "Loading backlog item"
-#~ msgstr "Loading backlog item"
-
-#~ msgid "Loading dashboard"
-#~ msgstr "Loading dashboard"
-
 msgid "Loading dataset..."
 msgstr "Loading dataset..."
 
@@ -1196,23 +1178,14 @@ msgstr "Loading organization…"
 msgid "Loading profile onboarding..."
 msgstr "Loading profile onboarding..."
 
-#~ msgid "Loading Program B backlog"
-#~ msgstr "Loading Program B backlog"
-
 msgid "Loading reports..."
 msgstr "Loading reports..."
 
 msgid "Loading specializations..."
 msgstr "Loading specializations..."
 
-#~ msgid "Loading team workspace"
-#~ msgstr "Loading team workspace"
-
 msgid "Loading universities..."
 msgstr "Loading universities..."
-
-#~ msgid "Loading workspace"
-#~ msgstr "Loading workspace"
 
 msgid "Location"
 msgstr "Location"
@@ -1587,9 +1560,6 @@ msgstr "Organization access is owner-only"
 msgid "Organization dashboard"
 msgstr "Organization dashboard"
 
-#~ msgid "Organization dashboard is the next slice"
-#~ msgstr "Organization dashboard is the next slice"
-
 msgid "Organization details are loaded from the authenticated company owner account."
 msgstr "Organization details are loaded from the authenticated company owner account."
 
@@ -1613,9 +1583,6 @@ msgstr "Organization metrics, backlog activity, and project delivery now live un
 
 msgid "ORGANIZATION SETUP"
 msgstr "ORGANIZATION SETUP"
-
-#~ msgid "Organization workspace"
-#~ msgstr "Organization workspace"
 
 msgid "Organization-scoped access"
 msgstr "Organization-scoped access"
@@ -1907,21 +1874,6 @@ msgstr "Resend the email if it did not arrive. Paste the token below only if you
 
 msgid "Resending..."
 msgstr "Resending..."
-
-#~ msgid "Resolving your authenticated role and workspace."
-#~ msgstr "Resolving your authenticated role and workspace."
-
-#~ msgid "Resolving your authenticated workspace."
-#~ msgstr "Resolving your authenticated workspace."
-
-#~ msgid "Resolving your student session and backlog filters."
-#~ msgstr "Resolving your student session and backlog filters."
-
-#~ msgid "Resolving your student session and backlog item."
-#~ msgstr "Resolving your student session and backlog item."
-
-#~ msgid "Resolving your student session."
-#~ msgstr "Resolving your student session."
 
 msgid "Retry"
 msgstr "Retry"
@@ -2352,9 +2304,6 @@ msgstr "TEAM INVITE"
 msgid "Team invites"
 msgstr "Team invites"
 
-#~ msgid "Team lead"
-#~ msgstr "Team lead"
-
 msgid "Team lock"
 msgstr "Team lock"
 
@@ -2409,14 +2358,8 @@ msgstr "The admin session could not be verified. Retry once the connection is av
 msgid "The authenticated account email does not match the invited email."
 msgstr "The authenticated account email does not match the invited email."
 
-#~ msgid "The current dashboard branch is focused on student workflows. Your authenticated role is"
-#~ msgstr "The current dashboard branch is focused on student workflows. Your authenticated role is"
-
 msgid "The current report table could not be loaded."
 msgstr "The current report table could not be loaded."
-
-#~ msgid "The current team could not be loaded right now. Retry the request instead of showing the empty-team state."
-#~ msgstr "The current team could not be loaded right now. Retry the request instead of showing the empty-team state."
 
 msgid "The current team could not be loaded right now. Retry the request instead of treating this as no team."
 msgstr "The current team could not be loaded right now. Retry the request instead of treating this as no team."
@@ -2429,9 +2372,6 @@ msgstr "The faculty will be created under the selected university."
 
 msgid "The fastest actions to keep the workflow moving."
 msgstr "The fastest actions to keep the workflow moving."
-
-#~ msgid "The generated `/teams/me` endpoint returned no active team for this user. Finish profile onboarding and create a team first."
-#~ msgstr "The generated `/teams/me` endpoint returned no active team for this user. Finish profile onboarding and create a team first."
 
 msgid "The invitation link may be expired, revoked, or invalid."
 msgstr "The invitation link may be expired, revoked, or invalid."
@@ -2492,12 +2432,6 @@ msgstr "This invite link is invalid or no longer exists."
 
 msgid "This mentor workspace is routed correctly. Project mentoring and progress views can now be added under /mentor/* without reworking auth or shell ownership."
 msgstr "This mentor workspace is routed correctly. Project mentoring and progress views can now be added under /mentor/* without reworking auth or shell ownership."
-
-#~ msgid "This onboarding step is focused on filling the team once the lead account is ready."
-#~ msgstr "This onboarding step is focused on filling the team once the lead account is ready."
-
-#~ msgid "This onboarding step stays focused on inviting teammates once the lead account is ready."
-#~ msgstr "This onboarding step stays focused on inviting teammates once the lead account is ready."
 
 msgid "This organization has no invite records available right now."
 msgstr "This organization has no invite records available right now."
@@ -2839,9 +2773,6 @@ msgstr "Withdraw application"
 msgid "Workspace"
 msgstr "Workspace"
 
-#~ msgid "workspace is rendered here."
-#~ msgstr "workspace is rendered here."
-
 msgid "Year cannot be in the past."
 msgstr "Year cannot be in the past."
 
@@ -2877,9 +2808,6 @@ msgstr "You must accept the terms."
 
 msgid "You survived the boss fight"
 msgstr "You survived the boss fight"
-
-#~ msgid "Your account is correctly routed away from the student dashboard. The organization dashboard implementation is still out of scope for this branch, so this entry point stays explicit instead of mixing company users into student UI."
-#~ msgstr "Your account is correctly routed away from the student dashboard. The organization dashboard implementation is still out of scope for this branch, so this entry point stays explicit instead of mixing company users into student UI."
 
 msgid "Your admin session has expired."
 msgstr "Your admin session has expired."

@@ -2,6 +2,8 @@
 
 import { t } from '@lingui/core/macro';
 import {
+  CalendarClock,
+  ClipboardCheck,
   FileSpreadsheet,
   GraduationCap,
   LayoutGrid,
@@ -37,6 +39,8 @@ type AdminShellProps = {
 
 const NAV_ICON_BY_HREF: Record<string, React.ReactNode> = {
   [ROUTES.ADMIN.ROOT]: <LayoutGrid className="h-4 w-4" />,
+  [ROUTES.ADMIN.MODERATION]: <ClipboardCheck className="h-4 w-4" />,
+  [ROUTES.ADMIN.CALLS]: <CalendarClock className="h-4 w-4" />,
   [ROUTES.ADMIN.REPORTS]: <FileSpreadsheet className="h-4 w-4" />,
   [ROUTES.ADMIN.USERS]: <Users2 className="h-4 w-4" />,
   [ROUTES.ADMIN.ACADEMIC_STRUCTURE]: <GraduationCap className="h-4 w-4" />,
@@ -58,6 +62,12 @@ function getTranslatedAdminNavLabel(href: string) {
   switch (label) {
     case 'Overview':
       return t`Overview`;
+
+    case 'Moderation':
+      return t`Moderation`;
+
+    case 'Calls':
+      return t`Calls`;
 
     case 'Reports':
       return t`Reports`;

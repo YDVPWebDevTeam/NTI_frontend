@@ -14,6 +14,8 @@ const ADMIN_ROUTES = {
   LOGIN: '/admin/login',
   FORCE_CHANGE_PASSWORD: '/admin/force-change-password',
   ROOT: '/admin',
+  MODERATION: '/admin/moderation',
+  CALLS: '/admin/calls',
   REPORTS: '/admin/reports',
   USERS: '/admin/users',
   ACADEMIC_STRUCTURE: '/admin/academic-structure',

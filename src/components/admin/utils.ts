@@ -25,6 +25,14 @@ export const ADMIN_NAV_ITEMS: AdminNavItem[] = [
     exact: true,
   },
   {
+    href: ROUTES.ADMIN.MODERATION,
+    label: 'Moderation',
+  },
+  {
+    href: ROUTES.ADMIN.CALLS,
+    label: 'Calls',
+  },
+  {
     href: ROUTES.ADMIN.REPORTS,
     label: 'Reports',
   },
@@ -45,10 +53,17 @@ export const ADMIN_NAV_ITEMS: AdminNavItem[] = [
     label: 'Invites',
   },
 ];
-
 export function getAdminNavLabel(href: string) {
   if (href === ROUTES.ADMIN.ROOT) {
     return 'Overview';
+  }
+
+  if (href === ROUTES.ADMIN.MODERATION) {
+    return 'Moderation';
+  }
+
+  if (href === ROUTES.ADMIN.CALLS) {
+    return 'Calls';
   }
 
   if (href === ROUTES.ADMIN.REPORTS) {
@@ -157,6 +172,14 @@ export function getStatusTone(status: AdminStatus): StatusTone {
 export function getAdminPageTitle(pathname: string) {
   if (pathname === ROUTES.ADMIN.ROOT) {
     return t`Overview`;
+  }
+
+  if (pathname === ROUTES.ADMIN.MODERATION) {
+    return t`Moderation`;
+  }
+
+  if (pathname === ROUTES.ADMIN.CALLS) {
+    return t`Calls`;
   }
 
   if (pathname === ROUTES.ADMIN.USERS) {

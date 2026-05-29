@@ -95,6 +95,9 @@ msgstr "Academic Structure"
 msgid "Academic structure is unavailable"
 msgstr "Academic structure is unavailable"
 
+msgid "Accept"
+msgstr "Accept"
+
 msgid "Accept organization invite"
 msgstr "Accept organization invite"
 
@@ -251,11 +254,20 @@ msgstr "Approving..."
 msgid "Ascending"
 msgstr "Ascending"
 
+msgid "Assign myself as product owner"
+msgstr "Assign myself as product owner"
+
 msgid "Assign product owners"
 msgstr "Assign product owners"
 
+msgid "At least one milestone is overdue and still needs status movement."
+msgstr "At least one milestone is overdue and still needs status movement."
+
 msgid "At least one skill must be marked as primary."
 msgstr "At least one skill must be marked as primary."
+
+msgid "Attention required"
+msgstr "Attention required"
 
 msgid "Attention Required"
 msgstr "Attention Required"
@@ -299,11 +311,11 @@ msgstr "Back to projects"
 msgid "Backlog"
 msgstr "Backlog"
 
+#~ msgid "Backlog detail is limited"
+#~ msgstr "Backlog detail is limited"
+
 msgid "Backlog item is unavailable"
 msgstr "Backlog item is unavailable"
-
-msgid "Backlog detail is limited"
-msgstr "Backlog detail is limited"
 
 msgid "Backlog items"
 msgstr "Backlog items"
@@ -340,6 +352,18 @@ msgstr "Calls still open for new submissions."
 
 msgid "Cancel"
 msgstr "Cancel"
+
+msgid "Candidate accepted."
+msgstr "Candidate accepted."
+
+msgid "Candidate decisions are waiting in this backlog item."
+msgstr "Candidate decisions are waiting in this backlog item."
+
+msgid "Candidate rejected."
+msgstr "Candidate rejected."
+
+msgid "Candidate shortlisted."
+msgstr "Candidate shortlisted."
 
 msgid "Candidates"
 msgstr "Candidates"
@@ -389,6 +413,9 @@ msgstr "Close menu"
 msgid "Close navigation"
 msgstr "Close navigation"
 
+msgid "Closed Program B projects are read-only"
+msgstr "Closed Program B projects are read-only"
+
 msgid "Closes"
 msgstr "Closes"
 
@@ -403,6 +430,9 @@ msgstr "Comma-separated CV file ids"
 
 msgid "COMPANY DETAILS"
 msgstr "COMPANY DETAILS"
+
+msgid "Company final acceptance is still pending."
+msgstr "Company final acceptance is still pending."
 
 msgid "Company name"
 msgstr "Company name"
@@ -427,9 +457,6 @@ msgstr "Company projects"
 
 msgid "Company workspace"
 msgstr "Company workspace"
-
-msgid "Closed Program B projects are read-only"
-msgstr "Closed Program B projects are read-only"
 
 #~ msgid "Company workspace is not active yet"
 #~ msgstr "Company workspace is not active yet"
@@ -538,6 +565,9 @@ msgstr "Create Invite"
 
 msgid "Create organization"
 msgstr "Create organization"
+
+msgid "Create project workspace"
+msgstr "Create project workspace"
 
 msgid "Create Specialization"
 msgstr "Create Specialization"
@@ -659,6 +689,9 @@ msgstr "Date To"
 msgid "Decided"
 msgstr "Decided"
 
+msgid "Decision note:"
+msgstr "Decision note:"
+
 msgid "Decisions recorded during the last 30 days."
 msgstr "Decisions recorded during the last 30 days."
 
@@ -727,6 +760,10 @@ msgstr "Download"
 
 msgid "Driving innovation and economic growth through technology and academic collaboration."
 msgstr "Driving innovation and economic growth through technology and academic collaboration."
+
+#. placeholder {0}: formatUnknownDate(milestone.dueAt)
+msgid "Due {0}"
+msgstr "Due {0}"
 
 msgid "E.g. Algorithms, Distributed Systems, UX Design"
 msgstr "E.g. Algorithms, Distributed Systems, UX Design"
@@ -947,6 +984,9 @@ msgstr "Filters"
 msgid "Filters applied to the table are reused for the export request."
 msgstr "Filters applied to the table are reused for the export request."
 
+msgid "Final acceptance recorded."
+msgstr "Final acceptance recorded."
+
 msgid "Finish profile details and keep team membership current so application actions stay available."
 msgstr "Finish profile details and keep team membership current so application actions stay available."
 
@@ -1009,6 +1049,9 @@ msgstr "Headline reporting data could not be loaded."
 
 msgid "Help us understand your academic performance."
 msgstr "Help us understand your academic performance."
+
+msgid "Hidden revoked invitation cards restored."
+msgstr "Hidden revoked invitation cards restored."
 
 msgid "Hide password"
 msgstr "Hide password"
@@ -1101,9 +1144,6 @@ msgstr "Invitation management and organization administration stay scoped to the
 
 msgid "Invitation resent."
 msgstr "Invitation resent."
-
-msgid "Hidden revoked invitation cards restored."
-msgstr "Hidden revoked invitation cards restored."
 
 msgid "Invitation revoked."
 msgstr "Invitation revoked."
@@ -1252,6 +1292,9 @@ msgstr "Loading company workspace"
 msgid "Loading dataset..."
 msgstr "Loading dataset..."
 
+msgid "Loading documents…"
+msgstr "Loading documents…"
+
 msgid "Loading export job..."
 msgstr "Loading export job..."
 
@@ -1263,9 +1306,6 @@ msgstr "Loading invitations…"
 
 msgid "Loading organization…"
 msgstr "Loading organization…"
-
-msgid "Loading documents…"
-msgstr "Loading documents…"
 
 msgid "Loading profile onboarding..."
 msgstr "Loading profile onboarding..."
@@ -1334,6 +1374,15 @@ msgstr "Managing faculties for the selected university."
 msgid "Managing specializations for the selected faculty."
 msgstr "Managing specializations for the selected faculty."
 
+msgid "Mark blocked"
+msgstr "Mark blocked"
+
+msgid "Mark done"
+msgstr "Mark done"
+
+msgid "Mark in progress"
+msgstr "Mark in progress"
+
 msgid "Member"
 msgstr "Member"
 
@@ -1358,6 +1407,9 @@ msgstr "Mentor is not assigned yet."
 msgid "Mentor workspace"
 msgstr "Mentor workspace"
 
+msgid "Mentor:"
+msgstr "Mentor:"
+
 #. placeholder {0}: item.mentor.fullName
 msgid "Mentor: {0}"
 msgstr "Mentor: {0}"
@@ -1367,6 +1419,9 @@ msgstr "Mentoring"
 
 msgid "Mentors"
 msgstr "Mentors"
+
+msgid "Milestone updated."
+msgstr "Milestone updated."
 
 msgid "Milestones"
 msgstr "Milestones"
@@ -1492,6 +1547,9 @@ msgstr "No documents uploaded yet."
 msgid "No documents yet."
 msgstr "No documents yet."
 
+msgid "No due date"
+msgstr "No due date"
+
 msgid "No employee invitations yet. Send the first invitation using the form on the left."
 msgstr "No employee invitations yet. Send the first invitation using the form on the left."
 
@@ -1510,8 +1568,14 @@ msgstr "No file selected yet."
 msgid "No local Program A drafts yet."
 msgstr "No local Program A drafts yet."
 
+msgid "No milestone description."
+msgstr "No milestone description."
+
 msgid "No milestones yet."
 msgstr "No milestones yet."
+
+msgid "No motivation provided."
+msgstr "No motivation provided."
 
 msgid "No organization found"
 msgstr "No organization found"
@@ -1575,6 +1639,9 @@ msgstr "Non-leads stay read-only. Lead privileges are derived from the current t
 
 msgid "None"
 msgstr "None"
+
+msgid "Not assigned"
+msgstr "Not assigned"
 
 msgid "Not available"
 msgstr "Not available"
@@ -1860,8 +1927,17 @@ msgstr "PRIVACY POLICY"
 msgid "PROCESSING..."
 msgstr "PROCESSING..."
 
+msgid "Product owner assigned."
+msgstr "Product owner assigned."
+
 msgid "Product owner is not assigned yet."
 msgstr "Product owner is not assigned yet."
+
+msgid "Product owner still needs assignment."
+msgstr "Product owner still needs assignment."
+
+msgid "Product owner:"
+msgstr "Product owner:"
 
 #. placeholder {0}: item.productOwner.fullName
 msgid "Product owner: {0}"
@@ -1954,6 +2030,9 @@ msgstr "Project Title"
 msgid "Project title is required."
 msgstr "Project title is required."
 
+msgid "Project workspace created."
+msgstr "Project workspace created."
+
 msgid "Projects"
 msgstr "Projects"
 
@@ -1995,6 +2074,9 @@ msgstr "Recent organization-scoped Program B backlog items from the dedicated su
 
 msgid "Recent organizations that still need an operational decision."
 msgstr "Recent organizations that still need an operational decision."
+
+msgid "Record company final acceptance"
+msgstr "Record company final acceptance"
 
 msgid "Record final acceptance"
 msgstr "Record final acceptance"
@@ -2098,9 +2180,6 @@ msgstr "Retry"
 msgid "Review"
 msgstr "Review"
 
-msgid "Revoked invitation card removed."
-msgstr "Revoked invitation card removed."
-
 msgid "Review backlog candidates"
 msgstr "Review backlog candidates"
 
@@ -2133,6 +2212,9 @@ msgstr "Revoke"
 
 msgid "Revoked"
 msgstr "Revoked"
+
+msgid "Revoked invitation card removed."
+msgstr "Revoked invitation card removed."
 
 msgid "Revoking..."
 msgstr "Revoking..."
@@ -2326,11 +2408,14 @@ msgstr "Short Name"
 msgid "Short project description..."
 msgstr "Short project description..."
 
-msgid "Show password"
-msgstr "Show password"
+msgid "Shortlist"
+msgstr "Shortlist"
 
 msgid "Show hidden revoked cards"
 msgstr "Show hidden revoked cards"
+
+msgid "Show password"
+msgstr "Show password"
 
 msgid "Showcase your best projects and tell us about yourself."
 msgstr "Showcase your best projects and tell us about yourself."
@@ -2674,20 +2759,17 @@ msgstr "These queues need direct company attention and link into the relevant Pr
 msgid "This account must update its password before the admin session can continue."
 msgstr "This account must update its password before the admin session can continue."
 
-msgid "This backlog item belongs to your company workspace, but the full published-detail endpoint is not available for its current state."
-msgstr "This backlog item belongs to your company workspace, but the full published-detail endpoint is not available for its current state."
-
-msgid "This backlog item is not available in your company workspace."
-msgstr "This backlog item is not available in your company workspace."
+#~ msgid "This backlog item belongs to your company workspace, but the full published-detail endpoint is not available for its current state."
+#~ msgstr "This backlog item belongs to your company workspace, but the full published-detail endpoint is not available for its current state."
 
 msgid "This backlog item is in an internal company workflow state, so this page is showing the organization-scoped workspace summary instead of the published-detail endpoint."
 msgstr "This backlog item is in an internal company workflow state, so this page is showing the organization-scoped workspace summary instead of the published-detail endpoint."
 
+#~ msgid "This backlog item is not available in your company workspace."
+#~ msgstr "This backlog item is not available in your company workspace."
+
 msgid "This flow validates the invite first, then gets you into the invited team and your student profile onboarding."
 msgstr "This flow validates the invite first, then gets you into the invited team and your student profile onboarding."
-
-msgid "This project is closed and now read-only."
-msgstr "This project is closed and now read-only."
 
 msgid "This invite has expired, was revoked, or has already been accepted."
 msgstr "This invite has expired, was revoked, or has already been accepted."
@@ -2706,6 +2788,9 @@ msgstr "This mentor workspace is routed correctly. Project mentoring and progres
 
 msgid "This organization has no invite records available right now."
 msgstr "This organization has no invite records available right now."
+
+msgid "This project is closed and now read-only."
+msgstr "This project is closed and now read-only."
 
 msgid "This review workspace is routed correctly. Program A review queues and detail routes can now be added under /review/* without reworking auth or layout structure."
 msgstr "This review workspace is routed correctly. Program A review queues and detail routes can now be added under /review/* without reworking auth or layout structure."
@@ -2755,6 +2840,9 @@ msgstr "Twitter"
 msgid "Unable to accept invitation."
 msgstr "Unable to accept invitation."
 
+msgid "Unable to assign product owner."
+msgstr "Unable to assign product owner."
+
 msgid "Unable to change the password."
 msgstr "Unable to change the password."
 
@@ -2763,6 +2851,9 @@ msgstr "Unable to create a draft application."
 
 msgid "Unable to create invitations right now."
 msgstr "Unable to create invitations right now."
+
+msgid "Unable to create project."
+msgstr "Unable to create project."
 
 msgid "Unable to create team."
 msgstr "Unable to create team."
@@ -2839,6 +2930,9 @@ msgstr "Unable to log out right now."
 msgid "Unable to open the document."
 msgstr "Unable to open the document."
 
+msgid "Unable to record final acceptance."
+msgstr "Unable to record final acceptance."
+
 msgid "Unable to register. Please try again."
 msgstr "Unable to register. Please try again."
 
@@ -2889,6 +2983,12 @@ msgstr "Unable to submit the team application right now."
 
 msgid "Unable to transfer leadership right now."
 msgstr "Unable to transfer leadership right now."
+
+msgid "Unable to update candidate status."
+msgstr "Unable to update candidate status."
+
+msgid "Unable to update milestone."
+msgstr "Unable to update milestone."
 
 msgid "Unable to update the faculty."
 msgstr "Unable to update the faculty."
@@ -3011,15 +3111,15 @@ msgstr "Users"
 msgid "Users are unavailable"
 msgstr "Users are unavailable"
 
-#. placeholder {0}: field.value
 #~ msgid "Using browser defaults."
 #~ msgstr "Using browser defaults."
 
-msgid "Using organization backlog data"
-msgstr "Using organization backlog data"
-
+#. placeholder {0}: field.value
 msgid "Using existing CV (ID: {0})"
 msgstr "Using existing CV (ID: {0})"
+
+msgid "Using organization backlog data"
+msgstr "Using organization backlog data"
 
 msgid "Validating invitation…"
 msgstr "Validating invitation…"

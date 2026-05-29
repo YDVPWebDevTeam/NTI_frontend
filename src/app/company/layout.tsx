@@ -1,5 +1,6 @@
 'use client';
 
+import { t } from '@lingui/core/macro';
 import type { ReactNode } from 'react';
 
 import { UserRole } from 'lib/api';
@@ -16,8 +17,8 @@ export default function CompanyLayout({ children }: { children: ReactNode }) {
     return (
       <main className="mx-auto flex min-h-screen w-full max-w-4xl items-center px-4">
         <StudentStatusCard
-          title="Loading workspace"
-          description="Resolving your authenticated workspace."
+          title={t`Loading workspace`}
+          description={t`Resolving your authenticated workspace.`}
         />
       </main>
     );

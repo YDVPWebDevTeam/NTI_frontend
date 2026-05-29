@@ -2,9 +2,9 @@ import { t } from '@lingui/core/macro';
 
 import { ROUTES } from 'lib/constants';
 import { DATE_FORMATS, formatDate } from 'lib/date';
-import { formatEnumLabel } from 'lib/utils';
 import {
   type AdminStatus,
+  CallStatus,
   InviteStatus,
   OrganizationStatus,
   UserAccountStatus,
@@ -53,6 +53,7 @@ export const ADMIN_NAV_ITEMS: AdminNavItem[] = [
     label: 'Invites',
   },
 ];
+
 export function getAdminNavLabel(href: string) {
   if (href === ROUTES.ADMIN.ROOT) {
     return 'Overview';
@@ -158,11 +159,17 @@ type AdminStatusValue = `${AdminStatus}`;
 const STATUS_TONE_MAP: Partial<Record<AdminStatusValue, StatusTone>> = {
   [UserAccountStatus.ACTIVE]: StatusTone.SUCCESS,
   [InviteStatus.ACCEPTED]: StatusTone.SUCCESS,
+  [CallStatus.OPEN]: StatusTone.SUCCESS,
+
   [UserAccountStatus.SUSPENDED]: StatusTone.WARNING,
   [OrganizationStatus.PENDING]: StatusTone.WARNING,
+  [CallStatus.DRAFT]: StatusTone.NEUTRAL,
+
   [OrganizationStatus.REJECTED]: StatusTone.DANGER,
   [InviteStatus.REVOKED]: StatusTone.DANGER,
   [InviteStatus.EXPIRED]: StatusTone.DANGER,
+  [CallStatus.CLOSED]: StatusTone.WARNING,
+  [CallStatus.ARCHIVED]: StatusTone.DANGER,
 };
 
 export function getStatusTone(status: AdminStatus): StatusTone {
@@ -206,9 +213,61 @@ export function getAdminPageTitle(pathname: string) {
     return t`System Invites`;
   }
 
+  if (pathname.startsWith(ROUTES.ADMIN.CALLS)) {
+    return t`Calls`;
+  }
+
   return t`Admin`;
 }
 
 export function formatStatusLabel(status: AdminStatus) {
-  return formatEnumLabel(status);
+  switch (status) {
+    case UserAccountStatus.ACTIVE:
+      return t`Active`;
+
+    case UserAccountStatus.PENDING:
+      return t`Pending`;
+
+    case UserAccountStatus.SUSPENDED:
+      return t`Suspended`;
+
+    case OrganizationStatus.ACTIVE:
+      return t`Active`;
+
+    case OrganizationStatus.PENDING:
+      return t`Pending`;
+
+    case OrganizationStatus.REJECTED:
+      return t`Rejected`;
+
+    case OrganizationStatus.SUSPENDED:
+      return t`Suspended`;
+
+    case InviteStatus.PENDING:
+      return t`Pending`;
+
+    case InviteStatus.ACCEPTED:
+      return t`Accepted`;
+
+    case InviteStatus.REVOKED:
+      return t`Revoked`;
+
+    case InviteStatus.EXPIRED:
+      return t`Expired`;
+
+    case CallStatus.DRAFT:
+      return t`Draft`;
+
+    case CallStatus.OPEN:
+      return t`Open status`;
+
+    case CallStatus.CLOSED:
+      return t`Closed`;
+
+    case CallStatus.ARCHIVED:
+      return t`Archived`;
+
+    default:
+      return status;
+  }
 }

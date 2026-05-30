@@ -174,6 +174,9 @@ msgstr "Admin overview unavailable"
 msgid "Admin session unavailable"
 msgstr "Admin session unavailable"
 
+msgid "Admin workspace"
+msgstr "Admin workspace"
+
 msgid "Admin Workspace"
 msgstr "Admin Workspace"
 
@@ -198,8 +201,14 @@ msgstr "Already have an account?"
 msgid "An account with this invited email already exists. Use the existing account path instead."
 msgstr "An account with this invited email already exists. Use the existing account path instead."
 
+#~ msgid "Application configuration"
+#~ msgstr "Application configuration"
+
 msgid "Application Decisions"
 msgstr "Application Decisions"
+
+#~ msgid "Application rules"
+#~ msgstr "Application rules"
 
 msgid "Application withdrawn."
 msgstr "Application withdrawn."
@@ -218,6 +227,12 @@ msgstr "Approve or reject organization onboarding requests."
 
 msgid "Approving..."
 msgstr "Approving..."
+
+msgid "Archive"
+msgstr "Archive"
+
+msgid "Archived"
+msgstr "Archived"
 
 msgid "Ascending"
 msgstr "Ascending"
@@ -243,11 +258,20 @@ msgstr "Average grade is required."
 msgid "Average grade must be between 1 and 5."
 msgstr "Average grade must be between 1 and 5."
 
+msgid "Back"
+msgstr "Back"
+
 msgid "Back to academic"
 msgstr "Back to academic"
 
 msgid "Back to backlog"
 msgstr "Back to backlog"
+
+msgid "Back to calls"
+msgstr "Back to calls"
+
+msgid "Back to detail"
+msgstr "Back to detail"
 
 msgid "Back to home"
 msgstr "Back to home"
@@ -285,14 +309,29 @@ msgstr "Budget:"
 msgid "Call"
 msgstr "Call"
 
+msgid "Call details"
+msgstr "Call details"
+
+msgid "Call unavailable"
+msgstr "Call unavailable"
+
+msgid "Calls"
+msgstr "Calls"
+
 msgid "Calls still open for new submissions."
 msgstr "Calls still open for new submissions."
+
+msgid "Calls unavailable"
+msgstr "Calls unavailable"
 
 msgid "Cancel"
 msgstr "Cancel"
 
 msgid "Candidates"
 msgstr "Candidates"
+
+msgid "Categories"
+msgstr "Categories"
 
 msgid "Check team readiness"
 msgstr "Check team readiness"
@@ -330,14 +369,29 @@ msgstr "Choose your logo…"
 msgid "City"
 msgstr "City"
 
+msgid "Close"
+msgstr "Close"
+
+msgid "Close date is invalid."
+msgstr "Close date is invalid."
+
+msgid "Close date must be after open date."
+msgstr "Close date must be after open date."
+
 msgid "Close menu"
 msgstr "Close menu"
 
 msgid "Close navigation"
 msgstr "Close navigation"
 
+msgid "Closed"
+msgstr "Closed"
+
 msgid "Closes"
 msgstr "Closes"
+
+msgid "Closes at"
+msgstr "Closes at"
 
 msgid "Code"
 msgstr "Code"
@@ -465,6 +519,9 @@ msgstr "Create an employee account or sign in with your existing account to acce
 msgid "Create an invite to inspect the returned metadata here."
 msgstr "Create an invite to inspect the returned metadata here."
 
+msgid "Create call"
+msgstr "Create call"
+
 msgid "Create Faculty"
 msgstr "Create Faculty"
 
@@ -557,6 +614,9 @@ msgstr "Current status:"
 
 msgid "Current Year of Study"
 msgstr "Current Year of Study"
+
+msgid "CV"
+msgstr "CV"
 
 msgid "CV File"
 msgstr "CV File"
@@ -651,6 +711,9 @@ msgstr "Don't have an account yet?"
 msgid "Download"
 msgstr "Download"
 
+msgid "Draft"
+msgstr "Draft"
+
 msgid "Driving innovation and economic growth through technology and academic collaboration."
 msgstr "Driving innovation and economic growth through technology and academic collaboration."
 
@@ -662,6 +725,12 @@ msgstr "E.g. competitions, awards, scholarships..."
 
 msgid "e.g., React"
 msgstr "e.g., React"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Edit call"
+msgstr "Edit call"
 
 msgid "Edit Faculty"
 msgstr "Edit Faculty"
@@ -765,6 +834,9 @@ msgstr "Everything is up to date right now."
 msgid "Everything that affects access across the rest of the student area."
 msgstr "Everything that affects access across the rest of the student area."
 
+msgid "Executive summary"
+msgstr "Executive summary"
+
 msgid "Expected Graduation"
 msgstr "Expected Graduation"
 
@@ -776,6 +848,9 @@ msgstr "Expected outcomes:"
 
 msgid "Experience (months)"
 msgstr "Experience (months)"
+
+msgid "Expired"
+msgstr "Expired"
 
 msgid "Expires"
 msgstr "Expires"
@@ -970,6 +1045,9 @@ msgstr "ICO: {0}"
 msgid "Id"
 msgstr "Id"
 
+msgid "ID"
+msgstr "ID"
+
 msgid "Identity"
 msgstr "Identity"
 
@@ -1005,6 +1083,9 @@ msgstr "Innovation Repository"
 
 msgid "Inspect KPI rollups, compare report datasets, and manage export jobs."
 msgstr "Inspect KPI rollups, compare report datasets, and manage export jobs."
+
+msgid "Invalid call id"
+msgstr "Invalid call id"
 
 #. placeholder {0}: parsed.invalidEmails.join(', ')
 msgid "Invalid emails: {0}"
@@ -1227,6 +1308,9 @@ msgstr "Manage"
 msgid "Manage organization access"
 msgstr "Manage organization access"
 
+msgid "Manage Program A and Program B calls, deadlines, and lifecycle status."
+msgstr "Manage Program A and Program B calls, deadlines, and lifecycle status."
+
 msgid "Manage Users"
 msgstr "Manage Users"
 
@@ -1235,6 +1319,24 @@ msgstr "Managing faculties for the selected university."
 
 msgid "Managing specializations for the selected faculty."
 msgstr "Managing specializations for the selected faculty."
+
+msgid "Max profile subjects average"
+msgstr "Max profile subjects average"
+
+msgid "Max profile subjects average must be between 0 and 5."
+msgstr "Max profile subjects average must be between 0 and 5."
+
+msgid "Max transferred subjects"
+msgstr "Max transferred subjects"
+
+msgid "Max transferred subjects must be a whole number greater than or equal to 0."
+msgstr "Max transferred subjects must be a whole number greater than or equal to 0."
+
+#~ msgid "Maximum profile subjects average"
+#~ msgstr "Maximum profile subjects average"
+
+#~ msgid "Maximum transferred subjects"
+#~ msgstr "Maximum transferred subjects"
 
 msgid "Member"
 msgstr "Member"
@@ -1266,17 +1368,38 @@ msgstr "Mentors"
 msgid "Milestones"
 msgstr "Milestones"
 
+msgid "Min team size"
+msgstr "Min team size"
+
+msgid "Min team size must be a whole number greater than or equal to 1."
+msgstr "Min team size must be a whole number greater than or equal to 1."
+
+#~ msgid "Minimum team size"
+#~ msgstr "Minimum team size"
+
 msgid "Missing invitation token"
 msgstr "Missing invitation token"
 
 msgid "Missing invite token"
 msgstr "Missing invite token"
 
+msgid "Moderation"
+msgstr "Moderation"
+
+msgid "Moderation workspace is coming soon"
+msgstr "Moderation workspace is coming soon"
+
+msgid "Monetization model"
+msgstr "Monetization model"
+
 msgid "Most recent response from the invite endpoint."
 msgstr "Most recent response from the invite endpoint."
 
 msgid "Motivation"
 msgstr "Motivation"
+
+msgid "Motivation letter"
+msgstr "Motivation letter"
 
 msgid "Move into program work"
 msgstr "Move into program work"
@@ -1346,6 +1469,12 @@ msgstr "No application rows match the current filters."
 
 msgid "No backlog items available yet."
 msgstr "No backlog items available yet."
+
+msgid "No calls found"
+msgstr "No calls found"
+
+msgid "No calls match the selected filters."
+msgstr "No calls match the selected filters."
 
 msgid "No candidates yet."
 msgstr "No candidates yet."
@@ -1485,6 +1614,9 @@ msgstr "Open Calls"
 msgid "Open calls, draft recovery, and application-start actions live here."
 msgstr "Open calls, draft recovery, and application-start actions live here."
 
+msgid "Open date is invalid."
+msgstr "Open date is invalid."
+
 msgid "Open detail"
 msgstr "Open detail"
 
@@ -1512,6 +1644,9 @@ msgstr "Open Queue"
 msgid "Open Reports"
 msgstr "Open Reports"
 
+#~ msgid "Open status"
+#~ msgstr "Open status"
+
 msgid "Open team"
 msgstr "Open team"
 
@@ -1523,6 +1658,9 @@ msgstr "Open the full invitation link from your email and try again."
 
 msgid "Opens"
 msgstr "Opens"
+
+msgid "Opens at"
+msgstr "Opens at"
 
 msgid "Opportunities"
 msgstr "Opportunities"
@@ -1601,6 +1739,9 @@ msgstr "Organizations Tracked"
 
 msgid "Organizations waiting for review or already rejected."
 msgstr "Organizations waiting for review or already rejected."
+
+msgid "Other"
+msgstr "Other"
 
 msgid "Overview"
 msgstr "Overview"
@@ -1722,11 +1863,17 @@ msgstr "Profile status"
 msgid "Program"
 msgstr "Program"
 
+msgid "Program A"
+msgstr "Program A"
+
 msgid "Program A flow"
 msgstr "Program A flow"
 
 msgid "Program A is for draft and submission flow. Program B is for opportunity pairing and project delivery."
 msgstr "Program A is for draft and submission flow. Program B is for opportunity pairing and project delivery."
+
+msgid "Program A Moderation"
+msgstr "Program A Moderation"
 
 msgid "Program B"
 msgstr "Program B"
@@ -1836,6 +1983,9 @@ msgstr "Regular User"
 msgid "Reject"
 msgstr "Reject"
 
+msgid "Rejected"
+msgstr "Rejected"
+
 msgid "Rejecting..."
 msgstr "Rejecting..."
 
@@ -1859,6 +2009,12 @@ msgstr "Reports"
 
 msgid "Request failed"
 msgstr "Request failed"
+
+msgid "Required document type"
+msgstr "Required document type"
+
+msgid "Required document types"
+msgstr "Required document types"
 
 msgid "Resend"
 msgstr "Resend"
@@ -1908,6 +2064,12 @@ msgstr "Revoked"
 msgid "Revoking..."
 msgstr "Revoking..."
 
+msgid "Risk analysis"
+msgstr "Risk analysis"
+
+msgid "Roadmap"
+msgstr "Roadmap"
+
 msgid "Role"
 msgstr "Role"
 
@@ -1932,6 +2094,9 @@ msgstr "Running"
 msgid "Save academic information"
 msgstr "Save academic information"
 
+msgid "Save changes"
+msgstr "Save changes"
+
 msgid "Save New Password"
 msgstr "Save New Password"
 
@@ -1955,6 +2120,9 @@ msgstr "Search accounts, inspect roles, and suspend or reactivate access."
 
 msgid "Search backlog items"
 msgstr "Search backlog items"
+
+msgid "Search by call title"
+msgstr "Search by call title"
 
 msgid "Search by email, role, or id"
 msgstr "Search by email, role, or id"
@@ -2142,6 +2310,9 @@ msgstr "Soft Skills"
 msgid "Soft-disabled rows remain manageable when this filter is turned on."
 msgstr "Soft-disabled rows remain manageable when this filter is turned on."
 
+msgid "Solution proposal"
+msgstr "Solution proposal"
+
 msgid "Sort"
 msgstr "Sort"
 
@@ -2180,6 +2351,9 @@ msgstr "Specializations"
 
 msgid "Specializations are unavailable"
 msgstr "Specializations are unavailable"
+
+msgid "Stack tags"
+msgstr "Stack tags"
 
 msgid "Standard login"
 msgstr "Standard login"
@@ -2256,6 +2430,9 @@ msgstr "SUPPORT"
 msgid "Suspend"
 msgstr "Suspend"
 
+msgid "Suspended"
+msgstr "Suspended"
+
 msgid "Suspended Users"
 msgstr "Suspended Users"
 
@@ -2325,6 +2502,9 @@ msgstr "Team readiness"
 msgid "Team:"
 msgstr "Team:"
 
+msgid "Technical architecture"
+msgstr "Technical architecture"
+
 msgid "Technical Skills"
 msgstr "Technical Skills"
 
@@ -2358,6 +2538,12 @@ msgstr "The admin session could not be verified. Retry once the connection is av
 msgid "The authenticated account email does not match the invited email."
 msgstr "The authenticated account email does not match the invited email."
 
+msgid "The call detail request failed."
+msgstr "The call detail request failed."
+
+msgid "The call management request failed."
+msgstr "The call management request failed."
+
 msgid "The current report table could not be loaded."
 msgstr "The current report table could not be loaded."
 
@@ -2384,6 +2570,9 @@ msgstr "The invite could not be validated right now. Please try again later."
 
 msgid "The invite detail request failed for this organization."
 msgstr "The invite detail request failed for this organization."
+
+msgid "The requested call could not be identified from the route."
+msgstr "The requested call could not be identified from the route."
 
 msgid "The requested organization could not be identified from the route."
 msgstr "The requested organization could not be identified from the route."
@@ -2436,6 +2625,9 @@ msgstr "This mentor workspace is routed correctly. Project mentoring and progres
 msgid "This organization has no invite records available right now."
 msgstr "This organization has no invite records available right now."
 
+msgid "This placeholder keeps the admin route available while the full Program A moderation workflow is being implemented."
+msgstr "This placeholder keeps the admin route available while the full Program A moderation workflow is being implemented."
+
 msgid "This review workspace is routed correctly. Program A review queues and detail routes can now be added under /review/* without reworking auth or layout structure."
 msgstr "This review workspace is routed correctly. Program A review queues and detail routes can now be added under /review/* without reworking auth or layout structure."
 
@@ -2453,6 +2645,9 @@ msgstr "Timeline"
 
 msgid "Title"
 msgstr "Title"
+
+msgid "Title is required"
+msgstr "Title is required"
 
 msgid "Top-level academic institutions currently visible in the directory."
 msgstr "Top-level academic institutions currently visible in the directory."
@@ -2474,6 +2669,9 @@ msgstr "Transferred Subjects"
 
 msgid "Twitter"
 msgstr "Twitter"
+
+msgid "Type"
+msgstr "Type"
 
 msgid "Unable to accept invitation."
 msgstr "Unable to accept invitation."
@@ -2742,6 +2940,9 @@ msgstr "Verification token must be at least 4 characters."
 
 msgid "Verify your email address before creating your organization profile."
 msgstr "Verify your email address before creating your organization profile."
+
+msgid "View"
+msgstr "View"
 
 msgid "View details"
 msgstr "View details"

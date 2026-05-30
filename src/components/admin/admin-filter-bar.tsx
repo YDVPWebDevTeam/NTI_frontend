@@ -10,8 +10,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from 'components/shadcn';
-import { AdminFilterOption } from 'lib/api-client/admin/types';
-import { formatEnumLabel } from 'lib/utils';
+import { AdminFilterOption, type AdminStatus } from 'lib/api-client/admin/types';
+
+import { formatStatusLabel } from './utils';
 
 type AdminFilterBarProps<TFilter extends string> = {
   search: string;
@@ -21,6 +22,14 @@ type AdminFilterBarProps<TFilter extends string> = {
   onStatusChange: (value: TFilter) => void;
   filters: readonly TFilter[];
 };
+
+function formatFilterLabel(filter: string) {
+  if (filter === AdminFilterOption.ALL) {
+    return t`All statuses`;
+  }
+
+  return formatStatusLabel(filter as AdminStatus);
+}
 
 export function AdminFilterBar<TFilter extends string>({
   search,
@@ -43,6 +52,7 @@ export function AdminFilterBar<TFilter extends string>({
           className="h-11 bg-white"
         />
       </div>
+
       <div className="w-full lg:w-56">
         <label className="mb-2 block text-[11px] font-medium tracking-[0.12em] text-slate-500 uppercase">
           {t`Status`}
@@ -54,7 +64,7 @@ export function AdminFilterBar<TFilter extends string>({
           <SelectContent>
             {filters.map((filter) => (
               <SelectItem key={filter} value={filter}>
-                {filter === AdminFilterOption.ALL ? t`All statuses` : formatEnumLabel(filter)}
+                {formatFilterLabel(filter)}
               </SelectItem>
             ))}
           </SelectContent>

@@ -1,4 +1,9 @@
-import { AdminOrganizationRowDtoStatus, SystemInviteResponseDtoStatus, UserStatus } from 'lib/api';
+import {
+  AdminOrganizationRowDtoStatus,
+  PublicCallDtoStatus,
+  SystemInviteResponseDtoStatus,
+  UserStatus,
+} from 'lib/api';
 
 export const AdminFilterOption = {
   ALL: 'ALL',
@@ -15,9 +20,14 @@ export type OrganizationStatus = (typeof OrganizationStatus)[keyof typeof Organi
 export const InviteStatus = SystemInviteResponseDtoStatus;
 export type InviteStatus = (typeof InviteStatus)[keyof typeof InviteStatus];
 
-export type AdminStatus = UserAccountStatus | OrganizationStatus | InviteStatus;
+export const CallStatus = PublicCallDtoStatus;
+export type CallStatus = (typeof CallStatus)[keyof typeof CallStatus];
+
+export type AdminStatus = UserAccountStatus | OrganizationStatus | InviteStatus | CallStatus;
+
 export type UserStatusFilter = AdminFilterOption | UserAccountStatus;
 export type OrganizationStatusFilter = AdminFilterOption | OrganizationStatus;
+export type CallStatusFilter = AdminFilterOption | CallStatus;
 
 export const userStatusFilters = [
   AdminFilterOption.ALL,
@@ -33,3 +43,11 @@ export const organizationStatusFilters = [
   OrganizationStatus.REJECTED,
   OrganizationStatus.SUSPENDED,
 ] as const satisfies readonly OrganizationStatusFilter[];
+
+export const callStatusFilters = [
+  AdminFilterOption.ALL,
+  CallStatus.DRAFT,
+  CallStatus.OPEN,
+  CallStatus.CLOSED,
+  CallStatus.ARCHIVED,
+] as const satisfies readonly CallStatusFilter[];

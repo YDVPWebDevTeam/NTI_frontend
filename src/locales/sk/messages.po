@@ -175,7 +175,7 @@ msgid "Admin session unavailable"
 msgstr "Relácia správcu nie je dostupná"
 
 msgid "Admin workspace"
-msgstr ""
+msgstr "Administrátorské pracovisko"
 
 msgid "Admin Workspace"
 msgstr "Administrátorské pracovisko"
@@ -201,8 +201,14 @@ msgstr "Už máte účet?"
 msgid "An account with this invited email already exists. Use the existing account path instead."
 msgstr "Účet s touto pozvánkou už existuje. Použite radšej existujúci účet."
 
+#~ msgid "Application configuration"
+#~ msgstr "Konfigurácia prihlášky"
+
 msgid "Application Decisions"
 msgstr "Rozhodnutia o prihláškach"
+
+#~ msgid "Application rules"
+#~ msgstr "Pravidlá prihlášky"
 
 msgid "Application withdrawn."
 msgstr "Prihláška bola stiahnutá."
@@ -262,10 +268,10 @@ msgid "Back to backlog"
 msgstr "Späť na backlog"
 
 msgid "Back to calls"
-msgstr ""
+msgstr "Späť na výzvy"
 
 msgid "Back to detail"
-msgstr ""
+msgstr "Späť na detail"
 
 msgid "Back to home"
 msgstr "Späť na domovskú stránku"
@@ -307,7 +313,7 @@ msgid "Call details"
 msgstr "Detaily výzvy"
 
 msgid "Call unavailable"
-msgstr ""
+msgstr "Výzva nie je dostupná"
 
 msgid "Calls"
 msgstr "Výzvy"
@@ -316,13 +322,16 @@ msgid "Calls still open for new submissions."
 msgstr "Výzvy sú stále otvorené pre nové prihlášky."
 
 msgid "Calls unavailable"
-msgstr ""
+msgstr "Výzvy nie sú dostupné"
 
 msgid "Cancel"
 msgstr "Zrušiť"
 
 msgid "Candidates"
 msgstr "Kandidáti"
+
+msgid "Categories"
+msgstr "Kategórie"
 
 msgid "Check team readiness"
 msgstr "Skontrolovať pripravenosť tímu"
@@ -362,6 +371,12 @@ msgstr "Mesto"
 
 msgid "Close"
 msgstr "Uzavrieť"
+
+msgid "Close date is invalid."
+msgstr "Dátum uzavretia je neplatný."
+
+msgid "Close date must be after open date."
+msgstr "Dátum uzavretia musí byť po dátume otvorenia."
 
 msgid "Close menu"
 msgstr "Zavrieť menu"
@@ -715,7 +730,7 @@ msgid "Edit"
 msgstr "Upraviť"
 
 msgid "Edit call"
-msgstr ""
+msgstr "Upraviť výzvu"
 
 msgid "Edit Faculty"
 msgstr "Upraviť fakultu"
@@ -835,7 +850,7 @@ msgid "Experience (months)"
 msgstr "Skúsenosti (mesiace)"
 
 msgid "Expired"
-msgstr ""
+msgstr "Platnosť vypršala"
 
 msgid "Expires"
 msgstr "Platnosť"
@@ -1031,7 +1046,7 @@ msgid "Id"
 msgstr "ID"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "Identity"
 msgstr "Identita"
@@ -1070,7 +1085,7 @@ msgid "Inspect KPI rollups, compare report datasets, and manage export jobs."
 msgstr "Skontrolujte súhrny KPI, porovnajte dátové súbory reportov a spravujte exportné úlohy."
 
 msgid "Invalid call id"
-msgstr ""
+msgstr "Neplatné ID výzvy"
 
 #. placeholder {0}: parsed.invalidEmails.join(', ')
 msgid "Invalid emails: {0}"
@@ -1308,8 +1323,20 @@ msgstr "Správa špecializácií pre vybranú fakultu."
 msgid "Max profile subjects average"
 msgstr "Maximálny priemer profilových predmetov"
 
+msgid "Max profile subjects average must be between 0 and 5."
+msgstr "Maximálny priemer profilových predmetov musí byť medzi 0 a 5."
+
 msgid "Max transferred subjects"
 msgstr "Maximálny počet prenesených predmetov"
+
+msgid "Max transferred subjects must be a whole number greater than or equal to 0."
+msgstr "Maximálny počet prenesených predmetov musí byť celé číslo väčšie alebo rovné 0."
+
+#~ msgid "Maximum profile subjects average"
+#~ msgstr "Maximálny priemer profilových predmetov"
+
+#~ msgid "Maximum transferred subjects"
+#~ msgstr "Maximálny počet prenesených predmetov"
 
 msgid "Member"
 msgstr "Člen"
@@ -1344,6 +1371,12 @@ msgstr "Míľniky"
 msgid "Min team size"
 msgstr "Minimálna veľkosť tímu"
 
+msgid "Min team size must be a whole number greater than or equal to 1."
+msgstr "Minimálna veľkosť tímu musí byť celé číslo väčšie alebo rovné 1."
+
+#~ msgid "Minimum team size"
+#~ msgstr "Minimálna veľkosť tímu"
+
 msgid "Missing invitation token"
 msgstr "Chýba token pozvánky"
 
@@ -1351,10 +1384,10 @@ msgid "Missing invite token"
 msgstr "Chýba token pozvánky"
 
 msgid "Moderation"
-msgstr ""
+msgstr "Moderovanie"
 
 msgid "Moderation workspace is coming soon"
-msgstr ""
+msgstr "Pracovisko moderovania bude čoskoro dostupné"
 
 msgid "Monetization model"
 msgstr "Monetizačný model"
@@ -1438,10 +1471,10 @@ msgid "No backlog items available yet."
 msgstr "Zatiaľ nie sú dostupné žiadne položky backlogu."
 
 msgid "No calls found"
-msgstr ""
+msgstr "Nenašli sa žiadne výzvy"
 
 msgid "No calls match the selected filters."
-msgstr ""
+msgstr "Žiadne výzvy nezodpovedajú vybraným filtrom."
 
 msgid "No candidates yet."
 msgstr "Zatiaľ žiadni kandidáti."
@@ -1570,7 +1603,7 @@ msgid "Only the current team lead can transfer leadership."
 msgstr "Len aktuálny vedúci tímu môže preniesť vedenie."
 
 msgid "Open"
-msgstr "Otvoriť"
+msgstr "Otvorená"
 
 msgid "Open backlog"
 msgstr "Otvoriť backlog"
@@ -1580,6 +1613,9 @@ msgstr "Otvorené výzvy"
 
 msgid "Open calls, draft recovery, and application-start actions live here."
 msgstr "Otvorené výzvy, obnova návrhov a akcie na začatie prihlášky sú dostupné tu."
+
+msgid "Open date is invalid."
+msgstr "Dátum otvorenia je neplatný."
 
 msgid "Open detail"
 msgstr "Otvoriť detail"
@@ -1608,8 +1644,8 @@ msgstr "Otvoriť front"
 msgid "Open Reports"
 msgstr "Otvoriť reporty"
 
-msgid "Open status"
-msgstr "Otvorené"
+#~ msgid "Open status"
+#~ msgstr "Otvorené"
 
 msgid "Open team"
 msgstr "Otvoriť tím"
@@ -1837,7 +1873,7 @@ msgid "Program A is for draft and submission flow. Program B is for opportunity 
 msgstr "Program A slúži na tok návrhu a podania. Program B je určený na párovanie príležitostí a realizáciu projektov."
 
 msgid "Program A Moderation"
-msgstr ""
+msgstr "Moderovanie Programu A"
 
 msgid "Program B"
 msgstr "Program B"
@@ -1948,7 +1984,7 @@ msgid "Reject"
 msgstr "Zamietnuť"
 
 msgid "Rejected"
-msgstr ""
+msgstr "Zamietnuté"
 
 msgid "Rejecting..."
 msgstr "Zamieta sa..."
@@ -1976,6 +2012,9 @@ msgstr "Požiadavka zlyhala"
 
 msgid "Required document type"
 msgstr "Povinný typ dokumentu"
+
+msgid "Required document types"
+msgstr "Povinné typy dokumentov"
 
 msgid "Resend"
 msgstr "Poslať znova"
@@ -2313,6 +2352,9 @@ msgstr "Špecializácie"
 msgid "Specializations are unavailable"
 msgstr "Špecializácie nie sú dostupné"
 
+msgid "Stack tags"
+msgstr "Technologické značky"
+
 msgid "Standard login"
 msgstr "Štandardné prihlásenie"
 
@@ -2389,7 +2431,7 @@ msgid "Suspend"
 msgstr "Pozastaviť"
 
 msgid "Suspended"
-msgstr ""
+msgstr "Pozastavené"
 
 msgid "Suspended Users"
 msgstr "Pozastavení používatelia"
@@ -2497,10 +2539,10 @@ msgid "The authenticated account email does not match the invited email."
 msgstr "E-mailová adresa prihláseného účtu sa nezhoduje s e-mailovou adresou pozvaného používateľa."
 
 msgid "The call detail request failed."
-msgstr ""
+msgstr "Nepodarilo sa načítať detail výzvy."
 
 msgid "The call management request failed."
-msgstr ""
+msgstr "Nepodarilo sa načítať správu výziev."
 
 msgid "The current report table could not be loaded."
 msgstr "Aktuálnu reportovaciu tabuľku sa nepodarilo načítať."
@@ -2530,7 +2572,7 @@ msgid "The invite detail request failed for this organization."
 msgstr "Požiadavka na detail pozvánky pre túto organizáciu zlyhala."
 
 msgid "The requested call could not be identified from the route."
-msgstr ""
+msgstr "Požadovanú výzvu sa nepodarilo identifikovať z adresy."
 
 msgid "The requested organization could not be identified from the route."
 msgstr "Požadovanú organizáciu sa nepodarilo identifikovať z adresy."
@@ -2584,7 +2626,7 @@ msgid "This organization has no invite records available right now."
 msgstr "Táto organizácia momentálne nemá dostupné žiadne záznamy o pozvánkach."
 
 msgid "This placeholder keeps the admin route available while the full Program A moderation workflow is being implemented."
-msgstr ""
+msgstr "Tento zástupný obsah ponecháva administrátorskú cestu dostupnú, kým sa implementuje kompletný workflow moderovania Programu A."
 
 msgid "This review workspace is routed correctly. Program A review queues and detail routes can now be added under /review/* without reworking auth or layout structure."
 msgstr "Toto revízne pracovisko je smerované správne. Fronty revízií Programu A a detailné trasy je teraz možné pridať pod /review/* bez prepracovania autentifikácie alebo štruktúry layoutu."
@@ -2603,6 +2645,9 @@ msgstr "Časová os"
 
 msgid "Title"
 msgstr "Názov"
+
+msgid "Title is required"
+msgstr "Názov je povinný"
 
 msgid "Top-level academic institutions currently visible in the directory."
 msgstr "Vrcholové akademické inštitúcie aktuálne viditeľné v adresári."

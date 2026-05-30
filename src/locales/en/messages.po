@@ -201,8 +201,14 @@ msgstr "Already have an account?"
 msgid "An account with this invited email already exists. Use the existing account path instead."
 msgstr "An account with this invited email already exists. Use the existing account path instead."
 
+#~ msgid "Application configuration"
+#~ msgstr "Application configuration"
+
 msgid "Application Decisions"
 msgstr "Application Decisions"
+
+#~ msgid "Application rules"
+#~ msgstr "Application rules"
 
 msgid "Application withdrawn."
 msgstr "Application withdrawn."
@@ -324,6 +330,9 @@ msgstr "Cancel"
 msgid "Candidates"
 msgstr "Candidates"
 
+msgid "Categories"
+msgstr "Categories"
+
 msgid "Check team readiness"
 msgstr "Check team readiness"
 
@@ -362,6 +371,12 @@ msgstr "City"
 
 msgid "Close"
 msgstr "Close"
+
+msgid "Close date is invalid."
+msgstr "Close date is invalid."
+
+msgid "Close date must be after open date."
+msgstr "Close date must be after open date."
 
 msgid "Close menu"
 msgstr "Close menu"
@@ -1308,8 +1323,20 @@ msgstr "Managing specializations for the selected faculty."
 msgid "Max profile subjects average"
 msgstr "Max profile subjects average"
 
+msgid "Max profile subjects average must be between 0 and 5."
+msgstr "Max profile subjects average must be between 0 and 5."
+
 msgid "Max transferred subjects"
 msgstr "Max transferred subjects"
+
+msgid "Max transferred subjects must be a whole number greater than or equal to 0."
+msgstr "Max transferred subjects must be a whole number greater than or equal to 0."
+
+#~ msgid "Maximum profile subjects average"
+#~ msgstr "Maximum profile subjects average"
+
+#~ msgid "Maximum transferred subjects"
+#~ msgstr "Maximum transferred subjects"
 
 msgid "Member"
 msgstr "Member"
@@ -1343,6 +1370,12 @@ msgstr "Milestones"
 
 msgid "Min team size"
 msgstr "Min team size"
+
+msgid "Min team size must be a whole number greater than or equal to 1."
+msgstr "Min team size must be a whole number greater than or equal to 1."
+
+#~ msgid "Minimum team size"
+#~ msgstr "Minimum team size"
 
 msgid "Missing invitation token"
 msgstr "Missing invitation token"
@@ -1581,6 +1614,9 @@ msgstr "Open Calls"
 msgid "Open calls, draft recovery, and application-start actions live here."
 msgstr "Open calls, draft recovery, and application-start actions live here."
 
+msgid "Open date is invalid."
+msgstr "Open date is invalid."
+
 msgid "Open detail"
 msgstr "Open detail"
 
@@ -1608,8 +1644,8 @@ msgstr "Open Queue"
 msgid "Open Reports"
 msgstr "Open Reports"
 
-msgid "Open status"
-msgstr "Open status"
+#~ msgid "Open status"
+#~ msgstr "Open status"
 
 msgid "Open team"
 msgstr "Open team"
@@ -1977,6 +2013,9 @@ msgstr "Request failed"
 msgid "Required document type"
 msgstr "Required document type"
 
+msgid "Required document types"
+msgstr "Required document types"
+
 msgid "Resend"
 msgstr "Resend"
 
@@ -2313,6 +2352,9 @@ msgstr "Specializations"
 msgid "Specializations are unavailable"
 msgstr "Specializations are unavailable"
 
+msgid "Stack tags"
+msgstr "Stack tags"
+
 msgid "Standard login"
 msgstr "Standard login"
 
@@ -2603,6 +2645,9 @@ msgstr "Timeline"
 
 msgid "Title"
 msgstr "Title"
+
+msgid "Title is required"
+msgstr "Title is required"
 
 msgid "Top-level academic institutions currently visible in the directory."
 msgstr "Top-level academic institutions currently visible in the directory."

@@ -21,6 +21,104 @@ import {
 import { ROUTES } from 'lib/constants';
 import { formatEnumLabel } from 'lib/utils';
 
+function formatOptionalNumber(value?: number | null) {
+  return value ?? '—';
+}
+
+function getUnknownItemLabel(item: unknown) {
+  if (typeof item === 'string') {
+    return formatEnumLabel(item);
+  }
+
+  if (typeof item === 'number') {
+    return item.toString();
+  }
+
+  if (item && typeof item === 'object') {
+    if ('name' in item && typeof item.name === 'string') {
+      return item.name;
+    }
+
+    if ('title' in item && typeof item.title === 'string') {
+      return item.title;
+    }
+
+    if ('label' in item && typeof item.label === 'string') {
+      return item.label;
+    }
+
+    if ('value' in item && typeof item.value === 'string') {
+      return formatEnumLabel(item.value);
+    }
+  }
+
+  return null;
+}
+
+function DetailTags({
+  items,
+  emptyLabel = '—',
+}: {
+  items?: unknown[] | null;
+  emptyLabel?: string;
+}) {
+  const labels = items?.map(getUnknownItemLabel).filter((label): label is string => Boolean(label));
+
+  if (!labels?.length) {
+    return <p className="text-slate-950">{emptyLabel}</p>;
+  }
+
+  return (
+    <div className="mt-2 flex flex-wrap gap-2">
+      {labels.map((label) => (
+        <span
+          key={label}
+          className="rounded-full border border-slate-200 px-3 py-1 text-xs font-medium text-slate-700"
+        >
+          {label}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function formatRequiredDocumentTypeLabel(documentType: string) {
+  switch (documentType) {
+    case 'EXECUTIVE_SUMMARY':
+      return t`Executive summary`;
+
+    case 'TECHNICAL_ARCHITECTURE':
+      return t`Technical architecture`;
+
+    case 'ROADMAP':
+      return t`Roadmap`;
+
+    case 'BUDGET':
+      return t`Budget`;
+
+    case 'RISK_ANALYSIS':
+      return t`Risk analysis`;
+
+    case 'MONETIZATION_MODEL':
+      return t`Monetization model`;
+
+    case 'CV':
+      return t`CV`;
+
+    case 'MOTIVATION_LETTER':
+      return t`Motivation letter`;
+
+    case 'SOLUTION_PROPOSAL':
+      return t`Solution proposal`;
+
+    case 'OTHER':
+      return t`Other`;
+
+    default:
+      return formatEnumLabel(documentType);
+  }
+}
+
 export default function AdminCallDetailPage() {
   const params = useParams<{ callId: string }>();
   const callId = params.callId?.trim() ?? '';
@@ -121,6 +219,28 @@ export default function AdminCallDetailPage() {
           </div>
 
           <div>
+            <p className="text-slate-500">{t`Status`}</p>
+            <div className="mt-1">
+              <AdminStatusBadge status={call.status} />
+            </div>
+          </div>
+
+          <div>
+            <p className="text-slate-500">{t`Min team size`}</p>
+            <p className="text-slate-950">{formatOptionalNumber(call.minTeamSize)}</p>
+          </div>
+
+          <div>
+            <p className="text-slate-500">{t`Max transferred subjects`}</p>
+            <p className="text-slate-950">{formatOptionalNumber(call.maxTransferredSubjects)}</p>
+          </div>
+
+          <div>
+            <p className="text-slate-500">{t`Max profile subjects average`}</p>
+            <p className="text-slate-950">{formatOptionalNumber(call.maxProfileSubjectsAverage)}</p>
+          </div>
+
+          <div>
             <p className="text-slate-500">{t`Opens at`}</p>
             <p className="text-slate-950">{formatAdminDateTime(call.opensAt)}</p>
           </div>
@@ -138,6 +258,25 @@ export default function AdminCallDetailPage() {
           <div>
             <p className="text-slate-500">{t`Updated at`}</p>
             <p className="text-slate-950">{formatAdminDateTime(call.updatedAt)}</p>
+          </div>
+
+          <div className="md:col-span-2">
+            <p className="text-slate-500">{t`Required document types`}</p>
+            <DetailTags
+              items={call.requiredDocumentTypes?.map((document) =>
+                formatRequiredDocumentTypeLabel(document.documentType),
+              )}
+            />
+          </div>
+
+          <div className="md:col-span-2">
+            <p className="text-slate-500">{t`Categories`}</p>
+            <DetailTags items={call.categories} />
+          </div>
+
+          <div className="md:col-span-2">
+            <p className="text-slate-500">{t`Stack tags`}</p>
+            <DetailTags items={call.stackTags} />
           </div>
         </CardContent>
       </Card>

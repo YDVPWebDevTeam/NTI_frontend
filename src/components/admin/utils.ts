@@ -259,7 +259,7 @@ export function formatStatusLabel(status: AdminStatus) {
       return t`Draft`;
 
     case CallStatus.OPEN:
-      return t`Open status`;
+      return t`Open`;
 
     case CallStatus.CLOSED:
       return t`Closed`;

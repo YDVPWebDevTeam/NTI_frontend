@@ -9,7 +9,6 @@ import { AdminCallForm } from 'components/admin/admin-call-form';
 import { Button } from 'components/shadcn';
 import { useAdminCall, useUpdateAdminCall } from 'lib/api-client/admin/calls';
 import { ROUTES } from 'lib/constants';
-import { type UpdateAdminCallDto } from '@/src/lib/api';
 
 export default function EditAdminCallPage() {
   const params = useParams<{ callId: string }>();
@@ -66,7 +65,7 @@ export default function EditAdminCallPage() {
           updateMutation.mutate(
             {
               id: callId,
-              data: values as unknown as UpdateAdminCallDto,
+              data: values,
             },
             {
               onSuccess: () => router.push(ROUTES.ADMIN.callDetails(callId)),

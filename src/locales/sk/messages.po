@@ -16,10 +16,33 @@ msgstr ""
 msgid " and institutional data processing terms required for platform access."
 msgstr " a inštitucionálne podmienky spracovania údajov potrebné na prístup k platforme."
 
+#. placeholder {0}: overview.projects.awaitingFinalAcceptance
+#. placeholder {1}: overview.projects.overdueMilestones
+msgid "{0} awaiting final acceptance · {1} overdue milestones"
+msgstr "{0} čaká na finálne schválenie · {1} omeškané míľniky"
+
 #. placeholder {0}: selectedFaculty.name
 #. placeholder {0}: selectedUniversity.name
 msgid "{0} is currently selected."
 msgstr "{0} je aktuálne vybrané."
+
+#. placeholder {0}: item.pendingCandidatesCount
+msgid "{0} pending reviews"
+msgstr "{0} čaká na kontrolu"
+
+#. placeholder {0}: overview.candidates.submitted
+#. placeholder {1}: overview.candidates.shortlisted
+msgid "{0} submitted · {1} shortlisted"
+msgstr "{0} odoslaných · {1} vo užšom výbere"
+
+#. placeholder {0}: item.candidatesCount
+msgid "{0} total candidates"
+msgstr "{0} kandidátov celkom"
+
+#. placeholder {0}: overview.backlog.withoutProductOwner
+#. placeholder {1}: overview.backlog.published
+msgid "{0} without product owner · {1} published"
+msgstr "{0} bez product ownera · {1} publikovaných"
 
 msgid "{activeOrganizations} organizations are currently active."
 msgstr "{activeOrganizations} organizácií je aktuálne aktívnych."
@@ -72,6 +95,9 @@ msgstr "Akademická štruktúra"
 msgid "Academic structure is unavailable"
 msgstr "Akademická štruktúra nie je dostupná"
 
+msgid "Accept"
+msgstr "Prijať"
+
 msgid "Accept organization invite"
 msgstr "Prijať pozvánku do organizácie"
 
@@ -108,6 +134,9 @@ msgstr "NASTAVENIE ÚČTU"
 msgid "Accounts currently blocked from normal access."
 msgstr "Účty aktuálne zablokované pre bežný prístup."
 
+msgid "Action queues, backlog movement, and project delivery status are summarized here so company users can move directly into the right Program B workspace."
+msgstr "Fronty akcií, pohyb backlogu a stav realizácie projektov sú tu zhrnuté tak, aby sa firemní používatelia mohli hneď presunúť do správneho pracoviska Programu B."
+
 msgid "Actions"
 msgstr "Akcie"
 
@@ -122,6 +151,9 @@ msgstr "Aktívne projekty"
 
 msgid "Active Projects"
 msgstr "Aktívne projekty"
+
+msgid "Active projects contain milestones that have moved past their expected due date."
+msgstr "Aktívne projekty obsahujú míľniky, ktoré prekročili očakávaný termín."
 
 msgid "ACTIVE STAGE"
 msgstr "AKTÍVNA FÁZA"
@@ -237,8 +269,20 @@ msgstr "Archivované"
 msgid "Ascending"
 msgstr "Vzostupne"
 
+msgid "Assign myself as product owner"
+msgstr "Priradiť seba ako product ownera"
+
+msgid "Assign product owners"
+msgstr "Priradiť product ownerov"
+
+msgid "At least one milestone is overdue and still needs status movement."
+msgstr "Aspoň jeden míľnik je po termíne a stále potrebuje posun stavu."
+
 msgid "At least one skill must be marked as primary."
 msgstr "Aspoň jedna zručnosť musí byť označená ako hlavná."
+
+msgid "Attention required"
+msgstr "Vyžaduje sa pozornosť"
 
 msgid "Attention Required"
 msgstr "Vyžaduje sa pozornosť"
@@ -249,6 +293,9 @@ msgstr "AUTENTIFIKAČNÝ PROTOKOL"
 msgid "Authenticate with your admin account."
 msgstr "Overte sa pomocou svojho administrátorského účtu."
 
+msgid "Available sections are still shown below, and you can refresh again without leaving the workspace."
+msgstr "Dostupné sekcie sa stále zobrazujú nižšie a môžete ich obnoviť bez opustenia pracoviska."
+
 msgid "Average grade"
 msgstr "Priemerná známka"
 
@@ -257,6 +304,9 @@ msgstr "Priemerná známka je povinná."
 
 msgid "Average grade must be between 1 and 5."
 msgstr "Priemerná známka musí byť medzi 1 a 5."
+
+msgid "Awaiting final acceptance"
+msgstr "Čaká na finálne schválenie"
 
 msgid "Back"
 msgstr "Späť"
@@ -285,8 +335,20 @@ msgstr "Späť na projekty"
 msgid "Backlog"
 msgstr "Backlog"
 
+#~ msgid "Backlog detail is limited"
+#~ msgstr "Detail backlogu je obmedzený"
+
+msgid "Backlog item is unavailable"
+msgstr "Položka backlogu nie je dostupná"
+
 msgid "Backlog items"
 msgstr "Položky backlogu"
+
+msgid "Backlog items are missing ownership and need a responsible company contact."
+msgstr "Položkám backlogu chýba vlastník a potrebujú zodpovednú firemnú kontaktnú osobu."
+
+msgid "Backlog items for your organization will appear here once Program B work is created."
+msgstr "Položky backlogu vašej organizácie sa tu zobrazia, keď bude vytvorená práca v Programe B."
 
 msgid "Backlog preview"
 msgstr "Náhľad backlogu"
@@ -327,8 +389,23 @@ msgstr "Výzvy nie sú dostupné"
 msgid "Cancel"
 msgstr "Zrušiť"
 
+msgid "Candidate accepted."
+msgstr "Kandidát bol prijatý."
+
+msgid "Candidate decisions are waiting in this backlog item."
+msgstr "V tejto položke backlogu čakajú rozhodnutia o kandidátoch."
+
+msgid "Candidate rejected."
+msgstr "Kandidát bol zamietnutý."
+
+msgid "Candidate shortlisted."
+msgstr "Kandidát bol zaradený do užšieho výberu."
+
 msgid "Candidates"
 msgstr "Kandidáti"
+
+msgid "Candidates are unavailable right now."
+msgstr "Kandidáti teraz nie sú dostupní."
 
 msgid "Categories"
 msgstr "Kategórie"
@@ -384,6 +461,9 @@ msgstr "Zavrieť menu"
 msgid "Close navigation"
 msgstr "Zavrieť navigáciu"
 
+msgid "Closed Program B projects are read-only"
+msgstr "Uzavreté projekty Programu B sú len na čítanie"
+
 msgid "Closed"
 msgstr "Uzavreté"
 
@@ -405,6 +485,9 @@ msgstr "ID súborov CV oddelené čiarkou"
 msgid "COMPANY DETAILS"
 msgstr "ÚDAJE O SPOLOČNOSTI"
 
+msgid "Company final acceptance is still pending."
+msgstr "Finálne schválenie zo strany spoločnosti stále čaká."
+
 msgid "Company name"
 msgstr "Názov spoločnosti"
 
@@ -413,6 +496,9 @@ msgstr "Názov spoločnosti musí mať aspoň 2 znaky."
 
 msgid "Company name must be at most 100 characters."
 msgstr "Názov spoločnosti môže mať maximálne 100 znakov."
+
+msgid "Company organization is unavailable"
+msgstr "Firemná organizácia nie je dostupná"
 
 msgid "Company Partner"
 msgstr "Firemný partner"
@@ -426,6 +512,9 @@ msgstr "Firemné projekty"
 msgid "Company workspace"
 msgstr "Firemné pracovisko"
 
+#~ msgid "Company workspace is not active yet"
+#~ msgstr "Firemné pracovisko ešte nie je aktívne"
+
 msgid "Complete"
 msgstr "Dokončiť"
 
@@ -434,6 +523,9 @@ msgstr "Dokončiť základné nastavenie"
 
 msgid "Complete your student profile"
 msgstr "Dokončite svoj študentský profil"
+
+msgid "Completed delivery is waiting for final company acceptance in the project workspace."
+msgstr "Dokončené plnenie čaká na finálne schválenie spoločnosťou v projektovom pracovisku."
 
 msgid "Completed:"
 msgstr "Dokončené:"
@@ -531,6 +623,9 @@ msgstr "Vytvoriť pozvánku"
 msgid "Create organization"
 msgstr "Vytvoriť organizáciu"
 
+msgid "Create project workspace"
+msgstr "Vytvoriť projektové pracovisko"
+
 msgid "Create Specialization"
 msgstr "Vytvoriť špecializáciu"
 
@@ -603,8 +698,11 @@ msgstr "Aktuálne pozvánky"
 msgid "Current organization"
 msgstr "Aktuálna organizácia"
 
-msgid "Current Program B delivery tracked from the company side."
-msgstr "Aktuálne plnenie Programu B sledované zo strany spoločnosti."
+msgid "Current Program B delivery from the dedicated company project summary endpoint."
+msgstr "Aktuálna realizácia Programu B z vyhradeného summary endpointu firemných projektov."
+
+#~ msgid "Current Program B delivery tracked from the company side."
+#~ msgstr "Aktuálne plnenie Programu B sledované zo strany spoločnosti."
 
 msgid "Current Search"
 msgstr "Aktuálne vyhľadávanie"
@@ -630,6 +728,9 @@ msgstr "CV, technické zručnosti, roly, odkazy a projekty."
 msgid "Dashboard"
 msgstr "Nástenná tabuľa"
 
+msgid "Dashboard data refreshes automatically when you return from related Program B workspaces."
+msgstr "Dáta dashboardu sa automaticky obnovia, keď sa vrátite zo súvisiacich pracovísk Programu B."
+
 msgid "Dataset"
 msgstr "Dataset"
 
@@ -647,6 +748,9 @@ msgstr "Dátum do"
 
 msgid "Decided"
 msgstr "Rozhodnuté"
+
+msgid "Decision note:"
+msgstr "Poznámka k rozhodnutiu:"
 
 msgid "Decisions recorded during the last 30 days."
 msgstr "Rozhodnutia zaznamenané za posledných 30 dní."
@@ -702,6 +806,9 @@ msgstr "Máte aktuálne uznané alebo nedokončené predmety?"
 msgid "Documents"
 msgstr "Dokumenty"
 
+msgid "Documents are unavailable right now."
+msgstr "Dokumenty teraz nie sú dostupné."
+
 msgid "Doe"
 msgstr "Novák"
 
@@ -716,6 +823,10 @@ msgstr "Koncept"
 
 msgid "Driving innovation and economic growth through technology and academic collaboration."
 msgstr "Podporujeme inovácie a ekonomický rast prostredníctvom technológií a akademickej spolupráce."
+
+#. placeholder {0}: formatUnknownDate(milestone.dueAt)
+msgid "Due {0}"
+msgstr "Termín {0}"
 
 msgid "E.g. Algorithms, Distributed Systems, UX Design"
 msgstr "Napr. Algoritmy, distribuované systémy, UX dizajn"
@@ -948,6 +1059,9 @@ msgstr "Filtre"
 msgid "Filters applied to the table are reused for the export request."
 msgstr "Filtre použité v tabuľke sa znovu použijú aj pri exporte."
 
+msgid "Final acceptance recorded."
+msgstr "Finálne schválenie bolo zaznamenané."
+
 msgid "Finish profile details and keep team membership current so application actions stay available."
 msgstr "Dokončite detaily profilu a udržiavajte členstvo v tíme aktuálne, aby akcie prihlášky zostali dostupné."
 
@@ -1010,6 +1124,9 @@ msgstr "Hlavné reportovacie údaje sa nepodarilo načítať."
 
 msgid "Help us understand your academic performance."
 msgstr "Pomôžte nám pochopiť vaše akademické výsledky."
+
+msgid "Hidden revoked invitation cards restored."
+msgstr "Skryté karty zrušených pozvánok boli obnovené."
 
 msgid "Hide password"
 msgstr "Skryť heslo"
@@ -1083,6 +1200,9 @@ msgstr "Repozitár inovácií"
 
 msgid "Inspect KPI rollups, compare report datasets, and manage export jobs."
 msgstr "Skontrolujte súhrny KPI, porovnajte dátové súbory reportov a spravujte exportné úlohy."
+
+msgid "Inspect projects"
+msgstr "Skontrolovať projekty"
 
 msgid "Invalid call id"
 msgstr "Neplatné ID výzvy"
@@ -1241,8 +1361,20 @@ msgstr "Načítava sa akademická štruktúra..."
 msgid "Loading admin data..."
 msgstr "Načítavajú sa administrátorské údaje..."
 
+msgid "Loading backlog item"
+msgstr "Načítava sa položka backlogu"
+
+msgid "Loading candidates…"
+msgstr "Načítavajú sa kandidáti…"
+
+msgid "Loading company workspace"
+msgstr "Načítava sa firemné pracovisko"
+
 msgid "Loading dataset..."
 msgstr "Načítava sa dataset..."
+
+msgid "Loading documents…"
+msgstr "Načítavajú sa dokumenty…"
 
 msgid "Loading export job..."
 msgstr "Načítava sa exportná úloha..."
@@ -1259,6 +1391,9 @@ msgstr "Načítava sa organizácia…"
 msgid "Loading profile onboarding..."
 msgstr "Načítava sa onboarding profilu..."
 
+msgid "Loading project"
+msgstr "Načítava sa projekt"
+
 msgid "Loading reports..."
 msgstr "Načítavajú sa reporty..."
 
@@ -1267,6 +1402,9 @@ msgstr "Načítavajú sa špecializácie..."
 
 msgid "Loading universities..."
 msgstr "Načítavajú sa univerzity..."
+
+msgid "Loading workspace"
+msgstr "Načítava sa pracovisko"
 
 msgid "Location"
 msgstr "Lokalita"
@@ -1320,6 +1458,15 @@ msgstr "Správa fakúlt pre vybranú univerzitu."
 msgid "Managing specializations for the selected faculty."
 msgstr "Správa špecializácií pre vybranú fakultu."
 
+msgid "Mark blocked"
+msgstr "Označiť ako blokované"
+
+msgid "Mark done"
+msgstr "Označiť ako hotové"
+
+msgid "Mark in progress"
+msgstr "Označiť ako rozpracované"
+
 msgid "Max profile subjects average"
 msgstr "Maximálny priemer profilových predmetov"
 
@@ -1356,8 +1503,18 @@ msgstr "Členovia a pozvánky sa tu zobrazia po integrácii API."
 msgid "Mentor dashboard"
 msgstr "Mentorský dashboard"
 
+msgid "Mentor is not assigned yet."
+msgstr "Mentor ešte nie je priradený."
+
 msgid "Mentor workspace"
 msgstr "Mentorské pracovisko"
+
+msgid "Mentor:"
+msgstr "Mentor:"
+
+#. placeholder {0}: item.mentor.fullName
+msgid "Mentor: {0}"
+msgstr "Mentor: {0}"
 
 msgid "Mentoring"
 msgstr "Mentoring"
@@ -1365,8 +1522,14 @@ msgstr "Mentoring"
 msgid "Mentors"
 msgstr "Mentori"
 
+msgid "Milestone updated."
+msgstr "Míľnik bol aktualizovaný."
+
 msgid "Milestones"
 msgstr "Míľniky"
+
+msgid "Milestones are unavailable right now."
+msgstr "Míľniky teraz nie sú dostupné."
 
 msgid "Min team size"
 msgstr "Minimálna veľkosť tímu"
@@ -1443,6 +1606,10 @@ msgstr "Novinky"
 msgid "Next"
 msgstr "Ďalej"
 
+#. placeholder {0}: item.nextMilestone.title
+msgid "Next milestone: {0}"
+msgstr "Ďalší míľnik: {0}"
+
 msgid "NEXT STEP"
 msgstr "ĎALŠÍ KROK"
 
@@ -1458,8 +1625,11 @@ msgstr "Momentálne nie sú dostupné žiadne aktívne výzvy Programu A."
 msgid "No active Program B projects yet."
 msgstr "Zatiaľ nie sú žiadne aktívne projekty Programu B."
 
-msgid "No active projects yet."
-msgstr "Zatiaľ nie sú žiadne aktívne projekty."
+msgid "No active projects yet"
+msgstr "Zatiaľ nie sú žiadne aktívne projekty"
+
+#~ msgid "No active projects yet."
+#~ msgstr "Zatiaľ nie sú žiadne aktívne projekty."
 
 msgid "No active team"
 msgstr "Žiadny aktívny tím"
@@ -1467,8 +1637,14 @@ msgstr "Žiadny aktívny tím"
 msgid "No application rows match the current filters."
 msgstr "Aktuálnym filtrom nezodpovedajú žiadne riadky prihlášok."
 
-msgid "No backlog items available yet."
-msgstr "Zatiaľ nie sú dostupné žiadne položky backlogu."
+#~ msgid "No backlog items available yet."
+#~ msgstr "Zatiaľ nie sú dostupné žiadne položky backlogu."
+
+msgid "No backlog items found"
+msgstr "Nenašli sa žiadne položky backlogu"
+
+msgid "No backlog items yet"
+msgstr "Zatiaľ nie sú žiadne položky backlogu"
 
 msgid "No calls found"
 msgstr "Nenašli sa žiadne výzvy"
@@ -1497,6 +1673,12 @@ msgstr "Nebola poskytnutá žiadna odpoveď."
 msgid "No documents uploaded yet."
 msgstr "Zatiaľ neboli nahrané žiadne dokumenty."
 
+msgid "No documents yet."
+msgstr "Zatiaľ žiadne dokumenty."
+
+msgid "No due date"
+msgstr "Bez termínu"
+
 msgid "No employee invitations yet. Send the first invitation using the form on the left."
 msgstr "Zatiaľ nie sú žiadne pozvánky pre zamestnancov. Odošlite prvú pozvánku pomocou formulára vľavo."
 
@@ -1515,6 +1697,15 @@ msgstr "Zatiaľ nebol vybraný žiadny súbor."
 msgid "No local Program A drafts yet."
 msgstr "Zatiaľ nie sú žiadne lokálne návrhy Programu A."
 
+msgid "No milestone description."
+msgstr "Bez popisu míľnika."
+
+msgid "No milestones yet."
+msgstr "Zatiaľ žiadne míľniky."
+
+msgid "No motivation provided."
+msgstr "Nebola uvedená žiadna motivácia."
+
 msgid "No organization found"
 msgstr "Organizácia sa nenašla"
 
@@ -1527,8 +1718,17 @@ msgstr "Žiadne organizácie nezodpovedajú aktuálnym filtrom."
 msgid "No organizations need review"
 msgstr "Žiadne organizácie nepotrebujú kontrolu"
 
+msgid "No pending actions right now"
+msgstr "Momentálne nie sú žiadne čakajúce akcie"
+
 msgid "No Program B rows match the current filters."
 msgstr "Aktuálnym filtrom nezodpovedajú žiadne riadky Programu B."
+
+msgid "No projects yet"
+msgstr "Zatiaľ žiadne projekty"
+
+msgid "No reviews yet."
+msgstr "Zatiaľ žiadne hodnotenia."
 
 msgid "No sector provided"
 msgstr "Neuvádza sa žiadne odvetvie"
@@ -1554,6 +1754,9 @@ msgstr "Nenašli sa žiadne univerzity"
 msgid "No university selected"
 msgstr "Nebola vybraná univerzita"
 
+msgid "No upcoming milestone"
+msgstr "Žiadny nadchádzajúci míľnik"
+
 msgid "No users match the current filters."
 msgstr "Žiadni používatelia nezodpovedajú aktuálnym filtrom."
 
@@ -1565,6 +1768,9 @@ msgstr "Nevedúci majú režim iba na čítanie. Oprávnenia vedúceho sa odvodz
 
 msgid "None"
 msgstr "Žiadne"
+
+msgid "Not assigned"
+msgstr "Nepriradené"
 
 msgid "Not available"
 msgstr "Nedostupné"
@@ -1587,6 +1793,9 @@ msgstr "Počet uznaných predmetov"
 msgid "of"
 msgstr "z"
 
+msgid "Once backlog work is created for this organization, the latest items will appear here."
+msgstr "Keď sa pre túto organizáciu vytvorí backlog, najnovšie položky sa zobrazia tu."
+
 msgid "Once the team lead is ready, this step is for inviting teammates."
 msgstr "Keď je vedúci tímu pripravený, tento krok slúži na pozvanie spoluhráčov."
 
@@ -1607,6 +1816,9 @@ msgstr "Otvorená"
 
 msgid "Open backlog"
 msgstr "Otvoriť backlog"
+
+msgid "Open backlog detail"
+msgstr "Otvoriť detail backlogu"
 
 msgid "Open Calls"
 msgstr "Otvorené výzvy"
@@ -1632,8 +1844,17 @@ msgstr "Otvoriť navigáciu"
 msgid "Open profile"
 msgstr "Otvoriť profil"
 
+msgid "Open Program B backlog"
+msgstr "Otvoriť backlog Programu B"
+
 msgid "Open project"
 msgstr "Otvoriť projekt"
+
+msgid "Open project detail"
+msgstr "Otvoriť detail projektu"
+
+msgid "Open project workspace"
+msgstr "Otvoriť projektové pracovisko"
 
 msgid "Open projects"
 msgstr "Otvoriť projekty"
@@ -1656,11 +1877,17 @@ msgstr "Otvoriť tímové pracovisko"
 msgid "Open the full invitation link from your email and try again."
 msgstr "Otvorte celý odkaz pozvánky z vášho e-mailu a skúste to znova."
 
+msgid "Open workspace"
+msgstr "Otvoriť pracovisko"
+
 msgid "Opens"
 msgstr "Otvára sa"
 
 msgid "Opens at"
 msgstr "Otvára sa"
+
+msgid "Operational queues that still need company-side decisions."
+msgstr "Operačné fronty, ktoré stále vyžadujú rozhodnutia zo strany spoločnosti."
 
 msgid "Opportunities"
 msgstr "Príležitosti"
@@ -1716,11 +1943,15 @@ msgstr "Pozvánky organizácie"
 msgid "Organization invites unavailable"
 msgstr "Pozvánky organizácie nie sú dostupné"
 
-msgid "Organization metrics, backlog activity, and project delivery now live under the company workspace family."
-msgstr "Metriky organizácie, aktivita backlogu a realizácia projektov sú teraz v rodine firemného pracoviska."
+#~ msgid "Organization metrics, backlog activity, and project delivery now live under the company workspace family."
+#~ msgstr "Metriky organizácie, aktivita backlogu a realizácia projektov sú teraz v rodine firemného pracoviska."
 
 msgid "ORGANIZATION SETUP"
 msgstr "NASTAVENIE ORGANIZÁCIE"
+
+#. placeholder {0}: formatEnumLabel(organization.status)
+msgid "Organization status: {0}"
+msgstr "Stav organizácie: {0}"
 
 msgid "Organization-scoped access"
 msgstr "Prístup v rozsahu organizácie"
@@ -1745,6 +1976,10 @@ msgstr "Iné"
 
 msgid "Overview"
 msgstr "Prehľad"
+
+#. placeholder {0}: formatDateTime(overview.updatedAt)
+msgid "Overview updated {0}"
+msgstr "Prehľad bol aktualizovaný {0}"
 
 msgid "Page"
 msgstr "Strana"
@@ -1775,6 +2010,9 @@ msgstr "Čaká"
 
 msgid "Pending actions"
 msgstr "Čakajúce akcie"
+
+msgid "Pending actions are unavailable"
+msgstr "Čakajúce akcie nie sú dostupné"
 
 msgid "Personal Portfolio / Website"
 msgstr "Osobné portfólio / webová stránka"
@@ -1829,6 +2067,22 @@ msgstr "ZÁSADY OCHRANY SÚKROMIA"
 
 msgid "PROCESSING..."
 msgstr "SPRACOVÁVA SA..."
+
+msgid "Product owner assigned."
+msgstr "Product owner bol priradený."
+
+msgid "Product owner is not assigned yet."
+msgstr "Product owner ešte nie je priradený."
+
+msgid "Product owner still needs assignment."
+msgstr "Product owner stále potrebuje priradenie."
+
+msgid "Product owner:"
+msgstr "Product owner:"
+
+#. placeholder {0}: item.productOwner.fullName
+msgid "Product owner: {0}"
+msgstr "Product owner: {0}"
 
 msgid "Professional skills"
 msgstr "Profesionálne zručnosti"
@@ -1890,6 +2144,9 @@ msgstr "Správa výziev Programu B"
 msgid "Program B company dashboard"
 msgstr "Firemný dashboard Programu B"
 
+msgid "Program B company summary becomes available after your organization reaches the active state."
+msgstr "Firemné zhrnutie Programu B bude dostupné po tom, ako vaša organizácia dosiahne aktívny stav."
+
 msgid "Program B delivery tracked for the authenticated organization."
 msgstr "Realizácia Programu B sledovaná pre autentifikovanú organizáciu."
 
@@ -1908,6 +2165,9 @@ msgstr "Programy"
 msgid "Project"
 msgstr "Projekt"
 
+msgid "Project is unavailable"
+msgstr "Projekt nie je dostupný"
+
 msgid "Project preview"
 msgstr "Náhľad projektu"
 
@@ -1917,11 +2177,20 @@ msgstr "Názov projektu"
 msgid "Project title is required."
 msgstr "Názov projektu je povinný."
 
+msgid "Project workspace created."
+msgstr "Projektové pracovisko bolo vytvorené."
+
 msgid "Projects"
 msgstr "Projekty"
 
 msgid "Projects & Summary"
 msgstr "Projekty a zhrnutie"
+
+msgid "Projects created from accepted Program B candidates will appear here."
+msgstr "Projekty vytvorené z prijatých kandidátov Programu B sa zobrazia tu."
+
+msgid "Projects created from accepted Program B candidates will show up here."
+msgstr "Projekty vytvorené z prijatých kandidátov Programu B sa zobrazia tu."
 
 msgid "Proposal text"
 msgstr "Text návrhu"
@@ -1944,11 +2213,20 @@ msgstr "Zaradené exporty zostanú tu, kým sa nedokončia alebo nezlyhajú."
 msgid "Quick Links"
 msgstr "Rýchle odkazy"
 
-msgid "Recent organization-scoped Program B backlog items."
-msgstr "Nedávne položky backlogu Programu B v rozsahu organizácie."
+msgid "Recent organization-scoped Program B backlog items from the dedicated summary endpoint."
+msgstr "Nedávne položky backlogu Programu B v rozsahu organizácie z vyhradeného summary endpointu."
+
+#~ msgid "Recent organization-scoped Program B backlog items."
+#~ msgstr "Nedávne položky backlogu Programu B v rozsahu organizácie."
 
 msgid "Recent organizations that still need an operational decision."
 msgstr "Nedávne organizácie, ktoré stále potrebujú operačné rozhodnutie."
+
+msgid "Record company final acceptance"
+msgstr "Zaznamenať finálne schválenie spoločnosti"
+
+msgid "Record final acceptance"
+msgstr "Zaznamenať finálne schválenie"
 
 msgid "Record is active"
 msgstr "Záznam je aktívny"
@@ -1958,6 +2236,9 @@ msgstr "Obnovené návrhy"
 
 msgid "Refresh"
 msgstr "Obnoviť"
+
+msgid "Refresh data"
+msgstr "Obnoviť dáta"
 
 msgid "Refresh statuses"
 msgstr "Obnoviť stavy"
@@ -1995,6 +2276,9 @@ msgstr "Príslušné kurzy"
 msgid "Remove"
 msgstr "Odstrániť"
 
+msgid "Remove card"
+msgstr "Odstrániť kartu"
+
 msgid "Rename team"
 msgstr "Premenovať tím"
 
@@ -2031,11 +2315,32 @@ msgstr "Ak e-mail neprišiel, odošlite ho znova. Token nižšie vložte iba v p
 msgid "Resending..."
 msgstr "Posiela sa znova..."
 
+msgid "Resolve overdue milestones"
+msgstr "Vyriešiť omeškané míľniky"
+
+msgid "Resolving the Program B backlog detail for this organization."
+msgstr "Načítava sa detail backlogu Programu B pre túto organizáciu."
+
+msgid "Resolving the Program B project detail for this organization."
+msgstr "Načítava sa detail projektu Programu B pre túto organizáciu."
+
+msgid "Resolving your authenticated workspace."
+msgstr "Overuje sa vaše autentifikované pracovisko."
+
+msgid "Resolving your organization access before loading Program B company data."
+msgstr "Pred načítaním firemných dát Programu B sa overuje prístup k vašej organizácii."
+
 msgid "Retry"
 msgstr "Skúsiť znova"
 
 msgid "Review"
 msgstr "Kontrola"
+
+msgid "Review backlog candidates"
+msgstr "Skontrolovať kandidátov backlogu"
+
+msgid "Review candidate teams"
+msgstr "Skontrolovať kandidátske tímy"
 
 msgid "Review dashboard"
 msgstr "Revízny dashboard"
@@ -2055,11 +2360,17 @@ msgstr "Revízne pracovisko"
 msgid "Reviews"
 msgstr "Revízie"
 
+msgid "Reviews are unavailable right now."
+msgstr "Hodnotenia teraz nie sú dostupné."
+
 msgid "Revoke"
 msgstr "Zrušiť"
 
 msgid "Revoked"
 msgstr "Zrušené"
+
+msgid "Revoked invitation card removed."
+msgstr "Karta zrušenej pozvánky bola odstránená."
 
 msgid "Revoking..."
 msgstr "Ruší sa..."
@@ -2265,6 +2576,12 @@ msgstr "Skrátený názov"
 msgid "Short project description..."
 msgstr "Krátky popis projektu..."
 
+msgid "Shortlist"
+msgstr "Užší výber"
+
+msgid "Show hidden revoked cards"
+msgstr "Zobraziť skryté zrušené karty"
+
 msgid "Show password"
 msgstr "Zobraziť heslo"
 
@@ -2309,6 +2626,9 @@ msgstr "Mäkké zručnosti"
 
 msgid "Soft-disabled rows remain manageable when this filter is turned on."
 msgstr "Mäkko deaktivované riadky zostávajú spravovateľné po zapnutí tohto filtra."
+
+msgid "Some dashboard sections could not be refreshed."
+msgstr "Niektoré sekcie dashboardu sa nepodarilo obnoviť."
 
 msgid "Solution proposal"
 msgstr "Návrh riešenia"
@@ -2420,6 +2740,9 @@ msgstr "Odoslať prihlášku"
 
 msgid "Submitted"
 msgstr "Odoslané"
+
+msgid "Submitted candidates are waiting for shortlist or acceptance decisions."
+msgstr "Odoslaní kandidáti čakajú na rozhodnutie o užšom výbere alebo prijatí."
 
 msgid "Submitted:"
 msgstr "Odoslané:"
@@ -2538,6 +2861,12 @@ msgstr "Reláciu správcu sa nepodarilo overiť. Skúste to znova, keď bude pri
 msgid "The authenticated account email does not match the invited email."
 msgstr "E-mailová adresa prihláseného účtu sa nezhoduje s e-mailovou adresou pozvaného používateľa."
 
+msgid "The company project summary could not be loaded right now."
+msgstr "Firemné zhrnutie projektov sa teraz nepodarilo načítať."
+
+msgid "The current Program B company workflow does not have any open action queues."
+msgstr "Aktuálny firemný workflow Programu B momentálne nemá žiadne otvorené fronty akcií."
+
 msgid "The call detail request failed."
 msgstr "Nepodarilo sa načítať detail výzvy."
 
@@ -2571,6 +2900,15 @@ msgstr "Pozvánku sa momentálne nepodarilo overiť. Skúste to prosím neskôr.
 msgid "The invite detail request failed for this organization."
 msgstr "Požiadavka na detail pozvánky pre túto organizáciu zlyhala."
 
+msgid "The organization backlog summary could not be loaded right now."
+msgstr "Firemné zhrnutie backlogu sa teraz nepodarilo načítať."
+
+msgid "The Program B backlog list could not be loaded right now."
+msgstr "Zoznam backlogu Programu B sa teraz nepodarilo načítať."
+
+msgid "The Program B project list could not be loaded right now."
+msgstr "Zoznam projektov Programu B sa teraz nepodarilo načítať."
+
 msgid "The requested call could not be identified from the route."
 msgstr "Požadovanú výzvu sa nepodarilo identifikovať z adresy."
 
@@ -2589,6 +2927,9 @@ msgstr "Zoznam fakúlt vybranej univerzity sa nepodarilo načítať."
 msgid "The specialization will be created under the selected faculty."
 msgstr "Špecializácia bude vytvorená pod vybranou fakultou."
 
+msgid "The summary counts are unavailable right now, but the dedicated backlog and project sections can still load independently."
+msgstr "Súhrnné počty teraz nie sú dostupné, ale samostatné sekcie backlogu a projektov sa môžu načítať nezávisle."
+
 msgid "The summary queries failed. Refresh the page to try again."
 msgstr "Súhrnné požiadavky zlyhali. Obnovte stránku a skúste to znova."
 
@@ -2601,8 +2942,20 @@ msgstr "Zoznam používateľov sa nepodarilo načítať."
 msgid "There is no data to export for the current filters."
 msgstr "Pre aktuálne filtre nie sú k dispozícii žiadne dáta na export."
 
+msgid "These queues need direct company attention and link into the relevant Program B workspace."
+msgstr "Tieto fronty vyžadujú priamu pozornosť spoločnosti a odkazujú do príslušného pracoviska Programu B."
+
 msgid "This account must update its password before the admin session can continue."
 msgstr "Tento účet musí aktualizovať heslo pred pokračovaním administrátorskej relácie."
+
+#~ msgid "This backlog item belongs to your company workspace, but the full published-detail endpoint is not available for its current state."
+#~ msgstr "Táto položka backlogu patrí do firemného pracoviska vašej spoločnosti, ale úplný detail publikovaného endpointu nie je pre jej aktuálny stav dostupný."
+
+msgid "This backlog item is in an internal company workflow state, so this page is showing the organization-scoped workspace summary instead of the published-detail endpoint."
+msgstr "Táto položka backlogu je v internom stave firemného workflow, preto táto stránka zobrazuje zhrnutie pracoviska v rozsahu organizácie namiesto detailu z publikovaného endpointu."
+
+#~ msgid "This backlog item is not available in your company workspace."
+#~ msgstr "Táto položka backlogu nie je vo vašom firemnom pracovisku dostupná."
 
 msgid "This flow validates the invite first, then gets you into the invited team and your student profile onboarding."
 msgstr "Tento proces najprv overí pozvánku, potom vás pripojí do pozvaného tímu a prevedie onboardingom študentského profilu."
@@ -2625,6 +2978,9 @@ msgstr "Toto mentorské pracovisko je smerované správne. Zobrazenia mentorovan
 msgid "This organization has no invite records available right now."
 msgstr "Táto organizácia momentálne nemá dostupné žiadne záznamy o pozvánkach."
 
+msgid "This project is closed and now read-only."
+msgstr "Tento projekt je uzavretý a teraz je len na čítanie."
+
 msgid "This placeholder keeps the admin route available while the full Program A moderation workflow is being implemented."
 msgstr "Tento zástupný obsah ponecháva administrátorskú cestu dostupnú, kým sa implementuje kompletný workflow moderovania Programu A."
 
@@ -2636,6 +2992,9 @@ msgstr "Tento krok slúži na pozvanie spoluhráčov, keď je vedúci tímu prip
 
 msgid "This workspace is correctly routed, but its feature surface is not implemented yet."
 msgstr "Toto pracovisko je smerované správne, ale jeho funkčná vrstva ešte nie je implementovaná."
+
+msgid "This workspace needs attention."
+msgstr "Toto pracovisko vyžaduje pozornosť."
 
 msgid "Time to invite colleagues"
 msgstr "Čas pozvať kolegov"
@@ -2667,6 +3026,9 @@ msgstr "Preniesť vedenie"
 msgid "Transferred Subjects"
 msgstr "Uznané predmety"
 
+msgid "Try adjusting the search phrase or filters to find another backlog item."
+msgstr "Skúste upraviť vyhľadávaný výraz alebo filtre, aby ste našli inú položku backlogu."
+
 msgid "Twitter"
 msgstr "Twitter"
 
@@ -2676,6 +3038,9 @@ msgstr "Typ"
 msgid "Unable to accept invitation."
 msgstr "Pozvánku sa nepodarilo prijať."
 
+msgid "Unable to assign product owner."
+msgstr "Nepodarilo sa priradiť product ownera."
+
 msgid "Unable to change the password."
 msgstr "Nepodarilo sa zmeniť heslo."
 
@@ -2684,6 +3049,9 @@ msgstr "Nepodarilo sa vytvoriť návrh prihlášky."
 
 msgid "Unable to create invitations right now."
 msgstr "Momentálne sa nepodarilo vytvoriť pozvánky."
+
+msgid "Unable to create project."
+msgstr "Nepodarilo sa vytvoriť projekt."
 
 msgid "Unable to create team."
 msgstr "Nepodarilo sa vytvoriť tím."
@@ -2712,11 +3080,26 @@ msgstr "Tento report sa momentálne nepodarilo exportovať."
 msgid "Unable to join the invited team right now."
 msgstr "Momentálne sa nemôžem pripojiť k pozvanému tímu."
 
+msgid "Unable to load backlog preview"
+msgstr "Nepodarilo sa načítať náhľad backlogu"
+
+msgid "Unable to load company backlog"
+msgstr "Nepodarilo sa načítať firemný backlog"
+
+msgid "Unable to load company projects"
+msgstr "Nepodarilo sa načítať firemné projekty"
+
 msgid "Unable to load organization invitations."
 msgstr "Nepodarilo sa načítať pozvánky organizácie."
 
+msgid "Unable to load overview metrics"
+msgstr "Nepodarilo sa načítať metriky prehľadu"
+
 msgid "Unable to load profile data for review."
 msgstr "Nepodarilo sa načítať údaje profilu na kontrolu."
+
+msgid "Unable to load project preview"
+msgstr "Nepodarilo sa načítať náhľad projektov"
 
 msgid "Unable to load team data"
 msgstr "Nepodarilo sa načítať údaje tímu"
@@ -2744,6 +3127,9 @@ msgstr "Momentálne sa nepodarilo odhlásiť."
 
 msgid "Unable to open the document."
 msgstr "Nepodarilo sa otvoriť dokument."
+
+msgid "Unable to record final acceptance."
+msgstr "Nepodarilo sa zaznamenať finálne schválenie."
 
 msgid "Unable to register. Please try again."
 msgstr "Nepodarilo sa zaregistrovať. Skúste to znova."
@@ -2795,6 +3181,12 @@ msgstr "Momentálne sa nepodarilo odoslať tímovú prihlášku."
 
 msgid "Unable to transfer leadership right now."
 msgstr "Momentálne sa nepodarilo preniesť vedenie."
+
+msgid "Unable to update candidate status."
+msgstr "Nepodarilo sa aktualizovať stav kandidáta."
+
+msgid "Unable to update milestone."
+msgstr "Nepodarilo sa aktualizovať míľnik."
 
 msgid "Unable to update the faculty."
 msgstr "Nepodarilo sa aktualizovať fakultu."
@@ -2871,6 +3263,10 @@ msgstr "Aktualizujte svoj študentský profil"
 msgid "Updated"
 msgstr "Aktualizované"
 
+#. placeholder {0}: formatDateTime(item.updatedAt)
+msgid "Updated {0}"
+msgstr "Aktualizované {0}"
+
 msgid "Updated at"
 msgstr "Aktualizované"
 
@@ -2913,9 +3309,15 @@ msgstr "Používatelia"
 msgid "Users are unavailable"
 msgstr "Používatelia nie sú dostupní"
 
+#~ msgid "Using browser defaults."
+#~ msgstr "Používajú sa predvolené nastavenia prehliadača."
+
 #. placeholder {0}: field.value
 msgid "Using existing CV (ID: {0})"
 msgstr "Používa sa existujúce CV (ID: {0})"
+
+msgid "Using organization backlog data"
+msgstr "Používajú sa backlog dáta organizácie"
 
 msgid "Validating invitation…"
 msgstr "Overuje sa pozvánka…"
@@ -2952,6 +3354,18 @@ msgstr "Zobraziť pozvánky"
 
 msgid "View team access"
 msgstr "Zobraziť prístup tímu"
+
+msgid "We could not load the Program B action queues right now."
+msgstr "Fronty akcií Programu B sa teraz nepodarilo načítať."
+
+msgid "We could not load this Program B backlog item right now."
+msgstr "Túto položku backlogu Programu B sa teraz nepodarilo načítať."
+
+msgid "We could not load this Program B project right now."
+msgstr "Tento projekt Programu B sa teraz nepodarilo načítať."
+
+msgid "We could not resolve the organization linked to your company account."
+msgstr "Nepodarilo sa určiť organizáciu prepojenú s vaším firemným účtom."
 
 msgid "We couldn't load your team right now. Please try again."
 msgstr "Váš tím sa momentálne nepodarilo načítať. Skúste to prosím znova."
@@ -3012,6 +3426,12 @@ msgstr "Prežili ste boss fight"
 
 msgid "Your admin session has expired."
 msgstr "Vaša administrátorská relácia vypršala."
+
+msgid "Your company account is linked to an organization, but Program B company overview endpoints are only available for active organizations."
+msgstr "Váš firemný účet je prepojený s organizáciou, ale endpointy firemného prehľadu Programu B sú dostupné len pre aktívne organizácie."
+
+#~ msgid "Your company account must become active before the company workspace can load Program B data."
+#~ msgstr "Váš firemný účet musí byť aktívny, aby mohlo firemné pracovisko načítať dáta Programu B."
 
 msgid "your email address"
 msgstr "vaša e-mailová adresa"

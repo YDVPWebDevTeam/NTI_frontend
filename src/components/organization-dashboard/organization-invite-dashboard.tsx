@@ -3,7 +3,7 @@
 import { t } from '@lingui/core/macro';
 import { useQueryClient } from '@tanstack/react-query';
 import { ArrowRight, Building2, Loader2, Mail, Users } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 import {
@@ -17,10 +17,13 @@ import {
 import { Badge, Button, Card, CardContent, CardHeader, CardTitle, Input } from 'components/shadcn';
 import { formatEnumLabel } from 'lib/utils';
 
+const DISMISSED_REVOKED_INVITES_STORAGE_KEY = 'organization-dismissed-revoked-invites';
+
 export default function OrganizationInviteDashboard() {
   const queryClient = useQueryClient();
 
   const [email, setEmail] = useState('');
+  const [dismissedInviteIds, setDismissedInviteIds] = useState<string[]>([]);
   const [activeResendInviteId, setActiveResendInviteId] = useState<string | null>(null);
   const [activeRevokeInviteId, setActiveRevokeInviteId] = useState<string | null>(null);
 
@@ -46,7 +49,9 @@ export default function OrganizationInviteDashboard() {
   );
 
   const normalizedEmail = email.trim().toLowerCase();
-  const invites = invitesQuery.data?.data ?? [];
+  const invites = (invitesQuery.data?.data ?? []).filter(
+    (invite) => !dismissedInviteIds.includes(invite.id),
+  );
   let organizationDetails = t`Members and invitations will appear here after API integration.`;
 
   if (organization) {
@@ -55,6 +60,41 @@ export default function OrganizationInviteDashboard() {
 
   const isSubmitDisabled =
     !organizationId || !normalizedEmail || createInvite.isPending || organizationQuery.isLoading;
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    try {
+      const storedInviteIds = window.localStorage.getItem(DISMISSED_REVOKED_INVITES_STORAGE_KEY);
+
+      if (!storedInviteIds) {
+        return;
+      }
+
+      const parsedInviteIds: unknown = JSON.parse(storedInviteIds);
+
+      if (Array.isArray(parsedInviteIds)) {
+        setDismissedInviteIds(
+          parsedInviteIds.filter((value): value is string => typeof value === 'string'),
+        );
+      }
+    } catch {
+      window.localStorage.removeItem(DISMISSED_REVOKED_INVITES_STORAGE_KEY);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    window.localStorage.setItem(
+      DISMISSED_REVOKED_INVITES_STORAGE_KEY,
+      JSON.stringify(dismissedInviteIds),
+    );
+  }, [dismissedInviteIds]);
 
   const refreshInvites = async () => {
     await queryClient.invalidateQueries({
@@ -127,6 +167,13 @@ export default function OrganizationInviteDashboard() {
     } finally {
       setActiveRevokeInviteId(null);
     }
+  };
+
+  const handleDismissRevokedInvite = (inviteId: string) => {
+    setDismissedInviteIds((current) =>
+      current.includes(inviteId) ? current : [...current, inviteId],
+    );
+    toast.success(t`Revoked invitation card removed.`);
   };
 
   return (
@@ -293,10 +340,27 @@ export default function OrganizationInviteDashboard() {
                 </div>
               ) : null}
 
+              {!invitesQuery.isLoading && !invitesQuery.isError && dismissedInviteIds.length > 0 ? (
+                <div className="flex justify-end">
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    className="text-sm text-[#1e58d5] hover:text-[#1e58d5]"
+                    onClick={() => {
+                      setDismissedInviteIds([]);
+                      toast.success(t`Hidden revoked invitation cards restored.`);
+                    }}
+                  >
+                    {t`Show hidden revoked cards`}
+                  </Button>
+                </div>
+              ) : null}
+
               {invites.map((invite) => {
                 const isResendingInvite = activeResendInviteId === invite.id;
                 const isRevokingInvite = activeRevokeInviteId === invite.id;
                 const isPendingInvite = invite.status === 'PENDING';
+                const isRevokedInvite = invite.status === 'REVOKED';
 
                 return (
                   <div
@@ -344,6 +408,16 @@ export default function OrganizationInviteDashboard() {
                         >
                           {isRevokingInvite ? t`Revoking...` : t`Revoke`}
                         </Button>
+
+                        {isRevokedInvite ? (
+                          <Button
+                            type="button"
+                            variant="outline"
+                            onClick={() => handleDismissRevokedInvite(invite.id)}
+                          >
+                            {t`Remove card`}
+                          </Button>
+                        ) : null}
                       </div>
                     </div>
                   </div>

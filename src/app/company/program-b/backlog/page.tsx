@@ -9,6 +9,11 @@ import {
   type ProgramBBacklogControllerListMySort,
   useProgramBBacklogControllerListMy,
 } from 'lib/api';
+import {
+  CompanyDashboardLoadingCard,
+  CompanyStatusBadge,
+  CompanyDashboardStatus,
+} from 'components/company-dashboard/program-b-company-dashboard-primitives';
 import { Input } from 'components/shadcn';
 import { ROUTES } from 'lib/constants';
 import { normalizeUnknownText } from 'lib/student-dashboard/normalizers';
@@ -26,6 +31,64 @@ export default function CompanyProgramBBacklogPage() {
     sort,
     order,
   });
+  const backlogItems = backlogQuery.data?.data ?? [];
+
+  let backlogContent;
+
+  if (backlogQuery.isLoading && !backlogQuery.data) {
+    backlogContent = (
+      <div className="grid gap-4 lg:grid-cols-2">
+        <CompanyDashboardLoadingCard />
+        <CompanyDashboardLoadingCard />
+      </div>
+    );
+  } else if (backlogQuery.isError && !backlogQuery.data) {
+    backlogContent = (
+      <CompanyDashboardStatus
+        title={t`Unable to load company backlog`}
+        description={t`The Program B backlog list could not be loaded right now.`}
+        tone="danger"
+      />
+    );
+  } else if (backlogItems.length === 0) {
+    backlogContent = (
+      <CompanyDashboardStatus
+        title={t`No backlog items found`}
+        description={
+          deferredQuery
+            ? t`Try adjusting the search phrase or filters to find another backlog item.`
+            : t`Backlog items for your organization will appear here once Program B work is created.`
+        }
+      />
+    );
+  } else {
+    backlogContent = (
+      <div className="grid gap-4 lg:grid-cols-2">
+        {backlogItems.map((item) => (
+          <article
+            key={item.id}
+            className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]"
+          >
+            <p className="font-semibold text-[#10213d]">
+              {normalizeUnknownText(item.title) ?? t`Untitled backlog item`}
+            </p>
+            <p className="mt-2 text-sm leading-7 text-[#60718d]">
+              {normalizeUnknownText(item.description) ?? t`No description provided.`}
+            </p>
+            <div className="mt-4 flex items-center justify-between gap-3 text-sm">
+              <CompanyStatusBadge status={item.status} />
+              <Link
+                href={ROUTES.COMPANY.programBBacklogDetail(item.id)}
+                className="font-medium text-[#1e58d5]"
+              >
+                {t`Open detail`}
+              </Link>
+            </div>
+          </article>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -66,32 +129,7 @@ export default function CompanyProgramBBacklogPage() {
         </div>
       </section>
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        {(backlogQuery.data?.data ?? []).map((item) => (
-          <article
-            key={item.id}
-            className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]"
-          >
-            <p className="font-semibold text-[#10213d]">
-              {normalizeUnknownText(item.title) ?? t`Untitled backlog item`}
-            </p>
-            <p className="mt-2 text-sm leading-7 text-[#60718d]">
-              {normalizeUnknownText(item.description) ?? t`No description provided.`}
-            </p>
-            <div className="mt-4 flex items-center justify-between gap-3 text-sm">
-              <span className="rounded-full bg-[#edf3ff] px-3 py-1 font-medium text-[#0f4fb8]">
-                {item.status}
-              </span>
-              <Link
-                href={ROUTES.COMPANY.programBBacklogDetail(item.id)}
-                className="font-medium text-[#1e58d5]"
-              >
-                {t`Open detail`}
-              </Link>
-            </div>
-          </article>
-        ))}
-      </div>
+      {backlogContent}
 
       <section className="flex items-center justify-between rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
         <span className="text-sm text-[#60718d]">

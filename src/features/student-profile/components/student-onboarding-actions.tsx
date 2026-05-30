@@ -13,11 +13,6 @@ type StudentOnboardingActionsProps = {
   onSaveSkills: () => void;
 };
 
-const SAVE_ACTION_LABELS = {
-  academic: t`Save academic information`,
-  skills: t`Save professional skills`,
-} as const;
-
 export function StudentOnboardingActions({
   activeStage,
   isBusy,
@@ -27,6 +22,9 @@ export function StudentOnboardingActions({
   onSaveAcademic,
   onSaveSkills,
 }: StudentOnboardingActionsProps) {
+  const saveActionLabel =
+    activeStage === 'academic' ? t`Save academic information` : t`Save professional skills`;
+
   if (isComplete) {
     return (
       <div className="flex flex-wrap gap-3">
@@ -51,7 +49,7 @@ export function StudentOnboardingActions({
         onClick={activeStage === 'academic' ? onSaveAcademic : onSaveSkills}
         className="bg-[#1e58d5] hover:bg-[#245fdc]"
       >
-        {isBusy ? t`Saving…` : SAVE_ACTION_LABELS[activeStage]}
+        {isBusy ? t`Saving…` : saveActionLabel}
       </Button>
     </div>
   );

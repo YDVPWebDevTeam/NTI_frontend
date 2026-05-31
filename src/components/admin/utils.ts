@@ -33,6 +33,10 @@ export const ADMIN_NAV_ITEMS: AdminNavItem[] = [
     label: 'Calls',
   },
   {
+    href: ROUTES.ADMIN.PROGRAM_B_PROJECTS,
+    label: 'Program B',
+  },
+  {
     href: ROUTES.ADMIN.REPORTS,
     label: 'Reports',
   },
@@ -65,6 +69,10 @@ export function getAdminNavLabel(href: string) {
 
   if (href === ROUTES.ADMIN.CALLS) {
     return 'Calls';
+  }
+
+  if (href === ROUTES.ADMIN.PROGRAM_B_PROJECTS) {
+    return 'Program B';
   }
 
   if (href === ROUTES.ADMIN.REPORTS) {
@@ -215,6 +223,10 @@ export function getAdminPageTitle(pathname: string) {
 
   if (pathname.startsWith(ROUTES.ADMIN.CALLS)) {
     return t`Calls`;
+  }
+
+  if (pathname.startsWith(ROUTES.ADMIN.PROGRAM_B_PROJECTS)) {
+    return t`Program B`;
   }
 
   return t`Admin`;

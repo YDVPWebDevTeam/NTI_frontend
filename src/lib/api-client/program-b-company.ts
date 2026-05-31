@@ -5,10 +5,13 @@ import type { QueryClient } from '@tanstack/react-query';
 import {
   getProgramBBacklogControllerFindPublishedByIdQueryKey,
   getProgramBBacklogControllerListCandidatesQueryKey,
+  getProgramBBacklogControllerListDocumentsQueryKey,
   getProgramBCompanyOverviewControllerGetBacklogSummaryQueryKey,
   getProgramBCompanyOverviewControllerGetOverviewQueryKey,
   getProgramBCompanyOverviewControllerGetProjectSummaryQueryKey,
   getProgramBProjectsControllerGetProjectQueryKey,
+  getProgramBProjectsControllerListDocumentsQueryKey,
+  getProgramBProjectsControllerListMentoringNotesQueryKey,
   getProgramBProjectsControllerListMilestonesQueryKey,
   getProgramBProjectsControllerListPoReviewsQueryKey,
 } from 'lib/api';
@@ -55,6 +58,9 @@ export function invalidateProgramBCompanyWorkspace(
       queryClient.invalidateQueries({
         queryKey: getProgramBBacklogControllerListCandidatesQueryKey(ids.backlogId),
       }),
+      queryClient.invalidateQueries({
+        queryKey: getProgramBBacklogControllerListDocumentsQueryKey(ids.backlogId),
+      }),
     );
   }
 
@@ -68,6 +74,12 @@ export function invalidateProgramBCompanyWorkspace(
       }),
       queryClient.invalidateQueries({
         queryKey: getProgramBProjectsControllerListPoReviewsQueryKey(ids.projectId),
+      }),
+      queryClient.invalidateQueries({
+        queryKey: getProgramBProjectsControllerListMentoringNotesQueryKey(ids.projectId),
+      }),
+      queryClient.invalidateQueries({
+        queryKey: getProgramBProjectsControllerListDocumentsQueryKey(ids.projectId),
       }),
     );
   }

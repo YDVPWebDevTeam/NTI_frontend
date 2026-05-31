@@ -32,6 +32,7 @@ import type {
   CreateProgramBMilestoneDto,
   CreateProgramBPoReviewDto,
   CreateProgramBProjectDocumentUploadDto,
+  ProgramBAssignableMentorDto,
   ProgramBDocumentDownloadDto,
   ProgramBMentoringNoteDto,
   ProgramBMilestoneDto,
@@ -124,6 +125,92 @@ export function useProgramBProjectsControllerListMy<TData = Awaited<ReturnType<t
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
   const queryOptions = getProgramBProjectsControllerListMyQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+export const programBProjectsControllerListAssignableMentors = (
+    
+ options?: SecondParameter<typeof orvalMutator>,signal?: AbortSignal
+) => {
+      
+      
+      return orvalMutator<ProgramBAssignableMentorDto[]>(
+      {url: `/program-b/projects/assignable-mentors`, method: 'GET', signal
+    },
+      options);
+    }
+  
+
+
+
+export const getProgramBProjectsControllerListAssignableMentorsQueryKey = () => {
+    return [
+    `/program-b/projects/assignable-mentors`
+    ] as const;
+    }
+
+    
+export const getProgramBProjectsControllerListAssignableMentorsQueryOptions = <TData = Awaited<ReturnType<typeof programBProjectsControllerListAssignableMentors>>, TError = unknown>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof programBProjectsControllerListAssignableMentors>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getProgramBProjectsControllerListAssignableMentorsQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof programBProjectsControllerListAssignableMentors>>> = ({ signal }) => programBProjectsControllerListAssignableMentors(requestOptions, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof programBProjectsControllerListAssignableMentors>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type ProgramBProjectsControllerListAssignableMentorsQueryResult = NonNullable<Awaited<ReturnType<typeof programBProjectsControllerListAssignableMentors>>>
+export type ProgramBProjectsControllerListAssignableMentorsQueryError = unknown
+
+
+export function useProgramBProjectsControllerListAssignableMentors<TData = Awaited<ReturnType<typeof programBProjectsControllerListAssignableMentors>>, TError = unknown>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof programBProjectsControllerListAssignableMentors>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof programBProjectsControllerListAssignableMentors>>,
+          TError,
+          Awaited<ReturnType<typeof programBProjectsControllerListAssignableMentors>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useProgramBProjectsControllerListAssignableMentors<TData = Awaited<ReturnType<typeof programBProjectsControllerListAssignableMentors>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof programBProjectsControllerListAssignableMentors>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof programBProjectsControllerListAssignableMentors>>,
+          TError,
+          Awaited<ReturnType<typeof programBProjectsControllerListAssignableMentors>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useProgramBProjectsControllerListAssignableMentors<TData = Awaited<ReturnType<typeof programBProjectsControllerListAssignableMentors>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof programBProjectsControllerListAssignableMentors>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+
+export function useProgramBProjectsControllerListAssignableMentors<TData = Awaited<ReturnType<typeof programBProjectsControllerListAssignableMentors>>, TError = unknown>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof programBProjectsControllerListAssignableMentors>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getProgramBProjectsControllerListAssignableMentorsQueryOptions(options)
 
   const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 

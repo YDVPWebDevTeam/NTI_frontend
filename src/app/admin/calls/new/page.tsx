@@ -8,7 +8,6 @@ import { AdminCallForm } from 'components/admin/admin-call-form';
 import { Button } from 'components/shadcn';
 import { useCreateAdminCall } from 'lib/api-client/admin/calls';
 import { ROUTES } from 'lib/constants';
-import type { CreateAdminCallDto } from 'lib/api';
 
 export default function CreateAdminCallPage() {
   const router = useRouter();

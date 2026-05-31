@@ -5,6 +5,7 @@ import {
   CalendarClock,
   ClipboardCheck,
   FileSpreadsheet,
+  FolderKanban,
   GraduationCap,
   LayoutGrid,
   LogOut,
@@ -41,6 +42,7 @@ const NAV_ICON_BY_HREF: Record<string, React.ReactNode> = {
   [ROUTES.ADMIN.ROOT]: <LayoutGrid className="h-4 w-4" />,
   [ROUTES.ADMIN.MODERATION]: <ClipboardCheck className="h-4 w-4" />,
   [ROUTES.ADMIN.CALLS]: <CalendarClock className="h-4 w-4" />,
+  [ROUTES.ADMIN.PROGRAM_B_PROJECTS]: <FolderKanban className="h-4 w-4" />,
   [ROUTES.ADMIN.REPORTS]: <FileSpreadsheet className="h-4 w-4" />,
   [ROUTES.ADMIN.USERS]: <Users2 className="h-4 w-4" />,
   [ROUTES.ADMIN.ACADEMIC_STRUCTURE]: <GraduationCap className="h-4 w-4" />,
@@ -68,6 +70,9 @@ function getTranslatedAdminNavLabel(href: string) {
 
     case 'Calls':
       return t`Calls`;
+
+    case 'Program B':
+      return t`Program B`;
 
     case 'Reports':
       return t`Reports`;

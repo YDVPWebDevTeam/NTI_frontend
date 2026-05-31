@@ -2125,6 +2125,13 @@ export interface ProgramBProjectDetailDto {
   updatedAt: string;
 }
 
+export interface ProgramBAssignableMentorDto {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+
 /**
  * Milestone status.
  */

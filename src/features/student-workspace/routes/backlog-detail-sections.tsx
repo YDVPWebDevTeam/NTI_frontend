@@ -4,7 +4,8 @@ import { t } from '@lingui/core/macro';
 import type { ReactNode } from 'react';
 import type { ProgramBBacklogItemDto, ProgramBTeamApplicationResponseDto } from 'lib/api';
 
-import { Button, Input, Textarea } from 'components/shadcn';
+import { Button, Textarea } from 'components/shadcn';
+import { FileUploader } from 'components/files/file-uploader';
 import { StudentSectionCard } from 'components/student-dashboard/page-shell-primitives';
 import { formatUnknownDate } from 'lib/student-dashboard/normalizers';
 
@@ -45,10 +46,10 @@ export function TeamApplicationSection({
   team,
   motivation,
   proposalText,
-  cvFileIds,
+  cvFiles,
   setMotivation,
   setProposalText,
-  setCvFileIds,
+  setCvFiles,
   onSubmit,
   onWithdraw,
   isSubmitting,
@@ -59,10 +60,10 @@ export function TeamApplicationSection({
   team: { id: string } | null;
   motivation: string;
   proposalText: string;
-  cvFileIds: string;
+  cvFiles: File[];
   setMotivation: (value: string) => void;
   setProposalText: (value: string) => void;
-  setCvFileIds: (value: string) => void;
+  setCvFiles: (value: File[]) => void;
   onSubmit: () => Promise<void>;
   onWithdraw: () => Promise<void>;
   isSubmitting: boolean;
@@ -108,13 +109,22 @@ export function TeamApplicationSection({
           placeholder={t`Proposal text`}
           rows={5}
         />
-        <Input
-          value={cvFileIds}
-          onChange={(event) => setCvFileIds(event.target.value)}
-          placeholder={t`Comma-separated CV file ids`}
+        <FileUploader
+          id="program-b-application-cv"
+          value={cvFiles}
+          onChange={setCvFiles}
+          accept=".pdf,.doc,.docx"
+          placeholder={t`Upload CVs for your team (PDF or Word).`}
+          buttonLabel={t`Upload CV`}
         />
         <Button
-          disabled={!team || !motivation.trim() || !proposalText.trim() || isSubmitting}
+          disabled={
+            !team ||
+            !motivation.trim() ||
+            !proposalText.trim() ||
+            cvFiles.length === 0 ||
+            isSubmitting
+          }
           onClick={() => void onSubmit()}
         >
           {t`Submit application`}

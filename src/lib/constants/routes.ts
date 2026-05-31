@@ -28,6 +28,9 @@ const ADMIN_ROUTES = {
   ORGANIZATION_DETAILS: '/admin/organizations/[organizationId]',
   organizationDetails: (organizationId: string) => `/admin/organizations/${organizationId}`,
   INVITES: '/admin/invites',
+  PROGRAM_B_PROJECTS: '/admin/program-b/projects',
+  PROGRAM_B_PROJECT_DETAILS: '/admin/program-b/projects/[projectId]',
+  programBProjectDetail: (projectId: string) => `/admin/program-b/projects/${projectId}`,
 } as const;
 
 const STUDENT_ROUTES = {
@@ -56,6 +59,8 @@ const COMPANY_ROUTES = {
 const MENTOR_ROUTES = {
   ROOT: '/mentor/dashboard',
   DASHBOARD: '/mentor/dashboard',
+  PROGRAM_B_PROJECTS: '/mentor/program-b/projects',
+  programBProjectDetail: (projectId: string) => `/mentor/program-b/projects/${projectId}`,
 } as const;
 
 const REVIEW_ROUTES = {

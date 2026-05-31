@@ -2,7 +2,7 @@
 
 import { t } from '@lingui/core/macro';
 import type { ReactNode } from 'react';
-import { LayoutGrid } from 'lucide-react';
+import { FolderKanban, LayoutGrid } from 'lucide-react';
 
 import { InternalWorkspaceLayout } from 'components/workspace/internal-workspace-layout';
 import { StudentStatusCard } from 'components/student-dashboard/page-shell-primitives';
@@ -29,7 +29,14 @@ export default function MentorLayout({ children }: { children: ReactNode }) {
       user={me}
       title={t`Mentor workspace`}
       description={t`Guidance and project support`}
-      navItems={[{ href: ROUTES.MENTOR.DASHBOARD, label: t`Dashboard`, icon: LayoutGrid }]}
+      navItems={[
+        { href: ROUTES.MENTOR.DASHBOARD, label: t`Dashboard`, icon: LayoutGrid },
+        {
+          href: ROUTES.MENTOR.PROGRAM_B_PROJECTS,
+          label: t`Program B projects`,
+          icon: FolderKanban,
+        },
+      ]}
     >
       {children}
     </InternalWorkspaceLayout>

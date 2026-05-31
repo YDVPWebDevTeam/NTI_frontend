@@ -26,6 +26,7 @@ import {
   normalizeUnknownText,
 } from 'lib/student-dashboard/normalizers';
 import { useStudentWorkspaceUser } from 'lib/student-dashboard/student-workspace-user-context';
+import { useFileUploads } from 'components/files/file-uploader';
 import {
   DocumentsSection,
   TeamApplicationSection,
@@ -36,7 +37,8 @@ export function StudentProgramBBacklogDetailPage({ params }: { params: Promise<{
   const me = useStudentWorkspaceUser();
   const [motivation, setMotivation] = useState('');
   const [proposalText, setProposalText] = useState('');
-  const [cvFileIds, setCvFileIds] = useState('');
+  const [cvFiles, setCvFiles] = useState<File[]>([]);
+  const { uploadFiles, isUploading } = useFileUploads();
 
   const backlogItemQuery = useProgramBBacklogControllerFindPublishedById(id, {
     query: { enabled: true },
@@ -144,27 +146,32 @@ export function StudentProgramBBacklogDetailPage({ params }: { params: Promise<{
         team={team}
         motivation={motivation}
         proposalText={proposalText}
-        cvFileIds={cvFileIds}
+        cvFiles={cvFiles}
         setMotivation={setMotivation}
         setProposalText={setProposalText}
-        setCvFileIds={setCvFileIds}
+        setCvFiles={setCvFiles}
         onSubmit={async () => {
           if (!team) {
             return;
           }
           try {
+            const uploadedCvs = await uploadFiles(cvFiles, {
+              purpose: 'program-b-application-cv',
+              entityType: 'program-b-team-application',
+            });
+
             await submitApplication.mutateAsync({
               backlogItemId: id,
               data: {
                 teamId: team.id,
                 motivation: motivation.trim(),
                 proposalText: proposalText.trim(),
-                cvFileIds: cvFileIds
-                  .split(',')
-                  .map((entry) => entry.trim())
-                  .filter(Boolean),
+                cvFileIds: uploadedCvs.map((file) => file.fileId),
               },
             });
+            setMotivation('');
+            setProposalText('');
+            setCvFiles([]);
             await myApplicationQuery.refetch();
             toast.success(t`Team application submitted.`);
           } catch (error) {
@@ -189,7 +196,7 @@ export function StudentProgramBBacklogDetailPage({ params }: { params: Promise<{
             );
           }
         }}
-        isSubmitting={submitApplication.isPending}
+        isSubmitting={submitApplication.isPending || isUploading}
         isWithdrawing={withdrawApplication.isPending}
       />
 

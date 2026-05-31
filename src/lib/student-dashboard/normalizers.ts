@@ -75,3 +75,13 @@ export function formatUnknownDate(value: unknown, locale?: string): string {
 export function isApiNotFoundError(error: unknown): boolean {
   return isApiRequestError(error) && error.status === 404;
 }
+
+export function formatPersonName(
+  person: { firstName: string; lastName: string } | null | undefined,
+): string | null {
+  if (!person) {
+    return null;
+  }
+
+  return `${person.firstName} ${person.lastName}`.trim();
+}

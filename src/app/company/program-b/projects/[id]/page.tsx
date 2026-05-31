@@ -4,18 +4,26 @@ import { t } from '@lingui/core/macro';
 import { useQueryClient } from '@tanstack/react-query';
 import { Loader2 } from 'lucide-react';
 import Link from 'next/link';
-import { use } from 'react';
+import { use, useState } from 'react';
 import { toast } from 'sonner';
 
 import {
   CreateProgramBFinalAcceptanceDtoSide,
-  ProgramBProjectDetailDtoStatus,
+  CreateProgramBPoReviewDtoDecision,
+  CreateProgramBProjectDocumentUploadDtoCategory,
+  programBProjectsControllerRequestDocumentDownload,
   ProgramBMilestoneDtoStatus,
-  useProgramBProjectsControllerRecordFinalAcceptance,
+  ProgramBProjectDetailDtoStatus,
+  useProgramBProjectsControllerCompleteDocumentUpload,
+  useProgramBProjectsControllerCreateDocumentUpload,
+  useProgramBProjectsControllerCreateMilestone,
+  useProgramBProjectsControllerCreatePoReview,
   useProgramBProjectsControllerGetProject,
   useProgramBProjectsControllerListDocuments,
+  useProgramBProjectsControllerListMentoringNotes,
   useProgramBProjectsControllerListMilestones,
   useProgramBProjectsControllerListPoReviews,
+  useProgramBProjectsControllerRecordFinalAcceptance,
   useProgramBProjectsControllerUpdateMilestone,
 } from 'lib/api';
 import { invalidateProgramBCompanyWorkspace } from 'lib/api-client/program-b-company';
@@ -24,9 +32,26 @@ import {
   CompanyDashboardStatus,
   CompanyStatusBadge,
 } from 'components/company-dashboard/program-b-company-dashboard-primitives';
-import { Button } from 'components/shadcn';
+import { ProgramBDocumentManager } from 'components/company-dashboard/program-b-document-manager';
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  Input,
+  Label,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+  Textarea,
+} from 'components/shadcn';
 import { ROUTES } from 'lib/constants';
 import {
+  formatPersonName,
   formatUnknownDate,
   normalizeUnknownDate,
   normalizeUnknownText,
@@ -34,13 +59,46 @@ import {
 import { formatEnumLabel } from 'lib/utils';
 
 const CONFLICT_STATUS = 409;
+const ISO_DATE_LENGTH = 10;
 
-function formatPersonName(person: { firstName: string; lastName: string } | null | undefined) {
-  if (!person) {
-    return null;
+type MilestoneFormState = {
+  milestoneId: string | null;
+  title: string;
+  description: string;
+  dueAt: string;
+};
+
+const EMPTY_MILESTONE_FORM: MilestoneFormState = {
+  milestoneId: null,
+  title: '',
+  description: '',
+  dueAt: '',
+};
+
+const PROJECT_DOCUMENT_CATEGORIES = [
+  { value: CreateProgramBProjectDocumentUploadDtoCategory.OUTPUT, label: t`Output` },
+  {
+    value: CreateProgramBProjectDocumentUploadDtoCategory.FINAL_PRESENTATION,
+    label: t`Final presentation`,
+  },
+  { value: CreateProgramBProjectDocumentUploadDtoCategory.DELIVERABLE, label: t`Deliverable` },
+  { value: CreateProgramBProjectDocumentUploadDtoCategory.OTHER, label: t`Other` },
+];
+
+function toDateInputValue(value: unknown): string {
+  const normalized = normalizeUnknownDate(value);
+
+  if (!normalized) {
+    return '';
   }
 
-  return `${person.firstName} ${person.lastName}`.trim();
+  const parsed = new Date(normalized);
+
+  if (Number.isNaN(parsed.getTime())) {
+    return '';
+  }
+
+  return parsed.toISOString().slice(0, ISO_DATE_LENGTH);
 }
 
 export default function CompanyProgramBProjectDetailPage({
@@ -53,15 +111,23 @@ export default function CompanyProgramBProjectDetailPage({
   const projectQuery = useProgramBProjectsControllerGetProject(id);
   const milestonesQuery = useProgramBProjectsControllerListMilestones(id);
   const reviewsQuery = useProgramBProjectsControllerListPoReviews(id);
+  const notesQuery = useProgramBProjectsControllerListMentoringNotes(id);
   const documentsQuery = useProgramBProjectsControllerListDocuments(id);
   const recordFinalAcceptance = useProgramBProjectsControllerRecordFinalAcceptance();
   const updateMilestone = useProgramBProjectsControllerUpdateMilestone();
+  const createMilestone = useProgramBProjectsControllerCreateMilestone();
+  const createPoReview = useProgramBProjectsControllerCreatePoReview();
+  const createDocumentUpload = useProgramBProjectsControllerCreateDocumentUpload();
+  const completeDocumentUpload = useProgramBProjectsControllerCompleteDocumentUpload();
+
   const project = projectQuery.data;
   const milestones = milestonesQuery.data ?? [];
   const reviews = reviewsQuery.data ?? [];
+  const notes = notesQuery.data ?? [];
   const documents = documentsQuery.data ?? [];
   const isProjectReadOnly = project?.status === ProgramBProjectDetailDtoStatus.CLOSED;
   const hasCompanyFinalAcceptance = Boolean(project?.acceptedByCompanyAt);
+  const hasNtiFinalAcceptance = Boolean(project?.acceptedByNtiAt);
   const hasOverdueMilestone = milestones.some((milestone) => {
     const normalizedDueAt = normalizeUnknownDate(milestone.dueAt);
 
@@ -75,28 +141,37 @@ export default function CompanyProgramBProjectDetailPage({
     );
   });
 
+  const [milestoneForm, setMilestoneForm] = useState<MilestoneFormState>(EMPTY_MILESTONE_FORM);
+  const [isMilestoneOpen, setIsMilestoneOpen] = useState(false);
+  const [reviewDecision, setReviewDecision] = useState<CreateProgramBPoReviewDtoDecision>(
+    CreateProgramBPoReviewDtoDecision.APPROVED,
+  );
+  const [reviewComment, setReviewComment] = useState('');
+
   const refreshWorkspace = async () => {
     await invalidateProgramBCompanyWorkspace(queryClient, { projectId: id });
+  };
+
+  const reportMutationError = (error: unknown, fallback: string) => {
+    if (isApiRequestError(error) && error.status === CONFLICT_STATUS) {
+      toast.error(t`Closed Program B projects are read-only`);
+
+      return;
+    }
+
+    toast.error(error instanceof Error ? error.message : fallback);
   };
 
   const handleFinalAcceptance = async () => {
     try {
       await recordFinalAcceptance.mutateAsync({
         id,
-        data: {
-          side: CreateProgramBFinalAcceptanceDtoSide.COMPANY,
-        },
+        data: { side: CreateProgramBFinalAcceptanceDtoSide.COMPANY },
       });
       toast.success(t`Final acceptance recorded.`);
       await refreshWorkspace();
     } catch (error) {
-      if (isApiRequestError(error) && error.status === CONFLICT_STATUS) {
-        toast.error(t`Closed Program B projects are read-only`);
-
-        return;
-      }
-
-      toast.error(error instanceof Error ? error.message : t`Unable to record final acceptance.`);
+      reportMutationError(error, t`Unable to record final acceptance.`);
     }
   };
 
@@ -105,25 +180,100 @@ export default function CompanyProgramBProjectDetailPage({
     nextStatus: (typeof ProgramBMilestoneDtoStatus)[keyof typeof ProgramBMilestoneDtoStatus],
   ) => {
     try {
-      await updateMilestone.mutateAsync({
-        id,
-        milestoneId,
-        data: {
-          status: nextStatus,
-        },
-      });
+      await updateMilestone.mutateAsync({ id, milestoneId, data: { status: nextStatus } });
       toast.success(t`Milestone updated.`);
       await refreshWorkspace();
     } catch (error) {
-      if (isApiRequestError(error) && error.status === CONFLICT_STATUS) {
-        toast.error(t`Closed Program B projects are read-only`);
-
-        return;
-      }
-
-      toast.error(error instanceof Error ? error.message : t`Unable to update milestone.`);
+      reportMutationError(error, t`Unable to update milestone.`);
     }
   };
+
+  const handleMilestoneSubmit = async () => {
+    if (!milestoneForm.title.trim()) {
+      toast.error(t`Milestone title is required.`);
+
+      return;
+    }
+
+    const data = {
+      title: milestoneForm.title.trim(),
+      description: milestoneForm.description.trim() || undefined,
+      dueAt: milestoneForm.dueAt ? new Date(milestoneForm.dueAt).toISOString() : undefined,
+    };
+
+    try {
+      if (milestoneForm.milestoneId) {
+        await updateMilestone.mutateAsync({
+          id,
+          milestoneId: milestoneForm.milestoneId,
+          data,
+        });
+        toast.success(t`Milestone updated.`);
+      } else {
+        await createMilestone.mutateAsync({ id, data });
+        toast.success(t`Milestone created.`);
+      }
+      setIsMilestoneOpen(false);
+      setMilestoneForm(EMPTY_MILESTONE_FORM);
+      await refreshWorkspace();
+    } catch (error) {
+      reportMutationError(error, t`Unable to save milestone.`);
+    }
+  };
+
+  const handleCreateReview = async () => {
+    try {
+      await createPoReview.mutateAsync({
+        id,
+        data: {
+          decision: reviewDecision,
+          comment: reviewComment.trim() || undefined,
+        },
+      });
+      toast.success(t`Review submitted.`);
+      setReviewComment('');
+      setReviewDecision(CreateProgramBPoReviewDtoDecision.APPROVED);
+      await refreshWorkspace();
+    } catch (error) {
+      reportMutationError(error, t`Unable to submit review.`);
+    }
+  };
+
+  const openCreateMilestone = () => {
+    setMilestoneForm(EMPTY_MILESTONE_FORM);
+    setIsMilestoneOpen(true);
+  };
+
+  const openEditMilestone = (milestone: (typeof milestones)[number]) => {
+    setMilestoneForm({
+      milestoneId: milestone.id,
+      title: milestone.title,
+      description: normalizeUnknownText(milestone.description) ?? '',
+      dueAt: toDateInputValue(milestone.dueAt),
+    });
+    setIsMilestoneOpen(true);
+  };
+
+  if (projectQuery.isLoading && !project) {
+    return (
+      <CompanyDashboardStatus
+        title={t`Loading project`}
+        description={t`Resolving the Program B project detail for this organization.`}
+      />
+    );
+  }
+
+  if (projectQuery.isError || !project) {
+    return (
+      <CompanyDashboardStatus
+        title={t`Project is unavailable`}
+        description={t`We could not load this Program B project right now.`}
+        tone="danger"
+      />
+    );
+  }
+
+  const isMilestonePending = createMilestone.isPending || updateMilestone.isPending;
 
   let milestonesContent;
 
@@ -149,6 +299,15 @@ export default function CompanyProgramBProjectDetailPage({
           {milestone.dueAt ? t`Due ${formatUnknownDate(milestone.dueAt)}` : t`No due date`}
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
+          <Button
+            type="button"
+            size="sm"
+            variant="ghost"
+            disabled={isProjectReadOnly}
+            onClick={() => openEditMilestone(milestone)}
+          >
+            {t`Edit`}
+          </Button>
           {milestone.status === ProgramBMilestoneDtoStatus.IN_PROGRESS ? null : (
             <Button
               type="button"
@@ -159,7 +318,6 @@ export default function CompanyProgramBProjectDetailPage({
                 void handleMilestoneStatus(milestone.id, ProgramBMilestoneDtoStatus.IN_PROGRESS)
               }
             >
-              {updateMilestone.isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
               {t`Mark in progress`}
             </Button>
           )}
@@ -172,7 +330,6 @@ export default function CompanyProgramBProjectDetailPage({
                 void handleMilestoneStatus(milestone.id, ProgramBMilestoneDtoStatus.DONE)
               }
             >
-              {updateMilestone.isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
               {t`Mark done`}
             </Button>
           )}
@@ -186,7 +343,6 @@ export default function CompanyProgramBProjectDetailPage({
                 void handleMilestoneStatus(milestone.id, ProgramBMilestoneDtoStatus.BLOCKED)
               }
             >
-              {updateMilestone.isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
               {t`Mark blocked`}
             </Button>
           )}
@@ -206,50 +362,36 @@ export default function CompanyProgramBProjectDetailPage({
   } else {
     reviewsContent = reviews.map((review) => (
       <div key={review.id} className="rounded-2xl border border-[#dfe7fa] bg-[#f8fbff] p-4">
-        <p className="font-semibold text-[#10213d]">{review.decision}</p>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <p className="font-semibold text-[#10213d]">{formatEnumLabel(review.decision)}</p>
+          <span className="text-xs text-[#60718d]">{formatUnknownDate(review.createdAt)}</span>
+        </div>
         <p className="mt-1 text-sm text-[#60718d]">
           {normalizeUnknownText(review.comment) ?? t`No comment`}
         </p>
+        {formatPersonName(review.author) ? (
+          <p className="mt-2 text-xs text-[#94a3c4]">{formatPersonName(review.author)}</p>
+        ) : null}
       </div>
     ));
   }
 
-  let documentsContent;
+  let notesContent;
 
-  if (documentsQuery.isError) {
-    documentsContent = (
-      <p className="text-sm text-[#60718d]">{t`Documents are unavailable right now.`}</p>
-    );
-  } else if (documents.length === 0) {
-    documentsContent = <p className="text-sm text-[#60718d]">{t`No documents yet.`}</p>;
+  if (notesQuery.isError) {
+    notesContent = <p className="text-sm text-[#60718d]">{t`Notes are unavailable right now.`}</p>;
+  } else if (notes.length === 0) {
+    notesContent = <p className="text-sm text-[#60718d]">{t`No mentoring notes yet.`}</p>;
   } else {
-    documentsContent = documents.map((document) => (
-      <div key={document.id} className="rounded-2xl border border-[#dfe7fa] bg-[#f8fbff] p-4">
-        <p className="font-semibold text-[#10213d]">{document.name}</p>
-        <p className="mt-1 text-sm text-[#60718d]">
-          {document.category} · {document.status}
-        </p>
+    notesContent = notes.map((note) => (
+      <div key={note.id} className="rounded-2xl border border-[#dfe7fa] bg-[#f8fbff] p-4">
+        <p className="text-sm leading-7 text-[#60718d]">{note.note}</p>
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-xs text-[#94a3c4]">
+          <span>{formatPersonName(note.author) ?? t`Mentor`}</span>
+          <span>{formatUnknownDate(note.createdAt)}</span>
+        </div>
       </div>
     ));
-  }
-
-  if (projectQuery.isLoading && !project) {
-    return (
-      <CompanyDashboardStatus
-        title={t`Loading project`}
-        description={t`Resolving the Program B project detail for this organization.`}
-      />
-    );
-  }
-
-  if (projectQuery.isError || !project) {
-    return (
-      <CompanyDashboardStatus
-        title={t`Project is unavailable`}
-        description={t`We could not load this Program B project right now.`}
-        tone="danger"
-      />
-    );
   }
 
   return (
@@ -287,11 +429,6 @@ export default function CompanyProgramBProjectDetailPage({
         <article className="rounded-[1.5rem] border border-amber-200 bg-amber-50 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.04)]">
           <h2 className="text-lg font-semibold text-amber-950">{t`Attention required`}</h2>
           <div className="mt-3 flex flex-wrap gap-3 text-sm text-amber-900">
-            {isProjectReadOnly ? (
-              <span className="rounded-full bg-white px-3 py-1 ring-1 ring-amber-200">
-                {t`This project is closed and now read-only.`}
-              </span>
-            ) : null}
             {hasCompanyFinalAcceptance ? null : (
               <span className="rounded-full bg-white px-3 py-1 ring-1 ring-amber-200">
                 {t`Company final acceptance is still pending.`}
@@ -320,56 +457,234 @@ export default function CompanyProgramBProjectDetailPage({
         </article>
       )}
 
-      <div className="grid gap-6 xl:grid-cols-2">
-        <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
-          <h2 className="text-lg font-semibold text-[#10213d]">{t`Overview`}</h2>
-          <div className="mt-4 space-y-2 text-sm text-[#60718d]">
-            <p>
-              {t`Team:`}{' '}
-              <span className="font-medium text-[#10213d]">
-                {project.team.name ?? t`Unknown team`}
-              </span>
-            </p>
-            <p>
-              {t`Accepted:`}{' '}
-              <span className="font-medium text-[#10213d]">
-                {project.acceptedByCompanyAt
-                  ? formatUnknownDate(project.acceptedByCompanyAt)
-                  : t`Pending`}
-              </span>
-            </p>
-            <p>
-              {t`Product owner:`}{' '}
-              <span className="font-medium text-[#10213d]">
-                {formatPersonName(project.productOwner)}
-              </span>
-            </p>
-            <p>
-              {t`Mentor:`}{' '}
-              <span className="font-medium text-[#10213d]">
-                {formatPersonName(project.mentorAssignment.mentor) ?? t`Not assigned`}
-              </span>
-            </p>
+      <Tabs defaultValue="overview">
+        <TabsList>
+          <TabsTrigger value="overview">{t`Overview`}</TabsTrigger>
+          <TabsTrigger value="milestones">{t`Milestones`}</TabsTrigger>
+          <TabsTrigger value="reviews">{t`Reviews & notes`}</TabsTrigger>
+          <TabsTrigger value="documents">{t`Documents`}</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="overview">
+          <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
+            <h2 className="text-lg font-semibold text-[#10213d]">{t`Overview`}</h2>
+            <div className="mt-4 grid gap-2 text-sm text-[#60718d] md:grid-cols-2">
+              <p>
+                {t`Team:`}{' '}
+                <span className="font-medium text-[#10213d]">
+                  {project.team.name ?? t`Unknown team`}
+                </span>
+              </p>
+              <p>
+                {t`Product owner:`}{' '}
+                <span className="font-medium text-[#10213d]">
+                  {formatPersonName(project.productOwner)}
+                </span>
+              </p>
+              <p>
+                {t`Mentor:`}{' '}
+                <span className="font-medium text-[#10213d]">
+                  {formatPersonName(project.mentorAssignment.mentor) ?? t`Not assigned`}
+                </span>
+              </p>
+              <p>
+                {t`Company acceptance:`}{' '}
+                <span className="font-medium text-[#10213d]">
+                  {hasCompanyFinalAcceptance
+                    ? formatUnknownDate(project.acceptedByCompanyAt)
+                    : t`Pending`}
+                </span>
+              </p>
+              <p>
+                {t`NTI acceptance:`}{' '}
+                <span className="font-medium text-[#10213d]">
+                  {hasNtiFinalAcceptance ? formatUnknownDate(project.acceptedByNtiAt) : t`Pending`}
+                </span>
+              </p>
+            </div>
+          </article>
+        </TabsContent>
+
+        <TabsContent value="milestones">
+          <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h2 className="text-lg font-semibold text-[#10213d]">{t`Milestones`}</h2>
+              <Button
+                type="button"
+                size="sm"
+                disabled={isProjectReadOnly}
+                onClick={openCreateMilestone}
+              >
+                {t`New milestone`}
+              </Button>
+            </div>
+            <div className="mt-4 space-y-3">{milestonesContent}</div>
+          </article>
+        </TabsContent>
+
+        <TabsContent value="reviews">
+          <div className="grid gap-6 xl:grid-cols-2">
+            <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
+              <h2 className="text-lg font-semibold text-[#10213d]">{t`Product owner reviews`}</h2>
+              <div className="mt-4 space-y-3">{reviewsContent}</div>
+
+              {isProjectReadOnly ? null : (
+                <div className="mt-5 space-y-3 rounded-2xl border border-dashed border-[#c4d4f5] bg-white/70 p-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="review-decision">{t`Decision`}</Label>
+                    <select
+                      id="review-decision"
+                      className="w-full rounded-md border border-black/10 bg-white px-3 py-2 text-sm"
+                      value={reviewDecision}
+                      onChange={(event) =>
+                        setReviewDecision(event.target.value as CreateProgramBPoReviewDtoDecision)
+                      }
+                    >
+                      <option value={CreateProgramBPoReviewDtoDecision.APPROVED}>
+                        {t`Approved`}
+                      </option>
+                      <option value={CreateProgramBPoReviewDtoDecision.CHANGES_REQUESTED}>
+                        {t`Changes requested`}
+                      </option>
+                    </select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="review-comment">{t`Comment (optional)`}</Label>
+                    <Textarea
+                      id="review-comment"
+                      rows={3}
+                      maxLength={5000}
+                      value={reviewComment}
+                      onChange={(event) => setReviewComment(event.target.value)}
+                    />
+                  </div>
+                  <div className="flex justify-end">
+                    <Button
+                      type="button"
+                      size="sm"
+                      disabled={createPoReview.isPending}
+                      onClick={() => void handleCreateReview()}
+                    >
+                      {createPoReview.isPending ? (
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      ) : null}
+                      {t`Submit review`}
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </article>
+
+            <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
+              <h2 className="text-lg font-semibold text-[#10213d]">{t`Mentoring notes`}</h2>
+              <div className="mt-4 space-y-3">{notesContent}</div>
+            </article>
           </div>
-        </article>
+        </TabsContent>
 
-        <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
-          <h2 className="text-lg font-semibold text-[#10213d]">{t`Milestones`}</h2>
-          <div className="mt-4 space-y-3">{milestonesContent}</div>
-        </article>
-      </div>
+        <TabsContent value="documents">
+          <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
+            <h2 className="text-lg font-semibold text-[#10213d]">{t`Documents`}</h2>
+            <div className="mt-4">
+              <ProgramBDocumentManager
+                documents={documents}
+                categories={PROJECT_DOCUMENT_CATEGORIES}
+                isLoading={documentsQuery.isLoading && !documentsQuery.data}
+                isError={documentsQuery.isError}
+                canUpload={!isProjectReadOnly}
+                disabled={isProjectReadOnly}
+                createUpload={(input) =>
+                  createDocumentUpload.mutateAsync({
+                    id,
+                    data: {
+                      ...input,
+                      category: input.category as CreateProgramBProjectDocumentUploadDtoCategory,
+                    },
+                  })
+                }
+                completeUpload={(documentId, input) =>
+                  completeDocumentUpload.mutateAsync({ id, documentId, data: input })
+                }
+                requestDownload={(documentId) =>
+                  programBProjectsControllerRequestDocumentDownload(id, documentId)
+                }
+                onChanged={refreshWorkspace}
+              />
+            </div>
+          </article>
+        </TabsContent>
+      </Tabs>
 
-      <div className="grid gap-6 xl:grid-cols-2">
-        <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
-          <h2 className="text-lg font-semibold text-[#10213d]">{t`Reviews`}</h2>
-          <div className="mt-4 space-y-3">{reviewsContent}</div>
-        </article>
-
-        <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
-          <h2 className="text-lg font-semibold text-[#10213d]">{t`Documents`}</h2>
-          <div className="mt-4 space-y-3">{documentsContent}</div>
-        </article>
-      </div>
+      <Dialog
+        open={isMilestoneOpen}
+        onOpenChange={(open) => {
+          setIsMilestoneOpen(open);
+          if (!open) {
+            setMilestoneForm(EMPTY_MILESTONE_FORM);
+          }
+        }}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>
+              {milestoneForm.milestoneId ? t`Edit milestone` : t`New milestone`}
+            </DialogTitle>
+            <DialogDescription>
+              {t`Capture delivery milestones with an optional description and due date.`}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="milestone-title">{t`Title`}</Label>
+              <Input
+                id="milestone-title"
+                value={milestoneForm.title}
+                onChange={(event) =>
+                  setMilestoneForm((current) => ({ ...current, title: event.target.value }))
+                }
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="milestone-description">{t`Description`}</Label>
+              <Textarea
+                id="milestone-description"
+                rows={3}
+                value={milestoneForm.description}
+                onChange={(event) =>
+                  setMilestoneForm((current) => ({
+                    ...current,
+                    description: event.target.value,
+                  }))
+                }
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="milestone-due">{t`Due date`}</Label>
+              <Input
+                id="milestone-due"
+                type="date"
+                value={milestoneForm.dueAt}
+                onChange={(event) =>
+                  setMilestoneForm((current) => ({ ...current, dueAt: event.target.value }))
+                }
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button type="button" variant="outline" onClick={() => setIsMilestoneOpen(false)}>
+              {t`Cancel`}
+            </Button>
+            <Button
+              type="button"
+              disabled={isMilestonePending}
+              onClick={() => void handleMilestoneSubmit()}
+            >
+              {isMilestonePending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+              {milestoneForm.milestoneId ? t`Save changes` : t`Create milestone`}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

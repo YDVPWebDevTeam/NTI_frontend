@@ -2,7 +2,7 @@
 
 import { t } from '@lingui/core/macro';
 import type { ReactNode } from 'react';
-import { FolderKanban, LayoutGrid } from 'lucide-react';
+import { FolderKanban, LayoutGrid, ShieldCheck } from 'lucide-react';
 
 import { InternalWorkspaceLayout } from 'components/workspace/internal-workspace-layout';
 import { StudentStatusCard } from 'components/student-dashboard/page-shell-primitives';
@@ -36,6 +36,7 @@ export default function MentorLayout({ children }: { children: ReactNode }) {
           label: t`Program B projects`,
           icon: FolderKanban,
         },
+        { href: ROUTES.ACCOUNT, label: t`Account security`, icon: ShieldCheck },
       ]}
     >
       {children}

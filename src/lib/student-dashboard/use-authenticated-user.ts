@@ -1,15 +1,24 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import { useGetMe, type UserRole } from 'lib/api';
 import { isApiRequestError } from 'lib/api-client/openapi-runtime/client';
 import { ROUTES } from 'lib/constants';
 import { getDefaultRouteForRole } from 'lib/auth/access';
 
-export function useAuthenticatedUser(allowedRoles?: UserRole[]) {
+type UseAuthenticatedUserOptions = {
+  preservePathOnAuthRedirect?: boolean;
+};
+
+export function useAuthenticatedUser(
+  allowedRoles?: UserRole[],
+  options?: UseAuthenticatedUserOptions,
+) {
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const meQuery = useGetMe({
     query: {
       retry: false,
@@ -22,9 +31,20 @@ export function useAuthenticatedUser(allowedRoles?: UserRole[]) {
     }
 
     if (meQuery.error.status === 401) {
+      if (options?.preservePathOnAuthRedirect && pathname) {
+        const nextPath = searchParams?.toString()
+          ? `${pathname}?${searchParams.toString()}`
+          : pathname;
+        const params = new URLSearchParams({ next: nextPath });
+
+        router.replace(`${ROUTES.AUTH.LOGIN}?${params.toString()}`);
+
+        return;
+      }
+
       router.replace(ROUTES.AUTH.LOGIN);
     }
-  }, [meQuery.error, router]);
+  }, [meQuery.error, options?.preservePathOnAuthRedirect, pathname, router, searchParams]);
 
   useEffect(() => {
     if (!meQuery.data || !allowedRoles) {

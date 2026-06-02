@@ -120,8 +120,11 @@ msgstr "ACCEPTING..."
 msgid "Access Admin"
 msgstr "Access Admin"
 
-msgid "ACCESS PLATFORM"
-msgstr "ACCESS PLATFORM"
+msgid "Access forbidden"
+msgstr "Access forbidden"
+
+#~ msgid "ACCESS PLATFORM"
+#~ msgstr "ACCESS PLATFORM"
 
 msgid "Access the high-performance environment tailored to your institutional role. Choose a path to begin your technical journey."
 msgstr "Access the high-performance environment tailored to your institutional role. Choose a path to begin your technical journey."
@@ -132,8 +135,14 @@ msgstr "Access to Program A Frameworks"
 msgid "Access your account"
 msgstr "Access your account"
 
+msgid "ACCOUNT RECOVERY"
+msgstr "ACCOUNT RECOVERY"
+
 msgid "ACCOUNT SETUP"
 msgstr "ACCOUNT SETUP"
+
+msgid "Account suspended"
+msgstr "Account suspended"
 
 msgid "Accounts currently blocked from normal access."
 msgstr "Accounts currently blocked from normal access."
@@ -348,6 +357,9 @@ msgstr "Back to detail"
 msgid "Back to home"
 msgstr "Back to home"
 
+msgid "Back to login"
+msgstr "Back to login"
+
 msgid "Back to Organizations"
 msgstr "Back to Organizations"
 
@@ -456,6 +468,9 @@ msgstr "Changes requested"
 msgid "Check team readiness"
 msgstr "Check team readiness"
 
+msgid "Check your email"
+msgstr "Check your email"
+
 msgid "Check your inbox and use the token only if you want to confirm now."
 msgstr "Check your inbox and use the token only if you want to confirm now."
 
@@ -467,6 +482,9 @@ msgstr "Choose a faculty from the table before managing specializations."
 
 msgid "Choose a file"
 msgstr "Choose a file"
+
+msgid "Choose a new password"
+msgstr "Choose a new password"
 
 msgid "Choose a university first"
 msgstr "Choose a university first"
@@ -591,6 +609,9 @@ msgstr "Confirm email"
 msgid "CONFIRM EMAIL"
 msgstr "CONFIRM EMAIL"
 
+msgid "Confirm new password"
+msgstr "Confirm new password"
+
 msgid "Confirm password"
 msgstr "Confirm password"
 
@@ -606,8 +627,20 @@ msgstr "Confirm your company owner account"
 msgid "Confirm your email address from the message sent to your inbox before full platform access."
 msgstr "Confirm your email address from the message sent to your inbox before full platform access."
 
+msgid "Confirm your NTI account"
+msgstr "Confirm your NTI account"
+
 msgid "Confirmation email sent."
 msgstr "Confirmation email sent."
+
+msgid "Confirming email"
+msgstr "Confirming email"
+
+msgid "Confirming your email"
+msgstr "Confirming your email"
+
+msgid "Confirming your email address..."
+msgstr "Confirming your email address..."
 
 msgid "CONFIRMING..."
 msgstr "CONFIRMING..."
@@ -618,6 +651,9 @@ msgstr "Connect"
 msgid "Contact Us"
 msgstr "Contact Us"
 
+msgid "CONTINUE"
+msgstr "CONTINUE"
+
 msgid "Continue as Company Partner"
 msgstr "Continue as Company Partner"
 
@@ -626,6 +662,9 @@ msgstr "Continue as Regular User"
 
 msgid "Continue draft"
 msgstr "Continue draft"
+
+msgid "Continue your onboarding, track applications, and manage your NTI profile from one place."
+msgstr "Continue your onboarding, track applications, and manage your NTI profile from one place."
 
 msgid "Control Center"
 msgstr "Control Center"
@@ -672,6 +711,9 @@ msgstr "Create an invite to inspect the returned metadata here."
 msgid "Create call"
 msgstr "Create call"
 
+msgid "Create company owner account"
+msgstr "Create company owner account"
+
 msgid "Create Faculty"
 msgstr "Create Faculty"
 
@@ -681,6 +723,9 @@ msgstr "Create Invite"
 msgid "Create milestone"
 msgstr "Create milestone"
 
+msgid "Create new password"
+msgstr "Create new password"
+
 msgid "Create organization"
 msgstr "Create organization"
 
@@ -689,6 +734,9 @@ msgstr "Create project workspace"
 
 msgid "Create Specialization"
 msgstr "Create Specialization"
+
+msgid "CREATE STUDENT ACCOUNT"
+msgstr "CREATE STUDENT ACCOUNT"
 
 msgid "Create System Invite"
 msgstr "Create System Invite"
@@ -885,8 +933,8 @@ msgstr "Documents are unavailable right now."
 msgid "Doe"
 msgstr "Doe"
 
-msgid "Don't have an account yet?"
-msgstr "Don't have an account yet?"
+#~ msgid "Don't have an account yet?"
+#~ msgstr "Don't have an account yet?"
 
 msgid "Download"
 msgstr "Download"
@@ -955,6 +1003,15 @@ msgstr "Email Confirmation"
 msgid "Email confirmation failed"
 msgstr "Email confirmation failed"
 
+msgid "Email confirmation required"
+msgstr "Email confirmation required"
+
+msgid "Email confirmed"
+msgstr "Email confirmed"
+
+msgid "Email confirmed successfully."
+msgstr "Email confirmed successfully."
+
 msgid "EMAIL VERIFICATION"
 msgstr "EMAIL VERIFICATION"
 
@@ -979,6 +1036,9 @@ msgstr "ENCRYPTION"
 msgid "END-TO-END"
 msgstr "END-TO-END"
 
+msgid "Enter a new password for your account."
+msgstr "Enter a new password for your account."
+
 msgid "Enter a strong password"
 msgstr "Enter a strong password"
 
@@ -987,6 +1047,12 @@ msgstr "Enter a valid URL."
 
 msgid "Enter faculty name"
 msgstr "Enter faculty name"
+
+msgid "Enter new password"
+msgstr "Enter new password"
+
+msgid "Enter password"
+msgstr "Enter password"
 
 msgid "Enter specialization name"
 msgstr "Enter specialization name"
@@ -1000,8 +1066,11 @@ msgstr "Enter the verification token from your email."
 msgid "Enter university name"
 msgstr "Enter university name"
 
-msgid "Enter your credentials below to access the platform."
-msgstr "Enter your credentials below to access the platform."
+#~ msgid "Enter your credentials below to access the platform."
+#~ msgstr "Enter your credentials below to access the platform."
+
+msgid "Enter your email address and we will send you a password reset link."
+msgstr "Enter your email address and we will send you a password reset link."
 
 msgid "Enter your first name…"
 msgstr "Enter your first name…"
@@ -1177,6 +1246,9 @@ msgstr "First name must be at most 50 characters."
 msgid "Focus Areas"
 msgstr "Focus Areas"
 
+msgid "FORGOT PASSWORD"
+msgstr "FORGOT PASSWORD"
+
 msgid "Forgot password?"
 msgstr "Forgot password?"
 
@@ -1203,6 +1275,9 @@ msgstr "Generate a direct invite for any supported platform role."
 
 msgid "GitHub Profile"
 msgstr "GitHub Profile"
+
+msgid "Go home"
+msgstr "Go home"
 
 msgid "Go to dashboard"
 msgstr "Go to dashboard"
@@ -1267,6 +1342,9 @@ msgstr "Identity Verification"
 
 msgid "IDENTITY VERIFICATION"
 msgstr "IDENTITY VERIFICATION"
+
+msgid "If an account exists for that email, a reset link has been sent. Open the link to continue."
+msgstr "If an account exists for that email, a reset link has been sent. Open the link to continue."
 
 msgid "If you are onboarding as the team lead, create the team here and send the first teammate invites immediately."
 msgstr "If you are onboarding as the team lead, create the team here and send the first teammate invites immediately."
@@ -1436,6 +1514,9 @@ msgstr "Legal"
 
 msgid "Level is required."
 msgstr "Level is required."
+
+msgid "Link expired"
+msgstr "Link expired"
 
 msgid "LinkedIn"
 msgstr "LinkedIn"
@@ -1715,8 +1796,14 @@ msgstr "New backlog item"
 msgid "New milestone"
 msgstr "New milestone"
 
+msgid "New password"
+msgstr "New password"
+
 msgid "New Password"
 msgstr "New Password"
+
+msgid "New to NTI?"
+msgstr "New to NTI?"
 
 msgid "News"
 msgstr "News"
@@ -2138,20 +2225,50 @@ msgstr "Pagination"
 msgid "Password"
 msgstr "Password"
 
+msgid "Password confirmation is required."
+msgstr "Password confirmation is required."
+
 msgid "Password must be at least 6 characters."
 msgstr "Password must be at least 6 characters."
+
+msgid "Password must be at least 8 characters."
+msgstr "Password must be at least 8 characters."
+
+msgid "PASSWORD RESET"
+msgstr "PASSWORD RESET"
 
 msgid "Password Reset Required"
 msgstr "Password Reset Required"
 
+msgid "Password reset token is required."
+msgstr "Password reset token is required."
+
+msgid "Password updated"
+msgstr "Password updated"
+
 msgid "Passwords do not match."
 msgstr "Passwords do not match."
+
+msgid "Passwords must match."
+msgstr "Passwords must match."
+
+msgid "Paste reset token"
+msgstr "Paste reset token"
 
 msgid "Paste the token from your email…"
 msgstr "Paste the token from your email…"
 
+msgid "Paste verification token"
+msgstr "Paste verification token"
+
+msgid "Paste your reset token only if the email link did not open correctly."
+msgstr "Paste your reset token only if the email link did not open correctly."
+
 msgid "Paste your verification token"
 msgstr "Paste your verification token"
+
+msgid "Paste your verification token if the email link did not open correctly."
+msgstr "Paste your verification token if the email link did not open correctly."
 
 msgid "Pending"
 msgstr "Pending"
@@ -2168,8 +2285,11 @@ msgstr "Personal Portfolio / Website"
 msgid "Phew! You survived."
 msgstr "Phew! You survived."
 
-msgid "PLATFORM ACCESS"
-msgstr "PLATFORM ACCESS"
+#~ msgid "PLATFORM ACCESS"
+#~ msgstr "PLATFORM ACCESS"
+
+msgid "Please confirm your email address before signing in."
+msgstr "Please confirm your email address before signing in."
 
 msgid "Please enter a valid email address."
 msgstr "Please enter a valid email address."
@@ -2179,6 +2299,18 @@ msgstr "Please enter a valid website URL."
 
 msgid "Please review your information before completing the registration."
 msgstr "Please review your information before completing the registration."
+
+msgid "Please sign in again to continue."
+msgstr "Please sign in again to continue."
+
+msgid "Please try again."
+msgstr "Please try again."
+
+msgid "Please wait while we verify your company owner account."
+msgstr "Please wait while we verify your company owner account."
+
+msgid "Please wait while we verify your email address."
+msgstr "Please wait while we verify your email address."
 
 msgid "PNG, JPG or WEBP. Logo is optional."
 msgstr "PNG, JPG or WEBP. Logo is optional."
@@ -2406,6 +2538,9 @@ msgstr "Record is active"
 msgid "Record NTI final acceptance"
 msgstr "Record NTI final acceptance"
 
+msgid "Recover your NTI access"
+msgstr "Recover your NTI access"
+
 msgid "Recovered drafts"
 msgstr "Recovered drafts"
 
@@ -2429,6 +2564,9 @@ msgstr "Register company owner"
 
 msgid "Register your account to continue with organization onboarding."
 msgstr "Register your account to continue with organization onboarding."
+
+msgid "Registering as a company?"
+msgstr "Registering as a company?"
 
 msgid "Registration failed"
 msgstr "Registration failed"
@@ -2460,6 +2598,9 @@ msgstr "Remove card"
 msgid "Rename team"
 msgstr "Rename team"
 
+msgid "Repeat new password"
+msgstr "Repeat new password"
+
 msgid "Repeat the new password"
 msgstr "Repeat the new password"
 
@@ -2469,8 +2610,17 @@ msgstr "Reporting dashboard unavailable"
 msgid "Reports"
 msgstr "Reports"
 
+msgid "Request a new password reset link and try again."
+msgstr "Request a new password reset link and try again."
+
+msgid "Request a secure link and choose a new password from your email."
+msgstr "Request a secure link and choose a new password from your email."
+
 msgid "Request failed"
 msgstr "Request failed"
+
+msgid "Request new link"
+msgstr "Request new link"
 
 msgid "Required document type"
 msgstr "Required document type"
@@ -2493,6 +2643,21 @@ msgstr "Resend the email if it did not arrive. Paste the token below only if you
 msgid "Resending..."
 msgstr "Resending..."
 
+msgid "Reset link expired"
+msgstr "Reset link expired"
+
+msgid "RESET PASSWORD"
+msgstr "RESET PASSWORD"
+
+msgid "Reset token"
+msgstr "Reset token"
+
+msgid "Reset your password"
+msgstr "Reset your password"
+
+msgid "RESETTING..."
+msgstr "RESETTING..."
+
 msgid "Resolve overdue milestones"
 msgstr "Resolve overdue milestones"
 
@@ -2513,6 +2678,9 @@ msgstr "Resolving your organization access before loading Program B company data
 
 msgid "Retry"
 msgstr "Retry"
+
+msgid "RETURN TO LOGIN"
+msgstr "RETURN TO LOGIN"
 
 msgid "Review"
 msgstr "Review"
@@ -2745,11 +2913,20 @@ msgstr "SEND INVITATION"
 msgid "Send invites"
 msgstr "Send invites"
 
+msgid "SEND RESET LINK"
+msgstr "SEND RESET LINK"
+
 msgid "SENDING INVITATION..."
 msgstr "SENDING INVITATION..."
 
 msgid "Sending…"
 msgstr "Sending…"
+
+msgid "SENDING..."
+msgstr "SENDING..."
+
+msgid "Session expired"
+msgstr "Session expired"
 
 msgid "Set a new admin password"
 msgstr "Set a new admin password"
@@ -2778,6 +2955,9 @@ msgstr "Show password"
 msgid "Showcase your best projects and tell us about yourself."
 msgstr "Showcase your best projects and tell us about yourself."
 
+msgid "Sign in"
+msgstr "Sign in"
+
 msgid "Sign In"
 msgstr "Sign In"
 
@@ -2787,8 +2967,11 @@ msgstr "SIGN IN"
 msgid "SIGN IN AND ACCEPT"
 msgstr "SIGN IN AND ACCEPT"
 
-msgid "Sign in to continue with your student, team, or organization workflow."
-msgstr "Sign in to continue with your student, team, or organization workflow."
+#~ msgid "Sign in to continue with your student, team, or organization workflow."
+#~ msgstr "Sign in to continue with your student, team, or organization workflow."
+
+msgid "Sign in to your NTI workspace"
+msgstr "Sign in to your NTI workspace"
 
 msgid "Sign in with the account that uses the invited email address. After login, the invitation will be accepted automatically."
 msgstr "Sign in with the account that uses the invited email address. After login, the invitation will be accepted automatically."
@@ -2822,6 +3005,9 @@ msgstr "Solution proposal"
 
 msgid "Some dashboard sections could not be refreshed."
 msgstr "Some dashboard sections could not be refreshed."
+
+msgid "Something went wrong"
+msgstr "Something went wrong"
 
 msgid "Sort"
 msgstr "Sort"
@@ -3099,6 +3285,9 @@ msgstr "The invite could not be validated right now. Please try again later."
 msgid "The invite detail request failed for this organization."
 msgstr "The invite detail request failed for this organization."
 
+msgid "The link is invalid or expired. Request a new link and try again."
+msgstr "The link is invalid or expired. Request a new link and try again."
+
 msgid "The organization backlog summary could not be loaded right now."
 msgstr "The organization backlog summary could not be loaded right now."
 
@@ -3141,11 +3330,17 @@ msgstr "The university directory could not be loaded."
 msgid "The user list could not be loaded."
 msgstr "The user list could not be loaded."
 
+msgid "The verification link could not be completed. You can try again or return to login."
+msgstr "The verification link could not be completed. You can try again or return to login."
+
 msgid "There is no data to export for the current filters."
 msgstr "There is no data to export for the current filters."
 
 msgid "These queues need direct company attention and link into the relevant Program B workspace."
 msgstr "These queues need direct company attention and link into the relevant Program B workspace."
+
+msgid "This account cannot sign in right now. Contact support if you think this is a mistake."
+msgstr "This account cannot sign in right now. Contact support if you think this is a mistake."
 
 msgid "This account must update its password before the admin session can continue."
 msgstr "This account must update its password before the admin session can continue."
@@ -3333,8 +3528,8 @@ msgstr "Unable to load your profile."
 msgid "Unable to log in right now."
 msgstr "Unable to log in right now."
 
-msgid "Unable to log in. Please try again."
-msgstr "Unable to log in. Please try again."
+#~ msgid "Unable to log in. Please try again."
+#~ msgstr "Unable to log in. Please try again."
 
 msgid "Unable to log out right now."
 msgstr "Unable to log out right now."
@@ -3547,11 +3742,17 @@ msgstr "Use the invitation details below to join the organization workspace."
 msgid "Use the same email address that received this invitation."
 msgstr "Use the same email address that received this invitation."
 
+msgid "Use the secure reset link from your email to update your NTI password."
+msgstr "Use the secure reset link from your email to update your NTI password."
+
 msgid "Use this for soft disabling. Delete only when the record is truly obsolete."
 msgstr "Use this for soft disabling. Delete only when the record is truly obsolete."
 
 msgid "Use your admin credentials to access moderation, organization reviews, and system invites."
 msgstr "Use your admin credentials to access moderation, organization reviews, and system invites."
+
+msgid "Use your email and password to continue."
+msgstr "Use your email and password to continue."
 
 msgid "Users"
 msgstr "Users"
@@ -3575,6 +3776,9 @@ msgstr "Validating invite..."
 msgid "Verification"
 msgstr "Verification"
 
+msgid "Verification failed"
+msgstr "Verification failed"
+
 msgid "VERIFICATION STEP"
 msgstr "VERIFICATION STEP"
 
@@ -3584,11 +3788,23 @@ msgstr "Verification token"
 msgid "Verification Token"
 msgstr "Verification Token"
 
+msgid "Verification token is required."
+msgstr "Verification token is required."
+
 msgid "Verification token must be at least 4 characters."
 msgstr "Verification token must be at least 4 characters."
 
+msgid "VERIFY EMAIL"
+msgstr "VERIFY EMAIL"
+
+msgid "Verify your email"
+msgstr "Verify your email"
+
 msgid "Verify your email address before creating your organization profile."
 msgstr "Verify your email address before creating your organization profile."
+
+msgid "Verify your email address to activate your account and continue with onboarding."
+msgstr "Verify your email address to activate your account and continue with onboarding."
 
 msgid "View"
 msgstr "View"
@@ -3620,8 +3836,11 @@ msgstr "We couldn't load your team right now. Please try again."
 msgid "Website"
 msgstr "Website"
 
-msgid "Welcome back to NTI"
-msgstr "Welcome back to NTI"
+msgid "WELCOME BACK"
+msgstr "WELCOME BACK"
+
+#~ msgid "Welcome back to NTI"
+#~ msgstr "Welcome back to NTI"
 
 msgid "What are your main areas of interest?"
 msgstr "What are your main areas of interest?"
@@ -3671,6 +3890,9 @@ msgstr "You must accept the terms."
 msgid "You survived the boss fight"
 msgstr "You survived the boss fight"
 
+msgid "Your account does not have access to this page."
+msgstr "Your account does not have access to this page."
+
 msgid "Your admin session has expired."
 msgstr "Your admin session has expired."
 
@@ -3680,8 +3902,17 @@ msgstr "Your company account is linked to an organization, but Program B company
 msgid "your email address"
 msgstr "your email address"
 
+msgid "Your email address was confirmed successfully. Redirecting you to the next step."
+msgstr "Your email address was confirmed successfully. Redirecting you to the next step."
+
+msgid "Your email address was confirmed successfully. Redirecting you to your workspace."
+msgstr "Your email address was confirmed successfully. Redirecting you to your workspace."
+
 msgid "Your invitation token is verified before account setup."
 msgstr "Your invitation token is verified before account setup."
+
+msgid "Your password was reset successfully. You can now sign in with the new password."
+msgstr "Your password was reset successfully. You can now sign in with the new password."
 
 msgid "Your Role (e.g., Frontend Dev)"
 msgstr "Your Role (e.g., Frontend Dev)"

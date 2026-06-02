@@ -4,12 +4,13 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { useGetMe, type UserRole } from 'lib/api';
-import { isApiRequestError } from 'lib/api-client/openapi-runtime/client';
+import { isApiRequestError, isAuthErrorStatus } from 'lib/api-client/openapi-runtime/client';
+import { getPostAuthRedirect } from 'lib/auth/public-auth-flow';
 import { ROUTES } from 'lib/constants';
-import { getDefaultRouteForRole } from 'lib/auth/access';
 
 export function useAuthenticatedUser(allowedRoles?: UserRole[]) {
   const router = useRouter();
+
   const meQuery = useGetMe({
     query: {
       retry: false,
@@ -21,23 +22,35 @@ export function useAuthenticatedUser(allowedRoles?: UserRole[]) {
       return;
     }
 
-    if (meQuery.error.status === 401) {
+    if (isAuthErrorStatus(meQuery.error.status)) {
       router.replace(ROUTES.AUTH.LOGIN);
     }
   }, [meQuery.error, router]);
 
   useEffect(() => {
-    if (!meQuery.data || !allowedRoles) {
+    if (!meQuery.data) {
+      return;
+    }
+
+    if (meQuery.data.status !== 'ACTIVE') {
+      router.replace(getPostAuthRedirect(meQuery.data));
+
+      return;
+    }
+
+    if (!allowedRoles) {
       return;
     }
 
     if (!allowedRoles.includes(meQuery.data.role)) {
-      router.replace(getDefaultRouteForRole(meQuery.data.role));
+      router.replace(getPostAuthRedirect(meQuery.data));
     }
   }, [allowedRoles, meQuery.data, router]);
 
   const isAllowed = Boolean(
-    meQuery.data && (!allowedRoles || allowedRoles.includes(meQuery.data.role)),
+    meQuery.data &&
+    meQuery.data.status === 'ACTIVE' &&
+    (!allowedRoles || allowedRoles.includes(meQuery.data.role)),
   );
 
   return {

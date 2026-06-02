@@ -1,9 +1,11 @@
 import { i18n } from '@lingui/core';
 import { msg } from '@lingui/core/macro';
 import * as z from 'zod';
+
 import { getCurrentYear, getMaxGraduationYear } from 'lib/date';
 
 export const PASSWORD_MIN_LENGTH = 6;
+export const RESET_PASSWORD_MIN_LENGTH = 8;
 export const VERIFICATION_CODE_MIN_LENGTH = 4;
 export const NAME_MIN_LENGTH = 2;
 export const NAME_MAX_LENGTH = 50;
@@ -44,6 +46,45 @@ export function createLoginSchema() {
     password: z
       .string()
       .min(PASSWORD_MIN_LENGTH, { message: i18n._(msg`Password must be at least 6 characters.`) }),
+  });
+}
+
+export function createForgotPasswordSchema() {
+  return z.object({
+    email: z.email({ message: i18n._(msg`Please enter a valid email address.`) }),
+  });
+}
+
+export function createResetPasswordSchema() {
+  return z
+    .object({
+      token: z
+        .string()
+        .trim()
+        .min(1, {
+          message: i18n._(msg`Password reset token is required.`),
+        }),
+      password: z.string().min(RESET_PASSWORD_MIN_LENGTH, {
+        message: i18n._(msg`Password must be at least 8 characters.`),
+      }),
+      confirmPassword: z.string().min(1, {
+        message: i18n._(msg`Password confirmation is required.`),
+      }),
+    })
+    .refine((values) => values.password === values.confirmPassword, {
+      path: ['confirmPassword'],
+      message: i18n._(msg`Passwords must match.`),
+    });
+}
+
+export function createEmailVerificationSchema() {
+  return z.object({
+    token: z
+      .string()
+      .trim()
+      .min(1, {
+        message: i18n._(msg`Verification token is required.`),
+      }),
   });
 }
 
@@ -210,4 +251,7 @@ export function createStudentRegistrationSchema() {
 }
 
 export type LoginFormValues = z.infer<ReturnType<typeof createLoginSchema>>;
+export type ForgotPasswordFormValues = z.infer<ReturnType<typeof createForgotPasswordSchema>>;
+export type ResetPasswordFormValues = z.infer<ReturnType<typeof createResetPasswordSchema>>;
+export type EmailVerificationFormValues = z.infer<ReturnType<typeof createEmailVerificationSchema>>;
 export type StudentRegistrationValues = z.infer<ReturnType<typeof createStudentRegistrationSchema>>;

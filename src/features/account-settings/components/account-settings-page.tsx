@@ -1,15 +1,12 @@
 'use client';
 
 import { t } from '@lingui/core/macro';
-import Link from 'next/link';
 
 import {
   StudentPageShell,
   StudentSectionCard,
 } from 'components/student-dashboard/page-shell-primitives';
-import { Button } from 'components/shadcn';
 import type { AuthenticatedUserDto } from 'lib/api';
-import { getDefaultRouteForRole } from 'lib/auth/access';
 
 import { useAccountSecurity } from '../hooks/use-account-security';
 import { EmailChangeSection } from './email-change-section';
@@ -23,22 +20,13 @@ export function AccountSettingsPage({ user }: { user: AuthenticatedUserDto }) {
     <StudentPageShell
       eyebrow={t`Account security`}
       title={t`Manage your account`}
-      description={t`Update your password and email with the same guarded flows used for authentication. Sensitive changes may require verification or a fresh sign-in.`}
-      actions={
-        <Button
-          asChild
-          variant="outline"
-          className="rounded-2xl border-[#d8e4fb] bg-white/90 text-[#122039] hover:bg-[#f5f8ff]"
-        >
-          <Link href={getDefaultRouteForRole(user.role)}>{t`Return to workspace`}</Link>
-        </Button>
-      }
+      description={t`Change your email or password here. For some updates, we may ask you to verify the change or sign in again.`}
     >
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.6fr)_minmax(19rem,0.9fr)]">
         <div className="space-y-6">
           <StudentSectionCard
             title={t`Password change`}
-            description={t`Use your current password to authorize the change. After success, every active refresh session is revoked and a new sign-in is required.`}
+            description={t`Enter your current password to make the change. After that, you'll need to sign in again.`}
           >
             <PasswordChangeSection
               feedback={security.passwordFeedback}
@@ -51,7 +39,7 @@ export function AccountSettingsPage({ user }: { user: AuthenticatedUserDto }) {
 
           <StudentSectionCard
             title={t`Email change`}
-            description={t`Request a new address first, then confirm the verification token or email link. The current address remains active until confirmation succeeds.`}
+            description={t`Enter your new email first, then confirm it from your inbox. Your current email stays active until you finish that step.`}
           >
             <EmailChangeSection
               canConfirmEmailChange={
@@ -64,6 +52,7 @@ export function AccountSettingsPage({ user }: { user: AuthenticatedUserDto }) {
               isRequestPending={security.emailRequestMutation.isPending}
               onConfirmSubmit={security.handleEmailConfirmSubmit}
               onRequestSubmit={security.handleEmailRequestSubmit}
+              pendingEmail={security.pendingEmail}
               requestFeedback={security.emailRequestFeedback}
               requestForm={security.emailRequestForm}
             />

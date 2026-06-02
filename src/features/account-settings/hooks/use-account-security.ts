@@ -29,6 +29,7 @@ import {
 import type { SecurityFeedback } from '../lib/types';
 
 const REAUTH_REDIRECT_DELAY_MS = 1200;
+const TOO_MANY_REQUESTS_STATUS = 429;
 
 type ReauthReason = 'password-changed' | 'email-changed' | 'session-expired';
 
@@ -41,7 +42,7 @@ export function useAccountSecurity(user: AuthenticatedUserDto) {
 
   const [latestFeedback, setLatestFeedback] = useState<SecurityFeedback>({
     title: t`Your account is protected`,
-    description: t`Use this page for sensitive security updates. Password and email changes are separated because they have different verification and session consequences.`,
+    description: t`You can update your password or email here. If a change affects account safety, we'll guide you through the next step.`,
     tone: 'info',
   });
   const [passwordFeedback, setPasswordFeedback] = useState<SecurityFeedback | null>(null);
@@ -151,6 +152,24 @@ export function useAccountSecurity(user: AuthenticatedUserDto) {
     return false;
   };
 
+  const handleTooManyRequestsError = (error: unknown) => {
+    if (isApiRequestError(error) && error.status === TOO_MANY_REQUESTS_STATUS) {
+      const feedback: SecurityFeedback = {
+        title: t`Please wait before trying again`,
+        description: t`For security, email confirmation requests are limited for a short time. Please try again in about a minute.`,
+        tone: 'warning',
+      };
+
+      setEmailRequestFeedback(feedback);
+      setLatestFeedback(feedback);
+      toast.error(feedback.description);
+
+      return true;
+    }
+
+    return false;
+  };
+
   const handlePasswordSubmit = async (values: ChangePasswordFormValues) => {
     setPasswordFeedback(null);
 
@@ -160,7 +179,7 @@ export function useAccountSecurity(user: AuthenticatedUserDto) {
         title: t`Password updated`,
         description:
           response.message ||
-          t`All active refresh sessions were revoked. You will be asked to sign in again with the new password.`,
+          t`Your password was updated. To keep your account safe, you'll need to sign in again with the new password.`,
         tone: 'warning',
       };
 
@@ -199,7 +218,7 @@ export function useAccountSecurity(user: AuthenticatedUserDto) {
         title: t`Verification pending`,
         description:
           response.message ||
-          t`A confirmation link was sent to the new address. Your current session stays active until the email change is confirmed.`,
+          t`We sent a confirmation message to your new email. Your current email will stay the same until you confirm the change.`,
         tone: 'info',
       };
 
@@ -208,9 +227,15 @@ export function useAccountSecurity(user: AuthenticatedUserDto) {
       setLatestFeedback(feedback);
       emailRequestForm.reset();
       toast.success(t`Email change confirmation sent.`);
+
+      return true;
     } catch (error) {
       if (handleAuthError(error, t`Unable to request the email change right now.`)) {
-        return;
+        return false;
+      }
+
+      if (handleTooManyRequestsError(error)) {
+        return false;
       }
 
       const feedback: SecurityFeedback = {
@@ -223,6 +248,8 @@ export function useAccountSecurity(user: AuthenticatedUserDto) {
       setEmailRequestFeedback(feedback);
       setLatestFeedback(feedback);
       toast.error(feedback.description);
+
+      return false;
     }
   };
 
@@ -237,7 +264,7 @@ export function useAccountSecurity(user: AuthenticatedUserDto) {
         title: t`Email updated`,
         description:
           response.message ||
-          t`The new email address is now active. You will be redirected to sign in again because existing refresh sessions were revoked.`,
+          t`Your new email is now active. To keep your account safe, you'll need to sign in again.`,
         tone: 'warning',
       };
 

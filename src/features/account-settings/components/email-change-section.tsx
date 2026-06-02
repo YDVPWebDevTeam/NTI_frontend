@@ -7,9 +7,12 @@ import type { UseFormReturn } from 'react-hook-form';
 
 import { ControlledInputField } from 'components/forms';
 import { Button, Form } from 'components/shadcn';
+import { useResendCooldown } from 'lib/hooks/use-resend-cooldown';
 import type { ChangeEmailConfirmFormValues, ChangeEmailRequestFormValues } from '../lib/schemas';
 import type { SecurityFeedback } from '../lib/types';
 import { SecurityFeedbackBanner } from './security-feedback-banner';
+
+const EMAIL_CHANGE_REQUEST_COOLDOWN_SECONDS = 60;
 
 function EmailChangePanel({
   eyebrow,
@@ -52,6 +55,7 @@ export function EmailChangeSection({
   isRequestPending,
   onConfirmSubmit,
   onRequestSubmit,
+  pendingEmail,
   requestFeedback,
   requestForm,
 }: {
@@ -62,24 +66,51 @@ export function EmailChangeSection({
   isRedirectPending: boolean;
   isRequestPending: boolean;
   onConfirmSubmit: (values: ChangeEmailConfirmFormValues) => Promise<void>;
-  onRequestSubmit: (values: ChangeEmailRequestFormValues) => Promise<void>;
+  onRequestSubmit: (values: ChangeEmailRequestFormValues) => Promise<boolean>;
+  pendingEmail: string | null;
   requestFeedback: SecurityFeedback | null;
   requestForm: UseFormReturn<ChangeEmailRequestFormValues>;
 }) {
   const confirmToken = confirmForm.watch('token');
+  const requestEmail = requestForm.watch('newEmail')?.trim().toLowerCase() ?? '';
+  const cooldownEmail = pendingEmail ?? requestEmail;
   const isConfirmReady = confirmToken.trim().length > 0 && confirmForm.formState.isValid;
+  const { isCoolingDown, remainingSeconds, startCooldown } = useResendCooldown(
+    `account-email-change:${cooldownEmail || 'pending'}`,
+    EMAIL_CHANGE_REQUEST_COOLDOWN_SECONDS,
+  );
+  let requestLabel = t`Send Verification`;
+
+  if (isRequestPending) {
+    requestLabel = t`Sending…`;
+  } else if (isCoolingDown) {
+    requestLabel = t`Send again in ${remainingSeconds}s`;
+  }
 
   return (
     <div className="grid gap-6 xl:grid-cols-2">
       <EmailChangePanel
         eyebrow={t`Request change`}
-        title={t`Send verification to the new email`}
-        description={t`Use an address you can access right now. Conflicts and existing-account issues will be reported before any email is changed.`}
+        title={t`Verify your new email`}
+        description={t`Enter an email address you can open right now. We'll send a confirmation message before anything changes.`}
         feedback={requestFeedback}
         feedbackEyebrow={t`Request status`}
       >
         <Form {...requestForm}>
-          <form onSubmit={requestForm.handleSubmit(onRequestSubmit)} className="space-y-5">
+          <form
+            onSubmit={requestForm.handleSubmit(async (values) => {
+              if (isCoolingDown) {
+                return;
+              }
+
+              const wasSent = await onRequestSubmit(values);
+
+              if (wasSent) {
+                startCooldown();
+              }
+            })}
+            className="space-y-5"
+          >
             <ControlledInputField
               control={requestForm.control}
               name="newEmail"
@@ -91,7 +122,7 @@ export function EmailChangeSection({
 
             <Button
               type="submit"
-              disabled={isRequestPending || isRedirectPending}
+              disabled={isRequestPending || isRedirectPending || isCoolingDown}
               className="h-12 rounded-xl bg-[#1e58d5] px-5 text-[12px] font-semibold tracking-[0.16em] uppercase hover:bg-[#245fdc]"
             >
               {isRequestPending ? (
@@ -100,7 +131,7 @@ export function EmailChangeSection({
                   {t`Sending…`}
                 </>
               ) : (
-                t`Send Verification`
+                requestLabel
               )}
             </Button>
           </form>
@@ -110,7 +141,7 @@ export function EmailChangeSection({
       <EmailChangePanel
         eyebrow={t`Confirm change`}
         title={t`Apply the verified email`}
-        description={t`Paste the token from the email or open the confirmation link. Once confirmed, the account will require a fresh sign-in.`}
+        description={t`Open the link in your email, or paste the confirmation code here. After that, you'll need to sign in again.`}
         feedback={confirmFeedback}
         feedbackEyebrow={t`Confirmation status`}
       >
@@ -120,8 +151,8 @@ export function EmailChangeSection({
               <ControlledInputField
                 control={confirmForm.control}
                 name="token"
-                label={t`Verification Token`}
-                placeholder={t`Paste the token from your email…`}
+                label={t`Confirmation Code`}
+                placeholder={t`Paste the code from your email…`}
                 autoComplete="one-time-code"
                 spellCheck={false}
               />
@@ -137,14 +168,14 @@ export function EmailChangeSection({
                     {t`Confirming...`}
                   </>
                 ) : (
-                  t`Confirm Email Change`
+                  t`Confirm New Email`
                 )}
               </Button>
             </form>
           </Form>
         ) : (
           <div className="rounded-[1.25rem] border border-dashed border-[#d4def3] bg-white/80 p-4 text-sm leading-6 text-[#5b667b]">
-            {t`This confirmation step stays inactive until you request an email change or open a confirmation link from your inbox.`}
+            {t`This step will become available after you request an email change or open the link from your inbox.`}
           </div>
         )}
       </EmailChangePanel>

@@ -60,11 +60,14 @@ msgstr "© 2026 NTI. Všetky práva vyhradené."
 msgid "100% Complete"
 msgstr "100 % dokončené"
 
-msgid "A confirmation link was sent to the new address. Your current session stays active until the email change is confirmed."
-msgstr "Na novú adresu bol odoslaný potvrdzovací odkaz. Vaša aktuálna relácia zostáva aktívna, kým sa zmena e-mailu nepotvrdí."
+#~ msgid "A confirmation link was sent to the new address. Your current session stays active until the email change is confirmed."
+#~ msgstr "Na novú adresu bol odoslaný potvrdzovací odkaz. Vaša aktuálna relácia zostáva aktívna, kým sa zmena e-mailu nepotvrdí."
 
 msgid "A confirmation link will be sent to"
 msgstr "Potvrdzovací odkaz bude odoslaný na"
+
+msgid "A few things to keep in mind when updating your email or password."
+msgstr "Pri zmene e-mailu alebo hesla je dobré vedieť niekoľko vecí."
 
 msgid "A lighter student workspace with separate flows for foundation setup, Program A applications, and Program B opportunities."
 msgstr "Odľahčené študentské pracovisko so samostatnými tokmi pre základné nastavenie, prihlášky do Programu A a príležitosti v Programe B."
@@ -243,8 +246,8 @@ msgstr "admin@nti.sk"
 msgid "Administrative Access"
 msgstr "Administrátorský prístup"
 
-msgid "All active refresh sessions were revoked. You will be asked to sign in again with the new password."
-msgstr "Všetky aktívne refresh relácie boli zrušené. Budete požiadaní, aby ste sa znova prihlásili s novým heslom."
+#~ msgid "All active refresh sessions were revoked. You will be asked to sign in again with the new password."
+#~ msgstr "Všetky aktívne refresh relácie boli zrušené. Budete požiadaní, aby ste sa znova prihlásili s novým heslom."
 
 msgid "All programs"
 msgstr "Všetky programy"
@@ -471,6 +474,9 @@ msgstr "Zaznamenajte míľniky dodávky s voliteľným popisom a termínom."
 msgid "Categories"
 msgstr "Kategórie"
 
+msgid "Change your email or password here. For some updates, we may ask you to verify the change or sign in again."
+msgstr "Tu si môžete zmeniť e-mail alebo heslo. Pri niektorých zmenách vás môžeme požiadať o overenie alebo opätovné prihlásenie."
+
 msgid "Changes requested"
 msgstr "Vyžiadané zmeny"
 
@@ -618,8 +624,11 @@ msgstr "Potvrdiť e-mail"
 msgid "CONFIRM EMAIL"
 msgstr "POTVRDIŤ E-MAIL"
 
-msgid "Confirm Email Change"
-msgstr "Potvrdiť zmenu e-mailu"
+#~ msgid "Confirm Email Change"
+#~ msgstr "Potvrdiť zmenu e-mailu"
+
+msgid "Confirm New Email"
+msgstr "Potvrdiť nový e-mail"
 
 msgid "Confirm New Password"
 msgstr "Potvrdiť nové heslo"
@@ -638,6 +647,12 @@ msgstr "Potvrďte svoj účet vlastníka spoločnosti"
 
 msgid "Confirm your email address from the message sent to your inbox before full platform access."
 msgstr "Pred plným prístupom na platformu potvrďte svoju e-mailovú adresu prostredníctvom správy odoslanej do vašej schránky."
+
+msgid "Confirmation Code"
+msgstr "Potvrdzovací kód"
+
+msgid "Confirmation code is required."
+msgstr "Potvrdzovací kód je povinný."
 
 msgid "Confirmation email sent."
 msgstr "Potvrdzovací e-mail bol odoslaný."
@@ -1012,8 +1027,8 @@ msgstr "Potvrdenie e-mailu zlyhalo"
 msgid "Email confirmed. Sign in again with your updated address."
 msgstr "E-mail bol potvrdený. Prihláste sa znova s aktualizovanou adresou."
 
-msgid "Email requests only create a pending verification step. The current address remains unchanged until the token is confirmed."
-msgstr "Požiadavky na zmenu e-mailu vytvárajú iba čakajúci krok overenia. Aktuálna adresa zostáva nezmenená, kým sa token nepotvrdí."
+#~ msgid "Email requests only create a pending verification step. The current address remains unchanged until the token is confirmed."
+#~ msgstr "Požiadavky na zmenu e-mailu vytvárajú iba čakajúci krok overenia. Aktuálna adresa zostáva nezmenená, kým sa token nepotvrdí."
 
 msgid "Email updated"
 msgstr "E-mail bol aktualizovaný"
@@ -1054,6 +1069,9 @@ msgstr "Zadajte silné heslo"
 msgid "Enter a valid URL."
 msgstr "Zadajte platnú URL adresu."
 
+msgid "Enter an email address you can open right now. We'll send a confirmation message before anything changes."
+msgstr "Zadajte e-mailovú adresu, ku ktorej máte teraz prístup. Pred akoukoľvek zmenou vám pošleme potvrdzovací e-mail."
+
 msgid "Enter faculty name"
 msgstr "Zadajte názov fakulty"
 
@@ -1075,11 +1093,17 @@ msgstr "Zadajte svoje prihlasovacie údaje nižšie pre prístup na platformu."
 msgid "Enter your current password"
 msgstr "Zadajte svoje aktuálne heslo"
 
+msgid "Enter your current password to make the change. After that, you'll need to sign in again."
+msgstr "Na vykonanie zmeny zadajte svoje aktuálne heslo. Potom sa budete musieť znova prihlásiť."
+
 msgid "Enter your first name…"
 msgstr "Zadajte svoje meno…"
 
 msgid "Enter your last name…"
 msgstr "Zadajte svoje priezvisko…"
+
+msgid "Enter your new email first, then confirm it from your inbox. Your current email stays active until you finish that step."
+msgstr "Najprv zadajte nový e-mail a potom ho potvrďte v doručenej pošte. Váš aktuálny e-mail zostane aktívny, kým tento krok nedokončíte."
 
 msgid "Enter your password"
 msgstr "Zadajte svoje heslo"
@@ -1249,6 +1273,9 @@ msgstr "Meno môže mať maximálne 50 znakov."
 msgid "Focus Areas"
 msgstr "Oblasti záujmu"
 
+msgid "For security, email confirmation requests are limited for a short time. Please try again in about a minute."
+msgstr "Z bezpečnostných dôvodov sú požiadavky na potvrdenie e-mailu na krátky čas obmedzené. Skúste to znova približne o minútu."
+
 msgid "Forgot password?"
 msgstr "Zabudli ste heslo?"
 
@@ -1291,6 +1318,9 @@ msgstr "Hlavné reportovacie údaje sa nepodarilo načítať."
 msgid "Help us understand your academic performance."
 msgstr "Pomôžte nám pochopiť vaše akademické výsledky."
 
+msgid "Helpful to know"
+msgstr "Dobré vedieť"
+
 msgid "Hidden revoked invitation cards restored."
 msgstr "Skryté karty zrušených pozvánok boli obnovené."
 
@@ -1300,8 +1330,8 @@ msgstr "Skryť heslo"
 msgid "Highlight your technical and soft skills for potential partners."
 msgstr "Zdôraznite svoje technické a soft skills pre potenciálnych partnerov."
 
-msgid "How the flows behave"
-msgstr "Ako sa tieto flow správajú"
+#~ msgid "How the flows behave"
+#~ msgstr "Ako sa tieto flow správajú"
 
 msgid "https://example.edu"
 msgstr "https://example.edu"
@@ -1343,8 +1373,11 @@ msgstr "Overenie identity"
 msgid "IDENTITY VERIFICATION"
 msgstr "OVERENIE IDENTITY"
 
-msgid "If the backend reports an invalid token, a conflict, or an expired session, the exact server error is surfaced here instead of being hidden behind generic copy."
-msgstr "Ak backend nahlási neplatný token, konflikt alebo expirovanú reláciu, zobrazí sa tu presná chyba servera namiesto všeobecnej hlášky."
+msgid "If something needs attention, we'll show a clear message so you know what to do next."
+msgstr "Ak bude niečo potrebné vyriešiť, zobrazíme jasnú správu, aby ste vedeli, čo urobiť ďalej."
+
+#~ msgid "If the backend reports an invalid token, a conflict, or an expired session, the exact server error is surfaced here instead of being hidden behind generic copy."
+#~ msgstr "Ak backend nahlási neplatný token, konflikt alebo expirovanú reláciu, zobrazí sa tu presná chyba servera namiesto všeobecnej hlášky."
 
 msgid "If you are onboarding as the team lead, create the team here and send the first teammate invites immediately."
 msgstr "Ak prechádzate onboardingom ako vedúci tímu, vytvorte tu tím a ihneď odošlite prvé pozvánky spoluhráčom."
@@ -2109,6 +2142,9 @@ msgstr "Otvoriť tímové pracovisko"
 msgid "Open the full invitation link from your email and try again."
 msgstr "Otvorte celý odkaz pozvánky z vášho e-mailu a skúste to znova."
 
+msgid "Open the link in your email, or paste the confirmation code here. After that, you'll need to sign in again."
+msgstr "Otvorte odkaz v e-maile alebo sem vložte potvrdzovací kód. Potom sa budete musieť znova prihlásiť."
+
 msgid "Open workspace"
 msgstr "Otvoriť pracovisko"
 
@@ -2237,8 +2273,8 @@ msgstr "Zmena hesla zlyhala"
 msgid "Password changed. Sign in again with your new password."
 msgstr "Heslo bolo zmenené. Prihláste sa znova pomocou nového hesla."
 
-msgid "Password changes require the current password and immediately invalidate active refresh sessions across devices."
-msgstr "Zmena hesla vyžaduje aktuálne heslo a okamžite zneplatní aktívne refresh relácie na všetkých zariadeniach."
+#~ msgid "Password changes require the current password and immediately invalidate active refresh sessions across devices."
+#~ msgstr "Zmena hesla vyžaduje aktuálne heslo a okamžite zneplatní aktívne refresh relácie na všetkých zariadeniach."
 
 msgid "Password must be at least 6 characters."
 msgstr "Heslo musí mať aspoň 6 znakov."
@@ -2261,8 +2297,11 @@ msgstr "Heslá sa nezhodujú."
 msgid "Passwords must match."
 msgstr "Heslá sa musia zhodovať."
 
-msgid "Paste the token from the email or open the confirmation link. Once confirmed, the account will require a fresh sign-in."
-msgstr "Vložte token z e-mailu alebo otvorte potvrdzovací odkaz. Po potvrdení bude účet vyžadovať nové prihlásenie."
+msgid "Paste the code from your email…"
+msgstr "Vložte kód z e-mailu…"
+
+#~ msgid "Paste the token from the email or open the confirmation link. Once confirmed, the account will require a fresh sign-in."
+#~ msgstr "Vložte token z e-mailu alebo otvorte potvrdzovací odkaz. Po potvrdení bude účet vyžadovať nové prihlásenie."
 
 msgid "Paste the token from your email…"
 msgstr "Vložte token z vášho e-mailu…"
@@ -2299,6 +2338,9 @@ msgstr "Zadajte platnú URL webovej stránky."
 
 msgid "Please review your information before completing the registration."
 msgstr "Pred dokončením registrácie si skontrolujte svoje údaje."
+
+msgid "Please wait before trying again"
+msgstr "Pred ďalším pokusom chvíľu počkajte"
 
 msgid "PNG, JPG or WEBP. Logo is optional."
 msgstr "PNG, JPG alebo WEBP. Logo je voliteľné."
@@ -2589,8 +2631,8 @@ msgstr "Reportovací dashboard nie je dostupný"
 msgid "Reports"
 msgstr "Reporty"
 
-msgid "Request a new address first, then confirm the verification token or email link. The current address remains active until confirmation succeeds."
-msgstr "Najprv požiadajte o novú adresu, potom potvrďte overovací token alebo odkaz z e-mailu. Aktuálna adresa zostáva aktívna, kým potvrdenie neprebehne úspešne."
+#~ msgid "Request a new address first, then confirm the verification token or email link. The current address remains active until confirmation succeeds."
+#~ msgstr "Najprv požiadajte o novú adresu, potom potvrďte overovací token alebo odkaz z e-mailu. Aktuálna adresa zostáva aktívna, kým potvrdenie neprebehne úspešne."
 
 msgid "Request change"
 msgstr "Požiadať o zmenu"
@@ -2643,8 +2685,8 @@ msgstr "Pred načítaním firemných dát Programu B sa overuje prístup k vaše
 msgid "Retry"
 msgstr "Skúsiť znova"
 
-msgid "Return to workspace"
-msgstr "Späť do pracoviska"
+#~ msgid "Return to workspace"
+#~ msgstr "Späť do pracoviska"
 
 msgid "Review"
 msgstr "Kontrola"
@@ -2871,6 +2913,9 @@ msgstr "Vybraná univerzita"
 msgid "Selected university values are loaded here for direct editing."
 msgstr "Hodnoty vybranej univerzity sú načítané tu pre priamu úpravu."
 
+msgid "Send again in {remainingSeconds}s"
+msgstr "Odoslať znova o {remainingSeconds}s"
+
 msgid "Send an invitation to a colleague. The invited user will join as a company employee."
 msgstr "Odošlite pozvánku kolegovi. Pozvaný používateľ sa pripojí ako zamestnanec spoločnosti."
 
@@ -2883,8 +2928,8 @@ msgstr "Odoslať pozvánky"
 msgid "Send Verification"
 msgstr "Odoslať overenie"
 
-msgid "Send verification to the new email"
-msgstr "Odoslať overenie na nový e-mail"
+#~ msgid "Send verification to the new email"
+#~ msgstr "Odoslať overenie na nový e-mail"
 
 msgid "SENDING INVITATION..."
 msgstr "ODOSIELA SA POZVÁNKA..."
@@ -3246,8 +3291,8 @@ msgstr "Pozvánku sa momentálne nepodarilo overiť. Skúste to prosím neskôr.
 msgid "The invite detail request failed for this organization."
 msgstr "Požiadavka na detail pozvánky pre túto organizáciu zlyhala."
 
-msgid "The new email address is now active. You will be redirected to sign in again because existing refresh sessions were revoked."
-msgstr "Nová e-mailová adresa je teraz aktívna. Budete presmerovaní na nové prihlásenie, pretože existujúce refresh relácie boli zrušené."
+#~ msgid "The new email address is now active. You will be redirected to sign in again because existing refresh sessions were revoked."
+#~ msgstr "Nová e-mailová adresa je teraz aktívna. Budete presmerovaní na nové prihlásenie, pretože existujúce refresh relácie boli zrušené."
 
 msgid "The organization backlog summary could not be loaded right now."
 msgstr "Firemné zhrnutie backlogu sa teraz nepodarilo načítať."
@@ -3297,8 +3342,8 @@ msgstr "Pre aktuálne filtre nie sú k dispozícii žiadne dáta na export."
 msgid "These queues need direct company attention and link into the relevant Program B workspace."
 msgstr "Tieto fronty vyžadujú priamu pozornosť spoločnosti a odkazujú do príslušného pracoviska Programu B."
 
-msgid "These states are intentional so security changes stay explicit."
-msgstr "Tieto stavy sú zámerné, aby bezpečnostné zmeny zostali jednoznačné."
+#~ msgid "These states are intentional so security changes stay explicit."
+#~ msgstr "Tieto stavy sú zámerné, aby bezpečnostné zmeny zostali jednoznačné."
 
 msgid "This account must update its password before the admin session can continue."
 msgstr "Tento účet musí aktualizovať heslo pred pokračovaním administrátorskej relácie."
@@ -3309,8 +3354,8 @@ msgstr "Tento typ účtu momentálne nemá samoobslužné pracovisko pre nastave
 msgid "This backlog item is in an internal company workflow state, so this page is showing the organization-scoped workspace summary instead of the published-detail endpoint."
 msgstr "Táto položka backlogu je v internom stave firemného workflow, preto táto stránka zobrazuje zhrnutie pracoviska v rozsahu organizácie namiesto detailu z publikovaného endpointu."
 
-msgid "This confirmation step stays inactive until you request an email change or open a confirmation link from your inbox."
-msgstr "Tento krok potvrdenia zostane neaktívny, kým nepožiadate o zmenu e-mailu alebo neotvoríte potvrdzovací odkaz z doručenej pošty."
+#~ msgid "This confirmation step stays inactive until you request an email change or open a confirmation link from your inbox."
+#~ msgstr "Tento krok potvrdenia zostane neaktívny, kým nepožiadate o zmenu e-mailu alebo neotvoríte potvrdzovací odkaz z doručenej pošty."
 
 msgid "This flow validates the invite first, then gets you into the invited team and your student profile onboarding."
 msgstr "Tento proces najprv overí pozvánku, potom vás pripojí do pozvaného tímu a prevedie onboardingom študentského profilu."
@@ -3345,6 +3390,9 @@ msgstr "Toto revízne pracovisko je smerované správne. Fronty revízií Progra
 msgid "This step is for inviting teammates once the team lead is ready."
 msgstr "Tento krok slúži na pozvanie spoluhráčov, keď je vedúci tímu pripravený."
 
+msgid "This step will become available after you request an email change or open the link from your inbox."
+msgstr "Tento krok bude dostupný po odoslaní žiadosti o zmenu e-mailu alebo po otvorení odkazu z doručenej pošty."
+
 msgid "This workspace is correctly routed, but its feature surface is not implemented yet."
 msgstr "Toto pracovisko je smerované správne, ale jeho funkčná vrstva ešte nie je implementovaná."
 
@@ -3362,6 +3410,9 @@ msgstr "Názov"
 
 msgid "Title is required"
 msgstr "Názov je povinný"
+
+msgid "To change your password, enter your current one first. After the update, you'll be asked to sign in again."
+msgstr "Ak chcete zmeniť heslo, najskôr zadajte aktuálne heslo. Po zmene sa budete musieť znova prihlásiť."
 
 msgid "Top-level academic institutions currently visible in the directory."
 msgstr "Vrcholové akademické inštitúcie aktuálne viditeľné v adresári."
@@ -3660,8 +3711,8 @@ msgstr "Aktualizujte názov, popis, rozpočet a očakávané výstupy tejto polo
 msgid "Update University"
 msgstr "Aktualizovať univerzitu"
 
-msgid "Update your password and email with the same guarded flows used for authentication. Sensitive changes may require verification or a fresh sign-in."
-msgstr "Aktualizujte heslo a e-mail pomocou rovnakých chránených flow, aké sa používajú pri autentifikácii. Citlivé zmeny môžu vyžadovať overenie alebo nové prihlásenie."
+#~ msgid "Update your password and email with the same guarded flows used for authentication. Sensitive changes may require verification or a fresh sign-in."
+#~ msgstr "Aktualizujte heslo a e-mail pomocou rovnakých chránených flow, aké sa používajú pri autentifikácii. Citlivé zmeny môžu vyžadovať overenie alebo nové prihlásenie."
 
 msgid "Update your student profile"
 msgstr "Aktualizujte svoj študentský profil"
@@ -3703,8 +3754,8 @@ msgstr "Nahrajte jeden alebo viac súborov."
 msgid "Upload your CV and add links to your profiles."
 msgstr "Nahrajte svoje CV a pridajte odkazy na svoje profily."
 
-msgid "Use an address you can access right now. Conflicts and existing-account issues will be reported before any email is changed."
-msgstr "Použite adresu, ku ktorej máte práve teraz prístup. Konflikty a problémy s existujúcim účtom sa nahlásia ešte pred zmenou e-mailu."
+#~ msgid "Use an address you can access right now. Conflicts and existing-account issues will be reported before any email is changed."
+#~ msgstr "Použite adresu, ku ktorej máte práve teraz prístup. Konflikty a problémy s existujúcim účtom sa nahlásia ešte pred zmenou e-mailu."
 
 msgid "Use at least 6 characters to secure the invited account."
 msgstr "Použite aspoň 6 znakov na zabezpečenie pozvaného účtu."
@@ -3724,14 +3775,14 @@ msgstr "Použite rovnakú e-mailovú adresu, ktorá prijala túto pozvánku."
 msgid "Use this for soft disabling. Delete only when the record is truly obsolete."
 msgstr "Použite toto na mäkkú deaktiváciu. Odstraňujte iba vtedy, keď je záznam skutočne zastaraný."
 
-msgid "Use this page for sensitive security updates. Password and email changes are separated because they have different verification and session consequences."
-msgstr "Použite túto stránku na citlivé bezpečnostné aktualizácie. Zmena hesla a e-mailu je oddelená, pretože má odlišné dôsledky na overenie a reláciu."
+#~ msgid "Use this page for sensitive security updates. Password and email changes are separated because they have different verification and session consequences."
+#~ msgstr "Použite túto stránku na citlivé bezpečnostné aktualizácie. Zmena hesla a e-mailu je oddelená, pretože má odlišné dôsledky na overenie a reláciu."
 
 msgid "Use your admin credentials to access moderation, organization reviews, and system invites."
 msgstr "Použite svoje administrátorské údaje na prístup k moderovaniu, kontrolám organizácií a systémovým pozvánkam."
 
-msgid "Use your current password to authorize the change. After success, every active refresh session is revoked and a new sign-in is required."
-msgstr "Na autorizáciu zmeny použite svoje aktuálne heslo. Po úspechu sa zrušia všetky aktívne refresh relácie a bude potrebné nové prihlásenie."
+#~ msgid "Use your current password to authorize the change. After success, every active refresh session is revoked and a new sign-in is required."
+#~ msgstr "Na autorizáciu zmeny použite svoje aktuálne heslo. Po úspechu sa zrušia všetky aktívne refresh relácie a bude potrebné nové prihlásenie."
 
 msgid "Users"
 msgstr "Používatelia"
@@ -3767,14 +3818,17 @@ msgstr "Overovací token"
 msgid "Verification Token"
 msgstr "Overovací token"
 
-msgid "Verification token is required."
-msgstr "Overovací token je povinný."
+#~ msgid "Verification token is required."
+#~ msgstr "Overovací token je povinný."
 
 msgid "Verification token must be at least 4 characters."
 msgstr "Overovací token musí mať aspoň 4 znaky."
 
 msgid "Verify your email address before creating your organization profile."
 msgstr "Pred vytvorením profilu organizácie overte svoju e-mailovú adresu."
+
+msgid "Verify your new email"
+msgstr "Overte svoj nový e-mail"
 
 msgid "View"
 msgstr "Zobraziť"
@@ -3803,6 +3857,9 @@ msgstr "Nepodarilo sa určiť organizáciu prepojenú s vaším firemným účto
 msgid "We couldn't load your team right now. Please try again."
 msgstr "Váš tím sa momentálne nepodarilo načítať. Skúste to prosím znova."
 
+msgid "We sent a confirmation message to your new email. Your current email will stay the same until you confirm the change."
+msgstr "Na váš nový e-mail sme odoslali potvrdzovaciu správu. Váš aktuálny e-mail zostane nezmenený, kým zmenu nepotvrdíte."
+
 msgid "Website"
 msgstr "Webová stránka"
 
@@ -3814,6 +3871,9 @@ msgstr "Aké sú vaše hlavné oblasti záujmu?"
 
 msgid "What kind of team role are you looking for?"
 msgstr "Akú rolu v tíme hľadáte?"
+
+msgid "When you change your email, your current address stays active until you confirm the new one from your inbox."
+msgstr "Keď zmeníte e-mail, aktuálna adresa zostane aktívna, kým novú nepotvrdíte cez správu v doručenej pošte."
 
 msgid "Withdraw application"
 msgstr "Odvolať žiadosť"
@@ -3844,6 +3904,9 @@ msgstr "Môžete zadať iba doménu. HTTPS bude v prípade potreby pridané auto
 
 msgid "You can request another email after the countdown finishes."
 msgstr "O ďalší e-mail môžete požiadať po dokončení odpočítavania."
+
+msgid "You can update your password or email here. If a change affects account safety, we'll guide you through the next step."
+msgstr "Tu môžete aktualizovať heslo alebo e-mail. Ak zmena ovplyvní bezpečnosť účtu, prevedieme vás ďalším krokom."
 
 msgid "You don't have a team yet. Complete your profile onboarding and create a team first."
 msgstr "Zatiaľ nemáte tím. Dokončite onboarding profilu a najprv vytvorte tím."
@@ -3878,8 +3941,14 @@ msgstr "Váš e-mail bol aktualizovaný. Prihláste sa znova s novou adresou, ab
 msgid "Your invitation token is verified before account setup."
 msgstr "Váš token pozvánky je overený pred nastavením účtu."
 
+msgid "Your new email is now active. To keep your account safe, you'll need to sign in again."
+msgstr "Váš nový e-mail je teraz aktívny. Kvôli bezpečnosti účtu sa budete musieť znova prihlásiť."
+
 msgid "Your password was updated. Sign in again with the new password to continue."
 msgstr "Vaše heslo bolo aktualizované. Prihláste sa znova s novým heslom, aby ste mohli pokračovať."
+
+msgid "Your password was updated. To keep your account safe, you'll need to sign in again with the new password."
+msgstr "Vaše heslo bolo aktualizované. Kvôli bezpečnosti účtu sa budete musieť znova prihlásiť s novým heslom."
 
 msgid "Your Role (e.g., Frontend Dev)"
 msgstr "Vaša rola (napr. Frontend Dev)"

@@ -71,24 +71,24 @@ export function SecurityOverviewSection({
       </StudentSectionCard>
 
       <StudentSectionCard
-        title={t`How the flows behave`}
-        description={t`These states are intentional so security changes stay explicit.`}
+        title={t`Helpful to know`}
+        description={t`A few things to keep in mind when updating your email or password.`}
       >
         <div className="space-y-4 text-sm leading-6 text-[#5b667b]">
           <SecurityBehaviorItem
             icon={<MailCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#1e58d5]" />}
           >
-            {t`Email requests only create a pending verification step. The current address remains unchanged until the token is confirmed.`}
+            {t`When you change your email, your current address stays active until you confirm the new one from your inbox.`}
           </SecurityBehaviorItem>
           <SecurityBehaviorItem
             icon={<KeyRound className="mt-0.5 h-4 w-4 shrink-0 text-[#1e58d5]" />}
           >
-            {t`Password changes require the current password and immediately invalidate active refresh sessions across devices.`}
+            {t`To change your password, enter your current one first. After the update, you'll be asked to sign in again.`}
           </SecurityBehaviorItem>
           <SecurityBehaviorItem
             icon={<ShieldAlert className="mt-0.5 h-4 w-4 shrink-0 text-[#1e58d5]" />}
           >
-            {t`If the backend reports an invalid token, a conflict, or an expired session, the exact server error is surfaced here instead of being hidden behind generic copy.`}
+            {t`If something needs attention, we'll show a clear message so you know what to do next.`}
           </SecurityBehaviorItem>
         </div>
       </StudentSectionCard>

@@ -2,19 +2,19 @@ import { i18n } from '@lingui/core';
 import { msg } from '@lingui/core/macro';
 import * as z from 'zod';
 
-const ACCOUNT_PASSWORD_MIN_LENGTH = 8;
+const ACCOUNT_PASSWORD_MIN_LENGTH = 6;
 
 export function createChangePasswordSchema() {
   return z
     .object({
       currentPassword: z.string().min(ACCOUNT_PASSWORD_MIN_LENGTH, {
-        message: i18n._(msg`Password must be at least 8 characters.`),
+        message: i18n._(msg`Password must be at least 6 characters.`),
       }),
       newPassword: z.string().min(ACCOUNT_PASSWORD_MIN_LENGTH, {
-        message: i18n._(msg`Password must be at least 8 characters.`),
+        message: i18n._(msg`Password must be at least 6 characters.`),
       }),
       confirmNewPassword: z.string().min(ACCOUNT_PASSWORD_MIN_LENGTH, {
-        message: i18n._(msg`Password must be at least 8 characters.`),
+        message: i18n._(msg`Password must be at least 6 characters.`),
       }),
     })
     .superRefine((values, ctx) => {
@@ -51,7 +51,7 @@ export function createChangeEmailConfirmSchema() {
     token: z
       .string()
       .trim()
-      .min(1, { message: i18n._(msg`Verification token is required.`) }),
+      .min(1, { message: i18n._(msg`Confirmation code is required.`) }),
   });
 }
 

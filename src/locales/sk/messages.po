@@ -138,17 +138,29 @@ msgstr "NASTAVENIE ÚČTU"
 msgid "Accounts currently blocked from normal access."
 msgstr "Účty aktuálne zablokované pre bežný prístup."
 
+msgid "Action failed"
+msgstr "Akcia zlyhala"
+
 msgid "Action queues, backlog movement, and project delivery status are summarized here so company users can move directly into the right Program B workspace."
 msgstr "Fronty akcií, pohyb backlogu a stav realizácie projektov sú tu zhrnuté tak, aby sa firemní používatelia mohli hneď presunúť do správneho pracoviska Programu B."
 
 msgid "Actions"
 msgstr "Akcie"
 
+#~ msgid "Actions are disabled for demo applications. Open a real application from the review queue to use lifecycle actions."
+#~ msgstr "Akcie sú pre demo prihlášky vypnuté. Ak chcete použiť akcie životného cyklu, otvorte reálnu prihlášku z fronty na kontrolu."
+
 msgid "Activate"
 msgstr "Aktivovať"
 
+msgid "Activate project"
+msgstr "Aktivovať projekt"
+
 msgid "Active"
 msgstr "Aktívne"
+
+msgid "Active project"
+msgstr "Aktívny projekt"
 
 msgid "Active projects"
 msgstr "Aktívne projekty"
@@ -186,6 +198,9 @@ msgstr "Pridajte základné informácie o vašej organizácii."
 msgid "Add company details so your organization can be reviewed and connected to the platform."
 msgstr "Pridajte údaje o spoločnosti, aby mohla byť vaša organizácia skontrolovaná a prepojená s platformou."
 
+msgid "Add evaluation"
+msgstr "Pridať hodnotenie"
+
 msgid "Add note"
 msgstr "Pridať poznámku"
 
@@ -197,6 +212,9 @@ msgstr "Pridať zručnosť"
 
 msgid "Add your CV, skills, and supporting professional details."
 msgstr "Pridajte svoje CV, zručnosti a doplňujúce profesionálne údaje."
+
+msgid "Additional submitted section data."
+msgstr "Ďalšie odoslané údaje sekcie."
 
 msgid "Adjust the search or create a new university to start building the academic tree."
 msgstr "Upravte vyhľadávanie alebo vytvorte novú univerzitu na začatie budovania akademického stromu."
@@ -228,8 +246,14 @@ msgstr "admin@nti.sk"
 msgid "Administrative Access"
 msgstr "Administrátorský prístup"
 
+msgid "All"
+msgstr "Všetko"
+
 msgid "All programs"
 msgstr "Všetky programy"
+
+msgid "All signals passed"
+msgstr "Všetky signály boli splnené"
 
 msgid "All statuses"
 msgstr "Všetky stavy"
@@ -243,8 +267,26 @@ msgstr "Už máte účet?"
 msgid "An account with this invited email already exists. Use the existing account path instead."
 msgstr "Účet s touto pozvánkou už existuje. Použite radšej existujúci účet."
 
+msgid "Application"
+msgstr "Prihláška"
+
+#~ msgid "Application content"
+#~ msgstr "Obsah prihlášky"
+
+msgid "Application data is not loaded yet."
+msgstr "Údaje prihlášky ešte nie sú načítanéю"
+
 msgid "Application Decisions"
 msgstr "Rozhodnutia o prihláškach"
+
+#~ msgid "Application ID"
+#~ msgstr "ID prihlášky"
+
+msgid "Application name"
+msgstr "Názov prihlášky"
+
+msgid "Application sections"
+msgstr "Sekcie prihlášky"
 
 msgid "Application withdrawn."
 msgstr "Prihláška bola stiahnutá."
@@ -254,6 +296,9 @@ msgstr "Prihlášky"
 
 msgid "Applications In Scope"
 msgstr "Prihlášky v zábere"
+
+msgid "Approval is only available while the application is evaluating."
+msgstr "Schválenie je dostupné iba počas hodnotenia prihlášky."
 
 msgid "Approve"
 msgstr "Schváliť"
@@ -270,6 +315,12 @@ msgstr "Schvaľuje sa..."
 msgid "Archive"
 msgstr "Archivovať"
 
+msgid "Archive application"
+msgstr "Archivovať prihlášku"
+
+msgid "Archive is only available for rejected or completed applications."
+msgstr "Archivácia je dostupná iba pre zamietnuté alebo dokončené prihlášky."
+
 msgid "Archived"
 msgstr "Archivované"
 
@@ -279,20 +330,32 @@ msgstr "Vzostupne"
 msgid "Assign"
 msgstr "Priradiť"
 
+msgid "Assign a mentor before adding mentorship notes."
+msgstr "Pred pridaním mentorských poznámok priraďte mentora."
+
 msgid "Assign a team member"
 msgstr "Priradiť člena tímu"
 
 msgid "Assign mentor"
 msgstr "Priradiť mentora"
 
+msgid "Assign mentor / onboarding"
+msgstr "Priradiť mentora / onboarding"
+
 msgid "Assign myself"
 msgstr "Priradiť seba"
+
+msgid "Assign or update the Program A mentor responsible for delivery follow-up."
+msgstr "Priraďte alebo aktualizujte mentora Programu A zodpovedného za sledovanie realizácie"
 
 msgid "Assign product owner"
 msgstr "Priradiť produktového vlastníka"
 
 msgid "Assign product owners"
 msgstr "Priradiť product ownerov"
+
+msgid "Assigned"
+msgstr "Priradený"
 
 msgid "Assigned:"
 msgstr "Priradený:"
@@ -354,6 +417,9 @@ msgstr "Späť na organizácie"
 msgid "Back to projects"
 msgstr "Späť na projekty"
 
+msgid "Back to review queue"
+msgstr "Späť na frontu kontroly"
+
 msgid "Backlog"
 msgstr "Backlog"
 
@@ -386,6 +452,9 @@ msgstr "Položky backlogu vašej organizácie sa tu zobrazia, keď bude vytvoren
 
 msgid "Backlog preview"
 msgstr "Náhľad backlogu"
+
+msgid "Basic application profile information."
+msgstr "Základné informácie o profile prihlášky"
 
 msgid "Bio"
 msgstr "Bio"
@@ -450,6 +519,9 @@ msgstr "Zaznamenajte míľniky dodávky s voliteľným popisom a termínom."
 msgid "Categories"
 msgstr "Kategórie"
 
+msgid "Category"
+msgstr "Kategória"
+
 msgid "Changes requested"
 msgstr "Vyžiadané zmeny"
 
@@ -507,6 +579,9 @@ msgstr "Zavrieť menu"
 msgid "Close navigation"
 msgstr "Zavrieť navigáciu"
 
+msgid "Close navigation menu"
+msgstr "Zatvoriť navigačné menu"
+
 msgid "Closed"
 msgstr "Uzavreté"
 
@@ -524,6 +599,9 @@ msgstr "Kód"
 
 msgid "Code must be at least 4 characters."
 msgstr "Kód musí mať aspoň 4 znaky."
+
+msgid "Comment"
+msgstr "Komentár"
 
 msgid "Comment (optional)"
 msgstr "Komentár (voliteľné)"
@@ -570,8 +648,14 @@ msgstr "Dokončiť"
 msgid "Complete foundation setup"
 msgstr "Dokončiť základné nastavenie"
 
+msgid "Complete project"
+msgstr "Dokončiť projekt"
+
 msgid "Complete your student profile"
 msgstr "Dokončite svoj študentský profil"
+
+msgid "Completed"
+msgstr "Dokončené"
 
 msgid "Completed delivery is waiting for final company acceptance in the project workspace."
 msgstr "Dokončené plnenie čaká na finálne schválenie spoločnosťou v projektovom pracovisku."
@@ -672,6 +756,9 @@ msgstr "Vytvorte pozvánku pre zobrazenie vrátených metadát."
 msgid "Create call"
 msgstr "Vytvoriť výzvu"
 
+msgid "Create criterion-based scoring after formal verification or during evaluation."
+msgstr "Vytvorte bodové hodnotenie podľa kritérií po formálnom overení alebo počas hodnotenia."
+
 msgid "Create Faculty"
 msgstr "Vytvoriť fakultu"
 
@@ -680,6 +767,9 @@ msgstr "Vytvoriť pozvánku"
 
 msgid "Create milestone"
 msgstr "Vytvoriť míľnik"
+
+msgid "Create needs-info item"
+msgstr "Vytvoriť požiadavku na doplnenie informácií"
 
 msgid "Create organization"
 msgstr "Vytvoriť organizáciu"
@@ -738,6 +828,9 @@ msgstr "Vytvorené"
 msgid "Created At"
 msgstr "Vytvorené"
 
+#~ msgid "Created by"
+#~ msgstr "Vytvoril"
+
 msgid "Created By"
 msgstr "Vytvoril"
 
@@ -753,8 +846,14 @@ msgstr "Vytvára sa organizácia…"
 msgid "Creating..."
 msgstr "Vytvára sa..."
 
+#~ msgid "Criterion-based scoring form will be connected to the backend in the next steps."
+#~ msgstr "Formulár hodnotenia podľa kritérií bude pripojený k backendu v ďalších krokoch."
+
 msgid "Current invitations"
 msgstr "Aktuálne pozvánky"
+
+msgid "Current mentor"
+msgstr "Aktuálny mentor"
 
 msgid "Current mentor:"
 msgstr "Aktuálny mentor:"
@@ -816,6 +915,9 @@ msgstr "Rozhodnutie"
 msgid "Decision note:"
 msgstr "Poznámka k rozhodnutiu:"
 
+msgid "Decision reason"
+msgstr "Dôvod rozhodnutia"
+
 msgid "Decisions recorded during the last 30 days."
 msgstr "Rozhodnutia zaznamenané za posledných 30 dní."
 
@@ -845,6 +947,15 @@ msgstr "Odstraňuje sa..."
 
 msgid "Deliverable"
 msgstr "Dodávka"
+
+msgid "Delivery"
+msgstr "Realizácia"
+
+#~ msgid "Delivery phase"
+#~ msgstr "Realizačná fáza"
+
+msgid "Delivery workflow"
+msgstr "Proces realizácie"
 
 msgid "Descending"
 msgstr "Zostupne"
@@ -897,6 +1008,9 @@ msgstr "Koncept"
 msgid "Driving innovation and economic growth through technology and academic collaboration."
 msgstr "Podporujeme inovácie a ekonomický rast prostredníctvom technológií a akademickej spolupráce."
 
+msgid "Due"
+msgstr "Termín"
+
 #. placeholder {0}: formatUnknownDate(milestone.dueAt)
 msgid "Due {0}"
 msgstr "Termín {0}"
@@ -943,6 +1057,9 @@ msgstr "Upraviť univerzitu"
 msgid "Education details, academic verification, and declaration."
 msgstr "Detaily vzdelania, akademické overenie a vyhlásenie."
 
+msgid "Eligibility"
+msgstr "Spôsobilosť"
+
 msgid "Email"
 msgstr "E-mail"
 
@@ -978,6 +1095,12 @@ msgstr "ŠIFROVANIE"
 
 msgid "END-TO-END"
 msgstr "KOMPLEXNÉ"
+
+msgid "Enter a mentor user ID before assigning a mentor."
+msgstr "Pred priradením mentora zadajte ID používateľa mentora."
+
+msgid "Enter a milestone title before creating it."
+msgstr "Pred vytvorením míľnika zadajte jeho názov."
 
 msgid "Enter a strong password"
 msgstr "Zadajte silné heslo"
@@ -1021,8 +1144,23 @@ msgstr "Podniková dátová analytika"
 msgid "Entry point for Program B stakeholders. Manage technical challenges, oversee precision metrics, and interface directly with emerging talent pools through the Engine portal."
 msgstr "Vstupný bod pre účastníkov Programu B. Spravujte technické výzvy, sledujte presné metriky a komunikujte priamo s novými talentmi cez portál Engine."
 
+msgid "Evaluating"
+msgstr "V hodnotení"
+
+msgid "Evaluation can only be created after formal verification or during evaluation."
+msgstr "Hodnotenie je možné vytvoriť iba po formálnom overení alebo počas hodnotenia."
+
+msgid "Evaluation can only be started after formal verification."
+msgstr "Hodnotenie je možné spustiť iba po formálnom overení."
+
 msgid "Evaluation queue and review flows"
 msgstr "Front hodnotenia a revízne toky"
+
+msgid "Evaluations"
+msgstr "Hodnotenia"
+
+msgid "Evaluator"
+msgstr "Hodnotiteľ"
 
 msgid "Everything is up to date right now."
 msgstr "Momentálne je všetko aktuálne."
@@ -1062,6 +1200,9 @@ msgstr "Platnosť do:"
 
 msgid "Expiry timestamp returned by the backend."
 msgstr "Časová pečiatka platnosti vrátená backendom."
+
+msgid "Explain what the team has to clarify or upload..."
+msgstr "Vysvetlite, čo má tím objasniť alebo nahrať..."
 
 msgid "Explain why this organization should be rejected."
 msgstr "Vysvetlite, prečo by mala byť táto organizácia zamietnutá."
@@ -1129,6 +1270,15 @@ msgstr "Fakulta bola aktualizovaná."
 msgid "Failed"
 msgstr "Zlyhalo"
 
+msgid "Failed signals"
+msgstr "Nesplnené signály"
+
+msgid "Filter by call"
+msgstr "Filtrovať podľa výzvy"
+
+#~ msgid "Filter by status"
+#~ msgstr "Filtrovať podľa stavu"
+
 msgid "Filter faculties on this page"
 msgstr "Filtrovať fakulty na tejto stránke"
 
@@ -1182,6 +1332,21 @@ msgstr "Zabudli ste heslo?"
 
 msgid "Form Conquered"
 msgstr "Formulár zvládnutý"
+
+msgid "Formal verification"
+msgstr "Formálne overenie"
+
+msgid "Formal verification is only available for submitted applications."
+msgstr "Formálne overenie je dostupné iba pre odoslané prihlášky."
+
+msgid "Formal verify"
+msgstr "Formálne overiť"
+
+msgid "Formally verified"
+msgstr "Formálne overené"
+
+msgid "Formally Verified"
+msgstr "Formálne Overené"
 
 msgid "Format"
 msgstr "Formát"
@@ -1259,6 +1424,9 @@ msgstr "ID"
 msgid "ID"
 msgstr "ID"
 
+msgid "Idea overview"
+msgstr "Prehľad nápadu"
+
 msgid "Identity"
 msgstr "Identita"
 
@@ -1288,6 +1456,9 @@ msgstr "Nedokončené"
 
 msgid "Information Technology…"
 msgstr "Informačné technológie…"
+
+msgid "Initial progress note"
+msgstr "Úvodná poznámka o pokroku"
 
 msgid "Innovation Repository"
 msgstr "Repozitár inovácií"
@@ -1392,8 +1563,14 @@ msgstr "PRIPÁJANIE..."
 msgid "Keep your academic and professional information up to date."
 msgstr "Nezabudnite aktualizovať svoje akademické a profesijné údaje."
 
+msgid "Key business and product information from the submitted application."
+msgstr "Kľúčové obchodné a produktové informácie z odoslanej prihlášky"
+
 msgid "Language"
 msgstr "Jazyk"
+
+msgid "Last activity"
+msgstr "Posledná aktivita"
 
 msgid "Last name"
 msgstr "Priezvisko"
@@ -1406,6 +1583,9 @@ msgstr "Priezvisko musí mať aspoň 2 znaky."
 
 msgid "Last name must be at most 50 characters."
 msgstr "Priezvisko môže mať maximálne 50 znakov."
+
+msgid "Last updated"
+msgstr "Naposledy aktualizované"
 
 msgid "Last updated:"
 msgstr "Naposledy aktualizované:"
@@ -1449,11 +1629,20 @@ msgstr "Odkazy"
 msgid "List your primary technical skills and proficiency."
 msgstr "Uveďte svoje hlavné technické zručnosti a úroveň znalostí."
 
+#~ msgid "Load a real application detail before running lifecycle actions."
+#~ msgstr "Pred spustením akcií životného cyklu načítajte detail reálnej prihlášky."
+
 msgid "Loading academic structure..."
 msgstr "Načítava sa akademická štruktúra..."
 
 msgid "Loading admin data..."
 msgstr "Načítavajú sa administrátorské údaje..."
+
+msgid "Loading application detail..."
+msgstr "Načítava sa detail prihlášky..."
+
+msgid "Loading application sections..."
+msgstr "Načítavajú sa sekcie prihlášky..."
 
 msgid "Loading backlog item"
 msgstr "Načítava sa položka backlogu"
@@ -1470,6 +1659,9 @@ msgstr "Načítava sa dataset..."
 msgid "Loading documents…"
 msgstr "Načítavajú sa dokumenty…"
 
+msgid "Loading evaluations..."
+msgstr "Načítavajú sa hodnotenia..."
+
 msgid "Loading export job..."
 msgstr "Načítava sa exportná úloha..."
 
@@ -1485,11 +1677,23 @@ msgstr "Načítavajú sa členovia…"
 msgid "Loading mentors…"
 msgstr "Načítavajú sa mentori…"
 
+msgid "Loading mentorship notes..."
+msgstr "Načítavajú sa mentorské poznámky..."
+
+msgid "Loading needs-info thread..."
+msgstr "Načítava sa vlákno požiadaviek na doplnenie informácií..."
+
 msgid "Loading organization…"
 msgstr "Načítava sa organizácia…"
 
 msgid "Loading profile onboarding..."
 msgstr "Načítava sa onboarding profilu..."
+
+msgid "Loading Program A applications..."
+msgstr "Načítavajú sa prihlášky do Programu A..."
+
+msgid "Loading Program A milestones..."
+msgstr "Načítavajú sa míľniky Programu A..."
 
 msgid "Loading project"
 msgstr "Načítava sa projekt"
@@ -1603,11 +1807,17 @@ msgstr "Mentor bol priradený."
 msgid "Mentor assignment"
 msgstr "Priradenie mentora"
 
+#~ msgid "Mentor assignment, mentorship notes, and milestones will be enabled for approved Program A applications."
+#~ msgstr "Priradenie mentora, mentorské poznámky a míľniky budú dostupné pre schválené prihlášky do Programu A."
+
 msgid "Mentor dashboard"
 msgstr "Mentorský dashboard"
 
 msgid "Mentor is not assigned yet."
 msgstr "Mentor ešte nie je priradený."
+
+msgid "Mentor user id"
+msgstr "ID používateľa mentora"
 
 msgid "Mentor workspace"
 msgstr "Mentorské pracovisko"
@@ -1631,8 +1841,20 @@ msgstr "Mentorské poznámky"
 msgid "Mentors"
 msgstr "Mentori"
 
+msgid "Mentorship notes"
+msgstr "Mentorské poznámky"
+
+#~ msgid "Mentorship notes and milestones"
+#~ msgstr "Mentorské poznámky a míľniky"
+
 msgid "Milestone created."
 msgstr "Míľnik bol vytvorený."
+
+msgid "Milestone description"
+msgstr "Popis míľnika"
+
+msgid "Milestone title"
+msgstr "Názov míľnika"
 
 msgid "Milestone title is required."
 msgstr "Názov míľnika je povinný."
@@ -1652,6 +1874,9 @@ msgstr "Minimálna veľkosť tímu"
 msgid "Min team size must be a whole number greater than or equal to 1."
 msgstr "Minimálna veľkosť tímu musí byť celé číslo väčšie alebo rovné 1."
 
+msgid "Missing documents"
+msgstr "Chýbajúce dokumenty"
+
 msgid "Missing invitation token"
 msgstr "Chýba token pozvánky"
 
@@ -1661,8 +1886,11 @@ msgstr "Chýba token pozvánky"
 msgid "Moderation"
 msgstr "Moderovanie"
 
-msgid "Moderation workspace is coming soon"
-msgstr "Pracovisko moderovania bude čoskoro dostupné"
+msgid "Moderation actions"
+msgstr "Akcie moderovania"
+
+#~ msgid "Moderation workspace is coming soon"
+#~ msgstr "Pracovisko moderovania bude čoskoro dostupné"
 
 msgid "Monetization model"
 msgstr "Monetizačný model"
@@ -1706,6 +1934,15 @@ msgstr "meno@institucia.edu…"
 msgid "Needs attention"
 msgstr "Vyžaduje pozornosť"
 
+msgid "Needs info"
+msgstr "Vyžaduje informácie"
+
+msgid "Needs Info"
+msgstr "Vyžaduje informácie"
+
+msgid "Needs-info thread"
+msgstr "Vlákno doplňujúcich informácií"
+
 msgid "New"
 msgstr "Nové"
 
@@ -1724,6 +1961,9 @@ msgstr "Novinky"
 msgid "Next"
 msgstr "Ďalej"
 
+msgid "Next action"
+msgstr "Ďalšia akcia"
+
 #. placeholder {0}: item.nextMilestone.title
 msgid "Next milestone: {0}"
 msgstr "Ďalší míľnik: {0}"
@@ -1736,6 +1976,9 @@ msgstr "Ďalšie kroky"
 
 msgid "No"
 msgstr "Nie"
+
+msgid "No action"
+msgstr "Žiadna akcia"
 
 msgid "No active Program A calls are available right now."
 msgstr "Momentálne nie sú dostupné žiadne aktívne výzvy Programu A."
@@ -1751,6 +1994,12 @@ msgstr "Žiadny aktívny tím"
 
 msgid "No application rows match the current filters."
 msgstr "Aktuálnym filtrom nezodpovedajú žiadne riadky prihlášok."
+
+msgid "No application sections were returned by the backend."
+msgstr "Backend nevrátil žiadne sekcie prihlášky."
+
+msgid "No applications found."
+msgstr "Nenašli sa žiadne prihlášky."
 
 msgid "No assigned projects"
 msgstr "Žiadne priradené projekty"
@@ -1797,6 +2046,9 @@ msgstr "Bez termínu"
 msgid "No employee invitations yet. Send the first invitation using the form on the left."
 msgstr "Zatiaľ nie sú žiadne pozvánky pre zamestnancov. Odošlite prvú pozvánku pomocou formulára vľavo."
 
+msgid "No evaluations were returned by the backend."
+msgstr "Backend nevrátil žiadne hodnotenia."
+
 msgid "No export jobs yet"
 msgstr "Zatiaľ žiadne exportné úlohy"
 
@@ -1818,6 +2070,9 @@ msgstr "Zatiaľ nie sú žiadne lokálne návrhy Programu A."
 msgid "No mentoring notes yet."
 msgstr "Zatiaľ žiadne mentorské poznámky."
 
+msgid "No mentorship notes were returned by the backend."
+msgstr "Backend nevrátil žiadne mentorské poznámky."
+
 msgid "No milestone description."
 msgstr "Bez popisu míľnika."
 
@@ -1826,6 +2081,9 @@ msgstr "Zatiaľ žiadne míľniky."
 
 msgid "No motivation provided."
 msgstr "Nebola uvedená žiadna motivácia."
+
+msgid "No needs-info messages were returned by the backend."
+msgstr "Backend nevrátil žiadne správy s požiadavkou na doplnenie informácií."
 
 msgid "No organization found"
 msgstr "Organizácia sa nenašla"
@@ -1845,6 +2103,15 @@ msgstr "Žiadne organizácie nepotrebujú kontrolu"
 msgid "No pending actions right now"
 msgstr "Momentálne nie sú žiadne čakajúce akcie"
 
+msgid "No Program A applications found"
+msgstr "Nenašli sa žiadne prihlášky Programu A"
+
+#~ msgid "No Program A applications yet"
+#~ msgstr "Zatiaľ nie sú žiadne prihlášky do Programu A"
+
+msgid "No Program A milestones were returned by the backend."
+msgstr "Backend nevrátil žiadne míľniky Programu A."
+
 msgid "No Program B projects"
 msgstr "Žiadne projekty programu B"
 
@@ -1853,6 +2120,9 @@ msgstr "Aktuálnym filtrom nezodpovedajú žiadne riadky Programu B."
 
 msgid "No projects yet"
 msgstr "Zatiaľ žiadne projekty"
+
+msgid "No recommendation"
+msgstr "Bez odporúčania"
 
 msgid "No reviews yet."
 msgstr "Zatiaľ žiadne hodnotenia."
@@ -1902,6 +2172,9 @@ msgstr "Nepriradené"
 msgid "Not available"
 msgstr "Nedostupné"
 
+msgid "Not checked"
+msgstr "Neskontrolované"
+
 msgid "Not provided"
 msgstr "Neuvedené"
 
@@ -1937,6 +2210,9 @@ msgstr "Počet uznaných predmetov"
 
 msgid "of"
 msgstr "z"
+
+msgid "Onboarding can only be started after the application is approved."
+msgstr "Onboarding je možné spustiť iba po schválení prihlášky."
 
 msgid "Once backlog work is created for this organization, the latest items will appear here."
 msgstr "Keď sa pre túto organizáciu vytvorí backlog, najnovšie položky sa zobrazia tu."
@@ -1985,6 +2261,9 @@ msgstr "Otvoriť menu"
 
 msgid "Open navigation"
 msgstr "Otvoriť navigáciu"
+
+msgid "Open navigation menu"
+msgstr "Otvoriť navigačné menu"
 
 msgid "Open profile"
 msgstr "Otvoriť profil"
@@ -2132,6 +2411,9 @@ msgstr "Prehľad bol aktualizovaný {0}"
 msgid "Page"
 msgstr "Strana"
 
+#~ msgid "Page 1 of 1"
+#~ msgstr "Strana 1 z 1"
+
 msgid "Pagination"
 msgstr "Stránkovanie"
 
@@ -2152,6 +2434,9 @@ msgstr "Vložte token z vášho e-mailu…"
 
 msgid "Paste your verification token"
 msgstr "Vložte svoj overovací token"
+
+msgid "Pause project"
+msgstr "Pozastaviť projekt"
 
 msgid "Pending"
 msgstr "Čaká"
@@ -2179,6 +2464,15 @@ msgstr "Zadajte platnú URL webovej stránky."
 
 msgid "Please review your information before completing the registration."
 msgstr "Pred dokončením registrácie si skontrolujte svoje údaje."
+
+msgid "Please wait until the current request finishes."
+msgstr "Počkajte, kým sa aktuálna požiadavka dokončí."
+
+msgid "Please wait. The previous action is still running."
+msgstr "Počkajte, predchádzajúca akcia stále prebieha."
+
+msgid "Please write a transition reason before running this action."
+msgstr "Pred spustením tejto akcie uveďte dôvod prechodu."
 
 msgid "PNG, JPG or WEBP. Logo is optional."
 msgstr "PNG, JPG alebo WEBP. Logo je voliteľné."
@@ -2212,6 +2506,9 @@ msgstr "Zásady ochrany súkromia"
 
 msgid "PRIVACY POLICY"
 msgstr "ZÁSADY OCHRANY SÚKROMIA"
+
+msgid "Problem"
+msgstr "Problém"
 
 msgid "PROCESSING..."
 msgstr "SPRACOVÁVA SA..."
@@ -2274,11 +2571,20 @@ msgstr "Program"
 msgid "Program A"
 msgstr "Program A"
 
+msgid "Program A application"
+msgstr "Prihláška do Programu A"
+
+#~ msgid "Program A application detail with review state, application metadata, documents, evaluations, needs-info workflow, and delivery follow-up."
+#~ msgstr "Detail prihlášky do Programu A so stavom kontroly, metadátami prihlášky, dokumentmi, hodnoteniami, procesom doplňujúcich informácií a následným sledovaním realizácie."
+
 msgid "Program A flow"
 msgstr "Tok Programu A"
 
 msgid "Program A is for draft and submission flow. Program B is for opportunity pairing and project delivery."
 msgstr "Program A slúži na tok návrhu a podania. Program B je určený na párovanie príležitostí a realizáciu projektov."
+
+msgid "Program A milestones"
+msgstr "Míľniky Programu A"
 
 msgid "Program A Moderation"
 msgstr "Moderovanie Programu A"
@@ -2325,11 +2631,23 @@ msgstr "Tu sa zobrazia projekty programu B, kde ste priradeným mentorom."
 msgid "Programs"
 msgstr "Programy"
 
+msgid "Progress note"
+msgstr "Poznámka o pokroku"
+
 msgid "Project"
 msgstr "Projekt"
 
+msgid "Project activation is only available from onboarding or paused states."
+msgstr "Aktivácia projektu je dostupná iba zo stavov onboarding alebo pozastavený."
+
+msgid "Project completion is only available for active projects."
+msgstr "Dokončenie projektu je dostupné iba pre aktívne projekty."
+
 msgid "Project is unavailable"
 msgstr "Projekt nie je dostupný"
+
+msgid "Project pause is only available for active projects."
+msgstr "Pozastavenie projektu je dostupné iba pre aktívne projekty."
 
 msgid "Project preview"
 msgstr "Náhľad projektu"
@@ -2388,11 +2706,17 @@ msgstr "Rýchle odkazy"
 msgid "Reason (optional)"
 msgstr "Dôvod (voliteľné)"
 
+msgid "Reassign mentor"
+msgstr "Zmeniť mentora"
+
 msgid "Recent organization-scoped Program B backlog items from the dedicated summary endpoint."
 msgstr "Nedávne položky backlogu Programu B v rozsahu organizácie z vyhradeného summary endpointu."
 
 msgid "Recent organizations that still need an operational decision."
 msgstr "Nedávne organizácie, ktoré stále potrebujú operačné rozhodnutie."
+
+msgid "Recommendation"
+msgstr "Odporúčanie"
 
 msgid "Record company final acceptance"
 msgstr "Zaznamenať finálne schválenie spoločnosti"
@@ -2442,6 +2766,9 @@ msgstr "Zamietnuť"
 msgid "Reject candidate"
 msgstr "Zamietnuť uchádzača"
 
+msgid "Reject is only available during submitted, formal verification, evaluation, or needs-info states."
+msgstr "Zamietnutie je dostupné iba v stavoch odoslané, formálne overenie, hodnotenie alebo potreba doplnenia informácií."
+
 msgid "Rejected"
 msgstr "Zamietnuté"
 
@@ -2468,6 +2795,9 @@ msgstr "Reportovací dashboard nie je dostupný"
 
 msgid "Reports"
 msgstr "Reporty"
+
+msgid "Request additional information"
+msgstr "Vyžiadať doplňujúce informácie"
 
 msgid "Request failed"
 msgstr "Požiadavka zlyhala"
@@ -2511,6 +2841,9 @@ msgstr "Overuje sa vaše autentifikované pracovisko."
 msgid "Resolving your organization access before loading Program B company data."
 msgstr "Pred načítaním firemných dát Programu B sa overuje prístup k vašej organizácii."
 
+msgid "Resume project"
+msgstr "Obnoviť projekt"
+
 msgid "Retry"
 msgstr "Skúsiť znova"
 
@@ -2526,8 +2859,17 @@ msgstr "Skontrolovať kandidátske tímy"
 msgid "Review dashboard"
 msgstr "Revízny dashboard"
 
+msgid "Review metadata, evaluate the application, request information, assign a mentor, and manage Program A delivery milestones."
+msgstr "Skontrolujte metadáta, vyhodnoťte prihlášku, vyžiadajte informácie, priraďte mentora a spravujte realizačné míľniky Programu A."
+
 msgid "Review Organizations"
 msgstr "Kontrola organizácií"
+
+msgid "Review Program A applications, move them through moderation, assign mentors, and track delivery milestones."
+msgstr "Kontrolujte prihlášky Programu A, presúvajte ich cez moderovanie, priraďujte mentorov a sledujte realizačné míľniky."
+
+#~ msgid "Review queue"
+#~ msgstr "Fronta na kontrolu"
 
 msgid "Review Queue"
 msgstr "Front na kontrolu"
@@ -2535,8 +2877,14 @@ msgstr "Front na kontrolu"
 msgid "Review setup"
 msgstr "Nastavenie revízie"
 
+#~ msgid "Review submitted Program A applications, request additional information, evaluate teams, and continue approved projects into delivery."
+#~ msgstr "Kontrolujte odoslané prihlášky do Programu A, vyžiadajte doplňujúce informácie, hodnotte tímy a posúvajte schválené projekty do realizačnej fázy."
+
 msgid "Review submitted."
 msgstr "Hodnotenie bolo odoslané."
+
+msgid "Review workflow"
+msgstr "Proces kontroly"
 
 msgid "Review workspace"
 msgstr "Revízne pracovisko"
@@ -2583,6 +2931,9 @@ msgstr "Rola na pridelenie"
 msgid "rows"
 msgstr "riadkov"
 
+msgid "Rows"
+msgstr "Riadky"
+
 msgid "Running"
 msgstr "Prebieha"
 
@@ -2592,11 +2943,17 @@ msgstr "Uložiť akademické informácie"
 msgid "Save changes"
 msgstr "Uložiť zmeny"
 
+msgid "Save evaluation"
+msgstr "Uložiť hodnotenie"
+
 msgid "Save New Password"
 msgstr "Uložiť nové heslo"
 
 msgid "Save professional skills"
 msgstr "Uložiť profesionálne zručnosti"
+
+msgid "Save progress"
+msgstr "Uložiť pokrok"
 
 msgid "Save your academic section first so professional data can be attached to a valid student profile."
 msgstr "Najprv uložte akademickú sekciu, aby mohli byť profesionálne údaje pripojené k platnému študentskému profilu."
@@ -2624,6 +2981,12 @@ msgstr "Vyhľadávať podľa e-mailu, roly alebo ID"
 
 msgid "Search by name, website, sector, or id"
 msgstr "Vyhľadávať podľa názvu, webu, sektora alebo ID"
+
+#~ msgid "Search by team, applicant, or call..."
+#~ msgstr "Hľadať podľa tímu, uchádzača alebo výzvy..."
+
+msgid "Search by team, call, status, or mentor state..."
+msgstr "Hľadať podľa tímu, výzvy, stavu alebo stavu mentora..."
 
 msgid "Search title or description"
 msgstr "Hľadať názov alebo popis"
@@ -2778,6 +3141,9 @@ msgstr "Zobraziť heslo"
 msgid "Showcase your best projects and tell us about yourself."
 msgstr "Predstavte svoje najlepšie projekty a povedzte nám niečo o sebe."
 
+msgid "Showing Program A moderation rows."
+msgstr "Zobrazujú sa riadky moderovania Programu A."
+
 msgid "Sign In"
 msgstr "Prihlásiť sa"
 
@@ -2817,11 +3183,17 @@ msgstr "Mäkké zručnosti"
 msgid "Soft-disabled rows remain manageable when this filter is turned on."
 msgstr "Mäkko deaktivované riadky zostávajú spravovateľné po zapnutí tohto filtra."
 
+msgid "Solution"
+msgstr "Riešenie"
+
 msgid "Solution proposal"
 msgstr "Návrh riešenia"
 
 msgid "Some dashboard sections could not be refreshed."
 msgstr "Niektoré sekcie dashboardu sa nepodarilo obnoviť."
+
+msgid "Something went wrong. Check the Network tab for details."
+msgstr "Niečo sa pokazilo. Podrobnosti nájdete na karte Network."
 
 msgid "Sort"
 msgstr "Zoradiť podľa"
@@ -2862,6 +3234,9 @@ msgstr "Špecializácie"
 msgid "Specializations are unavailable"
 msgstr "Špecializácie nie sú dostupné"
 
+msgid "Stack"
+msgstr "Technológie"
+
 msgid "Stack tags"
 msgstr "Technologické značky"
 
@@ -2874,8 +3249,14 @@ msgstr "Spustite export, aby ste tu mohli sledovať jeho stav a stiahnuť dokon�
 msgid "Start draft"
 msgstr "Začať návrh"
 
+msgid "Start evaluation"
+msgstr "Spustiť hodnotenie"
+
 msgid "START FROM THE BEGINNING"
 msgstr "ZAČAŤ OD ZAČIATKU"
+
+msgid "Start onboarding"
+msgstr "Spustiť onboarding"
 
 msgid "Startups"
 msgstr "Startupy"
@@ -2928,14 +3309,23 @@ msgstr "Priemer z predmetov"
 msgid "Submit application"
 msgstr "Odoslať prihlášku"
 
+msgid "Submit evaluation"
+msgstr "Odoslať hodnotenie"
+
 msgid "Submit review"
 msgstr "Odoslať hodnotenie"
 
 msgid "Submitted"
 msgstr "Odoslané"
 
+msgid "Submitted by"
+msgstr "Odoslal"
+
 msgid "Submitted candidates are waiting for shortlist or acceptance decisions."
 msgstr "Odoslaní kandidáti čakajú na rozhodnutie o užšom výbere alebo prijatí."
+
+#~ msgid "Submitted Program A applications will appear here after teams send their applications for review."
+#~ msgstr "Odoslané prihlášky do Programu A sa tu zobrazia po tom, ako ich tímy pošlú na kontrolu."
 
 msgid "Submitted:"
 msgstr "Odoslané:"
@@ -2972,6 +3362,9 @@ msgstr "Pipeline získavania talentov"
 
 msgid "Target team"
 msgstr "Cieľový tím"
+
+msgid "Target users"
+msgstr "Cieľoví používatelia"
 
 msgid "Team"
 msgstr "Tím"
@@ -3017,6 +3410,9 @@ msgstr "Prehľad tímu"
 
 msgid "Team readiness"
 msgstr "Pripravenosť tímu"
+
+msgid "Team size"
+msgstr "Veľkosť tímu"
 
 msgid "Team:"
 msgstr "Tím:"
@@ -3068,6 +3464,9 @@ msgstr "Nepodarilo sa načítať správu výziev."
 
 msgid "The company project summary could not be loaded right now."
 msgstr "Firemné zhrnutie projektov sa teraz nepodarilo načítať."
+
+#~ msgid "The current application detail DTO contains only core metadata. Full application answers should be connected when the backend exposes them in the detail response or a separate endpoint."
+#~ msgstr "Aktuálne DTO detailu prihlášky obsahuje iba základné metadáta. Úplné odpovede z prihlášky by sa mali pripojiť, keď ich backend sprístupní v odpovedi detailu alebo v samostatnom endpointe."
 
 msgid "The current Program B company workflow does not have any open action queues."
 msgstr "Aktuálny firemný workflow Programu B momentálne nemá žiadne otvorené fronty akcií."
@@ -3174,8 +3573,8 @@ msgstr "Toto mentorské pracovisko je smerované správne. Zobrazenia mentorovan
 msgid "This organization has no invite records available right now."
 msgstr "Táto organizácia momentálne nemá dostupné žiadne záznamy o pozvánkach."
 
-msgid "This placeholder keeps the admin route available while the full Program A moderation workflow is being implemented."
-msgstr "Tento zástupný obsah ponecháva administrátorskú cestu dostupnú, kým sa implementuje kompletný workflow moderovania Programu A."
+#~ msgid "This placeholder keeps the admin route available while the full Program A moderation workflow is being implemented."
+#~ msgstr "Tento zástupný obsah ponecháva administrátorskú cestu dostupnú, kým sa implementuje kompletný workflow moderovania Programu A."
 
 msgid "This project is closed and now read-only."
 msgstr "Tento projekt je uzavretý a teraz je len na čítanie."
@@ -3213,6 +3612,9 @@ msgstr "Celkový počet riadkov prihlášok naprieč skupinami stavov."
 msgid "Total Users"
 msgstr "Celkový počet používateľov"
 
+msgid "Track delivery"
+msgstr "Sledovať realizáciu"
+
 msgid "Track pending, accepted, expired, and revoked employee invitations."
 msgstr "Sledujte čakajúce, prijaté, expirované a zrušené pozvánky pre zamestnancov."
 
@@ -3222,8 +3624,20 @@ msgstr "Preniesť vedenie"
 msgid "Transferred Subjects"
 msgstr "Uznané predmety"
 
+#~ msgid "Transition note"
+#~ msgstr "Poznámka k zmene stavu"
+
+msgid "Transition reason"
+msgstr "Dôvod prechodu"
+
 msgid "Try adjusting the search phrase or filters to find another backlog item."
 msgstr "Skúste upraviť vyhľadávaný výraz alebo filtre, aby ste našli inú položku backlogu."
+
+msgid "Try changing the search query, call filter, or selected status."
+msgstr "Skúste zmeniť vyhľadávací dotaz, filter výzvy alebo vybraný stav."
+
+#~ msgid "Try changing the search text, call filter, or status filter."
+#~ msgstr "Skúste zmeniť text vyhľadávania, filter výzvy alebo filter stavu"
 
 msgid "Twitter"
 msgstr "Twitter"
@@ -3291,6 +3705,9 @@ msgstr "Tento report sa momentálne nepodarilo exportovať."
 msgid "Unable to join the invited team right now."
 msgstr "Momentálne sa nemôžem pripojiť k pozvanému tímu."
 
+msgid "Unable to load application detail from the backend."
+msgstr "Nepodarilo sa načítať detail prihlášky z backendu."
+
 msgid "Unable to load backlog preview"
 msgstr "Nepodarilo sa načítať náhľad backlogu"
 
@@ -3300,6 +3717,15 @@ msgstr "Nepodarilo sa načítať firemný backlog"
 msgid "Unable to load company projects"
 msgstr "Nepodarilo sa načítať firemné projekty"
 
+#~ msgid "Unable to load live application detail. Showing demo layout data for development preview."
+#~ msgstr "Nepodarilo sa načítať detail reálnej prihlášky. Zobrazujú sa demo dáta rozloženia pre vývojový náhľad."
+
+msgid "Unable to load live applications."
+msgstr "Nepodarilo sa načítať aktuálne prihlášky"
+
+#~ msgid "Unable to load live applications. Showing demo moderation rows."
+#~ msgstr "Nepodarilo sa načítať reálne prihlášky. Zobrazujú sa demo riadky moderovania."
+
 msgid "Unable to load organization invitations."
 msgstr "Nepodarilo sa načítať pozvánky organizácie."
 
@@ -3308,6 +3734,9 @@ msgstr "Nepodarilo sa načítať metriky prehľadu"
 
 msgid "Unable to load profile data for review."
 msgstr "Nepodarilo sa načítať údaje profilu na kontrolu."
+
+msgid "Unable to load Program A applications from the backend."
+msgstr "Nepodarilo sa načítať prihlášky Programu A z backendu"
 
 msgid "Unable to load project preview"
 msgstr "Nepodarilo sa načítať náhľad projektov"
@@ -3471,6 +3900,12 @@ msgstr "Výber univerzity je povinný"
 msgid "University updated."
 msgstr "Univerzita bola aktualizovaná."
 
+msgid "Unknown call"
+msgstr "Neznáma výzva"
+
+#~ msgid "Unknown status"
+#~ msgstr "Neznámy stav"
+
 msgid "Unknown team"
 msgstr "Neznámy tím"
 
@@ -3511,6 +3946,12 @@ msgstr "Aktualizované:"
 msgid "Updating"
 msgstr "Aktualizuje sa"
 
+#~ msgid "Updating application status..."
+#~ msgstr "Aktualizuje sa stav prihlášky..."
+
+msgid "Updating application..."
+msgstr "Aktualizuje sa prihláška..."
+
 msgid "Updating..."
 msgstr "Aktualizuje sa..."
 
@@ -3544,6 +3985,12 @@ msgstr "Použite backendové vyhľadávanie univerzít, potom spravujte závisl�
 msgid "Use the invitation details below to join the organization workspace."
 msgstr "Použite nižšie uvedené detaily pozvánky na pripojenie do pracoviska organizácie."
 
+#~ msgid "Use the note field below when a transition requires a reason."
+#~ msgstr "Ak zmena stavu vyžaduje dôvod, použite pole poznámky nižšie."
+
+msgid "Use the reason field when a transition requires a reason."
+msgstr "Použite pole dôvodu, keď prechod vyžaduje dôvod."
+
 msgid "Use the same email address that received this invitation."
 msgstr "Použite rovnakú e-mailovú adresu, ktorá prijala túto pozvánku."
 
@@ -3571,6 +4018,9 @@ msgstr "Overuje sa pozvánka…"
 
 msgid "Validating invite..."
 msgstr "Overuje sa pozvánka..."
+
+msgid "Value proposition"
+msgstr "Hodnotová ponuka"
 
 msgid "Verification"
 msgstr "Overenie"
@@ -3601,6 +4051,9 @@ msgstr "Zobraziť pozvánky"
 
 msgid "View team access"
 msgstr "Zobraziť prístup tímu"
+
+msgid "Waiting for team"
+msgstr "Čaká sa na tím"
 
 msgid "We could not load the Program B action queues right now."
 msgstr "Fronty akcií Programu B sa teraz nepodarilo načítať."
@@ -3634,6 +4087,18 @@ msgstr "Odvolať žiadosť"
 
 msgid "Workspace"
 msgstr "Pracovisko"
+
+msgid "Write a mentorship note before saving it."
+msgstr "Pred uložením napíšte mentorskú poznámku."
+
+msgid "Write a mentorship note..."
+msgstr "Napíšte mentorskú poznámku..."
+
+msgid "Write an optional note. Reject, pause, and archive require a reason."
+msgstr "Napíšte voliteľnú poznámku. Zamietnutie, pozastavenie a archivácia vyžadujú dôvod."
+
+msgid "Write what information is needed before creating a needs-info item."
+msgstr "Pred vytvorením požiadavky na doplnenie informácií napíšte, aké informácie sú potrebné."
 
 msgid "Year cannot be in the past."
 msgstr "Rok nemôže byť v minulosti."

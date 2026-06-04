@@ -9,7 +9,7 @@ import { toast } from 'sonner';
 
 import { AdminErrorState, AdminLoadingState, formatAdminDateTime } from 'components/admin';
 import { ProgramBDocumentManager } from 'components/company-dashboard/program-b-document-manager';
-import { Button, Tabs, TabsContent, TabsList, TabsTrigger } from 'components/shadcn';
+import { Button, Input, Label, Tabs, TabsContent, TabsList, TabsTrigger } from 'components/shadcn';
 import {
   CreateProgramBFinalAcceptanceDtoSide,
   programBProjectsControllerRequestDocumentDownload,
@@ -22,6 +22,7 @@ import {
   useProgramBProjectsControllerListAssignableMentors,
   useProgramBProjectsControllerListPoReviews,
   useProgramBProjectsControllerRecordFinalAcceptance,
+  useProgramBProjectsControllerUpdateReward,
 } from 'lib/api';
 import { invalidateProgramBCompanyWorkspace } from 'lib/api-client/program-b-company';
 import { isApiRequestError } from 'lib/api-client/openapi-runtime/client';
@@ -61,6 +62,8 @@ export default function AdminProgramBProjectDetailPage({
   const hasNtiFinalAcceptance = Boolean(project?.acceptedByNtiAt);
 
   const [selectedMentorId, setSelectedMentorId] = useState('');
+  const [rewardInput, setRewardInput] = useState('');
+  const updateReward = useProgramBProjectsControllerUpdateReward();
 
   const refreshWorkspace = async () => {
     await invalidateProgramBCompanyWorkspace(queryClient, { projectId: id });
@@ -88,6 +91,32 @@ export default function AdminProgramBProjectDetailPage({
       await refreshWorkspace();
     } catch (error) {
       reportMutationError(error, t`Unable to assign mentor.`);
+    }
+  };
+
+  const handleUpdateReward = async () => {
+    const parsed = parseFloat(rewardInput.trim());
+
+    if (!rewardInput.trim() || Number.isNaN(parsed) || parsed < 0) {
+      toast.error(t`Enter a valid non-negative number for the reward amount.`);
+
+      return;
+    }
+
+    try {
+      await updateReward.mutateAsync({
+        id,
+        data: {
+          rewardPerMember: parsed as unknown as Parameters<
+            typeof updateReward.mutateAsync
+          >[0]['data']['rewardPerMember'],
+        },
+      });
+      toast.success(t`Reward per member updated.`);
+      setRewardInput('');
+      await refreshWorkspace();
+    } catch (error) {
+      reportMutationError(error, t`Unable to update reward per member.`);
     }
   };
 
@@ -201,7 +230,7 @@ export default function AdminProgramBProjectDetailPage({
         </div>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="grid gap-4 lg:grid-cols-3">
         <div className="rounded-2xl border border-slate-200 bg-white p-5">
           <h2 className="text-lg font-semibold text-slate-950">{t`Mentor assignment`}</h2>
           <p className="mt-1 text-sm text-slate-600">
@@ -275,6 +304,50 @@ export default function AdminProgramBProjectDetailPage({
               </Button>
             </div>
           ) : null}
+        </div>
+
+        <div className="rounded-2xl border border-slate-200 bg-white p-5">
+          <h2 className="text-lg font-semibold text-slate-950">{t`Reward per member`}</h2>
+          <p className="mt-1 text-sm text-slate-600">
+            {t`Current reward:`}{' '}
+            <span className="font-medium text-slate-900">
+              {typeof (project.rewardPerMember as unknown) === 'number'
+                ? `€${(project.rewardPerMember as unknown as number).toLocaleString()}`
+                : t`Not set`}
+            </span>
+          </p>
+          {isProjectReadOnly ? (
+            <p className="mt-3 text-sm text-slate-500">
+              {t`This project is closed and now read-only.`}
+            </p>
+          ) : (
+            <div className="mt-4 space-y-2">
+              <Label htmlFor="admin-reward-input">{t`Amount (EUR)`}</Label>
+              <div className="flex flex-wrap items-center gap-2">
+                <Input
+                  id="admin-reward-input"
+                  type="number"
+                  min={0}
+                  step="0.01"
+                  placeholder="e.g. 500"
+                  className="w-40"
+                  value={rewardInput}
+                  onChange={(event) => setRewardInput(event.target.value)}
+                />
+                <Button
+                  type="button"
+                  size="sm"
+                  disabled={!rewardInput.trim() || updateReward.isPending}
+                  onClick={() => void handleUpdateReward()}
+                >
+                  {updateReward.isPending ? (
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  ) : null}
+                  {t`Set reward`}
+                </Button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 

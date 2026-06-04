@@ -25,6 +25,7 @@ import {
   useProgramBProjectsControllerListPoReviews,
   useProgramBProjectsControllerRecordFinalAcceptance,
   useProgramBProjectsControllerUpdateMilestone,
+  useProgramBProjectsControllerUpdateReward,
 } from 'lib/api';
 import { invalidateProgramBCompanyWorkspace } from 'lib/api-client/program-b-company';
 import { isApiRequestError } from 'lib/api-client/openapi-runtime/client';
@@ -147,6 +148,8 @@ export default function CompanyProgramBProjectDetailPage({
     CreateProgramBPoReviewDtoDecision.APPROVED,
   );
   const [reviewComment, setReviewComment] = useState('');
+  const [rewardInput, setRewardInput] = useState('');
+  const updateReward = useProgramBProjectsControllerUpdateReward();
 
   const refreshWorkspace = async () => {
     await invalidateProgramBCompanyWorkspace(queryClient, { projectId: id });
@@ -160,6 +163,32 @@ export default function CompanyProgramBProjectDetailPage({
     }
 
     toast.error(error instanceof Error ? error.message : fallback);
+  };
+
+  const handleUpdateReward = async () => {
+    const parsed = parseFloat(rewardInput.trim());
+
+    if (!rewardInput.trim() || Number.isNaN(parsed) || parsed < 0) {
+      toast.error(t`Enter a valid non-negative number for the reward amount.`);
+
+      return;
+    }
+
+    try {
+      await updateReward.mutateAsync({
+        id,
+        data: {
+          rewardPerMember: parsed as unknown as Parameters<
+            typeof updateReward.mutateAsync
+          >[0]['data']['rewardPerMember'],
+        },
+      });
+      toast.success(t`Reward per member updated.`);
+      setRewardInput('');
+      await refreshWorkspace();
+    } catch (error) {
+      reportMutationError(error, t`Unable to update reward per member.`);
+    }
   };
 
   const handleFinalAcceptance = async () => {
@@ -488,6 +517,14 @@ export default function CompanyProgramBProjectDetailPage({
                 </span>
               </p>
               <p>
+                {t`Reward per member:`}{' '}
+                <span className="font-medium text-[#10213d]">
+                  {typeof (project.rewardPerMember as unknown) === 'number'
+                    ? `€${(project.rewardPerMember as unknown as number).toLocaleString()}`
+                    : t`Not set`}
+                </span>
+              </p>
+              <p>
                 {t`Company acceptance:`}{' '}
                 <span className="font-medium text-[#10213d]">
                   {hasCompanyFinalAcceptance
@@ -502,6 +539,34 @@ export default function CompanyProgramBProjectDetailPage({
                 </span>
               </p>
             </div>
+
+            {isProjectReadOnly ? null : (
+              <div className="mt-5 space-y-2 border-t border-[#dfe7fa] pt-4">
+                <p className="text-sm font-semibold text-[#10213d]">{t`Update reward per member`}</p>
+                <div className="flex flex-wrap items-center gap-2">
+                  <Input
+                    type="number"
+                    min={0}
+                    step="0.01"
+                    placeholder="e.g. 500"
+                    className="w-40"
+                    value={rewardInput}
+                    onChange={(event) => setRewardInput(event.target.value)}
+                  />
+                  <Button
+                    type="button"
+                    size="sm"
+                    disabled={!rewardInput.trim() || updateReward.isPending}
+                    onClick={() => void handleUpdateReward()}
+                  >
+                    {updateReward.isPending ? (
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    ) : null}
+                    {t`Set reward (EUR)`}
+                  </Button>
+                </div>
+              </div>
+            )}
           </article>
         </TabsContent>
 

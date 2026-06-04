@@ -32,6 +32,7 @@ import type {
   CreateProgramAMilestoneDto,
   OptionalApplicationTransitionNoteDto,
   UpdateAdminCallDto,
+  UpdateApplicationGrantBudgetDto,
   UpdateProgramAMilestoneDto
 } from '../index.schemas';
 
@@ -848,6 +849,64 @@ export const useAdminApplicationsControllerComplete = <TError = void,
       > => {
 
       const mutationOptions = getAdminApplicationsControllerCompleteMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    export const adminApplicationsControllerUpdateGrantBudget = (
+    id: string,
+    updateApplicationGrantBudgetDto: UpdateApplicationGrantBudgetDto,
+ options?: SecondParameter<typeof orvalMutator>,) => {
+      
+      
+      return orvalMutator<ApplicationDetailDto>(
+      {url: `/admin/applications/${id}/grant-budget`, method: 'PATCH',
+      headers: {'Content-Type': 'application/json', },
+      data: updateApplicationGrantBudgetDto
+    },
+      options);
+    }
+  
+
+
+export const getAdminApplicationsControllerUpdateGrantBudgetMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof adminApplicationsControllerUpdateGrantBudget>>, TError,{id: string;data: UpdateApplicationGrantBudgetDto}, TContext>, request?: SecondParameter<typeof orvalMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof adminApplicationsControllerUpdateGrantBudget>>, TError,{id: string;data: UpdateApplicationGrantBudgetDto}, TContext> => {
+
+const mutationKey = ['adminApplicationsControllerUpdateGrantBudget'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof adminApplicationsControllerUpdateGrantBudget>>, {id: string;data: UpdateApplicationGrantBudgetDto}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  adminApplicationsControllerUpdateGrantBudget(id,data,requestOptions)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type AdminApplicationsControllerUpdateGrantBudgetMutationResult = NonNullable<Awaited<ReturnType<typeof adminApplicationsControllerUpdateGrantBudget>>>
+    export type AdminApplicationsControllerUpdateGrantBudgetMutationBody = UpdateApplicationGrantBudgetDto
+    export type AdminApplicationsControllerUpdateGrantBudgetMutationError = unknown
+
+    export const useAdminApplicationsControllerUpdateGrantBudget = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof adminApplicationsControllerUpdateGrantBudget>>, TError,{id: string;data: UpdateApplicationGrantBudgetDto}, TContext>, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof adminApplicationsControllerUpdateGrantBudget>>,
+        TError,
+        {id: string;data: UpdateApplicationGrantBudgetDto},
+        TContext
+      > => {
+
+      const mutationOptions = getAdminApplicationsControllerUpdateGrantBudgetMutationOptions(options);
 
       return useMutation(mutationOptions, queryClient);
     }

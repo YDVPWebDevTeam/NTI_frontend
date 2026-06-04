@@ -3,9 +3,9 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --font-geist-sans:
+  --font-sans-fallback:
     "Segoe UI", "Helvetica Neue", Helvetica, Arial, "Noto Sans", sans-serif;
-  --font-geist-mono:
+  --font-mono-fallback:
     "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Monaco, monospace;
   --background: 0 0% 100%;
   --foreground: 240 10% 3.9%;
@@ -129,13 +129,13 @@
   --color-on-secondary-container: #57657a;
   --color-on-secondary: #ffffff;
 
-  --font-headline: var(--font-manrope), sans-serif;
-  --font-body: var(--font-inter), sans-serif;
-  --font-label: var(--font-inter), sans-serif;
+  --font-headline: var(--font-geist-sans), var(--font-sans-fallback);
+  --font-body: var(--font-geist-sans), var(--font-sans-fallback);
+  --font-label: var(--font-geist-sans), var(--font-sans-fallback);
 
   --radius: var(--radius);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans), var(--font-sans-fallback);
+  --font-mono: var(--font-geist-mono), var(--font-mono-fallback);
 }
 
 * {
@@ -164,5 +164,5 @@
 body {
   background: hsl(var(--background));
   color: hsl(var(--foreground));
-  font-family: var(--font-geist-sans), sans-serif;
+  font-family: var(--font-geist-sans), var(--font-sans-fallback);
 }

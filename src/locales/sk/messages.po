@@ -273,6 +273,9 @@ msgstr "Tím Alpha"
 msgid "Already have an account?"
 msgstr "Už máte účet?"
 
+msgid "Amount (EUR)"
+msgstr "Suma (EUR)"
+
 msgid "An account with this invited email already exists. Use the existing account path instead."
 msgstr "Účet s touto pozvánkou už existuje. Použite radšej existujúci účet."
 
@@ -873,6 +876,9 @@ msgstr "Vytvára sa organizácia…"
 msgid "Creating..."
 msgstr "Vytvára sa..."
 
+msgid "Current budget"
+msgstr "Aktuálny rozpočet"
+
 msgid "Current email"
 msgstr "Aktuálny e-mail"
 
@@ -893,6 +899,9 @@ msgstr "Aktuálne heslo"
 
 msgid "Current Program B delivery from the dedicated company project summary endpoint."
 msgstr "Aktuálna realizácia Programu B z vyhradeného summary endpointu firemných projektov."
+
+msgid "Current reward:"
+msgstr "Aktuálna odmena:"
 
 msgid "Current Search"
 msgstr "Aktuálne vyhľadávanie"
@@ -1149,6 +1158,12 @@ msgstr "Zadajte nové heslo"
 
 msgid "Enter a strong password"
 msgstr "Zadajte silné heslo"
+
+msgid "Enter a valid non-negative number for the grant budget."
+msgstr "Zadajte platné kladné číslo pre rozpočet grantu."
+
+msgid "Enter a valid non-negative number for the reward amount."
+msgstr "Zadajte platné kladné číslo ako výšku odmeny."
 
 msgid "Enter a valid URL."
 msgstr "Zadajte platnú URL adresu."
@@ -1431,6 +1446,15 @@ msgstr "Prejsť na hlavnú stránku"
 
 msgid "Go to site home"
 msgstr "Prejsť na domovskú stránku"
+
+msgid "Grant budget"
+msgstr "Grant budget"
+
+msgid "Grant budget can be set after the application is approved."
+msgstr "Rozpočet grantu je možné stanoviť po schválení žiadosti."
+
+msgid "Grant budget can only be set after the application is approved."
+msgstr "Rozpočet grantu je možné stanoviť až po schválení žiadosti."
 
 msgid "Guidance and project support"
 msgstr "Usmernenie a podpora projektu"
@@ -2238,6 +2262,9 @@ msgstr "Neskontrolované"
 msgid "Not provided"
 msgstr "Neuvedené"
 
+msgid "Not set"
+msgstr "Nenastavené"
+
 msgid "Not specified"
 msgstr "Nešpecifikované"
 
@@ -2991,6 +3018,15 @@ msgstr "Karta zrušenej pozvánky bola odstránená."
 msgid "Revoking..."
 msgstr "Ruší sa..."
 
+msgid "Reward per member"
+msgstr "Odmena na člena"
+
+msgid "Reward per member updated."
+msgstr "Odmena na člena bola aktualizovaná."
+
+msgid "Reward per member:"
+msgstr "Odmena na člena:"
+
 msgid "Risk analysis"
 msgstr "Analýza rizík"
 
@@ -3206,6 +3242,21 @@ msgstr "Odosiela sa…"
 
 msgid "Set a new admin password"
 msgstr "Nastaviť nové administrátorské heslo"
+
+msgid "Set grant budget"
+msgstr "Stanoviť rozpočet grantu"
+
+msgid "Set reward"
+msgstr "Nastaviť odmenu"
+
+msgid "Set reward (EUR)"
+msgstr "Nastaviť odmenu (EUR)"
+
+msgid "Set the approved grant budget in EUR for this project."
+msgstr "Zadajte schválený rozpočet grantu v EUR pre tento projekt."
+
+msgid "Set up team"
+msgstr "Nastaviť tím"
 
 msgid "Short Name"
 msgstr "Skrátený názov"
@@ -3936,6 +3987,9 @@ msgstr "Nepodarilo sa aktualizovať stav kandidáta."
 msgid "Unable to update milestone."
 msgstr "Nepodarilo sa aktualizovať míľnik."
 
+msgid "Unable to update reward per member."
+msgstr "Nepodarilo sa aktualizovať odmenu pre člena."
+
 msgid "Unable to update the faculty."
 msgstr "Nepodarilo sa aktualizovať fakultu."
 
@@ -4004,6 +4058,9 @@ msgstr "Položka backlogu bez názvu"
 
 msgid "Update Faculty"
 msgstr "Aktualizovať fakultu"
+
+msgid "Update reward per member"
+msgstr "Aktualizácia odmeny na člena"
 
 msgid "Update Specialization"
 msgstr "Aktualizovať špecializáciu"

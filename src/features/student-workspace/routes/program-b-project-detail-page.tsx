@@ -59,6 +59,14 @@ export function StudentProgramBProjectDetailPage({ params }: { params: Promise<{
               </span>
             </p>
             <p>
+              Reward per member:{' '}
+              <span className="font-medium text-neutral-950">
+                {typeof (project?.rewardPerMember as unknown) === 'number'
+                  ? `€${(project?.rewardPerMember as unknown as number).toLocaleString()}`
+                  : 'Not set'}
+              </span>
+            </p>
+            <p>
               Accepted by company:{' '}
               <span className="font-medium text-neutral-950">
                 {project?.acceptedByCompanyAt

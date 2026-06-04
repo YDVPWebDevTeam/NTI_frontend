@@ -6,6 +6,7 @@ import {
   Archive as ArchiveIcon,
   ArrowLeft,
   ClipboardCheck,
+  DollarSign,
   FileText,
   Loader2,
   MessageSquareText,
@@ -32,6 +33,7 @@ import {
   useAdminApplicationsControllerReject,
   useAdminApplicationsControllerStartEvaluation,
   useAdminApplicationsControllerStartOnboarding,
+  useAdminApplicationsControllerUpdateGrantBudget,
   useAdminApplicationsControllerUpdateProgramAMilestone,
 } from 'lib/api/admin/admin';
 import {
@@ -57,6 +59,7 @@ import type {
   NeedsInfoItemDto,
   OptionalApplicationTransitionNoteDto,
   ProgramAMentorshipNoteDto,
+  UpdateApplicationGrantBudgetDto,
   UpdateProgramAMilestoneDto,
 } from 'lib/api/index.schemas';
 import { ROUTES } from 'lib/constants';
@@ -124,6 +127,9 @@ const DATE_TIME_FORMATTER = new Intl.DateTimeFormat('sk-SK', {
   timeStyle: 'short',
 });
 
+const ISO_DATE_LENGTH = 10;
+const JSON_INDENT = 2;
+
 function formatDate(value: unknown, fallback = '—') {
   const textValue = toText(value, '');
 
@@ -143,9 +149,9 @@ function formatDateInputValue(value: unknown) {
 
   const date = new Date(textValue);
 
-  if (Number.isNaN(date.getTime())) return textValue.slice(0, 10);
+  if (Number.isNaN(date.getTime())) return textValue.slice(0, ISO_DATE_LENGTH);
 
-  return date.toISOString().slice(0, 10);
+  return date.toISOString().slice(0, ISO_DATE_LENGTH);
 }
 
 function getNestedValue(source: unknown, keys: string[]) {
@@ -349,7 +355,7 @@ function renderJsonValue(value: unknown) {
     return String(value);
   }
 
-  return JSON.stringify(value, null, 2);
+  return JSON.stringify(value, null, JSON_INDENT);
 }
 
 function prettySectionTitle(key: string) {
@@ -650,6 +656,7 @@ export default function AdminProgramAApplicationDetailPage({
   const { applicationId } = use(params);
 
   const [transitionReason, setTransitionReason] = useState('');
+  const [grantBudgetInput, setGrantBudgetInput] = useState('');
   const [mentorUserId, setMentorUserId] = useState('');
   const [needsInfoMessage, setNeedsInfoMessage] = useState('');
   const [needsInfoDueAt, setNeedsInfoDueAt] = useState('');
@@ -766,6 +773,15 @@ export default function AdminProgramAApplicationDetailPage({
   const pauseMutation = useAdminApplicationsControllerPause({ mutation: mutationOptions });
   const completeMutation = useAdminApplicationsControllerComplete({ mutation: mutationOptions });
   const archiveMutation = useAdminApplicationsControllerArchive({ mutation: mutationOptions });
+  const updateGrantBudgetMutation = useAdminApplicationsControllerUpdateGrantBudget({
+    mutation: {
+      onSuccess: () => {
+        setGrantBudgetInput('');
+        refetchApplicationData();
+      },
+      onError: (error: unknown) => showActionError(getErrorMessage(error)),
+    },
+  });
 
   const assignMentorMutation = useApplicationsControllerAssignMentor({
     mutation: {
@@ -857,6 +873,7 @@ export default function AdminProgramAApplicationDetailPage({
     pauseMutation.isPending ||
     completeMutation.isPending ||
     archiveMutation.isPending ||
+    updateGrantBudgetMutation.isPending ||
     assignMentorMutation.isPending ||
     createMentorshipNoteMutation.isPending ||
     createNeedsInfoMutation.isPending ||
@@ -880,6 +897,9 @@ export default function AdminProgramAApplicationDetailPage({
   const canPauseProject = applicationStatus === 'ACTIVE_PROJECT';
   const canCompleteProject = applicationStatus === 'ACTIVE_PROJECT';
   const canArchive = ['REJECTED', 'COMPLETED'].includes(applicationStatus ?? '');
+  const canSetGrantBudget = ['APPROVED', 'ONBOARDING', 'ACTIVE_PROJECT', 'PAUSED'].includes(
+    applicationStatus ?? '',
+  );
 
   const sections: ApplicationSectionDto[] = Array.isArray(sectionsQuery.data)
     ? sectionsQuery.data
@@ -924,6 +944,10 @@ export default function AdminProgramAApplicationDetailPage({
   }, [eligibilitySignalsQuery.data]);
 
   const applicationTitle = getApplicationDisplayName(application, applicationQueueRow);
+  const currentGrantBudget = application?.grantBudget as unknown;
+  const grantBudgetDisplay =
+    typeof currentGrantBudget === 'number' ? `€${currentGrantBudget.toLocaleString()}` : t`Not set`;
+
   const applicationInfoRows: { label: string; value: unknown }[] = [
     { label: t`Application`, value: applicationTitle },
     { label: t`Call`, value: getCallDisplayName(application, applicationQueueRow) },
@@ -933,6 +957,7 @@ export default function AdminProgramAApplicationDetailPage({
     { label: t`Last updated`, value: formatDate(application?.updatedAt) },
     { label: t`Documents`, value: completenessSummary },
     { label: t`Eligibility`, value: eligibilitySummary },
+    { label: t`Grant budget`, value: grantBudgetDisplay },
   ];
 
   const validateBaseAction = () => {
@@ -1194,6 +1219,30 @@ export default function AdminProgramAApplicationDetailPage({
     if (!validateBaseAction()) return;
 
     updateMilestoneMutation.mutate({ id: applicationId, milestoneId: milestone.id, data });
+  };
+
+  const runUpdateGrantBudget = () => {
+    if (!validateBaseAction()) return;
+
+    if (!canSetGrantBudget) {
+      showActionError(t`Grant budget can only be set after the application is approved.`);
+
+      return;
+    }
+
+    const parsed = parseFloat(grantBudgetInput.trim());
+
+    if (!grantBudgetInput.trim() || Number.isNaN(parsed) || parsed < 0) {
+      showActionError(t`Enter a valid non-negative number for the grant budget.`);
+
+      return;
+    }
+
+    const data: UpdateApplicationGrantBudgetDto = {
+      grantBudget: parsed as unknown as UpdateApplicationGrantBudgetDto['grantBudget'],
+    };
+
+    updateGrantBudgetMutation.mutate({ id: applicationId, data });
   };
 
   if (applicationQuery.isLoading) {
@@ -1788,6 +1837,54 @@ export default function AdminProgramAApplicationDetailPage({
                   {t`Updating application...`}
                 </div>
               )}
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>
+                <DollarSign className="h-5 w-5 text-sky-700" />
+                {t`Grant budget`}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-600">
+                <span className="font-semibold text-slate-950">{t`Current budget`}:</span>{' '}
+                {grantBudgetDisplay}
+              </div>
+              <p className="text-xs leading-5 text-slate-500">
+                {canSetGrantBudget
+                  ? t`Set the approved grant budget in EUR for this project.`
+                  : t`Grant budget can be set after the application is approved.`}
+              </p>
+              <div className="flex flex-col gap-2">
+                <label className="block">
+                  <span className="text-xs font-semibold tracking-[0.08em] text-slate-500 uppercase">
+                    {t`Amount (EUR)`}
+                  </span>
+                  <input
+                    className={`${INPUT_CLASS} mt-2`}
+                    disabled={!canRunAction || !canSetGrantBudget}
+                    min={0}
+                    placeholder="e.g. 5000"
+                    step="0.01"
+                    type="number"
+                    value={grantBudgetInput}
+                    onChange={(event) => setGrantBudgetInput(event.target.value)}
+                  />
+                </label>
+                <button
+                  className={`${OUTLINE_BUTTON_CLASS} w-full justify-start`}
+                  disabled={!canRunAction || !canSetGrantBudget || !grantBudgetInput.trim()}
+                  type="button"
+                  onClick={runUpdateGrantBudget}
+                >
+                  {updateGrantBudgetMutation.isPending && (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  )}
+                  {t`Set grant budget`}
+                </button>
+              </div>
             </CardContent>
           </Card>
         </aside>

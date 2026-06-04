@@ -273,6 +273,9 @@ msgstr "Alpha Team"
 msgid "Already have an account?"
 msgstr "Already have an account?"
 
+msgid "Amount (EUR)"
+msgstr "Amount (EUR)"
+
 msgid "An account with this invited email already exists. Use the existing account path instead."
 msgstr "An account with this invited email already exists. Use the existing account path instead."
 
@@ -873,6 +876,9 @@ msgstr "Creating organization…"
 msgid "Creating..."
 msgstr "Creating..."
 
+msgid "Current budget"
+msgstr "Current budget"
+
 msgid "Current email"
 msgstr "Current email"
 
@@ -893,6 +899,9 @@ msgstr "Current Password"
 
 msgid "Current Program B delivery from the dedicated company project summary endpoint."
 msgstr "Current Program B delivery from the dedicated company project summary endpoint."
+
+msgid "Current reward:"
+msgstr "Current reward:"
 
 msgid "Current Search"
 msgstr "Current Search"
@@ -1149,6 +1158,12 @@ msgstr "Enter a new password"
 
 msgid "Enter a strong password"
 msgstr "Enter a strong password"
+
+msgid "Enter a valid non-negative number for the grant budget."
+msgstr "Enter a valid non-negative number for the grant budget."
+
+msgid "Enter a valid non-negative number for the reward amount."
+msgstr "Enter a valid non-negative number for the reward amount."
 
 msgid "Enter a valid URL."
 msgstr "Enter a valid URL."
@@ -1431,6 +1446,15 @@ msgstr "Go to dashboard"
 
 msgid "Go to site home"
 msgstr "Go to site home"
+
+msgid "Grant budget"
+msgstr "Grant budget"
+
+msgid "Grant budget can be set after the application is approved."
+msgstr "Grant budget can be set after the application is approved."
+
+msgid "Grant budget can only be set after the application is approved."
+msgstr "Grant budget can only be set after the application is approved."
 
 msgid "Guidance and project support"
 msgstr "Guidance and project support"
@@ -2238,6 +2262,9 @@ msgstr "Not checked"
 msgid "Not provided"
 msgstr "Not provided"
 
+msgid "Not set"
+msgstr "Not set"
+
 msgid "Not specified"
 msgstr "Not specified"
 
@@ -2991,6 +3018,15 @@ msgstr "Revoked invitation card removed."
 msgid "Revoking..."
 msgstr "Revoking..."
 
+msgid "Reward per member"
+msgstr "Reward per member"
+
+msgid "Reward per member updated."
+msgstr "Reward per member updated."
+
+msgid "Reward per member:"
+msgstr "Reward per member:"
+
 msgid "Risk analysis"
 msgstr "Risk analysis"
 
@@ -3206,6 +3242,21 @@ msgstr "Sending…"
 
 msgid "Set a new admin password"
 msgstr "Set a new admin password"
+
+msgid "Set grant budget"
+msgstr "Set grant budget"
+
+msgid "Set reward"
+msgstr "Set reward"
+
+msgid "Set reward (EUR)"
+msgstr "Set reward (EUR)"
+
+msgid "Set the approved grant budget in EUR for this project."
+msgstr "Set the approved grant budget in EUR for this project."
+
+msgid "Set up team"
+msgstr "Set up team"
 
 msgid "Short Name"
 msgstr "Short Name"
@@ -3936,6 +3987,9 @@ msgstr "Unable to update candidate status."
 msgid "Unable to update milestone."
 msgstr "Unable to update milestone."
 
+msgid "Unable to update reward per member."
+msgstr "Unable to update reward per member."
+
 msgid "Unable to update the faculty."
 msgstr "Unable to update the faculty."
 
@@ -4004,6 +4058,9 @@ msgstr "Untitled backlog item"
 
 msgid "Update Faculty"
 msgstr "Update Faculty"
+
+msgid "Update reward per member"
+msgstr "Update reward per member"
 
 msgid "Update Specialization"
 msgstr "Update Specialization"

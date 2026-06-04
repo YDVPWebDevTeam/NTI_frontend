@@ -22,25 +22,25 @@ const WORKSPACE_POLICIES: readonly WorkspaceAccessPolicy[] = [
   {
     family: 'student',
     rootRoute: ROUTES.STUDENT.ROOT,
-    allowedRoutePrefixes: ['/student', ROUTES.ONBOARDING_PROFILE],
+    allowedRoutePrefixes: ['/student', ROUTES.ONBOARDING_PROFILE, ROUTES.ACCOUNT],
     roles: STUDENT_ROLES,
   },
   {
     family: 'company',
     rootRoute: ROUTES.COMPANY.ROOT,
-    allowedRoutePrefixes: ['/company'],
+    allowedRoutePrefixes: ['/company', ROUTES.ACCOUNT],
     roles: COMPANY_ROLES,
   },
   {
     family: 'mentor',
     rootRoute: ROUTES.MENTOR.ROOT,
-    allowedRoutePrefixes: ['/mentor'],
+    allowedRoutePrefixes: ['/mentor', ROUTES.ACCOUNT],
     roles: MENTOR_ROLES,
   },
   {
     family: 'review',
     rootRoute: ROUTES.REVIEW.ROOT,
-    allowedRoutePrefixes: ['/review'],
+    allowedRoutePrefixes: ['/review', ROUTES.ACCOUNT],
     roles: REVIEW_ROLES,
   },
   {

@@ -73,6 +73,7 @@ const REVIEW_ROUTES = {
 
 export const ROUTES = {
   ROOT: '/',
+  ACCOUNT: '/account',
   TEAM_INVITE_ONBOARDING: '/invite',
   ONBOARDING_PROFILE: '/onboarding/profile',
   ORGANIZATION_INVITE_ONBOARDING: '/onboarding/invites',

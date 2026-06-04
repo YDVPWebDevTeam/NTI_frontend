@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
 import { ArrowRight, Lock, Mail } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
@@ -21,8 +21,25 @@ import { Form } from 'components/shadcn';
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const queryClient = useQueryClient();
   const { isPending: isLoginPending, mutateAsync: login } = useLogin();
+  const accountAction = searchParams.get('accountAction');
+  const changedEmail = searchParams.get('email')?.trim() ?? '';
+  const nextPath = searchParams.get('next')?.trim() ?? '';
+  const safeNextPath = nextPath.startsWith('/') && !nextPath.startsWith('//') ? nextPath : null;
+
+  let accountActionMessage: string | null = null;
+
+  if (accountAction === 'password-changed') {
+    accountActionMessage = t`Your password was updated. Sign in again with the new password to continue.`;
+  } else if (accountAction === 'email-changed') {
+    accountActionMessage = changedEmail
+      ? t`Your email was updated to ${changedEmail}. Sign in again with the new address to continue.`
+      : t`Your email was updated. Sign in again with the new address to continue.`;
+  } else if (accountAction === 'session-expired') {
+    accountActionMessage = t`Your session expired during a protected account change. Sign in again to continue.`;
+  }
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(createLoginSchema()),
@@ -44,7 +61,7 @@ export default function LoginPage() {
         }),
       );
 
-      router.push(getDefaultRouteForRole(me.role));
+      router.push(safeNextPath ?? getDefaultRouteForRole(me.role));
     } catch (error) {
       toast.error(error instanceof Error ? error.message : t`Unable to log in. Please try again.`);
     }
@@ -76,6 +93,12 @@ export default function LoginPage() {
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-5">
+          {accountActionMessage ? (
+            <div className="rounded-sm border border-blue-200 bg-blue-50 px-4 py-3 text-sm leading-6 text-blue-950">
+              {accountActionMessage}
+            </div>
+          ) : null}
+
           <ControlledInputField
             control={form.control}
             name="email"

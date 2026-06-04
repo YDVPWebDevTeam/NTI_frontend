@@ -2,7 +2,7 @@
 
 import { t } from '@lingui/core/macro';
 import type { ReactNode } from 'react';
-import { LayoutGrid } from 'lucide-react';
+import { LayoutGrid, ShieldCheck } from 'lucide-react';
 
 import { InternalWorkspaceLayout } from 'components/workspace/internal-workspace-layout';
 import { StudentStatusCard } from 'components/student-dashboard/page-shell-primitives';
@@ -29,7 +29,10 @@ export default function ReviewLayout({ children }: { children: ReactNode }) {
       user={me}
       title={t`Review workspace`}
       description={t`Evaluation queue and review flows`}
-      navItems={[{ href: ROUTES.REVIEW.DASHBOARD, label: t`Dashboard`, icon: LayoutGrid }]}
+      navItems={[
+        { href: ROUTES.REVIEW.DASHBOARD, label: t`Dashboard`, icon: LayoutGrid },
+        { href: ROUTES.ACCOUNT, label: t`Account security`, icon: ShieldCheck },
+      ]}
     >
       {children}
     </InternalWorkspaceLayout>

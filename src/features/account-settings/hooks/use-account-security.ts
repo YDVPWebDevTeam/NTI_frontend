@@ -42,7 +42,7 @@ export function useAccountSecurity(user: AuthenticatedUserDto) {
 
   const [latestFeedback, setLatestFeedback] = useState<SecurityFeedback>({
     title: t`Your account is protected`,
-    description: t`You can update your password or email here. If a change affects account safety, we'll guide you through the next step.`,
+    description: t`You can update your password or email here. If anything extra is needed, we'll walk you through it.`,
     tone: 'info',
   });
   const [passwordFeedback, setPasswordFeedback] = useState<SecurityFeedback | null>(null);
@@ -138,7 +138,7 @@ export function useAccountSecurity(user: AuthenticatedUserDto) {
     if (isApiRequestError(error) && error.status === 401) {
       const feedback: SecurityFeedback = {
         title: t`Your session is no longer valid`,
-        description: t`Sign in again before continuing with protected account changes.`,
+        description: t`Sign in again before making more account changes.`,
         tone: 'warning',
       };
 
@@ -156,7 +156,7 @@ export function useAccountSecurity(user: AuthenticatedUserDto) {
     if (isApiRequestError(error) && error.status === TOO_MANY_REQUESTS_STATUS) {
       const feedback: SecurityFeedback = {
         title: t`Please wait before trying again`,
-        description: t`For security, email confirmation requests are limited for a short time. Please try again in about a minute.`,
+        description: t`Please wait about a minute before requesting another email confirmation.`,
         tone: 'warning',
       };
 

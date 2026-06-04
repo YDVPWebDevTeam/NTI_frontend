@@ -84,15 +84,15 @@ export function EmailChangeSection({
   if (isRequestPending) {
     requestLabel = t`Sending…`;
   } else if (isCoolingDown) {
-    requestLabel = t`Send again in ${remainingSeconds}s`;
+    requestLabel = t`Try again in ${remainingSeconds}s`;
   }
 
   return (
     <div className="grid gap-6 xl:grid-cols-2">
       <EmailChangePanel
         eyebrow={t`Request change`}
-        title={t`Verify your new email`}
-        description={t`Enter an email address you can open right now. We'll send a confirmation message before anything changes.`}
+        title={t`Confirm your new email`}
+        description={t`Enter an email address you can open right now. We'll send a confirmation message before we make the change.`}
         feedback={requestFeedback}
         feedbackEyebrow={t`Request status`}
       >
@@ -140,8 +140,8 @@ export function EmailChangeSection({
 
       <EmailChangePanel
         eyebrow={t`Confirm change`}
-        title={t`Apply the verified email`}
-        description={t`Open the link in your email, or paste the confirmation code here. After that, you'll need to sign in again.`}
+        title={t`Finish email change`}
+        description={t`Open the link in your email, or paste the code here. After that, sign in again.`}
         feedback={confirmFeedback}
         feedbackEyebrow={t`Confirmation status`}
       >
@@ -151,8 +151,8 @@ export function EmailChangeSection({
               <ControlledInputField
                 control={confirmForm.control}
                 name="token"
-                label={t`Confirmation Code`}
-                placeholder={t`Paste the code from your email…`}
+                label={t`Confirmation code`}
+                placeholder={t`Paste the code from your email`}
                 autoComplete="one-time-code"
                 spellCheck={false}
               />
@@ -165,7 +165,7 @@ export function EmailChangeSection({
                 {isConfirmPending ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" />
-                    {t`Confirming...`}
+                    {t`Confirming…`}
                   </>
                 ) : (
                   t`Confirm New Email`
@@ -175,7 +175,7 @@ export function EmailChangeSection({
           </Form>
         ) : (
           <div className="rounded-[1.25rem] border border-dashed border-[#d4def3] bg-white/80 p-4 text-sm leading-6 text-[#5b667b]">
-            {t`This step will become available after you request an email change or open the link from your inbox.`}
+            {t`This step will unlock after you request the change or open the link from your inbox.`}
           </div>
         )}
       </EmailChangePanel>

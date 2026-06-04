@@ -20,13 +20,13 @@ export function AccountSettingsPage({ user }: { user: AuthenticatedUserDto }) {
     <StudentPageShell
       eyebrow={t`Account security`}
       title={t`Manage your account`}
-      description={t`Change your email or password here. For some updates, we may ask you to verify the change or sign in again.`}
+      description={t`Update your email or password here. If needed, we'll guide you through the next step.`}
     >
       <div className="grid gap-6 xl:grid-cols-[minmax(0,1.6fr)_minmax(19rem,0.9fr)]">
         <div className="space-y-6">
           <StudentSectionCard
             title={t`Password change`}
-            description={t`Enter your current password to make the change. After that, you'll need to sign in again.`}
+            description={t`Enter your current password to set a new one. After that, sign in again.`}
           >
             <PasswordChangeSection
               feedback={security.passwordFeedback}
@@ -39,7 +39,7 @@ export function AccountSettingsPage({ user }: { user: AuthenticatedUserDto }) {
 
           <StudentSectionCard
             title={t`Email change`}
-            description={t`Enter your new email first, then confirm it from your inbox. Your current email stays active until you finish that step.`}
+            description={t`Enter your new email, then confirm it from your inbox. Your current email stays the same until you finish.`}
           >
             <EmailChangeSection
               canConfirmEmailChange={

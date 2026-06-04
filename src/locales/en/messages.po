@@ -60,20 +60,14 @@ msgstr "© 2026 NTI. All rights reserved."
 msgid "100% Complete"
 msgstr "100% Complete"
 
-#~ msgid "A confirmation link was sent to the new address. Your current session stays active until the email change is confirmed."
-#~ msgstr "A confirmation link was sent to the new address. Your current session stays active until the email change is confirmed."
-
 msgid "A confirmation link will be sent to"
 msgstr "A confirmation link will be sent to"
 
-msgid "A few things to keep in mind when updating your email or password."
-msgstr "A few things to keep in mind when updating your email or password."
+msgid "A few quick notes before you make changes."
+msgstr "A few quick notes before you make changes."
 
 msgid "A lighter student workspace with separate flows for foundation setup, Program A applications, and Program B opportunities."
 msgstr "A lighter student workspace with separate flows for foundation setup, Program A applications, and Program B opportunities."
-
-msgid "A quick view of the account identity and the last sensitive action state."
-msgstr "A quick view of the account identity and the last sensitive action state."
 
 msgid "A rejection reason is required."
 msgstr "A rejection reason is required."
@@ -156,6 +150,9 @@ msgstr "Account status"
 msgid "Accounts currently blocked from normal access."
 msgstr "Accounts currently blocked from normal access."
 
+msgid "Action failed"
+msgstr "Action failed"
+
 msgid "Action queues, backlog movement, and project delivery status are summarized here so company users can move directly into the right Program B workspace."
 msgstr "Action queues, backlog movement, and project delivery status are summarized here so company users can move directly into the right Program B workspace."
 
@@ -165,8 +162,14 @@ msgstr "Actions"
 msgid "Activate"
 msgstr "Activate"
 
+msgid "Activate project"
+msgstr "Activate project"
+
 msgid "Active"
 msgstr "Active"
+
+msgid "Active project"
+msgstr "Active project"
 
 msgid "Active projects"
 msgstr "Active projects"
@@ -204,6 +207,9 @@ msgstr "Add basic information about your organization."
 msgid "Add company details so your organization can be reviewed and connected to the platform."
 msgstr "Add company details so your organization can be reviewed and connected to the platform."
 
+msgid "Add evaluation"
+msgstr "Add evaluation"
+
 msgid "Add note"
 msgstr "Add note"
 
@@ -215,6 +221,9 @@ msgstr "Add Skill"
 
 msgid "Add your CV, skills, and supporting professional details."
 msgstr "Add your CV, skills, and supporting professional details."
+
+msgid "Additional submitted section data."
+msgstr "Additional submitted section data."
 
 msgid "Adjust the search or create a new university to start building the academic tree."
 msgstr "Adjust the search or create a new university to start building the academic tree."
@@ -244,13 +253,16 @@ msgid "admin@nti.sk"
 msgstr "admin@nti.sk"
 
 msgid "Administrative Access"
-msgstr "Administrative Access"
+msgstr "Administrative Access<<<<<<< HEAD"
 
-#~ msgid "All active refresh sessions were revoked. You will be asked to sign in again with the new password."
-#~ msgstr "All active refresh sessions were revoked. You will be asked to sign in again with the new password."
+msgid "All"
+msgstr "All>>>>>>> origin/main"
 
 msgid "All programs"
 msgstr "All programs"
+
+msgid "All signals passed"
+msgstr "All signals passed"
 
 msgid "All statuses"
 msgstr "All statuses"
@@ -264,8 +276,20 @@ msgstr "Already have an account?"
 msgid "An account with this invited email already exists. Use the existing account path instead."
 msgstr "An account with this invited email already exists. Use the existing account path instead."
 
+msgid "Application"
+msgstr "Application"
+
+msgid "Application data is not loaded yet."
+msgstr "Application data is not loaded yet."
+
 msgid "Application Decisions"
 msgstr "Application Decisions"
+
+msgid "Application name"
+msgstr "Application name"
+
+msgid "Application sections"
+msgstr "Application sections"
 
 msgid "Application withdrawn."
 msgstr "Application withdrawn."
@@ -274,10 +298,10 @@ msgid "Applications"
 msgstr "Applications"
 
 msgid "Applications In Scope"
-msgstr "Applications In Scope"
+msgstr "Applications In Scope<<<<<<< HEAD"
 
-msgid "Apply the verified email"
-msgstr "Apply the verified email"
+msgid "Approval is only available while the application is evaluating."
+msgstr "Approval is only available while the application is evaluating.>>>>>>> origin/main"
 
 msgid "Approve"
 msgstr "Approve"
@@ -294,6 +318,12 @@ msgstr "Approving..."
 msgid "Archive"
 msgstr "Archive"
 
+msgid "Archive application"
+msgstr "Archive application"
+
+msgid "Archive is only available for rejected or completed applications."
+msgstr "Archive is only available for rejected or completed applications."
+
 msgid "Archived"
 msgstr "Archived"
 
@@ -303,20 +333,32 @@ msgstr "Ascending"
 msgid "Assign"
 msgstr "Assign"
 
+msgid "Assign a mentor before adding mentorship notes."
+msgstr "Assign a mentor before adding mentorship notes."
+
 msgid "Assign a team member"
 msgstr "Assign a team member"
 
 msgid "Assign mentor"
 msgstr "Assign mentor"
 
+msgid "Assign mentor / onboarding"
+msgstr "Assign mentor / onboarding"
+
 msgid "Assign myself"
 msgstr "Assign myself"
+
+msgid "Assign or update the Program A mentor responsible for delivery follow-up."
+msgstr "Assign or update the Program A mentor responsible for delivery follow-up."
 
 msgid "Assign product owner"
 msgstr "Assign product owner"
 
 msgid "Assign product owners"
 msgstr "Assign product owners"
+
+msgid "Assigned"
+msgstr "Assigned"
 
 msgid "Assigned:"
 msgstr "Assigned:"
@@ -378,6 +420,9 @@ msgstr "Back to Organizations"
 msgid "Back to projects"
 msgstr "Back to projects"
 
+msgid "Back to review queue"
+msgstr "Back to review queue"
+
 msgid "Backlog"
 msgstr "Backlog"
 
@@ -410,6 +455,9 @@ msgstr "Backlog items for your organization will appear here once Program B work
 
 msgid "Backlog preview"
 msgstr "Backlog preview"
+
+msgid "Basic application profile information."
+msgstr "Basic application profile information."
 
 msgid "Bio"
 msgstr "Bio"
@@ -472,10 +520,10 @@ msgid "Capture delivery milestones with an optional description and due date."
 msgstr "Capture delivery milestones with an optional description and due date."
 
 msgid "Categories"
-msgstr "Categories"
+msgstr "Categories<<<<<<< HEAD"
 
-msgid "Change your email or password here. For some updates, we may ask you to verify the change or sign in again."
-msgstr "Change your email or password here. For some updates, we may ask you to verify the change or sign in again."
+msgid "Category"
+msgstr "Category>>>>>>> origin/main"
 
 msgid "Changes requested"
 msgstr "Changes requested"
@@ -537,6 +585,9 @@ msgstr "Close menu"
 msgid "Close navigation"
 msgstr "Close navigation"
 
+msgid "Close navigation menu"
+msgstr "Close navigation menu"
+
 msgid "Closed"
 msgstr "Closed"
 
@@ -554,6 +605,9 @@ msgstr "Code"
 
 msgid "Code must be at least 4 characters."
 msgstr "Code must be at least 4 characters."
+
+msgid "Comment"
+msgstr "Comment"
 
 msgid "Comment (optional)"
 msgstr "Comment (optional)"
@@ -600,8 +654,14 @@ msgstr "Complete"
 msgid "Complete foundation setup"
 msgstr "Complete foundation setup"
 
+msgid "Complete project"
+msgstr "Complete project"
+
 msgid "Complete your student profile"
 msgstr "Complete your student profile"
+
+msgid "Completed"
+msgstr "Completed"
 
 msgid "Completed delivery is waiting for final company acceptance in the project workspace."
 msgstr "Completed delivery is waiting for final company acceptance in the project workspace."
@@ -624,9 +684,6 @@ msgstr "Confirm email"
 msgid "CONFIRM EMAIL"
 msgstr "CONFIRM EMAIL"
 
-#~ msgid "Confirm Email Change"
-#~ msgstr "Confirm Email Change"
-
 msgid "Confirm New Email"
 msgstr "Confirm New Email"
 
@@ -648,8 +705,11 @@ msgstr "Confirm your company owner account"
 msgid "Confirm your email address from the message sent to your inbox before full platform access."
 msgstr "Confirm your email address from the message sent to your inbox before full platform access."
 
-msgid "Confirmation Code"
-msgstr "Confirmation Code"
+msgid "Confirm your new email"
+msgstr "Confirm your new email"
+
+msgid "Confirmation code"
+msgstr "Confirmation code"
 
 msgid "Confirmation code is required."
 msgstr "Confirmation code is required."
@@ -660,8 +720,8 @@ msgstr "Confirmation email sent."
 msgid "Confirmation status"
 msgstr "Confirmation status"
 
-msgid "Confirming..."
-msgstr "Confirming..."
+msgid "Confirming…"
+msgstr "Confirming…"
 
 msgid "CONFIRMING..."
 msgstr "CONFIRMING..."
@@ -726,6 +786,9 @@ msgstr "Create an invite to inspect the returned metadata here."
 msgid "Create call"
 msgstr "Create call"
 
+msgid "Create criterion-based scoring after formal verification or during evaluation."
+msgstr "Create criterion-based scoring after formal verification or during evaluation."
+
 msgid "Create Faculty"
 msgstr "Create Faculty"
 
@@ -734,6 +797,9 @@ msgstr "Create Invite"
 
 msgid "Create milestone"
 msgstr "Create milestone"
+
+msgid "Create needs-info item"
+msgstr "Create needs-info item"
 
 msgid "Create organization"
 msgstr "Create organization"
@@ -805,13 +871,16 @@ msgid "Creating organization…"
 msgstr "Creating organization…"
 
 msgid "Creating..."
-msgstr "Creating..."
+msgstr "Creating...<<<<<<< HEAD"
 
 msgid "Current email"
-msgstr "Current email"
+msgstr "Current email======="
 
 msgid "Current invitations"
 msgstr "Current invitations"
+
+msgid "Current mentor"
+msgstr "Current mentor"
 
 msgid "Current mentor:"
 msgstr "Current mentor:"
@@ -876,6 +945,9 @@ msgstr "Decision"
 msgid "Decision note:"
 msgstr "Decision note:"
 
+msgid "Decision reason"
+msgstr "Decision reason"
+
 msgid "Decisions recorded during the last 30 days."
 msgstr "Decisions recorded during the last 30 days."
 
@@ -905,6 +977,12 @@ msgstr "Deleting..."
 
 msgid "Deliverable"
 msgstr "Deliverable"
+
+msgid "Delivery"
+msgstr "Delivery"
+
+msgid "Delivery workflow"
+msgstr "Delivery workflow"
 
 msgid "Descending"
 msgstr "Descending"
@@ -957,6 +1035,9 @@ msgstr "Draft"
 msgid "Driving innovation and economic growth through technology and academic collaboration."
 msgstr "Driving innovation and economic growth through technology and academic collaboration."
 
+msgid "Due"
+msgstr "Due"
+
 #. placeholder {0}: formatUnknownDate(milestone.dueAt)
 msgid "Due {0}"
 msgstr "Due {0}"
@@ -1003,6 +1084,9 @@ msgstr "Edit University"
 msgid "Education details, academic verification, and declaration."
 msgstr "Education details, academic verification, and declaration."
 
+msgid "Eligibility"
+msgstr "Eligibility"
+
 msgid "Email"
 msgstr "Email"
 
@@ -1026,9 +1110,6 @@ msgstr "Email confirmation failed"
 
 msgid "Email confirmed. Sign in again with your updated address."
 msgstr "Email confirmed. Sign in again with your updated address."
-
-#~ msgid "Email requests only create a pending verification step. The current address remains unchanged until the token is confirmed."
-#~ msgstr "Email requests only create a pending verification step. The current address remains unchanged until the token is confirmed."
 
 msgid "Email updated"
 msgstr "Email updated"
@@ -1055,13 +1136,19 @@ msgid "ENCRYPTION"
 msgstr "ENCRYPTION"
 
 msgid "END-TO-END"
-msgstr "END-TO-END"
+msgstr "END-TO-END<<<<<<< HEAD"
 
 msgid "Enter a different email address."
 msgstr "Enter a different email address."
 
+msgid "Enter a mentor user ID before assigning a mentor."
+msgstr "Enter a mentor user ID before assigning a mentor."
+
+msgid "Enter a milestone title before creating it."
+msgstr "Enter a milestone title before creating it.>>>>>>> origin/main"
+
 msgid "Enter a new password"
-msgstr "Enter a new password"
+msgstr "Enter a new password======="
 
 msgid "Enter a strong password"
 msgstr "Enter a strong password"
@@ -1069,8 +1156,8 @@ msgstr "Enter a strong password"
 msgid "Enter a valid URL."
 msgstr "Enter a valid URL."
 
-msgid "Enter an email address you can open right now. We'll send a confirmation message before anything changes."
-msgstr "Enter an email address you can open right now. We'll send a confirmation message before anything changes."
+msgid "Enter an email address you can open right now. We'll send a confirmation message before we make the change."
+msgstr "Enter an email address you can open right now. We'll send a confirmation message before we make the change."
 
 msgid "Enter faculty name"
 msgstr "Enter faculty name"
@@ -1093,8 +1180,8 @@ msgstr "Enter your credentials below to access the platform."
 msgid "Enter your current password"
 msgstr "Enter your current password"
 
-msgid "Enter your current password to make the change. After that, you'll need to sign in again."
-msgstr "Enter your current password to make the change. After that, you'll need to sign in again."
+msgid "Enter your current password to set a new one. After that, sign in again."
+msgstr "Enter your current password to set a new one. After that, sign in again."
 
 msgid "Enter your first name…"
 msgstr "Enter your first name…"
@@ -1102,8 +1189,8 @@ msgstr "Enter your first name…"
 msgid "Enter your last name…"
 msgstr "Enter your last name…"
 
-msgid "Enter your new email first, then confirm it from your inbox. Your current email stays active until you finish that step."
-msgstr "Enter your new email first, then confirm it from your inbox. Your current email stays active until you finish that step."
+msgid "Enter your new email, then confirm it from your inbox. Your current email stays the same until you finish."
+msgstr "Enter your new email, then confirm it from your inbox. Your current email stays the same until you finish."
 
 msgid "Enter your password"
 msgstr "Enter your password"
@@ -1117,8 +1204,23 @@ msgstr "Enterprise Data Analytics"
 msgid "Entry point for Program B stakeholders. Manage technical challenges, oversee precision metrics, and interface directly with emerging talent pools through the Engine portal."
 msgstr "Entry point for Program B stakeholders. Manage technical challenges, oversee precision metrics, and interface directly with emerging talent pools through the Engine portal."
 
+msgid "Evaluating"
+msgstr "Evaluating"
+
+msgid "Evaluation can only be created after formal verification or during evaluation."
+msgstr "Evaluation can only be created after formal verification or during evaluation."
+
+msgid "Evaluation can only be started after formal verification."
+msgstr "Evaluation can only be started after formal verification."
+
 msgid "Evaluation queue and review flows"
 msgstr "Evaluation queue and review flows"
+
+msgid "Evaluations"
+msgstr "Evaluations"
+
+msgid "Evaluator"
+msgstr "Evaluator"
 
 msgid "Everything is up to date right now."
 msgstr "Everything is up to date right now."
@@ -1158,6 +1260,9 @@ msgstr "Expires:"
 
 msgid "Expiry timestamp returned by the backend."
 msgstr "Expiry timestamp returned by the backend."
+
+msgid "Explain what the team has to clarify or upload..."
+msgstr "Explain what the team has to clarify or upload..."
 
 msgid "Explain why this organization should be rejected."
 msgstr "Explain why this organization should be rejected."
@@ -1225,6 +1330,12 @@ msgstr "Faculty updated."
 msgid "Failed"
 msgstr "Failed"
 
+msgid "Failed signals"
+msgstr "Failed signals"
+
+msgid "Filter by call"
+msgstr "Filter by call"
+
 msgid "Filter faculties on this page"
 msgstr "Filter faculties on this page"
 
@@ -1252,6 +1363,9 @@ msgstr "Final acceptance recorded."
 msgid "Final presentation"
 msgstr "Final presentation"
 
+msgid "Finish email change"
+msgstr "Finish email change"
+
 msgid "Finish profile details and keep team membership current so application actions stay available."
 msgstr "Finish profile details and keep team membership current so application actions stay available."
 
@@ -1273,14 +1387,26 @@ msgstr "First name must be at most 50 characters."
 msgid "Focus Areas"
 msgstr "Focus Areas"
 
-msgid "For security, email confirmation requests are limited for a short time. Please try again in about a minute."
-msgstr "For security, email confirmation requests are limited for a short time. Please try again in about a minute."
-
 msgid "Forgot password?"
 msgstr "Forgot password?"
 
 msgid "Form Conquered"
 msgstr "Form Conquered"
+
+msgid "Formal verification"
+msgstr "Formal verification"
+
+msgid "Formal verification is only available for submitted applications."
+msgstr "Formal verification is only available for submitted applications."
+
+msgid "Formal verify"
+msgstr "Formal verify"
+
+msgid "Formally verified"
+msgstr "Formally verified"
+
+msgid "Formally Verified"
+msgstr "Formally Verified"
 
 msgid "Format"
 msgstr "Format"
@@ -1330,9 +1456,6 @@ msgstr "Hide password"
 msgid "Highlight your technical and soft skills for potential partners."
 msgstr "Highlight your technical and soft skills for potential partners."
 
-#~ msgid "How the flows behave"
-#~ msgstr "How the flows behave"
-
 msgid "https://example.edu"
 msgstr "https://example.edu"
 
@@ -1364,6 +1487,9 @@ msgstr "Id"
 msgid "ID"
 msgstr "ID"
 
+msgid "Idea overview"
+msgstr "Idea overview"
+
 msgid "Identity"
 msgstr "Identity"
 
@@ -1373,11 +1499,8 @@ msgstr "Identity Verification"
 msgid "IDENTITY VERIFICATION"
 msgstr "IDENTITY VERIFICATION"
 
-msgid "If something needs attention, we'll show a clear message so you know what to do next."
-msgstr "If something needs attention, we'll show a clear message so you know what to do next."
-
-#~ msgid "If the backend reports an invalid token, a conflict, or an expired session, the exact server error is surfaced here instead of being hidden behind generic copy."
-#~ msgstr "If the backend reports an invalid token, a conflict, or an expired session, the exact server error is surfaced here instead of being hidden behind generic copy."
+msgid "If something goes wrong, we'll tell you what to do next."
+msgstr "If something goes wrong, we'll tell you what to do next."
 
 msgid "If you are onboarding as the team lead, create the team here and send the first teammate invites immediately."
 msgstr "If you are onboarding as the team lead, create the team here and send the first teammate invites immediately."
@@ -1399,6 +1522,9 @@ msgstr "Incomplete"
 
 msgid "Information Technology…"
 msgstr "Information Technology…"
+
+msgid "Initial progress note"
+msgstr "Initial progress note"
 
 msgid "Innovation Repository"
 msgstr "Innovation Repository"
@@ -1503,8 +1629,14 @@ msgstr "JOINING..."
 msgid "Keep your academic and professional information up to date."
 msgstr "Keep your academic and professional information up to date."
 
+msgid "Key business and product information from the submitted application."
+msgstr "Key business and product information from the submitted application."
+
 msgid "Language"
 msgstr "Language"
+
+msgid "Last activity"
+msgstr "Last activity"
 
 msgid "Last name"
 msgstr "Last name"
@@ -1517,6 +1649,9 @@ msgstr "Last name must be at least 2 characters."
 
 msgid "Last name must be at most 50 characters."
 msgstr "Last name must be at most 50 characters."
+
+msgid "Last updated"
+msgstr "Last updated"
 
 msgid "Last updated:"
 msgstr "Last updated:"
@@ -1569,6 +1704,12 @@ msgstr "Loading academic structure..."
 msgid "Loading admin data..."
 msgstr "Loading admin data..."
 
+msgid "Loading application detail..."
+msgstr "Loading application detail..."
+
+msgid "Loading application sections..."
+msgstr "Loading application sections..."
+
 msgid "Loading backlog item"
 msgstr "Loading backlog item"
 
@@ -1583,6 +1724,9 @@ msgstr "Loading dataset..."
 
 msgid "Loading documents…"
 msgstr "Loading documents…"
+
+msgid "Loading evaluations..."
+msgstr "Loading evaluations..."
 
 msgid "Loading export job..."
 msgstr "Loading export job..."
@@ -1599,11 +1743,23 @@ msgstr "Loading members…"
 msgid "Loading mentors…"
 msgstr "Loading mentors…"
 
+msgid "Loading mentorship notes..."
+msgstr "Loading mentorship notes..."
+
+msgid "Loading needs-info thread..."
+msgstr "Loading needs-info thread..."
+
 msgid "Loading organization…"
 msgstr "Loading organization…"
 
 msgid "Loading profile onboarding..."
 msgstr "Loading profile onboarding..."
+
+msgid "Loading Program A applications..."
+msgstr "Loading Program A applications..."
+
+msgid "Loading Program A milestones..."
+msgstr "Loading Program A milestones..."
 
 msgid "Loading project"
 msgstr "Loading project"
@@ -1726,6 +1882,9 @@ msgstr "Mentor dashboard"
 msgid "Mentor is not assigned yet."
 msgstr "Mentor is not assigned yet."
 
+msgid "Mentor user id"
+msgstr "Mentor user id"
+
 msgid "Mentor workspace"
 msgstr "Mentor workspace"
 
@@ -1748,8 +1907,17 @@ msgstr "Mentoring notes"
 msgid "Mentors"
 msgstr "Mentors"
 
+msgid "Mentorship notes"
+msgstr "Mentorship notes"
+
 msgid "Milestone created."
 msgstr "Milestone created."
+
+msgid "Milestone description"
+msgstr "Milestone description"
+
+msgid "Milestone title"
+msgstr "Milestone title"
 
 msgid "Milestone title is required."
 msgstr "Milestone title is required."
@@ -1769,6 +1937,9 @@ msgstr "Min team size"
 msgid "Min team size must be a whole number greater than or equal to 1."
 msgstr "Min team size must be a whole number greater than or equal to 1."
 
+msgid "Missing documents"
+msgstr "Missing documents"
+
 msgid "Missing invitation token"
 msgstr "Missing invitation token"
 
@@ -1778,8 +1949,8 @@ msgstr "Missing invite token"
 msgid "Moderation"
 msgstr "Moderation"
 
-msgid "Moderation workspace is coming soon"
-msgstr "Moderation workspace is coming soon"
+msgid "Moderation actions"
+msgstr "Moderation actions"
 
 msgid "Monetization model"
 msgstr "Monetization model"
@@ -1826,6 +1997,15 @@ msgstr "name@institution.edu…"
 msgid "Needs attention"
 msgstr "Needs attention"
 
+msgid "Needs info"
+msgstr "Needs info"
+
+msgid "Needs Info"
+msgstr "Needs Info"
+
+msgid "Needs-info thread"
+msgstr "Needs-info thread"
+
 msgid "New"
 msgstr "New"
 
@@ -1847,6 +2027,9 @@ msgstr "News"
 msgid "Next"
 msgstr "Next"
 
+msgid "Next action"
+msgstr "Next action"
+
 #. placeholder {0}: item.nextMilestone.title
 msgid "Next milestone: {0}"
 msgstr "Next milestone: {0}"
@@ -1859,6 +2042,9 @@ msgstr "Next steps"
 
 msgid "No"
 msgstr "No"
+
+msgid "No action"
+msgstr "No action"
 
 msgid "No active Program A calls are available right now."
 msgstr "No active Program A calls are available right now."
@@ -1874,6 +2060,12 @@ msgstr "No active team"
 
 msgid "No application rows match the current filters."
 msgstr "No application rows match the current filters."
+
+msgid "No application sections were returned by the backend."
+msgstr "No application sections were returned by the backend."
+
+msgid "No applications found."
+msgstr "No applications found."
 
 msgid "No assigned projects"
 msgstr "No assigned projects"
@@ -1920,6 +2112,9 @@ msgstr "No due date"
 msgid "No employee invitations yet. Send the first invitation using the form on the left."
 msgstr "No employee invitations yet. Send the first invitation using the form on the left."
 
+msgid "No evaluations were returned by the backend."
+msgstr "No evaluations were returned by the backend."
+
 msgid "No export jobs yet"
 msgstr "No export jobs yet"
 
@@ -1941,6 +2136,9 @@ msgstr "No local Program A drafts yet."
 msgid "No mentoring notes yet."
 msgstr "No mentoring notes yet."
 
+msgid "No mentorship notes were returned by the backend."
+msgstr "No mentorship notes were returned by the backend."
+
 msgid "No milestone description."
 msgstr "No milestone description."
 
@@ -1949,6 +2147,9 @@ msgstr "No milestones yet."
 
 msgid "No motivation provided."
 msgstr "No motivation provided."
+
+msgid "No needs-info messages were returned by the backend."
+msgstr "No needs-info messages were returned by the backend."
 
 msgid "No organization found"
 msgstr "No organization found"
@@ -1968,6 +2169,12 @@ msgstr "No organizations need review"
 msgid "No pending actions right now"
 msgstr "No pending actions right now"
 
+msgid "No Program A applications found"
+msgstr "No Program A applications found"
+
+msgid "No Program A milestones were returned by the backend."
+msgstr "No Program A milestones were returned by the backend."
+
 msgid "No Program B projects"
 msgstr "No Program B projects"
 
@@ -1976,6 +2183,9 @@ msgstr "No Program B rows match the current filters."
 
 msgid "No projects yet"
 msgstr "No projects yet"
+
+msgid "No recommendation"
+msgstr "No recommendation"
 
 msgid "No reviews yet."
 msgstr "No reviews yet."
@@ -2025,6 +2235,9 @@ msgstr "Not assigned"
 msgid "Not available"
 msgstr "Not available"
 
+msgid "Not checked"
+msgstr "Not checked"
+
 msgid "Not provided"
 msgstr "Not provided"
 
@@ -2060,6 +2273,9 @@ msgstr "Number of transferred subjects"
 
 msgid "of"
 msgstr "of"
+
+msgid "Onboarding can only be started after the application is approved."
+msgstr "Onboarding can only be started after the application is approved."
 
 msgid "Once backlog work is created for this organization, the latest items will appear here."
 msgstr "Once backlog work is created for this organization, the latest items will appear here."
@@ -2109,6 +2325,9 @@ msgstr "Open menu"
 msgid "Open navigation"
 msgstr "Open navigation"
 
+msgid "Open navigation menu"
+msgstr "Open navigation menu"
+
 msgid "Open profile"
 msgstr "Open profile"
 
@@ -2142,8 +2361,8 @@ msgstr "Open team workspace"
 msgid "Open the full invitation link from your email and try again."
 msgstr "Open the full invitation link from your email and try again."
 
-msgid "Open the link in your email, or paste the confirmation code here. After that, you'll need to sign in again."
-msgstr "Open the link in your email, or paste the confirmation code here. After that, you'll need to sign in again."
+msgid "Open the link in your email, or paste the code here. After that, sign in again."
+msgstr "Open the link in your email, or paste the code here. After that, sign in again."
 
 msgid "Open workspace"
 msgstr "Open workspace"
@@ -2273,14 +2492,8 @@ msgstr "Password change failed"
 msgid "Password changed. Sign in again with your new password."
 msgstr "Password changed. Sign in again with your new password."
 
-#~ msgid "Password changes require the current password and immediately invalidate active refresh sessions across devices."
-#~ msgstr "Password changes require the current password and immediately invalidate active refresh sessions across devices."
-
 msgid "Password must be at least 6 characters."
 msgstr "Password must be at least 6 characters."
-
-msgid "Password must be at least 8 characters."
-msgstr "Password must be at least 8 characters."
 
 msgid "Password Reset Required"
 msgstr "Password Reset Required"
@@ -2297,17 +2510,17 @@ msgstr "Passwords do not match."
 msgid "Passwords must match."
 msgstr "Passwords must match."
 
-msgid "Paste the code from your email…"
-msgstr "Paste the code from your email…"
-
-#~ msgid "Paste the token from the email or open the confirmation link. Once confirmed, the account will require a fresh sign-in."
-#~ msgstr "Paste the token from the email or open the confirmation link. Once confirmed, the account will require a fresh sign-in."
+msgid "Paste the code from your email"
+msgstr "Paste the code from your email"
 
 msgid "Paste the token from your email…"
 msgstr "Paste the token from your email…"
 
 msgid "Paste your verification token"
 msgstr "Paste your verification token"
+
+msgid "Pause project"
+msgstr "Pause project"
 
 msgid "Pending"
 msgstr "Pending"
@@ -2337,10 +2550,22 @@ msgid "Please enter a valid website URL."
 msgstr "Please enter a valid website URL."
 
 msgid "Please review your information before completing the registration."
-msgstr "Please review your information before completing the registration."
+msgstr "Please review your information before completing the registration.<<<<<<< HEAD"
+
+msgid "Please wait about a minute before requesting another email confirmation."
+msgstr "Please wait about a minute before requesting another email confirmation."
 
 msgid "Please wait before trying again"
-msgstr "Please wait before trying again"
+msgstr "Please wait before trying again======="
+
+msgid "Please wait until the current request finishes."
+msgstr "Please wait until the current request finishes."
+
+msgid "Please wait. The previous action is still running."
+msgstr "Please wait. The previous action is still running."
+
+msgid "Please write a transition reason before running this action."
+msgstr "Please write a transition reason before running this action.>>>>>>> origin/main"
 
 msgid "PNG, JPG or WEBP. Logo is optional."
 msgstr "PNG, JPG or WEBP. Logo is optional."
@@ -2374,6 +2599,9 @@ msgstr "Privacy Policy"
 
 msgid "PRIVACY POLICY"
 msgstr "PRIVACY POLICY"
+
+msgid "Problem"
+msgstr "Problem"
 
 msgid "PROCESSING..."
 msgstr "PROCESSING..."
@@ -2436,11 +2664,17 @@ msgstr "Program"
 msgid "Program A"
 msgstr "Program A"
 
+msgid "Program A application"
+msgstr "Program A application"
+
 msgid "Program A flow"
 msgstr "Program A flow"
 
 msgid "Program A is for draft and submission flow. Program B is for opportunity pairing and project delivery."
 msgstr "Program A is for draft and submission flow. Program B is for opportunity pairing and project delivery."
+
+msgid "Program A milestones"
+msgstr "Program A milestones"
 
 msgid "Program A Moderation"
 msgstr "Program A Moderation"
@@ -2487,11 +2721,23 @@ msgstr "Program B projects where you are the assigned mentor will appear here."
 msgid "Programs"
 msgstr "Programs"
 
+msgid "Progress note"
+msgstr "Progress note"
+
 msgid "Project"
 msgstr "Project"
 
+msgid "Project activation is only available from onboarding or paused states."
+msgstr "Project activation is only available from onboarding or paused states."
+
+msgid "Project completion is only available for active projects."
+msgstr "Project completion is only available for active projects."
+
 msgid "Project is unavailable"
 msgstr "Project is unavailable"
+
+msgid "Project pause is only available for active projects."
+msgstr "Project pause is only available for active projects."
 
 msgid "Project preview"
 msgstr "Project preview"
@@ -2550,11 +2796,17 @@ msgstr "Quick Links"
 msgid "Reason (optional)"
 msgstr "Reason (optional)"
 
+msgid "Reassign mentor"
+msgstr "Reassign mentor"
+
 msgid "Recent organization-scoped Program B backlog items from the dedicated summary endpoint."
 msgstr "Recent organization-scoped Program B backlog items from the dedicated summary endpoint."
 
 msgid "Recent organizations that still need an operational decision."
 msgstr "Recent organizations that still need an operational decision."
+
+msgid "Recommendation"
+msgstr "Recommendation"
 
 msgid "Record company final acceptance"
 msgstr "Record company final acceptance"
@@ -2604,6 +2856,9 @@ msgstr "Reject"
 msgid "Reject candidate"
 msgstr "Reject candidate"
 
+msgid "Reject is only available during submitted, formal verification, evaluation, or needs-info states."
+msgstr "Reject is only available during submitted, formal verification, evaluation, or needs-info states."
+
 msgid "Rejected"
 msgstr "Rejected"
 
@@ -2629,13 +2884,13 @@ msgid "Reporting dashboard unavailable"
 msgstr "Reporting dashboard unavailable"
 
 msgid "Reports"
-msgstr "Reports"
+msgstr "Reports<<<<<<< HEAD"
 
-#~ msgid "Request a new address first, then confirm the verification token or email link. The current address remains active until confirmation succeeds."
-#~ msgstr "Request a new address first, then confirm the verification token or email link. The current address remains active until confirmation succeeds."
+msgid "Request additional information"
+msgstr "Request additional information>>>>>>> origin/main"
 
 msgid "Request change"
-msgstr "Request change"
+msgstr "Request change======="
 
 msgid "Request failed"
 msgstr "Request failed"
@@ -2682,11 +2937,11 @@ msgstr "Resolving your authenticated workspace."
 msgid "Resolving your organization access before loading Program B company data."
 msgstr "Resolving your organization access before loading Program B company data."
 
+msgid "Resume project"
+msgstr "Resume project"
+
 msgid "Retry"
 msgstr "Retry"
-
-#~ msgid "Return to workspace"
-#~ msgstr "Return to workspace"
 
 msgid "Review"
 msgstr "Review"
@@ -2700,8 +2955,14 @@ msgstr "Review candidate teams"
 msgid "Review dashboard"
 msgstr "Review dashboard"
 
+msgid "Review metadata, evaluate the application, request information, assign a mentor, and manage Program A delivery milestones."
+msgstr "Review metadata, evaluate the application, request information, assign a mentor, and manage Program A delivery milestones."
+
 msgid "Review Organizations"
 msgstr "Review Organizations"
+
+msgid "Review Program A applications, move them through moderation, assign mentors, and track delivery milestones."
+msgstr "Review Program A applications, move them through moderation, assign mentors, and track delivery milestones."
 
 msgid "Review Queue"
 msgstr "Review Queue"
@@ -2711,6 +2972,9 @@ msgstr "Review setup"
 
 msgid "Review submitted."
 msgstr "Review submitted."
+
+msgid "Review workflow"
+msgstr "Review workflow"
 
 msgid "Review workspace"
 msgstr "Review workspace"
@@ -2757,6 +3021,9 @@ msgstr "Role To Assign"
 msgid "rows"
 msgstr "rows"
 
+msgid "Rows"
+msgstr "Rows"
+
 msgid "Running"
 msgstr "Running"
 
@@ -2766,11 +3033,17 @@ msgstr "Save academic information"
 msgid "Save changes"
 msgstr "Save changes"
 
+msgid "Save evaluation"
+msgstr "Save evaluation"
+
 msgid "Save New Password"
 msgstr "Save New Password"
 
 msgid "Save professional skills"
 msgstr "Save professional skills"
+
+msgid "Save progress"
+msgstr "Save progress"
 
 msgid "Save your academic section first so professional data can be attached to a valid student profile."
 msgstr "Save your academic section first so professional data can be attached to a valid student profile."
@@ -2799,6 +3072,9 @@ msgstr "Search by email, role, or id"
 msgid "Search by name, website, sector, or id"
 msgstr "Search by name, website, sector, or id"
 
+msgid "Search by team, call, status, or mentor state..."
+msgstr "Search by team, call, status, or mentor state..."
+
 msgid "Search title or description"
 msgstr "Search title or description"
 
@@ -2822,6 +3098,9 @@ msgstr "Security overview"
 
 msgid "SECURITY STANDARDS"
 msgstr "SECURITY STANDARDS"
+
+msgid "See your current account details and the latest update here."
+msgstr "See your current account details and the latest update here."
 
 msgid "Select a faculty before creating or editing specializations."
 msgstr "Select a faculty before creating or editing specializations."
@@ -2913,9 +3192,6 @@ msgstr "Selected University"
 msgid "Selected university values are loaded here for direct editing."
 msgstr "Selected university values are loaded here for direct editing."
 
-msgid "Send again in {remainingSeconds}s"
-msgstr "Send again in {remainingSeconds}s"
-
 msgid "Send an invitation to a colleague. The invited user will join as a company employee."
 msgstr "Send an invitation to a colleague. The invited user will join as a company employee."
 
@@ -2927,9 +3203,6 @@ msgstr "Send invites"
 
 msgid "Send Verification"
 msgstr "Send Verification"
-
-#~ msgid "Send verification to the new email"
-#~ msgstr "Send verification to the new email"
 
 msgid "SENDING INVITATION..."
 msgstr "SENDING INVITATION..."
@@ -2964,14 +3237,17 @@ msgstr "Show password"
 msgid "Showcase your best projects and tell us about yourself."
 msgstr "Showcase your best projects and tell us about yourself."
 
+msgid "Showing Program A moderation rows."
+msgstr "Showing Program A moderation rows."
+
 msgid "Sign In"
 msgstr "Sign In"
 
 msgid "SIGN IN"
 msgstr "SIGN IN"
 
-msgid "Sign in again before continuing with protected account changes."
-msgstr "Sign in again before continuing with protected account changes."
+msgid "Sign in again before making more account changes."
+msgstr "Sign in again before making more account changes."
 
 msgid "SIGN IN AND ACCEPT"
 msgstr "SIGN IN AND ACCEPT"
@@ -3006,11 +3282,17 @@ msgstr "Soft Skills"
 msgid "Soft-disabled rows remain manageable when this filter is turned on."
 msgstr "Soft-disabled rows remain manageable when this filter is turned on."
 
+msgid "Solution"
+msgstr "Solution"
+
 msgid "Solution proposal"
 msgstr "Solution proposal"
 
 msgid "Some dashboard sections could not be refreshed."
 msgstr "Some dashboard sections could not be refreshed."
+
+msgid "Something went wrong. Check the Network tab for details."
+msgstr "Something went wrong. Check the Network tab for details."
 
 msgid "Sort"
 msgstr "Sort"
@@ -3051,6 +3333,9 @@ msgstr "Specializations"
 msgid "Specializations are unavailable"
 msgstr "Specializations are unavailable"
 
+msgid "Stack"
+msgstr "Stack"
+
 msgid "Stack tags"
 msgstr "Stack tags"
 
@@ -3063,8 +3348,14 @@ msgstr "Start an export to monitor its status and download completed files from 
 msgid "Start draft"
 msgstr "Start draft"
 
+msgid "Start evaluation"
+msgstr "Start evaluation"
+
 msgid "START FROM THE BEGINNING"
 msgstr "START FROM THE BEGINNING"
+
+msgid "Start onboarding"
+msgstr "Start onboarding"
 
 msgid "Startups"
 msgstr "Startups"
@@ -3117,11 +3408,17 @@ msgstr "Subject Average"
 msgid "Submit application"
 msgstr "Submit application"
 
+msgid "Submit evaluation"
+msgstr "Submit evaluation"
+
 msgid "Submit review"
 msgstr "Submit review"
 
 msgid "Submitted"
 msgstr "Submitted"
+
+msgid "Submitted by"
+msgstr "Submitted by"
 
 msgid "Submitted candidates are waiting for shortlist or acceptance decisions."
 msgstr "Submitted candidates are waiting for shortlist or acceptance decisions."
@@ -3161,6 +3458,9 @@ msgstr "Talent Acquisition Pipeline"
 
 msgid "Target team"
 msgstr "Target team"
+
+msgid "Target users"
+msgstr "Target users"
 
 msgid "Team"
 msgstr "Team"
@@ -3206,6 +3506,9 @@ msgstr "Team overview"
 
 msgid "Team readiness"
 msgstr "Team readiness"
+
+msgid "Team size"
+msgstr "Team size"
 
 msgid "Team:"
 msgstr "Team:"
@@ -3264,9 +3567,6 @@ msgstr "The current Program B company workflow does not have any open action que
 msgid "The current report table could not be loaded."
 msgstr "The current report table could not be loaded."
 
-msgid "The current session is being closed for safety. Redirecting you to sign in again."
-msgstr "The current session is being closed for safety. Redirecting you to sign in again."
-
 msgid "The current team could not be loaded right now. Retry the request instead of treating this as no team."
 msgstr "The current team could not be loaded right now. Retry the request instead of treating this as no team."
 
@@ -3290,9 +3590,6 @@ msgstr "The invite could not be validated right now. Please try again later."
 
 msgid "The invite detail request failed for this organization."
 msgstr "The invite detail request failed for this organization."
-
-#~ msgid "The new email address is now active. You will be redirected to sign in again because existing refresh sessions were revoked."
-#~ msgstr "The new email address is now active. You will be redirected to sign in again because existing refresh sessions were revoked."
 
 msgid "The organization backlog summary could not be loaded right now."
 msgstr "The organization backlog summary could not be loaded right now."
@@ -3342,9 +3639,6 @@ msgstr "There is no data to export for the current filters."
 msgid "These queues need direct company attention and link into the relevant Program B workspace."
 msgstr "These queues need direct company attention and link into the relevant Program B workspace."
 
-#~ msgid "These states are intentional so security changes stay explicit."
-#~ msgstr "These states are intentional so security changes stay explicit."
-
 msgid "This account must update its password before the admin session can continue."
 msgstr "This account must update its password before the admin session can continue."
 
@@ -3353,9 +3647,6 @@ msgstr "This account type does not currently have a self-service account setting
 
 msgid "This backlog item is in an internal company workflow state, so this page is showing the organization-scoped workspace summary instead of the published-detail endpoint."
 msgstr "This backlog item is in an internal company workflow state, so this page is showing the organization-scoped workspace summary instead of the published-detail endpoint."
-
-#~ msgid "This confirmation step stays inactive until you request an email change or open a confirmation link from your inbox."
-#~ msgstr "This confirmation step stays inactive until you request an email change or open a confirmation link from your inbox."
 
 msgid "This flow validates the invite first, then gets you into the invited team and your student profile onboarding."
 msgstr "This flow validates the invite first, then gets you into the invited team and your student profile onboarding."
@@ -3378,9 +3669,6 @@ msgstr "This mentor workspace is routed correctly. Project mentoring and progres
 msgid "This organization has no invite records available right now."
 msgstr "This organization has no invite records available right now."
 
-msgid "This placeholder keeps the admin route available while the full Program A moderation workflow is being implemented."
-msgstr "This placeholder keeps the admin route available while the full Program A moderation workflow is being implemented."
-
 msgid "This project is closed and now read-only."
 msgstr "This project is closed and now read-only."
 
@@ -3390,8 +3678,8 @@ msgstr "This review workspace is routed correctly. Program A review queues and d
 msgid "This step is for inviting teammates once the team lead is ready."
 msgstr "This step is for inviting teammates once the team lead is ready."
 
-msgid "This step will become available after you request an email change or open the link from your inbox."
-msgstr "This step will become available after you request an email change or open the link from your inbox."
+msgid "This step will unlock after you request the change or open the link from your inbox."
+msgstr "This step will unlock after you request the change or open the link from your inbox."
 
 msgid "This workspace is correctly routed, but its feature surface is not implemented yet."
 msgstr "This workspace is correctly routed, but its feature surface is not implemented yet."
@@ -3423,6 +3711,9 @@ msgstr "Total application rows represented across status groups."
 msgid "Total Users"
 msgstr "Total Users"
 
+msgid "Track delivery"
+msgstr "Track delivery"
+
 msgid "Track pending, accepted, expired, and revoked employee invitations."
 msgstr "Track pending, accepted, expired, and revoked employee invitations."
 
@@ -3432,8 +3723,17 @@ msgstr "Transfer leadership"
 msgid "Transferred Subjects"
 msgstr "Transferred Subjects"
 
+msgid "Transition reason"
+msgstr "Transition reason"
+
 msgid "Try adjusting the search phrase or filters to find another backlog item."
 msgstr "Try adjusting the search phrase or filters to find another backlog item."
+
+msgid "Try again in {remainingSeconds}s"
+msgstr "Try again in {remainingSeconds}s"
+
+msgid "Try changing the search query, call filter, or selected status."
+msgstr "Try changing the search query, call filter, or selected status."
 
 msgid "Twitter"
 msgstr "Twitter"
@@ -3507,6 +3807,9 @@ msgstr "Unable to export this report right now."
 msgid "Unable to join the invited team right now."
 msgstr "Unable to join the invited team right now."
 
+msgid "Unable to load application detail from the backend."
+msgstr "Unable to load application detail from the backend."
+
 msgid "Unable to load backlog preview"
 msgstr "Unable to load backlog preview"
 
@@ -3516,6 +3819,9 @@ msgstr "Unable to load company backlog"
 msgid "Unable to load company projects"
 msgstr "Unable to load company projects"
 
+msgid "Unable to load live applications."
+msgstr "Unable to load live applications."
+
 msgid "Unable to load organization invitations."
 msgstr "Unable to load organization invitations."
 
@@ -3524,6 +3830,9 @@ msgstr "Unable to load overview metrics"
 
 msgid "Unable to load profile data for review."
 msgstr "Unable to load profile data for review."
+
+msgid "Unable to load Program A applications from the backend."
+msgstr "Unable to load Program A applications from the backend."
 
 msgid "Unable to load project preview"
 msgstr "Unable to load project preview"
@@ -3690,6 +3999,9 @@ msgstr "University selection required"
 msgid "University updated."
 msgstr "University updated."
 
+msgid "Unknown call"
+msgstr "Unknown call"
+
 msgid "Unknown team"
 msgstr "Unknown team"
 
@@ -3711,8 +4023,8 @@ msgstr "Update the title, description, budget, and expected outcomes for this ba
 msgid "Update University"
 msgstr "Update University"
 
-#~ msgid "Update your password and email with the same guarded flows used for authentication. Sensitive changes may require verification or a fresh sign-in."
-#~ msgstr "Update your password and email with the same guarded flows used for authentication. Sensitive changes may require verification or a fresh sign-in."
+msgid "Update your email or password here. If needed, we'll guide you through the next step."
+msgstr "Update your email or password here. If needed, we'll guide you through the next step."
 
 msgid "Update your student profile"
 msgstr "Update your student profile"
@@ -3732,6 +4044,9 @@ msgstr "Updated:"
 
 msgid "Updating"
 msgstr "Updating"
+
+msgid "Updating application..."
+msgstr "Updating application..."
 
 msgid "Updating..."
 msgstr "Updating..."
@@ -3754,9 +4069,6 @@ msgstr "Upload one or more files."
 msgid "Upload your CV and add links to your profiles."
 msgstr "Upload your CV and add links to your profiles."
 
-#~ msgid "Use an address you can access right now. Conflicts and existing-account issues will be reported before any email is changed."
-#~ msgstr "Use an address you can access right now. Conflicts and existing-account issues will be reported before any email is changed."
-
 msgid "Use at least 6 characters to secure the invited account."
 msgstr "Use at least 6 characters to secure the invited account."
 
@@ -3769,20 +4081,17 @@ msgstr "Use the backend search for universities, then manage dependent faculties
 msgid "Use the invitation details below to join the organization workspace."
 msgstr "Use the invitation details below to join the organization workspace."
 
+msgid "Use the reason field when a transition requires a reason."
+msgstr "Use the reason field when a transition requires a reason."
+
 msgid "Use the same email address that received this invitation."
 msgstr "Use the same email address that received this invitation."
 
 msgid "Use this for soft disabling. Delete only when the record is truly obsolete."
 msgstr "Use this for soft disabling. Delete only when the record is truly obsolete."
 
-#~ msgid "Use this page for sensitive security updates. Password and email changes are separated because they have different verification and session consequences."
-#~ msgstr "Use this page for sensitive security updates. Password and email changes are separated because they have different verification and session consequences."
-
 msgid "Use your admin credentials to access moderation, organization reviews, and system invites."
 msgstr "Use your admin credentials to access moderation, organization reviews, and system invites."
-
-#~ msgid "Use your current password to authorize the change. After success, every active refresh session is revoked and a new sign-in is required."
-#~ msgstr "Use your current password to authorize the change. After success, every active refresh session is revoked and a new sign-in is required."
 
 msgid "Users"
 msgstr "Users"
@@ -3803,6 +4112,9 @@ msgstr "Validating invitation…"
 msgid "Validating invite..."
 msgstr "Validating invite..."
 
+msgid "Value proposition"
+msgstr "Value proposition"
+
 msgid "Verification"
 msgstr "Verification"
 
@@ -3818,17 +4130,11 @@ msgstr "Verification token"
 msgid "Verification Token"
 msgstr "Verification Token"
 
-#~ msgid "Verification token is required."
-#~ msgstr "Verification token is required."
-
 msgid "Verification token must be at least 4 characters."
 msgstr "Verification token must be at least 4 characters."
 
 msgid "Verify your email address before creating your organization profile."
 msgstr "Verify your email address before creating your organization profile."
-
-msgid "Verify your new email"
-msgstr "Verify your new email"
 
 msgid "View"
 msgstr "View"
@@ -3841,6 +4147,9 @@ msgstr "View Invites"
 
 msgid "View team access"
 msgstr "View team access"
+
+msgid "Waiting for team"
+msgstr "Waiting for team"
 
 msgid "We could not load the Program B action queues right now."
 msgstr "We could not load the Program B action queues right now."
@@ -3859,6 +4168,9 @@ msgstr "We couldn't load your team right now. Please try again."
 
 msgid "We sent a confirmation message to your new email. Your current email will stay the same until you confirm the change."
 msgstr "We sent a confirmation message to your new email. Your current email will stay the same until you confirm the change."
+
+msgid "We're signing you out now. Please sign in again to keep going."
+msgstr "We're signing you out now. Please sign in again to keep going."
 
 msgid "Website"
 msgstr "Website"
@@ -3880,6 +4192,18 @@ msgstr "Withdraw application"
 
 msgid "Workspace"
 msgstr "Workspace"
+
+msgid "Write a mentorship note before saving it."
+msgstr "Write a mentorship note before saving it."
+
+msgid "Write a mentorship note..."
+msgstr "Write a mentorship note..."
+
+msgid "Write an optional note. Reject, pause, and archive require a reason."
+msgstr "Write an optional note. Reject, pause, and archive require a reason."
+
+msgid "Write what information is needed before creating a needs-info item."
+msgstr "Write what information is needed before creating a needs-info item."
 
 msgid "Year cannot be in the past."
 msgstr "Year cannot be in the past."
@@ -3905,8 +4229,8 @@ msgstr "You can enter the domain only. HTTPS will be added automatically if need
 msgid "You can request another email after the countdown finishes."
 msgstr "You can request another email after the countdown finishes."
 
-msgid "You can update your password or email here. If a change affects account safety, we'll guide you through the next step."
-msgstr "You can update your password or email here. If a change affects account safety, we'll guide you through the next step."
+msgid "You can update your password or email here. If anything extra is needed, we'll walk you through it."
+msgstr "You can update your password or email here. If anything extra is needed, we'll walk you through it."
 
 msgid "You don't have a team yet. Complete your profile onboarding and create a team first."
 msgstr "You don't have a team yet. Complete your profile onboarding and create a team first."

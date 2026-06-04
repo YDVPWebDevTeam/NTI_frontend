@@ -40,7 +40,7 @@ export function SecurityOverviewSection({
     <div className="space-y-6">
       <StudentSectionCard
         title={t`Security overview`}
-        description={t`A quick view of the account identity and the last sensitive action state.`}
+        description={t`See your current account details and the latest update here.`}
       >
         <div className="space-y-5">
           <StudentKeyValueList
@@ -61,9 +61,7 @@ export function SecurityOverviewSection({
             <div className="rounded-[1.25rem] border border-[#f7d58a] bg-[#fff7e6] px-4 py-4 text-sm leading-6 text-[#7a4b00]">
               <div className="flex items-start gap-3">
                 <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
-                <p>
-                  {t`The current session is being closed for safety. Redirecting you to sign in again.`}
-                </p>
+                <p>{t`We're signing you out now. Please sign in again to keep going.`}</p>
               </div>
             </div>
           ) : null}
@@ -72,7 +70,7 @@ export function SecurityOverviewSection({
 
       <StudentSectionCard
         title={t`Helpful to know`}
-        description={t`A few things to keep in mind when updating your email or password.`}
+        description={t`A few quick notes before you make changes.`}
       >
         <div className="space-y-4 text-sm leading-6 text-[#5b667b]">
           <SecurityBehaviorItem
@@ -88,7 +86,7 @@ export function SecurityOverviewSection({
           <SecurityBehaviorItem
             icon={<ShieldAlert className="mt-0.5 h-4 w-4 shrink-0 text-[#1e58d5]" />}
           >
-            {t`If something needs attention, we'll show a clear message so you know what to do next.`}
+            {t`If something goes wrong, we'll tell you what to do next.`}
           </SecurityBehaviorItem>
         </div>
       </StudentSectionCard>

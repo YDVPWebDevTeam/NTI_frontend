@@ -22,19 +22,6 @@ import { ROUTES } from 'lib/constants';
 import type { DraftRegistryEntry } from 'lib/student-dashboard/draft-registry';
 import { formatUnknownDate, normalizeUnknownText } from 'lib/student-dashboard/normalizers';
 
-export function DashboardHeaderActions({ team }: { team: { id: string } | null }) {
-  return (
-    <>
-      <Button asChild variant="outline">
-        <Link href={ROUTES.STUDENT.PROFILE}>{t`Edit profile`}</Link>
-      </Button>
-      <Button asChild>
-        <Link href={ROUTES.STUDENT.TEAM}>{team ? t`Open team workspace` : t`Set up team`}</Link>
-      </Button>
-    </>
-  );
-}
-
 export function FoundationSection({
   profile,
   teamAccessLabel,
@@ -358,7 +345,7 @@ export function TeamLoadErrorState({ onRetry }: { onRetry: () => void }) {
 }
 
 export function StudentDashboardShell({
-  team,
+  team: _team,
   children,
 }: {
   team: TeamDetailDto | null;
@@ -368,7 +355,6 @@ export function StudentDashboardShell({
     <StudentPageShell
       title={t`Dashboard`}
       description={t`A lighter student workspace with separate flows for foundation setup, Program A applications, and Program B opportunities.`}
-      actions={<DashboardHeaderActions team={team} />}
     >
       {children}
     </StudentPageShell>

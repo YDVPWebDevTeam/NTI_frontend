@@ -253,10 +253,10 @@ msgid "admin@nti.sk"
 msgstr "admin@nti.sk"
 
 msgid "Administrative Access"
-msgstr "Administrative Access<<<<<<< HEAD"
+msgstr "Administrative Access"
 
 msgid "All"
-msgstr "All>>>>>>> origin/main"
+msgstr "All"
 
 msgid "All programs"
 msgstr "All programs"
@@ -298,10 +298,10 @@ msgid "Applications"
 msgstr "Applications"
 
 msgid "Applications In Scope"
-msgstr "Applications In Scope<<<<<<< HEAD"
+msgstr "Applications In Scope"
 
 msgid "Approval is only available while the application is evaluating."
-msgstr "Approval is only available while the application is evaluating.>>>>>>> origin/main"
+msgstr "Approval is only available while the application is evaluating."
 
 msgid "Approve"
 msgstr "Approve"
@@ -520,10 +520,10 @@ msgid "Capture delivery milestones with an optional description and due date."
 msgstr "Capture delivery milestones with an optional description and due date."
 
 msgid "Categories"
-msgstr "Categories<<<<<<< HEAD"
+msgstr "Categories"
 
 msgid "Category"
-msgstr "Category>>>>>>> origin/main"
+msgstr "Category"
 
 msgid "Changes requested"
 msgstr "Changes requested"
@@ -871,10 +871,10 @@ msgid "Creating organization…"
 msgstr "Creating organization…"
 
 msgid "Creating..."
-msgstr "Creating...<<<<<<< HEAD"
+msgstr "Creating..."
 
 msgid "Current email"
-msgstr "Current email======="
+msgstr "Current email"
 
 msgid "Current invitations"
 msgstr "Current invitations"
@@ -1072,9 +1072,6 @@ msgstr "Edit Faculty"
 msgid "Edit milestone"
 msgstr "Edit milestone"
 
-msgid "Edit profile"
-msgstr "Edit profile"
-
 msgid "Edit Specialization"
 msgstr "Edit Specialization"
 
@@ -1136,7 +1133,7 @@ msgid "ENCRYPTION"
 msgstr "ENCRYPTION"
 
 msgid "END-TO-END"
-msgstr "END-TO-END<<<<<<< HEAD"
+msgstr "END-TO-END"
 
 msgid "Enter a different email address."
 msgstr "Enter a different email address."
@@ -1145,10 +1142,10 @@ msgid "Enter a mentor user ID before assigning a mentor."
 msgstr "Enter a mentor user ID before assigning a mentor."
 
 msgid "Enter a milestone title before creating it."
-msgstr "Enter a milestone title before creating it.>>>>>>> origin/main"
+msgstr "Enter a milestone title before creating it."
 
 msgid "Enter a new password"
-msgstr "Enter a new password======="
+msgstr "Enter a new password"
 
 msgid "Enter a strong password"
 msgstr "Enter a strong password"
@@ -2355,9 +2352,6 @@ msgstr "Open Reports"
 msgid "Open team"
 msgstr "Open team"
 
-msgid "Open team workspace"
-msgstr "Open team workspace"
-
 msgid "Open the full invitation link from your email and try again."
 msgstr "Open the full invitation link from your email and try again."
 
@@ -2550,13 +2544,13 @@ msgid "Please enter a valid website URL."
 msgstr "Please enter a valid website URL."
 
 msgid "Please review your information before completing the registration."
-msgstr "Please review your information before completing the registration.<<<<<<< HEAD"
+msgstr "Please review your information before completing the registration."
 
 msgid "Please wait about a minute before requesting another email confirmation."
 msgstr "Please wait about a minute before requesting another email confirmation."
 
 msgid "Please wait before trying again"
-msgstr "Please wait before trying again======="
+msgstr "Please wait before trying again"
 
 msgid "Please wait until the current request finishes."
 msgstr "Please wait until the current request finishes."
@@ -2565,7 +2559,7 @@ msgid "Please wait. The previous action is still running."
 msgstr "Please wait. The previous action is still running."
 
 msgid "Please write a transition reason before running this action."
-msgstr "Please write a transition reason before running this action.>>>>>>> origin/main"
+msgstr "Please write a transition reason before running this action."
 
 msgid "PNG, JPG or WEBP. Logo is optional."
 msgstr "PNG, JPG or WEBP. Logo is optional."
@@ -2884,13 +2878,13 @@ msgid "Reporting dashboard unavailable"
 msgstr "Reporting dashboard unavailable"
 
 msgid "Reports"
-msgstr "Reports<<<<<<< HEAD"
+msgstr "Reports"
 
 msgid "Request additional information"
-msgstr "Request additional information>>>>>>> origin/main"
+msgstr "Request additional information"
 
 msgid "Request change"
-msgstr "Request change======="
+msgstr "Request change"
 
 msgid "Request failed"
 msgstr "Request failed"
@@ -3212,9 +3206,6 @@ msgstr "Sending…"
 
 msgid "Set a new admin password"
 msgstr "Set a new admin password"
-
-msgid "Set up team"
-msgstr "Set up team"
 
 msgid "Short Name"
 msgstr "Short Name"

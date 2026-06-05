@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 
 import {
-  type ApplicationProfileSectionValueDto,
   type ApplicationSectionDto,
   type AttachApplicationDocumentDtoDocumentType,
   type ApplicationsControllerAttachDocumentMutationBody,
@@ -12,13 +11,16 @@ import {
   type FilesControllerCompleteUploadMutationResult,
   type FilesControllerRequestUploadUrlMutationBody,
   type FilesControllerRequestUploadUrlMutationResult,
+  type UpsertIdeaOverviewSectionDto,
   useApplicationsControllerGetSectionHistory,
-  useApplicationsControllerUpsertSection,
+  useApplicationsControllerUpsertIdeaOverviewSection,
 } from 'lib/api';
 import { Button, Input, Textarea } from 'components/shadcn';
 import { StudentSectionCard } from 'components/student-dashboard/page-shell-primitives';
 import { uploadAndCompleteFile } from 'lib/api-client/openapi-runtime/file-upload';
 import { formatUnknownDate, normalizeUnknownText } from 'lib/student-dashboard/normalizers';
+
+const IDEA_OVERVIEW_SECTION_KEY = 'idea_overview';
 
 type QueryLike<TData> = {
   data?: TData;
@@ -63,6 +65,34 @@ type NeedsInfoThreadItem = {
   replies: NeedsInfoReplyItem[];
 };
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null;
+}
+
+function readString(value: unknown): string | null {
+  return typeof value === 'string' ? value : null;
+}
+
+function getInitialIdeaOverviewValue(valueJson: unknown): UpsertIdeaOverviewSectionDto {
+  const value = isRecord(valueJson) ? valueJson : {};
+
+  return {
+    problem: readString(value.problem) ?? readString(value.name) ?? '',
+    solution: readString(value.solution) ?? '',
+    targetUsers: readString(value.targetUsers) ?? '',
+    valueProposition: readString(value.valueProposition) ?? '',
+  };
+}
+
+function hasCompleteIdeaOverview(value: UpsertIdeaOverviewSectionDto): boolean {
+  return Boolean(
+    value.problem.trim() &&
+    value.solution.trim() &&
+    value.targetUsers.trim() &&
+    value.valueProposition.trim(),
+  );
+}
+
 export function RetryNotice({
   message,
   onRetry,
@@ -89,13 +119,22 @@ function ApplicationSectionEditor({
   section: ApplicationSectionDto;
   canEdit: boolean;
 }) {
-  const [profileSection, setProfileSection] = useState<ApplicationProfileSectionValueDto>(
-    section.valueJson,
+  const [ideaOverviewSection, setIdeaOverviewSection] = useState<UpsertIdeaOverviewSectionDto>(() =>
+    getInitialIdeaOverviewValue(section.valueJson),
   );
-  const saveSection = useApplicationsControllerUpsertSection();
+
+  const saveSection = useApplicationsControllerUpsertIdeaOverviewSection();
+
   const historyQuery = useApplicationsControllerGetSectionHistory(applicationId, section.key, {
     query: { enabled: true },
   });
+
+  const isIdeaOverviewSection = section.key === IDEA_OVERVIEW_SECTION_KEY;
+  const canSave =
+    canEdit &&
+    isIdeaOverviewSection &&
+    hasCompleteIdeaOverview(ideaOverviewSection) &&
+    !saveSection.isPending;
 
   return (
     <div className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4">
@@ -103,31 +142,96 @@ function ApplicationSectionEditor({
         <p className="font-semibold text-neutral-950">{section.key}</p>
         <p className="text-xs text-neutral-500">version {section.version}</p>
       </div>
-      <label className="mt-3 block space-y-2">
-        <span className="text-xs font-medium tracking-[0.12em] text-neutral-500 uppercase">
-          Name
-        </span>
-        <Input
-          value={profileSection.name}
-          disabled={!canEdit}
-          onChange={(event) =>
-            setProfileSection((currentValue) => ({ ...currentValue, name: event.target.value }))
-          }
-        />
-      </label>
+
+      {isIdeaOverviewSection ? null : (
+        <p className="mt-3 text-sm text-neutral-600">
+          This generated API currently supports editing only the idea overview section.
+        </p>
+      )}
+
+      <div className="mt-3 grid gap-3 md:grid-cols-2">
+        <label className="block space-y-2">
+          <span className="text-xs font-medium tracking-[0.12em] text-neutral-500 uppercase">
+            Problem
+          </span>
+          <Input
+            value={ideaOverviewSection.problem}
+            disabled={!canEdit || !isIdeaOverviewSection}
+            onChange={(event) =>
+              setIdeaOverviewSection((currentValue) => ({
+                ...currentValue,
+                problem: event.target.value,
+              }))
+            }
+          />
+        </label>
+
+        <label className="block space-y-2">
+          <span className="text-xs font-medium tracking-[0.12em] text-neutral-500 uppercase">
+            Solution
+          </span>
+          <Input
+            value={ideaOverviewSection.solution}
+            disabled={!canEdit || !isIdeaOverviewSection}
+            onChange={(event) =>
+              setIdeaOverviewSection((currentValue) => ({
+                ...currentValue,
+                solution: event.target.value,
+              }))
+            }
+          />
+        </label>
+
+        <label className="block space-y-2">
+          <span className="text-xs font-medium tracking-[0.12em] text-neutral-500 uppercase">
+            Target users
+          </span>
+          <Input
+            value={ideaOverviewSection.targetUsers}
+            disabled={!canEdit || !isIdeaOverviewSection}
+            onChange={(event) =>
+              setIdeaOverviewSection((currentValue) => ({
+                ...currentValue,
+                targetUsers: event.target.value,
+              }))
+            }
+          />
+        </label>
+
+        <label className="block space-y-2">
+          <span className="text-xs font-medium tracking-[0.12em] text-neutral-500 uppercase">
+            Value proposition
+          </span>
+          <Input
+            value={ideaOverviewSection.valueProposition}
+            disabled={!canEdit || !isIdeaOverviewSection}
+            onChange={(event) =>
+              setIdeaOverviewSection((currentValue) => ({
+                ...currentValue,
+                valueProposition: event.target.value,
+              }))
+            }
+          />
+        </label>
+      </div>
+
       <div className="mt-3 flex items-center justify-between gap-3">
         <p className="text-xs text-neutral-500">
           {historyQuery.data?.length ?? 0} historical version(s)
         </p>
         <Button
           size="sm"
-          disabled={!canEdit || saveSection.isPending}
+          disabled={!canSave}
           onClick={async () => {
             try {
               await saveSection.mutateAsync({
                 applicationId,
-                key: section.key,
-                data: { valueJson: profileSection },
+                data: {
+                  problem: ideaOverviewSection.problem.trim(),
+                  solution: ideaOverviewSection.solution.trim(),
+                  targetUsers: ideaOverviewSection.targetUsers.trim(),
+                  valueProposition: ideaOverviewSection.valueProposition.trim(),
+                },
               });
               await historyQuery.refetch();
               toast.success(`Saved ${section.key}.`);
@@ -417,6 +521,7 @@ export function AttachDocumentSection({
               if (!documentFile) {
                 return;
               }
+
               try {
                 const uploadedFile = await uploadAndCompleteFile(
                   {

@@ -197,7 +197,7 @@ export function ControlledPasswordField<
               type="button"
               variant="ghost"
               size="icon"
-              className="absolute top-1/2 right-1 h-10 w-10 -translate-y-1/2 rounded-sm text-neutral-500 hover:bg-neutral-100 hover:text-neutral-800"
+              className="absolute top-1/2 right-1 h-10 w-10 -translate-y-1/2 rounded-sm text-neutral-500 hover:bg-transparent hover:text-neutral-700"
               onClick={() => {
                 setIsVisible((current) => !current);
               }}

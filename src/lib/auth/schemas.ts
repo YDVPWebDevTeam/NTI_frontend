@@ -4,8 +4,9 @@ import * as z from 'zod';
 
 import { getCurrentYear, getMaxGraduationYear } from 'lib/date';
 
-export const PASSWORD_MIN_LENGTH = 6;
-export const RESET_PASSWORD_MIN_LENGTH = 8;
+export const PASSWORD_MIN_LENGTH = 8;
+export const PASSWORD_MAX_LENGTH = 128;
+export const PASSWORD_WEAK_MESSAGE = msg`Password must contain at least one letter and one number`;
 export const VERIFICATION_CODE_MIN_LENGTH = 4;
 export const NAME_MIN_LENGTH = 2;
 export const NAME_MAX_LENGTH = 50;
@@ -40,12 +41,26 @@ function refineStudentSkills(values: StudentSkillsValidationValues, ctx: z.Refin
   }
 }
 
+export function createPasswordField() {
+  return z
+    .string()
+    .min(PASSWORD_MIN_LENGTH, {
+      message: i18n._(msg`Password must be at least 8 characters.`),
+    })
+    .max(PASSWORD_MAX_LENGTH, {
+      message: i18n._(msg`Password must be at most 128 characters.`),
+    })
+    .refine((value) => /[a-z]/.test(value) && /\d/.test(value), {
+      message: i18n._(PASSWORD_WEAK_MESSAGE),
+    });
+}
+
 export function createLoginSchema() {
   return z.object({
     email: z.email({ message: i18n._(msg`Please enter a valid email address.`) }),
-    password: z
-      .string()
-      .min(PASSWORD_MIN_LENGTH, { message: i18n._(msg`Password must be at least 6 characters.`) }),
+    password: z.string().min(1, {
+      message: i18n._(msg`Password is required.`),
+    }),
   });
 }
 
@@ -64,9 +79,7 @@ export function createResetPasswordSchema() {
         .min(1, {
           message: i18n._(msg`Password reset token is required.`),
         }),
-      password: z.string().min(RESET_PASSWORD_MIN_LENGTH, {
-        message: i18n._(msg`Password must be at least 8 characters.`),
-      }),
+      password: createPasswordField(),
       confirmPassword: z.string().min(1, {
         message: i18n._(msg`Password confirmation is required.`),
       }),
@@ -101,9 +114,7 @@ export function createStudentIdentitySchema() {
       .min(NAME_MIN_LENGTH, { message: i18n._(msg`Must be at least 2 characters.`) })
       .max(NAME_MAX_LENGTH, { message: i18n._(msg`Must be at most 50 characters.`) }),
     email: z.email({ message: i18n._(msg`Must be a valid email address.`) }),
-    password: z
-      .string()
-      .min(PASSWORD_MIN_LENGTH, { message: i18n._(msg`Password must be at least 6 characters.`) }),
+    password: createPasswordField(),
     acceptTerms: z.boolean().refine((val) => val, {
       message: i18n._(msg`You must accept the terms.`),
     }),

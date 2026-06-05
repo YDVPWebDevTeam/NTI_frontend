@@ -15,6 +15,9 @@ const ADMIN_ROUTES = {
   FORCE_CHANGE_PASSWORD: '/admin/force-change-password',
   ROOT: '/admin',
   MODERATION: '/admin/moderation',
+  PROGRAM_A_MODERATION: '/admin/moderation',
+  PROGRAM_A_APPLICATION_DETAILS: '/admin/moderation/[applicationId]',
+  programAApplicationDetails: (applicationId: string) => `/admin/moderation/${applicationId}`,
   CALLS: '/admin/calls',
   CALL_CREATE: '/admin/calls/new',
   CALL_DETAILS: '/admin/calls/[callId]',
@@ -70,6 +73,7 @@ const REVIEW_ROUTES = {
 
 export const ROUTES = {
   ROOT: '/',
+  ACCOUNT: '/account',
   TEAM_INVITE_ONBOARDING: '/invite',
   ONBOARDING_PROFILE: '/onboarding/profile',
   ORGANIZATION_INVITE_ONBOARDING: '/onboarding/invites',

@@ -11,7 +11,7 @@ export function LandingFooter() {
       className="w-full border-t border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-950"
       id="contact"
     >
-      <div className="font-inter mx-auto grid max-w-7xl grid-cols-1 gap-8 px-8 py-12 text-sm antialiased md:grid-cols-4">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-8 py-12 text-sm antialiased md:grid-cols-4">
         <div className="space-y-4">
           <NtiBrand href={ROUTES.ROOT} variant="landing" size="sm" />
           <p className="text-slate-500 dark:text-slate-400">

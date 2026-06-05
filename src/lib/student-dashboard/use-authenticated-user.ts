@@ -1,15 +1,35 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
-import { useGetMe, type UserRole } from 'lib/api';
+import { useGetMe, UserStatus, type UserRole } from 'lib/api';
 import { isApiRequestError, isAuthErrorStatus } from 'lib/api-client/openapi-runtime/client';
 import { getPostAuthRedirect } from 'lib/auth/public-auth-flow';
 import { ROUTES } from 'lib/constants';
 
-export function useAuthenticatedUser(allowedRoles?: UserRole[]) {
+type UseAuthenticatedUserOptions = {
+  preservePathOnAuthRedirect?: boolean;
+};
+
+function buildLoginRedirectPath(options?: UseAuthenticatedUserOptions, pathname?: string | null) {
+  if (!options?.preservePathOnAuthRedirect || !pathname) {
+    return ROUTES.AUTH.LOGIN;
+  }
+
+  const searchParams = new URLSearchParams({
+    redirectTo: pathname,
+  });
+
+  return `${ROUTES.AUTH.LOGIN}?${searchParams.toString()}`;
+}
+
+export function useAuthenticatedUser(
+  allowedRoles?: UserRole[],
+  options?: UseAuthenticatedUserOptions,
+) {
   const router = useRouter();
+  const pathname = usePathname();
 
   const meQuery = useGetMe({
     query: {
@@ -23,16 +43,16 @@ export function useAuthenticatedUser(allowedRoles?: UserRole[]) {
     }
 
     if (isAuthErrorStatus(meQuery.error.status)) {
-      router.replace(ROUTES.AUTH.LOGIN);
+      router.replace(buildLoginRedirectPath(options, pathname));
     }
-  }, [meQuery.error, router]);
+  }, [meQuery.error, options, pathname, router]);
 
   useEffect(() => {
     if (!meQuery.data) {
       return;
     }
 
-    if (meQuery.data.status !== 'ACTIVE') {
+    if (meQuery.data.status !== UserStatus.ACTIVE) {
       router.replace(getPostAuthRedirect(meQuery.data));
 
       return;
@@ -49,7 +69,7 @@ export function useAuthenticatedUser(allowedRoles?: UserRole[]) {
 
   const isAllowed = Boolean(
     meQuery.data &&
-    meQuery.data.status === 'ACTIVE' &&
+    meQuery.data.status === UserStatus.ACTIVE &&
     (!allowedRoles || allowedRoles.includes(meQuery.data.role)),
   );
 

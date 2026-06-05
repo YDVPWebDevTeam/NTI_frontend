@@ -16,7 +16,7 @@ export function LandingHeader() {
 
   return (
     <header className="fixed top-0 z-50 w-full bg-white/80 shadow-sm backdrop-blur-md dark:bg-slate-900/80 dark:shadow-none">
-      <nav className="font-manrope mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between px-6 py-4 font-bold tracking-tight">
+      <nav className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between px-6 py-4 font-bold tracking-tight">
         <div className="flex w-full items-center justify-between md:w-auto">
           <NtiBrand href={ROUTES.ROOT} variant="landing" size="md" />
           <button

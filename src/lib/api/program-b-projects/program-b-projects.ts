@@ -40,7 +40,8 @@ import type {
   ProgramBProjectDetailDto,
   ProgramBProjectDocumentDto,
   ProgramBProjectDocumentUploadDto,
-  UpdateProgramBMilestoneDto
+  UpdateProgramBMilestoneDto,
+  UpdateProgramBProjectRewardDto
 } from '../index.schemas';
 
 import { orvalMutator } from '../../api-client/openapi-runtime/runtime';
@@ -1061,6 +1062,64 @@ const {mutation: mutationOptions, request: requestOptions} = options ?
       > => {
 
       const mutationOptions = getProgramBProjectsControllerRequestDocumentDownloadMutationOptions(options);
+
+      return useMutation(mutationOptions, queryClient);
+    }
+    export const programBProjectsControllerUpdateReward = (
+    id: string,
+    updateProgramBProjectRewardDto: UpdateProgramBProjectRewardDto,
+ options?: SecondParameter<typeof orvalMutator>,) => {
+      
+      
+      return orvalMutator<ProgramBProjectDetailDto>(
+      {url: `/program-b/projects/${id}/reward`, method: 'PATCH',
+      headers: {'Content-Type': 'application/json', },
+      data: updateProgramBProjectRewardDto
+    },
+      options);
+    }
+  
+
+
+export const getProgramBProjectsControllerUpdateRewardMutationOptions = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof programBProjectsControllerUpdateReward>>, TError,{id: string;data: UpdateProgramBProjectRewardDto}, TContext>, request?: SecondParameter<typeof orvalMutator>}
+): UseMutationOptions<Awaited<ReturnType<typeof programBProjectsControllerUpdateReward>>, TError,{id: string;data: UpdateProgramBProjectRewardDto}, TContext> => {
+
+const mutationKey = ['programBProjectsControllerUpdateReward'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+      
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof programBProjectsControllerUpdateReward>>, {id: string;data: UpdateProgramBProjectRewardDto}> = (props) => {
+          const {id,data} = props ?? {};
+
+          return  programBProjectsControllerUpdateReward(id,data,requestOptions)
+        }
+
+        
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type ProgramBProjectsControllerUpdateRewardMutationResult = NonNullable<Awaited<ReturnType<typeof programBProjectsControllerUpdateReward>>>
+    export type ProgramBProjectsControllerUpdateRewardMutationBody = UpdateProgramBProjectRewardDto
+    export type ProgramBProjectsControllerUpdateRewardMutationError = unknown
+
+    export const useProgramBProjectsControllerUpdateReward = <TError = unknown,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof programBProjectsControllerUpdateReward>>, TError,{id: string;data: UpdateProgramBProjectRewardDto}, TContext>, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient): UseMutationResult<
+        Awaited<ReturnType<typeof programBProjectsControllerUpdateReward>>,
+        TError,
+        {id: string;data: UpdateProgramBProjectRewardDto},
+        TContext
+      > => {
+
+      const mutationOptions = getProgramBProjectsControllerUpdateRewardMutationOptions(options);
 
       return useMutation(mutationOptions, queryClient);
     }

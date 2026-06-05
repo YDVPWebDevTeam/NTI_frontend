@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import type { ReactNode } from 'react';
 import {
+  ShieldCheck,
   LayoutGrid,
   LogOut,
   Menu,
@@ -113,6 +114,7 @@ export function StudentWorkspaceLayout({ children }: { children: ReactNode }) {
     { href: ROUTES.STUDENT.PROFILE, label: t`Profile`, icon: UserRound },
     { href: ROUTES.STUDENT.TEAM, label: t`Team`, icon: Users },
     { href: ROUTES.STUDENT.PROGRAM_B_BACKLOG, label: t`Program B backlog`, icon: Rocket },
+    { href: ROUTES.ACCOUNT, label: t`Account security`, icon: ShieldCheck },
   ] as const;
   const studentUser = studentProfileQuery.data?.user;
   const displayName =

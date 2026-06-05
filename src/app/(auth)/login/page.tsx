@@ -2,44 +2,24 @@
 
 import { t } from '@lingui/core/macro';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useQueryClient } from '@tanstack/react-query';
 import { ArrowRight, Lock, Mail } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import { getDefaultRouteForRole } from 'lib/auth/access';
-import { getGetMeQueryOptions, useLogin } from 'lib/api';
-import { ROUTES } from 'lib/constants';
+import { useLogin } from 'lib/api';
+import { getPostAuthRedirect, mapAuthError } from 'lib/auth/public-auth-flow';
 import { createLoginSchema, type LoginFormValues } from 'lib/auth/schemas';
+import { ROUTES } from 'lib/constants';
 
 import { ControlledInputField, ControlledPasswordField } from 'components/forms';
 import { AuthSplitShell } from 'components/layout';
-import { Button } from 'components/shadcn';
-import { Form } from 'components/shadcn';
+import { Button, Form } from 'components/shadcn';
 
 export default function LoginPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const queryClient = useQueryClient();
-  const { isPending: isLoginPending, mutateAsync: login } = useLogin();
-  const accountAction = searchParams.get('accountAction');
-  const changedEmail = searchParams.get('email')?.trim() ?? '';
-  const nextPath = searchParams.get('next')?.trim() ?? '';
-  const safeNextPath = nextPath.startsWith('/') && !nextPath.startsWith('//') ? nextPath : null;
-
-  let accountActionMessage: string | null = null;
-
-  if (accountAction === 'password-changed') {
-    accountActionMessage = t`Your password was updated. Sign in again with the new password to continue.`;
-  } else if (accountAction === 'email-changed') {
-    accountActionMessage = changedEmail
-      ? t`Your email was updated to ${changedEmail}. Sign in again with the new address to continue.`
-      : t`Your email was updated. Sign in again with the new address to continue.`;
-  } else if (accountAction === 'session-expired') {
-    accountActionMessage = t`Your session expired during a protected account change. Sign in again to continue.`;
-  }
+  const { mutateAsync: login, isPending: isLoginPending } = useLogin();
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(createLoginSchema()),
@@ -50,55 +30,47 @@ export default function LoginPage() {
     mode: 'onChange',
   });
 
-  const handleSubmit = async (values: LoginFormValues) => {
+  const handleSubmit = async (values: LoginFormValues): Promise<void> => {
     try {
-      await login({ data: values });
-      const me = await queryClient.fetchQuery(
-        getGetMeQueryOptions({
-          query: {
-            retry: false,
-          },
-        }),
-      );
+      const response = await login({
+        data: {
+          email: values.email.trim(),
+          password: values.password,
+        },
+      });
 
-      router.push(safeNextPath ?? getDefaultRouteForRole(me.role));
+      router.push(getPostAuthRedirect(response.user));
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : t`Unable to log in. Please try again.`);
+      const mappedError = mapAuthError(error);
+
+      toast.error(mappedError.description);
     }
   };
 
   return (
     <AuthSplitShell
-      asideEyebrow={t`PLATFORM ACCESS`}
-      asideTitle={t`Welcome back to NTI`}
-      asideDescription={t`Sign in to continue with your student, team, or organization workflow.`}
+      asideEyebrow={t`WELCOME BACK`}
+      asideTitle={t`Sign in to your NTI workspace`}
+      asideDescription={t`Continue your onboarding, track applications, and manage your NTI profile from one place.`}
       headerEyebrow={t`SIGN IN`}
       headerTitle={t`Access your account`}
-      headerDescription={t`Enter your credentials below to access the platform.`}
+      headerDescription={t`Use your email and password to continue.`}
       footerCta={
-        <>
-          <p className="text-sm font-medium text-white/70">{t`Don't have an account yet?`}</p>
+        <div className="space-y-3 text-sm text-white/80">
+          <p>{t`New to NTI?`}</p>
+
           <Button
             asChild
             variant="outline"
-            className="mt-4 border-white/20 bg-white/5 text-white hover:bg-white hover:text-[#041d67]"
+            className="h-11 rounded-sm border-white/30 bg-transparent text-[12px] font-semibold tracking-widest text-white hover:bg-white hover:text-[#041d67]"
           >
-            <Link href={ROUTES.AUTH.REGISTER_SELECT}>
-              {t`CREATE ACCOUNT`}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
+            <Link href={ROUTES.AUTH.REGISTER_STUDENT}>{t`CREATE STUDENT ACCOUNT`}</Link>
           </Button>
-        </>
+        </div>
       }
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-5">
-          {accountActionMessage ? (
-            <div className="rounded-sm border border-blue-200 bg-blue-50 px-4 py-3 text-sm leading-6 text-blue-950">
-              {accountActionMessage}
-            </div>
-          ) : null}
-
           <ControlledInputField
             control={form.control}
             name="email"
@@ -112,11 +84,11 @@ export default function LoginPage() {
             control={form.control}
             name="password"
             label={t`Password`}
-            placeholder={t`Enter your password`}
+            placeholder={t`Enter password`}
             startIcon={<Lock className="h-4 w-4" />}
           />
 
-          <div className="flex justify-between pt-2">
+          <div className="flex justify-end">
             <Button
               asChild
               variant="link"
@@ -131,9 +103,21 @@ export default function LoginPage() {
             disabled={isLoginPending}
             className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
           >
-            {isLoginPending ? t`SIGNING IN...` : t`ACCESS PLATFORM`}
+            {isLoginPending ? t`SIGNING IN...` : t`SIGN IN`}
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
+
+          <div className="border-t border-black/10 pt-5">
+            <p className="text-sm text-slate-600">
+              {t`Registering as a company?`}{' '}
+              <Link
+                href={ROUTES.AUTH.REGISTER_COMPANY}
+                className="font-semibold text-blue-600 hover:text-blue-700"
+              >
+                {t`Create company owner account`}
+              </Link>
+            </p>
+          </div>
         </form>
       </Form>
     </AuthSplitShell>

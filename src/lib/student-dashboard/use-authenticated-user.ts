@@ -1,16 +1,28 @@
 'use client';
 
 import { useEffect } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
-import { useGetMe, type UserRole } from 'lib/api';
-import { isApiRequestError } from 'lib/api-client/openapi-runtime/client';
+import { useGetMe, UserStatus, type UserRole } from 'lib/api';
+import { isApiRequestError, isAuthErrorStatus } from 'lib/api-client/openapi-runtime/client';
+import { getPostAuthRedirect } from 'lib/auth/public-auth-flow';
 import { ROUTES } from 'lib/constants';
-import { getDefaultRouteForRole } from 'lib/auth/access';
 
 type UseAuthenticatedUserOptions = {
   preservePathOnAuthRedirect?: boolean;
 };
+
+function buildLoginRedirectPath(options?: UseAuthenticatedUserOptions, pathname?: string | null) {
+  if (!options?.preservePathOnAuthRedirect || !pathname) {
+    return ROUTES.AUTH.LOGIN;
+  }
+
+  const searchParams = new URLSearchParams({
+    redirectTo: pathname,
+  });
+
+  return `${ROUTES.AUTH.LOGIN}?${searchParams.toString()}`;
+}
 
 export function useAuthenticatedUser(
   allowedRoles?: UserRole[],
@@ -18,7 +30,7 @@ export function useAuthenticatedUser(
 ) {
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
+
   const meQuery = useGetMe({
     query: {
       retry: false,
@@ -30,34 +42,35 @@ export function useAuthenticatedUser(
       return;
     }
 
-    if (meQuery.error.status === 401) {
-      if (options?.preservePathOnAuthRedirect && pathname) {
-        const nextPath = searchParams?.toString()
-          ? `${pathname}?${searchParams.toString()}`
-          : pathname;
-        const params = new URLSearchParams({ next: nextPath });
-
-        router.replace(`${ROUTES.AUTH.LOGIN}?${params.toString()}`);
-
-        return;
-      }
-
-      router.replace(ROUTES.AUTH.LOGIN);
+    if (isAuthErrorStatus(meQuery.error.status)) {
+      router.replace(buildLoginRedirectPath(options, pathname));
     }
-  }, [meQuery.error, options?.preservePathOnAuthRedirect, pathname, router, searchParams]);
+  }, [meQuery.error, options, pathname, router]);
 
   useEffect(() => {
-    if (!meQuery.data || !allowedRoles) {
+    if (!meQuery.data) {
+      return;
+    }
+
+    if (meQuery.data.status !== UserStatus.ACTIVE) {
+      router.replace(getPostAuthRedirect(meQuery.data));
+
+      return;
+    }
+
+    if (!allowedRoles) {
       return;
     }
 
     if (!allowedRoles.includes(meQuery.data.role)) {
-      router.replace(getDefaultRouteForRole(meQuery.data.role));
+      router.replace(getPostAuthRedirect(meQuery.data));
     }
   }, [allowedRoles, meQuery.data, router]);
 
   const isAllowed = Boolean(
-    meQuery.data && (!allowedRoles || allowedRoles.includes(meQuery.data.role)),
+    meQuery.data &&
+    meQuery.data.status === UserStatus.ACTIVE &&
+    (!allowedRoles || allowedRoles.includes(meQuery.data.role)),
   );
 
   return {

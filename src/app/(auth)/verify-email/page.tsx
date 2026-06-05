@@ -14,35 +14,31 @@ import {
   getPostAuthRedirect,
   mapAuthError,
 } from 'lib/auth/public-auth-flow';
+import { createEmailVerificationSchema, type EmailVerificationFormValues } from 'lib/auth/schemas';
 import { ROUTES } from 'lib/constants';
 
 import { ControlledInputField } from 'components/forms';
+import { AuthSplitShell } from 'components/layout';
 import { Button, Form } from 'components/shadcn';
 
-import { CompanyOwnerAuthLayout } from '../_components/company-owner-auth-layout';
-import {
-  createCompanyOwnerEmailConfirmationSchema,
-  type CompanyOwnerEmailConfirmationValues,
-} from './schema';
-
-type ConfirmationStatus = 'idle' | 'confirming' | 'success' | 'error';
+type VerificationStatus = 'idle' | 'confirming' | 'success' | 'error';
 
 const REDIRECT_DELAY_MS = 1200;
 
-export default function ConfirmCompanyOwnerEmailPage() {
+export default function VerifyEmailPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const tokenFromUrl = searchParams.get('token')?.trim() ?? '';
   const hasTokenFromUrl = tokenFromUrl.length > 0;
   const hasSubmittedUrlTokenRef = useRef(false);
 
-  const [status, setStatus] = useState<ConfirmationStatus>(hasTokenFromUrl ? 'confirming' : 'idle');
+  const [status, setStatus] = useState<VerificationStatus>(hasTokenFromUrl ? 'confirming' : 'idle');
   const [errorState, setErrorState] = useState<AuthFlowErrorAction | null>(null);
 
   const { mutateAsync: confirmEmail, isPending } = useConfirmEmail();
 
-  const form = useForm<CompanyOwnerEmailConfirmationValues>({
-    resolver: zodResolver(createCompanyOwnerEmailConfirmationSchema()),
+  const form = useForm<EmailVerificationFormValues>({
+    resolver: zodResolver(createEmailVerificationSchema()),
     defaultValues: {
       token: tokenFromUrl,
     },
@@ -100,38 +96,38 @@ export default function ConfirmCompanyOwnerEmailPage() {
     };
   }, [confirmToken, hasTokenFromUrl, tokenFromUrl]);
 
-  const handleSubmit = async (values: CompanyOwnerEmailConfirmationValues): Promise<void> => {
+  const handleSubmit = async (values: EmailVerificationFormValues): Promise<void> => {
     await confirmToken(values.token);
   };
 
-  let headerTitle = t`Confirm email`;
-  let headerDescription = t`Enter the verification token from your email.`;
+  let headerTitle = t`Verify your email`;
+  let headerDescription = t`Paste your verification token if the email link did not open correctly.`;
 
   if (status === 'confirming') {
-    headerTitle = t`Confirming email`;
-    headerDescription = t`Please wait while we verify your company owner account.`;
+    headerTitle = t`Confirming your email`;
+    headerDescription = t`Please wait while we verify your email address.`;
   }
 
   if (status === 'success') {
     headerTitle = t`Email confirmed`;
-    headerDescription = t`Your email address was confirmed successfully. Redirecting you to the next step.`;
+    headerDescription = t`Your email address was confirmed successfully. Redirecting you to your workspace.`;
   }
 
   if (status === 'error') {
-    headerTitle = t`Email confirmation failed`;
+    headerTitle = t`Verification failed`;
     headerDescription = t`The verification link could not be completed. You can try again or return to login.`;
   }
 
   const isConfirming = status === 'confirming';
   const isSuccess = status === 'success';
-  const shouldShowForm = status === 'idle' || status === 'error';
+  const shouldShowManualForm = status === 'idle' || (status === 'error' && !hasTokenFromUrl);
 
   return (
-    <CompanyOwnerAuthLayout
-      eyebrow={t`EMAIL VERIFICATION`}
-      title={t`Confirm your company owner account`}
-      description={t`Verify your email address before creating your organization profile.`}
-      headerEyebrow={t`VERIFICATION STEP`}
+    <AuthSplitShell
+      asideEyebrow={t`EMAIL VERIFICATION`}
+      asideTitle={t`Confirm your NTI account`}
+      asideDescription={t`Verify your email address to activate your account and continue with onboarding.`}
+      headerEyebrow={t`VERIFY EMAIL`}
       headerTitle={headerTitle}
       headerDescription={headerDescription}
     >
@@ -155,7 +151,7 @@ export default function ConfirmCompanyOwnerEmailPage() {
             asChild
             className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
           >
-            <Link href={ROUTES.AUTH.REGISTER_COMPANY_ORGANIZATION}>
+            <Link href={ROUTES.AUTH.LOGIN}>
               {t`CONTINUE`}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
@@ -163,28 +159,44 @@ export default function ConfirmCompanyOwnerEmailPage() {
         </div>
       ) : null}
 
-      {shouldShowForm ? (
+      {status === 'error' ? (
+        <div className="space-y-5">
+          {errorState ? (
+            <div className="space-y-2 rounded-sm border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+              <p className="font-semibold">{errorState.title}</p>
+              <p>{errorState.description}</p>
+
+              {errorState.href && errorState.actionLabel ? (
+                <Button asChild variant="link" className="h-auto p-0 text-red-700">
+                  <Link href={errorState.href}>{errorState.actionLabel}</Link>
+                </Button>
+              ) : null}
+            </div>
+          ) : null}
+
+          {hasTokenFromUrl ? (
+            <Button
+              asChild
+              className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
+            >
+              <Link href={ROUTES.AUTH.LOGIN}>
+                {t`RETURN TO LOGIN`}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          ) : null}
+        </div>
+      ) : null}
+
+      {shouldShowManualForm ? (
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-5">
-            {errorState ? (
-              <div className="space-y-2 rounded-sm border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-                <p className="font-semibold">{errorState.title}</p>
-                <p>{errorState.description}</p>
-
-                {errorState.href && errorState.actionLabel ? (
-                  <Button asChild variant="link" className="h-auto p-0 text-red-700">
-                    <Link href={errorState.href}>{errorState.actionLabel}</Link>
-                  </Button>
-                ) : null}
-              </div>
-            ) : null}
-
             <ControlledInputField
               control={form.control}
               name="token"
               label={t`Verification token`}
               type="text"
-              placeholder={t`Paste your verification token`}
+              placeholder={t`Paste verification token`}
               startIcon={<KeyRound className="h-4 w-4" />}
             />
 
@@ -207,6 +219,6 @@ export default function ConfirmCompanyOwnerEmailPage() {
           </form>
         </Form>
       ) : null}
-    </CompanyOwnerAuthLayout>
+    </AuthSplitShell>
   );
 }

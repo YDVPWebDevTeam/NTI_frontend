@@ -1,7 +1,7 @@
 'use client';
 
 import { t } from '@lingui/core/macro';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
 
 import {
@@ -12,6 +12,7 @@ import {
   type FilesControllerCompleteUploadMutationResult,
   type FilesControllerRequestUploadUrlMutationBody,
   type FilesControllerRequestUploadUrlMutationResult,
+  type TeamDetailDto,
   type UpsertIdeaOverviewSectionDto,
   useApplicationsControllerGetSectionHistory,
   useApplicationsControllerUpsertIdeaOverviewSection,
@@ -19,9 +20,26 @@ import {
 import { Button, Input, Textarea } from 'components/shadcn';
 import { StudentSectionCard } from 'components/student-dashboard/page-shell-primitives';
 import { uploadAndCompleteFile } from 'lib/api-client/openapi-runtime/file-upload';
-import { formatUnknownDate, normalizeUnknownText } from 'lib/student-dashboard/normalizers';
+import {
+  formatEnumLikeName,
+  formatUnknownDate,
+  normalizeUnknownText,
+} from 'lib/student-dashboard/normalizers';
 
 const IDEA_OVERVIEW_SECTION_KEY = 'idea_overview';
+
+const DOCUMENT_TYPE_OPTIONS: AttachApplicationDocumentDtoDocumentType[] = [
+  'EXECUTIVE_SUMMARY',
+  'TECHNICAL_ARCHITECTURE',
+  'ROADMAP',
+  'BUDGET',
+  'RISK_ANALYSIS',
+  'MONETIZATION_MODEL',
+  'CV',
+  'MOTIVATION_LETTER',
+  'SOLUTION_PROPOSAL',
+  'OTHER',
+];
 
 type QueryLike<TData> = {
   data?: TData;
@@ -37,8 +55,7 @@ type MutationLike<TPayload> = {
 
 type ApplicationOverview = {
   status: string;
-  callId: string;
-  teamId: string;
+  submittedAt?: unknown;
   createdAt: string | Date;
   updatedAt: string | Date;
 };
@@ -65,6 +82,8 @@ type NeedsInfoThreadItem = {
   message: string;
   replies: NeedsInfoReplyItem[];
 };
+
+type TeamMember = TeamDetailDto['members'][number];
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null;
@@ -94,63 +113,10 @@ function hasCompleteIdeaOverview(value: UpsertIdeaOverviewSectionDto): boolean {
   );
 }
 
-function formatApplicationStatus(status: string): string {
-  switch (status) {
-    case 'DRAFT':
-      return t`Draft`;
+function getTeamMemberLabel(member: TeamMember): string {
+  const fullName = `${member.user.firstName} ${member.user.lastName}`.trim();
 
-    case 'SUBMITTED':
-      return t`Submitted`;
-
-    case 'FORMALLY_VERIFIED':
-      return t`Formally verified`;
-
-    case 'EVALUATING':
-      return t`Evaluating`;
-
-    case 'NEEDS_INFO':
-      return t`Needs info`;
-
-    case 'APPROVED':
-      return t`Approved`;
-
-    case 'ONBOARDING':
-      return t`Onboarding`;
-
-    case 'ACTIVE_PROJECT':
-      return t`Active project`;
-
-    case 'PAUSED':
-      return t`Paused`;
-
-    case 'COMPLETED':
-      return t`Completed`;
-
-    case 'REJECTED':
-      return t`Rejected`;
-
-    case 'ARCHIVED':
-      return t`Archived`;
-
-    default:
-      return status;
-  }
-}
-
-function formatNeedsInfoStatus(status: string): string {
-  switch (status) {
-    case 'OPEN':
-      return t`Open`;
-
-    case 'RESOLVED':
-      return t`Resolved`;
-
-    case 'CANCELLED':
-      return t`Cancelled`;
-
-    default:
-      return status;
-  }
+  return fullName ? `${fullName} (${member.user.email})` : member.user.email;
 }
 
 export function RetryNotice({
@@ -189,27 +155,16 @@ function ApplicationSectionEditor({
     query: { enabled: true },
   });
 
-  const isIdeaOverviewSection = section.key === IDEA_OVERVIEW_SECTION_KEY;
-  const canSave =
-    canEdit &&
-    isIdeaOverviewSection &&
-    hasCompleteIdeaOverview(ideaOverviewSection) &&
-    !saveSection.isPending;
+  const canSave = canEdit && hasCompleteIdeaOverview(ideaOverviewSection) && !saveSection.isPending;
 
   return (
     <div className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="font-semibold text-neutral-950">{section.key}</p>
+        <p className="font-semibold text-neutral-950">{formatEnumLikeName(section.key)}</p>
         <p className="text-xs text-neutral-500">
           {t`Version`} {section.version}
         </p>
       </div>
-
-      {isIdeaOverviewSection ? null : (
-        <p className="mt-3 text-sm text-neutral-600">
-          {t`This generated API currently supports editing only the idea overview section.`}
-        </p>
-      )}
 
       <div className="mt-3 grid gap-3 md:grid-cols-2">
         <label className="block space-y-2">
@@ -218,7 +173,7 @@ function ApplicationSectionEditor({
           </span>
           <Input
             value={ideaOverviewSection.problem}
-            disabled={!canEdit || !isIdeaOverviewSection}
+            disabled={!canEdit}
             onChange={(event) =>
               setIdeaOverviewSection((currentValue) => ({
                 ...currentValue,
@@ -234,7 +189,7 @@ function ApplicationSectionEditor({
           </span>
           <Input
             value={ideaOverviewSection.solution}
-            disabled={!canEdit || !isIdeaOverviewSection}
+            disabled={!canEdit}
             onChange={(event) =>
               setIdeaOverviewSection((currentValue) => ({
                 ...currentValue,
@@ -250,7 +205,7 @@ function ApplicationSectionEditor({
           </span>
           <Input
             value={ideaOverviewSection.targetUsers}
-            disabled={!canEdit || !isIdeaOverviewSection}
+            disabled={!canEdit}
             onChange={(event) =>
               setIdeaOverviewSection((currentValue) => ({
                 ...currentValue,
@@ -266,7 +221,7 @@ function ApplicationSectionEditor({
           </span>
           <Input
             value={ideaOverviewSection.valueProposition}
-            disabled={!canEdit || !isIdeaOverviewSection}
+            disabled={!canEdit}
             onChange={(event) =>
               setIdeaOverviewSection((currentValue) => ({
                 ...currentValue,
@@ -296,7 +251,7 @@ function ApplicationSectionEditor({
                 },
               });
               await historyQuery.refetch();
-              toast.success(t`Saved ${section.key}.`);
+              toast.success(t`Saved ${formatEnumLikeName(section.key)}.`);
             } catch (error) {
               toast.error(error instanceof Error ? error.message : t`Unable to save this section.`);
             }
@@ -316,15 +271,17 @@ export function OverviewSection({ application }: { application: ApplicationOverv
         <p>
           {t`Status`}:{' '}
           <span className="font-medium text-neutral-950">
-            {formatApplicationStatus(application.status)}
+            {formatEnumLikeName(application.status)}
           </span>
         </p>
-        <p>
-          {t`Call id`}: <span className="font-medium text-neutral-950">{application.callId}</span>
-        </p>
-        <p>
-          {t`Team id`}: <span className="font-medium text-neutral-950">{application.teamId}</span>
-        </p>
+        {application.submittedAt ? (
+          <p>
+            {t`Submitted`}:{' '}
+            <span className="font-medium text-neutral-950">
+              {formatUnknownDate(application.submittedAt)}
+            </span>
+          </p>
+        ) : null}
         <p>
           {t`Created`}:{' '}
           <span className="font-medium text-neutral-950">
@@ -343,6 +300,8 @@ export function OverviewSection({ application }: { application: ApplicationOverv
 }
 
 export function SubmissionActionsSection({
+  canResubmit,
+  canSubmit,
   hasTeamLoadError,
   isLead,
   onRetryTeam,
@@ -354,6 +313,8 @@ export function SubmissionActionsSection({
   setResubmitNote,
   teamErrorMessage,
 }: {
+  canResubmit: boolean;
+  canSubmit: boolean;
   hasTeamLoadError: boolean;
   isLead: boolean;
   onRetryTeam: () => void;
@@ -369,17 +330,23 @@ export function SubmissionActionsSection({
     <StudentSectionCard title={t`Submission actions`}>
       <div className="space-y-3">
         <p className="text-sm text-neutral-600">
-          {t`Lead-only actions stay disabled unless the current team lead matches the application team.`}
+          {isLead
+            ? t`Submit is available for draft applications. Resubmit is available only when additional information is requested.`
+            : t`Only the current team lead can submit or resubmit this application.`}
         </p>
         {hasTeamLoadError ? <RetryNotice message={teamErrorMessage} onRetry={onRetryTeam} /> : null}
         <div className="flex flex-wrap gap-2">
-          <Button size="sm" disabled={!isLead || isSubmitPending} onClick={() => void onSubmit()}>
+          <Button
+            size="sm"
+            disabled={!canSubmit || isSubmitPending}
+            onClick={() => void onSubmit()}
+          >
             {t`Submit`}
           </Button>
           <Button
             size="sm"
             variant="outline"
-            disabled={!isLead || isResubmitPending}
+            disabled={!canResubmit || isResubmitPending}
             onClick={() => void onResubmit()}
           >
             {t`Resubmit`}
@@ -387,6 +354,7 @@ export function SubmissionActionsSection({
         </div>
         <Textarea
           value={resubmitNote}
+          disabled={!canResubmit || isResubmitPending}
           onChange={(event) => setResubmitNote(event.target.value)}
           rows={4}
           placeholder={t`Optional resubmission note`}
@@ -405,6 +373,9 @@ export function DocumentCompletenessSection({
   requiredDocumentsQuery: QueryLike<{ requiredDocuments: unknown[] }>;
   getErrorMessage: (error: unknown, fallback: string) => string;
 }) {
+  const missingDocuments = completenessQuery.data?.missingDocuments ?? [];
+  const requiredDocumentsCount = (requiredDocumentsQuery.data?.requiredDocuments ?? []).length;
+
   return (
     <StudentSectionCard title={t`Document completeness`}>
       {completenessQuery.isError ? (
@@ -433,18 +404,21 @@ export function DocumentCompletenessSection({
             </span>
           </p>
           <p>
-            {t`Required by call`}: {(requiredDocumentsQuery.data?.requiredDocuments ?? []).length}
+            {t`Required by call`}: {requiredDocumentsCount}
           </p>
-          <div>
-            <p className="font-medium text-neutral-950">{t`Missing`}</p>
-            <ul className="mt-2 space-y-1 text-sm text-neutral-600">
-              {(completenessQuery.data?.missingDocuments ?? []).map((item, index: number) => (
-                <li key={`${item.documentType}-${index}`}>
-                  {item.documentType} · {item.documentScope}
-                </li>
-              ))}
-            </ul>
-          </div>
+          {missingDocuments.length > 0 ? (
+            <div>
+              <p className="font-medium text-neutral-950">{t`Missing`}</p>
+              <ul className="mt-2 space-y-1 text-sm text-neutral-600">
+                {missingDocuments.map((item, index: number) => (
+                  <li key={`${item.documentType}-${index}`}>
+                    {formatEnumLikeName(item.documentType)} ·{' '}
+                    {formatEnumLikeName(item.documentScope)}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </div>
       )}
     </StudentSectionCard>
@@ -458,6 +432,12 @@ export function EligibilitySignalsSection({
   eligibilityQuery: QueryLike<{ signals: EligibilitySignalItem[] }>;
   getErrorMessage: (error: unknown, fallback: string) => string;
 }) {
+  const signals = eligibilityQuery.data?.signals;
+
+  if (!eligibilityQuery.isError && Array.isArray(signals) && signals.length === 0) {
+    return null;
+  }
+
   return (
     <StudentSectionCard title={t`Eligibility signals`}>
       {eligibilityQuery.isError ? (
@@ -470,10 +450,10 @@ export function EligibilitySignalsSection({
         />
       ) : (
         <div className="space-y-3">
-          {(eligibilityQuery.data?.signals ?? []).map((signal) => (
+          {(signals ?? []).map((signal) => (
             <div key={signal.code} className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4">
               <p className="font-semibold text-neutral-950">
-                {signal.code} · {signal.passed ? t`Passed` : t`Failed`}
+                {formatEnumLikeName(signal.code)} · {signal.passed ? t`Passed` : t`Failed`}
               </p>
               <p className="mt-1 text-sm text-neutral-600">
                 {normalizeUnknownText(signal.reason) ?? t`No reason provided.`}
@@ -497,6 +477,19 @@ export function SectionsEditorSection({
   sectionsQuery: QueryLike<ApplicationSectionDto[]>;
   getErrorMessage: (error: unknown, fallback: string) => string;
 }) {
+  const editableSections = useMemo(
+    () => (sectionsQuery.data ?? []).filter((section) => section.key === IDEA_OVERVIEW_SECTION_KEY),
+    [sectionsQuery.data],
+  );
+
+  if (
+    !sectionsQuery.isError &&
+    Array.isArray(sectionsQuery.data) &&
+    editableSections.length === 0
+  ) {
+    return null;
+  }
+
   return (
     <StudentSectionCard title={t`Sections`}>
       {sectionsQuery.isError ? (
@@ -509,7 +502,7 @@ export function SectionsEditorSection({
         />
       ) : (
         <div className="space-y-4">
-          {(sectionsQuery.data ?? []).map((section) => (
+          {editableSections.map((section) => (
             <ApplicationSectionEditor
               key={`${section.id}-${section.version}`}
               applicationId={applicationId}
@@ -526,6 +519,7 @@ export function SectionsEditorSection({
 export function AttachDocumentSection({
   applicationId,
   isLead,
+  members,
   attachDocument,
   requestUploadUrl,
   uploadToPresignedUrl,
@@ -534,6 +528,7 @@ export function AttachDocumentSection({
 }: {
   applicationId: string;
   isLead: boolean;
+  members: TeamMember[];
   attachDocument: MutationLike<{
     id: string;
     data: ApplicationsControllerAttachDocumentMutationBody;
@@ -549,41 +544,59 @@ export function AttachDocumentSection({
   const [documentType, setDocumentType] =
     useState<AttachApplicationDocumentDtoDocumentType>('EXECUTIVE_SUMMARY');
   const [documentFile, setDocumentFile] = useState<File | null>(null);
-  const [memberUserId, setMemberUserId] = useState('');
+  const [selectedMemberUserId, setSelectedMemberUserId] = useState('');
+  const isCvDocument = documentType === 'CV';
+  const canUpload =
+    isLead &&
+    Boolean(documentFile) &&
+    !attachDocument.isPending &&
+    (!isCvDocument || Boolean(selectedMemberUserId));
 
   return (
     <StudentSectionCard
       title={t`Attach document`}
-      description={t`Generated file upload endpoints handle the upload-url -> PUT -> complete flow before attaching the file to the application.`}
+      description={t`Upload a required document and attach it to this application.`}
     >
       <div className="grid gap-3 md:grid-cols-2">
         <select
           className="rounded-md border border-black/10 bg-white px-3 py-2 text-sm"
           value={documentType}
-          onChange={(event) =>
-            setDocumentType(event.target.value as AttachApplicationDocumentDtoDocumentType)
-          }
+          onChange={(event) => {
+            const nextDocumentType = event.target.value as AttachApplicationDocumentDtoDocumentType;
+
+            setDocumentType(nextDocumentType);
+
+            if (nextDocumentType !== 'CV') {
+              setSelectedMemberUserId('');
+            }
+          }}
         >
-          <option value="EXECUTIVE_SUMMARY">{t`Executive summary`}</option>
-          <option value="TECHNICAL_ARCHITECTURE">{t`Technical architecture`}</option>
-          <option value="ROADMAP">{t`Roadmap`}</option>
-          <option value="BUDGET">{t`Budget`}</option>
-          <option value="RISK_ANALYSIS">{t`Risk analysis`}</option>
-          <option value="MONETIZATION_MODEL">{t`Monetization model`}</option>
-          <option value="CV">{t`CV`}</option>
-          <option value="MOTIVATION_LETTER">{t`Motivation letter`}</option>
-          <option value="SOLUTION_PROPOSAL">{t`Solution proposal`}</option>
-          <option value="OTHER">{t`Other`}</option>
+          {DOCUMENT_TYPE_OPTIONS.map((documentTypeOption) => (
+            <option key={documentTypeOption} value={documentTypeOption}>
+              {formatEnumLikeName(documentTypeOption)}
+            </option>
+          ))}
         </select>
-        <Input
-          value={memberUserId}
-          onChange={(event) => setMemberUserId(event.target.value)}
-          placeholder={t`Member user id for CV uploads`}
-        />
+
+        {isCvDocument ? (
+          <select
+            className="rounded-md border border-black/10 bg-white px-3 py-2 text-sm"
+            value={selectedMemberUserId}
+            onChange={(event) => setSelectedMemberUserId(event.target.value)}
+          >
+            <option value="">{t`Select a team member for CV`}</option>
+            {members.map((member) => (
+              <option key={member.userId} value={member.userId}>
+                {getTeamMemberLabel(member)}
+              </option>
+            ))}
+          </select>
+        ) : null}
+
         <Input type="file" onChange={(event) => setDocumentFile(event.target.files?.[0] ?? null)} />
         <div className="flex items-center">
           <Button
-            disabled={!isLead || !documentFile || attachDocument.isPending}
+            disabled={!canUpload}
             onClick={async () => {
               if (!documentFile) {
                 return;
@@ -615,12 +628,12 @@ export function AttachDocumentSection({
                   data: {
                     fileId: uploadedFile.id,
                     documentType,
-                    memberUserId: memberUserId.trim() || undefined,
+                    memberUserId: isCvDocument ? selectedMemberUserId : undefined,
                   },
                 });
 
                 setDocumentFile(null);
-                setMemberUserId('');
+                setSelectedMemberUserId('');
                 await onAttached();
                 toast.success(t`Document attached.`);
               } catch (error) {
@@ -656,6 +669,11 @@ export function NeedsInfoThreadSection({
   getErrorMessage: (error: unknown, fallback: string) => string;
 }) {
   const [needsInfoReplyText, setNeedsInfoReplyText] = useState<Record<string, string>>({});
+  const items = needsInfoQuery.data?.items;
+
+  if (!needsInfoQuery.isError && Array.isArray(items) && items.length === 0) {
+    return null;
+  }
 
   return (
     <StudentSectionCard title={t`Needs-info thread`}>
@@ -669,59 +687,71 @@ export function NeedsInfoThreadSection({
         />
       ) : (
         <div className="space-y-4">
-          {(needsInfoQuery.data?.items ?? []).map((item) => (
-            <div key={item.id} className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4">
-              <p className="font-semibold text-neutral-950">{formatNeedsInfoStatus(item.status)}</p>
-              <p className="mt-1 text-sm text-neutral-700">{item.message}</p>
-              <div className="mt-3 space-y-2">
-                {item.replies.map((reply) => (
-                  <div key={reply.id} className="rounded-xl bg-white p-3 text-sm text-neutral-700">
-                    {reply.message}
+          {(items ?? []).map((item) => {
+            const canReply = isLead && item.status === 'OPEN';
+            const replyText = needsInfoReplyText[item.id] ?? '';
+
+            return (
+              <div key={item.id} className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4">
+                <p className="font-semibold text-neutral-950">{formatEnumLikeName(item.status)}</p>
+                <p className="mt-1 text-sm text-neutral-700">{item.message}</p>
+                {item.replies.length > 0 ? (
+                  <div className="mt-3 space-y-2">
+                    {item.replies.map((reply) => (
+                      <div
+                        key={reply.id}
+                        className="rounded-xl bg-white p-3 text-sm text-neutral-700"
+                      >
+                        {reply.message}
+                      </div>
+                    ))}
                   </div>
-                ))}
+                ) : null}
+                {canReply ? (
+                  <>
+                    <Textarea
+                      className="mt-3"
+                      rows={3}
+                      value={replyText}
+                      onChange={(event) =>
+                        setNeedsInfoReplyText((current) => ({
+                          ...current,
+                          [item.id]: event.target.value,
+                        }))
+                      }
+                      placeholder={t`Reply to this needs-info item`}
+                    />
+                    <div className="mt-3">
+                      <Button
+                        size="sm"
+                        disabled={!replyText.trim() || replyToNeedsInfo.isPending}
+                        onClick={async () => {
+                          try {
+                            await replyToNeedsInfo.mutateAsync({
+                              id: applicationId,
+                              itemId: item.id,
+                              data: { message: replyText.trim() },
+                            });
+                            setNeedsInfoReplyText((current) => ({ ...current, [item.id]: '' }));
+                            await needsInfoQuery.refetch();
+                            toast.success(t`Needs-info reply posted.`);
+                          } catch (error) {
+                            toast.error(
+                              error instanceof Error
+                                ? error.message
+                                : t`Unable to reply to the needs-info item.`,
+                            );
+                          }
+                        }}
+                      >
+                        {t`Send reply`}
+                      </Button>
+                    </div>
+                  </>
+                ) : null}
               </div>
-              <Textarea
-                className="mt-3"
-                rows={3}
-                value={needsInfoReplyText[item.id] ?? ''}
-                onChange={(event) =>
-                  setNeedsInfoReplyText((current) => ({
-                    ...current,
-                    [item.id]: event.target.value,
-                  }))
-                }
-                placeholder={t`Reply to this needs-info item`}
-              />
-              <div className="mt-3">
-                <Button
-                  size="sm"
-                  disabled={
-                    !isLead || !needsInfoReplyText[item.id]?.trim() || replyToNeedsInfo.isPending
-                  }
-                  onClick={async () => {
-                    try {
-                      await replyToNeedsInfo.mutateAsync({
-                        id: applicationId,
-                        itemId: item.id,
-                        data: { message: needsInfoReplyText[item.id].trim() },
-                      });
-                      setNeedsInfoReplyText((current) => ({ ...current, [item.id]: '' }));
-                      await needsInfoQuery.refetch();
-                      toast.success(t`Needs-info reply posted.`);
-                    } catch (error) {
-                      toast.error(
-                        error instanceof Error
-                          ? error.message
-                          : t`Unable to reply to the needs-info item.`,
-                      );
-                    }
-                  }}
-                >
-                  {t`Send reply`}
-                </Button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </StudentSectionCard>

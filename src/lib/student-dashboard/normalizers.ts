@@ -72,6 +72,34 @@ export function formatUnknownDate(value: unknown, locale?: string): string {
   }
 }
 
+const ENUM_LABEL_ACRONYMS = new Set(['AI', 'CV', 'ID', 'NTI', 'QA', 'UI', 'UX']);
+
+const ENUM_LABEL_LOWERCASE_WORDS = new Set(['AND', 'BY', 'FOR', 'OF', 'OR', 'TO']);
+
+export function formatEnumLikeName(value: string | null | undefined): string {
+  if (!value) {
+    return '';
+  }
+
+  return value
+    .split('_')
+    .filter(Boolean)
+    .map((part, index) => {
+      if (ENUM_LABEL_ACRONYMS.has(part)) {
+        return part;
+      }
+
+      if (index > 0 && ENUM_LABEL_LOWERCASE_WORDS.has(part)) {
+        return part.toLowerCase();
+      }
+
+      const normalizedPart = part.toLowerCase();
+
+      return `${normalizedPart.charAt(0).toUpperCase()}${normalizedPart.slice(1)}`;
+    })
+    .join(' ');
+}
+
 export function isApiNotFoundError(error: unknown): boolean {
   return isApiRequestError(error) && error.status === 404;
 }

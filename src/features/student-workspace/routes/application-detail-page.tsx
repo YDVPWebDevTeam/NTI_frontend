@@ -127,7 +127,7 @@ export function StudentApplicationDetailPage({ params }: { params: Promise<{ id:
     return (
       <StudentPageShell
         title={t`Program A application`}
-        description={t`Application detail needs a valid accessible application before the rest of the workflow can render.`}
+        description={t`Application details are available only for applications your team can access.`}
       >
         <StudentStatusCard title={errorTitle} description={errorDescription} />
         {notFound || isForbidden ? null : (
@@ -147,14 +147,19 @@ export function StudentApplicationDetailPage({ params }: { params: Promise<{ id:
     return null;
   }
 
+  const canSubmitApplication = isLead && application.status === 'DRAFT';
+  const canResubmitApplication = isLead && application.status === 'NEEDS_INFO';
+
   return (
     <StudentPageShell
-      title={t`Application ${application.id}`}
-      description={t`Generated Program A detail shell with sections, document completeness, eligibility signals, needs-info thread, and lead-only submit or resubmit actions.`}
+      title={t`Program A application`}
+      description={t`Review your application details, required documents, eligibility checks, and messages from the NTI team.`}
     >
       <div className="grid gap-6 lg:grid-cols-2">
         <OverviewSection application={application} />
         <SubmissionActionsSection
+          canResubmit={canResubmitApplication}
+          canSubmit={canSubmitApplication}
           hasTeamLoadError={hasTeamLoadError}
           isLead={isLead}
           onRetryTeam={() => void teamQuery.refetch()}
@@ -178,6 +183,7 @@ export function StudentApplicationDetailPage({ params }: { params: Promise<{ id:
                 data: payload as Record<string, unknown>,
               });
               await Promise.all([applicationQuery.refetch(), needsInfoQuery.refetch()]);
+              setResubmitNote('');
               toast.success(t`Application resubmitted.`);
             } catch (error) {
               toast.error(
@@ -210,7 +216,7 @@ export function StudentApplicationDetailPage({ params }: { params: Promise<{ id:
 
       <SectionsEditorSection
         applicationId={id}
-        canEdit={isLead}
+        canEdit={canSubmitApplication || canResubmitApplication}
         sectionsQuery={sectionsQuery}
         getErrorMessage={getErrorMessage}
       />
@@ -218,6 +224,7 @@ export function StudentApplicationDetailPage({ params }: { params: Promise<{ id:
       <AttachDocumentSection
         applicationId={id}
         isLead={isLead}
+        members={team?.members ?? []}
         attachDocument={attachDocument}
         requestUploadUrl={requestUploadUrl}
         uploadToPresignedUrl={uploadToPresignedUrl}

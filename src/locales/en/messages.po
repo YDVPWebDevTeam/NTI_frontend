@@ -307,9 +307,8 @@ msgstr "An account with this invited email already exists. Use the existing acco
 msgid "Application"
 msgstr "Application"
 
-#. placeholder {0}: application.id
-msgid "Application {0}"
-msgstr "Application {0}"
+#~ msgid "Application {0}"
+#~ msgstr "Application {0}"
 
 msgid "Application data is not loaded yet."
 msgstr "Application data is not loaded yet."
@@ -317,8 +316,11 @@ msgstr "Application data is not loaded yet."
 msgid "Application Decisions"
 msgstr "Application Decisions"
 
-msgid "Application detail needs a valid accessible application before the rest of the workflow can render."
-msgstr "Application detail needs a valid accessible application before the rest of the workflow can render."
+#~ msgid "Application detail needs a valid accessible application before the rest of the workflow can render."
+#~ msgstr "Application detail needs a valid accessible application before the rest of the workflow can render."
+
+msgid "Application details are available only for applications your team can access."
+msgstr "Application details are available only for applications your team can access."
 
 msgid "Application name"
 msgstr "Application name"
@@ -536,8 +538,8 @@ msgstr "Call"
 msgid "Call details"
 msgstr "Call details"
 
-msgid "Call id"
-msgstr "Call id"
+#~ msgid "Call id"
+#~ msgstr "Call id"
 
 msgid "Call unavailable"
 msgstr "Call unavailable"
@@ -554,8 +556,8 @@ msgstr "Calls unavailable"
 msgid "Cancel"
 msgstr "Cancel"
 
-msgid "Cancelled"
-msgstr "Cancelled"
+#~ msgid "Cancelled"
+#~ msgstr "Cancelled"
 
 msgid "Candidate accepted."
 msgstr "Candidate accepted."
@@ -1578,11 +1580,11 @@ msgstr "Generate a direct invite for a target role."
 msgid "Generate a direct invite for any supported platform role."
 msgstr "Generate a direct invite for any supported platform role."
 
-msgid "Generated file upload endpoints handle the upload-url -> PUT -> complete flow before attaching the file to the application."
-msgstr "Generated file upload endpoints handle the upload-url -> PUT -> complete flow before attaching the file to the application."
+#~ msgid "Generated file upload endpoints handle the upload-url -> PUT -> complete flow before attaching the file to the application."
+#~ msgstr "Generated file upload endpoints handle the upload-url -> PUT -> complete flow before attaching the file to the application."
 
-msgid "Generated Program A detail shell with sections, document completeness, eligibility signals, needs-info thread, and lead-only submit or resubmit actions."
-msgstr "Generated Program A detail shell with sections, document completeness, eligibility signals, needs-info thread, and lead-only submit or resubmit actions."
+#~ msgid "Generated Program A detail shell with sections, document completeness, eligibility signals, needs-info thread, and lead-only submit or resubmit actions."
+#~ msgstr "Generated Program A detail shell with sections, document completeness, eligibility signals, needs-info thread, and lead-only submit or resubmit actions."
 
 msgid "GitHub Profile"
 msgstr "GitHub Profile"
@@ -1838,8 +1840,8 @@ msgstr "Latest update"
 msgid "Lead access:"
 msgstr "Lead access:"
 
-msgid "Lead-only actions stay disabled unless the current team lead matches the application team."
-msgstr "Lead-only actions stay disabled unless the current team lead matches the application team."
+#~ msgid "Lead-only actions stay disabled unless the current team lead matches the application team."
+#~ msgstr "Lead-only actions stay disabled unless the current team lead matches the application team."
 
 msgid "Lead-only apply and withdraw actions use the generated team application endpoints."
 msgstr "Lead-only apply and withdraw actions use the generated team application endpoints."
@@ -2049,8 +2051,8 @@ msgstr "Member removal stays unavailable to non-leads and when the team is locke
 msgid "Member removed."
 msgstr "Member removed."
 
-msgid "Member user id for CV uploads"
-msgstr "Member user id for CV uploads"
+#~ msgid "Member user id for CV uploads"
+#~ msgstr "Member user id for CV uploads"
 
 msgid "Members"
 msgstr "Members"
@@ -2495,8 +2497,8 @@ msgstr "Number of transferred subjects"
 msgid "of"
 msgstr "of"
 
-msgid "Onboarding"
-msgstr "Onboarding"
+#~ msgid "Onboarding"
+#~ msgstr "Onboarding"
 
 msgid "Onboarding can only be started after the application is approved."
 msgstr "Onboarding can only be started after the application is approved."
@@ -2515,6 +2517,9 @@ msgstr "Only the current team lead can apply or withdraw for Program B opportuni
 
 msgid "Only the current team lead can send invitations. Ask the lead to add the remaining teammates."
 msgstr "Only the current team lead can send invitations. Ask the lead to add the remaining teammates."
+
+msgid "Only the current team lead can submit or resubmit this application."
+msgstr "Only the current team lead can submit or resubmit this application."
 
 msgid "Only the current team lead can transfer leadership."
 msgstr "Only the current team lead can transfer leadership."
@@ -2788,8 +2793,8 @@ msgstr "Paste your verification token if the email link did not open correctly."
 msgid "Pause project"
 msgstr "Pause project"
 
-msgid "Paused"
-msgstr "Paused"
+#~ msgid "Paused"
+#~ msgstr "Paused"
 
 msgid "Pending"
 msgstr "Pending"
@@ -3245,8 +3250,8 @@ msgstr "RESETTING..."
 msgid "Resolve overdue milestones"
 msgstr "Resolve overdue milestones"
 
-msgid "Resolved"
-msgstr "Resolved"
+#~ msgid "Resolved"
+#~ msgstr "Resolved"
 
 msgid "Resolving the Program B backlog detail for this organization."
 msgstr "Resolving the Program B backlog detail for this organization."
@@ -3316,6 +3321,9 @@ msgstr "Review workflow"
 
 msgid "Review workspace"
 msgstr "Review workspace"
+
+msgid "Review your application details, required documents, eligibility checks, and messages from the NTI team."
+msgstr "Review your application details, required documents, eligibility checks, and messages from the NTI team."
 
 msgid "Reviews & notes"
 msgstr "Reviews & notes"
@@ -3398,7 +3406,7 @@ msgstr "Save section"
 msgid "Save your academic section first so professional data can be attached to a valid student profile."
 msgstr "Save your academic section first so professional data can be attached to a valid student profile."
 
-#. placeholder {0}: section.key
+#. placeholder {0}: formatEnumLikeName(section.key)
 msgid "Saved {0}."
 msgstr "Saved {0}."
 
@@ -3476,6 +3484,9 @@ msgstr "Select a mentor"
 
 msgid "Select a role"
 msgstr "Select a role"
+
+msgid "Select a team member for CV"
+msgstr "Select a team member for CV"
 
 msgid "Select a university before creating or editing faculties."
 msgstr "Select a university before creating or editing faculties."
@@ -3807,6 +3818,9 @@ msgstr "Submit application"
 msgid "Submit evaluation"
 msgstr "Submit evaluation"
 
+msgid "Submit is available for draft applications. Resubmit is available only when additional information is requested."
+msgstr "Submit is available for draft applications. Resubmit is available only when additional information is requested."
+
 msgid "Submit review"
 msgstr "Submit review"
 
@@ -3885,8 +3899,8 @@ msgstr "Team created."
 msgid "Team creation requires a team name and at least two teammate email addresses."
 msgstr "Team creation requires a team name and at least two teammate email addresses."
 
-msgid "Team id"
-msgstr "Team id"
+#~ msgid "Team id"
+#~ msgstr "Team id"
 
 msgid "TEAM INVITE"
 msgstr "TEAM INVITE"
@@ -4086,8 +4100,8 @@ msgstr "This backlog item is in an internal company workflow state, so this page
 msgid "This flow validates the invite first, then gets you into the invited team and your student profile onboarding."
 msgstr "This flow validates the invite first, then gets you into the invited team and your student profile onboarding."
 
-msgid "This generated API currently supports editing only the idea overview section."
-msgstr "This generated API currently supports editing only the idea overview section."
+#~ msgid "This generated API currently supports editing only the idea overview section."
+#~ msgstr "This generated API currently supports editing only the idea overview section."
 
 msgid "This invite has expired, was revoked, or has already been accepted."
 msgstr "This invite has expired, was revoked, or has already been accepted."
@@ -4512,6 +4526,9 @@ msgstr "Updating application..."
 
 msgid "Updating..."
 msgstr "Updating..."
+
+msgid "Upload a required document and attach it to this application."
+msgstr "Upload a required document and attach it to this application."
 
 msgid "Upload and attach"
 msgstr "Upload and attach"

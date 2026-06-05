@@ -307,9 +307,8 @@ msgstr "Účet s touto pozvánkou už existuje. Použite radšej existujúci ú�
 msgid "Application"
 msgstr "Prihláška"
 
-#. placeholder {0}: application.id
-msgid "Application {0}"
-msgstr "Prihláška {0}"
+#~ msgid "Application {0}"
+#~ msgstr "Prihláška {0}"
 
 msgid "Application data is not loaded yet."
 msgstr "Údaje prihlášky ešte nie sú načítanéю"
@@ -317,8 +316,11 @@ msgstr "Údaje prihlášky ešte nie sú načítanéю"
 msgid "Application Decisions"
 msgstr "Rozhodnutia o prihláškach"
 
-msgid "Application detail needs a valid accessible application before the rest of the workflow can render."
-msgstr "Detail prihlášky potrebuje platnú a dostupnú prihlášku, aby sa mohol zobraziť zvyšok pracovného postupu."
+#~ msgid "Application detail needs a valid accessible application before the rest of the workflow can render."
+#~ msgstr "Detail prihlášky potrebuje platnú a dostupnú prihlášku, aby sa mohol zobraziť zvyšok pracovného postupu."
+
+msgid "Application details are available only for applications your team can access."
+msgstr "Detaily prihlášky sú dostupné iba pre prihlášky, ku ktorým má váš tím prístup."
 
 msgid "Application name"
 msgstr "Názov prihlášky"
@@ -536,8 +538,8 @@ msgstr "Výzva"
 msgid "Call details"
 msgstr "Detaily výzvy"
 
-msgid "Call id"
-msgstr "ID výzvy"
+#~ msgid "Call id"
+#~ msgstr "ID výzvy"
 
 msgid "Call unavailable"
 msgstr "Výzva nie je dostupná"
@@ -554,8 +556,8 @@ msgstr "Výzvy nie sú dostupné"
 msgid "Cancel"
 msgstr "Zrušiť"
 
-msgid "Cancelled"
-msgstr "Zrušené"
+#~ msgid "Cancelled"
+#~ msgstr "Zrušené"
 
 msgid "Candidate accepted."
 msgstr "Kandidát bol prijatý."
@@ -1578,11 +1580,11 @@ msgstr "Vytvorte priamu pozvánku pre cieľovú rolu."
 msgid "Generate a direct invite for any supported platform role."
 msgstr "Vytvorte priamu pozvánku pre ľubovoľnú podporovanú rolu platformy."
 
-msgid "Generated file upload endpoints handle the upload-url -> PUT -> complete flow before attaching the file to the application."
-msgstr "Vygenerované endpointy pre nahrávanie súborov spracujú postup upload-url -> PUT -> dokončenie pred priložením súboru k prihláške."
+#~ msgid "Generated file upload endpoints handle the upload-url -> PUT -> complete flow before attaching the file to the application."
+#~ msgstr "Vygenerované endpointy pre nahrávanie súborov spracujú postup upload-url -> PUT -> dokončenie pred priložením súboru k prihláške."
 
-msgid "Generated Program A detail shell with sections, document completeness, eligibility signals, needs-info thread, and lead-only submit or resubmit actions."
-msgstr "Vygenerovaná detailná stránka Programu A so sekciami, kompletnosťou dokumentov, signálmi oprávnenosti, vláknom na doplnenie informácií a akciami odoslania alebo opätovného odoslania iba pre lídra tímu"
+#~ msgid "Generated Program A detail shell with sections, document completeness, eligibility signals, needs-info thread, and lead-only submit or resubmit actions."
+#~ msgstr "Vygenerovaná detailná stránka Programu A so sekciami, kompletnosťou dokumentov, signálmi oprávnenosti, vláknom na doplnenie informácií a akciami odoslania alebo opätovného odoslania iba pre lídra tímu"
 
 msgid "GitHub Profile"
 msgstr "GitHub profil"
@@ -1838,8 +1840,8 @@ msgstr "Posledná aktualizácia"
 msgid "Lead access:"
 msgstr "Prístup vedúceho:"
 
-msgid "Lead-only actions stay disabled unless the current team lead matches the application team."
-msgstr "Akcie dostupné iba lídrovi zostanú vypnuté, pokiaľ aktuálny líder tímu nezodpovedá tímu prihlášky"
+#~ msgid "Lead-only actions stay disabled unless the current team lead matches the application team."
+#~ msgstr "Akcie dostupné iba lídrovi zostanú vypnuté, pokiaľ aktuálny líder tímu nezodpovedá tímu prihlášky"
 
 msgid "Lead-only apply and withdraw actions use the generated team application endpoints."
 msgstr "Akcie podať a stiahnuť prihlášku, dostupné len vedúcemu tímu, používajú generované koncové body tímovej prihlášky."
@@ -2049,8 +2051,8 @@ msgstr "Odstránenie člena zostáva nedostupné pre nevedúcich a aj vtedy, ke�
 msgid "Member removed."
 msgstr "Člen bol odstránený."
 
-msgid "Member user id for CV uploads"
-msgstr "ID používateľa člena pre nahratie CV"
+#~ msgid "Member user id for CV uploads"
+#~ msgstr "ID používateľa člena pre nahratie CV"
 
 msgid "Members"
 msgstr "Členovia"
@@ -2495,8 +2497,8 @@ msgstr "Počet uznaných predmetov"
 msgid "of"
 msgstr "z"
 
-msgid "Onboarding"
-msgstr "Onboarding"
+#~ msgid "Onboarding"
+#~ msgstr "Onboarding"
 
 msgid "Onboarding can only be started after the application is approved."
 msgstr "Onboarding je možné spustiť iba po schválení prihlášky."
@@ -2515,6 +2517,9 @@ msgstr "Len aktuálny vedúci tímu môže podať alebo stiahnuť prihlášku na
 
 msgid "Only the current team lead can send invitations. Ask the lead to add the remaining teammates."
 msgstr "Pozvánky môže posielať len aktuálny vedúci tímu. Požiadajte vedúceho, aby pridal zostávajúcich spoluhráčov."
+
+msgid "Only the current team lead can submit or resubmit this application."
+msgstr "Túto prihlášku môže odoslať alebo znova odoslať iba aktuálny vedúci tímu."
 
 msgid "Only the current team lead can transfer leadership."
 msgstr "Len aktuálny vedúci tímu môže preniesť vedenie."
@@ -2788,8 +2793,8 @@ msgstr "Vložte overovací token, ak sa e-mailový odkaz neotvoril správne."
 msgid "Pause project"
 msgstr "Pozastaviť projekt"
 
-msgid "Paused"
-msgstr "Pozastavené"
+#~ msgid "Paused"
+#~ msgstr "Pozastavené"
 
 msgid "Pending"
 msgstr "Čaká"
@@ -3245,8 +3250,8 @@ msgstr "OBNOVUJE SA..."
 msgid "Resolve overdue milestones"
 msgstr "Vyriešiť omeškané míľniky"
 
-msgid "Resolved"
-msgstr "Vyriešené"
+#~ msgid "Resolved"
+#~ msgstr "Vyriešené"
 
 msgid "Resolving the Program B backlog detail for this organization."
 msgstr "Načítava sa detail backlogu Programu B pre túto organizáciu."
@@ -3316,6 +3321,9 @@ msgstr "Proces kontroly"
 
 msgid "Review workspace"
 msgstr "Revízne pracovisko"
+
+msgid "Review your application details, required documents, eligibility checks, and messages from the NTI team."
+msgstr "Skontrolujte detaily svojej prihlášky, požadované dokumenty, kontroly oprávnenosti a správy od tímu NTI"
 
 msgid "Reviews & notes"
 msgstr "Hodnotenia a poznámky"
@@ -3398,7 +3406,7 @@ msgstr "Uložiť sekciu"
 msgid "Save your academic section first so professional data can be attached to a valid student profile."
 msgstr "Najprv uložte akademickú sekciu, aby mohli byť profesionálne údaje pripojené k platnému študentskému profilu."
 
-#. placeholder {0}: section.key
+#. placeholder {0}: formatEnumLikeName(section.key)
 msgid "Saved {0}."
 msgstr "Uložené {0}."
 
@@ -3476,6 +3484,9 @@ msgstr "Vyberte mentora"
 
 msgid "Select a role"
 msgstr "Vyberte rolu"
+
+msgid "Select a team member for CV"
+msgstr "Vyberte člena tímu pre životopis"
 
 msgid "Select a university before creating or editing faculties."
 msgstr "Pred vytvorením alebo úpravou fakúlt vyberte univerzitu."
@@ -3807,6 +3818,9 @@ msgstr "Odoslať prihlášku"
 msgid "Submit evaluation"
 msgstr "Odoslať hodnotenie"
 
+msgid "Submit is available for draft applications. Resubmit is available only when additional information is requested."
+msgstr "Odoslanie je dostupné pre rozpracované prihlášky. Opätovné odoslanie je dostupné iba vtedy, keď sú vyžiadané dodatočné informácie"
+
 msgid "Submit review"
 msgstr "Odoslať hodnotenie"
 
@@ -3885,8 +3899,8 @@ msgstr "Tím bol vytvorený."
 msgid "Team creation requires a team name and at least two teammate email addresses."
 msgstr "Vytvorenie tímu vyžaduje názov tímu a aspoň dve e-mailové adresy spoluhráčov."
 
-msgid "Team id"
-msgstr "ID tímu"
+#~ msgid "Team id"
+#~ msgstr "ID tímu"
 
 msgid "TEAM INVITE"
 msgstr "TÍMOVÁ POZVÁNKA"
@@ -4086,8 +4100,8 @@ msgstr "Táto položka backlogu je v internom stave firemného workflow, preto t
 msgid "This flow validates the invite first, then gets you into the invited team and your student profile onboarding."
 msgstr "Tento proces najprv overí pozvánku, potom vás pripojí do pozvaného tímu a prevedie onboardingom študentského profilu."
 
-msgid "This generated API currently supports editing only the idea overview section."
-msgstr "Toto vygenerované API momentálne podporuje úpravu iba sekcie prehľadu nápadu."
+#~ msgid "This generated API currently supports editing only the idea overview section."
+#~ msgstr "Toto vygenerované API momentálne podporuje úpravu iba sekcie prehľadu nápadu."
 
 msgid "This invite has expired, was revoked, or has already been accepted."
 msgstr "Platnosť tejto pozvánky vypršala, bola zrušená alebo už bola prijatá."
@@ -4512,6 +4526,9 @@ msgstr "Aktualizuje sa prihláška..."
 
 msgid "Updating..."
 msgstr "Aktualizuje sa..."
+
+msgid "Upload a required document and attach it to this application."
+msgstr "Nahrajte požadovaný dokument a priložte ho k tejto prihláške."
 
 msgid "Upload and attach"
 msgstr "Nahrať a priložiť"

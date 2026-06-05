@@ -1,7 +1,15 @@
 'use client';
 
 import { t } from '@lingui/core/macro';
-import { Activity, ArrowRight, Building2, ShieldAlert, Users2 } from 'lucide-react';
+import {
+  Activity,
+  ArrowRight,
+  Building2,
+  CalendarClock,
+  Plus,
+  ShieldAlert,
+  Users2,
+} from 'lucide-react';
 import Link from 'next/link';
 
 import {
@@ -10,14 +18,109 @@ import {
   AdminLoadingState,
   AdminStatCard,
   AdminStatusBadge,
+  formatAdminDateTime,
 } from 'components/admin';
 import { Button, Card, CardContent, CardHeader, CardTitle } from 'components/shadcn';
+import { AdminCallStatus, useAdminCalls } from 'lib/api-client/admin/calls';
 import { useOrganizationInvites } from 'lib/api-client/admin/organizations';
 import { OrganizationStatus, UserAccountStatus } from 'lib/api-client/admin/types';
 import { useUsers } from 'lib/api-client/admin/users';
 import { ROUTES } from 'lib/constants';
 
 const ATTENTION_PREVIEW_LIMIT = 5;
+const ACTIVE_CALLS_PREVIEW_LIMIT = 5;
+
+function ActiveCallsCard() {
+  const callsQuery = useAdminCalls({
+    status: AdminCallStatus.OPEN,
+  });
+
+  const activeCalls = callsQuery.data?.data?.slice(0, ACTIVE_CALLS_PREVIEW_LIMIT) ?? [];
+
+  return (
+    <Card className="border-slate-200 bg-white shadow-none">
+      <CardHeader className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-sky-50 text-sky-700">
+            <CalendarClock className="h-5 w-5" />
+          </div>
+
+          <CardTitle className="text-2xl text-slate-950">{t`Active Calls`}</CardTitle>
+
+          <p className="mt-2 text-sm text-slate-600">
+            {t`Currently open calls receiving submissions.`}
+          </p>
+        </div>
+
+        <Button asChild variant="outline" className="bg-white">
+          <Link href={ROUTES.ADMIN.CALLS}>
+            {t`View all calls`}
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </Button>
+      </CardHeader>
+
+      <CardContent>
+        {callsQuery.isLoading ? <AdminLoadingState /> : null}
+
+        {callsQuery.isError ? (
+          <AdminErrorState
+            title={t`Active calls unavailable`}
+            description={t`The active calls request failed, but the rest of the dashboard is still available.`}
+            actionLabel={t`Retry`}
+            onAction={() => void callsQuery.refetch()}
+          />
+        ) : null}
+
+        {!callsQuery.isLoading && !callsQuery.isError && activeCalls.length === 0 ? (
+          <div className="space-y-4">
+            <AdminEmptyState
+              title={t`No active calls`}
+              description={t`There are no currently open calls receiving submissions.`}
+            />
+
+            <Button asChild>
+              <Link href={ROUTES.ADMIN.CALL_CREATE}>
+                <Plus className="mr-2 h-4 w-4" />
+                {t`Create call`}
+              </Link>
+            </Button>
+          </div>
+        ) : null}
+
+        {!callsQuery.isLoading && !callsQuery.isError && activeCalls.length > 0 ? (
+          <div className="space-y-3">
+            {activeCalls.map((call) => (
+              <Link
+                key={call.id}
+                href={ROUTES.ADMIN.callDetails(call.id)}
+                className="block rounded-2xl border border-slate-200 px-4 py-4 transition-colors hover:border-slate-300 hover:bg-slate-50"
+              >
+                <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                  <div className="min-w-0">
+                    <div className="font-medium text-slate-950">{call.title}</div>
+
+                    <div className="mt-1 text-sm text-slate-600">
+                      {t`Opens`}: {formatAdminDateTime(call.opensAt)}
+                    </div>
+                  </div>
+
+                  <div className="text-sm text-slate-600 md:text-right">
+                    <div>{t`Deadline`}</div>
+
+                    <div className="font-medium text-slate-950">
+                      {formatAdminDateTime(call.closesAt)}
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        ) : null}
+      </CardContent>
+    </Card>
+  );
+}
 
 export default function AdminOverviewPage() {
   const usersQuery = useUsers();
@@ -75,6 +178,8 @@ export default function AdminOverviewPage() {
           icon={<Activity className="h-5 w-5" />}
         />
       </section>
+
+      <ActiveCallsCard />
 
       <section className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
         <Card className="border-slate-200 bg-white shadow-none">
@@ -141,6 +246,11 @@ export default function AdminOverviewPage() {
                 href: ROUTES.ADMIN.USERS,
                 title: t`Manage Users`,
                 description: t`Search accounts, inspect roles, and suspend or reactivate access.`,
+              },
+              {
+                href: ROUTES.ADMIN.CALLS,
+                title: t`Manage Calls`,
+                description: t`Review active calls, deadlines, and lifecycle status.`,
               },
               {
                 href: ROUTES.ADMIN.INVITES,

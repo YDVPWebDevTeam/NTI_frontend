@@ -130,13 +130,13 @@ msgid "ACCEPTING..."
 msgstr "PRIJÍMA SA..."
 
 msgid "Access Admin"
-msgstr "Prístup správcu"
+msgstr "Prístup správcu<<<<<<< HEAD"
+
+msgid "Access forbidden"
+msgstr "Prístup zakázaný"
 
 msgid "Access invites"
 msgstr "Pozvánky na prístup"
-
-msgid "ACCESS PLATFORM"
-msgstr "PRÍSTUP K PLATFORME"
 
 msgid "Access the high-performance environment tailored to your institutional role. Choose a path to begin your technical journey."
 msgstr "Vstúpte do prostredia prispôsobeného vašej roli. Vyberte si cestu, ktorou chcete začať."
@@ -146,6 +146,9 @@ msgstr "Prístup k rámcom Programu A"
 
 msgid "Access your account"
 msgstr "Prístup k účtu"
+
+msgid "ACCOUNT RECOVERY"
+msgstr "OBNOVENIE ÚČTU"
 
 msgid "Account security"
 msgstr "Zabezpečenie účtu"
@@ -158,6 +161,9 @@ msgstr "NASTAVENIE ÚČTU"
 
 msgid "Account status"
 msgstr "Stav účtu"
+
+msgid "Account suspended"
+msgstr "Účet pozastavený"
 
 msgid "Accounts currently blocked from normal access."
 msgstr "Účty aktuálne zablokované pre bežný prístup."
@@ -179,6 +185,12 @@ msgstr "Aktivovať projekt"
 
 msgid "Active"
 msgstr "Aktívne"
+
+msgid "Active Calls"
+msgstr "Aktívne výzvy"
+
+msgid "Active calls unavailable"
+msgstr "Aktívne výzvy nie sú dostupné"
 
 msgid "Active project"
 msgstr "Aktívny projekt"
@@ -432,6 +444,9 @@ msgstr "Späť na detail"
 msgid "Back to home"
 msgstr "Späť na domovskú stránku"
 
+msgid "Back to login"
+msgstr "Späť na prihlásenie"
+
 msgid "Back to Organizations"
 msgstr "Späť na organizácie"
 
@@ -549,6 +564,9 @@ msgstr "Vyžiadané zmeny"
 msgid "Check team readiness"
 msgstr "Skontrolovať pripravenosť tímu"
 
+msgid "Check your email"
+msgstr "Skontrolujte svoj e-mail"
+
 msgid "Check your inbox and use the token only if you want to confirm now."
 msgstr "Skontrolujte svoju schránku a použite token iba v prípade, že chcete potvrdenie vykonať teraz."
 
@@ -565,10 +583,13 @@ msgid "Choose a faculty from the table before managing specializations."
 msgstr "Pred správou špecializácií vyberte fakultu z tabuľky."
 
 msgid "Choose a file"
-msgstr "Vyberte súbor"
+msgstr "Vyberte súbor<<<<<<< HEAD"
 
 msgid "Choose a logo file"
-msgstr "Vyberte súbor s logom"
+msgstr "Vyberte súbor s logom======="
+
+msgid "Choose a new password"
+msgstr "Zvoľte si nové heslo>>>>>>> origin/main"
 
 msgid "Choose a password you have not used for the current session."
 msgstr "Vyberte heslo, ktoré ste v aktuálnej relácii ešte nepoužili."
@@ -732,6 +753,9 @@ msgstr "POTVRDIŤ E-MAIL"
 msgid "Confirm New Email"
 msgstr "Potvrdiť nový e-mail"
 
+msgid "Confirm new password"
+msgstr "Potvrďte nové heslo"
+
 msgid "Confirm New Password"
 msgstr "Potvrdiť nové heslo"
 
@@ -753,6 +777,9 @@ msgstr "Pred plným prístupom na platformu potvrďte svoju e-mailovú adresu pr
 msgid "Confirm your new email"
 msgstr "Potvrďte svoj nový e-mail"
 
+msgid "Confirm your NTI account"
+msgstr "Potvrďte svoj účet NTI"
+
 msgid "Confirmation code"
 msgstr "Potvrdzovací kód"
 
@@ -764,6 +791,15 @@ msgstr "Potvrdzovací e-mail bol odoslaný."
 
 msgid "Confirmation status"
 msgstr "Stav potvrdenia"
+
+msgid "Confirming email"
+msgstr "Potvrdzuje sa e-mail"
+
+msgid "Confirming your email"
+msgstr "Potvrdzuje sa váš e-mail"
+
+msgid "Confirming your email address..."
+msgstr "Potvrdzuje sa vaša e-mailová adresa..."
 
 msgid "Confirming…"
 msgstr "Potvrdzuje sa…"
@@ -777,6 +813,9 @@ msgstr "Spojiť sa"
 msgid "Contact Us"
 msgstr "Kontaktujte nás"
 
+msgid "CONTINUE"
+msgstr "POKRAČOVAŤ"
+
 msgid "Continue as Company Partner"
 msgstr "Pokračovať ako firemný partner"
 
@@ -784,10 +823,13 @@ msgid "Continue as Regular User"
 msgstr "Pokračovať ako bežný používateľ"
 
 msgid "Continue draft"
-msgstr "Pokračovať v návrhu"
+msgstr "Pokračovať v návrhu<<<<<<< HEAD"
+
+msgid "Continue your onboarding, track applications, and manage your NTI profile from one place."
+msgstr "Pokračujte v onboardingu, sledujte prihlášky a spravujte svoj NTI profil z jedného miesta.>>>>>>> origin/main"
 
 msgid "Contract"
-msgstr "Zmluva"
+msgstr "Zmluva======="
 
 msgid "Control Center"
 msgstr "Riadiace centrum"
@@ -834,6 +876,9 @@ msgstr "Vytvorte pozvánku pre zobrazenie vrátených metadát."
 msgid "Create call"
 msgstr "Vytvoriť výzvu"
 
+msgid "Create company owner account"
+msgstr "Vytvoriť účet vlastníka spoločnosti"
+
 msgid "Create criterion-based scoring after formal verification or during evaluation."
 msgstr "Vytvorte bodové hodnotenie podľa kritérií po formálnom overení alebo počas hodnotenia."
 
@@ -849,6 +894,9 @@ msgstr "Vytvoriť míľnik"
 msgid "Create needs-info item"
 msgstr "Vytvoriť požiadavku na doplnenie informácií"
 
+msgid "Create new password"
+msgstr "Vytvoriť nové heslo"
+
 msgid "Create organization"
 msgstr "Vytvoriť organizáciu"
 
@@ -857,6 +905,9 @@ msgstr "Vytvoriť projektové pracovisko"
 
 msgid "Create Specialization"
 msgstr "Vytvoriť špecializáciu"
+
+msgid "CREATE STUDENT ACCOUNT"
+msgstr "VYTVORIŤ ŠTUDENTSKÝ ÚČET"
 
 msgid "Create System Invite"
 msgstr "Vytvoriť systémovú pozvánku"
@@ -934,7 +985,10 @@ msgid "Current mentor:"
 msgstr "Aktuálny mentor:"
 
 msgid "Current Password"
-msgstr "Aktuálne heslo"
+msgstr "Aktuálne heslo<<<<<<< HEAD======="
+
+msgid "Current password is required."
+msgstr "Aktuálne heslo je povinné"
 
 msgid "Current reward:"
 msgstr "Aktuálna odmena:"
@@ -947,6 +1001,9 @@ msgstr "Aktuálny stav:"
 
 msgid "Current Year of Study"
 msgstr "Aktuálny ročník štúdia"
+
+msgid "Currently open calls receiving submissions."
+msgstr "Aktuálne otvorené výzvy, ktoré prijímajú prihlášky."
 
 msgid "CV"
 msgstr "Životopis"
@@ -980,6 +1037,9 @@ msgstr "Dátum od"
 
 msgid "Date To"
 msgstr "Dátum do"
+
+msgid "Deadline"
+msgstr "Termín uzávierky"
 
 msgid "Decided"
 msgstr "Rozhodnuté"
@@ -1095,9 +1155,6 @@ msgstr "Dokumenty pre tento účet zatiaľ nie sú dostupné."
 msgid "Doe"
 msgstr "Novák"
 
-msgid "Don't have an account yet?"
-msgstr "Ešte nemáte účet?"
-
 msgid "Download"
 msgstr "Stiahnuť"
 
@@ -1177,6 +1234,15 @@ msgstr "Potvrdenie e-mailu"
 msgid "Email confirmation failed"
 msgstr "Potvrdenie e-mailu zlyhalo"
 
+msgid "Email confirmation required"
+msgstr "Vyžaduje sa potvrdenie e-mailu"
+
+msgid "Email confirmed"
+msgstr "E-mail potvrdený"
+
+msgid "Email confirmed successfully."
+msgstr "E-mail bol úspešne potvrdený."
+
 msgid "Email confirmed. Sign in again with your updated address."
 msgstr "E-mail bol potvrdený. Prihláste sa znova s aktualizovanou adresou."
 
@@ -1219,6 +1285,9 @@ msgstr "Pred vytvorením míľnika zadajte jeho názov."
 msgid "Enter a new password"
 msgstr "Zadajte nové heslo"
 
+msgid "Enter a new password for your account."
+msgstr "Zadajte nové heslo pre svoj účet."
+
 msgid "Enter a strong password"
 msgstr "Zadajte silné heslo"
 
@@ -1237,6 +1306,12 @@ msgstr "Zadajte e-mailovú adresu, ku ktorej máte práve teraz prístup. Pred v
 msgid "Enter faculty name"
 msgstr "Zadajte názov fakulty"
 
+msgid "Enter new password"
+msgstr "Zadajte nové heslo"
+
+msgid "Enter password"
+msgstr "Zadajte heslo"
+
 msgid "Enter specialization name"
 msgstr "Zadajte názov špecializácie"
 
@@ -1249,14 +1324,14 @@ msgstr "Zadajte overovací token z vášho e-mailu."
 msgid "Enter university name"
 msgstr "Zadajte názov univerzity"
 
-msgid "Enter your credentials below to access the platform."
-msgstr "Zadajte svoje prihlasovacie údaje nižšie pre prístup na platformu."
-
 msgid "Enter your current password"
 msgstr "Zadajte svoje aktuálne heslo"
 
 msgid "Enter your current password to set a new one. After that, sign in again."
 msgstr "Zadajte svoje aktuálne heslo a nastavte nové. Potom sa znova prihláste."
+
+msgid "Enter your email address and we will send you a password reset link."
+msgstr "Zadajte svoju e-mailovú adresu a pošleme vám odkaz na obnovenie hesla."
 
 msgid "Enter your first name…"
 msgstr "Zadajte svoje meno…"
@@ -1462,6 +1537,9 @@ msgstr "Meno môže mať maximálne 50 znakov."
 msgid "Focus Areas"
 msgstr "Oblasti záujmu"
 
+msgid "FORGOT PASSWORD"
+msgstr "ZABUDNUTÉ HESLO"
+
 msgid "Forgot password?"
 msgstr "Zabudli ste heslo?"
 
@@ -1503,6 +1581,9 @@ msgstr "Vytvorte priamu pozvánku pre ľubovoľnú podporovanú rolu platformy."
 
 msgid "GitHub Profile"
 msgstr "GitHub profil"
+
+msgid "Go home"
+msgstr "Prejsť na úvodnú stránku"
 
 msgid "Go to dashboard"
 msgstr "Prejsť na hlavnú stránku"
@@ -1575,6 +1656,9 @@ msgstr "Overenie identity"
 
 msgid "IDENTITY VERIFICATION"
 msgstr "OVERENIE IDENTITY"
+
+msgid "If an account exists for that email, a reset link has been sent. Open the link to continue."
+msgstr "Ak pre tento e-mail existuje účet, bol odoslaný odkaz na obnovenie hesla. Otvorte odkaz a pokračujte."
 
 msgid "If something goes wrong, we'll tell you what to do next."
 msgstr "Ak sa niečo pokazí, povieme vám, čo robiť ďalej."
@@ -1784,6 +1868,9 @@ msgstr "Právne informácie"
 msgid "Level is required."
 msgstr "Úroveň je povinná."
 
+msgid "Link expired"
+msgstr "Platnosť odkazu vypršala"
+
 msgid "LinkedIn"
 msgstr "Profil na LinkedIn"
 
@@ -1921,7 +2008,10 @@ msgid "Looking absolutely stellar"
 msgstr "Vyzerá to výborne"
 
 msgid "Manage"
-msgstr "Spravovať"
+msgstr "Spravovať<<<<<<< HEAD======="
+
+msgid "Manage Calls"
+msgstr "Spravovať výzvy"
 
 msgid "Manage Program A and Program B calls, deadlines, and lifecycle status."
 msgstr "Spravujte výzvy Programu A a Programu B, termíny a stav životného cyklu."
@@ -2131,8 +2221,14 @@ msgstr "Nová e-mailová adresa"
 msgid "New milestone"
 msgstr "Nový míľnik"
 
+msgid "New password"
+msgstr "Nové heslo"
+
 msgid "New Password"
 msgstr "Nové heslo"
+
+msgid "New to NTI?"
+msgstr "Ste v NTI nový?"
 
 msgid "News"
 msgstr "Novinky"
@@ -2158,6 +2254,9 @@ msgstr "Nie"
 
 msgid "No action"
 msgstr "Žiadna akcia"
+
+msgid "No active calls"
+msgstr "Žiadne aktívne výzvy"
 
 msgid "No active Program A calls are available right now."
 msgstr "Momentálne nie sú dostupné žiadne aktívne výzvy Programu A."
@@ -2651,11 +2750,32 @@ msgstr "Zmena hesla zlyhala"
 msgid "Password changed. Sign in again with your new password."
 msgstr "Heslo bolo zmenené. Prihláste sa znova pomocou nového hesla."
 
+msgid "Password confirmation is required."
+msgstr "Potvrdenie hesla je povinné"
+
+msgid "Password is required."
+msgstr "Heslo je povinné."
+
 msgid "Password must be at least 6 characters."
 msgstr "Heslo musí mať aspoň 6 znakov."
 
+msgid "Password must be at least 8 characters."
+msgstr "Heslo musí mať aspoň 8 znakov."
+
+msgid "Password must be at most 128 characters."
+msgstr "Heslo môže mať najviac 128 znakov."
+
+msgid "Password must contain at least one letter and one number"
+msgstr "Heslo musí obsahovať aspoň jedno písmeno a jednu číslicu"
+
+msgid "PASSWORD RESET"
+msgstr "OBNOVENIE HESLA"
+
 msgid "Password Reset Required"
 msgstr "Vyžaduje sa obnovenie hesla"
+
+msgid "Password reset token is required."
+msgstr "Token na obnovenie hesla je povinný"
 
 msgid "Password status"
 msgstr "Stav hesla"
@@ -2669,14 +2789,26 @@ msgstr "Heslá sa nezhodujú."
 msgid "Passwords must match."
 msgstr "Heslá sa musia zhodovať."
 
+msgid "Paste reset token"
+msgstr "Vložte token na obnovenie hesla"
+
 msgid "Paste the code from your email"
 msgstr "Vložte kód z vášho e-mailu"
 
 msgid "Paste the token from your email…"
 msgstr "Vložte token z vášho e-mailu…"
 
+msgid "Paste verification token"
+msgstr "Vložte overovací token"
+
+msgid "Paste your reset token only if the email link did not open correctly."
+msgstr "Vložte token na obnovenie hesla iba v prípade, že sa e-mailový odkaz neotvoril správne"
+
 msgid "Paste your verification token"
 msgstr "Vložte svoj overovací token"
+
+msgid "Paste your verification token if the email link did not open correctly."
+msgstr "Vložte overovací token, ak sa e-mailový odkaz neotvoril správne."
 
 msgid "Pause project"
 msgstr "Pozastaviť projekt"
@@ -2705,14 +2837,14 @@ msgstr "Osobné portfólio / webová stránka"
 msgid "Phew! You survived."
 msgstr "Uf! Zvládli ste to."
 
-msgid "PLATFORM ACCESS"
-msgstr "PRÍSTUP K PLATFORME"
-
 msgid "Please choose a file to upload."
 msgstr "Vyberte súbor, ktorý chcete nahrať."
 
 msgid "Please choose a valid logo file."
 msgstr "Vyberte platný súbor loga."
+
+msgid "Please confirm your email address before signing in."
+msgstr "Pred prihlásením potvrďte svoju e-mailovú adresu."
 
 msgid "Please enter a valid email address."
 msgstr "Zadajte platnú e-mailovú adresu."
@@ -2723,6 +2855,12 @@ msgstr "Zadajte platnú URL webovej stránky."
 msgid "Please review your information before completing the registration."
 msgstr "Pred dokončením registrácie si skontrolujte svoje údaje."
 
+msgid "Please sign in again to continue."
+msgstr "Ak chcete pokračovať, prihláste sa znova."
+
+msgid "Please try again."
+msgstr "Skúste to znova."
+
 msgid "Please wait about a minute before requesting another email confirmation."
 msgstr "Pred ďalšou žiadosťou o potvrdenie e-mailu počkajte asi minútu."
 
@@ -2731,6 +2869,12 @@ msgstr "Pred ďalším pokusom chvíľu počkajte"
 
 msgid "Please wait until the current request finishes."
 msgstr "Počkajte, kým sa aktuálna požiadavka dokončí."
+
+msgid "Please wait while we verify your company owner account."
+msgstr "Počkajte, kým overíme váš účet vlastníka spoločnosti."
+
+msgid "Please wait while we verify your email address."
+msgstr "Počkajte, kým overíme vašu e-mailovú adresu."
 
 msgid "Please wait. The previous action is still running."
 msgstr "Počkajte, predchádzajúca akcia stále prebieha."
@@ -2994,6 +3138,9 @@ msgstr "Záznam je aktívny"
 msgid "Record NTI final acceptance"
 msgstr "Zaznamenať finálnu akceptáciu NTI"
 
+msgid "Recover your NTI access"
+msgstr "Obnovte svoj prístup do NTI"
+
 msgid "Recovered drafts"
 msgstr "Obnovené návrhy"
 
@@ -3017,6 +3164,9 @@ msgstr "Registrovať vlastníka spoločnosti"
 
 msgid "Register your account to continue with organization onboarding."
 msgstr "Zaregistrujte svoj účet pre pokračovanie v onboardingu organizácie."
+
+msgid "Registering as a company?"
+msgstr "Registrujete sa ako spoločnosť?"
 
 msgid "Registration failed"
 msgstr "Registrácia zlyhala"
@@ -3054,6 +3204,9 @@ msgstr "Odstrániť člena"
 msgid "Rename team"
 msgstr "Premenovať tím"
 
+msgid "Repeat new password"
+msgstr "Zopakujte nové heslo"
+
 msgid "Repeat the new password"
 msgstr "Zopakujte nové heslo"
 
@@ -3063,6 +3216,12 @@ msgstr "Reportovací dashboard nie je dostupný"
 msgid "Reports"
 msgstr "Reporty"
 
+msgid "Request a new password reset link and try again."
+msgstr "Požiadajte o nový odkaz na obnovenie hesla a skúste to znova"
+
+msgid "Request a secure link and choose a new password from your email."
+msgstr "Požiadajte o bezpečný odkaz a zvoľte si nové heslo cez svoj e-mail"
+
 msgid "Request additional information"
 msgstr "Vyžiadať doplňujúce informácie"
 
@@ -3071,6 +3230,9 @@ msgstr "Požiadať o zmenu"
 
 msgid "Request failed"
 msgstr "Požiadavka zlyhala"
+
+msgid "Request new link"
+msgstr "Požiadať o nový odkaz"
 
 msgid "Request status"
 msgstr "Stav požiadavky"
@@ -3091,7 +3253,22 @@ msgid "Resend in {remainingSeconds}s"
 msgstr "Znovu odoslať o {remainingSeconds}s"
 
 msgid "Resend the email if it did not arrive. Paste the token below only if you want to verify this step immediately."
-msgstr "Ak e-mail neprišiel, odošlite ho znova. Token nižšie vložte iba v prípade, že chcete tento krok overiť okamžite."
+msgstr "Ak e-mail neprišiel, odošlite ho znova. Token nižšie vložte iba v prípade, že chcete tento krok overiť okamžite.<<<<<<< HEAD======="
+
+msgid "Reset link expired"
+msgstr "Platnosť odkazu na obnovenie hesla vypršala"
+
+msgid "RESET PASSWORD"
+msgstr "OBNOVIŤ HESLO"
+
+msgid "Reset token"
+msgstr "Token na obnovenie hesla"
+
+msgid "Reset your password"
+msgstr "Obnovte svoje heslo"
+
+msgid "RESETTING..."
+msgstr "OBNOVUJE SA...>>>>>>> origin/main"
 
 msgid "Resolve overdue milestones"
 msgstr "Vyriešiť omeškané míľniky"
@@ -3114,8 +3291,14 @@ msgstr "Obnoviť projekt"
 msgid "Retry"
 msgstr "Skúsiť znova"
 
+msgid "RETURN TO LOGIN"
+msgstr "SPÄŤ NA PRIHLÁSENIE"
+
 msgid "Review"
 msgstr "Kontrola"
+
+msgid "Review active calls, deadlines, and lifecycle status."
+msgstr "Skontrolujte aktívne výzvy, termíny a stav životného cyklu."
 
 msgid "Review backlog candidates"
 msgstr "Skontrolovať kandidátov backlogu"
@@ -3384,6 +3567,9 @@ msgstr "Odoslať pozvánku"
 msgid "Send invites"
 msgstr "Odoslať pozvánky"
 
+msgid "SEND RESET LINK"
+msgstr "ODOSLAŤ ODKAZ NA OBNOVENIE"
+
 msgid "Send Verification"
 msgstr "Odoslať overenie"
 
@@ -3395,6 +3581,12 @@ msgstr "Odosiela sa pozvánka…"
 
 msgid "Sending…"
 msgstr "Odosiela sa…"
+
+msgid "SENDING..."
+msgstr "ODOSIELA SA..."
+
+msgid "Session expired"
+msgstr "Platnosť relácie vypršala"
 
 msgid "Set a new admin password"
 msgstr "Nastaviť nové administrátorské heslo"
@@ -3409,10 +3601,10 @@ msgid "Set reward (EUR)"
 msgstr "Nastaviť odmenu (EUR)"
 
 msgid "Set the approved grant budget in EUR for this project."
-msgstr "Zadajte schválený rozpočet grantu v EUR pre tento projekt."
+msgstr "Zadajte schválený rozpočet grantu v EUR pre tento projekt.<<<<<<< HEAD"
 
 msgid "Shared organization files"
-msgstr "Zdieľané súbory organizácie"
+msgstr "Zdieľané súbory organizácie======="
 
 msgid "Short Name"
 msgstr "Skrátený názov"
@@ -3435,6 +3627,9 @@ msgstr "Predstavte svoje najlepšie projekty a povedzte nám niečo o sebe."
 msgid "Showing Program A moderation rows."
 msgstr "Zobrazujú sa riadky moderovania Programu A."
 
+msgid "Sign in"
+msgstr "Prihlásiť sa"
+
 msgid "Sign In"
 msgstr "Prihlásiť sa"
 
@@ -3447,8 +3642,8 @@ msgstr "Pred ďalšími zmenami účtu sa znova prihláste."
 msgid "SIGN IN AND ACCEPT"
 msgstr "PRIHLÁSIŤ SA A PRIJAŤ"
 
-msgid "Sign in to continue with your student, team, or organization workflow."
-msgstr "Prihláste sa pre pokračovanie vo workflow študenta, tímu alebo organizácie."
+msgid "Sign in to your NTI workspace"
+msgstr "Prihláste sa do svojho pracovného priestoru NTI"
 
 msgid "Sign in with the account that uses the invited email address. After login, the invitation will be accepted automatically."
 msgstr "Prihláste sa účtom, ktorý používa pozvanú e-mailovú adresu. Po prihlásení bude pozvánka prijatá automaticky."
@@ -3488,6 +3683,9 @@ msgstr "Návrh riešenia"
 
 msgid "Some dashboard sections could not be refreshed."
 msgstr "Niektoré sekcie dashboardu sa nepodarilo obnoviť."
+
+msgid "Something went wrong"
+msgstr "Niečo sa pokazilo"
 
 msgid "Something went wrong. Check the Network tab for details."
 msgstr "Niečo sa pokazilo. Podrobnosti nájdete na karte Network."
@@ -3747,6 +3945,9 @@ msgstr "Testovacia spoločnosť…"
 msgid "That was a lot of typing, but you made it! Your profile is officially sparkling clean and ready to go. Now, don't suffer alone—invite your colleagues to share the joy of filling out this form!"
 msgstr "Bolo toho veľa na vyplnenie, ale zvládli ste to! Váš profil je pripravený. A teraz v tom nemusíte byť sami — pozvite kolegov, aby sa pridali tiež."
 
+msgid "The active calls request failed, but the rest of the dashboard is still available."
+msgstr "Požiadavka na aktívne výzvy zlyhala, ale zvyšok prehľadu je stále dostupný."
+
 msgid "The admin session could not be verified. Retry once the connection is available."
 msgstr "Reláciu správcu sa nepodarilo overiť. Skúste to znova, keď bude pripojenie dostupné."
 
@@ -3787,10 +3988,13 @@ msgid "The invite could not be validated right now. Please try again later."
 msgstr "Pozvánku sa momentálne nepodarilo overiť. Skúste to prosím neskôr."
 
 msgid "The invite detail request failed for this organization."
-msgstr "Požiadavka na detail pozvánky pre túto organizáciu zlyhala."
+msgstr "Požiadavka na detail pozvánky pre túto organizáciu zlyhala.<<<<<<< HEAD"
+
+msgid "The link is invalid or expired. Request a new link and try again."
+msgstr "Odkaz je neplatný alebo jeho platnosť vypršala. Požiadajte o nový odkaz a skúste to znova."
 
 msgid "The organization will be created without a logo."
-msgstr "Organizácia bude vytvorená bez loga."
+msgstr "Organizácia bude vytvorená bez loga.======="
 
 msgid "The Program B backlog list could not be loaded right now."
 msgstr "Zoznam backlogu Programu B sa teraz nepodarilo načítať."
@@ -3834,11 +4038,20 @@ msgstr "Adresár univerzít sa nepodarilo načítať."
 msgid "The user list could not be loaded."
 msgstr "Zoznam používateľov sa nepodarilo načítať."
 
+msgid "The verification link could not be completed. You can try again or return to login."
+msgstr "Overovací odkaz sa nepodarilo dokončiť. Môžete to skúsiť znova alebo sa vrátiť na prihlásenie."
+
+msgid "There are no currently open calls receiving submissions."
+msgstr "Momentálne nie sú otvorené žiadne výzvy, ktoré prijímajú prihlášky."
+
 msgid "There is no data to export for the current filters."
 msgstr "Pre aktuálne filtre nie sú k dispozícii žiadne dáta na export."
 
 msgid "These items need attention and link you to the right place to continue."
 msgstr "Tieto položky si vyžadujú pozornosť a zavedú vás na správne miesto, kde môžete pokračovať."
+
+msgid "This account cannot sign in right now. Contact support if you think this is a mistake."
+msgstr "Tento účet sa momentálne nemôže prihlásiť. Ak si myslíte, že ide o chybu, kontaktujte podporu."
 
 msgid "This account must update its password before the admin session can continue."
 msgstr "Tento účet musí aktualizovať heslo pred pokračovaním administrátorskej relácie."
@@ -4084,9 +4297,6 @@ msgstr "Nepodarilo sa načítať váš profil."
 
 msgid "Unable to log in right now."
 msgstr "Momentálne sa nepodarilo prihlásiť."
-
-msgid "Unable to log in. Please try again."
-msgstr "Nepodarilo sa prihlásiť. Skúste to znova."
 
 msgid "Unable to log out right now."
 msgstr "Momentálne sa nepodarilo odhlásiť."
@@ -4344,11 +4554,17 @@ msgstr "Použite pole dôvodu, keď prechod vyžaduje dôvod."
 msgid "Use the same email address that received this invitation."
 msgstr "Použite rovnakú e-mailovú adresu, ktorá prijala túto pozvánku."
 
+msgid "Use the secure reset link from your email to update your NTI password."
+msgstr "Na aktualizáciu hesla NTI použite bezpečný odkaz zo svojho e-mailu."
+
 msgid "Use this for soft disabling. Delete only when the record is truly obsolete."
 msgstr "Použite toto na mäkkú deaktiváciu. Odstraňujte iba vtedy, keď je záznam skutočne zastaraný."
 
 msgid "Use your admin credentials to access moderation, organization reviews, and system invites."
 msgstr "Použite svoje administrátorské údaje na prístup k moderovaniu, kontrolám organizácií a systémovým pozvánkam."
+
+msgid "Use your email and password to continue."
+msgstr "Ak chcete pokračovať, použite svoj e-mail a heslo."
 
 msgid "Users"
 msgstr "Používatelia"
@@ -4375,6 +4591,9 @@ msgstr "Hodnotová ponuka"
 msgid "Verification"
 msgstr "Overenie"
 
+msgid "Verification failed"
+msgstr "Overenie zlyhalo"
+
 msgid "Verification pending"
 msgstr "Overenie čaká"
 
@@ -4387,14 +4606,29 @@ msgstr "Overovací token"
 msgid "Verification Token"
 msgstr "Overovací token"
 
+msgid "Verification token is required."
+msgstr "Overovací token je povinný."
+
 msgid "Verification token must be at least 4 characters."
 msgstr "Overovací token musí mať aspoň 4 znaky."
+
+msgid "VERIFY EMAIL"
+msgstr "OVERIŤ E-MAIL"
+
+msgid "Verify your email"
+msgstr "Overte svoj e-mail"
 
 msgid "Verify your email address before creating your organization profile."
 msgstr "Pred vytvorením profilu organizácie overte svoju e-mailovú adresu."
 
+msgid "Verify your email address to activate your account and continue with onboarding."
+msgstr "Overte svoju e-mailovú adresu, aby ste aktivovali účet a mohli pokračovať v onboardingu"
+
 msgid "View"
 msgstr "Zobraziť"
+
+msgid "View all calls"
+msgstr "Zobraziť všetky výzvy"
 
 msgid "View details"
 msgstr "Zobraziť detaily"
@@ -4450,8 +4684,8 @@ msgstr "Teraz vás odhlasujeme. Ak chcete pokračovať, znova sa prihláste."
 msgid "Website"
 msgstr "Webová stránka"
 
-msgid "Welcome back to NTI"
-msgstr "Vitajte späť v NTI"
+msgid "WELCOME BACK"
+msgstr "VITAJTE SPÄŤ"
 
 msgid "What are your main areas of interest?"
 msgstr "Aké sú vaše hlavné oblasti záujmu?"
@@ -4534,6 +4768,9 @@ msgstr "Musíte prijať podmienky."
 msgid "You survived the boss fight"
 msgstr "Zvládli ste aj finálnu výzvu"
 
+msgid "Your account does not have access to this page."
+msgstr "Váš účet nemá prístup k tejto stránke"
+
 msgid "Your account is protected"
 msgstr "Váš účet je chránený"
 
@@ -4546,17 +4783,17 @@ msgstr "Vaša administrátorská relácia vypršala."
 msgid "your email address"
 msgstr "vaša e-mailová adresa"
 
-msgid "Your email was updated to {changedEmail}. Sign in again with the new address to continue."
-msgstr "Váš e-mail bol aktualizovaný na {changedEmail}. Prihláste sa znova s novou adresou, aby ste mohli pokračovať."
+msgid "Your email address was confirmed successfully. Redirecting you to the next step."
+msgstr "Vaša e-mailová adresa bola úspešne potvrdená. Presmerujeme vás na ďalší krok"
 
-msgid "Your email was updated. Sign in again with the new address to continue."
-msgstr "Váš e-mail bol aktualizovaný. Prihláste sa znova s novou adresou, aby ste mohli pokračovať."
+msgid "Your email address was confirmed successfully. Redirecting you to your workspace."
+msgstr "Vaša e-mailová adresa bola úspešne potvrdená. Presmerujeme vás do vášho pracovného priestoru"
 
 msgid "Your invitation token is verified before account setup."
 msgstr "Váš token pozvánky je overený pred nastavením účtu."
 
 msgid "Your new email is now active. To keep your account safe, you'll need to sign in again."
-msgstr "Váš nový e-mail je teraz aktívny. Kvôli bezpečnosti účtu sa budete musieť znova prihlásiť."
+msgstr "Váš nový e-mail je teraz aktívny. Kvôli bezpečnosti účtu sa budete musieť znova prihlásiť.<<<<<<< HEAD"
 
 msgid "Your organization is linked correctly, but this dashboard will unlock only after activation is complete."
 msgstr "Vaša organizácia je prepojená správne, ale toto pracovisko sa sprístupní až po dokončení aktivácie."
@@ -4564,17 +4801,14 @@ msgstr "Vaša organizácia je prepojená správne, ale toto pracovisko sa sprís
 msgid "Your organization is still being activated. Invites, member changes, and document tools will open as soon as activation is complete."
 msgstr "Vaša organizácia sa ešte aktivuje. Pozvánky, správa členov a dokumenty budú dostupné hneď po dokončení aktivácie."
 
-msgid "Your password was updated. Sign in again with the new password to continue."
-msgstr "Vaše heslo bolo aktualizované. Prihláste sa znova s novým heslom, aby ste mohli pokračovať."
+msgid "Your password was reset successfully. You can now sign in with the new password."
+msgstr "Vaše heslo bolo úspešne obnovené. Teraz sa môžete prihlásiť s novým heslom"
 
 msgid "Your password was updated. To keep your account safe, you'll need to sign in again with the new password."
 msgstr "Vaše heslo bolo aktualizované. Kvôli bezpečnosti účtu sa budete musieť znova prihlásiť s novým heslom."
 
 msgid "Your Role (e.g., Frontend Dev)"
 msgstr "Vaša rola (napr. Frontend Dev)"
-
-msgid "Your session expired during a protected account change. Sign in again to continue."
-msgstr "Vaša relácia vypršala počas chránenej zmeny účtu. Prihláste sa znova, aby ste mohli pokračovať."
 
 msgid "Your session is no longer valid"
 msgstr "Vaša relácia už nie je platná"

@@ -168,6 +168,12 @@ msgstr "Aktivovať projekt"
 msgid "Active"
 msgstr "Aktívne"
 
+msgid "Active Calls"
+msgstr "Aktívne výzvy"
+
+msgid "Active calls unavailable"
+msgstr "Aktívne výzvy nie sú dostupné"
+
 msgid "Active project"
 msgstr "Aktívny projekt"
 
@@ -912,6 +918,9 @@ msgstr "Aktuálny stav:"
 msgid "Current Year of Study"
 msgstr "Aktuálny ročník štúdia"
 
+msgid "Currently open calls receiving submissions."
+msgstr "Aktuálne otvorené výzvy, ktoré prijímajú prihláškyю"
+
 msgid "CV"
 msgstr "Životopis"
 
@@ -944,6 +953,9 @@ msgstr "Dátum od"
 
 msgid "Date To"
 msgstr "Dátum do"
+
+msgid "Deadline"
+msgstr "Termín uzávierky"
 
 msgid "Decided"
 msgstr "Rozhodnuté"
@@ -1834,6 +1846,9 @@ msgstr "Vyzerá to výborne"
 msgid "Manage"
 msgstr "Spravovať"
 
+msgid "Manage Calls"
+msgstr "Spravovať výzvy"
+
 msgid "Manage organization access"
 msgstr "Spravovať prístup do organizácie"
 
@@ -2066,6 +2081,9 @@ msgstr "Nie"
 
 msgid "No action"
 msgstr "Žiadna akcia"
+
+msgid "No active calls"
+msgstr "Žiadne aktívne výzvy"
 
 msgid "No active Program A calls are available right now."
 msgstr "Momentálne nie sú dostupné žiadne aktívne výzvy Programu A."
@@ -2967,6 +2985,9 @@ msgstr "Skúsiť znova"
 msgid "Review"
 msgstr "Kontrola"
 
+msgid "Review active calls, deadlines, and lifecycle status."
+msgstr "Skontrolujte aktívne výzvy, termíny a stav životného cyklu."
+
 msgid "Review backlog candidates"
 msgstr "Skontrolovať kandidátov backlogu"
 
@@ -3255,8 +3276,8 @@ msgstr "Nastaviť odmenu (EUR)"
 msgid "Set the approved grant budget in EUR for this project."
 msgstr "Zadajte schválený rozpočet grantu v EUR pre tento projekt."
 
-msgid "Set up team"
-msgstr "Nastaviť tím"
+#~ msgid "Set up team"
+#~ msgstr "Nastaviť tím"
 
 msgid "Short Name"
 msgstr "Skrátený názov"
@@ -3588,6 +3609,9 @@ msgstr "Testovacia spoločnosť…"
 msgid "That was a lot of typing, but you made it! Your profile is officially sparkling clean and ready to go. Now, don't suffer alone—invite your colleagues to share the joy of filling out this form!"
 msgstr "Bolo toho veľa na vyplnenie, ale zvládli ste to! Váš profil je pripravený. A teraz v tom nemusíte byť sami — pozvite kolegov, aby sa pridali tiež."
 
+msgid "The active calls request failed, but the rest of the dashboard is still available."
+msgstr "Požiadavka na aktívne výzvy zlyhala, ale zvyšok prehľadu je stále dostupný."
+
 msgid "The admin session could not be verified. Retry once the connection is available."
 msgstr "Reláciu správcu sa nepodarilo overiť. Skúste to znova, keď bude pripojenie dostupné."
 
@@ -3674,6 +3698,9 @@ msgstr "Adresár univerzít sa nepodarilo načítať."
 
 msgid "The user list could not be loaded."
 msgstr "Zoznam používateľov sa nepodarilo načítať."
+
+msgid "There are no currently open calls receiving submissions."
+msgstr "Momentálne nie sú otvorené žiadne výzvy, ktoré prijímajú prihlášky."
 
 msgid "There is no data to export for the current filters."
 msgstr "Pre aktuálne filtre nie sú k dispozícii žiadne dáta na export."
@@ -4186,6 +4213,9 @@ msgstr "Pred vytvorením profilu organizácie overte svoju e-mailovú adresu."
 
 msgid "View"
 msgstr "Zobraziť"
+
+msgid "View all calls"
+msgstr "Zobraziť všetky výzvy"
 
 msgid "View details"
 msgstr "Zobraziť detaily"

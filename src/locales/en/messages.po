@@ -168,6 +168,12 @@ msgstr "Activate project"
 msgid "Active"
 msgstr "Active"
 
+msgid "Active Calls"
+msgstr "Active Calls"
+
+msgid "Active calls unavailable"
+msgstr "Active calls unavailable"
+
 msgid "Active project"
 msgstr "Active project"
 
@@ -912,6 +918,9 @@ msgstr "Current status:"
 msgid "Current Year of Study"
 msgstr "Current Year of Study"
 
+msgid "Currently open calls receiving submissions."
+msgstr "Currently open calls receiving submissions."
+
 msgid "CV"
 msgstr "CV"
 
@@ -944,6 +953,9 @@ msgstr "Date From"
 
 msgid "Date To"
 msgstr "Date To"
+
+msgid "Deadline"
+msgstr "Deadline"
 
 msgid "Decided"
 msgstr "Decided"
@@ -1834,6 +1846,9 @@ msgstr "Looking absolutely stellar"
 msgid "Manage"
 msgstr "Manage"
 
+msgid "Manage Calls"
+msgstr "Manage Calls"
+
 msgid "Manage organization access"
 msgstr "Manage organization access"
 
@@ -2066,6 +2081,9 @@ msgstr "No"
 
 msgid "No action"
 msgstr "No action"
+
+msgid "No active calls"
+msgstr "No active calls"
 
 msgid "No active Program A calls are available right now."
 msgstr "No active Program A calls are available right now."
@@ -2967,6 +2985,9 @@ msgstr "Retry"
 msgid "Review"
 msgstr "Review"
 
+msgid "Review active calls, deadlines, and lifecycle status."
+msgstr "Review active calls, deadlines, and lifecycle status."
+
 msgid "Review backlog candidates"
 msgstr "Review backlog candidates"
 
@@ -3255,8 +3276,8 @@ msgstr "Set reward (EUR)"
 msgid "Set the approved grant budget in EUR for this project."
 msgstr "Set the approved grant budget in EUR for this project."
 
-msgid "Set up team"
-msgstr "Set up team"
+#~ msgid "Set up team"
+#~ msgstr "Set up team"
 
 msgid "Short Name"
 msgstr "Short Name"
@@ -3588,6 +3609,9 @@ msgstr "Test Company…"
 msgid "That was a lot of typing, but you made it! Your profile is officially sparkling clean and ready to go. Now, don't suffer alone—invite your colleagues to share the joy of filling out this form!"
 msgstr "That was a lot of typing, but you made it! Your profile is officially sparkling clean and ready to go. Now, don't suffer alone—invite your colleagues to share the joy of filling out this form!"
 
+msgid "The active calls request failed, but the rest of the dashboard is still available."
+msgstr "The active calls request failed, but the rest of the dashboard is still available."
+
 msgid "The admin session could not be verified. Retry once the connection is available."
 msgstr "The admin session could not be verified. Retry once the connection is available."
 
@@ -3674,6 +3698,9 @@ msgstr "The university directory could not be loaded."
 
 msgid "The user list could not be loaded."
 msgstr "The user list could not be loaded."
+
+msgid "There are no currently open calls receiving submissions."
+msgstr "There are no currently open calls receiving submissions."
 
 msgid "There is no data to export for the current filters."
 msgstr "There is no data to export for the current filters."
@@ -4186,6 +4213,9 @@ msgstr "Verify your email address before creating your organization profile."
 
 msgid "View"
 msgstr "View"
+
+msgid "View all calls"
+msgstr "View all calls"
 
 msgid "View details"
 msgstr "View details"

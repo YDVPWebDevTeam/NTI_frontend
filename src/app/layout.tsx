@@ -5,8 +5,6 @@ import { AppProviders } from 'components/providers';
 import { activateDefaultLocale } from 'lib/i18n/runtime';
 import { getRequestLocale } from 'lib/i18n/server-locale';
 
-import { SpeedInsights } from '@vercel/speed-insights/next';
-
 import './styles/global.css';
 
 const geistSans = Geist({
@@ -73,8 +71,6 @@ export default async function RootLayout({
     >
       <body className="antialiased">
         <AppProviders>{children}</AppProviders>
-
-        <SpeedInsights />
       </body>
     </html>
   );

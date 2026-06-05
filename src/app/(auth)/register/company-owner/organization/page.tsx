@@ -70,20 +70,29 @@ export default function CreateCompanyOwnerOrganizationPage() {
       let logoUrl: string | undefined;
 
       if (values.logoFile instanceof File) {
-        const uploadedLogo = await uploadAndCompleteFile(
-          {
-            requestUploadUrl: (payload) => filesControllerRequestUploadUrl(payload),
-            uploadToPresignedUrl,
-            completeUpload: (payload) => filesControllerCompleteUpload(payload),
-          },
-          {
-            file: values.logoFile,
-            purpose: 'organization-logo',
-            entityType: 'organization',
-          },
-        );
+        try {
+          const uploadedLogo = await uploadAndCompleteFile(
+            {
+              requestUploadUrl: (payload) => filesControllerRequestUploadUrl(payload),
+              uploadToPresignedUrl,
+              completeUpload: (payload) => filesControllerCompleteUpload(payload),
+            },
+            {
+              file: values.logoFile,
+              visibility: 'PUBLIC',
+              purpose: 'organization-logo',
+              entityType: 'organization',
+            },
+          );
 
-        logoUrl = uploadedLogo.publicUrl;
+          logoUrl = uploadedLogo.publicUrl;
+        } catch (error) {
+          toast.error(
+            error instanceof Error
+              ? `${error.message} ${t`The organization will be created without a logo.`}`
+              : t`Logo upload failed. The organization will be created without a logo.`,
+          );
+        }
       }
 
       await createOrganization({

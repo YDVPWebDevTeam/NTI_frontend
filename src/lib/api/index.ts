@@ -15,6 +15,7 @@ export * from './health/health';
 export * from './index.schemas';
 export * from './invites/invites';
 export * from './organization-documents/organization-documents';
+export * from './organization-documents/organization-documents.compat';
 export * from './organizations/organizations';
 export * from './program-b-backlog/program-b-backlog';
 export * from './program-b-company-overview/program-b-company-overview';

@@ -1,5 +1,6 @@
 'use client';
 
+import { t } from '@lingui/core/macro';
 import { useState } from 'react';
 import { toast } from 'sonner';
 
@@ -93,6 +94,65 @@ function hasCompleteIdeaOverview(value: UpsertIdeaOverviewSectionDto): boolean {
   );
 }
 
+function formatApplicationStatus(status: string): string {
+  switch (status) {
+    case 'DRAFT':
+      return t`Draft`;
+
+    case 'SUBMITTED':
+      return t`Submitted`;
+
+    case 'FORMALLY_VERIFIED':
+      return t`Formally verified`;
+
+    case 'EVALUATING':
+      return t`Evaluating`;
+
+    case 'NEEDS_INFO':
+      return t`Needs info`;
+
+    case 'APPROVED':
+      return t`Approved`;
+
+    case 'ONBOARDING':
+      return t`Onboarding`;
+
+    case 'ACTIVE_PROJECT':
+      return t`Active project`;
+
+    case 'PAUSED':
+      return t`Paused`;
+
+    case 'COMPLETED':
+      return t`Completed`;
+
+    case 'REJECTED':
+      return t`Rejected`;
+
+    case 'ARCHIVED':
+      return t`Archived`;
+
+    default:
+      return status;
+  }
+}
+
+function formatNeedsInfoStatus(status: string): string {
+  switch (status) {
+    case 'OPEN':
+      return t`Open`;
+
+    case 'RESOLVED':
+      return t`Resolved`;
+
+    case 'CANCELLED':
+      return t`Cancelled`;
+
+    default:
+      return status;
+  }
+}
+
 export function RetryNotice({
   message,
   onRetry,
@@ -104,7 +164,7 @@ export function RetryNotice({
     <div className="space-y-3 rounded-2xl border border-black/10 bg-[#f7f8fa] p-4 text-sm text-neutral-700">
       <p>{message}</p>
       <Button size="sm" variant="outline" onClick={() => void onRetry()}>
-        Retry
+        {t`Retry`}
       </Button>
     </div>
   );
@@ -140,19 +200,21 @@ function ApplicationSectionEditor({
     <div className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="font-semibold text-neutral-950">{section.key}</p>
-        <p className="text-xs text-neutral-500">version {section.version}</p>
+        <p className="text-xs text-neutral-500">
+          {t`Version`} {section.version}
+        </p>
       </div>
 
       {isIdeaOverviewSection ? null : (
         <p className="mt-3 text-sm text-neutral-600">
-          This generated API currently supports editing only the idea overview section.
+          {t`This generated API currently supports editing only the idea overview section.`}
         </p>
       )}
 
       <div className="mt-3 grid gap-3 md:grid-cols-2">
         <label className="block space-y-2">
           <span className="text-xs font-medium tracking-[0.12em] text-neutral-500 uppercase">
-            Problem
+            {t`Problem`}
           </span>
           <Input
             value={ideaOverviewSection.problem}
@@ -168,7 +230,7 @@ function ApplicationSectionEditor({
 
         <label className="block space-y-2">
           <span className="text-xs font-medium tracking-[0.12em] text-neutral-500 uppercase">
-            Solution
+            {t`Solution`}
           </span>
           <Input
             value={ideaOverviewSection.solution}
@@ -184,7 +246,7 @@ function ApplicationSectionEditor({
 
         <label className="block space-y-2">
           <span className="text-xs font-medium tracking-[0.12em] text-neutral-500 uppercase">
-            Target users
+            {t`Target users`}
           </span>
           <Input
             value={ideaOverviewSection.targetUsers}
@@ -200,7 +262,7 @@ function ApplicationSectionEditor({
 
         <label className="block space-y-2">
           <span className="text-xs font-medium tracking-[0.12em] text-neutral-500 uppercase">
-            Value proposition
+            {t`Value proposition`}
           </span>
           <Input
             value={ideaOverviewSection.valueProposition}
@@ -217,7 +279,7 @@ function ApplicationSectionEditor({
 
       <div className="mt-3 flex items-center justify-between gap-3">
         <p className="text-xs text-neutral-500">
-          {historyQuery.data?.length ?? 0} historical version(s)
+          {t`${historyQuery.data?.length ?? 0} historical version(s)`}
         </p>
         <Button
           size="sm"
@@ -234,13 +296,13 @@ function ApplicationSectionEditor({
                 },
               });
               await historyQuery.refetch();
-              toast.success(`Saved ${section.key}.`);
+              toast.success(t`Saved ${section.key}.`);
             } catch (error) {
-              toast.error(error instanceof Error ? error.message : 'Unable to save this section.');
+              toast.error(error instanceof Error ? error.message : t`Unable to save this section.`);
             }
           }}
         >
-          Save section
+          {t`Save section`}
         </Button>
       </div>
     </div>
@@ -249,25 +311,28 @@ function ApplicationSectionEditor({
 
 export function OverviewSection({ application }: { application: ApplicationOverview }) {
   return (
-    <StudentSectionCard title="Overview">
+    <StudentSectionCard title={t`Overview`}>
       <div className="space-y-3 text-sm text-neutral-700">
         <p>
-          Status: <span className="font-medium text-neutral-950">{application.status}</span>
+          {t`Status`}:{' '}
+          <span className="font-medium text-neutral-950">
+            {formatApplicationStatus(application.status)}
+          </span>
         </p>
         <p>
-          Call id: <span className="font-medium text-neutral-950">{application.callId}</span>
+          {t`Call id`}: <span className="font-medium text-neutral-950">{application.callId}</span>
         </p>
         <p>
-          Team id: <span className="font-medium text-neutral-950">{application.teamId}</span>
+          {t`Team id`}: <span className="font-medium text-neutral-950">{application.teamId}</span>
         </p>
         <p>
-          Created:{' '}
+          {t`Created`}:{' '}
           <span className="font-medium text-neutral-950">
             {formatUnknownDate(application.createdAt)}
           </span>
         </p>
         <p>
-          Updated:{' '}
+          {t`Updated`}:{' '}
           <span className="font-medium text-neutral-950">
             {formatUnknownDate(application.updatedAt)}
           </span>
@@ -301,15 +366,15 @@ export function SubmissionActionsSection({
   teamErrorMessage: string;
 }) {
   return (
-    <StudentSectionCard title="Submission actions">
+    <StudentSectionCard title={t`Submission actions`}>
       <div className="space-y-3">
         <p className="text-sm text-neutral-600">
-          Lead-only actions stay disabled unless the current team lead matches the application team.
+          {t`Lead-only actions stay disabled unless the current team lead matches the application team.`}
         </p>
         {hasTeamLoadError ? <RetryNotice message={teamErrorMessage} onRetry={onRetryTeam} /> : null}
         <div className="flex flex-wrap gap-2">
           <Button size="sm" disabled={!isLead || isSubmitPending} onClick={() => void onSubmit()}>
-            Submit
+            {t`Submit`}
           </Button>
           <Button
             size="sm"
@@ -317,14 +382,14 @@ export function SubmissionActionsSection({
             disabled={!isLead || isResubmitPending}
             onClick={() => void onResubmit()}
           >
-            Resubmit
+            {t`Resubmit`}
           </Button>
         </div>
         <Textarea
           value={resubmitNote}
           onChange={(event) => setResubmitNote(event.target.value)}
           rows={4}
-          placeholder="Optional resubmission note"
+          placeholder={t`Optional resubmission note`}
         />
       </div>
     </StudentSectionCard>
@@ -341,12 +406,12 @@ export function DocumentCompletenessSection({
   getErrorMessage: (error: unknown, fallback: string) => string;
 }) {
   return (
-    <StudentSectionCard title="Document completeness">
+    <StudentSectionCard title={t`Document completeness`}>
       {completenessQuery.isError ? (
         <RetryNotice
           message={getErrorMessage(
             completenessQuery.error,
-            'Document completeness could not be loaded for this application.',
+            t`Document completeness could not be loaded for this application.`,
           )}
           onRetry={() => completenessQuery.refetch()}
         />
@@ -356,20 +421,22 @@ export function DocumentCompletenessSection({
             <RetryNotice
               message={getErrorMessage(
                 requiredDocumentsQuery.error,
-                'The required documents for this call could not be loaded.',
+                t`The required documents for this call could not be loaded.`,
               )}
               onRetry={() => requiredDocumentsQuery.refetch()}
             />
           ) : null}
           <p>
-            Complete:{' '}
+            {t`Complete`}:{' '}
             <span className="font-medium text-neutral-950">
-              {completenessQuery.data?.isComplete ? 'Yes' : 'No'}
+              {completenessQuery.data?.isComplete ? t`Yes` : t`No`}
             </span>
           </p>
-          <p>Required by call: {(requiredDocumentsQuery.data?.requiredDocuments ?? []).length}</p>
+          <p>
+            {t`Required by call`}: {(requiredDocumentsQuery.data?.requiredDocuments ?? []).length}
+          </p>
           <div>
-            <p className="font-medium text-neutral-950">Missing</p>
+            <p className="font-medium text-neutral-950">{t`Missing`}</p>
             <ul className="mt-2 space-y-1 text-sm text-neutral-600">
               {(completenessQuery.data?.missingDocuments ?? []).map((item, index: number) => (
                 <li key={`${item.documentType}-${index}`}>
@@ -392,12 +459,12 @@ export function EligibilitySignalsSection({
   getErrorMessage: (error: unknown, fallback: string) => string;
 }) {
   return (
-    <StudentSectionCard title="Eligibility signals">
+    <StudentSectionCard title={t`Eligibility signals`}>
       {eligibilityQuery.isError ? (
         <RetryNotice
           message={getErrorMessage(
             eligibilityQuery.error,
-            'Eligibility signals could not be loaded for this application.',
+            t`Eligibility signals could not be loaded for this application.`,
           )}
           onRetry={() => eligibilityQuery.refetch()}
         />
@@ -406,10 +473,10 @@ export function EligibilitySignalsSection({
           {(eligibilityQuery.data?.signals ?? []).map((signal) => (
             <div key={signal.code} className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4">
               <p className="font-semibold text-neutral-950">
-                {signal.code} · {signal.passed ? 'Passed' : 'Failed'}
+                {signal.code} · {signal.passed ? t`Passed` : t`Failed`}
               </p>
               <p className="mt-1 text-sm text-neutral-600">
-                {normalizeUnknownText(signal.reason) ?? 'No reason provided.'}
+                {normalizeUnknownText(signal.reason) ?? t`No reason provided.`}
               </p>
             </div>
           ))}
@@ -431,12 +498,12 @@ export function SectionsEditorSection({
   getErrorMessage: (error: unknown, fallback: string) => string;
 }) {
   return (
-    <StudentSectionCard title="Sections">
+    <StudentSectionCard title={t`Sections`}>
       {sectionsQuery.isError ? (
         <RetryNotice
           message={getErrorMessage(
             sectionsQuery.error,
-            'Application sections could not be loaded.',
+            t`Application sections could not be loaded.`,
           )}
           onRetry={() => sectionsQuery.refetch()}
         />
@@ -486,8 +553,8 @@ export function AttachDocumentSection({
 
   return (
     <StudentSectionCard
-      title="Attach document"
-      description="Generated file upload endpoints handle the upload-url -> PUT -> complete flow before attaching the file to the application."
+      title={t`Attach document`}
+      description={t`Generated file upload endpoints handle the upload-url -> PUT -> complete flow before attaching the file to the application.`}
     >
       <div className="grid gap-3 md:grid-cols-2">
         <select
@@ -497,21 +564,21 @@ export function AttachDocumentSection({
             setDocumentType(event.target.value as AttachApplicationDocumentDtoDocumentType)
           }
         >
-          <option value="EXECUTIVE_SUMMARY">EXECUTIVE_SUMMARY</option>
-          <option value="TECHNICAL_ARCHITECTURE">TECHNICAL_ARCHITECTURE</option>
-          <option value="ROADMAP">ROADMAP</option>
-          <option value="BUDGET">BUDGET</option>
-          <option value="RISK_ANALYSIS">RISK_ANALYSIS</option>
-          <option value="MONETIZATION_MODEL">MONETIZATION_MODEL</option>
-          <option value="CV">CV</option>
-          <option value="MOTIVATION_LETTER">MOTIVATION_LETTER</option>
-          <option value="SOLUTION_PROPOSAL">SOLUTION_PROPOSAL</option>
-          <option value="OTHER">OTHER</option>
+          <option value="EXECUTIVE_SUMMARY">{t`Executive summary`}</option>
+          <option value="TECHNICAL_ARCHITECTURE">{t`Technical architecture`}</option>
+          <option value="ROADMAP">{t`Roadmap`}</option>
+          <option value="BUDGET">{t`Budget`}</option>
+          <option value="RISK_ANALYSIS">{t`Risk analysis`}</option>
+          <option value="MONETIZATION_MODEL">{t`Monetization model`}</option>
+          <option value="CV">{t`CV`}</option>
+          <option value="MOTIVATION_LETTER">{t`Motivation letter`}</option>
+          <option value="SOLUTION_PROPOSAL">{t`Solution proposal`}</option>
+          <option value="OTHER">{t`Other`}</option>
         </select>
         <Input
           value={memberUserId}
           onChange={(event) => setMemberUserId(event.target.value)}
-          placeholder="Member user id for CV uploads"
+          placeholder={t`Member user id for CV uploads`}
         />
         <Input type="file" onChange={(event) => setDocumentFile(event.target.files?.[0] ?? null)} />
         <div className="flex items-center">
@@ -555,15 +622,15 @@ export function AttachDocumentSection({
                 setDocumentFile(null);
                 setMemberUserId('');
                 await onAttached();
-                toast.success('Document attached.');
+                toast.success(t`Document attached.`);
               } catch (error) {
                 toast.error(
-                  error instanceof Error ? error.message : 'Unable to attach the document.',
+                  error instanceof Error ? error.message : t`Unable to attach the document.`,
                 );
               }
             }}
           >
-            Upload and attach
+            {t`Upload and attach`}
           </Button>
         </div>
       </div>
@@ -591,12 +658,12 @@ export function NeedsInfoThreadSection({
   const [needsInfoReplyText, setNeedsInfoReplyText] = useState<Record<string, string>>({});
 
   return (
-    <StudentSectionCard title="Needs-info thread">
+    <StudentSectionCard title={t`Needs-info thread`}>
       {needsInfoQuery.isError ? (
         <RetryNotice
           message={getErrorMessage(
             needsInfoQuery.error,
-            'The needs-info thread could not be loaded.',
+            t`The needs-info thread could not be loaded.`,
           )}
           onRetry={() => needsInfoQuery.refetch()}
         />
@@ -604,7 +671,7 @@ export function NeedsInfoThreadSection({
         <div className="space-y-4">
           {(needsInfoQuery.data?.items ?? []).map((item) => (
             <div key={item.id} className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4">
-              <p className="font-semibold text-neutral-950">{item.status}</p>
+              <p className="font-semibold text-neutral-950">{formatNeedsInfoStatus(item.status)}</p>
               <p className="mt-1 text-sm text-neutral-700">{item.message}</p>
               <div className="mt-3 space-y-2">
                 {item.replies.map((reply) => (
@@ -623,7 +690,7 @@ export function NeedsInfoThreadSection({
                     [item.id]: event.target.value,
                   }))
                 }
-                placeholder="Reply to this needs-info item"
+                placeholder={t`Reply to this needs-info item`}
               />
               <div className="mt-3">
                 <Button
@@ -640,17 +707,17 @@ export function NeedsInfoThreadSection({
                       });
                       setNeedsInfoReplyText((current) => ({ ...current, [item.id]: '' }));
                       await needsInfoQuery.refetch();
-                      toast.success('Needs-info reply posted.');
+                      toast.success(t`Needs-info reply posted.`);
                     } catch (error) {
                       toast.error(
                         error instanceof Error
                           ? error.message
-                          : 'Unable to reply to the needs-info item.',
+                          : t`Unable to reply to the needs-info item.`,
                       );
                     }
                   }}
                 >
-                  Send reply
+                  {t`Send reply`}
                 </Button>
               </div>
             </div>

@@ -211,6 +211,9 @@ msgstr "AKTÍVNA FÁZA"
 msgid "Add a mentoring note"
 msgstr "Pridať mentorskú poznámku"
 
+msgid "Add a new delivery milestone to this project."
+msgstr "Pridajte do tohto projektu nový realizačný míľnik."
+
 msgid "Add a new university record to start a new academic branch."
 msgstr "Pridajte nový záznam univerzity na vytvorenie novej akademickej vetvy."
 
@@ -529,6 +532,9 @@ msgstr "Základné informácie o profile prihlášky"
 msgid "Bio"
 msgstr "Bio"
 
+msgid "Blocked"
+msgstr "Zablokované"
+
 msgid "Browse"
 msgstr "Prehľadávať"
 
@@ -672,6 +678,9 @@ msgstr "Uzavreté"
 
 msgid "Closed Program B projects are read-only"
 msgstr "Uzavreté projekty Programu B sú len na čítanie"
+
+msgid "Closed Program B projects are read-only."
+msgstr "Uzavreté projekty programu B sú iba na čítanie."
 
 msgid "Closes"
 msgstr "Uzatvára sa"
@@ -1159,6 +1168,9 @@ msgstr "Novák"
 #~ msgid "Don't have an account yet?"
 #~ msgstr "Ešte nemáte účet?"
 
+msgid "Done"
+msgstr "Dokončené"
+
 msgid "Download"
 msgstr "Stiahnuť"
 
@@ -1172,6 +1184,7 @@ msgid "Due"
 msgstr "Termín"
 
 #. placeholder {0}: formatUnknownDate(milestone.dueAt)
+#. placeholder {0}: formatUnknownDate(nextMilestone.dueAt)
 msgid "Due {0}"
 msgstr "Termín {0}"
 
@@ -1707,6 +1720,9 @@ msgstr "Ak prechádzate onboardingom ako vedúci tímu, vytvorte tu tím a ihne�
 msgid "immediately"
 msgstr "okamžite"
 
+msgid "In progress"
+msgstr "Prebieha"
+
 msgid "Inactive"
 msgstr "Neaktívne"
 
@@ -1959,6 +1975,9 @@ msgstr "Načítavajú sa mentori…"
 
 msgid "Loading mentorship notes..."
 msgstr "Načítavajú sa mentorské poznámky..."
+
+msgid "Loading milestones"
+msgstr "Načítavajú sa míľniky"
 
 msgid "Loading needs-info thread..."
 msgstr "Načítava sa vlákno požiadaviek na doplnenie informácií..."
@@ -2271,6 +2290,9 @@ msgstr "Ďalej"
 msgid "Next action"
 msgstr "Ďalšia akcia"
 
+msgid "Next milestone"
+msgstr "Nasledujúci míľnik"
+
 #. placeholder {0}: item.nextMilestone.title
 msgid "Next milestone: {0}"
 msgstr "Ďalší míľnik: {0}"
@@ -2430,6 +2452,9 @@ msgstr "Žiadne projekty programu B"
 
 msgid "No Program B rows match the current filters."
 msgstr "Aktuálnym filtrom nezodpovedajú žiadne riadky Programu B."
+
+msgid "No projects assigned yet"
+msgstr "Zatiaľ nemáte pridelené žiadne projekty"
 
 msgid "No projects yet"
 msgstr "Zatiaľ žiadne projekty"
@@ -2862,6 +2887,9 @@ msgstr "Osobné portfólio / webová stránka"
 msgid "Phew! You survived."
 msgstr "Uf! Zvládli ste to."
 
+msgid "Planned"
+msgstr "Plánované"
+
 #~ msgid "PLATFORM ACCESS"
 #~ msgstr "PRÍSTUP K PLATFORME"
 
@@ -3045,6 +3073,9 @@ msgstr "Projekt Programu B"
 
 msgid "Program B projects"
 msgstr "Projekty programu B"
+
+msgid "Program B projects assigned to you as a mentor will appear here."
+msgstr "Tu sa zobrazia projekty programu B, ku ktorým ste pridelený ako mentor."
 
 msgid "Program B projects currently in delivery."
 msgstr "Projekty Programu B, ktoré sa momentálne realizujú."
@@ -3375,6 +3406,9 @@ msgstr "Revízne pracovisko"
 
 msgid "Review your application details, required documents, eligibility checks, and messages from the NTI team."
 msgstr "Skontrolujte detaily svojej prihlášky, požadované dokumenty, kontroly oprávnenosti a správy od tímu NTI"
+
+msgid "Review your assigned Program B projects and their upcoming milestones."
+msgstr "Skontrolujte svoje pridelené projekty programu B a ich nadchádzajúce míľniky."
 
 msgid "Reviewer"
 msgstr "Hodnotiteľ"
@@ -4178,8 +4212,8 @@ msgstr "Tento pozývací odkaz je neúplný. Otvorte úplnú adresu URL pozvánk
 msgid "This invite link is invalid or no longer exists."
 msgstr "Tento pozývací odkaz je neplatný alebo už neexistuje."
 
-msgid "This mentor workspace is routed correctly. Project mentoring and progress views can now be added under /mentor/* without reworking auth or shell ownership."
-msgstr "Toto mentorské pracovisko je smerované správne. Zobrazenia mentorovania projektov a priebehu je teraz možné pridať pod /mentor/* bez prepracovania autentifikácie alebo vlastníctva shellu."
+#~ msgid "This mentor workspace is routed correctly. Project mentoring and progress views can now be added under /mentor/* without reworking auth or shell ownership."
+#~ msgstr "Toto mentorské pracovisko je smerované správne. Zobrazenia mentorovania projektov a priebehu je teraz možné pridať pod /mentor/* bez prepracovania autentifikácie alebo vlastníctva shellu."
 
 msgid "This organization has no invite records available right now."
 msgstr "Táto organizácia momentálne nemá dostupné žiadne záznamy o pozvánkach."
@@ -4288,6 +4322,9 @@ msgstr "Nepodarilo sa vytvoriť položku backlogu."
 
 msgid "Unable to create invitations right now."
 msgstr "Momentálne sa nepodarilo vytvoriť pozvánky."
+
+msgid "Unable to create milestone."
+msgstr "Míľnik sa nepodarilo vytvoriť."
 
 msgid "Unable to create project."
 msgstr "Nepodarilo sa vytvoriť projekt."
@@ -4562,6 +4599,9 @@ msgstr "Aktualizácia odmeny na člena"
 msgid "Update Specialization"
 msgstr "Aktualizovať špecializáciu"
 
+msgid "Update the milestone title, description, due date, or status."
+msgstr "Upravte názov, opis, termín alebo stav míľnika"
+
 msgid "Update the title, description, budget, and expected outcomes for this backlog item."
 msgstr "Aktualizujte názov, popis, rozpočet a očakávané výstupy tejto položky backlogu."
 
@@ -4813,6 +4853,9 @@ msgstr "O ďalší e-mail môžete požiadať po dokončení odpočítavania."
 msgid "You can update your password or email here. If anything extra is needed, we'll walk you through it."
 msgstr "Tu si môžete aktualizovať heslo alebo e-mail. Ak bude potrebné ešte niečo navyše, prevedieme vás tým."
 
+msgid "You do not have permission to manage milestones for this project."
+msgstr "Nemáte oprávnenie spravovať míľniky tohto projektu."
+
 msgid "You don't have a team yet. Complete your profile onboarding and create a team first."
 msgstr "Zatiaľ nemáte tím. Dokončite onboarding profilu a najprv vytvorte tím."
 
@@ -4839,6 +4882,9 @@ msgstr "Vaša administrátorská relácia vypršala."
 
 msgid "Your application needs additional information"
 msgstr "Vaša prihláška vyžaduje doplnenie informácií"
+
+msgid "Your assigned Program B projects could not be loaded right now."
+msgstr "Vaše pridelené projekty programu B sa momentálne nepodarilo načítať"
 
 msgid "Your company account is linked to an organization, but Program B company overview endpoints are only available for active organizations."
 msgstr "Váš firemný účet je prepojený s organizáciou, ale endpointy firemného prehľadu Programu B sú dostupné len pre aktívne organizácie."

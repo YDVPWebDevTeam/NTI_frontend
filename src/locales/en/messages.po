@@ -211,6 +211,9 @@ msgstr "ACTIVE STAGE"
 msgid "Add a mentoring note"
 msgstr "Add a mentoring note"
 
+msgid "Add a new delivery milestone to this project."
+msgstr "Add a new delivery milestone to this project."
+
 msgid "Add a new university record to start a new academic branch."
 msgstr "Add a new university record to start a new academic branch."
 
@@ -529,6 +532,9 @@ msgstr "Basic application profile information."
 msgid "Bio"
 msgstr "Bio"
 
+msgid "Blocked"
+msgstr "Blocked"
+
 msgid "Browse"
 msgstr "Browse"
 
@@ -672,6 +678,9 @@ msgstr "Closed"
 
 msgid "Closed Program B projects are read-only"
 msgstr "Closed Program B projects are read-only"
+
+msgid "Closed Program B projects are read-only."
+msgstr "Closed Program B projects are read-only."
 
 msgid "Closes"
 msgstr "Closes"
@@ -1159,6 +1168,9 @@ msgstr "Doe"
 #~ msgid "Don't have an account yet?"
 #~ msgstr "Don't have an account yet?"
 
+msgid "Done"
+msgstr "Done"
+
 msgid "Download"
 msgstr "Download"
 
@@ -1172,6 +1184,7 @@ msgid "Due"
 msgstr "Due"
 
 #. placeholder {0}: formatUnknownDate(milestone.dueAt)
+#. placeholder {0}: formatUnknownDate(nextMilestone.dueAt)
 msgid "Due {0}"
 msgstr "Due {0}"
 
@@ -1707,6 +1720,9 @@ msgstr "If you are onboarding as the team lead, create the team here and send th
 msgid "immediately"
 msgstr "immediately"
 
+msgid "In progress"
+msgstr "In progress"
+
 msgid "Inactive"
 msgstr "Inactive"
 
@@ -1959,6 +1975,9 @@ msgstr "Loading mentors…"
 
 msgid "Loading mentorship notes..."
 msgstr "Loading mentorship notes..."
+
+msgid "Loading milestones"
+msgstr "Loading milestones"
 
 msgid "Loading needs-info thread..."
 msgstr "Loading needs-info thread..."
@@ -2271,6 +2290,9 @@ msgstr "Next"
 msgid "Next action"
 msgstr "Next action"
 
+msgid "Next milestone"
+msgstr "Next milestone"
+
 #. placeholder {0}: item.nextMilestone.title
 msgid "Next milestone: {0}"
 msgstr "Next milestone: {0}"
@@ -2430,6 +2452,9 @@ msgstr "No Program B projects"
 
 msgid "No Program B rows match the current filters."
 msgstr "No Program B rows match the current filters."
+
+msgid "No projects assigned yet"
+msgstr "No projects assigned yet"
 
 msgid "No projects yet"
 msgstr "No projects yet"
@@ -2862,6 +2887,9 @@ msgstr "Personal Portfolio / Website"
 msgid "Phew! You survived."
 msgstr "Phew! You survived."
 
+msgid "Planned"
+msgstr "Planned"
+
 #~ msgid "PLATFORM ACCESS"
 #~ msgstr "PLATFORM ACCESS"
 
@@ -3045,6 +3073,9 @@ msgstr "Program B project"
 
 msgid "Program B projects"
 msgstr "Program B projects"
+
+msgid "Program B projects assigned to you as a mentor will appear here."
+msgstr "Program B projects assigned to you as a mentor will appear here."
 
 msgid "Program B projects currently in delivery."
 msgstr "Program B projects currently in delivery."
@@ -3375,6 +3406,9 @@ msgstr "Review workspace"
 
 msgid "Review your application details, required documents, eligibility checks, and messages from the NTI team."
 msgstr "Review your application details, required documents, eligibility checks, and messages from the NTI team."
+
+msgid "Review your assigned Program B projects and their upcoming milestones."
+msgstr "Review your assigned Program B projects and their upcoming milestones."
 
 msgid "Reviewer"
 msgstr "Reviewer"
@@ -4178,8 +4212,8 @@ msgstr "This invite link is incomplete. Open the full invite URL and try again."
 msgid "This invite link is invalid or no longer exists."
 msgstr "This invite link is invalid or no longer exists."
 
-msgid "This mentor workspace is routed correctly. Project mentoring and progress views can now be added under /mentor/* without reworking auth or shell ownership."
-msgstr "This mentor workspace is routed correctly. Project mentoring and progress views can now be added under /mentor/* without reworking auth or shell ownership."
+#~ msgid "This mentor workspace is routed correctly. Project mentoring and progress views can now be added under /mentor/* without reworking auth or shell ownership."
+#~ msgstr "This mentor workspace is routed correctly. Project mentoring and progress views can now be added under /mentor/* without reworking auth or shell ownership."
 
 msgid "This organization has no invite records available right now."
 msgstr "This organization has no invite records available right now."
@@ -4288,6 +4322,9 @@ msgstr "Unable to create backlog item."
 
 msgid "Unable to create invitations right now."
 msgstr "Unable to create invitations right now."
+
+msgid "Unable to create milestone."
+msgstr "Unable to create milestone."
 
 msgid "Unable to create project."
 msgstr "Unable to create project."
@@ -4562,6 +4599,9 @@ msgstr "Update reward per member"
 msgid "Update Specialization"
 msgstr "Update Specialization"
 
+msgid "Update the milestone title, description, due date, or status."
+msgstr "Update the milestone title, description, due date, or status."
+
 msgid "Update the title, description, budget, and expected outcomes for this backlog item."
 msgstr "Update the title, description, budget, and expected outcomes for this backlog item."
 
@@ -4813,6 +4853,9 @@ msgstr "You can request another email after the countdown finishes."
 msgid "You can update your password or email here. If anything extra is needed, we'll walk you through it."
 msgstr "You can update your password or email here. If anything extra is needed, we'll walk you through it."
 
+msgid "You do not have permission to manage milestones for this project."
+msgstr "You do not have permission to manage milestones for this project."
+
 msgid "You don't have a team yet. Complete your profile onboarding and create a team first."
 msgstr "You don't have a team yet. Complete your profile onboarding and create a team first."
 
@@ -4839,6 +4882,9 @@ msgstr "Your admin session has expired."
 
 msgid "Your application needs additional information"
 msgstr "Your application needs additional information"
+
+msgid "Your assigned Program B projects could not be loaded right now."
+msgstr "Your assigned Program B projects could not be loaded right now."
 
 msgid "Your company account is linked to an organization, but Program B company overview endpoints are only available for active organizations."
 msgstr "Your company account is linked to an organization, but Program B company overview endpoints are only available for active organizations."

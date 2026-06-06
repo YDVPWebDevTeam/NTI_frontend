@@ -39,14 +39,24 @@ export function LandingAuthActions({
   const error = meQuery.error as unknown;
 
   if (meQuery.isPending) {
-    return <>{loadingFallback}</>;
+    return (
+      <div className={`${className} pointer-events-none invisible`} aria-hidden>
+        {unauthenticatedActions.map((action, index) => (
+          <span key={`${index}:${action.href}:${action.label}`} className={action.className}>
+            {action.label}
+          </span>
+        ))}
+      </div>
+    );
   }
 
   if (meQuery.data) {
     return (
-      <Link className={authenticatedClassName} href={getDefaultRouteForRole(meQuery.data.role)}>
-        {t`Dashboard`}
-      </Link>
+      <div className={className}>
+        <Link className={authenticatedClassName} href={getDefaultRouteForRole(meQuery.data.role)}>
+          {t`Dashboard`}
+        </Link>
+      </div>
     );
   }
 
@@ -56,9 +66,9 @@ export function LandingAuthActions({
 
   return (
     <div className={className}>
-      {unauthenticatedActions.map((action) => (
+      {unauthenticatedActions.map((action, index) => (
         <Link
-          key={`${action.href}:${action.label}`}
+          key={`${index}:${action.href}:${action.label}`}
           className={action.className}
           href={action.href}
         >

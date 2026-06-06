@@ -1,4 +1,3 @@
-export { fallbackLandingPageContent } from './defaults';
 export { mapPayloadLandingPage } from './mapper';
 export { fetchLandingPageContent } from './service';
 export type {

@@ -168,7 +168,7 @@ export default function CompanyProgramBProjectDetailPage({
   const handleUpdateReward = async () => {
     const parsed = parseFloat(rewardInput.trim());
 
-    if (!rewardInput.trim() || Number.isNaN(parsed) || parsed < 0) {
+    if (!rewardInput.trim() || !Number.isFinite(parsed) || parsed < 0) {
       toast.error(t`Enter a valid non-negative number for the reward amount.`);
 
       return;

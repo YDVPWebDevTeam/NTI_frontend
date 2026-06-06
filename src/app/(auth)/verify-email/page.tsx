@@ -120,7 +120,7 @@ export default function VerifyEmailPage() {
 
   const isConfirming = status === 'confirming';
   const isSuccess = status === 'success';
-  const shouldShowManualForm = status === 'idle' || (status === 'error' && !hasTokenFromUrl);
+  const shouldShowManualForm = status === 'idle' || status === 'error';
 
   return (
     <AuthSplitShell

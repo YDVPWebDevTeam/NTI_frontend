@@ -86,9 +86,9 @@ export function mapAuthError(error: unknown): AuthFlowErrorAction {
   if (message.includes('Invalid or expired')) {
     return {
       title: t`Link expired`,
-      description: t`The link is invalid or expired. Request a new link and try again.`,
-      href: ROUTES.AUTH.FORGOT_PASSWORD,
-      actionLabel: t`Request new link`,
+      description: t`The link is invalid or expired. Please return to login and try again.`,
+      href: ROUTES.AUTH.LOGIN,
+      actionLabel: t`Back to login`,
     };
   }
 

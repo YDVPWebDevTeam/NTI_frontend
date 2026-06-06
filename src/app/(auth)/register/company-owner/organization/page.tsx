@@ -3,7 +3,7 @@
 import { t } from '@lingui/core/macro';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowRight } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
@@ -12,7 +12,9 @@ import {
   filesControllerCompleteUpload,
   filesControllerRequestUploadUrl,
   useOrganizationControllerCreate,
+  useOrganizationControllerGetMyOrganization,
 } from 'lib/api';
+import { isApiRequestError } from 'lib/api-client/openapi-runtime/client';
 import {
   uploadAndCompleteFile,
   uploadToPresignedUrl,
@@ -34,10 +36,17 @@ import {
   type CompanyOwnerOrganizationValues,
 } from './schema';
 
+const CONFLICT_STATUS = 409;
+
 export default function CreateCompanyOwnerOrganizationPage() {
   const router = useRouter();
 
   const { mutateAsync: createOrganization, isPending } = useOrganizationControllerCreate();
+  const myOrganizationQuery = useOrganizationControllerGetMyOrganization({
+    query: {
+      retry: false,
+    },
+  });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -57,6 +66,14 @@ export default function CreateCompanyOwnerOrganizationPage() {
 
   const selectedLogoFile = form.watch('logoFile');
   const isSubmitDisabled = isPending || isSubmitting;
+
+  useEffect(() => {
+    if (!myOrganizationQuery.data) {
+      return;
+    }
+
+    router.replace(ROUTES.COMPANY.ORGANIZATION);
+  }, [myOrganizationQuery.data, router]);
 
   const handleSubmit = async (values: CompanyOwnerOrganizationValues) => {
     if (isSubmitting) {
@@ -106,8 +123,18 @@ export default function CreateCompanyOwnerOrganizationPage() {
         },
       });
 
-      router.push(ROUTES.COMPANY.ROOT);
+      router.push(ROUTES.COMPANY.ORGANIZATION);
     } catch (error) {
+      if (isApiRequestError(error) && error.status === CONFLICT_STATUS) {
+        const message = t`Your company owner account is already linked to an organization. Opening your organization workspace.`;
+
+        setSubmitError(message);
+        toast.error(message);
+        router.push(ROUTES.COMPANY.ORGANIZATION);
+
+        return;
+      }
+
       const message =
         error instanceof Error
           ? error.message

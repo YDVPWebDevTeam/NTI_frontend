@@ -8,10 +8,12 @@ import { UserRole } from 'lib/api';
 import { useAuthenticatedUser } from 'lib/student-dashboard/use-authenticated-user';
 
 export default function CompanyOrganizationPage() {
-  const { isLoading, me } = useAuthenticatedUser([
-    UserRole.COMPANY_OWNER,
-    UserRole.COMPANY_EMPLOYEE,
-  ]);
+  const { isLoading, me } = useAuthenticatedUser(
+    [UserRole.COMPANY_OWNER, UserRole.COMPANY_EMPLOYEE],
+    {
+      allowPending: true,
+    },
+  );
 
   if (isLoading || !me) {
     return null;

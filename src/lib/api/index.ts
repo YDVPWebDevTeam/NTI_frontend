@@ -7,6 +7,7 @@ export * from './admin-organizations/admin-organizations';
 export * from './admin-users/admin-users';
 export * from './admin/admin';
 export * from './applications/applications';
+export * from './applications/applications.compat';
 export * from './auth/auth';
 export * from './calls/calls';
 export * from './files/files';

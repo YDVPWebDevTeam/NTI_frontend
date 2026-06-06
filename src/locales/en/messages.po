@@ -352,6 +352,9 @@ msgstr "Application sections"
 msgid "Application sections could not be loaded."
 msgstr "Application sections could not be loaded."
 
+msgid "Application submitted"
+msgstr "Application submitted"
+
 msgid "Application submitted."
 msgstr "Application submitted."
 
@@ -381,6 +384,9 @@ msgstr "Approve or reject organization onboarding requests."
 
 msgid "Approved"
 msgstr "Approved"
+
+msgid "Approved Program A projects will appear here once onboarding starts."
+msgstr "Approved Program A projects will appear here once onboarding starts."
 
 msgid "Approving..."
 msgstr "Approving..."
@@ -429,6 +435,9 @@ msgstr "Assign product owners"
 
 msgid "Assigned"
 msgstr "Assigned"
+
+msgid "Assigned mentor"
+msgstr "Assigned mentor"
 
 msgid "Assigned:"
 msgstr "Assigned:"
@@ -904,9 +913,6 @@ msgstr "Contract"
 msgid "Control Center"
 msgstr "Control Center"
 
-#~ msgid "Corporate Challenges"
-#~ msgstr "Corporate Challenges"
-
 msgid "Country"
 msgstr "Country"
 
@@ -936,6 +942,9 @@ msgstr "CREATE ACCOUNT AND JOIN TEAM"
 
 msgid "Create account from invite"
 msgstr "Create account from invite"
+
+msgid "CREATE AN ACCOUNT"
+msgstr "CREATE AN ACCOUNT"
 
 msgid "Create an employee account or sign in with your existing account to accept this organization invitation."
 msgstr "Create an employee account or sign in with your existing account to accept this organization invitation."
@@ -975,9 +984,6 @@ msgstr "Create project workspace"
 
 msgid "Create Specialization"
 msgstr "Create Specialization"
-
-msgid "CREATE STUDENT ACCOUNT"
-msgstr "CREATE STUDENT ACCOUNT"
 
 msgid "Create System Invite"
 msgstr "Create System Invite"
@@ -1047,6 +1053,9 @@ msgstr "Current budget"
 
 msgid "Current email"
 msgstr "Current email"
+
+msgid "Current lifecycle state and mentor assignment."
+msgstr "Current lifecycle state and mentor assignment."
 
 msgid "Current mentor"
 msgstr "Current mentor"
@@ -1689,12 +1698,6 @@ msgstr "Generate a direct invite for a target role."
 msgid "Generate a direct invite for any supported platform role."
 msgstr "Generate a direct invite for any supported platform role."
 
-#~ msgid "Generated file upload endpoints handle the upload-url -> PUT -> complete flow before attaching the file to the application."
-#~ msgstr "Generated file upload endpoints handle the upload-url -> PUT -> complete flow before attaching the file to the application."
-
-#~ msgid "Generated Program A detail shell with sections, document completeness, eligibility signals, needs-info thread, and lead-only submit or resubmit actions."
-#~ msgstr "Generated Program A detail shell with sections, document completeness, eligibility signals, needs-info thread, and lead-only submit or resubmit actions."
-
 msgid "Get in touch"
 msgstr "Get in touch"
 
@@ -1739,9 +1742,6 @@ msgstr ""
 "Hi, I would like to learn more about joining NTI as a mentor. Here is a bit about me:\n"
 "\n"
 ""
-
-msgid "Hidden revoked invitation cards restored."
-msgstr "Hidden revoked invitation cards restored."
 
 msgid "Hide password"
 msgstr "Hide password"
@@ -1906,11 +1906,11 @@ msgstr "Invited teammates join as company employees."
 msgid "Invites"
 msgstr "Invites"
 
-msgid "Jane Doe"
-msgstr "Jane Doe"
-
 msgid "Invites are only available after your account and organization are active."
 msgstr "Invites are only available after your account and organization are active."
+
+msgid "Jane Doe"
+msgstr "Jane Doe"
 
 msgid "Job Id"
 msgstr "Job Id"
@@ -2001,9 +2001,6 @@ msgstr "Leadership transfer is disabled when the team is locked."
 
 msgid "Leadership transferred."
 msgstr "Leadership transferred."
-
-#~ msgid "Legal"
-#~ msgstr "Legal"
 
 msgid "Level is required."
 msgstr "Level is required."
@@ -2256,9 +2253,6 @@ msgstr "Mentor:"
 msgid "Mentor: {0}"
 msgstr "Mentor: {0}"
 
-#~ msgid "Mentoring"
-#~ msgstr "Mentoring"
-
 msgid "Mentoring note added."
 msgstr "Mentoring note added."
 
@@ -2270,6 +2264,12 @@ msgstr "Mentors"
 
 msgid "Mentorship notes"
 msgstr "Mentorship notes"
+
+msgid "Mentorship notes are not available yet."
+msgstr "Mentorship notes are not available yet."
+
+msgid "Mentorship notes could not be loaded."
+msgstr "Mentorship notes could not be loaded."
 
 msgid "Message"
 msgstr "Message"
@@ -2452,6 +2452,9 @@ msgstr "No active team"
 msgid "No application rows match the current filters."
 msgstr "No application rows match the current filters."
 
+msgid "No application sections found."
+msgstr "No application sections found."
+
 msgid "No application sections were returned by the backend."
 msgstr "No application sections were returned by the backend."
 
@@ -2542,6 +2545,9 @@ msgstr "No members found"
 msgid "No mentoring notes yet."
 msgstr "No mentoring notes yet."
 
+msgid "No mentorship notes have been added yet."
+msgstr "No mentorship notes have been added yet."
+
 msgid "No mentorship notes were returned by the backend."
 msgstr "No mentorship notes were returned by the backend."
 
@@ -2602,6 +2608,9 @@ msgstr "No recommendation"
 msgid "No reviews yet."
 msgstr "No reviews yet."
 
+msgid "No section content provided."
+msgstr "No section content provided."
+
 msgid "No sector provided"
 msgstr "No sector provided"
 
@@ -2652,6 +2661,9 @@ msgstr "Northstar Labs"
 
 msgid "Not assigned"
 msgstr "Not assigned"
+
+msgid "Not assigned yet"
+msgstr "Not assigned yet"
 
 msgid "Not available"
 msgstr "Not available"
@@ -2706,6 +2718,9 @@ msgstr "of"
 
 msgid "Oldest submissions first"
 msgstr "Oldest submissions first"
+
+msgid "Onboarding"
+msgstr "Onboarding"
 
 msgid "Onboarding can only be started after the application is approved."
 msgstr "Onboarding can only be started after the application is approved."
@@ -3040,6 +3055,9 @@ msgstr "Paste your verification token if the email link did not open correctly."
 msgid "Pause project"
 msgstr "Pause project"
 
+msgid "Paused"
+msgstr "Paused"
+
 msgid "Pending"
 msgstr "Pending"
 
@@ -3233,6 +3251,9 @@ msgstr "Program A milestones"
 msgid "Program A Moderation"
 msgstr "Program A Moderation"
 
+msgid "Program A project"
+msgstr "Program A project"
+
 msgid "Program B"
 msgstr "Program B"
 
@@ -3296,6 +3317,9 @@ msgstr "Project pause is only available for active projects."
 msgid "Project preview"
 msgstr "Project preview"
 
+msgid "Project status"
+msgstr "Project status"
+
 msgid "Project Title"
 msgstr "Project Title"
 
@@ -3347,6 +3371,9 @@ msgstr "Queued exports stay here until they complete or fail."
 msgid "Quick Links"
 msgstr "Quick Links"
 
+msgid "Read-only notes shared by your mentor."
+msgstr "Read-only notes shared by your mentor."
+
 msgid "Reason (optional)"
 msgstr "Reason (optional)"
 
@@ -3355,9 +3382,6 @@ msgstr "Reassign mentor"
 
 msgid "Received"
 msgstr "Received"
-
-msgid "Recent organization-scoped Program B backlog items from the dedicated summary endpoint."
-msgstr "Recent organization-scoped Program B backlog items from the dedicated summary endpoint."
 
 msgid "Recent organizations that still need an operational decision."
 msgstr "Recent organizations that still need an operational decision."
@@ -3846,14 +3870,8 @@ msgstr "Selected University"
 msgid "Selected university values are loaded here for direct editing."
 msgstr "Selected university values are loaded here for direct editing."
 
-msgid "Send an invitation to a colleague. The invited user will join as a company employee."
-msgstr "Send an invitation to a colleague. The invited user will join as a company employee."
-
 msgid "Send another message"
 msgstr "Send another message"
-
-msgid "SEND INVITATION"
-msgstr "SEND INVITATION"
 
 msgid "Send invite"
 msgstr "Send invite"
@@ -4062,9 +4080,6 @@ msgstr "START FROM THE BEGINNING"
 msgid "Start onboarding"
 msgstr "Start onboarding"
 
-#~ msgid "Startups"
-#~ msgstr "Startups"
-
 msgid "Status"
 msgstr "Status"
 
@@ -4136,6 +4151,9 @@ msgstr "Submit review"
 
 msgid "Submitted"
 msgstr "Submitted"
+
+msgid "Submitted application content is shown read-only in project mode."
+msgstr "Submitted application content is shown read-only in project mode."
 
 msgid "Submitted applications could not be loaded right now."
 msgstr "Submitted applications could not be loaded right now."
@@ -4329,8 +4347,8 @@ msgstr "The invite could not be validated right now. Please try again later."
 msgid "The invite detail request failed for this organization."
 msgstr "The invite detail request failed for this organization."
 
-msgid "The link is invalid or expired. Request a new link and try again."
-msgstr "The link is invalid or expired. Request a new link and try again."
+msgid "The link is invalid or expired. Please return to login and try again."
+msgstr "The link is invalid or expired. Please return to login and try again."
 
 msgid "The needs-info thread could not be loaded."
 msgstr "The needs-info thread could not be loaded."
@@ -4434,9 +4452,6 @@ msgstr "This invite link is incomplete. Open the full invite URL and try again."
 msgid "This invite link is invalid or no longer exists."
 msgstr "This invite link is invalid or no longer exists."
 
-#~ msgid "This mentor workspace is routed correctly. Project mentoring and progress views can now be added under /mentor/* without reworking auth or shell ownership."
-#~ msgstr "This mentor workspace is routed correctly. Project mentoring and progress views can now be added under /mentor/* without reworking auth or shell ownership."
-
 msgid "This organization has no invite records available right now."
 msgstr "This organization has no invite records available right now."
 
@@ -4487,6 +4502,9 @@ msgstr "Total Users"
 
 msgid "Track delivery"
 msgstr "Track delivery"
+
+msgid "Track your approved application as a project with lifecycle status, mentor information, notes, and submitted sections."
+msgstr "Track your approved application as a project with lifecycle status, mentor information, notes, and submitted sections."
 
 msgid "Transfer leadership"
 msgstr "Transfer leadership"
@@ -5025,6 +5043,9 @@ msgstr "Version"
 
 msgid "View"
 msgstr "View"
+
+msgid "View all"
+msgstr "View all"
 
 msgid "View all calls"
 msgstr "View all calls"

@@ -352,6 +352,9 @@ msgstr "Sekcie prihlášky"
 msgid "Application sections could not be loaded."
 msgstr "Sekcie prihlášky sa nepodarilo načítať."
 
+msgid "Application submitted"
+msgstr "Prihláška odoslaná"
+
 msgid "Application submitted."
 msgstr "Prihláška bola odoslaná."
 
@@ -381,6 +384,9 @@ msgstr "Schváľte alebo zamietnite požiadavky na onboarding organizácie."
 
 msgid "Approved"
 msgstr "Schválené"
+
+msgid "Approved Program A projects will appear here once onboarding starts."
+msgstr "Schválené projekty Programu A sa tu zobrazia po začiatku onboardingu."
 
 msgid "Approving..."
 msgstr "Schvaľuje sa..."
@@ -430,14 +436,17 @@ msgstr "Priradiť product ownerov"
 msgid "Assigned"
 msgstr "Priradený"
 
+msgid "Assigned mentor"
+msgstr "Pridelený mentor"
+
 msgid "Assigned:"
 msgstr "Priradený:"
 
 msgid "At least 10 characters"
-msgstr ""
+msgstr "Aspoň 10 znakov"
 
 msgid "At least 2 characters"
-msgstr ""
+msgstr "Aspoň 2 znaky"
 
 msgid "At least one milestone is overdue and still needs status movement."
 msgstr "Aspoň jeden míľnik je po termíne a stále potrebuje posun stavu."
@@ -904,9 +913,6 @@ msgstr "Zmluva"
 msgid "Control Center"
 msgstr "Riadiace centrum"
 
-#~ msgid "Corporate Challenges"
-#~ msgstr "Firemné výzvy"
-
 msgid "Country"
 msgstr "Krajina"
 
@@ -936,6 +942,9 @@ msgstr "VYTVORIŤ ÚČET A PRIPOJIŤ SA K TÍMU"
 
 msgid "Create account from invite"
 msgstr "Vytvoriť účet z pozvánky"
+
+msgid "CREATE AN ACCOUNT"
+msgstr "VYTVORIŤ ÚČET"
 
 msgid "Create an employee account or sign in with your existing account to accept this organization invitation."
 msgstr "Vytvorte zamestnanecký účet alebo sa prihláste pomocou existujúceho účtu a prijmite túto pozvánku do organizácie."
@@ -975,9 +984,6 @@ msgstr "Vytvoriť projektové pracovisko"
 
 msgid "Create Specialization"
 msgstr "Vytvoriť špecializáciu"
-
-msgid "CREATE STUDENT ACCOUNT"
-msgstr "VYTVORIŤ ŠTUDENTSKÝ ÚČET"
 
 msgid "Create System Invite"
 msgstr "Vytvoriť systémovú pozvánku"
@@ -1047,6 +1053,9 @@ msgstr "Aktuálny rozpočet"
 
 msgid "Current email"
 msgstr "Aktuálny e-mail"
+
+msgid "Current lifecycle state and mentor assignment."
+msgstr "Aktuálny stav životného cyklu a pridelenie mentora."
 
 msgid "Current mentor"
 msgstr "Aktuálny mentor"
@@ -1387,7 +1396,7 @@ msgid "Enter a strong password"
 msgstr "Zadajte silné heslo"
 
 msgid "Enter a valid email"
-msgstr ""
+msgstr "Zadajte platný e-mail"
 
 msgid "Enter a valid non-negative number for the grant budget."
 msgstr "Zadajte platné kladné číslo pre rozpočet grantu."
@@ -1689,12 +1698,6 @@ msgstr "Vytvorte priamu pozvánku pre cieľovú rolu."
 msgid "Generate a direct invite for any supported platform role."
 msgstr "Vytvorte priamu pozvánku pre ľubovoľnú podporovanú rolu platformy."
 
-#~ msgid "Generated file upload endpoints handle the upload-url -> PUT -> complete flow before attaching the file to the application."
-#~ msgstr "Vygenerované endpointy pre nahrávanie súborov spracujú postup upload-url -> PUT -> dokončenie pred priložením súboru k prihláške."
-
-#~ msgid "Generated Program A detail shell with sections, document completeness, eligibility signals, needs-info thread, and lead-only submit or resubmit actions."
-#~ msgstr "Vygenerovaná detailná stránka Programu A so sekciami, kompletnosťou dokumentov, signálmi oprávnenosti, vláknom na doplnenie informácií a akciami odoslania alebo opätovného odoslania iba pre lídra tímu"
-
 msgid "Get in touch"
 msgstr "Spojte sa s nami"
 
@@ -1736,9 +1739,6 @@ msgid ""
 "\n"
 ""
 msgstr ""
-
-msgid "Hidden revoked invitation cards restored."
-msgstr "Skryté karty zrušených pozvánok boli obnovené."
 
 msgid "Hide password"
 msgstr "Skryť heslo"
@@ -1903,11 +1903,11 @@ msgstr "Pozvaní kolegovia sa pripoja ako zamestnanci spoločnosti."
 msgid "Invites"
 msgstr "Pozvania"
 
-msgid "Jane Doe"
-msgstr ""
-
 msgid "Invites are only available after your account and organization are active."
 msgstr "Pozvánky budú dostupné až po aktivácii vášho účtu a organizácie."
+
+msgid "Jane Doe"
+msgstr "Jana Nováková"
 
 msgid "Job Id"
 msgstr "ID úlohy"
@@ -1998,9 +1998,6 @@ msgstr "Prenos vedenia je vypnutý, keď je tím uzamknutý."
 
 msgid "Leadership transferred."
 msgstr "Vedenie bolo prenesené."
-
-#~ msgid "Legal"
-#~ msgstr "Právne informácie"
 
 msgid "Level is required."
 msgstr "Úroveň je povinná."
@@ -2253,9 +2250,6 @@ msgstr "Mentor/-ka:"
 msgid "Mentor: {0}"
 msgstr "Mentor/-ka: {0}"
 
-#~ msgid "Mentoring"
-#~ msgstr "Mentorovanie"
-
 msgid "Mentoring note added."
 msgstr "Mentorská poznámka bola pridaná."
 
@@ -2267,6 +2261,12 @@ msgstr "Mentori"
 
 msgid "Mentorship notes"
 msgstr "Mentorské poznámky"
+
+msgid "Mentorship notes are not available yet."
+msgstr "Mentorské poznámky zatiaľ nie sú k dispozícii."
+
+msgid "Mentorship notes could not be loaded."
+msgstr "Nepodarilo sa načítať mentorské poznámky."
 
 msgid "Message"
 msgstr "Správa"
@@ -2449,6 +2449,9 @@ msgstr "Žiadny aktívny tím"
 msgid "No application rows match the current filters."
 msgstr "Aktuálnym filtrom nezodpovedajú žiadne riadky prihlášok."
 
+msgid "No application sections found."
+msgstr "Nenašli sa žiadne sekcie prihlášky."
+
 msgid "No application sections were returned by the backend."
 msgstr "Backend nevrátil žiadne sekcie prihlášky."
 
@@ -2539,6 +2542,9 @@ msgstr "Nenašli sa žiadni členovia"
 msgid "No mentoring notes yet."
 msgstr "Zatiaľ žiadne mentorské poznámky."
 
+msgid "No mentorship notes have been added yet."
+msgstr "Zatiaľ neboli pridané žiadne mentorské poznámky."
+
 msgid "No mentorship notes were returned by the backend."
 msgstr "Backend nevrátil žiadne mentorské poznámky."
 
@@ -2599,6 +2605,9 @@ msgstr "Bez odporúčania"
 msgid "No reviews yet."
 msgstr "Zatiaľ žiadne hodnotenia."
 
+msgid "No section content provided."
+msgstr "Obsah sekcie nebol poskytnutý."
+
 msgid "No sector provided"
 msgstr "Neuvádza sa žiadne odvetvie"
 
@@ -2649,6 +2658,9 @@ msgstr "Northstar Labs SK"
 
 msgid "Not assigned"
 msgstr "Nepriradené"
+
+msgid "Not assigned yet"
+msgstr "Zatiaľ nepridelené"
 
 msgid "Not available"
 msgstr "Nedostupné"
@@ -2703,6 +2715,9 @@ msgstr "z"
 
 msgid "Oldest submissions first"
 msgstr "Najstaršie odoslania ako prvé"
+
+msgid "Onboarding"
+msgstr "Onboarding"
 
 msgid "Onboarding can only be started after the application is approved."
 msgstr "Onboarding je možné spustiť iba po schválení prihlášky."
@@ -3037,6 +3052,9 @@ msgstr "Vložte overovací token, ak sa e-mailový odkaz neotvoril správne."
 msgid "Pause project"
 msgstr "Pozastaviť projekt"
 
+msgid "Paused"
+msgstr "Pozastavené"
+
 msgid "Pending"
 msgstr "Čaká"
 
@@ -3230,6 +3248,9 @@ msgstr "Míľniky Programu A"
 msgid "Program A Moderation"
 msgstr "Moderovanie Programu A"
 
+msgid "Program A project"
+msgstr "Projekt Programu A"
+
 msgid "Program B"
 msgstr "Program B"
 
@@ -3293,6 +3314,9 @@ msgstr "Pozastavenie projektu je dostupné iba pre aktívne projekty."
 msgid "Project preview"
 msgstr "Náhľad projektu"
 
+msgid "Project status"
+msgstr "Stav projektu"
+
 msgid "Project Title"
 msgstr "Názov projektu"
 
@@ -3344,6 +3368,9 @@ msgstr "Zaradené exporty zostanú tu, kým sa nedokončia alebo nezlyhajú."
 msgid "Quick Links"
 msgstr "Rýchle odkazy"
 
+msgid "Read-only notes shared by your mentor."
+msgstr "Poznámky iba na čítanie zdieľané vaším mentorom."
+
 msgid "Reason (optional)"
 msgstr "Dôvod (voliteľné)"
 
@@ -3352,9 +3379,6 @@ msgstr "Zmeniť mentora"
 
 msgid "Received"
 msgstr "Prijaté"
-
-msgid "Recent organization-scoped Program B backlog items from the dedicated summary endpoint."
-msgstr "Nedávne položky backlogu Programu B v rozsahu organizácie z vyhradeného summary endpointu."
 
 msgid "Recent organizations that still need an operational decision."
 msgstr "Nedávne organizácie, ktoré stále potrebujú operačné rozhodnutie."
@@ -3843,14 +3867,8 @@ msgstr "Vybraná univerzita"
 msgid "Selected university values are loaded here for direct editing."
 msgstr "Hodnoty vybranej univerzity sú načítané tu pre priamu úpravu."
 
-msgid "Send an invitation to a colleague. The invited user will join as a company employee."
-msgstr "Odošlite pozvánku kolegovi. Pozvaný používateľ sa pripojí ako zamestnanec spoločnosti."
-
 msgid "Send another message"
 msgstr "Odoslať ďalšiu správu"
-
-msgid "SEND INVITATION"
-msgstr "ODOSLAŤ POZVÁNKU"
 
 msgid "Send invite"
 msgstr "Odoslať pozvánku"
@@ -4059,9 +4077,6 @@ msgstr "ZAČAŤ OD ZAČIATKU"
 msgid "Start onboarding"
 msgstr "Spustiť onboarding"
 
-#~ msgid "Startups"
-#~ msgstr "Startupy"
-
 msgid "Status"
 msgstr "Stav"
 
@@ -4133,6 +4148,9 @@ msgstr "Odoslať hodnotenie"
 
 msgid "Submitted"
 msgstr "Odoslané"
+
+msgid "Submitted application content is shown read-only in project mode."
+msgstr "Odoslaný obsah prihlášky sa v režime projektu zobrazuje iba na čítanie."
 
 msgid "Submitted applications could not be loaded right now."
 msgstr "Odoslané prihlášky sa momentálne nepodarilo načítať."
@@ -4326,8 +4344,8 @@ msgstr "Pozvánku sa momentálne nepodarilo overiť. Skúste to prosím neskôr.
 msgid "The invite detail request failed for this organization."
 msgstr "Požiadavka na detail pozvánky pre túto organizáciu zlyhala."
 
-msgid "The link is invalid or expired. Request a new link and try again."
-msgstr "Odkaz je neplatný alebo jeho platnosť vypršala. Požiadajte o nový odkaz a skúste to znova."
+msgid "The link is invalid or expired. Please return to login and try again."
+msgstr "Odkaz je neplatný alebo jeho platnosť vypršala. Vráťte sa na prihlásenie a skúste to znova."
 
 msgid "The needs-info thread could not be loaded."
 msgstr "Vlákno so žiadosťou o doplnenie informácií sa nepodarilo načítať."
@@ -4369,7 +4387,7 @@ msgid "The specialization will be created under the selected faculty."
 msgstr "Špecializácia bude vytvorená pod vybranou fakultou."
 
 msgid "The submissions list could not be loaded."
-msgstr ""
+msgstr "Nepodarilo sa načítať zoznam odoslaní."
 
 msgid "The summary counts are unavailable right now, but the dedicated backlog and project sections can still load independently."
 msgstr "Súhrnné počty teraz nie sú dostupné, ale samostatné sekcie backlogu a projektov sa môžu načítať nezávisle."
@@ -4431,9 +4449,6 @@ msgstr "Tento pozývací odkaz je neúplný. Otvorte úplnú adresu URL pozvánk
 msgid "This invite link is invalid or no longer exists."
 msgstr "Tento pozývací odkaz je neplatný alebo už neexistuje."
 
-#~ msgid "This mentor workspace is routed correctly. Project mentoring and progress views can now be added under /mentor/* without reworking auth or shell ownership."
-#~ msgstr "Toto mentorské pracovisko je smerované správne. Zobrazenia mentorovania projektov a priebehu je teraz možné pridať pod /mentor/* bez prepracovania autentifikácie alebo vlastníctva shellu."
-
 msgid "This organization has no invite records available right now."
 msgstr "Táto organizácia momentálne nemá dostupné žiadne záznamy o pozvánkach."
 
@@ -4484,6 +4499,9 @@ msgstr "Celkový počet používateľov"
 
 msgid "Track delivery"
 msgstr "Sledovať realizáciu"
+
+msgid "Track your approved application as a project with lifecycle status, mentor information, notes, and submitted sections."
+msgstr "Sledujte svoju schválenú prihlášku ako projekt so stavom životného cyklu, informáciami o mentorovi, poznámkami a odoslanými sekciami."
 
 msgid "Transfer leadership"
 msgstr "Preniesť vedenie"
@@ -5022,6 +5040,9 @@ msgstr "Verzia"
 
 msgid "View"
 msgstr "Zobraziť"
+
+msgid "View all"
+msgstr "Zobraziť všetko"
 
 msgid "View all calls"
 msgstr "Zobraziť všetky výzvy"

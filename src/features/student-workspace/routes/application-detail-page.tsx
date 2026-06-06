@@ -5,6 +5,7 @@ import { use, useState } from 'react';
 import { toast } from 'sonner';
 
 import {
+  useApplicationsControllerListMentorshipNotes,
   useApplicationsControllerAttachDocument,
   useApplicationsControllerFindById,
   useApplicationsControllerGetDocumentCompleteness,
@@ -39,6 +40,10 @@ import {
   SubmissionActionsSection,
 } from 'features/student-workspace/routes/application-detail-sections';
 
+import { ProgramAProjectView } from 'features/student-workspace/routes/program-a-project-view';
+
+import { isProgramAProjectStatus } from 'features/student-workspace/lib/program-a-project';
+
 const FORBIDDEN_STATUS = 403;
 
 function getErrorMessage(error: unknown, fallbackMessage: string) {
@@ -69,21 +74,37 @@ export function StudentApplicationDetailPage({ params }: { params: Promise<{ id:
     team.id === applicationQuery.data.teamId &&
     team.leaderId === me.id,
   );
+  const applicationStatus = applicationQuery.data?.status;
+  const isProjectView = isProgramAProjectStatus(applicationStatus);
+  const shouldLoadEditableApplicationData = Boolean(applicationStatus) && !isProjectView;
+
   const completenessQuery = useApplicationsControllerGetDocumentCompleteness(id, {
-    query: { enabled: true },
+    query: { enabled: shouldLoadEditableApplicationData },
   });
+
   const eligibilityQuery = useApplicationsControllerGetEligibilitySignals(id, {
-    query: { enabled: true },
+    query: { enabled: shouldLoadEditableApplicationData },
   });
+
   const needsInfoQuery = useApplicationsControllerGetNeedsInfoThread(id, {
-    query: { enabled: true },
+    query: { enabled: shouldLoadEditableApplicationData },
   });
+
   const sectionsQuery = useApplicationsControllerListSections(id, {
-    query: { enabled: true },
+    query: { enabled: Boolean(applicationStatus) },
   });
+
+  const mentorshipNotesQuery = useApplicationsControllerListMentorshipNotes(id, {
+    query: { enabled: isProjectView },
+  });
+
   const requiredDocumentsQuery = useCallsDocumentsControllerGetRequiredDocuments(
     applicationQuery.data?.callId ?? '',
-    { query: { enabled: Boolean(applicationQuery.data?.callId) } },
+    {
+      query: {
+        enabled: Boolean(applicationQuery.data?.callId) && shouldLoadEditableApplicationData,
+      },
+    },
   );
 
   const requestUploadUrl = useFilesControllerRequestUploadUrl();
@@ -145,6 +166,16 @@ export function StudentApplicationDetailPage({ params }: { params: Promise<{ id:
 
   if (!application) {
     return null;
+  }
+  if (isProgramAProjectStatus(application.status)) {
+    return (
+      <ProgramAProjectView
+        application={application}
+        mentorshipNotesQuery={mentorshipNotesQuery}
+        sectionsQuery={sectionsQuery}
+        getErrorMessage={getErrorMessage}
+      />
+    );
   }
 
   const canSubmitApplication = isLead && application.status === 'DRAFT';

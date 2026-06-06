@@ -10,8 +10,8 @@ import {
   ApplicationsControllerListActivePublicCallsType,
   type StudentApplicationSummaryDto,
   useApplicationsControllerCreateDraft,
-  useApplicationsControllerListActivePublicCalls,
   useApplicationsControllerListSubmittedForCurrentTeam,
+  useApplicationsControllerListActivePublicCalls,
   useGetMyStudentProfile,
   useProgramBBacklogControllerListPublished,
   useProgramBProjectsControllerListMy,
@@ -27,6 +27,7 @@ import {
   StudentDashboardShell,
   TeamLoadErrorState,
 } from 'features/student-workspace/routes/dashboard-sections';
+import { isProgramAProjectStatus } from 'features/student-workspace/lib/program-a-project';
 import {
   StudentKeyValueList,
   StudentSectionCard,
@@ -251,6 +252,10 @@ export default function StudentDashboardPage() {
   const projectPreview = (projectsQuery.data ?? []).slice(0, PROGRAM_B_PROJECT_PREVIEW_LIMIT);
   const activeCalls = callsQuery.data?.data ?? [];
   const submittedApplications = applicationsQuery.data ?? [];
+  const programAProjectApplications = submittedApplications.filter(
+    (application) =>
+      application.call.type === 'PROGRAM_A' && isProgramAProjectStatus(application.status),
+  );
 
   let teamAccessLabel = t`No team`;
   let teamLockLabel: string | null = null;
@@ -311,6 +316,7 @@ export default function StudentDashboardPage() {
           handleCreateDraft={handleCreateDraft}
           isLead={isLead}
           isLocked={isLocked}
+          projectApplications={programAProjectApplications}
           team={team}
         />
         <ProgramBSection backlogPreview={backlogPreview} projectPreview={projectPreview} />

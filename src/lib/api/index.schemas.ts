@@ -2850,6 +2850,47 @@ export interface StudentApplicationSummaryDto {
   call: StudentApplicationCallSummaryDto;
 }
 
+export interface ProgramAMentoredTeamMemberDto {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+
+export type ProgramAMentoredApplicationDtoStatus = typeof ProgramAMentoredApplicationDtoStatus[keyof typeof ProgramAMentoredApplicationDtoStatus];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ProgramAMentoredApplicationDtoStatus = {
+  DRAFT: 'DRAFT',
+  SUBMITTED: 'SUBMITTED',
+  FORMALLY_VERIFIED: 'FORMALLY_VERIFIED',
+  EVALUATING: 'EVALUATING',
+  NEEDS_INFO: 'NEEDS_INFO',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  ONBOARDING: 'ONBOARDING',
+  ACTIVE_PROJECT: 'ACTIVE_PROJECT',
+  PAUSED: 'PAUSED',
+  COMPLETED: 'COMPLETED',
+  ARCHIVED: 'ARCHIVED',
+} as const;
+
+export interface ProgramAMentoredApplicationDto {
+  id: string;
+  status: ProgramAMentoredApplicationDtoStatus;
+  lifecycleStage?: string;
+  teamId: string;
+  teamName: string;
+  teamMembers: ProgramAMentoredTeamMemberDto[];
+  callId: string;
+  callTitle: string;
+  mentorUserId: string;
+  assignedAt?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export type AttachApplicationDocumentDtoDocumentType = typeof AttachApplicationDocumentDtoDocumentType[keyof typeof AttachApplicationDocumentDtoDocumentType];
 
 
@@ -3866,6 +3907,53 @@ export interface ExportJobStatusDto {
   errorMessage?: string;
   downloadUrl?: string;
   downloadUrlExpiresAt?: string;
+}
+
+export interface CreateContactSubmissionDto {
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  /** Machine-readable intent key used to pre-filter submissions (e.g. "mentor"). */
+  topic?: string;
+}
+
+export type ContactSubmissionDtoTopic = { [key: string]: unknown };
+
+export type ContactSubmissionDtoStatus = typeof ContactSubmissionDtoStatus[keyof typeof ContactSubmissionDtoStatus];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ContactSubmissionDtoStatus = {
+  NEW: 'NEW',
+  REVIEWED: 'REVIEWED',
+  RESOLVED: 'RESOLVED',
+} as const;
+
+export interface ContactSubmissionDto {
+  id: string;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  topic?: ContactSubmissionDtoTopic;
+  status: ContactSubmissionDtoStatus;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type UpdateContactStatusDtoStatus = typeof UpdateContactStatusDtoStatus[keyof typeof UpdateContactStatusDtoStatus];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const UpdateContactStatusDtoStatus = {
+  NEW: 'NEW',
+  REVIEWED: 'REVIEWED',
+  RESOLVED: 'RESOLVED',
+} as const;
+
+export interface UpdateContactStatusDto {
+  status: UpdateContactStatusDtoStatus;
 }
 
 export type AppControllerGetHealth1200 = {

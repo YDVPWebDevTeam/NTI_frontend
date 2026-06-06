@@ -14,6 +14,7 @@ import {
   CompanyDashboardStatus,
   CompanyStatusBadge,
 } from 'components/company-dashboard/program-b-company-dashboard-primitives';
+import { ProgramAMentorProjectsList } from 'features/mentor-program-a/components';
 import { ROUTES } from 'lib/constants';
 import {
   formatUnknownDate,
@@ -160,11 +161,35 @@ export default function MentorDashboardPage() {
         <h1 className="text-2xl font-semibold text-[#10213d]">{t`Mentor dashboard`}</h1>
 
         <p className="mt-2 text-sm text-[#60718d]">
-          {t`Review your assigned Program B projects and their upcoming milestones.`}
+          {t`Review your assigned Program A applications, Program B projects, and upcoming milestones.`}
         </p>
       </section>
 
-      {projectsContent}
+      <section className="space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h2 className="text-lg font-semibold text-[#10213d]">{t`Program A projects`}</h2>
+          <Link
+            href={ROUTES.MENTOR.PROGRAM_A_PROJECTS}
+            className="text-sm font-medium text-[#1e58d5]"
+          >
+            {t`View all`}
+          </Link>
+        </div>
+        <ProgramAMentorProjectsList compact />
+      </section>
+
+      <section className="space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <h2 className="text-lg font-semibold text-[#10213d]">{t`Program B projects`}</h2>
+          <Link
+            href={ROUTES.MENTOR.PROGRAM_B_PROJECTS}
+            className="text-sm font-medium text-[#1e58d5]"
+          >
+            {t`View all`}
+          </Link>
+        </div>
+        {projectsContent}
+      </section>
     </div>
   );
 }

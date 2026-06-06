@@ -41,8 +41,8 @@ export function LandingAuthActions({
   if (meQuery.isPending) {
     return (
       <div className={`${className} pointer-events-none invisible`} aria-hidden>
-        {unauthenticatedActions.map((action) => (
-          <span key={`${action.href}:${action.label}`} className={action.className}>
+        {unauthenticatedActions.map((action, index) => (
+          <span key={`${index}:${action.href}:${action.label}`} className={action.className}>
             {action.label}
           </span>
         ))}
@@ -52,9 +52,11 @@ export function LandingAuthActions({
 
   if (meQuery.data) {
     return (
-      <Link className={authenticatedClassName} href={getDefaultRouteForRole(meQuery.data.role)}>
-        {t`Dashboard`}
-      </Link>
+      <div className={className}>
+        <Link className={authenticatedClassName} href={getDefaultRouteForRole(meQuery.data.role)}>
+          {t`Dashboard`}
+        </Link>
+      </div>
     );
   }
 
@@ -64,9 +66,9 @@ export function LandingAuthActions({
 
   return (
     <div className={className}>
-      {unauthenticatedActions.map((action) => (
+      {unauthenticatedActions.map((action, index) => (
         <Link
-          key={`${action.href}:${action.label}`}
+          key={`${index}:${action.href}:${action.label}`}
           className={action.className}
           href={action.href}
         >

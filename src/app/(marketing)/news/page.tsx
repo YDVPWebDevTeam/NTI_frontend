@@ -173,7 +173,7 @@ export default async function NewsPage() {
           <div className="bg-primary-fixed-dim/25 animate-blob absolute -top-24 -right-16 h-96 w-96 rounded-full blur-3xl" />
         </div>
         <div className="relative z-10 mx-auto max-w-7xl px-6">
-          <Reveal className="max-w-3xl">
+          <Reveal className="mx-auto flex max-w-3xl flex-col items-center text-center">
             <span className="border-tertiary/30 bg-tertiary-fixed/60 text-on-tertiary-fixed mb-5 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-bold tracking-widest uppercase">
               <Newspaper className="h-3.5 w-3.5" />
               {copy.eyebrow}
@@ -181,7 +181,7 @@ export default async function NewsPage() {
             <h1 className="font-headline text-on-surface text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
               {copy.heading}
             </h1>
-            <p className="text-on-surface-variant mt-5 text-lg leading-relaxed">
+            <p className="text-on-surface-variant mx-auto mt-5 max-w-2xl text-lg leading-relaxed">
               {copy.subheading}
             </p>
           </Reveal>

@@ -32,17 +32,12 @@ export type LandingPageContent = {
   };
   finalCTA: {
     description: string;
-    primaryCTA: CmsLink;
-    secondaryCTA: CmsLink;
     title: string;
   };
   hero: {
     description: string;
     eyebrow: string;
     heroImage: CmsImage;
-    learnMoreCTA: CmsLink;
-    primaryCTA: CmsLink;
-    secondaryCTA: CmsLink;
     titleHighlight: string;
     titlePrefix: string;
     titleSuffix: string;
@@ -68,7 +63,6 @@ export type LandingPageContent = {
     items: Array<{
       accent: ProgramAccent;
       bulletItems: string[];
-      cta: CmsLink;
       description: string;
       icon: IconKey;
       title: string;
@@ -79,11 +73,6 @@ export type LandingPageContent = {
 export type PayloadMedia = {
   alt?: string | null;
   url?: string | null;
-};
-
-export type PayloadLocalizedLink = {
-  href?: string | null;
-  label?: string | null;
 };
 
 export type PayloadLandingPage = {
@@ -108,17 +97,12 @@ export type PayloadLandingPage = {
   } | null;
   finalCTA?: {
     description?: string | null;
-    primaryCTA?: PayloadLocalizedLink | null;
-    secondaryCTA?: PayloadLocalizedLink | null;
     title?: string | null;
   } | null;
   hero?: {
     description?: string | null;
     eyebrow?: string | null;
     heroImage?: PayloadMedia | null;
-    learnMoreCTA?: PayloadLocalizedLink | null;
-    primaryCTA?: PayloadLocalizedLink | null;
-    secondaryCTA?: PayloadLocalizedLink | null;
     titleHighlight?: string | null;
     titlePrefix?: string | null;
     titleSuffix?: string | null;
@@ -146,7 +130,6 @@ export type PayloadLandingPage = {
       bulletItems?: Array<{
         label?: string | null;
       }> | null;
-      cta?: PayloadLocalizedLink | null;
       description?: string | null;
       icon?: IconKey | null;
       title?: string | null;

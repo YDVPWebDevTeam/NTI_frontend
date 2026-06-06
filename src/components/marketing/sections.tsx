@@ -97,18 +97,31 @@ export function MarketingHero({
         <div className="bg-tertiary-fixed-dim/15 animate-blob absolute top-40 -left-24 h-80 w-80 rounded-full blur-3xl [animation-delay:-6s]" />
       </div>
       <div className="relative z-10 mx-auto max-w-7xl px-6">
-        <div className={cn('grid items-center gap-12', image ? 'lg:grid-cols-12' : 'lg:max-w-3xl')}>
-          <Reveal className={image ? 'lg:col-span-7' : ''}>
+        <div
+          className={cn(
+            'grid items-center gap-12',
+            image ? 'lg:grid-cols-12' : 'mx-auto max-w-3xl text-center',
+          )}
+        >
+          <Reveal className={image ? 'lg:col-span-7' : 'flex flex-col items-center'}>
             <span className="border-tertiary/30 bg-tertiary-fixed/60 text-on-tertiary-fixed mb-5 inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-bold tracking-widest uppercase">
               {eyebrow}
             </span>
             <h1 className="font-headline text-on-surface text-4xl leading-[1.08] font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
               {title}
             </h1>
-            <p className="text-on-surface-variant mt-6 max-w-2xl text-lg leading-relaxed md:text-xl">
+            <p
+              className={cn(
+                'text-on-surface-variant mt-6 max-w-2xl text-lg leading-relaxed md:text-xl',
+                image ? '' : 'mx-auto',
+              )}
+            >
               {description}
             </p>
-            <ActionButtons actions={actions} className="mt-8" />
+            <ActionButtons
+              actions={actions}
+              className={cn('mt-8', image ? '' : 'justify-center')}
+            />
           </Reveal>
           {image ? (
             <Reveal className="lg:col-span-5" delay={150}>

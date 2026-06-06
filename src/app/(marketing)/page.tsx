@@ -18,6 +18,7 @@ import { LandingAuthActions } from 'components/layout';
 import { fetchLandingPageContent, type LandingPageContent } from 'lib/cms/landing-page';
 import { fetchLatestNewsArticle } from 'lib/cms/news';
 import { getRequestLocale } from 'lib/i18n/server-locale';
+import { landingStatic } from 'lib/marketing/static-content';
 
 /** Per-item delay (ms) for staggered scroll-reveal animations. */
 const STAGGER_MS = 120;
@@ -109,6 +110,8 @@ export default async function HomePage() {
 
   // Repeat the logos enough to overflow the viewport, then render the group
   // twice so the -50% translate produces a seamless, gapless loop.
+  const cta = landingStatic[locale];
+
   const marqueeGroup = Array.from({ length: MARQUEE_REPEAT }).flatMap(
     () => content.ecosystem.partnerLogos,
   );
@@ -151,22 +154,22 @@ export default async function HomePage() {
                   {
                     className:
                       'primary-gradient group inline-flex items-center justify-center gap-2 w-full rounded-xl px-8 py-4 text-center font-bold text-white shadow-lg shadow-primary/25 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/30 sm:w-auto',
-                    href: content.hero.primaryCTA.href,
-                    label: content.hero.primaryCTA.label,
+                    href: cta.heroPrimary.href,
+                    label: cta.heroPrimary.label,
                   },
                   {
                     className:
                       'bg-surface-container-highest text-primary hover:bg-surface-container-high w-full rounded-xl px-8 py-4 text-center font-bold ring-1 ring-primary/10 transition-all hover:-translate-y-0.5 sm:w-auto',
-                    href: content.hero.secondaryCTA.href,
-                    label: content.hero.secondaryCTA.label,
+                    href: cta.heroSecondary.href,
+                    label: cta.heroSecondary.label,
                   },
                 ]}
               />
               <Link
                 className="text-primary group inline-flex items-center gap-2 font-bold"
-                href={content.hero.learnMoreCTA.href}
+                href={cta.heroLearnMore.href}
               >
-                {content.hero.learnMoreCTA.label}
+                {cta.heroLearnMore.label}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </Reveal>
@@ -293,10 +296,10 @@ export default async function HomePage() {
                         ))}
                       </ul>
                       <Link
-                        href={program.cta.href}
+                        href={cta.programCtas[index].href}
                         className={`flex w-full items-center justify-center gap-2 rounded-xl border-2 py-4 text-center font-bold transition-all ${accent.button}`}
                       >
-                        {program.cta.label}
+                        {cta.programCtas[index].label}
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </Link>
                     </div>
@@ -479,14 +482,14 @@ export default async function HomePage() {
                     {
                       className:
                         'text-primary w-full rounded-xl bg-white px-10 py-5 text-center text-sm font-black tracking-wider uppercase shadow-xl transition-all hover:-translate-y-1 sm:w-auto',
-                      href: content.finalCTA.primaryCTA.href,
-                      label: content.finalCTA.primaryCTA.label,
+                      href: cta.finalPrimary.href,
+                      label: cta.finalPrimary.label,
                     },
                     {
                       className:
                         'bg-tertiary-fixed-dim text-on-tertiary-fixed w-full rounded-xl px-10 py-5 text-center text-sm font-black tracking-wider uppercase shadow-xl transition-all hover:-translate-y-1 sm:w-auto',
-                      href: content.finalCTA.secondaryCTA.href,
-                      label: content.finalCTA.secondaryCTA.label,
+                      href: cta.finalSecondary.href,
+                      label: cta.finalSecondary.label,
                     },
                   ]}
                 />

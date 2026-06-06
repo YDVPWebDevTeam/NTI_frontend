@@ -42,6 +42,17 @@ export type ProgramView = {
   cta: { title: string; description: string; actions: MarketingAction[] };
 };
 
+/**
+ * Split a tab label like `"Program A · Rozbeh startupu"` into a bold lead
+ * (`"Program A"`) and a lighter subtitle (`"Rozbeh startupu"`) so the toggle
+ * reads as two tidy tiers instead of one long, awkwardly-wrapping line.
+ */
+function splitTabLabel(label: string): [string, string] {
+  const [lead, ...rest] = label.split('·');
+
+  return [lead.trim(), rest.join('·').trim()];
+}
+
 function ProgramBody({ program }: { program: ProgramView }) {
   return (
     <>
@@ -157,18 +168,19 @@ export function ProgramsExplorer({
             <div
               role="tablist"
               aria-label={heading.title}
-              className="bg-surface-container-high ring-outline-variant/30 relative mx-auto mt-10 grid w-full max-w-md grid-cols-2 gap-1 rounded-2xl p-1.5 shadow-sm ring-1"
+              className="bg-surface-container-high ring-outline-variant/40 relative mx-auto mt-10 grid w-full max-w-xl grid-cols-2 gap-1.5 rounded-[1.25rem] p-1.5 shadow-sm ring-1"
             >
               {/* sliding highlight */}
               <span
                 aria-hidden
-                className="primary-gradient shadow-primary/25 absolute inset-y-1.5 left-1.5 w-[calc(50%-0.375rem)] rounded-xl shadow-lg transition-transform duration-300 ease-out motion-reduce:transition-none"
+                className="primary-gradient shadow-primary/30 absolute inset-y-1.5 left-1.5 w-[calc(50%-0.375rem)] rounded-2xl shadow-lg transition-transform duration-300 ease-out motion-reduce:transition-none"
                 style={{
                   transform: active === programs[1].key ? 'translateX(100%)' : 'translateX(0)',
                 }}
               />
               {programs.map((program, index) => {
                 const selected = program.key === active;
+                const [primaryLabel, secondaryLabel] = splitTabLabel(program.tabLabel);
 
                 return (
                   <button
@@ -185,11 +197,21 @@ export function ProgramsExplorer({
                     onClick={() => selectProgram(program.key)}
                     onKeyDown={(event) => onTabKeyDown(event, index)}
                     className={cn(
-                      'focus-visible:ring-primary relative z-10 rounded-xl px-5 py-3 text-sm font-bold tracking-tight transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-offset-0',
+                      'focus-visible:ring-primary relative z-10 flex flex-col items-center justify-center gap-0.5 rounded-2xl px-4 py-3 leading-tight tracking-tight transition-colors duration-200 outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent',
                       selected ? 'text-white' : 'text-on-surface-variant hover:text-on-surface',
                     )}
                   >
-                    {program.tabLabel}
+                    <span className="text-sm font-bold">{primaryLabel}</span>
+                    {secondaryLabel ? (
+                      <span
+                        className={cn(
+                          'text-xs font-medium transition-colors duration-200',
+                          selected ? 'text-white/80' : 'text-on-surface-variant/65',
+                        )}
+                      >
+                        {secondaryLabel}
+                      </span>
+                    ) : null}
                   </button>
                 );
               })}

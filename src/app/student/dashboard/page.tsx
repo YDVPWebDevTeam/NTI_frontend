@@ -1,27 +1,36 @@
 'use client';
 
 import { t } from '@lingui/core/macro';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
 import { toast } from 'sonner';
 
 import {
   ApplicationsControllerListActivePublicCallsType,
+  type StudentApplicationSummaryDto,
   useApplicationsControllerCreateDraft,
   useApplicationsControllerListActivePublicCalls,
+  useApplicationsControllerListSubmittedForCurrentTeam,
   useGetMyStudentProfile,
   useProgramBBacklogControllerListPublished,
   useProgramBProjectsControllerListMy,
   useTeamControllerFindCurrentForUser,
 } from 'lib/api';
+import { Button } from 'components/shadcn';
+import { ProgramAStatusBadge } from 'features/admin-program-a/components/program-a-status-badge';
 import {
   FoundationSection,
   NextStepsSection,
   ProgramASection,
   ProgramBSection,
-  TeamLoadErrorState,
   StudentDashboardShell,
+  TeamLoadErrorState,
 } from 'features/student-workspace/routes/dashboard-sections';
+import {
+  StudentKeyValueList,
+  StudentSectionCard,
+} from 'components/student-dashboard/page-shell-primitives';
 import { ROUTES } from 'lib/constants';
 import {
   saveDraftRegistryEntry,
@@ -33,17 +42,146 @@ import { useStudentWorkspaceUser } from 'lib/student-dashboard/student-workspace
 const PROGRAM_B_PROJECT_PREVIEW_LIMIT = 3;
 const PROGRAM_B_BACKLOG_PREVIEW_LIMIT = 3;
 
+function MyApplicationsSection({
+  applications,
+  isLoading,
+  isError,
+  onRetry,
+}: {
+  applications: StudentApplicationSummaryDto[];
+  isLoading: boolean;
+  isError: boolean;
+  onRetry: () => void;
+}) {
+  const needsInfoApplication = applications.find(
+    (application) => application.status === 'NEEDS_INFO',
+  );
+
+  const renderApplicationsContent = () => {
+    if (isLoading) {
+      return (
+        <p className="text-sm leading-7 text-[#58667d]">
+          {t`Loading your submitted applications...`}
+        </p>
+      );
+    }
+
+    if (isError) {
+      return (
+        <div className="space-y-3 rounded-[1.5rem] bg-[#f8faff] p-5">
+          <p className="text-sm leading-7 text-[#58667d]">
+            {t`Submitted applications could not be loaded right now.`}
+          </p>
+          <Button size="sm" variant="outline" onClick={onRetry}>
+            {t`Retry`}
+          </Button>
+        </div>
+      );
+    }
+
+    if (applications.length === 0) {
+      return (
+        <div className="rounded-[1.5rem] bg-[#f8faff] p-5">
+          <p className="text-sm leading-7 text-[#58667d]">{t`No submitted applications yet.`}</p>
+        </div>
+      );
+    }
+
+    return (
+      <div className="space-y-4">
+        {applications.map((application) => (
+          <div
+            key={application.id}
+            className="rounded-[1.5rem] border border-[#dce5fb] bg-[linear-gradient(180deg,#ffffff_0%,#f8faff_100%)] p-5"
+          >
+            <div className="flex flex-wrap items-start justify-between gap-3">
+              <div className="min-w-0 flex-1">
+                <p className="font-semibold text-[#122039]">{application.call.title}</p>
+
+                <div className="mt-3">
+                  <StudentKeyValueList
+                    items={[
+                      {
+                        label: t`Submitted`,
+                        value: application.submittedAt
+                          ? formatUnknownDate(application.submittedAt)
+                          : t`Not submitted`,
+                      },
+                      {
+                        label: t`Updated`,
+                        value: formatUnknownDate(application.updatedAt),
+                      },
+                    ]}
+                  />
+                </div>
+              </div>
+
+              <ProgramAStatusBadge status={application.status} />
+            </div>
+
+            <div className="mt-4">
+              <Button asChild size="sm" variant="outline">
+                <Link href={ROUTES.STUDENT.studentApplication(application.id)}>
+                  {t`View details`}
+                </Link>
+              </Button>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+  return (
+    <div className="space-y-4">
+      {needsInfoApplication ? (
+        <div className="rounded-[1.75rem] border border-amber-200 bg-amber-50 p-5 shadow-[0_14px_36px_rgba(19,27,46,0.05)]">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p className="text-sm font-semibold tracking-[0.16em] text-amber-700 uppercase">
+                {t`Action required`}
+              </p>
+              <h2 className="mt-2 text-xl font-semibold text-[#101a2e]">
+                {t`Your application needs additional information`}
+              </h2>
+              <p className="mt-2 text-sm leading-6 text-amber-800">
+                {t`Open the application detail and reply to the needs-info request.`}
+              </p>
+            </div>
+
+            <Button asChild size="sm">
+              <Link href={ROUTES.STUDENT.studentApplication(needsInfoApplication.id)}>
+                {t`Open application`}
+              </Link>
+            </Button>
+          </div>
+        </div>
+      ) : null}
+
+      <StudentSectionCard
+        title={t`My Applications`}
+        description={t`Submitted Program A applications for your current team.`}
+      >
+        {renderApplicationsContent()}
+      </StudentSectionCard>
+    </div>
+  );
+}
+
 export default function StudentDashboardPage() {
   const router = useRouter();
   const me = useStudentWorkspaceUser();
+
   const profileQuery = useGetMyStudentProfile({
     query: { enabled: true },
   });
+
   const teamQuery = useTeamControllerFindCurrentForUser({
     query: {
       retry: false,
     },
   });
+
   const backlogQuery = useProgramBBacklogControllerListPublished(
     {
       limit: PROGRAM_B_BACKLOG_PREVIEW_LIMIT,
@@ -55,9 +193,11 @@ export default function StudentDashboardPage() {
       query: { enabled: true },
     },
   );
+
   const projectsQuery = useProgramBProjectsControllerListMy({
     query: { enabled: true },
   });
+
   const callsQuery = useApplicationsControllerListActivePublicCalls(
     {
       limit: 4,
@@ -70,6 +210,14 @@ export default function StudentDashboardPage() {
       query: { enabled: true },
     },
   );
+
+  const applicationsQuery = useApplicationsControllerListSubmittedForCurrentTeam({
+    query: {
+      enabled: true,
+      retry: false,
+    },
+  });
+
   const createDraft = useApplicationsControllerCreateDraft();
   const draftRegistryEntries = useDraftRegistryStore((state) => state.entries);
 
@@ -78,6 +226,7 @@ export default function StudentDashboardPage() {
   const team = hasNoTeam ? null : (teamQuery.data ?? null);
   const isLead = Boolean(team && team.leaderId === me.id);
   const isLocked = Boolean(team?.lockedAt);
+
   const draftEntries = useMemo(() => {
     const entries = Object.values(draftRegistryEntries);
 
@@ -87,6 +236,7 @@ export default function StudentDashboardPage() {
 
     return entries.filter((entry) => entry.teamId === team.id);
   }, [draftRegistryEntries, team?.id]);
+
   const draftRegistryMap = useMemo(
     () => new Map(draftEntries.map((entry) => [entry.callId, entry])),
     [draftEntries],
@@ -100,6 +250,8 @@ export default function StudentDashboardPage() {
   const backlogPreview = backlogQuery.data?.data ?? [];
   const projectPreview = (projectsQuery.data ?? []).slice(0, PROGRAM_B_PROJECT_PREVIEW_LIMIT);
   const activeCalls = callsQuery.data?.data ?? [];
+  const submittedApplications = applicationsQuery.data ?? [];
+
   let teamAccessLabel = t`No team`;
   let teamLockLabel: string | null = null;
 
@@ -142,6 +294,13 @@ export default function StudentDashboardPage() {
         />
         <NextStepsSection />
       </div>
+
+      <MyApplicationsSection
+        applications={submittedApplications}
+        isError={applicationsQuery.isError}
+        isLoading={applicationsQuery.isLoading}
+        onRetry={() => void applicationsQuery.refetch()}
+      />
 
       <div className="grid gap-6 xl:grid-cols-2">
         <ProgramASection

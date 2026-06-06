@@ -256,6 +256,9 @@ msgstr "Add Skill"
 msgid "Add your CV, skills, and supporting professional details."
 msgstr "Add your CV, skills, and supporting professional details."
 
+msgid "Add your evaluation"
+msgstr "Add your evaluation"
+
 msgid "Additional submitted section data."
 msgstr "Additional submitted section data."
 
@@ -291,6 +294,9 @@ msgstr "Administrative Access"
 
 msgid "All"
 msgstr "All"
+
+msgid "All calls"
+msgstr "All calls"
 
 msgid "All programs"
 msgstr "All programs"
@@ -343,11 +349,17 @@ msgstr "Application sections could not be loaded."
 msgid "Application submitted."
 msgstr "Application submitted."
 
+msgid "Application summary"
+msgstr "Application summary"
+
 msgid "Application withdrawn."
 msgstr "Application withdrawn."
 
 msgid "Applications"
 msgstr "Applications"
+
+msgid "Applications currently in evaluation. Open an application to score its criteria and record your recommendation."
+msgstr "Applications currently in evaluation. Open an application to score its criteria and record your recommendation."
 
 msgid "Applications In Scope"
 msgstr "Applications In Scope"
@@ -1238,11 +1250,17 @@ msgstr "Edit Faculty"
 msgid "Edit milestone"
 msgstr "Edit milestone"
 
+msgid "Edit my evaluation"
+msgstr "Edit my evaluation"
+
 msgid "Edit Specialization"
 msgstr "Edit Specialization"
 
 msgid "Edit University"
 msgstr "Edit University"
+
+msgid "Edit your evaluation"
+msgstr "Edit your evaluation"
 
 msgid "Education details, academic verification, and declaration."
 msgstr "Education details, academic verification, and declaration."
@@ -1397,6 +1415,9 @@ msgstr "Enterprise Data Analytics"
 msgid "Entry point for Program B stakeholders. Manage technical challenges, oversee precision metrics, and interface directly with emerging talent pools through the Engine portal."
 msgstr "Entry point for Program B stakeholders. Manage technical challenges, oversee precision metrics, and interface directly with emerging talent pools through the Engine portal."
 
+msgid "Evaluated"
+msgstr "Evaluated"
+
 msgid "Evaluating"
 msgstr "Evaluating"
 
@@ -1405,6 +1426,9 @@ msgstr "Evaluation can only be created after formal verification or during evalu
 
 msgid "Evaluation can only be started after formal verification."
 msgstr "Evaluation can only be started after formal verification."
+
+msgid "Evaluation can only be submitted after formal verification or during evaluation."
+msgstr "Evaluation can only be submitted after formal verification or during evaluation."
 
 msgid "Evaluation queue and review flows"
 msgstr "Evaluation queue and review flows"
@@ -1941,6 +1965,9 @@ msgstr "Loading application detail..."
 msgid "Loading application sections..."
 msgstr "Loading application sections..."
 
+msgid "Loading applications to review..."
+msgstr "Loading applications to review..."
+
 msgid "Loading backlog item"
 msgstr "Loading backlog item"
 
@@ -1955,6 +1982,9 @@ msgstr "Loading dataset..."
 
 msgid "Loading documents…"
 msgstr "Loading documents…"
+
+msgid "Loading eligibility signals..."
+msgstr "Loading eligibility signals..."
 
 msgid "Loading evaluations..."
 msgstr "Loading evaluations..."
@@ -2285,6 +2315,9 @@ msgstr "New Password"
 msgid "New to NTI?"
 msgstr "New to NTI?"
 
+msgid "Newest submissions first"
+msgstr "Newest submissions first"
+
 msgid "News"
 msgstr "News"
 
@@ -2334,6 +2367,9 @@ msgstr "No application sections were returned by the backend."
 msgid "No applications found."
 msgstr "No applications found."
 
+msgid "No applications to review"
+msgstr "No applications to review"
+
 msgid "No assigned projects"
 msgstr "No assigned projects"
 
@@ -2379,6 +2415,11 @@ msgstr "No documents uploaded yet."
 msgid "No due date"
 msgstr "No due date"
 
+msgid "No eligibility signals were returned by the backend."
+msgstr "No eligibility signals were returned by the backend."
+
+msgid "No employee invitations yet. Send the first invitation using the form on the left."
+msgstr "No employee invitations yet. Send the first invitation using the form on the left."
 msgid "No evaluations were returned by the backend."
 msgstr "No evaluations were returned by the backend."
 
@@ -2535,6 +2576,9 @@ msgstr "Not specified"
 msgid "Not submitted"
 msgstr "Not submitted"
 
+msgid "Not yet evaluated"
+msgstr "Not yet evaluated"
+
 msgid "Note cannot be empty."
 msgstr "Note cannot be empty."
 
@@ -2565,6 +2609,11 @@ msgstr "Number of transferred subjects"
 msgid "of"
 msgstr "of"
 
+msgid "Oldest submissions first"
+msgstr "Oldest submissions first"
+
+#~ msgid "Onboarding"
+#~ msgstr "Onboarding"
 msgid "Onboarding can only be started after the application is approved."
 msgstr "Onboarding can only be started after the application is approved."
 
@@ -2786,6 +2835,9 @@ msgstr "Organizations waiting for review or already rejected."
 
 msgid "Other"
 msgstr "Other"
+
+msgid "Other reviewers' evaluations"
+msgstr "Other reviewers' evaluations"
 
 msgid "Output"
 msgstr "Output"
@@ -3397,8 +3449,8 @@ msgstr "Review backlog candidates"
 msgid "Review candidate teams"
 msgstr "Review candidate teams"
 
-msgid "Review dashboard"
-msgstr "Review dashboard"
+#~ msgid "Review dashboard"
+#~ msgstr "Review dashboard"
 
 msgid "Review metadata, evaluate the application, request information, assign a mentor, and manage Program A delivery milestones."
 msgstr "Review metadata, evaluate the application, request information, assign a mentor, and manage Program A delivery milestones."
@@ -3408,6 +3460,9 @@ msgstr "Review Organizations"
 
 msgid "Review Program A applications, move them through moderation, assign mentors, and track delivery milestones."
 msgstr "Review Program A applications, move them through moderation, assign mentors, and track delivery milestones."
+
+msgid "Review queue"
+msgstr "Review queue"
 
 msgid "Review Queue"
 msgstr "Review Queue"
@@ -3426,6 +3481,9 @@ msgstr "Review workspace"
 
 msgid "Review your application details, required documents, eligibility checks, and messages from the NTI team."
 msgstr "Review your application details, required documents, eligibility checks, and messages from the NTI team."
+
+msgid "Reviewer"
+msgstr "Reviewer"
 
 msgid "Reviews & notes"
 msgstr "Reviews & notes"
@@ -3514,6 +3572,9 @@ msgstr "Saving..."
 
 msgid "Saving…"
 msgstr "Saving…"
+
+msgid "Score each criterion from 0 to 100, choose a recommendation, and optionally add a comment."
+msgstr "Score each criterion from 0 to 100, choose a recommendation, and optionally add a comment."
 
 msgid "Search"
 msgstr "Search"
@@ -3733,6 +3794,9 @@ msgstr "Show password"
 
 msgid "Showcase your best projects and tell us about yourself."
 msgstr "Showcase your best projects and tell us about yourself."
+
+msgid "Showing applications in the evaluation stage."
+msgstr "Showing applications in the evaluation stage."
 
 msgid "Showing Program A moderation rows."
 msgstr "Showing Program A moderation rows."
@@ -4178,6 +4242,9 @@ msgstr "The user list could not be loaded."
 msgid "The verification link could not be completed. You can try again or return to login."
 msgstr "The verification link could not be completed. You can try again or return to login."
 
+msgid "There are currently no applications in the evaluation stage."
+msgstr "There are currently no applications in the evaluation stage."
+
 msgid "There are no currently open calls receiving submissions."
 msgstr "There are no currently open calls receiving submissions."
 
@@ -4229,8 +4296,8 @@ msgstr "This organization has no invite records available right now."
 msgid "This project is closed and now read-only."
 msgstr "This project is closed and now read-only."
 
-msgid "This review workspace is routed correctly. Program A review queues and detail routes can now be added under /review/* without reworking auth or layout structure."
-msgstr "This review workspace is routed correctly. Program A review queues and detail routes can now be added under /review/* without reworking auth or layout structure."
+#~ msgid "This review workspace is routed correctly. Program A review queues and detail routes can now be added under /review/* without reworking auth or layout structure."
+#~ msgstr "This review workspace is routed correctly. Program A review queues and detail routes can now be added under /review/* without reworking auth or layout structure."
 
 msgid "This section is unavailable right now."
 msgstr "This section is unavailable right now."
@@ -4389,6 +4456,9 @@ msgstr "Unable to load application"
 
 msgid "Unable to load application detail from the backend."
 msgstr "Unable to load application detail from the backend."
+
+msgid "Unable to load applications from the backend."
+msgstr "Unable to load applications from the backend."
 
 msgid "Unable to load backlog preview"
 msgstr "Unable to load backlog preview"
@@ -4608,6 +4678,9 @@ msgstr "University updated."
 
 msgid "Unknown call"
 msgstr "Unknown call"
+
+msgid "Unknown signal"
+msgstr "Unknown signal"
 
 msgid "Unknown team"
 msgstr "Unknown team"
@@ -4959,6 +5032,14 @@ msgstr "Your email address was confirmed successfully. Redirecting you to the ne
 msgid "Your email address was confirmed successfully. Redirecting you to your workspace."
 msgstr "Your email address was confirmed successfully. Redirecting you to your workspace."
 
+#~ msgid "Your email was updated to {changedEmail}. Sign in again with the new address to continue."
+#~ msgstr "Your email was updated to {changedEmail}. Sign in again with the new address to continue."
+
+#~ msgid "Your email was updated. Sign in again with the new address to continue."
+#~ msgstr "Your email was updated. Sign in again with the new address to continue."
+
+msgid "Your evaluation"
+msgstr "Your evaluation"
 msgid "Your invitation token is verified before account setup."
 msgstr "Your invitation token is verified before account setup."
 

@@ -1608,8 +1608,8 @@ msgstr "Súbor"
 msgid "Filter by call"
 msgstr "Filtrovať podľa výzvy"
 
-msgid "Filter calls by program type"
-msgstr "Filtrovať výzvy podľa typu programu"
+#~ msgid "Filter calls by program type"
+#~ msgstr "Filtrovať výzvy podľa typu programu"
 
 msgid "Filter faculties on this page"
 msgstr "Filtrovať fakulty na tejto stránke"
@@ -2716,8 +2716,8 @@ msgstr "NTI administrátor"
 msgid "NTI final acceptance recorded."
 msgstr "Finálna akceptácia NTI bola zaznamenaná."
 
-msgid "NTI Programs"
-msgstr "Programy NTI"
+#~ msgid "NTI Programs"
+#~ msgstr "Programy NTI"
 
 msgid "NTI student workspace. Separate flows for profile completion, team coordination, and program work."
 msgstr "Študentské pracovisko NTI. Samostatné toky pre dokončenie profilu, koordináciu tímu a programovú prácu."

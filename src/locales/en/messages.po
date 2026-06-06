@@ -1608,8 +1608,8 @@ msgstr "File"
 msgid "Filter by call"
 msgstr "Filter by call"
 
-msgid "Filter calls by program type"
-msgstr "Filter calls by program type"
+#~ msgid "Filter calls by program type"
+#~ msgstr "Filter calls by program type"
 
 msgid "Filter faculties on this page"
 msgstr "Filter faculties on this page"
@@ -2716,8 +2716,8 @@ msgstr "NTI Admin"
 msgid "NTI final acceptance recorded."
 msgstr "NTI final acceptance recorded."
 
-msgid "NTI Programs"
-msgstr "NTI Programs"
+#~ msgid "NTI Programs"
+#~ msgstr "NTI Programs"
 
 msgid "NTI student workspace. Separate flows for profile completion, team coordination, and program work."
 msgstr "NTI student workspace. Separate flows for profile completion, team coordination, and program work."

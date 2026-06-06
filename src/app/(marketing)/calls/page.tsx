@@ -18,7 +18,6 @@ const ACTIVE_CALLS_LIMIT = 12;
 type CallsPageProps = {
   searchParams: Promise<{
     page?: string | string[];
-    type?: string | string[];
   }>;
 };
 
@@ -40,17 +39,6 @@ export async function generateMetadata(): Promise<Metadata> {
       msg`Explore active program calls, review important dates, and prepare your application before the deadline.`,
     ),
   };
-}
-
-function getFilterClassName(isActive: boolean): string {
-  const baseClassName =
-    'inline-flex min-h-11 items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2';
-
-  if (isActive) {
-    return `${baseClassName} bg-slate-950 text-white hover:bg-slate-800`;
-  }
-
-  return `${baseClassName} border border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-50`;
 }
 
 function getPaginationClassName(isDisabled: boolean): string {
@@ -75,51 +63,26 @@ function parsePage(value: string | string[] | undefined): number {
   return parsedValue;
 }
 
-function getSelectedType(
-  value: string | string[] | undefined,
-): ApplicationsControllerListActivePublicCallsType | undefined {
-  const rawValue = Array.isArray(value) ? value[0] : value;
-
-  if (
-    rawValue === ApplicationsControllerListActivePublicCallsType.PROGRAM_A ||
-    rawValue === ApplicationsControllerListActivePublicCallsType.PROGRAM_B
-  ) {
-    return rawValue;
+function getCallsPageHref(page: number): string {
+  if (page <= 1) {
+    return ROUTES.CALLS;
   }
 
-  return undefined;
+  const searchParams = new URLSearchParams({
+    page: String(page),
+  });
+
+  return `${ROUTES.CALLS}?${searchParams.toString()}`;
 }
 
-function getCallsPageHref(
-  page: number,
-  type?: ApplicationsControllerListActivePublicCallsType,
-): string {
-  const searchParams = new URLSearchParams();
-
-  if (page > 1) {
-    searchParams.set('page', String(page));
-  }
-
-  if (type) {
-    searchParams.set('type', type);
-  }
-
-  const queryString = searchParams.toString();
-
-  return queryString ? `${ROUTES.CALLS}?${queryString}` : ROUTES.CALLS;
-}
-
-async function getActiveCalls(
-  page: number,
-  type?: ApplicationsControllerListActivePublicCallsType,
-): Promise<ActiveCallsState> {
+async function getActiveCalls(page: number): Promise<ActiveCallsState> {
   try {
     const response = await applicationsControllerListActivePublicCalls({
       page,
       limit: ACTIVE_CALLS_LIMIT,
       sort: 'closesAt',
       order: 'asc',
-      type,
+      type: ApplicationsControllerListActivePublicCallsType.PROGRAM_B,
     });
 
     return {
@@ -160,30 +123,29 @@ export default async function CallsPage({ searchParams }: CallsPageProps) {
   const [locale, params] = await Promise.all([getRequestLocale(), searchParams]);
 
   const currentPage = parsePage(params.page);
-  const selectedType = getSelectedType(params.type);
 
   const [serverI18n, activeCallsState] = await Promise.all([
     getServerI18n(locale),
-    getActiveCalls(currentPage, selectedType),
+    getActiveCalls(currentPage),
   ]);
 
   const { calls, hasError, totalPages } = activeCallsState;
 
   if (!hasError && totalPages > 0 && currentPage > totalPages) {
-    redirect(getCallsPageHref(totalPages, selectedType));
+    redirect(getCallsPageHref(totalPages));
   }
 
-  const previousPageHref = getCallsPageHref(Math.max(1, currentPage - 1), selectedType);
+  const previousPageHref = getCallsPageHref(Math.max(1, currentPage - 1));
 
-  const nextPageHref = getCallsPageHref(Math.min(totalPages, currentPage + 1), selectedType);
+  const nextPageHref = getCallsPageHref(Math.min(totalPages, currentPage + 1));
 
   return (
     <main className="min-h-screen flex-1 pt-20">
       <section className="px-4 py-14 sm:px-6 sm:py-16 lg:px-12 lg:py-20">
         <div className="mx-auto w-full max-w-7xl">
           <div className="max-w-3xl">
-            <p className="text-sm font-semibold tracking-[0.16em] text-blue-700 uppercase">
-              {serverI18n._(msg`NTI Programs`)}
+            <p className="text-sm font-semibold tracking-[0.16em] text-cyan-700 uppercase">
+              {serverI18n._(msg`Program B`)}
             </p>
 
             <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
@@ -197,51 +159,7 @@ export default async function CallsPage({ searchParams }: CallsPageProps) {
             </p>
           </div>
 
-          <nav
-            className="mt-9 flex flex-wrap gap-3"
-            aria-label={serverI18n._(msg`Filter calls by program type`)}
-          >
-            <Link
-              href={ROUTES.CALLS}
-              scroll={false}
-              className={getFilterClassName(selectedType === undefined)}
-              aria-current={selectedType === undefined ? 'page' : undefined}
-            >
-              {serverI18n._(msg`All programs`)}
-            </Link>
-
-            <Link
-              href={`${ROUTES.CALLS}?type=${ApplicationsControllerListActivePublicCallsType.PROGRAM_A}`}
-              scroll={false}
-              className={getFilterClassName(
-                selectedType === ApplicationsControllerListActivePublicCallsType.PROGRAM_A,
-              )}
-              aria-current={
-                selectedType === ApplicationsControllerListActivePublicCallsType.PROGRAM_A
-                  ? 'page'
-                  : undefined
-              }
-            >
-              {serverI18n._(msg`Program A`)}
-            </Link>
-
-            <Link
-              href={`${ROUTES.CALLS}?type=${ApplicationsControllerListActivePublicCallsType.PROGRAM_B}`}
-              scroll={false}
-              className={getFilterClassName(
-                selectedType === ApplicationsControllerListActivePublicCallsType.PROGRAM_B,
-              )}
-              aria-current={
-                selectedType === ApplicationsControllerListActivePublicCallsType.PROGRAM_B
-                  ? 'page'
-                  : undefined
-              }
-            >
-              {serverI18n._(msg`Program B`)}
-            </Link>
-          </nav>
-
-          <section id="calls-results" className="mt-8 scroll-mt-6" aria-live="polite">
+          <section id="calls-results" className="mt-10 scroll-mt-24" aria-live="polite">
             {hasError ? (
               <div className="rounded-3xl border border-red-200 bg-red-50 p-8">
                 <h2 className="text-lg font-semibold text-red-950">
@@ -277,9 +195,6 @@ export default async function CallsPage({ searchParams }: CallsPageProps) {
 
                   const closesAt = formatCallDate(call.closesAt, locale);
 
-                  const isProgramA =
-                    call.type === ApplicationsControllerListActivePublicCallsType.PROGRAM_A;
-
                   return (
                     <article
                       key={call.id}
@@ -287,16 +202,8 @@ export default async function CallsPage({ searchParams }: CallsPageProps) {
                     >
                       <div className="flex flex-1 flex-col">
                         <div>
-                          <span
-                            className={
-                              isProgramA
-                                ? 'inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold text-blue-700'
-                                : 'inline-flex rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700'
-                            }
-                          >
-                            {isProgramA
-                              ? serverI18n._(msg`Program A`)
-                              : serverI18n._(msg`Program B`)}
+                          <span className="inline-flex rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700">
+                            {serverI18n._(msg`Program B`)}
                           </span>
 
                           <h2 className="mt-5 text-xl leading-8 font-semibold text-slate-950">

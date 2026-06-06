@@ -1232,7 +1232,7 @@ export default function AdminProgramAApplicationDetailPage({
 
     const parsed = parseFloat(grantBudgetInput.trim());
 
-    if (!grantBudgetInput.trim() || Number.isNaN(parsed) || parsed < 0) {
+    if (!grantBudgetInput.trim() || !Number.isFinite(parsed) || parsed < 0) {
       showActionError(t`Enter a valid non-negative number for the grant budget.`);
 
       return;

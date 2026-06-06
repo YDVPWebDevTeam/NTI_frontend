@@ -6,9 +6,10 @@ import { ArrowRight, Lock, Mail } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-import { useLogin } from 'lib/api';
+import { getGetMeQueryKey, useLogin } from 'lib/api';
 import { getPostAuthRedirect, mapAuthError } from 'lib/auth/public-auth-flow';
 import { createLoginSchema, type LoginFormValues } from 'lib/auth/schemas';
 import { ROUTES } from 'lib/constants';
@@ -19,6 +20,7 @@ import { Button, Form } from 'components/shadcn';
 
 export default function LoginPage() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { mutateAsync: login, isPending: isLoginPending } = useLogin();
 
   const form = useForm<LoginFormValues>({
@@ -39,6 +41,7 @@ export default function LoginPage() {
         },
       });
 
+      queryClient.setQueryData(getGetMeQueryKey(), response.user);
       router.push(getPostAuthRedirect(response.user));
     } catch (error) {
       const mappedError = mapAuthError(error);
@@ -64,7 +67,7 @@ export default function LoginPage() {
             variant="outline"
             className="h-11 rounded-sm border-white/30 bg-transparent text-[12px] font-semibold tracking-widest text-white hover:bg-white hover:text-[#041d67]"
           >
-            <Link href={ROUTES.AUTH.REGISTER_STUDENT}>{t`CREATE STUDENT ACCOUNT`}</Link>
+            <Link href={ROUTES.AUTH.REGISTER_SELECT}>{t`CREATE AN ACCOUNT`}</Link>
           </Button>
         </div>
       }

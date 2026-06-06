@@ -568,6 +568,15 @@ msgstr "Výzva nie je dostupná"
 msgid "Calls"
 msgstr "Výzvy"
 
+msgid "Calls & Deadlines"
+msgstr "Výzvy a termíny"
+
+msgid "Calls could not be loaded"
+msgstr "Výzvy sa nepodarilo načítať"
+
+msgid "Calls pagination"
+msgstr "Stránkovanie výziev"
+
 msgid "Calls still open for new submissions."
 msgstr "Výzvy sú stále otvorené pre nové prihlášky."
 
@@ -1494,6 +1503,9 @@ msgstr "Vysvetlite, čo má tím objasniť alebo nahrať..."
 msgid "Explain why this organization should be rejected."
 msgstr "Vysvetlite, prečo by mala byť táto organizácia zamietnutá."
 
+msgid "Explore active program calls, review important dates, and prepare your application before the deadline."
+msgstr "Prezrite si aktívne programové výzvy, skontrolujte dôležité termíny a pripravte svoju prihlášku pred uzávierkou."
+
 msgid "Export Current View"
 msgstr "Exportovať aktuálne zobrazenie"
 
@@ -1565,6 +1577,9 @@ msgstr "Súbor"
 
 msgid "Filter by call"
 msgstr "Filtrovať podľa výzvy"
+
+msgid "Filter calls by program type"
+msgstr "Filtrovať výzvy podľa typu programu"
 
 msgid "Filter faculties on this page"
 msgstr "Filtrovať fakulty na tejto stránke"
@@ -1667,6 +1682,12 @@ msgstr "Prejsť na úvodnú stránku"
 
 msgid "Go to dashboard"
 msgstr "Prejsť na hlavnú stránku"
+
+msgid "Go to next calls page"
+msgstr "Prejsť na nasledujúcu stránku výziev"
+
+msgid "Go to previous calls page"
+msgstr "Prejsť na predchádzajúcu stránku výziev"
 
 msgid "Go to site home"
 msgstr "Prejsť na domovskú stránku"
@@ -2620,6 +2641,9 @@ msgstr "NTI administrátor"
 msgid "NTI final acceptance recorded."
 msgstr "Finálna akceptácia NTI bola zaznamenaná."
 
+msgid "NTI Programs"
+msgstr "Programy NTI"
+
 msgid "NTI student workspace. Separate flows for profile completion, team coordination, and program work."
 msgstr "Študentské pracovisko NTI. Samostatné toky pre dokončenie profilu, koordináciu tímu a programovú prácu."
 
@@ -2883,6 +2907,9 @@ msgstr "Len pre vlastníka"
 
 msgid "Page"
 msgstr "Strana"
+
+msgid "Page {currentPage} of {totalPages}"
+msgstr "Strana {currentPage} z {totalPages}"
 
 msgid "Pagination"
 msgstr "Stránkovanie"
@@ -3319,6 +3346,9 @@ msgstr "Registrácia"
 
 msgid "Register company owner"
 msgstr "Registrovať vlastníka spoločnosti"
+
+msgid "Register to apply"
+msgstr "Zaregistrovať sa a podať prihlášku"
 
 msgid "Register your account to continue with organization onboarding."
 msgstr "Zaregistrujte svoj účet pre pokračovanie v onboardingu organizácie."
@@ -4164,6 +4194,9 @@ msgstr "Bolo toho veľa na vyplnenie, ale zvládli ste to! Váš profil je pripr
 msgid "The active calls request failed, but the rest of the dashboard is still available."
 msgstr "Požiadavka na aktívne výzvy zlyhala, ale zvyšok prehľadu je stále dostupný."
 
+msgid "The active program calls are temporarily unavailable. Please try again later."
+msgstr "Aktívne programové výzvy sú dočasne nedostupné. Skúste to znova neskôr."
+
 msgid "The admin session could not be verified. Retry once the connection is available."
 msgstr "Reláciu správcu sa nepodarilo overiť. Skúste to znova, keď bude pripojenie dostupné."
 
@@ -4271,6 +4304,9 @@ msgstr "Overovací odkaz sa nepodarilo dokončiť. Môžete to skúsiť znova al
 
 msgid "There are currently no applications in the evaluation stage."
 msgstr "Momentálne nie sú žiadne prihlášky vo fáze hodnotenia."
+
+msgid "There are no active program calls at the moment. Please check again later."
+msgstr "Momentálne nie sú k dispozícii žiadne aktívne programové výzvy. Skontrolujte to znova neskôr."
 
 msgid "There are no currently open calls receiving submissions."
 msgstr "Momentálne nie sú otvorené žiadne výzvy, ktoré prijímajú prihlášky."

@@ -40,6 +40,14 @@ export function LandingFooter() {
             <li>
               <Link
                 className="text-slate-500 transition-colors hover:text-blue-700 dark:text-slate-400 dark:hover:text-cyan-300"
+                href={ROUTES.CALLS}
+              >
+                {t`Calls & Deadlines`}
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="text-slate-500 transition-colors hover:text-blue-700 dark:text-slate-400 dark:hover:text-cyan-300"
                 href={ROUTES.HOME.MENTORS}
               >
                 {t`Mentoring`}

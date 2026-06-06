@@ -568,6 +568,15 @@ msgstr "Call unavailable"
 msgid "Calls"
 msgstr "Calls"
 
+msgid "Calls & Deadlines"
+msgstr "Calls & Deadlines"
+
+msgid "Calls could not be loaded"
+msgstr "Calls could not be loaded"
+
+msgid "Calls pagination"
+msgstr "Calls pagination"
+
 msgid "Calls still open for new submissions."
 msgstr "Calls still open for new submissions."
 
@@ -1494,6 +1503,9 @@ msgstr "Explain what the team has to clarify or upload..."
 msgid "Explain why this organization should be rejected."
 msgstr "Explain why this organization should be rejected."
 
+msgid "Explore active program calls, review important dates, and prepare your application before the deadline."
+msgstr "Explore active program calls, review important dates, and prepare your application before the deadline."
+
 msgid "Export Current View"
 msgstr "Export Current View"
 
@@ -1565,6 +1577,9 @@ msgstr "File"
 
 msgid "Filter by call"
 msgstr "Filter by call"
+
+msgid "Filter calls by program type"
+msgstr "Filter calls by program type"
 
 msgid "Filter faculties on this page"
 msgstr "Filter faculties on this page"
@@ -1667,6 +1682,12 @@ msgstr "Go home"
 
 msgid "Go to dashboard"
 msgstr "Go to dashboard"
+
+msgid "Go to next calls page"
+msgstr "Go to next calls page"
+
+msgid "Go to previous calls page"
+msgstr "Go to previous calls page"
 
 msgid "Go to site home"
 msgstr "Go to site home"
@@ -2620,6 +2641,9 @@ msgstr "NTI Admin"
 msgid "NTI final acceptance recorded."
 msgstr "NTI final acceptance recorded."
 
+msgid "NTI Programs"
+msgstr "NTI Programs"
+
 msgid "NTI student workspace. Separate flows for profile completion, team coordination, and program work."
 msgstr "NTI student workspace. Separate flows for profile completion, team coordination, and program work."
 
@@ -2883,6 +2907,9 @@ msgstr "Owner only"
 
 msgid "Page"
 msgstr "Page"
+
+msgid "Page {currentPage} of {totalPages}"
+msgstr "Page {currentPage} of {totalPages}"
 
 msgid "Pagination"
 msgstr "Pagination"
@@ -3319,6 +3346,9 @@ msgstr "Register"
 
 msgid "Register company owner"
 msgstr "Register company owner"
+
+msgid "Register to apply"
+msgstr "Register to apply"
 
 msgid "Register your account to continue with organization onboarding."
 msgstr "Register your account to continue with organization onboarding."
@@ -4164,6 +4194,9 @@ msgstr "That was a lot of typing, but you made it! Your profile is officially sp
 msgid "The active calls request failed, but the rest of the dashboard is still available."
 msgstr "The active calls request failed, but the rest of the dashboard is still available."
 
+msgid "The active program calls are temporarily unavailable. Please try again later."
+msgstr "The active program calls are temporarily unavailable. Please try again later."
+
 msgid "The admin session could not be verified. Retry once the connection is available."
 msgstr "The admin session could not be verified. Retry once the connection is available."
 
@@ -4271,6 +4304,9 @@ msgstr "The verification link could not be completed. You can try again or retur
 
 msgid "There are currently no applications in the evaluation stage."
 msgstr "There are currently no applications in the evaluation stage."
+
+msgid "There are no active program calls at the moment. Please check again later."
+msgstr "There are no active program calls at the moment. Please check again later."
 
 msgid "There are no currently open calls receiving submissions."
 msgstr "There are no currently open calls receiving submissions."

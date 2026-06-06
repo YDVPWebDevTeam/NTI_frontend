@@ -39,6 +39,12 @@ export function LandingHeader() {
           </Link>
           <Link
             className="text-slate-600 transition-colors hover:text-blue-900 dark:text-slate-400 dark:hover:text-white"
+            href={ROUTES.CALLS}
+          >
+            {t`Calls`}
+          </Link>
+          <Link
+            className="text-slate-600 transition-colors hover:text-blue-900 dark:text-slate-400 dark:hover:text-white"
             href={ROUTES.HOME.MENTORS}
           >
             {t`Mentors`}

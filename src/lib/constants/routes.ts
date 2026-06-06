@@ -69,6 +69,8 @@ const MENTOR_ROUTES = {
 const REVIEW_ROUTES = {
   ROOT: '/review/dashboard',
   DASHBOARD: '/review/dashboard',
+  APPLICATIONS: '/review/applications/[id]',
+  application: (id: string) => `/review/applications/${id}`,
 } as const;
 
 export const ROUTES = {

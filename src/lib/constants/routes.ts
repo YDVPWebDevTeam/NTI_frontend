@@ -76,6 +76,7 @@ const REVIEW_ROUTES = {
 
 export const ROUTES = {
   ROOT: '/',
+  CALLS: '/calls',
   ACCOUNT: '/account',
   TEAM_INVITE_ONBOARDING: '/invite',
   ONBOARDING_PROFILE: '/onboarding/profile',

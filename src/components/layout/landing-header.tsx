@@ -19,17 +19,21 @@ export function LandingHeader() {
       <nav className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between px-6 py-4 font-bold tracking-tight">
         <div className="flex w-full items-center justify-between md:w-auto">
           <NtiBrand href={ROUTES.ROOT} variant="landing" size="md" />
+
           <button
             className="text-slate-600 md:hidden dark:text-slate-400"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? t`Close menu` : t`Open menu`}
+            type="button"
           >
             {mobileMenuOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
           </button>
         </div>
 
         <div
-          className={`${mobileMenuOpen ? 'flex' : 'hidden'} w-full flex-col items-center gap-4 pt-6 md:flex md:w-auto md:flex-row md:pt-0`}
+          className={`${
+            mobileMenuOpen ? 'flex' : 'hidden'
+          } w-full flex-col items-center gap-4 pt-6 md:flex md:w-auto md:flex-row md:pt-0`}
         >
           <Link
             className="text-slate-600 transition-colors hover:text-blue-900 dark:text-slate-400 dark:hover:text-white"
@@ -37,24 +41,35 @@ export function LandingHeader() {
           >
             {t`About`}
           </Link>
+
           <Link
             className="text-slate-600 transition-colors hover:text-blue-900 dark:text-slate-400 dark:hover:text-white"
             href={ROUTES.PROGRAMS}
           >
             {t`Programs`}
           </Link>
+
+          <Link
+            className="text-slate-600 transition-colors hover:text-blue-900 dark:text-slate-400 dark:hover:text-white"
+            href={ROUTES.CALLS}
+          >
+            {t`Calls`}
+          </Link>
+
           <Link
             className="text-slate-600 transition-colors hover:text-blue-900 dark:text-slate-400 dark:hover:text-white"
             href={ROUTES.MENTORS}
           >
             {t`Mentors`}
           </Link>
+
           <Link
             className="text-slate-600 transition-colors hover:text-blue-900 dark:text-slate-400 dark:hover:text-white"
             href={ROUTES.PARTNERS}
           >
             {t`Partners`}
           </Link>
+
           <Link
             className="text-slate-600 transition-colors hover:text-blue-900 dark:text-slate-400 dark:hover:text-white"
             href={ROUTES.NEWS}
@@ -64,13 +79,16 @@ export function LandingHeader() {
         </div>
 
         <div
-          className={`${mobileMenuOpen ? 'flex' : 'hidden'} w-full flex-col items-center gap-3 pt-6 md:flex md:w-auto md:flex-row md:pt-0`}
+          className={`${
+            mobileMenuOpen ? 'flex' : 'hidden'
+          } w-full flex-col items-center gap-3 pt-6 md:flex md:w-auto md:flex-row md:pt-0`}
         >
           <LanguageSelector
             className="border-slate-200 bg-white/90 dark:border-slate-700 dark:bg-slate-900/80"
-            triggerClassName="text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/70"
+            triggerClassName="text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800/70"
             contentClassName="border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900"
           />
+
           <LandingAuthActions
             className="flex w-full flex-col items-center gap-3 md:w-auto md:flex-row"
             authenticatedClassName="primary-gradient w-full scale-95 rounded-lg px-6 py-2.5 text-center text-white shadow-lg transition-transform active:opacity-80 md:w-auto"

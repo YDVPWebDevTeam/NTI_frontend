@@ -25,6 +25,10 @@ msgstr "{0} awaiting final acceptance · {1} overdue milestones"
 msgid "{0} file(s) selected."
 msgstr "{0} file(s) selected."
 
+#. placeholder {0}: historyQuery.data?.length ?? 0
+msgid "{0} historical version(s)"
+msgstr "{0} historical version(s)"
+
 #. placeholder {0}: selectedFaculty.name
 #. placeholder {0}: selectedUniversity.name
 msgid "{0} is currently selected."
@@ -130,7 +134,10 @@ msgid "ACCEPTING..."
 msgstr "ACCEPTING..."
 
 msgid "Access Admin"
-msgstr "Access Admin<<<<<<< HEAD"
+msgstr "Access Admin"
+
+msgid "Access denied"
+msgstr "Access denied"
 
 msgid "Access forbidden"
 msgstr "Access forbidden"
@@ -173,6 +180,9 @@ msgstr "Action failed"
 
 msgid "Action queues, backlog movement, and project delivery status are summarized here so company users can move directly into the right Program B workspace."
 msgstr "Action queues, backlog movement, and project delivery status are summarized here so company users can move directly into the right Program B workspace."
+
+msgid "Action required"
+msgstr "Action required"
 
 msgid "Actions"
 msgstr "Actions"
@@ -312,11 +322,26 @@ msgstr "Application data is not loaded yet."
 msgid "Application Decisions"
 msgstr "Application Decisions"
 
+msgid "Application details are available only for applications your team can access."
+msgstr "Application details are available only for applications your team can access."
+
 msgid "Application name"
 msgstr "Application name"
 
+msgid "Application not found"
+msgstr "Application not found"
+
+msgid "Application resubmitted."
+msgstr "Application resubmitted."
+
 msgid "Application sections"
 msgstr "Application sections"
+
+msgid "Application sections could not be loaded."
+msgstr "Application sections could not be loaded."
+
+msgid "Application submitted."
+msgstr "Application submitted."
 
 msgid "Application withdrawn."
 msgstr "Application withdrawn."
@@ -395,6 +420,9 @@ msgstr "At least one milestone is overdue and still needs status movement."
 
 msgid "At least one skill must be marked as primary."
 msgstr "At least one skill must be marked as primary."
+
+msgid "Attach document"
+msgstr "Attach document"
 
 msgid "Attention required"
 msgstr "Attention required"
@@ -583,13 +611,13 @@ msgid "Choose a faculty from the table before managing specializations."
 msgstr "Choose a faculty from the table before managing specializations."
 
 msgid "Choose a file"
-msgstr "Choose a file<<<<<<< HEAD"
+msgstr "Choose a file"
 
 msgid "Choose a logo file"
-msgstr "Choose a logo file======="
+msgstr "Choose a logo file"
 
 msgid "Choose a new password"
-msgstr "Choose a new password>>>>>>> origin/main"
+msgstr "Choose a new password"
 
 msgid "Choose a password you have not used for the current session."
 msgstr "Choose a password you have not used for the current session."
@@ -823,13 +851,13 @@ msgid "Continue as Regular User"
 msgstr "Continue as Regular User"
 
 msgid "Continue draft"
-msgstr "Continue draft<<<<<<< HEAD"
+msgstr "Continue draft"
 
 msgid "Continue your onboarding, track applications, and manage your NTI profile from one place."
-msgstr "Continue your onboarding, track applications, and manage your NTI profile from one place.>>>>>>> origin/main"
+msgstr "Continue your onboarding, track applications, and manage your NTI profile from one place."
 
 msgid "Contract"
-msgstr "Contract======="
+msgstr "Contract"
 
 msgid "Control Center"
 msgstr "Control Center"
@@ -985,7 +1013,7 @@ msgid "Current mentor:"
 msgstr "Current mentor:"
 
 msgid "Current Password"
-msgstr "Current Password<<<<<<< HEAD======="
+msgstr "Current Password"
 
 msgid "Current password is required."
 msgstr "Current password is required."
@@ -1122,6 +1150,15 @@ msgstr "Discover opportunities first, then track accepted work as project delive
 msgid "Do you currently have transferred / unfinished subjects?"
 msgstr "Do you currently have transferred / unfinished subjects?"
 
+msgid "Document attached."
+msgstr "Document attached."
+
+msgid "Document completeness"
+msgstr "Document completeness"
+
+msgid "Document completeness could not be loaded for this application."
+msgstr "Document completeness could not be loaded for this application."
+
 msgid "Document file cannot be empty."
 msgstr "Document file cannot be empty."
 
@@ -1212,6 +1249,12 @@ msgstr "Education details, academic verification, and declaration."
 
 msgid "Eligibility"
 msgstr "Eligibility"
+
+msgid "Eligibility signals"
+msgstr "Eligibility signals"
+
+msgid "Eligibility signals could not be loaded for this application."
+msgstr "Eligibility signals could not be loaded for this application."
 
 msgid "Email"
 msgstr "Email"
@@ -1889,6 +1932,9 @@ msgstr "Loading academic structure..."
 msgid "Loading admin data..."
 msgstr "Loading admin data..."
 
+msgid "Loading application"
+msgstr "Loading application"
+
 msgid "Loading application detail..."
 msgstr "Loading application detail..."
 
@@ -1961,6 +2007,9 @@ msgstr "Loading universities..."
 msgid "Loading workspace"
 msgstr "Loading workspace"
 
+msgid "Loading your submitted applications..."
+msgstr "Loading your submitted applications..."
+
 msgid "Location"
 msgstr "Location"
 
@@ -2008,7 +2057,7 @@ msgid "Looking absolutely stellar"
 msgstr "Looking absolutely stellar"
 
 msgid "Manage"
-msgstr "Manage<<<<<<< HEAD======="
+msgstr "Manage"
 
 msgid "Manage Calls"
 msgstr "Manage Calls"
@@ -2061,8 +2110,8 @@ msgstr "Member removal stays unavailable to non-leads and when the team is locke
 msgid "Member removed."
 msgstr "Member removed."
 
-msgid "Member role updated."
-msgstr "Member role updated."
+#~ msgid "Member role updated."
+#~ msgstr "Member role updated."
 
 msgid "Members"
 msgstr "Members"
@@ -2140,6 +2189,9 @@ msgstr "Min team size"
 msgid "Min team size must be a whole number greater than or equal to 1."
 msgstr "Min team size must be a whole number greater than or equal to 1."
 
+msgid "Missing"
+msgstr "Missing"
+
 msgid "Missing documents"
 msgstr "Missing documents"
 
@@ -2182,6 +2234,9 @@ msgstr "Must be at least 2 characters."
 msgid "Must be at most 50 characters."
 msgstr "Must be at most 50 characters."
 
+msgid "My Applications"
+msgstr "My Applications"
+
 msgid "Name"
 msgstr "Name"
 
@@ -2205,6 +2260,9 @@ msgstr "Needs info"
 
 msgid "Needs Info"
 msgstr "Needs Info"
+
+msgid "Needs-info reply posted."
+msgstr "Needs-info reply posted."
 
 msgid "Needs-info thread"
 msgstr "Needs-info thread"
@@ -2405,6 +2463,9 @@ msgstr "No Program B rows match the current filters."
 msgid "No projects yet"
 msgstr "No projects yet"
 
+msgid "No reason provided."
+msgstr "No reason provided."
+
 msgid "No recommendation"
 msgstr "No recommendation"
 
@@ -2422,6 +2483,9 @@ msgstr "No specializations available"
 
 msgid "No specializations found"
 msgstr "No specializations found"
+
+msgid "No submitted applications yet."
+msgstr "No submitted applications yet."
 
 msgid "No team"
 msgstr "No team"
@@ -2470,6 +2534,9 @@ msgstr "Not set"
 
 msgid "Not specified"
 msgstr "Not specified"
+
+msgid "Not submitted"
+msgstr "Not submitted"
 
 msgid "Note cannot be empty."
 msgstr "Note cannot be empty."
@@ -2522,11 +2589,17 @@ msgstr "Only the current team lead can apply or withdraw for Program B opportuni
 msgid "Only the current team lead can send invitations. Ask the lead to add the remaining teammates."
 msgstr "Only the current team lead can send invitations. Ask the lead to add the remaining teammates."
 
+msgid "Only the current team lead can submit or resubmit this application."
+msgstr "Only the current team lead can submit or resubmit this application."
+
 msgid "Only the current team lead can transfer leadership."
 msgstr "Only the current team lead can transfer leadership."
 
 msgid "Open"
 msgstr "Open"
+
+msgid "Open application"
+msgstr "Open application"
 
 msgid "Open backlog"
 msgstr "Open backlog"
@@ -2588,6 +2661,9 @@ msgstr "Open Reports"
 msgid "Open team"
 msgstr "Open team"
 
+msgid "Open the application detail and reply to the needs-info request."
+msgstr "Open the application detail and reply to the needs-info request."
+
 msgid "Open the full invitation link from your email and try again."
 msgstr "Open the full invitation link from your email and try again."
 
@@ -2626,6 +2702,9 @@ msgstr "Optional degree label"
 
 msgid "Optional for now. Leave this blank if you want to verify later from the email link."
 msgstr "Optional for now. Leave this blank if you want to verify later from the email link."
+
+msgid "Optional resubmission note"
+msgstr "Optional resubmission note"
 
 msgid "Optionally record a rationale for this decision. The team may see this note."
 msgstr "Optionally record a rationale for this decision. The team may see this note."
@@ -2737,6 +2816,9 @@ msgstr "Page"
 
 msgid "Pagination"
 msgstr "Pagination"
+
+msgid "Passed"
+msgstr "Passed"
 
 msgid "Password"
 msgstr "Password"
@@ -3210,6 +3292,9 @@ msgstr "Repeat new password"
 msgid "Repeat the new password"
 msgstr "Repeat the new password"
 
+msgid "Reply to this needs-info item"
+msgstr "Reply to this needs-info item"
+
 msgid "Reporting dashboard unavailable"
 msgstr "Reporting dashboard unavailable"
 
@@ -3237,6 +3322,9 @@ msgstr "Request new link"
 msgid "Request status"
 msgstr "Request status"
 
+msgid "Required by call"
+msgstr "Required by call"
+
 msgid "Required document type"
 msgstr "Required document type"
 
@@ -3253,7 +3341,7 @@ msgid "Resend in {remainingSeconds}s"
 msgstr "Resend in {remainingSeconds}s"
 
 msgid "Resend the email if it did not arrive. Paste the token below only if you want to verify this step immediately."
-msgstr "Resend the email if it did not arrive. Paste the token below only if you want to verify this step immediately.<<<<<<< HEAD======="
+msgstr "Resend the email if it did not arrive. Paste the token below only if you want to verify this step immediately."
 
 msgid "Reset link expired"
 msgstr "Reset link expired"
@@ -3268,7 +3356,7 @@ msgid "Reset your password"
 msgstr "Reset your password"
 
 msgid "RESETTING..."
-msgstr "RESETTING...>>>>>>> origin/main"
+msgstr "RESETTING..."
 
 msgid "Resolve overdue milestones"
 msgstr "Resolve overdue milestones"
@@ -3284,6 +3372,12 @@ msgstr "Resolving the Program B project detail."
 
 msgid "Resolving your authenticated workspace."
 msgstr "Resolving your authenticated workspace."
+
+msgid "Resolving your student session and Program A application detail."
+msgstr "Resolving your student session and Program A application detail."
+
+msgid "Resubmit"
+msgstr "Resubmit"
 
 msgid "Resume project"
 msgstr "Resume project"
@@ -3332,6 +3426,9 @@ msgstr "Review workflow"
 
 msgid "Review workspace"
 msgstr "Review workspace"
+
+msgid "Review your application details, required documents, eligibility checks, and messages from the NTI team."
+msgstr "Review your application details, required documents, eligibility checks, and messages from the NTI team."
 
 msgid "Reviews & notes"
 msgstr "Reviews & notes"
@@ -3402,8 +3499,15 @@ msgstr "Save profile changes"
 msgid "Save progress"
 msgstr "Save progress"
 
+msgid "Save section"
+msgstr "Save section"
+
 msgid "Save your academic section first so professional data can be attached to a valid student profile."
 msgstr "Save your academic section first so professional data can be attached to a valid student profile."
+
+#. placeholder {0}: formatEnumLikeName(section.key)
+msgid "Saved {0}."
+msgstr "Saved {0}."
 
 msgid "Saving changes…"
 msgstr "Saving changes…"
@@ -3443,6 +3547,9 @@ msgstr "Search universities by name, short name, city, or country"
 
 msgid "Searchable, sortable, paginated list of published Program B opportunities backed by generated backlog hooks."
 msgstr "Searchable, sortable, paginated list of published Program B opportunities backed by generated backlog hooks."
+
+msgid "Sections"
+msgstr "Sections"
 
 msgid "Sector"
 msgstr "Sector"
@@ -3485,6 +3592,9 @@ msgstr "Select a mentor"
 
 msgid "Select a role"
 msgstr "Select a role"
+
+msgid "Select a team member for CV"
+msgstr "Select a team member for CV"
 
 msgid "Select a university before creating or editing faculties."
 msgstr "Select a university before creating or editing faculties."
@@ -3567,6 +3677,9 @@ msgstr "Send invite"
 msgid "Send invites"
 msgstr "Send invites"
 
+msgid "Send reply"
+msgstr "Send reply"
+
 msgid "SEND RESET LINK"
 msgstr "SEND RESET LINK"
 
@@ -3601,10 +3714,10 @@ msgid "Set reward (EUR)"
 msgstr "Set reward (EUR)"
 
 msgid "Set the approved grant budget in EUR for this project."
-msgstr "Set the approved grant budget in EUR for this project.<<<<<<< HEAD"
+msgstr "Set the approved grant budget in EUR for this project."
 
 msgid "Shared organization files"
-msgstr "Shared organization files======="
+msgstr "Shared organization files"
 
 msgid "Short Name"
 msgstr "Short Name"
@@ -3804,11 +3917,20 @@ msgstr "Study Year"
 msgid "Subject Average"
 msgstr "Subject Average"
 
+msgid "Submission actions"
+msgstr "Submission actions"
+
+msgid "Submit"
+msgstr "Submit"
+
 msgid "Submit application"
 msgstr "Submit application"
 
 msgid "Submit evaluation"
 msgstr "Submit evaluation"
+
+msgid "Submit is available for draft applications. Resubmit is available only when additional information is requested."
+msgstr "Submit is available for draft applications. Resubmit is available only when additional information is requested."
 
 msgid "Submit review"
 msgstr "Submit review"
@@ -3816,11 +3938,17 @@ msgstr "Submit review"
 msgid "Submitted"
 msgstr "Submitted"
 
+msgid "Submitted applications could not be loaded right now."
+msgstr "Submitted applications could not be loaded right now."
+
 msgid "Submitted by"
 msgstr "Submitted by"
 
 msgid "Submitted candidates are waiting for shortlist or acceptance decisions."
 msgstr "Submitted candidates are waiting for shortlist or acceptance decisions."
+
+msgid "Submitted Program A applications for your current team."
+msgstr "Submitted Program A applications for your current team."
 
 msgid "Submitted:"
 msgstr "Submitted:"
@@ -3951,6 +4079,9 @@ msgstr "The active calls request failed, but the rest of the dashboard is still 
 msgid "The admin session could not be verified. Retry once the connection is available."
 msgstr "The admin session could not be verified. Retry once the connection is available."
 
+msgid "The application detail request failed. Retry the request and confirm that the application is still available."
+msgstr "The application detail request failed. Retry the request and confirm that the application is still available."
+
 msgid "The authenticated account email does not match the invited email."
 msgstr "The authenticated account email does not match the invited email."
 
@@ -3965,6 +4096,9 @@ msgstr "The current Program B company workflow does not have any open action que
 
 msgid "The current report table could not be loaded."
 msgstr "The current report table could not be loaded."
+
+msgid "The current team context could not be loaded, so lead-only actions remain unavailable until this is retried."
+msgstr "The current team context could not be loaded, so lead-only actions remain unavailable until this is retried."
 
 msgid "The current team could not be loaded right now. Retry the request instead of treating this as no team."
 msgstr "The current team could not be loaded right now. Retry the request instead of treating this as no team."
@@ -3988,13 +4122,16 @@ msgid "The invite could not be validated right now. Please try again later."
 msgstr "The invite could not be validated right now. Please try again later."
 
 msgid "The invite detail request failed for this organization."
-msgstr "The invite detail request failed for this organization.<<<<<<< HEAD"
+msgstr "The invite detail request failed for this organization."
 
 msgid "The link is invalid or expired. Request a new link and try again."
 msgstr "The link is invalid or expired. Request a new link and try again."
 
+msgid "The needs-info thread could not be loaded."
+msgstr "The needs-info thread could not be loaded."
+
 msgid "The organization will be created without a logo."
-msgstr "The organization will be created without a logo.======="
+msgstr "The organization will be created without a logo."
 
 msgid "The Program B backlog list could not be loaded right now."
 msgstr "The Program B backlog list could not be loaded right now."
@@ -4013,6 +4150,9 @@ msgstr "The requested call could not be identified from the route."
 
 msgid "The requested organization could not be identified from the route."
 msgstr "The requested organization could not be identified from the route."
+
+msgid "The required documents for this call could not be loaded."
+msgstr "The required documents for this call could not be loaded."
 
 msgid "The review queue could not be loaded."
 msgstr "The review queue could not be loaded."
@@ -4058,6 +4198,9 @@ msgstr "This account must update its password before the admin session can conti
 
 msgid "This account type does not currently have a self-service account settings workspace."
 msgstr "This account type does not currently have a self-service account settings workspace."
+
+msgid "This application does not exist or is no longer available."
+msgstr "This application does not exist or is no longer available."
 
 msgid "This backlog item is in an internal company workflow state, so this page is showing the organization-scoped workspace summary instead of the published-detail endpoint."
 msgstr "This backlog item is in an internal company workflow state, so this page is showing the organization-scoped workspace summary instead of the published-detail endpoint."
@@ -4187,6 +4330,9 @@ msgstr "Unable to assign mentor."
 msgid "Unable to assign product owner."
 msgstr "Unable to assign product owner."
 
+msgid "Unable to attach the document."
+msgstr "Unable to attach the document."
+
 msgid "Unable to change the password right now."
 msgstr "Unable to change the password right now."
 
@@ -4240,6 +4386,9 @@ msgstr "Unable to export this report right now."
 
 msgid "Unable to join the invited team right now."
 msgstr "Unable to join the invited team right now."
+
+msgid "Unable to load application"
+msgstr "Unable to load application"
 
 msgid "Unable to load application detail from the backend."
 msgstr "Unable to load application detail from the backend."
@@ -4322,6 +4471,9 @@ msgstr "Unable to remove the member right now."
 msgid "Unable to rename the team."
 msgstr "Unable to rename the team."
 
+msgid "Unable to reply to the needs-info item."
+msgstr "Unable to reply to the needs-info item."
+
 msgid "Unable to request the email change right now."
 msgstr "Unable to request the email change right now."
 
@@ -4333,6 +4485,9 @@ msgstr "Unable to resend the confirmation email right now."
 
 msgid "Unable to resend the invitation."
 msgstr "Unable to resend the invitation."
+
+msgid "Unable to resubmit the application."
+msgstr "Unable to resubmit the application."
 
 msgid "Unable to revoke invitation."
 msgstr "Unable to revoke invitation."
@@ -4358,6 +4513,9 @@ msgstr "Unable to save the specialization."
 msgid "Unable to save the university."
 msgstr "Unable to save the university."
 
+msgid "Unable to save this section."
+msgstr "Unable to save this section."
+
 msgid "Unable to send invitation."
 msgstr "Unable to send invitation."
 
@@ -4366,6 +4524,9 @@ msgstr "Unable to sign in and accept the organization invitation."
 
 msgid "Unable to submit review."
 msgstr "Unable to submit review."
+
+msgid "Unable to submit the application."
+msgstr "Unable to submit the application."
 
 msgid "Unable to submit the team application right now."
 msgstr "Unable to submit the team application right now."
@@ -4385,8 +4546,8 @@ msgstr "Unable to update backlog status."
 msgid "Unable to update candidate status."
 msgstr "Unable to update candidate status."
 
-msgid "Unable to update member role."
-msgstr "Unable to update member role."
+#~ msgid "Unable to update member role."
+#~ msgstr "Unable to update member role."
 
 msgid "Unable to update milestone."
 msgstr "Unable to update milestone."
@@ -4509,6 +4670,12 @@ msgstr "Updating..."
 msgid "Upload a new logo if you want to replace the current one."
 msgstr "Upload a new logo if you want to replace the current one."
 
+msgid "Upload a required document and attach it to this application."
+msgstr "Upload a required document and attach it to this application."
+
+msgid "Upload and attach"
+msgstr "Upload and attach"
+
 msgid "Upload CV"
 msgstr "Upload CV"
 
@@ -4623,6 +4790,9 @@ msgstr "Verify your email address before creating your organization profile."
 
 msgid "Verify your email address to activate your account and continue with onboarding."
 msgstr "Verify your email address to activate your account and continue with onboarding."
+
+msgid "Version"
+msgstr "Version"
 
 msgid "View"
 msgstr "View"
@@ -4768,6 +4938,9 @@ msgstr "You must accept the terms."
 msgid "You survived the boss fight"
 msgstr "You survived the boss fight"
 
+msgid "Your account cannot access this application."
+msgstr "Your account cannot access this application."
+
 msgid "Your account does not have access to this page."
 msgstr "Your account does not have access to this page."
 
@@ -4779,6 +4952,9 @@ msgstr "Your account is still waiting for approval. You'll be able to manage inv
 
 msgid "Your admin session has expired."
 msgstr "Your admin session has expired."
+
+msgid "Your application needs additional information"
+msgstr "Your application needs additional information"
 
 msgid "your email address"
 msgstr "your email address"
@@ -4793,7 +4969,7 @@ msgid "Your invitation token is verified before account setup."
 msgstr "Your invitation token is verified before account setup."
 
 msgid "Your new email is now active. To keep your account safe, you'll need to sign in again."
-msgstr "Your new email is now active. To keep your account safe, you'll need to sign in again.<<<<<<< HEAD"
+msgstr "Your new email is now active. To keep your account safe, you'll need to sign in again."
 
 msgid "Your organization is linked correctly, but this dashboard will unlock only after activation is complete."
 msgstr "Your organization is linked correctly, but this dashboard will unlock only after activation is complete."

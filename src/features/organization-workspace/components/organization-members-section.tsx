@@ -2,18 +2,16 @@
 
 import { t } from '@lingui/core/macro';
 import { useQueryClient } from '@tanstack/react-query';
-import { Crown, ShieldCheck, Trash2, UserCog } from 'lucide-react';
+import { Crown, ShieldCheck, Trash2 } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { toast } from 'sonner';
 
 import {
-  OrganizationMemberRole,
   getGetMeQueryKey,
   getOrganizationControllerListMembersQueryKey,
   useOrganizationControllerListMembers,
   useOrganizationControllerRemoveMember,
   useOrganizationControllerTransferOwner,
-  useOrganizationControllerUpdateMemberRole,
   type AuthenticatedUserDto,
 } from 'lib/api';
 import { isApiRequestError } from 'lib/api-client/openapi-runtime/client';
@@ -50,7 +48,6 @@ export function OrganizationMembersSection({
       enabled: Boolean(organizationId),
     },
   });
-  const updateMemberRole = useOrganizationControllerUpdateMemberRole();
   const removeMember = useOrganizationControllerRemoveMember();
   const transferOwner = useOrganizationControllerTransferOwner();
   const FORBIDDEN_STATUS = 403;
@@ -74,27 +71,6 @@ export function OrganizationMembersSection({
     () => members.filter((member) => member.role !== 'COMPANY_OWNER' && member.status === 'ACTIVE'),
     [members],
   );
-
-  const handleRoleChange = async (userId: string, role: string) => {
-    setActiveMemberId(userId);
-
-    try {
-      await updateMemberRole.mutateAsync({
-        id: organizationId,
-        userId,
-        data: {
-          role: role as typeof OrganizationMemberRole.COMPANY_EMPLOYEE,
-        },
-      });
-
-      toast.success(t`Member role updated.`);
-      await refreshMembers();
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : t`Unable to update member role.`);
-    } finally {
-      setActiveMemberId(null);
-    }
-  };
 
   const handleRemoveMember = async (userId: string, label: string) => {
     const confirmed = window.confirm(
@@ -233,7 +209,7 @@ export function OrganizationMembersSection({
               return (
                 <div
                   key={member.id}
-                  className="grid gap-4 rounded-[1.5rem] border border-[#dfe7fa] bg-white p-5 shadow-[0_8px_20px_rgba(19,27,46,0.04)] lg:grid-cols-[minmax(0,1fr)_200px_auto]"
+                  className="grid gap-4 rounded-[1.5rem] border border-[#dfe7fa] bg-white p-5 shadow-[0_8px_20px_rgba(19,27,46,0.04)] lg:grid-cols-[minmax(0,1fr)_220px_auto]"
                 >
                   <div className="space-y-2">
                     <div className="flex flex-wrap items-center gap-2">
@@ -269,26 +245,9 @@ export function OrganizationMembersSection({
                     <p className="text-[11px] font-semibold tracking-[0.14em] text-[#6c7c99] uppercase">
                       {t`Role`}
                     </p>
-                    {isOwner ? (
-                      <div className="rounded-xl border border-[#e2e8f7] bg-[#f8fbff] px-3 py-2 text-sm font-medium text-[#10213d]">
-                        {formatOrganizationRoleLabel(member.role)}
-                      </div>
-                    ) : (
-                      <Select
-                        value={member.role}
-                        onValueChange={(nextRole) => void handleRoleChange(member.id, nextRole)}
-                        disabled={isPendingAction || updateMemberRole.isPending}
-                      >
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value={OrganizationMemberRole.COMPANY_EMPLOYEE}>
-                            {t`Company employee`}
-                          </SelectItem>
-                        </SelectContent>
-                      </Select>
-                    )}
+                    <div className="rounded-xl border border-[#e2e8f7] bg-[#f8fbff] px-3 py-2 text-sm font-medium text-[#10213d]">
+                      {formatOrganizationRoleLabel(member.role)}
+                    </div>
                   </div>
 
                   <div className="flex items-start justify-start lg:justify-end">
@@ -300,11 +259,7 @@ export function OrganizationMembersSection({
                         void handleRemoveMember(member.id, `${member.firstName} ${member.lastName}`)
                       }
                     >
-                      {isPendingAction ? (
-                        <UserCog className="mr-2 h-4 w-4" />
-                      ) : (
-                        <Trash2 className="mr-2 h-4 w-4" />
-                      )}
+                      <Trash2 className="mr-2 h-4 w-4" />
                       {isPendingAction ? t`Working…` : t`Remove member`}
                     </Button>
                   </div>

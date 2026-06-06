@@ -1,5 +1,6 @@
 'use client';
 
+import { t } from '@lingui/core/macro';
 import { use, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -97,8 +98,8 @@ export function StudentApplicationDetailPage({ params }: { params: Promise<{ id:
     return (
       <main className="mx-auto flex min-h-screen w-full max-w-4xl items-center px-4">
         <StudentStatusCard
-          title="Loading application"
-          description="Resolving your student session and Program A application detail."
+          title={t`Loading application`}
+          description={t`Resolving your student session and Program A application detail.`}
         />
       </main>
     );
@@ -109,30 +110,30 @@ export function StudentApplicationDetailPage({ params }: { params: Promise<{ id:
     const notFound = isApiNotFoundError(applicationError);
     const isForbidden =
       isApiRequestError(applicationError) && applicationError.status === FORBIDDEN_STATUS;
-    let errorTitle = 'Unable to load application';
+    let errorTitle = t`Unable to load application`;
     let errorDescription = getErrorMessage(
       applicationError,
-      'The application detail request failed. Retry the request and confirm that the application is still available.',
+      t`The application detail request failed. Retry the request and confirm that the application is still available.`,
     );
 
     if (notFound) {
-      errorTitle = 'Application not found';
-      errorDescription = 'This application does not exist or is no longer available.';
+      errorTitle = t`Application not found`;
+      errorDescription = t`This application does not exist or is no longer available.`;
     } else if (isForbidden) {
-      errorTitle = 'Access denied';
-      errorDescription = 'Your account cannot access this application.';
+      errorTitle = t`Access denied`;
+      errorDescription = t`Your account cannot access this application.`;
     }
 
     return (
       <StudentPageShell
-        title="Program A application"
-        description="Application detail needs a valid accessible application before the rest of the workflow can render."
+        title={t`Program A application`}
+        description={t`Application details are available only for applications your team can access.`}
       >
         <StudentStatusCard title={errorTitle} description={errorDescription} />
         {notFound || isForbidden ? null : (
           <div className="flex justify-center">
             <Button variant="outline" onClick={() => void applicationQuery.refetch()}>
-              Retry
+              {t`Retry`}
             </Button>
           </div>
         )}
@@ -146,14 +147,19 @@ export function StudentApplicationDetailPage({ params }: { params: Promise<{ id:
     return null;
   }
 
+  const canSubmitApplication = isLead && application.status === 'DRAFT';
+  const canResubmitApplication = isLead && application.status === 'NEEDS_INFO';
+
   return (
     <StudentPageShell
-      title={`Application ${application.id}`}
-      description="Generated Program A detail shell with sections, document completeness, eligibility signals, needs-info thread, and lead-only submit or resubmit actions."
+      title={t`Program A application`}
+      description={t`Review your application details, required documents, eligibility checks, and messages from the NTI team.`}
     >
       <div className="grid gap-6 lg:grid-cols-2">
         <OverviewSection application={application} />
         <SubmissionActionsSection
+          canResubmit={canResubmitApplication}
+          canSubmit={canSubmitApplication}
           hasTeamLoadError={hasTeamLoadError}
           isLead={isLead}
           onRetryTeam={() => void teamQuery.refetch()}
@@ -161,10 +167,10 @@ export function StudentApplicationDetailPage({ params }: { params: Promise<{ id:
             try {
               await submitApplication.mutateAsync({ id });
               await applicationQuery.refetch();
-              toast.success('Application submitted.');
+              toast.success(t`Application submitted.`);
             } catch (error) {
               toast.error(
-                error instanceof Error ? error.message : 'Unable to submit the application.',
+                error instanceof Error ? error.message : t`Unable to submit the application.`,
               );
             }
           }}
@@ -177,10 +183,11 @@ export function StudentApplicationDetailPage({ params }: { params: Promise<{ id:
                 data: payload as Record<string, unknown>,
               });
               await Promise.all([applicationQuery.refetch(), needsInfoQuery.refetch()]);
-              toast.success('Application resubmitted.');
+              setResubmitNote('');
+              toast.success(t`Application resubmitted.`);
             } catch (error) {
               toast.error(
-                error instanceof Error ? error.message : 'Unable to resubmit the application.',
+                error instanceof Error ? error.message : t`Unable to resubmit the application.`,
               );
             }
           }}
@@ -190,7 +197,7 @@ export function StudentApplicationDetailPage({ params }: { params: Promise<{ id:
           setResubmitNote={setResubmitNote}
           teamErrorMessage={getErrorMessage(
             teamQuery.error,
-            'The current team context could not be loaded, so lead-only actions remain unavailable until this is retried.',
+            t`The current team context could not be loaded, so lead-only actions remain unavailable until this is retried.`,
           )}
         />
       </div>
@@ -209,7 +216,7 @@ export function StudentApplicationDetailPage({ params }: { params: Promise<{ id:
 
       <SectionsEditorSection
         applicationId={id}
-        canEdit={isLead}
+        canEdit={canSubmitApplication || canResubmitApplication}
         sectionsQuery={sectionsQuery}
         getErrorMessage={getErrorMessage}
       />
@@ -217,6 +224,7 @@ export function StudentApplicationDetailPage({ params }: { params: Promise<{ id:
       <AttachDocumentSection
         applicationId={id}
         isLead={isLead}
+        members={team?.members ?? []}
         attachDocument={attachDocument}
         requestUploadUrl={requestUploadUrl}
         uploadToPresignedUrl={uploadToPresignedUrl}

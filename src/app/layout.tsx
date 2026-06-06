@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import { AppProviders } from 'components/providers';
 import { activateDefaultLocale } from 'lib/i18n/runtime';
@@ -71,6 +72,7 @@ export default async function RootLayout({
     >
       <body className="antialiased">
         <AppProviders>{children}</AppProviders>
+        <SpeedInsights />
       </body>
     </html>
   );

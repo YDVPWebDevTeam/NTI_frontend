@@ -203,7 +203,7 @@ export function OrganizationProfileSection({
               control={form.control}
               name="website"
               label={t`Website`}
-              type="url"
+              type="text"
               placeholder="example.com"
               autoComplete="url"
               inputMode="url"

@@ -9,6 +9,7 @@ import { getPostAuthRedirect } from 'lib/auth/public-auth-flow';
 import { ROUTES } from 'lib/constants';
 
 type UseAuthenticatedUserOptions = {
+  allowPending?: boolean;
   preservePathOnAuthRedirect?: boolean;
 };
 
@@ -53,6 +54,10 @@ export function useAuthenticatedUser(
     }
 
     if (meQuery.data.status !== UserStatus.ACTIVE) {
+      if (options?.allowPending && meQuery.data.status === UserStatus.PENDING) {
+        return;
+      }
+
       router.replace(getPostAuthRedirect(meQuery.data));
 
       return;
@@ -69,7 +74,8 @@ export function useAuthenticatedUser(
 
   const isAllowed = Boolean(
     meQuery.data &&
-    meQuery.data.status === UserStatus.ACTIVE &&
+    (meQuery.data.status === UserStatus.ACTIVE ||
+      (options?.allowPending && meQuery.data.status === UserStatus.PENDING)) &&
     (!allowedRoles || allowedRoles.includes(meQuery.data.role)),
   );
 

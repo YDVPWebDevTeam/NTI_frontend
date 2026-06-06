@@ -2,16 +2,18 @@
 
 import { t } from '@lingui/core/macro';
 
-import OrganizationInviteDashboard from 'components/organization-dashboard/organization-invite-dashboard';
 import { StudentStatusCard } from 'components/student-dashboard/page-shell-primitives';
+import { OrganizationWorkspacePage } from 'features/organization-workspace/components/organization-workspace-page';
 import { UserRole } from 'lib/api';
 import { useAuthenticatedUser } from 'lib/student-dashboard/use-authenticated-user';
 
 export default function CompanyOrganizationPage() {
-  const { isLoading, me } = useAuthenticatedUser([
-    UserRole.COMPANY_OWNER,
-    UserRole.COMPANY_EMPLOYEE,
-  ]);
+  const { isLoading, me } = useAuthenticatedUser(
+    [UserRole.COMPANY_OWNER, UserRole.COMPANY_EMPLOYEE],
+    {
+      allowPending: true,
+    },
+  );
 
   if (isLoading || !me) {
     return null;
@@ -26,5 +28,5 @@ export default function CompanyOrganizationPage() {
     );
   }
 
-  return <OrganizationInviteDashboard />;
+  return <OrganizationWorkspacePage currentUser={me} />;
 }

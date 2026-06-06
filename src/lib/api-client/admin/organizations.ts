@@ -4,6 +4,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { OrganizationStatus } from 'lib/api-client/admin/types';
 import {
+  getAdminGetOrganizationQueryKey,
+  getAdminListOrganizationsQueryKey,
   adminUpdateOrganizationStatus,
   getAdminListOrganizationInvitesByOrganizationQueryKey,
   getAdminListOrganizationInvitesQueryKey,
@@ -47,6 +49,12 @@ export function useChangeOrganizationStatus() {
             : undefined,
       }),
     onSuccess: async (_response, variables) => {
+      await queryClient.invalidateQueries({
+        queryKey: getAdminListOrganizationsQueryKey(),
+      });
+      await queryClient.invalidateQueries({
+        queryKey: getAdminGetOrganizationQueryKey(variables.id),
+      });
       await queryClient.invalidateQueries({
         queryKey: getAdminListOrganizationInvitesQueryKey(),
       });

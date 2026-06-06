@@ -39,7 +39,15 @@ export function LandingAuthActions({
   const error = meQuery.error as unknown;
 
   if (meQuery.isPending) {
-    return <>{loadingFallback}</>;
+    return (
+      <div className={`${className} pointer-events-none invisible`} aria-hidden>
+        {unauthenticatedActions.map((action) => (
+          <span key={`${action.href}:${action.label}`} className={action.className}>
+            {action.label}
+          </span>
+        ))}
+      </div>
+    );
   }
 
   if (meQuery.data) {

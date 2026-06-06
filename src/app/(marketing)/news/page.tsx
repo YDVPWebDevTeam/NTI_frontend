@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { ArrowRight, Newspaper } from 'lucide-react';
 
 import { Reveal } from 'components/landing';
-import { LandingFooter, LandingHeader } from 'components/layout';
 import { fetchNewsList, newsPageCopy, type NewsArticle } from 'lib/cms/news';
 import { ROUTES } from 'lib/constants';
 import { type AppLocale } from 'lib/i18n/config';
@@ -167,9 +166,7 @@ export default async function NewsPage() {
   const [featured, ...rest] = articles;
 
   return (
-    <div className="bg-surface font-body text-on-surface min-h-screen overflow-x-hidden antialiased">
-      <LandingHeader />
-
+    <>
       <section className="relative overflow-hidden pt-32 pb-12 md:pt-44 md:pb-16">
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div className="bg-grid absolute inset-0" />
@@ -221,8 +218,6 @@ export default async function NewsPage() {
           )}
         </div>
       </section>
-
-      <LandingFooter />
-    </div>
+    </>
   );
 }

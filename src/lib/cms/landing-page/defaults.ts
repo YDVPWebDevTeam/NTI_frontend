@@ -9,8 +9,8 @@ export const fallbackLandingPageContent: Record<AppLocale, LandingPageContent> =
         'Nitriansky technologicky inkubator bridges the gap between academic research and market reality. We turn bold ideas into high-performance startups.',
       eyebrow: 'Innovation Hub',
       heroImage: {
-        alt: 'Modern lab environment',
-        url: '/images/mentor-explaining.png',
+        alt: 'Students working at NTI innovation hub',
+        url: '/images/students.png',
       },
       learnMoreCTA: {
         href: '#programs',
@@ -108,7 +108,7 @@ export const fallbackLandingPageContent: Record<AppLocale, LandingPageContent> =
           bio: 'Expert in neural networks with 15+ years in international R&D.',
           image: {
             alt: 'Mentor portrait of Marek Novak',
-            url: '/images/business-ideas.png',
+            url: '/images/students-clients.png',
           },
           name: 'Ing. Marek Novak',
           role: 'Lead Mentor / AI Systems',
@@ -117,7 +117,7 @@ export const fallbackLandingPageContent: Record<AppLocale, LandingPageContent> =
           bio: 'Specializes in market entry strategies for DeepTech startups.',
           image: {
             alt: 'Mentor portrait of Lucia Bielik',
-            url: '/images/full-cycle-incubation.png',
+            url: '/images/students-success.png',
           },
           name: 'Dr. Lucia Bielik',
           role: 'Business Strategy',
@@ -151,8 +151,8 @@ export const fallbackLandingPageContent: Record<AppLocale, LandingPageContent> =
         'Nitriansky technologicky inkubator prepaja akademicky vyskum s realitou trhu. Pomahame menit odvazne napady na vykonne startupy.',
       eyebrow: 'Inovacne centrum',
       heroImage: {
-        alt: 'Moderny laboratorny priestor',
-        url: '/images/mentor-explaining.png',
+        alt: 'Studenti v inovacnom centre NTI',
+        url: '/images/students.png',
       },
       learnMoreCTA: {
         href: '#programs',
@@ -251,7 +251,7 @@ export const fallbackLandingPageContent: Record<AppLocale, LandingPageContent> =
           bio: 'Expert na neuronove siete s viac ako 15 rokmi medzinarodneho vyskumneho a vyvojoveho zazemia.',
           image: {
             alt: 'Portret mentora Mareka Novaka',
-            url: '/images/business-ideas.png',
+            url: '/images/students-clients.png',
           },
           name: 'Ing. Marek Novak',
           role: 'Hlavny mentor / AI systemy',
@@ -260,7 +260,7 @@ export const fallbackLandingPageContent: Record<AppLocale, LandingPageContent> =
           bio: 'Specialistka na vstup na trh a rast DeepTech startupov.',
           image: {
             alt: 'Portret mentorky Lucie Bielik',
-            url: '/images/full-cycle-incubation.png',
+            url: '/images/students-success.png',
           },
           name: 'Dr. Lucia Bielik',
           role: 'Biznis strategia',

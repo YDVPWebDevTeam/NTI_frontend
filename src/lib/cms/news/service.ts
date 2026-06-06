@@ -78,3 +78,13 @@ export async function fetchNewsArticle(
 
   return articles[0] ?? null;
 }
+
+/** Fetch the most recently published article, or null if none exist. */
+export async function fetchLatestNewsArticle(locale: AppLocale): Promise<NewsArticle | null> {
+  const articles = await fetchNewsDocs(locale, {
+    sort: '-publishedAt',
+    limit: '1',
+  });
+
+  return articles[0] ?? null;
+}

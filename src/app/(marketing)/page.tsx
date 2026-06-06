@@ -6,6 +6,7 @@ import {
   Building2,
   CheckCircle2,
   FlaskConical,
+  Newspaper,
   Rocket,
   Sparkles,
   UserRoundCog,
@@ -13,8 +14,9 @@ import {
 } from 'lucide-react';
 
 import { Reveal, ScrollProgress } from 'components/landing';
-import { LandingAuthActions, LandingFooter, LandingHeader } from 'components/layout';
+import { LandingAuthActions } from 'components/layout';
 import { fetchLandingPageContent, type LandingPageContent } from 'lib/cms/landing-page';
+import { fetchLatestNewsArticle } from 'lib/cms/news';
 import { getRequestLocale } from 'lib/i18n/server-locale';
 
 /** Per-item delay (ms) for staggered scroll-reveal animations. */
@@ -100,7 +102,10 @@ function accentClasses(accent: LandingPageContent['programs']['items'][number]['
 
 export default async function HomePage() {
   const locale = await getRequestLocale();
-  const content = await fetchLandingPageContent(locale);
+  const [content, latestNews] = await Promise.all([
+    fetchLandingPageContent(locale),
+    fetchLatestNewsArticle(locale),
+  ]);
 
   // Repeat the logos enough to overflow the viewport, then render the group
   // twice so the -50% translate produces a seamless, gapless loop.
@@ -109,9 +114,8 @@ export default async function HomePage() {
   );
 
   return (
-    <div className="bg-surface font-body text-on-surface overflow-x-hidden antialiased">
+    <>
       <ScrollProgress />
-      <LandingHeader />
 
       {/* ─── Hero ─────────────────────────────────────────────── */}
       <section
@@ -179,20 +183,35 @@ export default async function HomePage() {
                 />
                 <div className="from-primary/30 absolute inset-0 bg-gradient-to-t to-transparent" />
               </div>
-              {/* floating success chip */}
-              <div className="bg-surface-container-lowest animate-float shadow-primary/10 absolute -bottom-5 -left-2 flex max-w-[15rem] items-center gap-3 rounded-2xl border border-white/60 p-4 shadow-xl backdrop-blur sm:-left-6">
-                <span className="bg-tertiary/10 text-tertiary flex h-11 w-11 shrink-0 items-center justify-center rounded-xl">
-                  <BadgeCheck className="h-6 w-6" />
-                </span>
-                <div className="min-w-0">
-                  <p className="text-on-surface-variant text-[0.65rem] font-bold tracking-widest uppercase">
-                    {content.ecosystem.successHighlight.eyebrow}
-                  </p>
-                  <p className="text-on-surface truncate text-sm font-bold">
-                    {content.ecosystem.successHighlight.metric}
-                  </p>
+              {/* floating news chip */}
+              {latestNews ? (
+                <Link
+                  href={`/news/${latestNews.slug}`}
+                  className="bg-surface-container-lowest animate-float shadow-primary/10 absolute -bottom-5 -left-2 flex max-w-[15rem] items-center gap-3 rounded-2xl border border-white/60 p-4 shadow-xl backdrop-blur sm:-left-6"
+                >
+                  <span className="bg-tertiary/10 text-tertiary flex h-11 w-11 shrink-0 items-center justify-center rounded-xl">
+                    <Newspaper className="h-6 w-6" />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-on-surface-variant text-[0.65rem] font-bold tracking-widest uppercase">
+                      Latest News
+                    </p>
+                    <p className="text-on-surface truncate text-sm font-bold">{latestNews.title}</p>
+                  </div>
+                </Link>
+              ) : (
+                <div className="bg-surface-container-lowest animate-float shadow-primary/10 absolute -bottom-5 -left-2 flex max-w-[15rem] items-center gap-3 rounded-2xl border border-white/60 p-4 shadow-xl backdrop-blur sm:-left-6">
+                  <span className="bg-tertiary/10 text-tertiary flex h-11 w-11 shrink-0 items-center justify-center rounded-xl">
+                    <Sparkles className="h-6 w-6" />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-on-surface-variant text-[0.65rem] font-bold tracking-widest uppercase">
+                      Coming Soon
+                    </p>
+                    <p className="text-on-surface truncate text-sm font-bold">Big things ahead</p>
+                  </div>
                 </div>
-              </div>
+              )}
             </Reveal>
           </div>
         </div>
@@ -392,28 +411,43 @@ export default async function HomePage() {
                 </Reveal>
               ))}
               <Reveal className="md:col-span-2" delay={120}>
-                <div className="bg-primary-container relative flex items-center justify-between overflow-hidden rounded-2xl p-6 text-white">
-                  <div className="animate-blob absolute -top-10 -right-6 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
-                  <div className="relative flex items-center gap-4">
-                    <BadgeCheck className="h-10 w-10 opacity-50" />
-                    <div>
-                      <p className="text-xs font-bold tracking-widest uppercase opacity-70">
-                        {content.ecosystem.successHighlight.eyebrow}
-                      </p>
-                      <h5 className="text-xl font-bold">
-                        {content.ecosystem.successHighlight.title}
-                      </h5>
+                {latestNews ? (
+                  <Link href={`/news/${latestNews.slug}`} className="block">
+                    <div className="bg-primary-container relative flex items-center justify-between overflow-hidden rounded-2xl p-6 text-white transition-opacity hover:opacity-90">
+                      <div className="animate-blob absolute -top-10 -right-6 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
+                      <div className="relative flex items-center gap-4">
+                        <Newspaper className="h-10 w-10 opacity-50" />
+                        <div>
+                          <p className="text-xs font-bold tracking-widest uppercase opacity-70">
+                            Latest News
+                          </p>
+                          <h5 className="line-clamp-1 text-xl font-bold">{latestNews.title}</h5>
+                        </div>
+                      </div>
+                      <div className="relative hidden shrink-0 text-right sm:block">
+                        {latestNews.category && (
+                          <p className="text-sm font-medium">{latestNews.category}</p>
+                        )}
+                        <p className="flex items-center justify-end gap-1 text-xs opacity-70">
+                          Read more <ArrowRight className="h-3 w-3" />
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                ) : (
+                  <div className="bg-primary-container relative flex items-center overflow-hidden rounded-2xl p-6 text-white">
+                    <div className="animate-blob absolute -top-10 -right-6 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
+                    <div className="relative flex items-center gap-4">
+                      <Sparkles className="h-10 w-10 opacity-50" />
+                      <div>
+                        <p className="text-xs font-bold tracking-widest uppercase opacity-70">
+                          Stay Tuned
+                        </p>
+                        <h5 className="text-xl font-bold">Something big is brewing</h5>
+                      </div>
                     </div>
                   </div>
-                  <div className="relative hidden text-right sm:block">
-                    <p className="text-sm font-medium">
-                      {content.ecosystem.successHighlight.metric}
-                    </p>
-                    <p className="text-xs opacity-70">
-                      {content.ecosystem.successHighlight.subtext}
-                    </p>
-                  </div>
-                </div>
+                )}
               </Reveal>
             </div>
           </div>
@@ -461,8 +495,6 @@ export default async function HomePage() {
           </Reveal>
         </div>
       </section>
-
-      <LandingFooter />
-    </div>
+    </>
   );
 }

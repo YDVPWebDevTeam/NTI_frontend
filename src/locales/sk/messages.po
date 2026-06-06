@@ -2418,8 +2418,6 @@ msgstr "Bez termínu"
 msgid "No eligibility signals were returned by the backend."
 msgstr "Backend nevrátil žiadne signály oprávnenosti."
 
-msgid "No employee invitations yet. Send the first invitation using the form on the left."
-msgstr "Zatiaľ nie sú žiadne pozvánky pre zamestnancov. Odošlite prvú pozvánku pomocou formulára vľavo."
 msgid "No evaluations were returned by the backend."
 msgstr "Backend nevrátil žiadne hodnotenia."
 
@@ -2612,8 +2610,6 @@ msgstr "z"
 msgid "Oldest submissions first"
 msgstr "Najstaršie odoslania ako prvé"
 
-#~ msgid "Onboarding"
-#~ msgstr "Onboarding"
 msgid "Onboarding can only be started after the application is approved."
 msgstr "Onboarding je možné spustiť iba po schválení prihlášky."
 
@@ -3448,9 +3444,6 @@ msgstr "Skontrolovať kandidátov backlogu"
 
 msgid "Review candidate teams"
 msgstr "Skontrolovať kandidátske tímy"
-
-#~ msgid "Review dashboard"
-#~ msgstr "Revízny dashboard"
 
 msgid "Review metadata, evaluate the application, request information, assign a mentor, and manage Program A delivery milestones."
 msgstr "Skontrolujte metadáta, vyhodnoťte prihlášku, vyžiadajte informácie, priraďte mentora a spravujte realizačné míľniky Programu A."
@@ -4296,9 +4289,6 @@ msgstr "Táto organizácia momentálne nemá dostupné žiadne záznamy o pozvá
 msgid "This project is closed and now read-only."
 msgstr "Tento projekt je uzavretý a teraz je len na čítanie."
 
-#~ msgid "This review workspace is routed correctly. Program A review queues and detail routes can now be added under /review/* without reworking auth or layout structure."
-#~ msgstr "Toto revízne pracovisko je smerované správne. Fronty revízií Programu A a detailné trasy je teraz možné pridať pod /review/* bez prepracovania autentifikácie alebo štruktúry layoutu."
-
 msgid "This section is unavailable right now."
 msgstr "Táto sekcia teraz nie je dostupná."
 
@@ -5023,6 +5013,9 @@ msgstr "Vaša administrátorská relácia vypršala."
 msgid "Your application needs additional information"
 msgstr "Vaša prihláška vyžaduje doplňujúce informácie"
 
+msgid "Your company owner account is already linked to an organization. Opening your organization workspace."
+msgstr "Váš účet vlastníka spoločnosti je už prepojený s organizáciou. Otvárame pracovný priestor vašej organizácie."
+
 msgid "your email address"
 msgstr "vaša e-mailová adresa"
 
@@ -5032,14 +5025,9 @@ msgstr "Vaša e-mailová adresa bola úspešne potvrdená. Presmerujeme vás na 
 msgid "Your email address was confirmed successfully. Redirecting you to your workspace."
 msgstr "Vaša e-mailová adresa bola úspešne potvrdená. Presmerujeme vás do vášho pracovného priestoru"
 
-#~ msgid "Your email was updated to {changedEmail}. Sign in again with the new address to continue."
-#~ msgstr "Váš e-mail bol aktualizovaný na {changedEmail}. Prihláste sa znova s novou adresou, aby ste mohli pokračovať."
-
-#~ msgid "Your email was updated. Sign in again with the new address to continue."
-#~ msgstr "Váš e-mail bol aktualizovaný. Prihláste sa znova s novou adresou, aby ste mohli pokračovať."
-
 msgid "Your evaluation"
 msgstr "Vaše hodnotenie"
+
 msgid "Your invitation token is verified before account setup."
 msgstr "Váš token pozvánky je overený pred nastavením účtu."
 

@@ -56,6 +56,10 @@ export const ADMIN_NAV_ITEMS: AdminNavItem[] = [
     href: ROUTES.ADMIN.INVITES,
     label: 'Invites',
   },
+  {
+    href: ROUTES.ADMIN.CONTACT,
+    label: 'Contact',
+  },
 ];
 
 export function getAdminNavLabel(href: string) {
@@ -93,6 +97,10 @@ export function getAdminNavLabel(href: string) {
 
   if (href === ROUTES.ADMIN.INVITES) {
     return 'Invites';
+  }
+
+  if (href === ROUTES.ADMIN.CONTACT) {
+    return 'Contact';
   }
 
   return href;
@@ -219,6 +227,10 @@ export function getAdminPageTitle(pathname: string) {
 
   if (pathname === ROUTES.ADMIN.INVITES) {
     return t`System Invites`;
+  }
+
+  if (pathname === ROUTES.ADMIN.CONTACT) {
+    return t`Contact Submissions`;
   }
 
   if (pathname.startsWith(ROUTES.ADMIN.CALLS)) {

@@ -1,21 +1,11 @@
-import type { AppLocale } from 'lib/i18n/config';
+import {
+  LANDING_FEATURED_IMAGE_URL,
+  LANDING_HERO_IMAGE_URL,
+  LANDING_MENTOR_IMAGE_URLS,
+} from './defaults';
+import type { CmsImage, LandingPageContent, PayloadLandingPage, PayloadMedia } from './types';
 
-import { fallbackLandingPageContent } from './defaults';
-import type {
-  CmsImage,
-  CmsLink,
-  LandingPageContent,
-  PayloadLandingPage,
-  PayloadLocalizedLink,
-  PayloadMedia,
-} from './types';
-
-function resolveLink(link: PayloadLocalizedLink | null | undefined, fallback: CmsLink): CmsLink {
-  return {
-    href: link?.href?.trim() || fallback.href,
-    label: link?.label?.trim() || fallback.label,
-  };
-}
+const trim = (value: string | null | undefined): string => value?.trim() ?? '';
 
 function resolveMediaUrl(cmsBaseUrl: string, url: string | null | undefined): string {
   if (!url) {
@@ -33,154 +23,94 @@ function resolveMediaUrl(cmsBaseUrl: string, url: string | null | undefined): st
   return `${cmsBaseUrl}${url.startsWith('/') ? url : `/${url}`}`;
 }
 
+/** Resolve a CMS image, falling back to a default *asset* URL (not copy). */
 function resolveImage(
   cmsBaseUrl: string,
   media: PayloadMedia | null | undefined,
-  fallback: CmsImage,
+  defaultUrl: string,
 ): CmsImage {
-  const url = resolveMediaUrl(cmsBaseUrl, media?.url);
-
   return {
-    alt: media?.alt?.trim() || fallback.alt,
-    url: url || fallback.url,
+    alt: trim(media?.alt),
+    url: resolveMediaUrl(cmsBaseUrl, media?.url) || defaultUrl,
   };
 }
 
+/**
+ * Map the raw Payload `landing-page` global into resolved content. Text fields
+ * coalesce to empty strings (the CMS seed is the source of truth); only image
+ * assets fall back to bundled defaults.
+ */
 export function mapPayloadLandingPage(
   payload: PayloadLandingPage,
-  locale: AppLocale,
   cmsBaseUrl: string,
 ): LandingPageContent {
-  const fallback = fallbackLandingPageContent[locale];
-
   return {
     ecosystem: {
-      description: payload.ecosystem?.description?.trim() || fallback.ecosystem.description,
-      heading: payload.ecosystem?.heading?.trim() || fallback.ecosystem.heading,
-      mentors:
-        payload.ecosystem?.mentors
-          ?.map((mentor, index) => {
-            const mentorFallback =
-              fallback.ecosystem.mentors[index] || fallback.ecosystem.mentors.at(-1);
-
-            if (!mentorFallback) {
-              return null;
-            }
-
-            return {
-              bio: mentor?.bio?.trim() || mentorFallback.bio,
-              image: resolveImage(cmsBaseUrl, mentor?.image, mentorFallback.image),
-              name: mentor?.name?.trim() || mentorFallback.name,
-              role: mentor?.role?.trim() || mentorFallback.role,
-            };
-          })
-          .filter((mentor): mentor is LandingPageContent['ecosystem']['mentors'][number] =>
-            Boolean(mentor),
-          ) || fallback.ecosystem.mentors,
-      partnerLogos:
-        payload.ecosystem?.partnerLogos
-          ?.map((partner) => partner?.label?.trim())
-          .filter((partner): partner is string => Boolean(partner)) ||
-        fallback.ecosystem.partnerLogos,
+      description: trim(payload.ecosystem?.description),
+      heading: trim(payload.ecosystem?.heading),
+      mentors: (payload.ecosystem?.mentors ?? []).map((mentor, index) => ({
+        bio: trim(mentor?.bio),
+        image: resolveImage(
+          cmsBaseUrl,
+          mentor?.image,
+          LANDING_MENTOR_IMAGE_URLS[index % LANDING_MENTOR_IMAGE_URLS.length],
+        ),
+        name: trim(mentor?.name),
+        role: trim(mentor?.role),
+      })),
+      partnerLogos: (payload.ecosystem?.partnerLogos ?? [])
+        .map((partner) => trim(partner?.label))
+        .filter(Boolean),
       successHighlight: {
-        eyebrow:
-          payload.ecosystem?.successHighlight?.eyebrow?.trim() ||
-          fallback.ecosystem.successHighlight.eyebrow,
-        metric:
-          payload.ecosystem?.successHighlight?.metric?.trim() ||
-          fallback.ecosystem.successHighlight.metric,
-        subtext:
-          payload.ecosystem?.successHighlight?.subtext?.trim() ||
-          fallback.ecosystem.successHighlight.subtext,
-        title:
-          payload.ecosystem?.successHighlight?.title?.trim() ||
-          fallback.ecosystem.successHighlight.title,
+        eyebrow: trim(payload.ecosystem?.successHighlight?.eyebrow),
+        metric: trim(payload.ecosystem?.successHighlight?.metric),
+        subtext: trim(payload.ecosystem?.successHighlight?.subtext),
+        title: trim(payload.ecosystem?.successHighlight?.title),
       },
     },
     finalCTA: {
-      description: payload.finalCTA?.description?.trim() || fallback.finalCTA.description,
-      primaryCTA: resolveLink(payload.finalCTA?.primaryCTA, fallback.finalCTA.primaryCTA),
-      secondaryCTA: resolveLink(payload.finalCTA?.secondaryCTA, fallback.finalCTA.secondaryCTA),
-      title: payload.finalCTA?.title?.trim() || fallback.finalCTA.title,
+      description: trim(payload.finalCTA?.description),
+      title: trim(payload.finalCTA?.title),
     },
     hero: {
-      description: payload.hero?.description?.trim() || fallback.hero.description,
-      eyebrow: payload.hero?.eyebrow?.trim() || fallback.hero.eyebrow,
-      heroImage: resolveImage(cmsBaseUrl, payload.hero?.heroImage, fallback.hero.heroImage),
-      learnMoreCTA: resolveLink(payload.hero?.learnMoreCTA, fallback.hero.learnMoreCTA),
-      primaryCTA: resolveLink(payload.hero?.primaryCTA, fallback.hero.primaryCTA),
-      secondaryCTA: resolveLink(payload.hero?.secondaryCTA, fallback.hero.secondaryCTA),
-      titleHighlight: payload.hero?.titleHighlight?.trim() || fallback.hero.titleHighlight,
-      titlePrefix: payload.hero?.titlePrefix?.trim() || fallback.hero.titlePrefix,
-      titleSuffix: payload.hero?.titleSuffix?.trim() || fallback.hero.titleSuffix,
+      description: trim(payload.hero?.description),
+      eyebrow: trim(payload.hero?.eyebrow),
+      heroImage: resolveImage(cmsBaseUrl, payload.hero?.heroImage, LANDING_HERO_IMAGE_URL),
+      titleHighlight: trim(payload.hero?.titleHighlight),
+      titlePrefix: trim(payload.hero?.titlePrefix),
+      titleSuffix: trim(payload.hero?.titleSuffix),
     },
     infrastructure: {
-      cards:
-        payload.infrastructure?.cards
-          ?.map((card, index) => {
-            const cardFallback =
-              fallback.infrastructure.cards[index] || fallback.infrastructure.cards.at(-1);
-
-            if (!cardFallback) {
-              return null;
-            }
-
-            return {
-              description: card?.description?.trim() || cardFallback.description,
-              icon: card?.icon || cardFallback.icon,
-              title: card?.title?.trim() || cardFallback.title,
-              tone: card?.tone || cardFallback.tone,
-            };
-          })
-          .filter((card): card is LandingPageContent['infrastructure']['cards'][number] =>
-            Boolean(card),
-          ) || fallback.infrastructure.cards,
-      eyebrow: payload.infrastructure?.eyebrow?.trim() || fallback.infrastructure.eyebrow,
+      cards: (payload.infrastructure?.cards ?? []).map((card) => ({
+        description: trim(card?.description),
+        icon: card?.icon ?? 'rocket',
+        title: trim(card?.title),
+        tone: card?.tone ?? 'surface',
+      })),
+      eyebrow: trim(payload.infrastructure?.eyebrow),
       featuredCard: {
-        description:
-          payload.infrastructure?.featuredCard?.description?.trim() ||
-          fallback.infrastructure.featuredCard.description,
-        icon:
-          payload.infrastructure?.featuredCard?.icon || fallback.infrastructure.featuredCard.icon,
+        description: trim(payload.infrastructure?.featuredCard?.description),
+        icon: payload.infrastructure?.featuredCard?.icon ?? 'rocket',
         image: resolveImage(
           cmsBaseUrl,
           payload.infrastructure?.featuredCard?.image,
-          fallback.infrastructure.featuredCard.image,
+          LANDING_FEATURED_IMAGE_URL,
         ),
-        title:
-          payload.infrastructure?.featuredCard?.title?.trim() ||
-          fallback.infrastructure.featuredCard.title,
+        title: trim(payload.infrastructure?.featuredCard?.title),
       },
-      heading: payload.infrastructure?.heading?.trim() || fallback.infrastructure.heading,
+      heading: trim(payload.infrastructure?.heading),
     },
     programs: {
-      heading: payload.programs?.heading?.trim() || fallback.programs.heading,
-      items:
-        payload.programs?.items
-          ?.map((program, index) => {
-            const programFallback =
-              fallback.programs.items[index] || fallback.programs.items.at(-1);
-
-            if (!programFallback) {
-              return null;
-            }
-
-            return {
-              accent: program?.accent || programFallback.accent,
-              bulletItems:
-                program?.bulletItems
-                  ?.map((bullet) => bullet?.label?.trim())
-                  .filter((bullet): bullet is string => Boolean(bullet)) ||
-                programFallback.bulletItems,
-              cta: resolveLink(program?.cta, programFallback.cta),
-              description: program?.description?.trim() || programFallback.description,
-              icon: program?.icon || programFallback.icon,
-              title: program?.title?.trim() || programFallback.title,
-            };
-          })
-          .filter((program): program is LandingPageContent['programs']['items'][number] =>
-            Boolean(program),
-          ) || fallback.programs.items,
+      heading: trim(payload.programs?.heading),
+      items: (payload.programs?.items ?? []).map((program) => ({
+        accent: program?.accent ?? 'primary',
+        bulletItems: (program?.bulletItems ?? [])
+          .map((bullet) => trim(bullet?.label))
+          .filter(Boolean),
+        description: trim(program?.description),
+        icon: program?.icon ?? 'rocket',
+        title: trim(program?.title),
+      })),
     },
   };
 }

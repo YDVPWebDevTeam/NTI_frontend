@@ -33,19 +33,31 @@ export function LandingHeader() {
         >
           <Link
             className="text-slate-600 transition-colors hover:text-blue-900 dark:text-slate-400 dark:hover:text-white"
-            href={ROUTES.HOME.PROGRAMS}
+            href={ROUTES.ABOUT}
+          >
+            {t`About`}
+          </Link>
+          <Link
+            className="text-slate-600 transition-colors hover:text-blue-900 dark:text-slate-400 dark:hover:text-white"
+            href={ROUTES.PROGRAMS}
           >
             {t`Programs`}
           </Link>
           <Link
             className="text-slate-600 transition-colors hover:text-blue-900 dark:text-slate-400 dark:hover:text-white"
-            href={ROUTES.HOME.MENTORS}
+            href={ROUTES.MENTORS}
           >
             {t`Mentors`}
           </Link>
           <Link
             className="text-slate-600 transition-colors hover:text-blue-900 dark:text-slate-400 dark:hover:text-white"
-            href={ROUTES.HOME.NEWS}
+            href={ROUTES.PARTNERS}
+          >
+            {t`Partners`}
+          </Link>
+          <Link
+            className="text-slate-600 transition-colors hover:text-blue-900 dark:text-slate-400 dark:hover:text-white"
+            href={ROUTES.NEWS}
           >
             {t`News`}
           </Link>

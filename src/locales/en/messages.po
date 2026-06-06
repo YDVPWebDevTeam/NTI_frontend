@@ -580,6 +580,15 @@ msgstr "Call unavailable"
 msgid "Calls"
 msgstr "Calls"
 
+msgid "Calls & Deadlines"
+msgstr "Calls & Deadlines"
+
+msgid "Calls could not be loaded"
+msgstr "Calls could not be loaded"
+
+msgid "Calls pagination"
+msgstr "Calls pagination"
+
 msgid "Calls still open for new submissions."
 msgstr "Calls still open for new submissions."
 
@@ -937,6 +946,9 @@ msgstr "CREATE ACCOUNT AND JOIN TEAM"
 msgid "Create account from invite"
 msgstr "Create account from invite"
 
+msgid "CREATE AN ACCOUNT"
+msgstr "CREATE AN ACCOUNT"
+
 msgid "Create an employee account or sign in with your existing account to accept this organization invitation."
 msgstr "Create an employee account or sign in with your existing account to accept this organization invitation."
 
@@ -976,8 +988,8 @@ msgstr "Create project workspace"
 msgid "Create Specialization"
 msgstr "Create Specialization"
 
-msgid "CREATE STUDENT ACCOUNT"
-msgstr "CREATE STUDENT ACCOUNT"
+#~ msgid "CREATE STUDENT ACCOUNT"
+#~ msgstr "CREATE STUDENT ACCOUNT"
 
 msgid "Create System Invite"
 msgstr "Create System Invite"
@@ -1521,6 +1533,9 @@ msgstr "Explain why this organization should be rejected."
 msgid "Explore"
 msgstr "Explore"
 
+msgid "Explore active program calls, review important dates, and prepare your application before the deadline."
+msgstr "Explore active program calls, review important dates, and prepare your application before the deadline."
+
 msgid "Export Current View"
 msgstr "Export Current View"
 
@@ -1592,6 +1607,9 @@ msgstr "File"
 
 msgid "Filter by call"
 msgstr "Filter by call"
+
+#~ msgid "Filter calls by program type"
+#~ msgstr "Filter calls by program type"
 
 msgid "Filter faculties on this page"
 msgstr "Filter faculties on this page"
@@ -1707,6 +1725,12 @@ msgstr "Go home"
 msgid "Go to dashboard"
 msgstr "Go to dashboard"
 
+msgid "Go to next calls page"
+msgstr "Go to next calls page"
+
+msgid "Go to previous calls page"
+msgstr "Go to previous calls page"
+
 msgid "Go to site home"
 msgstr "Go to site home"
 
@@ -1740,8 +1764,8 @@ msgstr ""
 "\n"
 ""
 
-msgid "Hidden revoked invitation cards restored."
-msgstr "Hidden revoked invitation cards restored."
+#~ msgid "Hidden revoked invitation cards restored."
+#~ msgstr "Hidden revoked invitation cards restored."
 
 msgid "Hide password"
 msgstr "Hide password"
@@ -1906,11 +1930,11 @@ msgstr "Invited teammates join as company employees."
 msgid "Invites"
 msgstr "Invites"
 
-msgid "Jane Doe"
-msgstr "Jane Doe"
-
 msgid "Invites are only available after your account and organization are active."
 msgstr "Invites are only available after your account and organization are active."
+
+msgid "Jane Doe"
+msgstr "Jane Doe"
 
 msgid "Job Id"
 msgstr "Job Id"
@@ -2692,6 +2716,9 @@ msgstr "NTI Admin"
 msgid "NTI final acceptance recorded."
 msgstr "NTI final acceptance recorded."
 
+#~ msgid "NTI Programs"
+#~ msgstr "NTI Programs"
+
 msgid "NTI student workspace. Separate flows for profile completion, team coordination, and program work."
 msgstr "NTI student workspace. Separate flows for profile completion, team coordination, and program work."
 
@@ -2955,6 +2982,9 @@ msgstr "Owner only"
 
 msgid "Page"
 msgstr "Page"
+
+msgid "Page {currentPage} of {totalPages}"
+msgstr "Page {currentPage} of {totalPages}"
 
 msgid "Pagination"
 msgstr "Pagination"
@@ -3356,8 +3386,8 @@ msgstr "Reassign mentor"
 msgid "Received"
 msgstr "Received"
 
-msgid "Recent organization-scoped Program B backlog items from the dedicated summary endpoint."
-msgstr "Recent organization-scoped Program B backlog items from the dedicated summary endpoint."
+#~ msgid "Recent organization-scoped Program B backlog items from the dedicated summary endpoint."
+#~ msgstr "Recent organization-scoped Program B backlog items from the dedicated summary endpoint."
 
 msgid "Recent organizations that still need an operational decision."
 msgstr "Recent organizations that still need an operational decision."
@@ -3400,6 +3430,9 @@ msgstr "Register"
 
 msgid "Register company owner"
 msgstr "Register company owner"
+
+msgid "Register to apply"
+msgstr "Register to apply"
 
 msgid "Register your account to continue with organization onboarding."
 msgstr "Register your account to continue with organization onboarding."
@@ -3846,14 +3879,14 @@ msgstr "Selected University"
 msgid "Selected university values are loaded here for direct editing."
 msgstr "Selected university values are loaded here for direct editing."
 
-msgid "Send an invitation to a colleague. The invited user will join as a company employee."
-msgstr "Send an invitation to a colleague. The invited user will join as a company employee."
+#~ msgid "Send an invitation to a colleague. The invited user will join as a company employee."
+#~ msgstr "Send an invitation to a colleague. The invited user will join as a company employee."
 
 msgid "Send another message"
 msgstr "Send another message"
 
-msgid "SEND INVITATION"
-msgstr "SEND INVITATION"
+#~ msgid "SEND INVITATION"
+#~ msgstr "SEND INVITATION"
 
 msgid "Send invite"
 msgstr "Send invite"
@@ -4281,6 +4314,9 @@ msgstr "That was a lot of typing, but you made it! Your profile is officially sp
 msgid "The active calls request failed, but the rest of the dashboard is still available."
 msgstr "The active calls request failed, but the rest of the dashboard is still available."
 
+msgid "The active program calls are temporarily unavailable. Please try again later."
+msgstr "The active program calls are temporarily unavailable. Please try again later."
+
 msgid "The admin session could not be verified. Retry once the connection is available."
 msgstr "The admin session could not be verified. Retry once the connection is available."
 
@@ -4329,8 +4365,11 @@ msgstr "The invite could not be validated right now. Please try again later."
 msgid "The invite detail request failed for this organization."
 msgstr "The invite detail request failed for this organization."
 
-msgid "The link is invalid or expired. Request a new link and try again."
-msgstr "The link is invalid or expired. Request a new link and try again."
+msgid "The link is invalid or expired. Please return to login and try again."
+msgstr "The link is invalid or expired. Please return to login and try again."
+
+#~ msgid "The link is invalid or expired. Request a new link and try again."
+#~ msgstr "The link is invalid or expired. Request a new link and try again."
 
 msgid "The needs-info thread could not be loaded."
 msgstr "The needs-info thread could not be loaded."
@@ -4391,6 +4430,9 @@ msgstr "The verification link could not be completed. You can try again or retur
 
 msgid "There are currently no applications in the evaluation stage."
 msgstr "There are currently no applications in the evaluation stage."
+
+msgid "There are no active program calls at the moment. Please check again later."
+msgstr "There are no active program calls at the moment. Please check again later."
 
 msgid "There are no currently open calls receiving submissions."
 msgstr "There are no currently open calls receiving submissions."

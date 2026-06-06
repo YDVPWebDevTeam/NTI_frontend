@@ -434,10 +434,10 @@ msgid "Assigned:"
 msgstr "Priradený:"
 
 msgid "At least 10 characters"
-msgstr ""
+msgstr "Minimálne 10 znakov"
 
 msgid "At least 2 characters"
-msgstr ""
+msgstr "Minimálne 2 znaky"
 
 msgid "At least one milestone is overdue and still needs status movement."
 msgstr "Aspoň jeden míľnik je po termíne a stále potrebuje posun stavu."
@@ -579,6 +579,15 @@ msgstr "Výzva nie je dostupná"
 
 msgid "Calls"
 msgstr "Výzvy"
+
+msgid "Calls & Deadlines"
+msgstr "Výzvy a termíny"
+
+msgid "Calls could not be loaded"
+msgstr "Výzvy sa nepodarilo načítať"
+
+msgid "Calls pagination"
+msgstr "Stránkovanie výziev"
 
 msgid "Calls still open for new submissions."
 msgstr "Výzvy sú stále otvorené pre nové prihlášky."
@@ -937,6 +946,9 @@ msgstr "VYTVORIŤ ÚČET A PRIPOJIŤ SA K TÍMU"
 msgid "Create account from invite"
 msgstr "Vytvoriť účet z pozvánky"
 
+msgid "CREATE AN ACCOUNT"
+msgstr "VYTVORIŤ ÚČET"
+
 msgid "Create an employee account or sign in with your existing account to accept this organization invitation."
 msgstr "Vytvorte zamestnanecký účet alebo sa prihláste pomocou existujúceho účtu a prijmite túto pozvánku do organizácie."
 
@@ -976,8 +988,8 @@ msgstr "Vytvoriť projektové pracovisko"
 msgid "Create Specialization"
 msgstr "Vytvoriť špecializáciu"
 
-msgid "CREATE STUDENT ACCOUNT"
-msgstr "VYTVORIŤ ŠTUDENTSKÝ ÚČET"
+#~ msgid "CREATE STUDENT ACCOUNT"
+#~ msgstr "VYTVORIŤ ŠTUDENTSKÝ ÚČET"
 
 msgid "Create System Invite"
 msgstr "Vytvoriť systémovú pozvánku"
@@ -1387,7 +1399,7 @@ msgid "Enter a strong password"
 msgstr "Zadajte silné heslo"
 
 msgid "Enter a valid email"
-msgstr ""
+msgstr "Zadajte platnú e-mailovú adresu"
 
 msgid "Enter a valid non-negative number for the grant budget."
 msgstr "Zadajte platné kladné číslo pre rozpočet grantu."
@@ -1521,6 +1533,9 @@ msgstr "Vysvetlite, prečo by mala byť táto organizácia zamietnutá."
 msgid "Explore"
 msgstr "Objavte"
 
+msgid "Explore active program calls, review important dates, and prepare your application before the deadline."
+msgstr "Prezrite si aktívne programové výzvy, skontrolujte dôležité termíny a pripravte svoju prihlášku pred uzávierkou."
+
 msgid "Export Current View"
 msgstr "Exportovať aktuálne zobrazenie"
 
@@ -1592,6 +1607,9 @@ msgstr "Súbor"
 
 msgid "Filter by call"
 msgstr "Filtrovať podľa výzvy"
+
+#~ msgid "Filter calls by program type"
+#~ msgstr "Filtrovať výzvy podľa typu programu"
 
 msgid "Filter faculties on this page"
 msgstr "Filtrovať fakulty na tejto stránke"
@@ -1707,6 +1725,12 @@ msgstr "Prejsť na úvodnú stránku"
 msgid "Go to dashboard"
 msgstr "Prejsť na hlavnú stránku"
 
+msgid "Go to next calls page"
+msgstr "Prejsť na nasledujúcu stránku výziev"
+
+msgid "Go to previous calls page"
+msgstr "Prejsť na predchádzajúcu stránku výziev"
+
 msgid "Go to site home"
 msgstr "Prejsť na domovskú stránku"
 
@@ -1736,9 +1760,12 @@ msgid ""
 "\n"
 ""
 msgstr ""
+"Dobrý deň, chcel(a) by som sa dozvedieť viac o možnosti pripojiť sa k NTI ako mentor. Tu je niekoľko informácií o mne:\n"
+"\" \"\n"
+""
 
-msgid "Hidden revoked invitation cards restored."
-msgstr "Skryté karty zrušených pozvánok boli obnovené."
+#~ msgid "Hidden revoked invitation cards restored."
+#~ msgstr "Skryté karty zrušených pozvánok boli obnovené."
 
 msgid "Hide password"
 msgstr "Skryť heslo"
@@ -1903,11 +1930,11 @@ msgstr "Pozvaní kolegovia sa pripoja ako zamestnanci spoločnosti."
 msgid "Invites"
 msgstr "Pozvania"
 
-msgid "Jane Doe"
-msgstr ""
-
 msgid "Invites are only available after your account and organization are active."
 msgstr "Pozvánky budú dostupné až po aktivácii vášho účtu a organizácie."
+
+msgid "Jane Doe"
+msgstr "Jana Nováková"
 
 msgid "Job Id"
 msgstr "ID úlohy"
@@ -2689,6 +2716,9 @@ msgstr "NTI administrátor"
 msgid "NTI final acceptance recorded."
 msgstr "Finálna akceptácia NTI bola zaznamenaná."
 
+#~ msgid "NTI Programs"
+#~ msgstr "Programy NTI"
+
 msgid "NTI student workspace. Separate flows for profile completion, team coordination, and program work."
 msgstr "Študentské pracovisko NTI. Samostatné toky pre dokončenie profilu, koordináciu tímu a programovú prácu."
 
@@ -2952,6 +2982,9 @@ msgstr "Len pre vlastníka"
 
 msgid "Page"
 msgstr "Strana"
+
+msgid "Page {currentPage} of {totalPages}"
+msgstr "Strana {currentPage} z {totalPages}"
 
 msgid "Pagination"
 msgstr "Stránkovanie"
@@ -3353,8 +3386,8 @@ msgstr "Zmeniť mentora"
 msgid "Received"
 msgstr "Prijaté"
 
-msgid "Recent organization-scoped Program B backlog items from the dedicated summary endpoint."
-msgstr "Nedávne položky backlogu Programu B v rozsahu organizácie z vyhradeného summary endpointu."
+#~ msgid "Recent organization-scoped Program B backlog items from the dedicated summary endpoint."
+#~ msgstr "Nedávne položky backlogu Programu B v rozsahu organizácie z vyhradeného summary endpointu."
 
 msgid "Recent organizations that still need an operational decision."
 msgstr "Nedávne organizácie, ktoré stále potrebujú operačné rozhodnutie."
@@ -3397,6 +3430,9 @@ msgstr "Registrácia"
 
 msgid "Register company owner"
 msgstr "Registrovať vlastníka spoločnosti"
+
+msgid "Register to apply"
+msgstr "Zaregistrovať sa a podať prihlášku"
 
 msgid "Register your account to continue with organization onboarding."
 msgstr "Zaregistrujte svoj účet pre pokračovanie v onboardingu organizácie."
@@ -3843,14 +3879,14 @@ msgstr "Vybraná univerzita"
 msgid "Selected university values are loaded here for direct editing."
 msgstr "Hodnoty vybranej univerzity sú načítané tu pre priamu úpravu."
 
-msgid "Send an invitation to a colleague. The invited user will join as a company employee."
-msgstr "Odošlite pozvánku kolegovi. Pozvaný používateľ sa pripojí ako zamestnanec spoločnosti."
+#~ msgid "Send an invitation to a colleague. The invited user will join as a company employee."
+#~ msgstr "Odošlite pozvánku kolegovi. Pozvaný používateľ sa pripojí ako zamestnanec spoločnosti."
 
 msgid "Send another message"
 msgstr "Odoslať ďalšiu správu"
 
-msgid "SEND INVITATION"
-msgstr "ODOSLAŤ POZVÁNKU"
+#~ msgid "SEND INVITATION"
+#~ msgstr "ODOSLAŤ POZVÁNKU"
 
 msgid "Send invite"
 msgstr "Odoslať pozvánku"
@@ -4278,6 +4314,9 @@ msgstr "Bolo toho veľa na vyplnenie, ale zvládli ste to! Váš profil je pripr
 msgid "The active calls request failed, but the rest of the dashboard is still available."
 msgstr "Požiadavka na aktívne výzvy zlyhala, ale zvyšok prehľadu je stále dostupný."
 
+msgid "The active program calls are temporarily unavailable. Please try again later."
+msgstr "Aktívne programové výzvy sú dočasne nedostupné. Skúste to znova neskôr."
+
 msgid "The admin session could not be verified. Retry once the connection is available."
 msgstr "Reláciu správcu sa nepodarilo overiť. Skúste to znova, keď bude pripojenie dostupné."
 
@@ -4326,8 +4365,11 @@ msgstr "Pozvánku sa momentálne nepodarilo overiť. Skúste to prosím neskôr.
 msgid "The invite detail request failed for this organization."
 msgstr "Požiadavka na detail pozvánky pre túto organizáciu zlyhala."
 
-msgid "The link is invalid or expired. Request a new link and try again."
-msgstr "Odkaz je neplatný alebo jeho platnosť vypršala. Požiadajte o nový odkaz a skúste to znova."
+msgid "The link is invalid or expired. Please return to login and try again."
+msgstr "Odkaz je neplatný alebo jeho platnosť vypršala. Vráťte sa na prihlasovaciu stránku a skúste to znova."
+
+#~ msgid "The link is invalid or expired. Request a new link and try again."
+#~ msgstr "Odkaz je neplatný alebo jeho platnosť vypršala. Požiadajte o nový odkaz a skúste to znova."
 
 msgid "The needs-info thread could not be loaded."
 msgstr "Vlákno so žiadosťou o doplnenie informácií sa nepodarilo načítať."
@@ -4369,7 +4411,7 @@ msgid "The specialization will be created under the selected faculty."
 msgstr "Špecializácia bude vytvorená pod vybranou fakultou."
 
 msgid "The submissions list could not be loaded."
-msgstr ""
+msgstr "Zoznam odovzdaných prihlášok sa nepodarilo načítať."
 
 msgid "The summary counts are unavailable right now, but the dedicated backlog and project sections can still load independently."
 msgstr "Súhrnné počty teraz nie sú dostupné, ale samostatné sekcie backlogu a projektov sa môžu načítať nezávisle."
@@ -4388,6 +4430,9 @@ msgstr "Overovací odkaz sa nepodarilo dokončiť. Môžete to skúsiť znova al
 
 msgid "There are currently no applications in the evaluation stage."
 msgstr "Momentálne nie sú žiadne prihlášky vo fáze hodnotenia."
+
+msgid "There are no active program calls at the moment. Please check again later."
+msgstr "Momentálne nie sú k dispozícii žiadne aktívne programové výzvy. Skontrolujte to znova neskôr."
 
 msgid "There are no currently open calls receiving submissions."
 msgstr "Momentálne nie sú otvorené žiadne výzvy, ktoré prijímajú prihlášky."

@@ -247,6 +247,9 @@ msgstr "Pridať zručnosť"
 msgid "Add your CV, skills, and supporting professional details."
 msgstr "Pridajte svoje CV, zručnosti a doplňujúce profesionálne údaje."
 
+msgid "Add your evaluation"
+msgstr "Pridať vaše hodnotenie"
+
 msgid "Additional submitted section data."
 msgstr "Ďalšie odoslané údaje sekcie."
 
@@ -282,6 +285,9 @@ msgstr "Administrátorský prístup"
 
 msgid "All"
 msgstr "Všetko"
+
+msgid "All calls"
+msgstr "Všetky výzvy"
 
 msgid "All programs"
 msgstr "Všetky programy"
@@ -340,11 +346,17 @@ msgstr "Sekcie prihlášky sa nepodarilo načítať"
 msgid "Application submitted."
 msgstr "Prihláška bola odoslaná"
 
+msgid "Application summary"
+msgstr "Súhrn prihlášky"
+
 msgid "Application withdrawn."
 msgstr "Prihláška bola stiahnutá."
 
 msgid "Applications"
 msgstr "Prihlášky"
+
+msgid "Applications currently in evaluation. Open an application to score its criteria and record your recommendation."
+msgstr "Prihlášky, ktoré sa práve hodnotia. Otvorte prihlášku, ohodnoťte jej kritériá a zaznamenajte svoje odporúčanie."
 
 msgid "Applications In Scope"
 msgstr "Prihlášky v zábere"
@@ -1193,11 +1205,17 @@ msgstr "Upraviť fakultu"
 msgid "Edit milestone"
 msgstr "Upraviť míľnik"
 
+msgid "Edit my evaluation"
+msgstr "Upraviť moje hodnotenie"
+
 msgid "Edit Specialization"
 msgstr "Upraviť špecializáciu"
 
 msgid "Edit University"
 msgstr "Upraviť univerzitu"
+
+msgid "Edit your evaluation"
+msgstr "Upraviť vaše hodnotenie"
 
 msgid "Education details, academic verification, and declaration."
 msgstr "Detaily vzdelania, akademické overenie a vyhlásenie."
@@ -1355,6 +1373,9 @@ msgstr "Podniková dátová analytika"
 msgid "Entry point for Program B stakeholders. Manage technical challenges, oversee precision metrics, and interface directly with emerging talent pools through the Engine portal."
 msgstr "Vstupný bod pre partnerov Programu B. Spravujte technické zadania, sledujte kľúčové ukazovatele a spolupracujte s talentmi cez portál Engine."
 
+msgid "Evaluated"
+msgstr "Ohodnotené"
+
 msgid "Evaluating"
 msgstr "V hodnotení"
 
@@ -1363,6 +1384,9 @@ msgstr "Hodnotenie je možné vytvoriť iba po formálnom overení alebo počas 
 
 msgid "Evaluation can only be started after formal verification."
 msgstr "Hodnotenie je možné spustiť iba po formálnom overení."
+
+msgid "Evaluation can only be submitted after formal verification or during evaluation."
+msgstr "Hodnotenie je možné odoslať až po formálnom overení alebo počas hodnotenia."
 
 msgid "Evaluation queue and review flows"
 msgstr "Front hodnotenia a revízne toky"
@@ -1894,6 +1918,9 @@ msgstr "Načítava sa detail prihlášky..."
 msgid "Loading application sections..."
 msgstr "Načítavajú sa sekcie prihlášky..."
 
+msgid "Loading applications to review..."
+msgstr "Načítavajú sa prihlášky na kontrolu..."
+
 msgid "Loading backlog item"
 msgstr "Načítava sa položka backlogu"
 
@@ -1908,6 +1935,9 @@ msgstr "Načítava sa dataset..."
 
 msgid "Loading documents…"
 msgstr "Načítavajú sa dokumenty…"
+
+msgid "Loading eligibility signals..."
+msgstr "Načítavajú sa signály oprávnenosti..."
 
 msgid "Loading evaluations..."
 msgstr "Načítavajú sa hodnotenia..."
@@ -2229,6 +2259,9 @@ msgstr "Nové heslo"
 msgid "New to NTI?"
 msgstr "Ste v NTI nový?"
 
+msgid "Newest submissions first"
+msgstr "Najnovšie odoslania ako prvé"
+
 msgid "News"
 msgstr "Novinky"
 
@@ -2278,6 +2311,9 @@ msgstr "Backend nevrátil žiadne sekcie prihlášky."
 msgid "No applications found."
 msgstr "Nenašli sa žiadne prihlášky."
 
+msgid "No applications to review"
+msgstr "Žiadne prihlášky na kontrolu"
+
 msgid "No assigned projects"
 msgstr "Žiadne priradené projekty"
 
@@ -2319,6 +2355,9 @@ msgstr "Zatiaľ neboli nahrané žiadne dokumenty."
 
 msgid "No due date"
 msgstr "Bez termínu"
+
+msgid "No eligibility signals were returned by the backend."
+msgstr "Backend nevrátil žiadne signály oprávnenosti."
 
 msgid "No employee invitations yet. Send the first invitation using the form on the left."
 msgstr "Zatiaľ nie sú žiadne pozvánky pre zamestnancov. Odošlite prvú pozvánku pomocou formulára vľavo."
@@ -2467,6 +2506,9 @@ msgstr "Nešpecifikované"
 msgid "Not submitted"
 msgstr "Neodoslané"
 
+msgid "Not yet evaluated"
+msgstr "Zatiaľ neohodnotené"
+
 msgid "Note cannot be empty."
 msgstr "Poznámka nemôže byť prázdna."
 
@@ -2496,6 +2538,9 @@ msgstr "Počet uznaných predmetov"
 
 msgid "of"
 msgstr "z"
+
+msgid "Oldest submissions first"
+msgstr "Najstaršie odoslania ako prvé"
 
 #~ msgid "Onboarding"
 #~ msgstr "Onboarding"
@@ -2695,6 +2740,9 @@ msgstr "Organizácie čakajúce na kontrolu alebo už zamietnuté."
 
 msgid "Other"
 msgstr "Iné"
+
+msgid "Other reviewers' evaluations"
+msgstr "Hodnotenia ostatných hodnotiteľov"
 
 msgid "Output"
 msgstr "Výstup"
@@ -3295,8 +3343,8 @@ msgstr "Skontrolovať kandidátov backlogu"
 msgid "Review candidate teams"
 msgstr "Skontrolovať kandidátske tímy"
 
-msgid "Review dashboard"
-msgstr "Revízny dashboard"
+#~ msgid "Review dashboard"
+#~ msgstr "Revízny dashboard"
 
 msgid "Review metadata, evaluate the application, request information, assign a mentor, and manage Program A delivery milestones."
 msgstr "Skontrolujte metadáta, vyhodnoťte prihlášku, vyžiadajte informácie, priraďte mentora a spravujte realizačné míľniky Programu A."
@@ -3306,6 +3354,9 @@ msgstr "Kontrola organizácií"
 
 msgid "Review Program A applications, move them through moderation, assign mentors, and track delivery milestones."
 msgstr "Kontrolujte prihlášky Programu A, presúvajte ich cez moderovanie, priraďujte mentorov a sledujte realizačné míľniky."
+
+msgid "Review queue"
+msgstr "Fronta kontroly"
 
 msgid "Review Queue"
 msgstr "Front na kontrolu"
@@ -3324,6 +3375,9 @@ msgstr "Revízne pracovisko"
 
 msgid "Review your application details, required documents, eligibility checks, and messages from the NTI team."
 msgstr "Skontrolujte detaily svojej prihlášky, požadované dokumenty, kontroly oprávnenosti a správy od tímu NTI"
+
+msgid "Reviewer"
+msgstr "Hodnotiteľ"
 
 msgid "Reviews & notes"
 msgstr "Hodnotenia a poznámky"
@@ -3415,6 +3469,9 @@ msgstr "Ukladá sa..."
 
 msgid "Saving…"
 msgstr "Ukladá sa…"
+
+msgid "Score each criterion from 0 to 100, choose a recommendation, and optionally add a comment."
+msgstr "Ohodnoťte každé kritérium od 0 do 100, vyberte odporúčanie a voliteľne pridajte komentár."
 
 msgid "Search"
 msgstr "Vyhľadávanie"
@@ -3628,6 +3685,9 @@ msgstr "Zobraziť heslo"
 
 msgid "Showcase your best projects and tell us about yourself."
 msgstr "Predstavte svoje najlepšie projekty a povedzte nám niečo o sebe."
+
+msgid "Showing applications in the evaluation stage."
+msgstr "Zobrazujú sa prihlášky vo fáze hodnotenia."
 
 msgid "Showing Program A moderation rows."
 msgstr "Zobrazujú sa riadky moderovania Programu A."
@@ -4073,6 +4133,9 @@ msgstr "Zoznam používateľov sa nepodarilo načítať."
 msgid "The verification link could not be completed. You can try again or return to login."
 msgstr "Overovací odkaz sa nepodarilo dokončiť. Môžete to skúsiť znova alebo sa vrátiť na prihlásenie."
 
+msgid "There are currently no applications in the evaluation stage."
+msgstr "Momentálne nie sú žiadne prihlášky vo fáze hodnotenia."
+
 msgid "There are no currently open calls receiving submissions."
 msgstr "Momentálne nie sú otvorené žiadne výzvy, ktoré prijímajú prihlášky."
 
@@ -4124,8 +4187,8 @@ msgstr "Táto organizácia momentálne nemá dostupné žiadne záznamy o pozvá
 msgid "This project is closed and now read-only."
 msgstr "Tento projekt je uzavretý a teraz je len na čítanie."
 
-msgid "This review workspace is routed correctly. Program A review queues and detail routes can now be added under /review/* without reworking auth or layout structure."
-msgstr "Toto revízne pracovisko je smerované správne. Fronty revízií Programu A a detailné trasy je teraz možné pridať pod /review/* bez prepracovania autentifikácie alebo štruktúry layoutu."
+#~ msgid "This review workspace is routed correctly. Program A review queues and detail routes can now be added under /review/* without reworking auth or layout structure."
+#~ msgstr "Toto revízne pracovisko je smerované správne. Fronty revízií Programu A a detailné trasy je teraz možné pridať pod /review/* bez prepracovania autentifikácie alebo štruktúry layoutu."
 
 msgid "This step is for inviting teammates once the team lead is ready."
 msgstr "Tento krok slúži na pozvanie spoluhráčov, keď je vedúci tímu pripravený."
@@ -4267,6 +4330,9 @@ msgstr "Prihlášku sa nepodarilo načítať"
 
 msgid "Unable to load application detail from the backend."
 msgstr "Nepodarilo sa načítať detail prihlášky z backendu."
+
+msgid "Unable to load applications from the backend."
+msgstr "Nepodarilo sa načítať prihlášky z backendu."
 
 msgid "Unable to load backlog preview"
 msgstr "Nepodarilo sa načítať náhľad backlogu"
@@ -4474,6 +4540,9 @@ msgstr "Univerzita bola aktualizovaná."
 
 msgid "Unknown call"
 msgstr "Neznáma výzva"
+
+msgid "Unknown signal"
+msgstr "Neznámy signál"
 
 msgid "Unknown team"
 msgstr "Neznámy tím"
@@ -4788,6 +4857,9 @@ msgstr "Vaša e-mailová adresa bola úspešne potvrdená. Presmerujeme vás do 
 
 #~ msgid "Your email was updated. Sign in again with the new address to continue."
 #~ msgstr "Váš e-mail bol aktualizovaný. Prihláste sa znova s novou adresou, aby ste mohli pokračovať."
+
+msgid "Your evaluation"
+msgstr "Vaše hodnotenie"
 
 msgid "Your invitation token is verified before account setup."
 msgstr "Váš token pozvánky je overený pred nastavením účtu."

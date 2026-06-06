@@ -2110,9 +2110,6 @@ msgstr "Member removal stays unavailable to non-leads and when the team is locke
 msgid "Member removed."
 msgstr "Member removed."
 
-#~ msgid "Member role updated."
-#~ msgstr "Member role updated."
-
 msgid "Members"
 msgstr "Members"
 
@@ -4545,9 +4542,6 @@ msgstr "Unable to update backlog status."
 
 msgid "Unable to update candidate status."
 msgstr "Unable to update candidate status."
-
-#~ msgid "Unable to update member role."
-#~ msgstr "Unable to update member role."
 
 msgid "Unable to update milestone."
 msgstr "Unable to update milestone."

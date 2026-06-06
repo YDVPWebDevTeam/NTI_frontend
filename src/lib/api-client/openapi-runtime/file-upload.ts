@@ -8,6 +8,7 @@ import type {
   FilesControllerCompleteUploadMutationResult,
   FilesControllerRequestUploadUrlMutationBody,
   FilesControllerRequestUploadUrlMutationResult,
+  RequestUploadDtoVisibility,
 } from 'lib/api';
 
 type UploadPipelineDependencies = {
@@ -24,6 +25,7 @@ type UploadPipelineInput = {
   file: File;
   purpose: string;
   entityType: string;
+  visibility?: RequestUploadDtoVisibility;
 };
 
 export async function uploadToPresignedUrl({ uploadUrl, file }: { uploadUrl: string; file: File }) {
@@ -48,6 +50,7 @@ export async function uploadAndCompleteFile(
     filename: input.file.name,
     mimeType: input.file.type || 'application/octet-stream',
     size: input.file.size,
+    visibility: input.visibility,
     purpose: input.purpose,
     entityType: input.entityType,
   });

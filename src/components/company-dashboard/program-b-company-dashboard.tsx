@@ -144,7 +144,7 @@ export function ProgramBCompanyDashboard() {
     return (
       <CompanyDashboardStatus
         title={t`Loading company workspace`}
-        description={t`Resolving your organization access before loading Program B company data.`}
+        description={t`Checking your organization access before loading the dashboard.`}
       />
     );
   }
@@ -171,13 +171,13 @@ export function ProgramBCompanyDashboard() {
             {t`Program B company dashboard`}
           </h1>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-[#60718d]">
-            {t`Program B company summary becomes available after your organization reaches the active state.`}
+            {t`This dashboard becomes available once your organization is active.`}
           </p>
         </section>
 
         <CompanyDashboardStatus
-          title={t`Organization status: ${formatEnumLabel(organization.status)}`}
-          description={t`Your company account is linked to an organization, but Program B company overview endpoints are only available for active organizations.`}
+          title={`${t`Organization status`}: ${formatEnumLabel(organization.status)}`}
+          description={t`Your organization is linked correctly, but this dashboard will unlock only after activation is complete.`}
         />
       </div>
     );
@@ -223,7 +223,7 @@ export function ProgramBCompanyDashboard() {
             </p>
             <p className="mt-3 text-sm text-[#60718d]">
               {overview?.updatedAt
-                ? t`Overview updated ${formatDateTime(overview.updatedAt)}`
+                ? `${t`Overview updated`} ${formatDateTime(overview.updatedAt)}`
                 : t`Dashboard data refreshes automatically when you return from related Program B workspaces.`}
             </p>
           </div>
@@ -261,7 +261,7 @@ export function ProgramBCompanyDashboard() {
 
       <CompanyDashboardSection
         title={t`Pending actions`}
-        description={t`These queues need direct company attention and link into the relevant Program B workspace.`}
+        description={t`These items need attention and link you to the right place to continue.`}
         action={
           <Button asChild variant="outline" size="sm">
             <Link href={ROUTES.COMPANY.PROGRAM_B_PROJECTS}>{t`Open project workspace`}</Link>
@@ -274,7 +274,7 @@ export function ProgramBCompanyDashboard() {
       <section className="grid gap-6 xl:grid-cols-2">
         <CompanyDashboardSection
           title={t`Backlog preview`}
-          description={t`Recent organization-scoped Program B backlog items from the dedicated summary endpoint.`}
+          description={t`A quick look at the latest backlog items for your organization.`}
           action={
             <Button asChild variant="outline" size="sm">
               <Link href={ROUTES.COMPANY.PROGRAM_B_BACKLOG}>{t`Open backlog`}</Link>
@@ -290,14 +290,14 @@ export function ProgramBCompanyDashboard() {
             emptyTitle={t`No backlog items yet`}
             emptyDescription={t`Once backlog work is created for this organization, the latest items will appear here.`}
             errorTitle={t`Unable to load backlog preview`}
-            errorDescription={t`The organization backlog summary could not be loaded right now.`}
+            errorDescription={t`We couldn’t load the backlog preview right now.`}
             errorIcon={<TriangleAlert className="h-5 w-5" />}
           />
         </CompanyDashboardSection>
 
         <CompanyDashboardSection
           title={t`Project preview`}
-          description={t`Current Program B delivery from the dedicated company project summary endpoint.`}
+          description={t`A quick look at the current Program B projects for your organization.`}
           action={
             <Button asChild variant="outline" size="sm">
               <Link href={ROUTES.COMPANY.PROGRAM_B_PROJECTS}>{t`Open projects`}</Link>
@@ -313,7 +313,7 @@ export function ProgramBCompanyDashboard() {
             emptyTitle={t`No active projects yet`}
             emptyDescription={t`Projects created from accepted Program B candidates will show up here.`}
             errorTitle={t`Unable to load project preview`}
-            errorDescription={t`The company project summary could not be loaded right now.`}
+            errorDescription={t`We couldn’t load the project preview right now.`}
             errorIcon={<TriangleAlert className="h-5 w-5" />}
           />
         </CompanyDashboardSection>

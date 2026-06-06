@@ -7,6 +7,13 @@ import Link from 'next/link';
 
 import { useAdminApplicationsControllerListProgramAApplications } from 'lib/api/admin/admin';
 import { ROUTES } from 'lib/constants';
+import {
+  formatDate,
+  getApplicationsArray,
+  getNestedValue,
+  isRecord,
+  toText,
+} from 'lib/review/application-display';
 
 type ReviewQueueRow = {
   id: string;
@@ -23,59 +30,6 @@ const OUTLINE_BUTTON_CLASS =
   'inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50';
 const INPUT_CLASS =
   'h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-950 transition outline-none focus:border-sky-400 focus:ring-4 focus:ring-sky-100';
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === 'object' && value !== null;
-}
-
-function toText(value: unknown, fallback = '') {
-  if (typeof value === 'string' && value.trim().length > 0) return value.trim();
-  if (typeof value === 'number' && Number.isFinite(value)) return String(value);
-
-  return fallback;
-}
-
-function getNestedValue(source: unknown, keys: string[]) {
-  let current: unknown = source;
-
-  for (const key of keys) {
-    if (!isRecord(current)) return undefined;
-    current = current[key];
-  }
-
-  return current;
-}
-
-function getApplicationsArray(data: unknown): unknown[] {
-  if (Array.isArray(data)) return data;
-  if (!isRecord(data)) return [];
-
-  const candidates: unknown[] = [data.items, data.data, data.results, data.applications];
-
-  for (const candidate of candidates) {
-    if (Array.isArray(candidate)) return candidate;
-  }
-
-  return [];
-}
-
-function formatDate(value: unknown, fallback = '—') {
-  const textValue = toText(value, '');
-
-  if (!textValue) return fallback;
-
-  const date = new Date(textValue);
-
-  if (Number.isNaN(date.getTime())) return textValue;
-
-  return new Intl.DateTimeFormat('sk-SK', {
-    day: 'numeric',
-    month: 'numeric',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  }).format(date);
-}
 
 function normalizeReviewRow(row: unknown): ReviewQueueRow | null {
   if (!isRecord(row)) return null;

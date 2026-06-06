@@ -25,6 +25,7 @@ const ADMIN_ROUTES = {
   callDetails: (callId: string) => `/admin/calls/${callId}`,
   callEdit: (callId: string) => `/admin/calls/${callId}/edit`,
   REPORTS: '/admin/reports',
+  CONTACT: '/admin/contact',
   USERS: '/admin/users',
   ACADEMIC_STRUCTURE: '/admin/academic-structure',
   ORGANIZATIONS: '/admin/organizations',
@@ -82,12 +83,27 @@ export const ROUTES = {
   TERMS_OF_SERVICE: '/terms-of-service',
   PRIVACY_POLICY: '/privacy-policy',
 
+  ABOUT: '/about',
+  PROGRAMS: '/programs',
+  programs: (tab?: 'a' | 'b') => (tab ? `/programs?program=${tab}` : '/programs'),
+  PARTNERS: '/partners',
+  MENTORS: '/mentors',
+  NEWS: '/news',
+  newsArticle: (slug: string) => `/news/${slug}`,
+
+  /**
+   * Scrolls to the contact form on the *current* landing page (the form is
+   * rendered on every landing page via the footer). Optionally pre-fills the
+   * topic, read by the form through `useSearchParams`.
+   */
+  contact: (topic?: string) => (topic ? `?topic=${topic}#contact` : '#contact'),
+
   HOME: {
     PROGRAMS: '/#programs',
     STARTUPS: '/#startups',
     MENTORS: '/#mentors',
     INFRASTRUCTURE: '/#infrastructure',
-    NEWS: '/#news',
+    NEWS: '/news',
     LEARN_MORE: '/#about',
     CONTACT: '/#contact',
   },

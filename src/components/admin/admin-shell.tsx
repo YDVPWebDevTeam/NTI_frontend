@@ -9,6 +9,7 @@ import {
   GraduationCap,
   LayoutGrid,
   LogOut,
+  Mail,
   Menu,
   ShieldCheck,
   UserCog,
@@ -51,6 +52,7 @@ const NAV_ICON_BY_HREF: Record<string, React.ReactNode> = {
   [ROUTES.ADMIN.ACADEMIC_STRUCTURE]: <GraduationCap className="h-4 w-4" />,
   [ROUTES.ADMIN.ORGANIZATIONS]: <ShieldCheck className="h-4 w-4" />,
   [ROUTES.ADMIN.INVITES]: <UserCog className="h-4 w-4" />,
+  [ROUTES.ADMIN.CONTACT]: <Mail className="h-4 w-4" />,
 };
 
 function isActiveNavItem(item: AdminNavItem, pathname: string) {
@@ -91,6 +93,9 @@ function getTranslatedAdminNavLabel(href: string) {
 
     case 'Invites':
       return t`Invites`;
+
+    case 'Contact':
+      return t`Contact`;
 
     default:
       return label;

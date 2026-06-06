@@ -261,7 +261,7 @@ export default async function HomePage() {
               const accent = accentClasses(program.accent);
 
               return (
-                <Reveal key={program.title} delay={index * STAGGER_MS}>
+                <Reveal key={program.title || index} delay={index * STAGGER_MS}>
                   <div
                     className={`group bg-surface-container-lowest hover:shadow-primary/10 relative h-full overflow-hidden rounded-2xl border border-transparent p-10 shadow-sm ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl ${accent.card}`}
                   >

@@ -1,12 +1,10 @@
 'use client';
 
 import { t } from '@lingui/core/macro';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { ArrowRight, CheckCircle2, KeyRound, Loader2 } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Loader2, ShieldAlert } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 
 import { useConfirmEmail } from 'lib/api';
 import {
@@ -14,44 +12,46 @@ import {
   getPostAuthRedirect,
   mapAuthError,
 } from 'lib/auth/public-auth-flow';
-import { createEmailVerificationSchema, type EmailVerificationFormValues } from 'lib/auth/schemas';
 import { ROUTES } from 'lib/constants';
 
-import { ControlledInputField } from 'components/forms';
-import { AuthSplitShell } from 'components/layout';
-import { Button, Form } from 'components/shadcn';
+import { AuthSplitShell } from 'components/layout/auth-split-shell';
+import { Button } from 'components/shadcn';
 
-type VerificationStatus = 'idle' | 'confirming' | 'success' | 'error';
+type VerificationStatus = 'confirming' | 'success' | 'error' | 'missing-token';
 
 const REDIRECT_DELAY_MS = 1200;
 
-export default function VerifyEmailPage() {
+function VerifyEmailFallback() {
+  return (
+    <AuthSplitShell
+      asideEyebrow={t`EMAIL VERIFICATION`}
+      asideTitle={t`Confirm your NTI account`}
+      asideDescription={t`Verify your email address to activate your account and continue with onboarding.`}
+      headerEyebrow={t`VERIFY EMAIL`}
+      headerTitle={t`Verify your email`}
+      headerDescription={t`Loading…`}
+    >
+      <div className="border-info/30 bg-info/10 text-info flex items-center gap-3 rounded-sm border p-4 text-sm">
+        <Loader2 className="h-5 w-5 animate-spin" />
+        <span>{t`Loading…`}</span>
+      </div>
+    </AuthSplitShell>
+  );
+}
+
+function VerifyEmailContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const tokenFromUrl = searchParams.get('token')?.trim() ?? '';
   const hasTokenFromUrl = tokenFromUrl.length > 0;
   const hasSubmittedUrlTokenRef = useRef(false);
 
-  const [status, setStatus] = useState<VerificationStatus>(hasTokenFromUrl ? 'confirming' : 'idle');
+  const [status, setStatus] = useState<VerificationStatus>(
+    hasTokenFromUrl ? 'confirming' : 'missing-token',
+  );
   const [errorState, setErrorState] = useState<AuthFlowErrorAction | null>(null);
 
-  const { mutateAsync: confirmEmail, isPending } = useConfirmEmail();
-
-  const form = useForm<EmailVerificationFormValues>({
-    resolver: zodResolver(createEmailVerificationSchema()),
-    defaultValues: {
-      token: tokenFromUrl,
-    },
-    mode: 'onChange',
-  });
-
-  const { setValue } = form;
-
-  useEffect(() => {
-    if (hasTokenFromUrl) {
-      setValue('token', tokenFromUrl, { shouldValidate: true });
-    }
-  }, [hasTokenFromUrl, setValue, tokenFromUrl]);
+  const { mutateAsync: confirmEmail } = useConfirmEmail();
 
   const confirmToken = useCallback(
     async (token: string): Promise<void> => {
@@ -71,15 +71,16 @@ export default function VerifyEmailPage() {
           router.replace(getPostAuthRedirect(response.user));
         }, REDIRECT_DELAY_MS);
       } catch (error) {
-        const mappedError = mapAuthError(error);
-
         setStatus('error');
-        setErrorState(mappedError);
+        setErrorState(mapAuthError(error));
       }
     },
     [confirmEmail, router],
   );
 
+  // The token is taken straight from the email link and confirmed automatically.
+  // This works on any device, even one with no existing session, because the
+  // token itself is the proof of email ownership.
   useEffect(() => {
     if (!hasTokenFromUrl || hasSubmittedUrlTokenRef.current) {
       return;
@@ -96,31 +97,19 @@ export default function VerifyEmailPage() {
     };
   }, [confirmToken, hasTokenFromUrl, tokenFromUrl]);
 
-  const handleSubmit = async (values: EmailVerificationFormValues): Promise<void> => {
-    await confirmToken(values.token);
-  };
-
   let headerTitle = t`Verify your email`;
-  let headerDescription = t`Paste your verification token if the email link did not open correctly.`;
+  let headerDescription = t`Open the confirmation link from the email we sent you to finish verifying your account.`;
 
   if (status === 'confirming') {
     headerTitle = t`Confirming your email`;
     headerDescription = t`Please wait while we verify your email address.`;
-  }
-
-  if (status === 'success') {
+  } else if (status === 'success') {
     headerTitle = t`Email confirmed`;
     headerDescription = t`Your email address was confirmed successfully. Redirecting you to your workspace.`;
-  }
-
-  if (status === 'error') {
+  } else if (status === 'error') {
     headerTitle = t`Verification failed`;
-    headerDescription = t`The verification link could not be completed. You can try again or return to login.`;
+    headerDescription = t`The verification link could not be completed. It may have expired or already been used.`;
   }
-
-  const isConfirming = status === 'confirming';
-  const isSuccess = status === 'success';
-  const shouldShowManualForm = status === 'idle' || status === 'error';
 
   return (
     <AuthSplitShell
@@ -131,25 +120,23 @@ export default function VerifyEmailPage() {
       headerTitle={headerTitle}
       headerDescription={headerDescription}
     >
-      {isConfirming ? (
-        <div className="space-y-5">
-          <div className="flex items-center gap-3 rounded-sm border border-blue-100 bg-blue-50 p-4 text-sm text-blue-700">
-            <Loader2 className="h-5 w-5 animate-spin" />
-            <span>{t`Confirming your email address...`}</span>
-          </div>
+      {status === 'confirming' ? (
+        <div className="border-info/30 bg-info/10 text-info flex items-center gap-3 rounded-sm border p-4 text-sm">
+          <Loader2 className="h-5 w-5 animate-spin" />
+          <span>{t`Confirming your email address...`}</span>
         </div>
       ) : null}
 
-      {isSuccess ? (
+      {status === 'success' ? (
         <div className="space-y-5">
-          <div className="flex items-center gap-3 rounded-sm border border-green-100 bg-green-50 p-4 text-sm text-green-700">
+          <div className="border-success/30 bg-success/10 text-success flex items-center gap-3 rounded-sm border p-4 text-sm">
             <CheckCircle2 className="h-5 w-5" />
             <span>{t`Email confirmed successfully.`}</span>
           </div>
 
           <Button
             asChild
-            className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 h-12 w-full rounded-sm text-[12px] font-semibold tracking-widest"
           >
             <Link href={ROUTES.AUTH.LOGIN}>
               {t`CONTINUE`}
@@ -159,66 +146,43 @@ export default function VerifyEmailPage() {
         </div>
       ) : null}
 
-      {status === 'error' ? (
+      {status === 'missing-token' || status === 'error' ? (
         <div className="space-y-5">
-          {errorState ? (
-            <div className="space-y-2 rounded-sm border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-              <p className="font-semibold">{errorState.title}</p>
-              <p>{errorState.description}</p>
-
-              {errorState.href && errorState.actionLabel ? (
-                <Button asChild variant="link" className="h-auto p-0 text-red-700">
-                  <Link href={errorState.href}>{errorState.actionLabel}</Link>
-                </Button>
-              ) : null}
+          <div className="border-destructive/30 bg-destructive/10 text-destructive flex items-start gap-3 rounded-sm border p-4 text-sm">
+            <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0" />
+            <div className="space-y-1">
+              <p className="font-semibold">
+                {status === 'missing-token'
+                  ? t`This link is incomplete`
+                  : (errorState?.title ?? t`Verification failed`)}
+              </p>
+              <p>
+                {status === 'missing-token'
+                  ? t`Open the full confirmation link from your email. If it still does not work, request a new confirmation email from the login page.`
+                  : (errorState?.description ?? t`The verification link could not be completed.`)}
+              </p>
             </div>
-          ) : null}
+          </div>
 
-          {hasTokenFromUrl ? (
-            <Button
-              asChild
-              className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
-            >
-              <Link href={ROUTES.AUTH.LOGIN}>
-                {t`RETURN TO LOGIN`}
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-          ) : null}
+          <Button
+            asChild
+            className="bg-primary text-primary-foreground hover:bg-primary/90 h-12 w-full rounded-sm text-[12px] font-semibold tracking-widest"
+          >
+            <Link href={errorState?.href ?? ROUTES.AUTH.LOGIN}>
+              {errorState?.actionLabel ?? t`RETURN TO LOGIN`}
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
         </div>
       ) : null}
-
-      {shouldShowManualForm ? (
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-5">
-            <ControlledInputField
-              control={form.control}
-              name="token"
-              label={t`Verification token`}
-              type="text"
-              placeholder={t`Paste verification token`}
-              startIcon={<KeyRound className="h-4 w-4" />}
-            />
-
-            <Button
-              type="submit"
-              disabled={isPending}
-              className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
-            >
-              {isPending ? t`CONFIRMING...` : t`CONFIRM EMAIL`}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-
-            <Button
-              asChild
-              variant="link"
-              className="h-auto p-0 text-[13px] font-medium text-blue-600"
-            >
-              <Link href={ROUTES.AUTH.LOGIN}>{t`Back to login`}</Link>
-            </Button>
-          </form>
-        </Form>
-      ) : null}
     </AuthSplitShell>
+  );
+}
+
+export default function VerifyEmailPage() {
+  return (
+    <Suspense fallback={<VerifyEmailFallback />}>
+      <VerifyEmailContent />
+    </Suspense>
   );
 }

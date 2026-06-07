@@ -38,7 +38,7 @@ export function RegistrationStepper({
           const isActive = !isCompletionStep && index === currentIndex;
           const StepIcon = stepIcons[step.id];
           const stepStateClass = isCompleted
-            ? 'border-blue-400 bg-blue-500 text-white'
+            ? 'border-primary bg-primary text-primary-foreground'
             : 'border-white/25 bg-white/10 text-white/60';
 
           const activeStepStateClass = 'border-white bg-white text-[#041d67]';

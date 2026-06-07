@@ -1,4 +1,5 @@
-import { t } from '@lingui/core/macro';
+import { i18n } from '@lingui/core';
+import { msg } from '@lingui/core/macro';
 import * as z from 'zod';
 
 const COMPANY_NAME_MIN_LENGTH = 2;
@@ -31,34 +32,34 @@ export function createCompanyOwnerOrganizationSchema() {
       .string()
       .trim()
       .min(COMPANY_NAME_MIN_LENGTH, {
-        message: t`Company name must be at least 2 characters.`,
+        message: i18n._(msg`Company name must be at least 2 characters.`),
       })
       .max(COMPANY_NAME_MAX_LENGTH, {
-        message: t`Company name must be at most 100 characters.`,
+        message: i18n._(msg`Company name must be at most 100 characters.`),
       }),
     ico: z
       .string()
       .trim()
       .refine((value) => normalizeIco(value).length === ICO_LENGTH, {
-        message: t`ICO must contain exactly 8 digits.`,
+        message: i18n._(msg`ICO must contain exactly 8 digits.`),
       }),
     sector: z
       .string()
       .trim()
       .min(SECTOR_MIN_LENGTH, {
-        message: t`Sector must be at least 2 characters.`,
+        message: i18n._(msg`Sector must be at least 2 characters.`),
       }),
     description: z
       .string()
       .trim()
       .min(DESCRIPTION_MIN_LENGTH, {
-        message: t`Description must be at least 10 characters.`,
+        message: i18n._(msg`Description must be at least 10 characters.`),
       }),
     website: z
       .string()
       .trim()
       .refine((value) => z.string().url().safeParse(normalizeWebsite(value)).success, {
-        message: t`Please enter a valid website URL.`,
+        message: i18n._(msg`Please enter a valid website URL.`),
       }),
     logoFile: z.unknown().optional().nullable(),
   });

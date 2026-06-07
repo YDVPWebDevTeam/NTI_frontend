@@ -2,8 +2,11 @@
 
 import { useLingui } from '@lingui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { type FormEvent, useEffect, useMemo } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { type FormEvent, Suspense, useEffect, useMemo, useRef } from 'react';
 import { type Resolver, useForm } from 'react-hook-form';
+
+import { ROUTES } from 'lib/constants';
 
 import { Form } from 'components/shadcn';
 import {
@@ -20,8 +23,21 @@ import { RegistrationStepContent } from './_components/registration-step-content
 import { RegistrationStepper } from './_components/registration-stepper';
 import { useStudentRegistrationActions } from './_hooks/use-student-registration-actions';
 
-export default function SignUpPage() {
+function SignUpContent() {
   const { i18n } = useLingui();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Email confirmation is handled entirely on /verify-email. If an email link
+  // ever lands here with a token (e.g. one sent before the backend was updated),
+  // forward it so the token is confirmed automatically instead of being ignored.
+  const confirmationToken = searchParams.get('token')?.trim() ?? '';
+
+  useEffect(() => {
+    if (confirmationToken) {
+      router.replace(`${ROUTES.AUTH.VERIFY_EMAIL}?token=${encodeURIComponent(confirmationToken)}`);
+    }
+  }, [confirmationToken, router]);
 
   const currentStepIndex = useStudentRegistrationStore((state) => state.currentStepIndex);
   const goToNextStep = useStudentRegistrationStore((state) => state.goToNextStep);
@@ -49,8 +65,34 @@ export default function SignUpPage() {
     mode: 'onChange',
   });
 
-  const { submitStep, resendConfirmation, isBusy, isResending } =
-    useStudentRegistrationActions(form);
+  const { submitStep, isBusy } = useStudentRegistrationActions(form);
+
+  // The store persists only `currentStepIndex`, not the form draft. On reload
+  // the form is re-created from empty defaults, so a persisted step > 0 would
+  // return the user to a later step with no real data and let them submit
+  // partial information. If we detect a later step but the form has no real
+  // identity data, reset to the first step. Runs once on mount.
+  const hasCheckedPersistedStepRef = useRef(false);
+
+  useEffect(() => {
+    if (hasCheckedPersistedStepRef.current) {
+      return;
+    }
+
+    hasCheckedPersistedStepRef.current = true;
+
+    if (currentStepIndex <= 0) {
+      return;
+    }
+
+    const hasRealData = Boolean(
+      form.getValues('email')?.trim() || form.getValues('firstName')?.trim(),
+    );
+
+    if (!hasRealData) {
+      resetStep();
+    }
+  }, [currentStepIndex, form, resetStep]);
 
   const handleNextStep = async () => {
     const isValid = await form.trigger(currentStep.fields);
@@ -89,14 +131,14 @@ export default function SignUpPage() {
 
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-1 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
-      <div className="flex w-full flex-col overflow-hidden rounded-xl border border-black/10 bg-[#e7e8eb] shadow-sm">
+      <div className="border-border bg-muted flex w-full flex-col overflow-hidden rounded-xl border shadow-sm">
         <RegistrationStepper
           steps={steps}
           activeStepIndex={safeCurrentStepIndex}
           isCompletionStep={isCompletionStep}
         />
 
-        <section className="bg-[#ececef] px-5 py-7 sm:px-8 sm:py-10 lg:px-12">
+        <section className="bg-background px-5 py-7 sm:px-8 sm:py-10 lg:px-12">
           {isCompletionStep ? (
             <RegistrationCompletion
               onInviteClick={() => {
@@ -116,11 +158,7 @@ export default function SignUpPage() {
 
               <Form {...form}>
                 <form onSubmit={handleFormSubmit}>
-                  <RegistrationStepContent
-                    stepId={currentStep.id}
-                    isResending={isResending}
-                    onResend={resendConfirmation}
-                  />
+                  <RegistrationStepContent stepId={currentStep.id} />
 
                   <RegistrationActions
                     safeCurrentStepIndex={safeCurrentStepIndex}
@@ -135,5 +173,13 @@ export default function SignUpPage() {
         </section>
       </div>
     </main>
+  );
+}
+
+export default function SignUpPage() {
+  return (
+    <Suspense fallback={null}>
+      <SignUpContent />
+    </Suspense>
   );
 }

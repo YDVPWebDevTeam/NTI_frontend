@@ -13,7 +13,7 @@ import { createForgotPasswordSchema, type ForgotPasswordFormValues } from 'lib/a
 import { mapAuthError } from 'lib/auth/public-auth-flow';
 
 import { ControlledInputField } from 'components/forms';
-import { AuthSplitShell } from 'components/layout';
+import { AuthSplitShell } from 'components/layout/auth-split-shell';
 import { Button, Form } from 'components/shadcn';
 
 export default function ForgotPasswordPage() {
@@ -62,7 +62,7 @@ export default function ForgotPasswordPage() {
         <div className="space-y-4">
           <Button
             asChild
-            className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 h-12 w-full rounded-sm text-[12px] font-semibold tracking-widest"
           >
             <Link href={ROUTES.AUTH.LOGIN}>
               {t`RETURN TO LOGIN`}
@@ -82,12 +82,12 @@ export default function ForgotPasswordPage() {
               startIcon={<Mail className="h-4 w-4" />}
             />
 
-            {errorMessage ? <p className="text-sm text-red-600">{errorMessage}</p> : null}
+            {errorMessage ? <p className="text-destructive text-sm">{errorMessage}</p> : null}
 
             <Button
               type="submit"
               disabled={isPending}
-              className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 h-12 w-full rounded-sm text-[12px] font-semibold tracking-widest"
             >
               {isPending ? t`SENDING...` : t`SEND RESET LINK`}
               <ArrowRight className="ml-2 h-4 w-4" />
@@ -96,7 +96,7 @@ export default function ForgotPasswordPage() {
             <Button
               asChild
               variant="link"
-              className="h-auto p-0 text-[13px] font-medium text-blue-600"
+              className="text-primary h-auto p-0 text-[13px] font-medium"
             >
               <Link href={ROUTES.AUTH.LOGIN}>
                 <ArrowLeft className="mr-2 h-4 w-4" />

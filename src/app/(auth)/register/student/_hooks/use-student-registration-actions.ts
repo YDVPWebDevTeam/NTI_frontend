@@ -4,7 +4,7 @@ import { t } from '@lingui/core/macro';
 import type { UseFormReturn } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import { useConfirmEmail, useRegister, useResendConfirmationEmail } from 'lib/api';
+import { useRegister } from 'lib/api';
 import type { StudentRegistrationValues } from 'lib/auth/schemas';
 import { useStudentProfileSubmit, type StudentRegistrationStepId } from 'features/student-profile';
 
@@ -19,20 +19,13 @@ type StepSubmitHandler = (args: Omit<SubmitStepArgs, 'stepId'>) => void | Promis
 
 export function useStudentRegistrationActions(form: UseFormReturn<StudentRegistrationValues>) {
   const { mutateAsync: register, isPending: isRegisterPending } = useRegister();
-  const { mutateAsync: resendConfirmationEmail, isPending: isResendConfirmationPending } =
-    useResendConfirmationEmail();
-  const { mutateAsync: confirmEmail, isPending: isConfirmEmailPending } = useConfirmEmail();
   const {
     submitAcademic,
     submitProfessional,
     isBusy: isProfileSubmitBusy,
   } = useStudentProfileSubmit(form);
 
-  const isBusy =
-    isRegisterPending ||
-    isResendConfirmationPending ||
-    isConfirmEmailPending ||
-    isProfileSubmitBusy;
+  const isBusy = isRegisterPending || isProfileSubmitBusy;
 
   const handleError = (error: unknown, fallback: string) => {
     toast.error(error instanceof Error ? error.message : fallback);
@@ -51,17 +44,6 @@ export function useStudentRegistrationActions(form: UseFormReturn<StudentRegistr
     });
   };
 
-  const handleEmailStep = async () => {
-    const values = form.getValues();
-    const token = values.verificationCode.trim();
-
-    if (!token) {
-      return;
-    }
-
-    await confirmEmail({ data: { token } });
-  };
-
   const submitStep = async ({
     stepId,
     currentStepIndex,
@@ -74,8 +56,9 @@ export function useStudentRegistrationActions(form: UseFormReturn<StudentRegistr
           await handleIdentityStep();
           onAdvance(Math.min(currentStepIndex + 1, stepsLength - 1));
         },
-        email: async ({ currentStepIndex, stepsLength, onAdvance }) => {
-          await handleEmailStep();
+        email: ({ currentStepIndex, stepsLength, onAdvance }) => {
+          // Email confirmation now happens entirely via the link in the email
+          // (handled on /verify-email), so this step is purely informational.
           onAdvance(Math.min(currentStepIndex + 1, stepsLength - 1));
         },
         academic: async ({ currentStepIndex, stepsLength, onAdvance }) => {
@@ -97,24 +80,8 @@ export function useStudentRegistrationActions(form: UseFormReturn<StudentRegistr
     }
   };
 
-  const resendConfirmation = async (email: string) => {
-    try {
-      await resendConfirmationEmail({ data: { email } });
-
-      toast.success(t`Confirmation email sent.`);
-
-      return true;
-    } catch (error) {
-      handleError(error, t`Unable to resend the confirmation email right now.`);
-
-      return false;
-    }
-  };
-
   return {
     submitStep,
-    resendConfirmation,
     isBusy,
-    isResending: isResendConfirmationPending,
   };
 }

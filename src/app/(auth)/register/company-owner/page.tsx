@@ -53,7 +53,9 @@ export default function RegisterCompanyOwnerPage() {
         password: '',
       });
 
-      router.push(ROUTES.AUTH.REGISTER_COMPANY_CONFIRM_EMAIL);
+      router.push(
+        `${ROUTES.AUTH.REGISTER_COMPANY_CONFIRM_EMAIL}?email=${encodeURIComponent(values.email)}`,
+      );
     } catch (error) {
       toast.error(error instanceof Error ? error.message : t`Registration failed`);
     }
@@ -104,7 +106,7 @@ export default function RegisterCompanyOwnerPage() {
           <Button
             type="submit"
             disabled={isPending}
-            className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 h-12 w-full rounded-sm text-[12px] font-semibold tracking-widest"
           >
             {isPending ? t`CREATING ACCOUNT...` : t`CREATE ACCOUNT`}
             <ArrowRight className="ml-2 h-4 w-4" />

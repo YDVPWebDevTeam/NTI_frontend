@@ -8,18 +8,12 @@ import { ReviewStep } from './review-step';
 
 type RegistrationStepContentProps = {
   stepId: StudentRegistrationStepId;
-  isResending: boolean;
-  onResend: (email: string) => Promise<boolean>;
 };
 
-export function RegistrationStepContent({
-  stepId,
-  isResending,
-  onResend,
-}: RegistrationStepContentProps) {
+export function RegistrationStepContent({ stepId }: RegistrationStepContentProps) {
   const stepContentById: Record<StudentRegistrationStepId, ReactNode> = {
     identity: <IdentityStep />,
-    email: <EmailStep isResending={isResending} onResend={onResend} />,
+    email: <EmailStep />,
     academic: <AcademicStep />,
     skills: <SkillsStep />,
     review: <ReviewStep />,

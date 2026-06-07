@@ -1,167 +1,526 @@
-// This file is a thin compatibility layer for organization workspace callers.
+'use client';
+
 import { useMutation, useQuery } from '@tanstack/react-query';
 import type {
+  DataTag,
+  DefinedInitialDataOptions,
+  DefinedUseQueryResult,
+  MutationFunction,
   QueryClient,
+  QueryFunction,
+  QueryKey,
+  UndefinedInitialDataOptions,
   UseMutationOptions,
   UseMutationResult,
   UseQueryOptions,
   UseQueryResult,
 } from '@tanstack/react-query';
 
-import openApiClient from 'lib/api-client/openapi-runtime/client';
 import type {
   CompleteOrganizationDocumentUploadDto,
   CreateOrganizationDocumentUploadDto,
 } from '../index.schemas';
-import { getOrganizationDocumentsControllerListDocumentsQueryKey } from './organization-documents';
+import { orvalMutator } from '../../api-client/openapi-runtime/runtime';
+import {
+  getOrganizationDocumentsControllerListDocumentsQueryKey,
+  getOrganizationDocumentsControllerRequestDownloadQueryKey,
+} from './organization-documents';
 
-export interface OrganizationDocumentListItemCompat {
+type SecondParameter<T extends (...args: never[]) => unknown> = Parameters<T>[1];
+
+export type OrganizationDocumentVisibility = 'INTERNAL' | 'CONFIDENTIAL';
+export type OrganizationDocumentUploadStatus = 'PENDING' | 'UPLOADED' | 'FAILED';
+
+export interface OrganizationDocumentDto {
   id: string;
   name: string;
-  version: number;
-  visibility: string;
   documentType: string;
-  status: string;
+  version: number;
+  mimeType: string;
   sizeBytes: number;
+  checksum?: string | null;
+  visibility: OrganizationDocumentVisibility;
+  status: OrganizationDocumentUploadStatus | string;
+  uploadedById: string;
   uploadedAt?: string;
+  createdAt: string;
 }
 
-export interface OrganizationDocumentUploadTicketCompat {
+export interface OrganizationDocumentUploadDto {
   documentId: string;
-  fileId: string;
+  version: number;
+  visibility: OrganizationDocumentVisibility;
+  status: OrganizationDocumentUploadStatus | string;
   uploadUrl: string;
+  expiresAt: string;
+  checksum?: string;
+}
+
+export interface OrganizationDocumentDownloadDto {
+  documentId: string;
+  downloadUrl: string;
   expiresAt: string;
 }
 
-export interface OrganizationDocumentDownloadCompat {
-  documentId: string;
-  downloadUrl: string;
-  expiresAt?: string;
-}
+export const organizationDocumentsControllerListDocumentsCompat = (
+  id: string,
+  options?: SecondParameter<typeof orvalMutator>,
+  signal?: AbortSignal,
+) =>
+  orvalMutator<OrganizationDocumentDto[]>(
+    {
+      url: `/organizations/${id}/documents`,
+      method: 'GET',
+      signal,
+    },
+    options,
+  );
 
-export { getOrganizationDocumentsControllerListDocumentsQueryKey };
-
-export function organizationDocumentsControllerListDocumentsCompat(id: string) {
-  return openApiClient<OrganizationDocumentListItemCompat[]>({
-    url: `/organizations/${id}/documents`,
-    method: 'GET',
-  });
-}
-
-export function useOrganizationDocumentsControllerListDocumentsCompat<
-  TData = OrganizationDocumentListItemCompat[],
+export const getOrganizationDocumentsControllerListDocumentsCompatQueryOptions = <
+  TData = Awaited<ReturnType<typeof organizationDocumentsControllerListDocumentsCompat>>,
   TError = unknown,
 >(
   id: string,
   options?: {
     query?: Partial<
-      UseQueryOptions<OrganizationDocumentListItemCompat[], TError, TData>
+      UseQueryOptions<
+        Awaited<ReturnType<typeof organizationDocumentsControllerListDocumentsCompat>>,
+        TError,
+        TData
+      >
     >;
-    request?: Record<string, unknown>;
+    request?: SecondParameter<typeof orvalMutator>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+  const queryKey =
+    queryOptions?.queryKey ?? getOrganizationDocumentsControllerListDocumentsQueryKey(id);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof organizationDocumentsControllerListDocumentsCompat>>
+  > = ({ signal }) => organizationDocumentsControllerListDocumentsCompat(id, requestOptions, signal);
+
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!id,
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof organizationDocumentsControllerListDocumentsCompat>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export function useOrganizationDocumentsControllerListDocumentsCompat<
+  TData = Awaited<ReturnType<typeof organizationDocumentsControllerListDocumentsCompat>>,
+  TError = unknown,
+>(
+  id: string,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof organizationDocumentsControllerListDocumentsCompat>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof organizationDocumentsControllerListDocumentsCompat>>,
+          TError,
+          Awaited<ReturnType<typeof organizationDocumentsControllerListDocumentsCompat>>
+        >,
+        'initialData'
+      >;
+    request?: SecondParameter<typeof orvalMutator>;
   },
   queryClient?: QueryClient,
-): UseQueryResult<TData, TError> {
-  const queryOptions = options?.query;
-
-  return useQuery(
-    {
-      queryKey:
-        queryOptions?.queryKey ?? getOrganizationDocumentsControllerListDocumentsQueryKey(id),
-      queryFn: () => organizationDocumentsControllerListDocumentsCompat(id),
-      enabled: Boolean(id) && (queryOptions?.enabled ?? true),
-      ...queryOptions,
-    },
-    queryClient,
-  );
-}
-
-export function organizationDocumentsControllerCreateUploadCompat(
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useOrganizationDocumentsControllerListDocumentsCompat<
+  TData = Awaited<ReturnType<typeof organizationDocumentsControllerListDocumentsCompat>>,
+  TError = unknown,
+>(
   id: string,
-  data: CreateOrganizationDocumentUploadDto,
-) {
-  return openApiClient<OrganizationDocumentUploadTicketCompat>({
-    url: `/organizations/${id}/documents`,
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    data,
-  });
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof organizationDocumentsControllerListDocumentsCompat>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof organizationDocumentsControllerListDocumentsCompat>>,
+          TError,
+          Awaited<ReturnType<typeof organizationDocumentsControllerListDocumentsCompat>>
+        >,
+        'initialData'
+      >;
+    request?: SecondParameter<typeof orvalMutator>;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useOrganizationDocumentsControllerListDocumentsCompat<
+  TData = Awaited<ReturnType<typeof organizationDocumentsControllerListDocumentsCompat>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof organizationDocumentsControllerListDocumentsCompat>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<typeof orvalMutator>;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useOrganizationDocumentsControllerListDocumentsCompat<
+  TData = Awaited<ReturnType<typeof organizationDocumentsControllerListDocumentsCompat>>,
+  TError = unknown,
+>(
+  id: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof organizationDocumentsControllerListDocumentsCompat>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<typeof orvalMutator>;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getOrganizationDocumentsControllerListDocumentsCompatQueryOptions(
+    id,
+    options,
+  );
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
 }
 
-export function useOrganizationDocumentsControllerCreateUploadCompat<
+export const organizationDocumentsControllerCreateUploadCompat = (
+  id: string,
+  createOrganizationDocumentUploadDto: CreateOrganizationDocumentUploadDto,
+  options?: SecondParameter<typeof orvalMutator>,
+) =>
+  orvalMutator<OrganizationDocumentUploadDto>(
+    {
+      url: `/organizations/${id}/documents`,
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      data: createOrganizationDocumentUploadDto,
+    },
+    options,
+  );
+
+export const getOrganizationDocumentsControllerCreateUploadCompatMutationOptions = <
   TError = unknown,
   TContext = unknown,
 >(
   options?: {
     mutation?: UseMutationOptions<
-      OrganizationDocumentUploadTicketCompat,
+      Awaited<ReturnType<typeof organizationDocumentsControllerCreateUploadCompat>>,
       TError,
       { id: string; data: CreateOrganizationDocumentUploadDto },
       TContext
     >;
+    request?: SecondParameter<typeof orvalMutator>;
   },
-  queryClient?: QueryClient,
-): UseMutationResult<
-  OrganizationDocumentUploadTicketCompat,
+): UseMutationOptions<
+  Awaited<ReturnType<typeof organizationDocumentsControllerCreateUploadCompat>>,
   TError,
   { id: string; data: CreateOrganizationDocumentUploadDto },
   TContext
-> {
-  return useMutation(
-    {
-      mutationKey: ['organizationDocumentsControllerCreateUploadCompat'],
-      mutationFn: ({ id, data }) => organizationDocumentsControllerCreateUploadCompat(id, data),
-      ...options?.mutation,
-    },
-    queryClient,
-  );
-}
+> => {
+  const mutationKey = ['organizationDocumentsControllerCreateUploadCompat'];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
 
-export function organizationDocumentsControllerCompleteUploadCompat(
-  id: string,
-  docId: string,
-  data: CompleteOrganizationDocumentUploadDto,
-) {
-  return openApiClient<void>({
-    url: `/organizations/${id}/documents/${docId}/complete`,
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    data,
-  });
-}
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof organizationDocumentsControllerCreateUploadCompat>>,
+    { id: string; data: CreateOrganizationDocumentUploadDto }
+  > = (props) => {
+    const { id, data } = props;
 
-export function useOrganizationDocumentsControllerCompleteUploadCompat<
+    return organizationDocumentsControllerCreateUploadCompat(id, data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export const useOrganizationDocumentsControllerCreateUploadCompat = <
   TError = unknown,
   TContext = unknown,
 >(
   options?: {
     mutation?: UseMutationOptions<
-      void,
+      Awaited<ReturnType<typeof organizationDocumentsControllerCreateUploadCompat>>,
+      TError,
+      { id: string; data: CreateOrganizationDocumentUploadDto },
+      TContext
+    >;
+    request?: SecondParameter<typeof orvalMutator>;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof organizationDocumentsControllerCreateUploadCompat>>,
+  TError,
+  { id: string; data: CreateOrganizationDocumentUploadDto },
+  TContext
+> => {
+  const mutationOptions = getOrganizationDocumentsControllerCreateUploadCompatMutationOptions(
+    options,
+  );
+
+  return useMutation(mutationOptions, queryClient);
+};
+
+export const organizationDocumentsControllerCompleteUploadCompat = (
+  id: string,
+  docId: string,
+  completeOrganizationDocumentUploadDto: CompleteOrganizationDocumentUploadDto,
+  options?: SecondParameter<typeof orvalMutator>,
+) =>
+  orvalMutator<OrganizationDocumentDto>(
+    {
+      url: `/organizations/${id}/documents/${docId}/complete`,
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      data: completeOrganizationDocumentUploadDto,
+    },
+    options,
+  );
+
+export const getOrganizationDocumentsControllerCompleteUploadCompatMutationOptions = <
+  TError = unknown,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof organizationDocumentsControllerCompleteUploadCompat>>,
       TError,
       { id: string; docId: string; data: CompleteOrganizationDocumentUploadDto },
       TContext
     >;
+    request?: SecondParameter<typeof orvalMutator>;
   },
-  queryClient?: QueryClient,
-): UseMutationResult<
-  void,
+): UseMutationOptions<
+  Awaited<ReturnType<typeof organizationDocumentsControllerCompleteUploadCompat>>,
   TError,
   { id: string; docId: string; data: CompleteOrganizationDocumentUploadDto },
   TContext
-> {
-  return useMutation(
-    {
-      mutationKey: ['organizationDocumentsControllerCompleteUploadCompat'],
-      mutationFn: ({ id, docId, data }) =>
-        organizationDocumentsControllerCompleteUploadCompat(id, docId, data),
-      ...options?.mutation,
-    },
-    queryClient,
-  );
-}
+> => {
+  const mutationKey = ['organizationDocumentsControllerCompleteUploadCompat'];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
 
-export function organizationDocumentsControllerRequestDownloadCompat(id: string, docId: string) {
-  return openApiClient<OrganizationDocumentDownloadCompat>({
-    url: `/organizations/${id}/documents/${docId}/download`,
-    method: 'GET',
-  });
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof organizationDocumentsControllerCompleteUploadCompat>>,
+    { id: string; docId: string; data: CompleteOrganizationDocumentUploadDto }
+  > = (props) => {
+    const { id, docId, data } = props;
+
+    return organizationDocumentsControllerCompleteUploadCompat(id, docId, data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export const useOrganizationDocumentsControllerCompleteUploadCompat = <
+  TError = unknown,
+  TContext = unknown,
+>(
+  options?: {
+    mutation?: UseMutationOptions<
+      Awaited<ReturnType<typeof organizationDocumentsControllerCompleteUploadCompat>>,
+      TError,
+      { id: string; docId: string; data: CompleteOrganizationDocumentUploadDto },
+      TContext
+    >;
+    request?: SecondParameter<typeof orvalMutator>;
+  },
+  queryClient?: QueryClient,
+): UseMutationResult<
+  Awaited<ReturnType<typeof organizationDocumentsControllerCompleteUploadCompat>>,
+  TError,
+  { id: string; docId: string; data: CompleteOrganizationDocumentUploadDto },
+  TContext
+> => {
+  const mutationOptions = getOrganizationDocumentsControllerCompleteUploadCompatMutationOptions(
+    options,
+  );
+
+  return useMutation(mutationOptions, queryClient);
+};
+
+export const organizationDocumentsControllerRequestDownloadCompat = (
+  id: string,
+  docId: string,
+  options?: SecondParameter<typeof orvalMutator>,
+  signal?: AbortSignal,
+) =>
+  orvalMutator<OrganizationDocumentDownloadDto>(
+    {
+      url: `/organizations/${id}/documents/${docId}/download`,
+      method: 'GET',
+      signal,
+    },
+    options,
+  );
+
+export const getOrganizationDocumentsControllerRequestDownloadCompatQueryOptions = <
+  TData = Awaited<ReturnType<typeof organizationDocumentsControllerRequestDownloadCompat>>,
+  TError = unknown,
+>(
+  id: string,
+  docId: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof organizationDocumentsControllerRequestDownloadCompat>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<typeof orvalMutator>;
+  },
+) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+  const queryKey =
+    queryOptions?.queryKey ?? getOrganizationDocumentsControllerRequestDownloadQueryKey(id, docId);
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof organizationDocumentsControllerRequestDownloadCompat>>
+  > = ({ signal }) =>
+    organizationDocumentsControllerRequestDownloadCompat(id, docId, requestOptions, signal);
+
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!(id && docId),
+    ...queryOptions,
+  } as UseQueryOptions<
+    Awaited<ReturnType<typeof organizationDocumentsControllerRequestDownloadCompat>>,
+    TError,
+    TData
+  > & { queryKey: DataTag<QueryKey, TData, TError> };
+};
+
+export function useOrganizationDocumentsControllerRequestDownloadCompat<
+  TData = Awaited<ReturnType<typeof organizationDocumentsControllerRequestDownloadCompat>>,
+  TError = unknown,
+>(
+  id: string,
+  docId: string,
+  options: {
+    query: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof organizationDocumentsControllerRequestDownloadCompat>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof organizationDocumentsControllerRequestDownloadCompat>>,
+          TError,
+          Awaited<ReturnType<typeof organizationDocumentsControllerRequestDownloadCompat>>
+        >,
+        'initialData'
+      >;
+    request?: SecondParameter<typeof orvalMutator>;
+  },
+  queryClient?: QueryClient,
+): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useOrganizationDocumentsControllerRequestDownloadCompat<
+  TData = Awaited<ReturnType<typeof organizationDocumentsControllerRequestDownloadCompat>>,
+  TError = unknown,
+>(
+  id: string,
+  docId: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof organizationDocumentsControllerRequestDownloadCompat>>,
+        TError,
+        TData
+      >
+    > &
+      Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof organizationDocumentsControllerRequestDownloadCompat>>,
+          TError,
+          Awaited<ReturnType<typeof organizationDocumentsControllerRequestDownloadCompat>>
+        >,
+        'initialData'
+      >;
+    request?: SecondParameter<typeof orvalMutator>;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useOrganizationDocumentsControllerRequestDownloadCompat<
+  TData = Awaited<ReturnType<typeof organizationDocumentsControllerRequestDownloadCompat>>,
+  TError = unknown,
+>(
+  id: string,
+  docId: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof organizationDocumentsControllerRequestDownloadCompat>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<typeof orvalMutator>;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+export function useOrganizationDocumentsControllerRequestDownloadCompat<
+  TData = Awaited<ReturnType<typeof organizationDocumentsControllerRequestDownloadCompat>>,
+  TError = unknown,
+>(
+  id: string,
+  docId: string,
+  options?: {
+    query?: Partial<
+      UseQueryOptions<
+        Awaited<ReturnType<typeof organizationDocumentsControllerRequestDownloadCompat>>,
+        TError,
+        TData
+      >
+    >;
+    request?: SecondParameter<typeof orvalMutator>;
+  },
+  queryClient?: QueryClient,
+): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+  const queryOptions = getOrganizationDocumentsControllerRequestDownloadCompatQueryOptions(
+    id,
+    docId,
+    options,
+  );
+  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
+    queryKey: DataTag<QueryKey, TData, TError>;
+  };
+
+  query.queryKey = queryOptions.queryKey;
+
+  return query;
 }

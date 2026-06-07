@@ -11,6 +11,7 @@ import type {
   ProgramBProjectsControllerListMyQueryResult,
   TeamDetailDto,
   useApplicationsControllerCreateDraft,
+  StudentApplicationSummaryDto,
 } from 'lib/api';
 import { Button } from 'components/shadcn';
 import {
@@ -20,6 +21,7 @@ import {
 } from 'components/student-dashboard/page-shell-primitives';
 import { ROUTES } from 'lib/constants';
 import type { DraftRegistryEntry } from 'lib/student-dashboard/draft-registry';
+import { ProgramAStatusBadge } from 'features/admin-program-a/components/program-a-status-badge';
 import { formatUnknownDate, normalizeUnknownText } from 'lib/student-dashboard/normalizers';
 
 export function FoundationSection({
@@ -118,6 +120,7 @@ export function ProgramASection({
   isLead,
   isLocked,
   team,
+  projectApplications,
 }: {
   activeCalls: ApplicationsControllerListActivePublicCallsQueryResult['data'];
   createDraft: ReturnType<typeof useApplicationsControllerCreateDraft>;
@@ -127,6 +130,7 @@ export function ProgramASection({
   isLead: boolean;
   isLocked: boolean;
   team: TeamDetailDto | null;
+  projectApplications: StudentApplicationSummaryDto[];
 }) {
   return (
     <StudentSectionCard
@@ -134,6 +138,52 @@ export function ProgramASection({
       description={t`Open calls, draft recovery, and application-start actions live here.`}
     >
       <div className="space-y-4">
+        <div>
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <h3 className="text-sm font-semibold tracking-[0.16em] text-[#6f7f9a] uppercase">
+              {t`Active projects`}
+            </h3>
+
+            <Button asChild size="sm" variant="outline">
+              <Link href={ROUTES.STUDENT.APPLICATIONS}>{t`View all`}</Link>
+            </Button>
+          </div>
+
+          <div className="space-y-3">
+            {projectApplications.map((application) => (
+              <div
+                key={application.id}
+                className="rounded-[1.25rem] border border-[#dce5fb] bg-[#f8faff] p-4"
+              >
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="font-semibold text-[#122039]">{application.call.title}</p>
+
+                    <p className="mt-1 text-sm text-[#58667d]">
+                      {t`Updated`} {formatUnknownDate(application.updatedAt)}
+                    </p>
+                  </div>
+
+                  <ProgramAStatusBadge status={application.status} />
+                </div>
+
+                <div className="mt-3">
+                  <Button asChild size="sm" variant="outline">
+                    <Link href={ROUTES.STUDENT.studentApplication(application.id)}>
+                      {t`Open project`}
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            ))}
+
+            {projectApplications.length ? null : (
+              <p className="text-sm leading-7 text-[#58667d]">
+                {t`Approved Program A projects will appear here once onboarding starts.`}
+              </p>
+            )}
+          </div>
+        </div>
         {activeCalls.map((call) => {
           const draftEntry = team ? (draftRegistryMap.get(call.id) ?? null) : null;
 

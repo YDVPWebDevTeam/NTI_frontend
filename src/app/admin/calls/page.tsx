@@ -77,13 +77,13 @@ export default function AdminCallsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-5 sm:flex-row sm:items-center sm:justify-between">
+      <div className="border-border bg-card flex flex-col gap-4 rounded-2xl border p-5 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-[11px] font-medium tracking-[0.12em] text-slate-500 uppercase">
+          <p className="text-muted-foreground text-[11px] font-medium tracking-[0.12em] uppercase">
             {t`Admin workspace`}
           </p>
-          <h1 className="mt-2 text-2xl font-semibold text-slate-950">{t`Calls`}</h1>
-          <p className="mt-1 text-sm text-slate-600">
+          <h1 className="text-foreground mt-2 text-2xl font-semibold">{t`Calls`}</h1>
+          <p className="text-muted-foreground mt-1 text-sm">
             {t`Manage Program A and Program B calls, deadlines, and lifecycle status.`}
           </p>
         </div>
@@ -127,7 +127,7 @@ export default function AdminCallsPage() {
           <AdminTableBody>
             {filteredCalls.map((call) => (
               <AdminTableRow key={call.id}>
-                <AdminTableCell className="font-medium text-slate-950">
+                <AdminTableCell className="text-foreground font-medium">
                   <Link href={ROUTES.ADMIN.callDetails(call.id)} className="hover:underline">
                     {call.title}
                   </Link>
@@ -157,7 +157,7 @@ export default function AdminCallsPage() {
                       <Button
                         size="sm"
                         variant="outline"
-                        disabled={openMutation.isPending}
+                        disabled={openMutation.isPending && openMutation.variables === call.id}
                         onClick={() => openMutation.mutate(call.id)}
                       >
                         {t`Open`}
@@ -168,7 +168,7 @@ export default function AdminCallsPage() {
                       <Button
                         size="sm"
                         variant="outline"
-                        disabled={closeMutation.isPending}
+                        disabled={closeMutation.isPending && closeMutation.variables === call.id}
                         onClick={() => closeMutation.mutate(call.id)}
                       >
                         {t`Close`}
@@ -179,8 +179,20 @@ export default function AdminCallsPage() {
                       <Button
                         size="sm"
                         variant="outline"
-                        disabled={archiveMutation.isPending}
-                        onClick={() => archiveMutation.mutate(call.id)}
+                        disabled={
+                          archiveMutation.isPending && archiveMutation.variables === call.id
+                        }
+                        onClick={() => {
+                          if (
+                            !window.confirm(
+                              t`Archive "${call.title}"? Archiving is terminal and cannot be undone.`,
+                            )
+                          ) {
+                            return;
+                          }
+
+                          archiveMutation.mutate(call.id);
+                        }}
                       >
                         {t`Archive`}
                       </Button>

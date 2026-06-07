@@ -659,7 +659,7 @@ export interface ResetPasswordDto {
   /**
    * New password for the account.
    * @minLength 8
-   * @maxLength 100
+   * @maxLength 128
    */
   password: string;
 }
@@ -2767,34 +2767,6 @@ export type ApplicationDetailDtoDecisionRationale = { [key: string]: unknown } |
  */
 export type ApplicationDetailDtoGrantBudget = { [key: string]: unknown } | null;
 
-/**
- * @nullable
- */
-export type ApplicationMentorAssignmentDtoMentorUserId = { [key: string]: unknown } | null;
-
-/**
- * @nullable
- */
-export type ApplicationMentorAssignmentDtoAssignedAt = { [key: string]: unknown } | null;
-
-/**
- * @nullable
- */
-export type ApplicationMentorAssignmentDtoAssignedById = { [key: string]: unknown } | null;
-
-export interface ApplicationMentorAssignmentDto {
-  /** @nullable */
-  mentorUserId?: ApplicationMentorAssignmentDtoMentorUserId;
-  /** @nullable */
-  mentor?: MentorshipNoteAuthorDto | null;
-  /** @nullable */
-  assignedAt?: ApplicationMentorAssignmentDtoAssignedAt;
-  /** @nullable */
-  assignedById?: ApplicationMentorAssignmentDtoAssignedById;
-  /** @nullable */
-  assignedBy?: MentorshipNoteAuthorDto | null;
-}
-
 export interface ApplicationDetailDto {
   id: string;
   callId: string;
@@ -2811,10 +2783,71 @@ export interface ApplicationDetailDto {
   decisionRationale?: ApplicationDetailDtoDecisionRationale;
   /** @nullable */
   grantBudget?: ApplicationDetailDtoGrantBudget;
-  /** @nullable */
-  mentorAssignment?: ApplicationMentorAssignmentDto | null;
   createdAt: string;
   updatedAt: string;
+}
+
+export type StudentApplicationCallSummaryDtoType = typeof StudentApplicationCallSummaryDtoType[keyof typeof StudentApplicationCallSummaryDtoType];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const StudentApplicationCallSummaryDtoType = {
+  PROGRAM_A: 'PROGRAM_A',
+  PROGRAM_B: 'PROGRAM_B',
+} as const;
+
+export type StudentApplicationCallSummaryDtoStatus = typeof StudentApplicationCallSummaryDtoStatus[keyof typeof StudentApplicationCallSummaryDtoStatus];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const StudentApplicationCallSummaryDtoStatus = {
+  DRAFT: 'DRAFT',
+  OPEN: 'OPEN',
+  CLOSED: 'CLOSED',
+  ARCHIVED: 'ARCHIVED',
+} as const;
+
+export interface StudentApplicationCallSummaryDto {
+  id: string;
+  title: string;
+  type: StudentApplicationCallSummaryDtoType;
+  status: StudentApplicationCallSummaryDtoStatus;
+}
+
+export type StudentApplicationSummaryDtoStatus = typeof StudentApplicationSummaryDtoStatus[keyof typeof StudentApplicationSummaryDtoStatus];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const StudentApplicationSummaryDtoStatus = {
+  DRAFT: 'DRAFT',
+  SUBMITTED: 'SUBMITTED',
+  FORMALLY_VERIFIED: 'FORMALLY_VERIFIED',
+  EVALUATING: 'EVALUATING',
+  NEEDS_INFO: 'NEEDS_INFO',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+  ONBOARDING: 'ONBOARDING',
+  ACTIVE_PROJECT: 'ACTIVE_PROJECT',
+  PAUSED: 'PAUSED',
+  COMPLETED: 'COMPLETED',
+  ARCHIVED: 'ARCHIVED',
+} as const;
+
+/**
+ * @nullable
+ */
+export type StudentApplicationSummaryDtoSubmittedAt = { [key: string]: unknown } | null;
+
+export interface StudentApplicationSummaryDto {
+  id: string;
+  callId: string;
+  teamId: string;
+  status: StudentApplicationSummaryDtoStatus;
+  /** @nullable */
+  submittedAt?: StudentApplicationSummaryDtoSubmittedAt;
+  createdAt: string;
+  updatedAt: string;
+  call: StudentApplicationCallSummaryDto;
 }
 
 export interface ProgramAMentoredTeamMemberDto {
@@ -4813,3 +4846,4 @@ dateFrom: string;
  */
 dateTo: string;
 };
+

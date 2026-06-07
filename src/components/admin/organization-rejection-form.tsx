@@ -33,15 +33,15 @@ export function OrganizationRejectionForm({
   };
 
   return (
-    <div className="space-y-3 rounded-xl border border-rose-200 bg-rose-50 p-3">
+    <div className="border-destructive/30 bg-destructive/10 space-y-3 rounded-xl border p-3">
       <Textarea
         value={reason}
         onChange={(event) => setReason(event.target.value)}
         placeholder={t`Explain why this organization should be rejected.`}
         disabled={disabled}
-        className="min-h-24 border-rose-200 bg-white"
+        className="border-destructive/30 bg-card min-h-24"
       />
-      {error ? <p className="text-sm font-medium text-rose-700">{error}</p> : null}
+      {error ? <p className="text-destructive text-sm font-medium">{error}</p> : null}
       <div className="flex flex-wrap gap-2">
         <Button
           type="button"

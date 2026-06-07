@@ -53,13 +53,13 @@ function GatewayCard({
     <Card
       className={cn(
         'flex flex-col rounded-none border-0 shadow-none',
-        isDark ? 'bg-[#0f172a]' : 'border-b border-black/[0.08] bg-white md:border-r md:border-b-0',
+        isDark ? 'bg-[#0f172a]' : 'bg-card border-b border-black/[0.08] md:border-r md:border-b-0',
       )}
     >
       <CardHeader className="px-5 pt-8 pb-0 sm:px-8 sm:pt-10 lg:px-10">
         <div className="mb-6 flex items-start justify-between">
           <Icon
-            className={cn('h-8 w-8', isDark ? 'text-white/40' : 'text-blue-600/70')}
+            className={cn('h-8 w-8', isDark ? 'text-white/40' : 'text-primary/70')}
             strokeWidth={1.5}
           />
         </div>
@@ -67,7 +67,7 @@ function GatewayCard({
         <h2
           className={cn(
             'mb-1 text-[26px] font-semibold tracking-tight',
-            isDark ? 'text-white' : 'text-neutral-900',
+            isDark ? 'text-white' : 'text-foreground',
           )}
         >
           {title}
@@ -76,7 +76,7 @@ function GatewayCard({
         <p
           className={cn(
             'text-[10px] font-medium tracking-[0.12em] uppercase',
-            isDark ? 'text-white/40' : 'text-blue-600',
+            isDark ? 'text-white/40' : 'text-primary',
           )}
         >
           {subtitle}
@@ -87,7 +87,7 @@ function GatewayCard({
         <p
           className={cn(
             'mb-7 text-[14px] leading-[1.65]',
-            isDark ? 'text-white/50' : 'text-neutral-500',
+            isDark ? 'text-white/50' : 'text-muted-foreground',
           )}
         >
           {description}
@@ -99,13 +99,13 @@ function GatewayCard({
               key={feature}
               className={cn(
                 'flex items-center gap-2.5 text-[13px] font-normal',
-                isDark ? 'text-white/70' : 'text-neutral-700',
+                isDark ? 'text-white/70' : 'text-foreground',
               )}
             >
               <CheckCircle2
                 className={cn(
                   'h-[18px] w-[18px] shrink-0',
-                  isDark ? 'text-white/40' : 'text-blue-600',
+                  isDark ? 'text-white/40' : 'text-primary',
                 )}
                 strokeWidth={1.8}
               />
@@ -122,8 +122,8 @@ function GatewayCard({
           className={cn(
             'min-h-12 w-full rounded-sm py-3 text-center text-[10px] font-semibold tracking-[0.1em] whitespace-normal transition-all duration-200 sm:text-[11px]',
             isDark
-              ? 'bg-blue-800 text-white hover:bg-blue-700'
-              : 'border-2 border-neutral-900 text-neutral-900 hover:bg-neutral-900 hover:text-white',
+              ? 'bg-primary text-primary-foreground hover:bg-primary/90'
+              : 'border-foreground text-foreground hover:bg-foreground hover:text-background border-2',
           )}
         >
           <Link href={href}>
@@ -178,17 +178,17 @@ export default function GatewayPage() {
     <main className="mx-auto w-full max-w-[1200px] flex-1 px-4 pt-10 pb-6 sm:px-6 sm:pt-12 lg:px-12 lg:pt-14 xl:px-16">
       <section className="mb-10 sm:mb-12">
         <div className="mb-4 flex items-center gap-3">
-          <div className="h-[2px] w-8 bg-neutral-400" />
-          <span className="text-[11px] font-medium tracking-[0.12em] text-neutral-500">
+          <div className="bg-muted-foreground h-[2px] w-8" />
+          <span className="text-muted-foreground text-[11px] font-medium tracking-[0.12em]">
             {t`IDENTITY VERIFICATION`}
           </span>
         </div>
 
-        <h1 className="mb-4 text-[38px] leading-[1.07] font-semibold tracking-tight text-neutral-900 sm:text-[48px] lg:text-[56px]">
-          {t`Select Your`} <span className="text-blue-600 sm:block">{t`Gateway`}</span>
+        <h1 className="text-foreground mb-4 text-[38px] leading-[1.07] font-semibold tracking-tight sm:text-[48px] lg:text-[56px]">
+          {t`Select Your`} <span className="text-primary sm:block">{t`Gateway`}</span>
         </h1>
 
-        <p className="max-w-[440px] text-[14px] leading-relaxed text-neutral-500 sm:text-[15px]">
+        <p className="text-muted-foreground max-w-[440px] text-[14px] leading-relaxed sm:text-[15px]">
           {t`Access the high-performance environment tailored to your institutional role. Choose a path to begin your technical journey.`}
         </p>
       </section>
@@ -201,7 +201,7 @@ export default function GatewayPage() {
 
       <p className="mt-5 text-center text-sm sm:text-base">
         {t`Already have an account?`}{' '}
-        <Button asChild variant="link" className="h-auto p-0 font-medium text-blue-500">
+        <Button asChild variant="link" className="text-primary h-auto p-0 font-medium">
           <Link href={ROUTES.AUTH.LOGIN}>{t`Log in`}</Link>
         </Button>
       </p>
@@ -209,12 +209,12 @@ export default function GatewayPage() {
       <section className="mt-8 grid grid-cols-1 gap-4 border-t border-black/[0.07] py-7 sm:grid-cols-3 sm:gap-3">
         {securityBadges.map(({ icon: Icon, label, sublabel }) => (
           <div key={label} className="flex items-center justify-center gap-3 sm:justify-start">
-            <Icon className="h-5 w-5 text-neutral-400" strokeWidth={1.5} />
+            <Icon className="text-muted-foreground h-5 w-5" strokeWidth={1.5} />
             <div>
-              <p className="text-[9px] font-semibold tracking-[0.1em] text-neutral-500 uppercase">
+              <p className="text-muted-foreground text-[9px] font-semibold tracking-[0.1em] uppercase">
                 {label}
               </p>
-              <p className="text-[9px] font-normal tracking-[0.08em] text-neutral-400 uppercase">
+              <p className="text-muted-foreground text-[9px] font-normal tracking-[0.08em] uppercase">
                 {sublabel}
               </p>
             </div>

@@ -65,7 +65,7 @@ function DetailTags({
   const labels = items?.map(getUnknownItemLabel).filter((label): label is string => Boolean(label));
 
   if (!labels?.length) {
-    return <p className="text-slate-950">{emptyLabel}</p>;
+    return <p className="text-foreground">{emptyLabel}</p>;
   }
 
   return (
@@ -73,7 +73,7 @@ function DetailTags({
       {labels.map((label) => (
         <span
           key={label}
-          className="rounded-full border border-slate-200 px-3 py-1 text-xs font-medium text-slate-700"
+          className="border-border text-foreground rounded-full border px-3 py-1 text-xs font-medium"
         >
           {label}
         </span>
@@ -156,12 +156,12 @@ export default function AdminCallDetailPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-5 sm:flex-row sm:items-center sm:justify-between">
+      <div className="border-border bg-card flex flex-col gap-4 rounded-2xl border p-5 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-[11px] font-medium tracking-[0.12em] text-slate-500 uppercase">
+          <p className="text-muted-foreground text-[11px] font-medium tracking-[0.12em] uppercase">
             {formatEnumLabel(call.type)}
           </p>
-          <h1 className="mt-2 text-2xl font-semibold text-slate-950">{call.title}</h1>
+          <h1 className="text-foreground mt-2 text-2xl font-semibold">{call.title}</h1>
           <div className="mt-3">
             <AdminStatusBadge status={call.status} />
           </div>
@@ -193,7 +193,17 @@ export default function AdminCallDetailPage() {
 
           {call.status === AdminCallStatus.CLOSED ? (
             <Button
-              onClick={() => archiveMutation.mutate(call.id)}
+              onClick={() => {
+                if (
+                  !window.confirm(
+                    t`Archive "${call.title}"? Archiving is terminal and cannot be undone.`,
+                  )
+                ) {
+                  return;
+                }
+
+                archiveMutation.mutate(call.id);
+              }}
               disabled={archiveMutation.isPending}
             >
               {t`Archive`}
@@ -202,66 +212,68 @@ export default function AdminCallDetailPage() {
         </div>
       </div>
 
-      <Card className="border-slate-200 bg-white shadow-none">
+      <Card className="border-border bg-card shadow-none">
         <CardHeader>
           <CardTitle>{t`Call details`}</CardTitle>
         </CardHeader>
 
         <CardContent className="grid gap-4 text-sm md:grid-cols-2">
           <div>
-            <p className="text-slate-500">{t`ID`}</p>
-            <p className="font-mono text-slate-950">{call.id}</p>
+            <p className="text-muted-foreground">{t`ID`}</p>
+            <p className="text-foreground font-mono">{call.id}</p>
           </div>
 
           <div>
-            <p className="text-slate-500">{t`Type`}</p>
-            <p className="text-slate-950">{formatEnumLabel(call.type)}</p>
+            <p className="text-muted-foreground">{t`Type`}</p>
+            <p className="text-foreground">{formatEnumLabel(call.type)}</p>
           </div>
 
           <div>
-            <p className="text-slate-500">{t`Status`}</p>
+            <p className="text-muted-foreground">{t`Status`}</p>
             <div className="mt-1">
               <AdminStatusBadge status={call.status} />
             </div>
           </div>
 
           <div>
-            <p className="text-slate-500">{t`Min team size`}</p>
-            <p className="text-slate-950">{formatOptionalNumber(call.minTeamSize)}</p>
+            <p className="text-muted-foreground">{t`Min team size`}</p>
+            <p className="text-foreground">{formatOptionalNumber(call.minTeamSize)}</p>
           </div>
 
           <div>
-            <p className="text-slate-500">{t`Max transferred subjects`}</p>
-            <p className="text-slate-950">{formatOptionalNumber(call.maxTransferredSubjects)}</p>
+            <p className="text-muted-foreground">{t`Max transferred subjects`}</p>
+            <p className="text-foreground">{formatOptionalNumber(call.maxTransferredSubjects)}</p>
           </div>
 
           <div>
-            <p className="text-slate-500">{t`Max profile subjects average`}</p>
-            <p className="text-slate-950">{formatOptionalNumber(call.maxProfileSubjectsAverage)}</p>
+            <p className="text-muted-foreground">{t`Max profile subjects average`}</p>
+            <p className="text-foreground">
+              {formatOptionalNumber(call.maxProfileSubjectsAverage)}
+            </p>
           </div>
 
           <div>
-            <p className="text-slate-500">{t`Opens at`}</p>
-            <p className="text-slate-950">{formatAdminDateTime(call.opensAt)}</p>
+            <p className="text-muted-foreground">{t`Opens at`}</p>
+            <p className="text-foreground">{formatAdminDateTime(call.opensAt)}</p>
           </div>
 
           <div>
-            <p className="text-slate-500">{t`Closes at`}</p>
-            <p className="text-slate-950">{formatAdminDateTime(call.closesAt)}</p>
+            <p className="text-muted-foreground">{t`Closes at`}</p>
+            <p className="text-foreground">{formatAdminDateTime(call.closesAt)}</p>
           </div>
 
           <div>
-            <p className="text-slate-500">{t`Created at`}</p>
-            <p className="text-slate-950">{formatAdminDateTime(call.createdAt)}</p>
+            <p className="text-muted-foreground">{t`Created at`}</p>
+            <p className="text-foreground">{formatAdminDateTime(call.createdAt)}</p>
           </div>
 
           <div>
-            <p className="text-slate-500">{t`Updated at`}</p>
-            <p className="text-slate-950">{formatAdminDateTime(call.updatedAt)}</p>
+            <p className="text-muted-foreground">{t`Updated at`}</p>
+            <p className="text-foreground">{formatAdminDateTime(call.updatedAt)}</p>
           </div>
 
           <div className="md:col-span-2">
-            <p className="text-slate-500">{t`Required document types`}</p>
+            <p className="text-muted-foreground">{t`Required document types`}</p>
             <DetailTags
               items={call.requiredDocumentTypes?.map((document) =>
                 formatRequiredDocumentTypeLabel(document.documentType),
@@ -270,12 +282,12 @@ export default function AdminCallDetailPage() {
           </div>
 
           <div className="md:col-span-2">
-            <p className="text-slate-500">{t`Categories`}</p>
+            <p className="text-muted-foreground">{t`Categories`}</p>
             <DetailTags items={call.categories} />
           </div>
 
           <div className="md:col-span-2">
-            <p className="text-slate-500">{t`Stack tags`}</p>
+            <p className="text-muted-foreground">{t`Stack tags`}</p>
             <DetailTags items={call.stackTags} />
           </div>
         </CardContent>

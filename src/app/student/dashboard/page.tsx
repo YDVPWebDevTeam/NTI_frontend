@@ -1,6 +1,7 @@
 'use client';
 
 import { t } from '@lingui/core/macro';
+import { useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useMemo } from 'react';
@@ -8,6 +9,7 @@ import { toast } from 'sonner';
 
 import {
   ApplicationsControllerListActivePublicCallsType,
+  getApplicationsControllerListSubmittedForCurrentTeamQueryKey,
   type StudentApplicationSummaryDto,
   useApplicationsControllerCreateDraft,
   useApplicationsControllerListSubmittedForCurrentTeam,
@@ -61,7 +63,7 @@ function MyApplicationsSection({
   const renderApplicationsContent = () => {
     if (isLoading) {
       return (
-        <p className="text-sm leading-7 text-[#58667d]">
+        <p className="text-muted-foreground text-sm leading-7">
           {t`Loading your submitted applications...`}
         </p>
       );
@@ -69,8 +71,8 @@ function MyApplicationsSection({
 
     if (isError) {
       return (
-        <div className="space-y-3 rounded-[1.5rem] bg-[#f8faff] p-5">
-          <p className="text-sm leading-7 text-[#58667d]">
+        <div className="bg-muted space-y-3 rounded-2xl p-5">
+          <p className="text-muted-foreground text-sm leading-7">
             {t`Submitted applications could not be loaded right now.`}
           </p>
           <Button size="sm" variant="outline" onClick={onRetry}>
@@ -82,8 +84,8 @@ function MyApplicationsSection({
 
     if (applications.length === 0) {
       return (
-        <div className="rounded-[1.5rem] bg-[#f8faff] p-5">
-          <p className="text-sm leading-7 text-[#58667d]">{t`No submitted applications yet.`}</p>
+        <div className="bg-muted rounded-2xl p-5">
+          <p className="text-muted-foreground text-sm leading-7">{t`No submitted applications yet.`}</p>
         </div>
       );
     }
@@ -91,13 +93,10 @@ function MyApplicationsSection({
     return (
       <div className="space-y-4">
         {applications.map((application) => (
-          <div
-            key={application.id}
-            className="rounded-[1.5rem] border border-[#dce5fb] bg-[linear-gradient(180deg,#ffffff_0%,#f8faff_100%)] p-5"
-          >
+          <div key={application.id} className="border-border bg-card rounded-2xl border p-5">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div className="min-w-0 flex-1">
-                <p className="font-semibold text-[#122039]">{application.call.title}</p>
+                <p className="text-foreground font-semibold">{application.call.title}</p>
 
                 <div className="mt-3">
                   <StudentKeyValueList
@@ -136,16 +135,16 @@ function MyApplicationsSection({
   return (
     <div className="space-y-4">
       {needsInfoApplication ? (
-        <div className="rounded-[1.75rem] border border-amber-200 bg-amber-50 p-5 shadow-[0_14px_36px_rgba(19,27,46,0.05)]">
+        <div className="border-warning/30 bg-warning/10 rounded-2xl border p-5 shadow-sm">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
-              <p className="text-sm font-semibold tracking-[0.16em] text-amber-700 uppercase">
+              <p className="text-warning text-sm font-semibold tracking-[0.16em] uppercase">
                 {t`Action required`}
               </p>
-              <h2 className="mt-2 text-xl font-semibold text-[#101a2e]">
+              <h2 className="text-foreground mt-2 text-xl font-semibold">
                 {t`Your application needs additional information`}
               </h2>
-              <p className="mt-2 text-sm leading-6 text-amber-800">
+              <p className="text-warning mt-2 text-sm leading-6">
                 {t`Open the application detail and reply to the needs-info request.`}
               </p>
             </div>
@@ -172,6 +171,7 @@ function MyApplicationsSection({
 export default function StudentDashboardPage() {
   const router = useRouter();
   const me = useStudentWorkspaceUser();
+  const queryClient = useQueryClient();
 
   const profileQuery = useGetMyStudentProfile({
     query: { enabled: true },
@@ -272,6 +272,16 @@ export default function StudentDashboardPage() {
       return;
     }
 
+    // Guard against creating a second draft for the same call when one is already
+    // known. Open the existing draft instead of duplicating it.
+    const existingDraft = draftRegistryMap.get(callId);
+
+    if (existingDraft) {
+      router.push(ROUTES.STUDENT.studentApplication(existingDraft.applicationId));
+
+      return;
+    }
+
     try {
       const application = await createDraft.mutateAsync({
         data: {
@@ -281,6 +291,11 @@ export default function StudentDashboardPage() {
       });
 
       saveDraftRegistryEntry(application.id, team.id, callId);
+      // The new draft must show up in the team's application list across devices,
+      // so invalidate the submitted-applications query (localStorage is per-browser).
+      await queryClient.invalidateQueries({
+        queryKey: getApplicationsControllerListSubmittedForCurrentTeamQueryKey(),
+      });
       router.push(ROUTES.STUDENT.studentApplication(application.id));
     } catch (error) {
       toast.error(
@@ -290,7 +305,7 @@ export default function StudentDashboardPage() {
   };
 
   return (
-    <StudentDashboardShell team={team}>
+    <StudentDashboardShell>
       <div className="grid gap-6 xl:grid-cols-[0.9fr_1.1fr]">
         <FoundationSection
           profile={profile}

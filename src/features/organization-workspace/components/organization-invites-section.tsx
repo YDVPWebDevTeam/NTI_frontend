@@ -135,7 +135,7 @@ export function OrganizationInvitesSection({ organizationId }: { organizationId:
       <div className="space-y-6">
         <Form {...form}>
           <form
-            className="rounded-[1.5rem] border border-[#dce5fb] bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] p-5"
+            className="border-border bg-muted rounded-2xl border p-5"
             onSubmit={form.handleSubmit(handleCreateInvite)}
           >
             <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
@@ -192,17 +192,17 @@ export function OrganizationInvitesSection({ organizationId }: { organizationId:
               return (
                 <div
                   key={invite.id}
-                  className="flex flex-col gap-4 rounded-[1.5rem] border border-[#dfe7fa] bg-white p-5 shadow-[0_8px_20px_rgba(19,27,46,0.04)] lg:flex-row lg:items-start lg:justify-between"
+                  className="border-border bg-card flex flex-col gap-4 rounded-2xl border p-5 shadow-sm lg:flex-row lg:items-start lg:justify-between"
                 >
                   <div className="space-y-2">
                     <div className="flex flex-wrap items-center gap-2">
-                      <p className="text-base font-semibold text-[#10213d]">{invite.email}</p>
-                      <Badge className="bg-[#eef4ff] text-[#1f56c2] hover:bg-[#eef4ff]">
+                      <p className="text-foreground text-base font-semibold">{invite.email}</p>
+                      <Badge className="bg-accent text-primary hover:bg-accent">
                         {formatEnumLabel(invite.status)}
                       </Badge>
                     </div>
 
-                    <div className="flex flex-wrap gap-x-5 gap-y-1 text-sm text-[#60718d]">
+                    <div className="text-muted-foreground flex flex-wrap gap-x-5 gap-y-1 text-sm">
                       <span>
                         {t`Created`}: {new Date(invite.createdAt).toLocaleDateString()}
                       </span>

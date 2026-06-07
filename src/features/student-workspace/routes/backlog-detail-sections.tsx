@@ -2,12 +2,27 @@
 
 import { t } from '@lingui/core/macro';
 import type { ReactNode } from 'react';
-import type { ProgramBBacklogItemDto, ProgramBTeamApplicationResponseDto } from 'lib/api';
+import {
+  ProgramBTeamApplicationResponseDtoStatus,
+  type ProgramBBacklogItemDto,
+  type ProgramBTeamApplicationResponseDto,
+} from 'lib/api';
 
 import { Button, Textarea } from 'components/shadcn';
 import { FileUploader } from 'components/files/file-uploader';
 import { StudentSectionCard } from 'components/student-dashboard/page-shell-primitives';
 import { formatUnknownDate } from 'lib/student-dashboard/normalizers';
+
+const ACTIVE_APPLICATION_STATUSES: ProgramBTeamApplicationResponseDtoStatus[] = [
+  ProgramBTeamApplicationResponseDtoStatus.SUBMITTED,
+  ProgramBTeamApplicationResponseDtoStatus.SHORTLISTED,
+];
+
+export function isActiveApplication(
+  application: ProgramBTeamApplicationResponseDto | null,
+): boolean {
+  return Boolean(application && ACTIVE_APPLICATION_STATUSES.includes(application.status));
+}
 
 export function DocumentsSection({
   item,
@@ -22,11 +37,11 @@ export function DocumentsSection({
         {(item?.documents ?? []).map((document) => (
           <div
             key={document.id}
-            className="flex flex-col gap-3 rounded-2xl border border-black/10 bg-[#f7f8fa] p-4 sm:flex-row sm:items-center sm:justify-between"
+            className="border-border bg-muted flex flex-col gap-3 rounded-2xl border p-4 sm:flex-row sm:items-center sm:justify-between"
           >
             <div>
-              <p className="font-semibold text-neutral-950">{document.name}</p>
-              <p className="text-sm text-neutral-600">
+              <p className="text-foreground font-semibold">{document.name}</p>
+              <p className="text-muted-foreground text-sm">
                 {document.category} · {document.status}
               </p>
             </div>
@@ -43,6 +58,7 @@ export function DocumentsSection({
 export function TeamApplicationSection({
   existingApplication,
   isLead,
+  isLocked,
   team,
   motivation,
   proposalText,
@@ -57,6 +73,7 @@ export function TeamApplicationSection({
 }: {
   existingApplication: ProgramBTeamApplicationResponseDto | null;
   isLead: boolean;
+  isLocked: boolean;
   team: { id: string } | null;
   motivation: string;
   proposalText: string;
@@ -69,34 +86,59 @@ export function TeamApplicationSection({
   isSubmitting: boolean;
   isWithdrawing: boolean;
 }) {
+  const lockedTooltip = t`This team is locked and can no longer submit or withdraw applications.`;
+  const hasActiveApplication = isActiveApplication(existingApplication);
+  const isTerminalApplication =
+    existingApplication != null &&
+    (existingApplication.status === ProgramBTeamApplicationResponseDtoStatus.ACCEPTED ||
+      existingApplication.status === ProgramBTeamApplicationResponseDtoStatus.PROJECT_CREATED);
+
   let content: ReactNode;
 
-  if (existingApplication) {
+  if (hasActiveApplication && existingApplication) {
     content = (
       <div className="space-y-4">
-        <p className="text-sm text-neutral-700">
+        <p className="text-muted-foreground text-sm">
           {t`Current status:`}{' '}
-          <span className="font-semibold text-neutral-950">{existingApplication.status}</span>
+          <span className="text-foreground font-semibold">{existingApplication.status}</span>
         </p>
-        <p className="text-sm text-neutral-700">
+        <p className="text-muted-foreground text-sm">
           {t`Submitted:`}{' '}
-          <span className="font-semibold text-neutral-950">
+          <span className="text-foreground font-semibold">
             {formatUnknownDate(existingApplication.submittedAt)}
           </span>
         </p>
         <Button
           size="sm"
           variant="outline"
-          disabled={!isLead || isWithdrawing}
+          disabled={!isLead || isLocked || isWithdrawing}
+          title={isLocked ? lockedTooltip : undefined}
           onClick={() => void onWithdraw()}
         >
           {t`Withdraw application`}
         </Button>
       </div>
     );
+  } else if (isTerminalApplication && existingApplication) {
+    content = (
+      <div className="space-y-2">
+        <p className="text-muted-foreground text-sm">
+          {t`Current status:`}{' '}
+          <span className="text-foreground font-semibold">{existingApplication.status}</span>
+        </p>
+        <p className="text-muted-foreground text-sm">
+          {t`This application has been finalized and can no longer be changed.`}
+        </p>
+      </div>
+    );
   } else if (isLead) {
     content = (
       <div className="space-y-4">
+        {existingApplication ? (
+          <p className="text-muted-foreground text-sm">
+            {t`Your previous application is ${existingApplication.status}. You can submit a new application below.`}
+          </p>
+        ) : null}
         <Textarea
           value={motivation}
           onChange={(event) => setMotivation(event.target.value)}
@@ -120,11 +162,13 @@ export function TeamApplicationSection({
         <Button
           disabled={
             !team ||
+            isLocked ||
             !motivation.trim() ||
             !proposalText.trim() ||
             cvFiles.length === 0 ||
             isSubmitting
           }
+          title={isLocked ? lockedTooltip : undefined}
           onClick={() => void onSubmit()}
         >
           {t`Submit application`}
@@ -133,7 +177,7 @@ export function TeamApplicationSection({
     );
   } else {
     content = (
-      <p className="text-sm text-neutral-600">
+      <p className="text-muted-foreground text-sm">
         {t`Only the current team lead can apply or withdraw for Program B opportunities.`}
       </p>
     );
@@ -144,6 +188,17 @@ export function TeamApplicationSection({
       title={t`Team application`}
       description={t`Lead-only apply and withdraw actions use the generated team application endpoints.`}
     >
+      {isLocked ? (
+        <div
+          role="status"
+          className="border-warning/30 bg-warning/10 text-warning mb-4 rounded-2xl border p-4 text-sm"
+        >
+          <p className="font-semibold">{t`Team locked`}</p>
+          <p className="mt-1">
+            {t`This team is locked, so applications can no longer be submitted or withdrawn.`}
+          </p>
+        </div>
+      ) : null}
       {content}
     </StudentSectionCard>
   );

@@ -24,23 +24,23 @@ export function StudentOnboardingStageList({
             type="button"
             onClick={() => onStageChange(stage.id)}
             aria-pressed={isActive}
-            className={`rounded-xl border p-4 text-left transition-colors focus-visible:ring-2 focus-visible:ring-[#1e58d5] focus-visible:ring-offset-2 ${
+            className={`focus-visible:ring-ring rounded-xl border p-4 text-left transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 ${
               isActive
-                ? 'border-[#1e58d5] bg-white shadow-sm'
-                : 'border-black/10 bg-white/70 hover:bg-white'
+                ? 'border-primary bg-card shadow-sm'
+                : 'border-border bg-card/70 hover:bg-card'
             }`}
           >
             <div className="flex items-center justify-between gap-3">
-              <h2 className="text-base font-semibold text-[#0c1a4f]">{stage.title}</h2>
+              <h2 className="text-foreground text-base font-semibold">{stage.title}</h2>
               <span
                 className={`rounded-full px-2.5 py-1 text-[11px] font-medium ${
-                  stage.completed ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'
+                  stage.completed ? 'bg-success/10 text-success' : 'bg-warning/10 text-warning'
                 }`}
               >
                 {stage.completed ? t`Complete` : t`Pending`}
               </span>
             </div>
-            <p className="mt-2 text-sm text-neutral-600">{stage.description}</p>
+            <p className="text-muted-foreground mt-2 text-sm">{stage.description}</p>
           </button>
         );
       })}

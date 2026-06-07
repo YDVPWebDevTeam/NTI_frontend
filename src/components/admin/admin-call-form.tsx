@@ -186,7 +186,7 @@ function FieldError({ message }: { message?: string }) {
     return null;
   }
 
-  return <p className="text-sm text-red-600">{message}</p>;
+  return <p className="text-destructive text-sm">{message}</p>;
 }
 
 export function AdminCallForm({
@@ -229,7 +229,7 @@ export function AdminCallForm({
 
   return (
     <form
-      className="space-y-5 rounded-2xl border border-slate-200 bg-white p-5"
+      className="border-border bg-card space-y-5 rounded-2xl border p-5"
       onSubmit={(event) => {
         event.preventDefault();
 
@@ -255,7 +255,7 @@ export function AdminCallForm({
     >
       <div className="grid gap-4 md:grid-cols-2">
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-700">{t`Title`}</label>
+          <label className="text-foreground text-sm font-medium">{t`Title`}</label>
           <Input
             value={values.title}
             onChange={(event) => updateField('title', event.target.value)}
@@ -265,7 +265,7 @@ export function AdminCallForm({
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-700">{t`Type`}</label>
+          <label className="text-foreground text-sm font-medium">{t`Type`}</label>
           <Select
             value={values.type}
             onValueChange={(value) => updateField('type', value as CreateAdminCallDtoType)}
@@ -282,7 +282,7 @@ export function AdminCallForm({
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-700">{t`Required document type`}</label>
+          <label className="text-foreground text-sm font-medium">{t`Required document type`}</label>
           <Select
             value={values.requiredDocumentType}
             onValueChange={(value) =>
@@ -304,7 +304,7 @@ export function AdminCallForm({
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-700">{t`Opens at`}</label>
+          <label className="text-foreground text-sm font-medium">{t`Opens at`}</label>
           <Input
             type="datetime-local"
             value={values.opensAt}
@@ -314,7 +314,7 @@ export function AdminCallForm({
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-700">{t`Closes at`}</label>
+          <label className="text-foreground text-sm font-medium">{t`Closes at`}</label>
           <Input
             type="datetime-local"
             value={values.closesAt}
@@ -324,7 +324,7 @@ export function AdminCallForm({
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-700">{t`Min team size`}</label>
+          <label className="text-foreground text-sm font-medium">{t`Min team size`}</label>
           <Input
             type="number"
             min="1"
@@ -336,7 +336,7 @@ export function AdminCallForm({
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-700">
+          <label className="text-foreground text-sm font-medium">
             {t`Max transferred subjects`}
           </label>
           <Input
@@ -350,7 +350,7 @@ export function AdminCallForm({
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium text-slate-700">
+          <label className="text-foreground text-sm font-medium">
             {t`Max profile subjects average`}
           </label>
           <Input

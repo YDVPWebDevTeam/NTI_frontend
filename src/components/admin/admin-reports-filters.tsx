@@ -96,9 +96,9 @@ export function AdminReportsFilters({
   const isApplications = selectedDataset === ReportsControllerExportReportDataset.applications;
 
   return (
-    <div className="grid gap-4 rounded-2xl border border-slate-200 bg-slate-50/70 p-4 sm:grid-cols-2 xl:grid-cols-4">
+    <div className="border-border bg-muted/70 grid gap-4 rounded-2xl border p-4 sm:grid-cols-2 xl:grid-cols-4">
       <div className="min-w-0">
-        <label className="mb-2 block text-[11px] font-medium tracking-[0.12em] text-slate-500 uppercase">
+        <label className="text-muted-foreground mb-2 block text-[11px] font-medium tracking-[0.12em] uppercase">
           {t`Status`}
         </label>
         <Select
@@ -115,7 +115,7 @@ export function AdminReportsFilters({
             setProgramBStatus(value as ProgramBStatusFilter);
           }}
         >
-          <SelectTrigger className="h-11 bg-white">
+          <SelectTrigger className="bg-card h-11">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -132,7 +132,7 @@ export function AdminReportsFilters({
 
       {isApplications ? (
         <div className="min-w-0">
-          <label className="mb-2 block text-[11px] font-medium tracking-[0.12em] text-slate-500 uppercase">
+          <label className="text-muted-foreground mb-2 block text-[11px] font-medium tracking-[0.12em] uppercase">
             {t`Program`}
           </label>
           <Select
@@ -142,7 +142,7 @@ export function AdminReportsFilters({
               setApplicationsProgramType(value as ProgramTypeFilter);
             }}
           >
-            <SelectTrigger className="h-11 bg-white">
+            <SelectTrigger className="bg-card h-11">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -157,7 +157,7 @@ export function AdminReportsFilters({
       ) : null}
 
       <div className="min-w-0">
-        <label className="mb-2 block text-[11px] font-medium tracking-[0.12em] text-slate-500 uppercase">
+        <label className="text-muted-foreground mb-2 block text-[11px] font-medium tracking-[0.12em] uppercase">
           {t`Sort`}
         </label>
         <Select
@@ -174,7 +174,7 @@ export function AdminReportsFilters({
             setProgramBSort(value as ProgramBSort);
           }}
         >
-          <SelectTrigger className="h-11 bg-white">
+          <SelectTrigger className="bg-card h-11">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -188,7 +188,7 @@ export function AdminReportsFilters({
       </div>
 
       <div className="min-w-0">
-        <label className="mb-2 block text-[11px] font-medium tracking-[0.12em] text-slate-500 uppercase">
+        <label className="text-muted-foreground mb-2 block text-[11px] font-medium tracking-[0.12em] uppercase">
           {t`Order`}
         </label>
         <Select
@@ -205,7 +205,7 @@ export function AdminReportsFilters({
             setProgramBOrder(value as ProgramBOrder);
           }}
         >
-          <SelectTrigger className="h-11 bg-white">
+          <SelectTrigger className="bg-card h-11">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -222,7 +222,7 @@ export function AdminReportsFilters({
       </div>
 
       <div className="min-w-0">
-        <label className="mb-2 block text-[11px] font-medium tracking-[0.12em] text-slate-500 uppercase">
+        <label className="text-muted-foreground mb-2 block text-[11px] font-medium tracking-[0.12em] uppercase">
           {t`Date From`}
         </label>
         <Input
@@ -239,12 +239,12 @@ export function AdminReportsFilters({
             setProgramBPage(1);
             setProgramBDateFrom(event.target.value);
           }}
-          className="h-11 bg-white"
+          className="bg-card h-11"
         />
       </div>
 
       <div className="min-w-0">
-        <label className="mb-2 block text-[11px] font-medium tracking-[0.12em] text-slate-500 uppercase">
+        <label className="text-muted-foreground mb-2 block text-[11px] font-medium tracking-[0.12em] uppercase">
           {t`Date To`}
         </label>
         <Input
@@ -261,7 +261,7 @@ export function AdminReportsFilters({
             setProgramBPage(1);
             setProgramBDateTo(event.target.value);
           }}
-          className="h-11 bg-white"
+          className="bg-card h-11"
         />
       </div>
     </div>

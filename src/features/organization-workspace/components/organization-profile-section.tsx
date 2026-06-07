@@ -18,6 +18,7 @@ import {
   uploadAndCompleteFile,
   uploadToPresignedUrl,
 } from 'lib/api-client/openapi-runtime/file-upload';
+import { IMAGE_ACCEPT, validateImageFile } from 'lib/files/upload-validation';
 import {
   ControlledFileField,
   ControlledInputField,
@@ -106,6 +107,15 @@ export function OrganizationProfileSection({
       let logoUrl = organization.logoUrl ?? null;
 
       if (values.logoFile instanceof File) {
+        const logoValidation = validateImageFile(values.logoFile);
+
+        if (!logoValidation.ok) {
+          form.setError('logoFile', { message: logoValidation.message });
+          toast.error(logoValidation.message);
+
+          return;
+        }
+
         try {
           setIsUploadingLogo(true);
 
@@ -125,11 +135,16 @@ export function OrganizationProfileSection({
 
           logoUrl = uploadedLogo.publicUrl ?? null;
         } catch (error) {
+          // Abort the whole save: continuing here would persist the profile with the
+          // OLD logo while we just told the user the upload failed, producing
+          // contradictory toasts. Surface the error and stop.
           toast.error(
             error instanceof Error
-              ? `${error.message} ${t`Profile changes will be saved without replacing the logo.`}`
-              : t`Logo upload failed. Profile changes will be saved without replacing the logo.`,
+              ? `${error.message} ${t`Your profile changes were not saved. Please try again.`}`
+              : t`Logo upload failed. Your profile changes were not saved. Please try again.`,
           );
+
+          return;
         } finally {
           setIsUploadingLogo(false);
         }
@@ -219,7 +234,7 @@ export function OrganizationProfileSection({
               onFileChange={(file) =>
                 form.setValue('logoFile', file, { shouldDirty: true, shouldValidate: true })
               }
-              accept="image/png,image/jpeg,image/webp,image/svg+xml"
+              accept={IMAGE_ACCEPT}
               description={t`Upload a new logo if you want to replace the current one.`}
               placeholder={t`Choose a logo file`}
               buttonLabel={t`Browse file`}
@@ -235,12 +250,12 @@ export function OrganizationProfileSection({
         </Form>
 
         <div className="space-y-4">
-          <div className="overflow-hidden rounded-[1.5rem] border border-[#dfe7fa] bg-[linear-gradient(180deg,#fbfdff_0%,#f4f8ff_100%)] p-5">
-            <p className="text-[11px] font-semibold tracking-[0.14em] text-[#6c7c99] uppercase">
+          <div className="border-border bg-muted overflow-hidden rounded-2xl border p-5">
+            <p className="text-muted-foreground text-[11px] font-semibold tracking-[0.14em] uppercase">
               {t`Current branding`}
             </p>
 
-            <div className="mt-4 flex min-h-44 items-center justify-center rounded-[1.25rem] border border-dashed border-[#cad8f8] bg-white p-6">
+            <div className="border-border bg-card mt-4 flex min-h-44 items-center justify-center rounded-2xl border border-dashed p-6">
               {organization.logoUrl ? (
                 <Image
                   src={organization.logoUrl}
@@ -251,8 +266,8 @@ export function OrganizationProfileSection({
                   unoptimized
                 />
               ) : (
-                <div className="flex flex-col items-center gap-3 text-center text-sm text-[#60718d]">
-                  <ImageIcon className="h-8 w-8 text-[#89a1d2]" />
+                <div className="text-muted-foreground flex flex-col items-center gap-3 text-center text-sm">
+                  <ImageIcon className="text-muted-foreground h-8 w-8" />
                   <p>{t`No logo uploaded yet.`}</p>
                 </div>
               )}

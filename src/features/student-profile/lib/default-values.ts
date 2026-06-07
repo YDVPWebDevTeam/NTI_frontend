@@ -8,7 +8,6 @@ export function getStudentProfileDefaultValues(): StudentRegistrationValues {
     email: '',
     password: '',
     acceptTerms: false,
-    verificationCode: '',
     universityId: '',
     facultyId: '',
     specializationId: '',

@@ -2,10 +2,19 @@
 
 import { useMemo, useState } from 'react';
 import { t } from '@lingui/core/macro';
-import { ArrowRight, ClipboardCheck, Loader2, Search } from 'lucide-react';
+import { ArrowRight, ClipboardCheck, Search } from 'lucide-react';
 import Link from 'next/link';
 
 import { ProgramAStatusBadge } from 'features/admin-program-a/components/program-a-status-badge';
+import {
+  Button,
+  Card,
+  EmptyState,
+  ErrorState,
+  Input,
+  LoadingState,
+  StatusBadge,
+} from 'components/shadcn';
 import { useAdminApplicationsControllerListProgramAApplications } from 'lib/api/admin/admin';
 import { ROUTES } from 'lib/constants';
 
@@ -37,10 +46,6 @@ const STATUS_TABS: StatusTab[] = [
   { label: 'Archived', value: 'ARCHIVED' },
   { label: 'Rejected', value: 'REJECTED' },
 ];
-
-const BUTTON_BASE_CLASS =
-  'inline-flex items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50';
-const OUTLINE_BUTTON_CLASS = `${BUTTON_BASE_CLASS} border-slate-200 bg-white text-slate-950 hover:bg-slate-50`;
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null;
@@ -260,12 +265,6 @@ function getProgramAApplications(data: unknown): ProgramAApplicationRow[] {
     .filter((row): row is ProgramAApplicationRow => row !== null);
 }
 
-function getStatusTabClassName(isActive: boolean) {
-  return isActive
-    ? 'rounded-full border-slate-950 bg-slate-950 text-white hover:bg-slate-800'
-    : 'rounded-full border-slate-200 bg-white text-slate-950 hover:bg-slate-50';
-}
-
 function matchesSearch(application: ProgramAApplicationRow, searchQuery: string) {
   const normalizedQuery = searchQuery.trim().toLowerCase();
 
@@ -342,15 +341,15 @@ export default function AdminModerationPage() {
 
   return (
     <div className="space-y-6">
-      <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-        <div className="space-y-4 border-b border-slate-200 px-6 py-6">
+      <Card className="overflow-hidden">
+        <div className="border-border space-y-4 border-b px-6 py-6">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div>
-              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-sky-50 text-sky-700">
+              <div className="bg-accent text-primary mb-3 flex h-10 w-10 items-center justify-center rounded-full">
                 <ClipboardCheck className="h-5 w-5" />
               </div>
-              <h1 className="text-2xl font-bold text-slate-950">{t`Program A Moderation`}</h1>
-              <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
+              <h1 className="text-foreground text-2xl font-bold">{t`Program A Moderation`}</h1>
+              <p className="text-muted-foreground mt-2 max-w-3xl text-sm leading-6">
                 {t`Review Program A applications, move them through moderation, assign mentors, and track delivery milestones.`}
               </p>
             </div>
@@ -361,14 +360,16 @@ export default function AdminModerationPage() {
               const isActive = activeStatus === tab.value;
 
               return (
-                <button
+                <Button
                   key={tab.value}
-                  className={`${BUTTON_BASE_CLASS} ${getStatusTabClassName(isActive)}`}
+                  className="rounded-full"
+                  size="sm"
                   type="button"
+                  variant={isActive ? 'default' : 'outline'}
                   onClick={() => setActiveStatus(tab.value)}
                 >
                   {getStatusTabLabel(tab.value)}
-                </button>
+                </Button>
               );
             })}
           </div>
@@ -377,24 +378,23 @@ export default function AdminModerationPage() {
         <div className="space-y-5 px-6 py-6">
           <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_220px_180px]">
             <div className="relative">
-              <Search className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-slate-400" />
-              <input
-                className="h-11 w-full rounded-xl border border-slate-200 bg-white pr-3 pl-9 text-sm text-slate-950 transition outline-none placeholder:text-slate-400 focus:border-sky-400 focus:ring-4 focus:ring-sky-100"
+              <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
+              <Input
+                className="pl-9"
                 placeholder={t`Search by team, call, status, or mentor state...`}
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
               />
             </div>
 
-            <input
-              className="h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-950 transition outline-none placeholder:text-slate-400 focus:border-sky-400 focus:ring-4 focus:ring-sky-100"
+            <Input
               placeholder={t`Filter by call`}
               value={callFilter}
               onChange={(event) => setCallFilter(event.target.value)}
             />
 
             <select
-              className="h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-950 transition outline-none focus:border-sky-400 focus:ring-4 focus:ring-sky-100"
+              className="border-input bg-background ring-offset-background focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
               value={activeStatus}
               onChange={(event) => setActiveStatus(event.target.value)}
             >
@@ -407,38 +407,28 @@ export default function AdminModerationPage() {
           </div>
 
           {applicationsQuery.isLoading && (
-            <div className="flex min-h-72 items-center justify-center rounded-2xl border border-slate-200 bg-white">
-              <div className="flex items-center gap-3 text-sm font-medium text-slate-600">
-                <Loader2 className="h-4 w-4 animate-spin" />
-                {t`Loading Program A applications...`}
-              </div>
-            </div>
+            <LoadingState label={t`Loading Program A applications...`} />
           )}
 
           {applicationsQuery.isError && (
-            <div className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm leading-6 text-rose-700">
-              {t`Unable to load Program A applications from the backend.`}
-            </div>
+            <ErrorState
+              description={t`Unable to load Program A applications from the backend.`}
+              title={t`Unable to load applications`}
+            />
           )}
 
           {shouldShowEmptyState && (
-            <div className="flex min-h-72 items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-6 text-center">
-              <div>
-                <p className="text-lg font-semibold text-slate-950">
-                  {t`No Program A applications found`}
-                </p>
-                <p className="mt-2 max-w-md text-sm leading-6 text-slate-600">
-                  {t`Try changing the search query, call filter, or selected status.`}
-                </p>
-              </div>
-            </div>
+            <EmptyState
+              description={t`Try changing the search query, call filter, or selected status.`}
+              title={t`No Program A applications found`}
+            />
           )}
 
           {!applicationsQuery.isLoading && filteredApplications.length > 0 && (
-            <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
+            <div className="border-border bg-card overflow-hidden rounded-lg border">
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[1120px] text-left text-sm">
-                  <thead className="border-b border-slate-200 bg-slate-50 text-[11px] tracking-[0.08em] text-slate-500 uppercase">
+                  <thead className="border-border bg-muted text-muted-foreground border-b text-[11px] tracking-[0.08em] uppercase">
                     <tr>
                       <th className="px-4 py-3 font-semibold">{t`Status`}</th>
                       <th className="px-4 py-3 font-semibold">{t`Team`}</th>
@@ -452,45 +442,40 @@ export default function AdminModerationPage() {
                     </tr>
                   </thead>
 
-                  <tbody className="divide-y divide-slate-100">
+                  <tbody className="divide-border divide-y">
                     {filteredApplications.map((application) => (
-                      <tr key={application.id} className="hover:bg-slate-50/80">
+                      <tr key={application.id} className="hover:bg-muted/50">
                         <td className="px-4 py-4">
                           <ProgramAStatusBadge status={application.status} />
                         </td>
-                        <td className="px-4 py-4 font-medium text-slate-950">
+                        <td className="text-foreground px-4 py-4 font-medium">
                           {application.teamName}
                         </td>
-                        <td className="px-4 py-4 text-slate-600">{application.callTitle}</td>
-                        <td className="px-4 py-4 text-slate-600">
+                        <td className="text-muted-foreground px-4 py-4">{application.callTitle}</td>
+                        <td className="text-muted-foreground px-4 py-4">
                           {formatDate(application.submittedAt)}
                         </td>
                         <td className="px-4 py-4">
-                          <span
-                            className={`rounded-full border px-3 py-1 text-xs font-semibold ${
-                              application.mentorAssigned
-                                ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
-                                : 'border-slate-200 bg-slate-50 text-slate-600'
-                            }`}
-                          >
+                          <StatusBadge tone={application.mentorAssigned ? 'success' : 'neutral'}>
                             {application.mentorAssigned ? t`Assigned` : t`Not assigned`}
-                          </span>
+                          </StatusBadge>
                         </td>
-                        <td className="px-4 py-4 text-slate-600">{application.eligibility}</td>
-                        <td className="px-4 py-4 font-medium text-slate-800">
+                        <td className="text-muted-foreground px-4 py-4">
+                          {application.eligibility}
+                        </td>
+                        <td className="text-foreground px-4 py-4 font-medium">
                           {application.nextAction}
                         </td>
-                        <td className="px-4 py-4 text-slate-600">
+                        <td className="text-muted-foreground px-4 py-4">
                           {formatDate(application.lastActivity)}
                         </td>
                         <td className="px-4 py-4">
-                          <Link
-                            className={`${OUTLINE_BUTTON_CLASS} bg-white`}
-                            href={ROUTES.ADMIN.programAApplicationDetails(application.id)}
-                          >
-                            {t`View`}
-                            <ArrowRight className="h-4 w-4" />
-                          </Link>
+                          <Button asChild size="sm" variant="outline">
+                            <Link href={ROUTES.ADMIN.programAApplicationDetails(application.id)}>
+                              {t`View`}
+                              <ArrowRight className="h-4 w-4" />
+                            </Link>
+                          </Button>
                         </td>
                       </tr>
                     ))}
@@ -500,7 +485,7 @@ export default function AdminModerationPage() {
             </div>
           )}
 
-          <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-slate-500">
+          <div className="text-muted-foreground flex flex-wrap items-center justify-between gap-3 text-sm">
             <span>
               {getModerationFooterMessage(applicationsQuery.isError, shouldShowEmptyState)}
             </span>
@@ -509,7 +494,7 @@ export default function AdminModerationPage() {
             </span>
           </div>
         </div>
-      </section>
+      </Card>
     </div>
   );
 }

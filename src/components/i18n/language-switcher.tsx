@@ -1,5 +1,6 @@
 'use client';
 
+import { t } from '@lingui/core/macro';
 import { Languages } from 'lucide-react';
 import { startTransition } from 'react';
 import { useRouter } from 'next/navigation';
@@ -39,15 +40,15 @@ export function LanguageSelector({
   return (
     <div
       className={cn(
-        'inline-flex items-center rounded-full border border-black/5 bg-white p-0.5 shadow-sm transition-all hover:shadow-md',
+        'border-border bg-card inline-flex items-center rounded-full border p-0.5 shadow-sm transition-all hover:shadow-md',
         className,
       )}
     >
       <Select value={locale} onValueChange={handleLocaleChange}>
         <SelectTrigger
-          aria-label="Change language"
+          aria-label={t`Change language`}
           className={cn(
-            'h-8 w-auto min-w-25 rounded-full border-none bg-transparent px-3 text-sm shadow-none transition-colors hover:bg-slate-100 focus:ring-0 focus:ring-offset-0',
+            'hover:bg-muted h-8 w-auto min-w-25 rounded-full border-none bg-transparent px-3 text-sm shadow-none transition-colors focus:ring-0 focus:ring-offset-0',
             triggerClassName,
           )}
         >
@@ -59,7 +60,7 @@ export function LanguageSelector({
         <SelectContent
           align="end"
           className={cn(
-            'min-w-35 overflow-hidden rounded-xl border border-slate-200/60 bg-white p-1 shadow-lg',
+            'border-border bg-card min-w-35 overflow-hidden rounded-xl border p-1 shadow-lg',
             contentClassName,
           )}
         >
@@ -67,7 +68,7 @@ export function LanguageSelector({
             <SelectItem
               key={language.value}
               value={language.value}
-              className="cursor-pointer rounded-lg py-2 pr-3 pl-9 text-sm font-medium transition-all data-highlighted:bg-slate-100 data-[state=checked]:bg-slate-50 data-[state=checked]:text-slate-900"
+              className="data-highlighted:bg-muted data-[state=checked]:bg-accent data-[state=checked]:text-foreground cursor-pointer rounded-lg py-2 pr-3 pl-9 text-sm font-medium transition-all"
             >
               {language.label}
             </SelectItem>

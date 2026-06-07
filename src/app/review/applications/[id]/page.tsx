@@ -1,19 +1,26 @@
 'use client';
 
-import { use, useMemo, useRef, useState } from 'react';
+import { use, useMemo, useState } from 'react';
 import { t } from '@lingui/core/macro';
+import { useQueryClient } from '@tanstack/react-query';
 import { ArrowLeft, ClipboardCheck, FileText, Loader2, ShieldCheck, Star } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'sonner';
 
-import { useAdminApplicationsControllerListProgramAApplications } from 'lib/api/admin/admin';
 import {
+  getAdminApplicationsControllerListProgramAApplicationsQueryKey,
+  useAdminApplicationsControllerListProgramAApplications,
+} from 'lib/api/admin/admin';
+import {
+  getApplicationsControllerFindByIdQueryKey,
+  getApplicationsControllerListEvaluationsQueryKey,
   useApplicationsControllerCreateEvaluation,
   useApplicationsControllerFindById,
   useApplicationsControllerGetEligibilitySignals,
   useApplicationsControllerListEvaluations,
   useApplicationsControllerListSections,
 } from 'lib/api/applications/applications';
+import { clampNumber, isWithinRange, parseNumericInput } from 'lib/validation/numeric';
 import type {
   ApplicationDetailDto,
   ApplicationEvaluationDto,
@@ -62,13 +69,23 @@ const EVALUATION_CRITERIA: EvaluationCriterion[] = [
 ];
 
 const DEFAULT_SCORE = 80;
+const MIN_SCORE = 0;
+const MAX_SCORE = 100;
+
+type ScoreState = Record<EvaluationCriterion['code'], string>;
+
+const DEFAULT_SCORE_STATE: ScoreState = {
+  TECHNICAL_QUALITY: String(DEFAULT_SCORE),
+  BUSINESS_VALUE: String(DEFAULT_SCORE),
+  TEAM_CAPABILITY: String(DEFAULT_SCORE),
+};
 
 const BUTTON_BASE_CLASS =
   'inline-flex items-center justify-center gap-2 rounded-xl border px-4 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50';
-const PRIMARY_BUTTON_CLASS = `${BUTTON_BASE_CLASS} border-sky-600 bg-sky-600 text-white hover:bg-sky-500`;
-const OUTLINE_BUTTON_CLASS = `${BUTTON_BASE_CLASS} border-slate-200 bg-white text-slate-950 hover:bg-slate-50`;
+const PRIMARY_BUTTON_CLASS = `${BUTTON_BASE_CLASS} border-primary bg-primary text-primary-foreground hover:bg-primary/90`;
+const OUTLINE_BUTTON_CLASS = `${BUTTON_BASE_CLASS} border-border bg-card text-foreground hover:bg-muted`;
 const INPUT_CLASS =
-  'w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-950 outline-none focus:border-sky-400 focus:ring-4 focus:ring-sky-100 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-500';
+  'w-full rounded-xl border border-border bg-card px-3 py-2 text-sm text-foreground outline-none focus:border-ring focus:ring-4 focus:ring-ring/20 disabled:cursor-not-allowed disabled:bg-muted disabled:text-muted-foreground';
 
 function canCreateEvaluation(status: ApplicationStatus | undefined) {
   return status === 'FORMALLY_VERIFIED' || status === 'EVALUATING';
@@ -94,13 +111,9 @@ export default function ReviewApplicationDetailPage({ params }: ReviewApplicatio
   const [isEditing, setIsEditing] = useState(false);
   const [evaluationRecommendation, setEvaluationRecommendation] = useState('APPROVE');
   const [evaluationComment, setEvaluationComment] = useState('');
-  const [evaluationScores, setEvaluationScores] = useState<
-    Record<EvaluationCriterion['code'], number>
-  >({
-    TECHNICAL_QUALITY: DEFAULT_SCORE,
-    BUSINESS_VALUE: DEFAULT_SCORE,
-    TEAM_CAPABILITY: DEFAULT_SCORE,
-  });
+  const [evaluationScores, setEvaluationScores] = useState<ScoreState>(DEFAULT_SCORE_STATE);
+
+  const queryClient = useQueryClient();
 
   // The queue row is the authoritative source for team/call names, which the
   // detail DTO does not include.
@@ -125,8 +138,18 @@ export default function ReviewApplicationDetailPage({ params }: ReviewApplicatio
     mutation: {
       onSuccess: () => {
         setIsEditing(false);
-        void evaluationsQuery.refetch();
-        void applicationsQuery.refetch();
+        // Invalidate every query that reflects this application's evaluation state so
+        // the detail view, the evaluations list, and the admin/evaluating queue (which
+        // drives the dashboard badge/queue) all refresh instead of going stale.
+        void queryClient.invalidateQueries({
+          queryKey: getApplicationsControllerListEvaluationsQueryKey(applicationId),
+        });
+        void queryClient.invalidateQueries({
+          queryKey: getApplicationsControllerFindByIdQueryKey(applicationId),
+        });
+        void queryClient.invalidateQueries({
+          queryKey: getAdminApplicationsControllerListProgramAApplicationsQueryKey(),
+        });
       },
       onError: (error: unknown) => toast.error(getErrorMessage(error)),
     },
@@ -136,8 +159,18 @@ export default function ReviewApplicationDetailPage({ params }: ReviewApplicatio
   const status = application?.status;
 
   const queueRow = findApplicationRow(applicationsQuery.data, applicationId);
-  const teamName = toText(getNestedValue(queueRow, ['team', 'name']), t`Not available`);
-  const callTitle = toText(getNestedValue(queueRow, ['call', 'title']), t`Not available`);
+  // The queue row carries human-readable names, but a deep-link to an application
+  // outside the EVALUATING list won't be in that list. Fall back to any team/call
+  // fields present on the detail DTO (names if available, otherwise the IDs) so the
+  // summary still shows something useful instead of "Not available".
+  const teamName = toText(
+    getNestedValue(queueRow, ['team', 'name']),
+    toText(getNestedValue(application, ['team', 'name']) ?? application?.teamId, t`Not available`),
+  );
+  const callTitle = toText(
+    getNestedValue(queueRow, ['call', 'title']),
+    toText(getNestedValue(application, ['call', 'title']) ?? application?.callId, t`Not available`),
+  );
   const submittedAt =
     toText(getNestedValue(queueRow, ['submittedAt'])) || toText(application?.submittedAt);
 
@@ -166,17 +199,17 @@ export default function ReviewApplicationDetailPage({ params }: ReviewApplicatio
       setEvaluationRecommendation(toText(ownEvaluation.recommendation, 'APPROVE'));
       setEvaluationComment(toText(ownEvaluation.comment, ''));
 
-      const nextScores = {
-        TECHNICAL_QUALITY: DEFAULT_SCORE,
-        BUSINESS_VALUE: DEFAULT_SCORE,
-        TEAM_CAPABILITY: DEFAULT_SCORE,
-      };
+      const nextScores: ScoreState = { ...DEFAULT_SCORE_STATE };
 
       for (const score of ownEvaluation.scores ?? []) {
         const code = score.criterionCode as EvaluationCriterion['code'];
 
         if (code in nextScores) {
-          nextScores[code] = Number(score.score);
+          const parsed = parseNumericInput(String(score.score));
+
+          nextScores[code] = String(
+            parsed === null ? DEFAULT_SCORE : clampNumber(parsed, MIN_SCORE, MAX_SCORE),
+          );
         }
       }
 
@@ -185,6 +218,8 @@ export default function ReviewApplicationDetailPage({ params }: ReviewApplicatio
 
     setIsEditing(true);
   };
+
+  const RECOMMENDATION_OPTIONS = ['APPROVE', 'NEEDS_INFO', 'REJECT'];
 
   const runSaveEvaluation = () => {
     if (!canCreateEvaluation(status)) {
@@ -195,13 +230,37 @@ export default function ReviewApplicationDetailPage({ params }: ReviewApplicatio
       return;
     }
 
+    if (!RECOMMENDATION_OPTIONS.includes(evaluationRecommendation)) {
+      toast.error(t`Select a recommendation before submitting.`);
+
+      return;
+    }
+
+    // HTML min/max are advisory only, so validate every criterion here. Each score
+    // must be a finite number within 0–100 and present for all criteria.
+    const validatedScores: { criterionCode: string; score: number }[] = [];
+
+    for (const criterion of EVALUATION_CRITERIA) {
+      const parsed = parseNumericInput(evaluationScores[criterion.code] ?? '');
+
+      if (parsed === null || !isWithinRange(parsed, MIN_SCORE, MAX_SCORE)) {
+        toast.error(
+          t`Enter a score between ${MIN_SCORE} and ${MAX_SCORE} for "${criterion.label}".`,
+        );
+
+        return;
+      }
+
+      validatedScores.push({
+        criterionCode: criterion.code,
+        score: clampNumber(parsed, MIN_SCORE, MAX_SCORE),
+      });
+    }
+
     const data: CreateApplicationEvaluationDto = {
       recommendation: evaluationRecommendation,
       comment: evaluationComment.trim().length > 0 ? evaluationComment.trim() : undefined,
-      scores: EVALUATION_CRITERIA.map((criterion) => ({
-        criterionCode: criterion.code,
-        score: evaluationScores[criterion.code],
-      })),
+      scores: validatedScores,
     };
 
     createEvaluationMutation.mutate({ id: applicationId, data });
@@ -214,8 +273,8 @@ export default function ReviewApplicationDetailPage({ params }: ReviewApplicatio
 
   if (applicationQuery.isLoading) {
     return (
-      <div className="flex min-h-96 items-center justify-center rounded-2xl border border-slate-200 bg-white">
-        <div className="flex items-center gap-3 text-sm font-medium text-slate-600">
+      <div className="border-border bg-card flex min-h-96 items-center justify-center rounded-2xl border">
+        <div className="text-muted-foreground flex items-center gap-3 text-sm font-medium">
           <Loader2 className="h-4 w-4 animate-spin" />
           {t`Loading application detail...`}
         </div>
@@ -231,7 +290,7 @@ export default function ReviewApplicationDetailPage({ params }: ReviewApplicatio
       </Link>
 
       {applicationQuery.isError && (
-        <div className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm leading-6 text-rose-700">
+        <div className="border-destructive/30 bg-destructive/10 text-destructive rounded-2xl border px-4 py-3 text-sm leading-6">
           {t`Unable to load application detail from the backend.`}
         </div>
       )}
@@ -239,7 +298,7 @@ export default function ReviewApplicationDetailPage({ params }: ReviewApplicatio
       <Card>
         <CardHeader>
           <CardTitle>
-            <ClipboardCheck className="h-5 w-5 text-sky-700" />
+            <ClipboardCheck className="text-primary h-5 w-5" />
             {t`Application summary`}
           </CardTitle>
         </CardHeader>
@@ -253,7 +312,7 @@ export default function ReviewApplicationDetailPage({ params }: ReviewApplicatio
       <Card>
         <CardHeader>
           <CardTitle>
-            <ShieldCheck className="h-5 w-5 text-sky-700" />
+            <ShieldCheck className="text-primary h-5 w-5" />
             {t`Eligibility signals`}
           </CardTitle>
         </CardHeader>
@@ -268,7 +327,7 @@ export default function ReviewApplicationDetailPage({ params }: ReviewApplicatio
       <Card>
         <CardHeader>
           <CardTitle>
-            <FileText className="h-5 w-5 text-sky-700" />
+            <FileText className="text-primary h-5 w-5" />
             {t`Application sections`}
           </CardTitle>
         </CardHeader>
@@ -286,7 +345,7 @@ export default function ReviewApplicationDetailPage({ params }: ReviewApplicatio
       <Card>
         <CardHeader>
           <CardTitle>
-            <Star className="h-5 w-5 text-sky-700" />
+            <Star className="text-primary h-5 w-5" />
             {t`Evaluations`}
           </CardTitle>
         </CardHeader>
@@ -303,30 +362,30 @@ export default function ReviewApplicationDetailPage({ params }: ReviewApplicatio
           )}
 
           {showEvaluationForm && (
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <p className="font-semibold text-slate-950">
+            <div className="border-border bg-muted rounded-2xl border p-4">
+              <p className="text-foreground font-semibold">
                 {ownEvaluation ? t`Edit your evaluation` : t`Add your evaluation`}
               </p>
-              <p className="mt-1 text-sm leading-6 text-slate-500">
+              <p className="text-muted-foreground mt-1 text-sm leading-6">
                 {t`Score each criterion from 0 to 100, choose a recommendation, and optionally add a comment.`}
               </p>
 
               <div className="mt-4 grid gap-3 md:grid-cols-3">
                 {EVALUATION_CRITERIA.map((criterion) => (
                   <label key={criterion.code} className="block">
-                    <span className="text-xs font-semibold tracking-[0.08em] text-slate-500 uppercase">
+                    <span className="text-muted-foreground text-xs font-semibold tracking-[0.08em] uppercase">
                       {criterion.label}
                     </span>
                     <input
                       className={`${INPUT_CLASS} mt-2 font-semibold`}
-                      max={100}
-                      min={0}
+                      max={MAX_SCORE}
+                      min={MIN_SCORE}
                       type="number"
                       value={evaluationScores[criterion.code]}
                       onChange={(event) =>
                         setEvaluationScores((currentScores) => ({
                           ...currentScores,
-                          [criterion.code]: Number(event.target.value),
+                          [criterion.code]: event.target.value,
                         }))
                       }
                     />
@@ -336,7 +395,7 @@ export default function ReviewApplicationDetailPage({ params }: ReviewApplicatio
 
               <div className="mt-4 grid gap-3 md:grid-cols-[220px_minmax(0,1fr)]">
                 <label className="block">
-                  <span className="text-xs font-semibold tracking-[0.08em] text-slate-500 uppercase">
+                  <span className="text-muted-foreground text-xs font-semibold tracking-[0.08em] uppercase">
                     {t`Recommendation`}
                   </span>
                   <select
@@ -350,7 +409,7 @@ export default function ReviewApplicationDetailPage({ params }: ReviewApplicatio
                   </select>
                 </label>
                 <label className="block">
-                  <span className="text-xs font-semibold tracking-[0.08em] text-slate-500 uppercase">
+                  <span className="text-muted-foreground text-xs font-semibold tracking-[0.08em] uppercase">
                     {t`Comment`}
                   </span>
                   <input
@@ -389,7 +448,7 @@ export default function ReviewApplicationDetailPage({ params }: ReviewApplicatio
 
           {otherEvaluations.length > 0 && (
             <div className="space-y-3">
-              <p className="text-sm font-semibold text-slate-700">
+              <p className="text-muted-foreground text-sm font-semibold">
                 {t`Other reviewers' evaluations`}
               </p>
               {otherEvaluations.map((evaluation) => (

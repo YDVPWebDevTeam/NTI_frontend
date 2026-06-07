@@ -18,10 +18,10 @@ export function FormSectionCard({
   contentClassName,
 }: FormSectionCardProps) {
   return (
-    <section className={cn('rounded-xl border border-black/10 bg-white p-6 md:p-8', className)}>
+    <section className={cn('border-border bg-card rounded-xl border p-6 md:p-8', className)}>
       <div className={cn('mb-6', contentClassName)}>
-        <h3 className="text-xl font-semibold text-[#0c1a4f]">{title}</h3>
-        {description ? <p className="text-sm text-neutral-500">{description}</p> : null}
+        <h3 className="text-foreground text-xl font-semibold">{title}</h3>
+        {description ? <p className="text-muted-foreground text-sm">{description}</p> : null}
       </div>
       {children}
     </section>

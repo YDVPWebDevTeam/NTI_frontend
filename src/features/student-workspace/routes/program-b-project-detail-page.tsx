@@ -1,5 +1,6 @@
 'use client';
 
+import { t } from '@lingui/core/macro';
 import { use } from 'react';
 
 import {
@@ -12,13 +13,19 @@ import {
 import {
   StudentPageShell,
   StudentSectionCard,
+  StudentStatusCard,
 } from 'components/student-dashboard/page-shell-primitives';
-import { formatUnknownDate, normalizeUnknownText } from 'lib/student-dashboard/normalizers';
+import {
+  formatPersonName,
+  formatUnknownDate,
+  isApiNotFoundError,
+  normalizeUnknownText,
+} from 'lib/student-dashboard/normalizers';
 
 export function StudentProgramBProjectDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const projectQuery = useProgramBProjectsControllerGetProject(id, {
-    query: { enabled: true },
+    query: { enabled: true, retry: false },
   });
   const milestonesQuery = useProgramBProjectsControllerListMilestones(id, {
     query: { enabled: true },
@@ -34,62 +41,93 @@ export function StudentProgramBProjectDetailPage({ params }: { params: Promise<{
   });
 
   const project = projectQuery.data;
+  const shellDescription = t`Overview, milestones, mentoring notes, reviews, and project documents from generated Program B project hooks.`;
+
+  if (projectQuery.isLoading && !project) {
+    return (
+      <StudentPageShell title={t`Program B project`} description={shellDescription}>
+        <StudentStatusCard
+          title={t`Loading project`}
+          description={t`Resolving this Program B project workspace.`}
+        />
+      </StudentPageShell>
+    );
+  }
+
+  if (isApiNotFoundError(projectQuery.error) || (!projectQuery.isLoading && !project)) {
+    return (
+      <StudentPageShell title={t`Program B project`} description={shellDescription}>
+        <StudentStatusCard
+          title={t`Project not found`}
+          description={t`This Program B project does not exist or is no longer available to you.`}
+        />
+      </StudentPageShell>
+    );
+  }
+
+  if (projectQuery.isError || !project) {
+    return (
+      <StudentPageShell title={t`Program B project`} description={shellDescription}>
+        <StudentStatusCard
+          title={t`Unable to load project`}
+          description={t`We could not load this Program B project right now. Please try again.`}
+        />
+      </StudentPageShell>
+    );
+  }
 
   return (
     <StudentPageShell
-      title={normalizeUnknownText(project?.backlogItem.title) ?? 'Program B project'}
-      description="Overview, milestones, mentoring notes, reviews, and project documents from generated Program B project hooks."
+      title={normalizeUnknownText(project.backlogItem?.title) ?? t`Program B project`}
+      description={shellDescription}
     >
       <div className="grid gap-6 lg:grid-cols-2">
-        <StudentSectionCard title="Overview">
-          <div className="space-y-3 text-sm text-neutral-700">
+        <StudentSectionCard title={t`Overview`}>
+          <div className="text-muted-foreground space-y-3 text-sm">
             <p>
-              Status: <span className="font-medium text-neutral-950">{project?.status}</span>
+              {t`Status:`} <span className="text-foreground font-medium">{project.status}</span>
             </p>
             <p>
-              Team:{' '}
-              <span className="font-medium text-neutral-950">
-                {project?.team.name ?? 'Unknown team'}
+              {t`Team:`}{' '}
+              <span className="text-foreground font-medium">
+                {project.team?.name ?? t`Unknown team`}
               </span>
             </p>
             <p>
-              Product owner:{' '}
-              <span className="font-medium text-neutral-950">
-                {project?.productOwner.firstName} {project?.productOwner.lastName}
+              {t`Product owner:`}{' '}
+              <span className="text-foreground font-medium">
+                {formatPersonName(project.productOwner) ?? t`Not assigned`}
               </span>
             </p>
             <p>
-              Reward per member:{' '}
-              <span className="font-medium text-neutral-950">
-                {typeof (project?.rewardPerMember as unknown) === 'number'
-                  ? `€${(project?.rewardPerMember as unknown as number).toLocaleString()}`
-                  : 'Not set'}
+              {t`Reward per member:`}{' '}
+              <span className="text-foreground font-medium">
+                {typeof (project.rewardPerMember as unknown) === 'number'
+                  ? `€${(project.rewardPerMember as unknown as number).toLocaleString()}`
+                  : t`Not set`}
               </span>
             </p>
             <p>
-              Accepted by company:{' '}
-              <span className="font-medium text-neutral-950">
-                {project?.acceptedByCompanyAt
+              {t`Accepted by company:`}{' '}
+              <span className="text-foreground font-medium">
+                {project.acceptedByCompanyAt
                   ? formatUnknownDate(project.acceptedByCompanyAt)
-                  : 'Pending'}
+                  : t`Pending`}
               </span>
             </p>
           </div>
         </StudentSectionCard>
 
-        <StudentSectionCard title="Milestones">
+        <StudentSectionCard title={t`Milestones`}>
           <div className="space-y-3">
             {(milestonesQuery.data ?? []).map((milestone) => (
-              <div
-                key={milestone.id}
-                className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4"
-              >
-                <p className="font-semibold text-neutral-950">{milestone.title}</p>
-                <p className="mt-1 text-sm text-neutral-600">
-                  {normalizeUnknownText(milestone.description) ?? 'No description'}
+              <div key={milestone.id} className="border-border bg-muted rounded-2xl border p-4">
+                <p className="text-foreground font-semibold">{milestone.title}</p>
+                <p className="text-muted-foreground mt-1 text-sm">
+                  {normalizeUnknownText(milestone.description) ?? t`No description`}
                 </p>
-                <p className="mt-1 text-sm text-neutral-600">
-                  {milestone.status} · due {formatUnknownDate(milestone.dueAt)}
+                <p className="text-muted-foreground mt-1 text-sm">
+                  {milestone.status} · {t`due`} {formatUnknownDate(milestone.dueAt)}
                 </p>
               </div>
             ))}
@@ -98,30 +136,29 @@ export function StudentProgramBProjectDetailPage({ params }: { params: Promise<{
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
-        <StudentSectionCard title="Mentoring notes">
+        <StudentSectionCard title={t`Mentoring notes`}>
           <div className="space-y-3">
             {(notesQuery.data ?? []).map((note) => (
-              <div key={note.id} className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4">
-                <p className="text-sm text-neutral-700">{note.note}</p>
-                <p className="mt-2 text-xs text-neutral-500">
-                  {note.author.firstName} {note.author.lastName} ·{' '}
-                  {formatUnknownDate(note.createdAt)}
+              <div key={note.id} className="border-border bg-muted rounded-2xl border p-4">
+                <p className="text-muted-foreground text-sm">{note.note}</p>
+                <p className="text-muted-foreground mt-2 text-xs">
+                  {formatPersonName(note.author) ?? t`Mentor`} · {formatUnknownDate(note.createdAt)}
                 </p>
               </div>
             ))}
           </div>
         </StudentSectionCard>
 
-        <StudentSectionCard title="Product owner reviews">
+        <StudentSectionCard title={t`Product owner reviews`}>
           <div className="space-y-3">
             {(reviewsQuery.data ?? []).map((review) => (
-              <div key={review.id} className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4">
-                <p className="font-semibold text-neutral-950">{review.decision}</p>
-                <p className="mt-1 text-sm text-neutral-600">
-                  {normalizeUnknownText(review.comment) ?? 'No comment'}
+              <div key={review.id} className="border-border bg-muted rounded-2xl border p-4">
+                <p className="text-foreground font-semibold">{review.decision}</p>
+                <p className="text-muted-foreground mt-1 text-sm">
+                  {normalizeUnknownText(review.comment) ?? t`No comment`}
                 </p>
-                <p className="mt-2 text-xs text-neutral-500">
-                  {review.author.firstName} {review.author.lastName} ·{' '}
+                <p className="text-muted-foreground mt-2 text-xs">
+                  {formatPersonName(review.author) ?? t`Product owner`} ·{' '}
                   {formatUnknownDate(review.createdAt)}
                 </p>
               </div>
@@ -130,12 +167,12 @@ export function StudentProgramBProjectDetailPage({ params }: { params: Promise<{
         </StudentSectionCard>
       </div>
 
-      <StudentSectionCard title="Documents">
+      <StudentSectionCard title={t`Documents`}>
         <div className="space-y-3">
           {(documentsQuery.data ?? []).map((document) => (
-            <div key={document.id} className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4">
-              <p className="font-semibold text-neutral-950">{document.name}</p>
-              <p className="text-sm text-neutral-600">
+            <div key={document.id} className="border-border bg-muted rounded-2xl border p-4">
+              <p className="text-foreground font-semibold">{document.name}</p>
+              <p className="text-muted-foreground text-sm">
                 {document.category} · {document.status} · {document.visibility}
               </p>
             </div>

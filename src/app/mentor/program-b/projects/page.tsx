@@ -46,24 +46,24 @@ export default function MentorProgramBProjectsPage() {
         {projects.map((project) => (
           <article
             key={project.id}
-            className={`rounded-[1.5rem] border p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)] ${
+            className={`rounded-2xl border p-5 shadow-sm ${
               project.status === ProgramBProjectDetailDtoStatus.CLOSED
-                ? 'border-rose-200 bg-[linear-gradient(180deg,#ffffff_0%,#fff3f3_100%)]'
-                : 'border-[#dfe7fa] bg-white/90'
+                ? 'border-destructive/30 bg-destructive/10'
+                : 'border-border bg-card'
             }`}
           >
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
-                <p className="font-semibold text-[#10213d]">
+                <p className="text-foreground font-semibold">
                   {normalizeUnknownText(project.backlogItem.title) ?? t`Project`}
                 </p>
-                <p className="mt-2 text-sm text-[#60718d]">{project.team.name}</p>
+                <p className="text-muted-foreground mt-2 text-sm">{project.team.name}</p>
               </div>
               <CompanyStatusBadge status={project.status} />
             </div>
             <Link
               href={ROUTES.MENTOR.programBProjectDetail(project.id)}
-              className="mt-4 inline-flex text-sm font-medium text-[#1e58d5]"
+              className="text-primary mt-4 inline-flex text-sm font-medium"
             >
               {t`Open project`}
             </Link>
@@ -75,9 +75,9 @@ export default function MentorProgramBProjectsPage() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-[1.75rem] border border-[#dfe7fa] bg-white/90 p-6 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
-        <h1 className="text-2xl font-semibold text-[#10213d]">{t`Program B projects`}</h1>
-        <p className="mt-2 text-sm text-[#60718d]">
+      <section className="border-border bg-card rounded-2xl border p-6 shadow-sm">
+        <h1 className="text-foreground text-2xl font-semibold">{t`Program B projects`}</h1>
+        <p className="text-muted-foreground mt-2 text-sm">
           {t`Projects where you provide mentoring support.`}
         </p>
       </section>

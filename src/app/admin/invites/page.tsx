@@ -64,10 +64,10 @@ export default function AdminInvitesPage() {
 
   return (
     <div className="grid gap-6 xl:grid-cols-[minmax(0,520px)_minmax(0,1fr)]">
-      <Card className="border-slate-200 bg-white shadow-none">
+      <Card className="border-border bg-card shadow-none">
         <CardHeader>
-          <CardTitle className="text-2xl text-slate-950">{t`Create System Invite`}</CardTitle>
-          <p className="text-sm leading-6 text-slate-600">
+          <CardTitle className="text-foreground text-2xl">{t`Create System Invite`}</CardTitle>
+          <p className="text-muted-foreground text-sm leading-6">
             {t`Generate a direct invite for a target role.`}
           </p>
         </CardHeader>
@@ -95,7 +95,7 @@ export default function AdminInvitesPage() {
               <Button
                 type="submit"
                 disabled={createInviteMutation.isPending}
-                className="h-11 rounded-xl bg-slate-950 px-5 hover:bg-slate-800"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 h-11 rounded-xl px-5"
               >
                 {createInviteMutation.isPending ? t`Creating...` : t`Create Invite`}
               </Button>
@@ -123,46 +123,46 @@ export default function AdminInvitesPage() {
           />
         </section>
 
-        <Card className="border-slate-200 bg-white shadow-none">
+        <Card className="border-border bg-card shadow-none">
           <CardHeader>
-            <CardTitle className="text-2xl text-slate-950">{t`Latest Invite Response`}</CardTitle>
+            <CardTitle className="text-foreground text-2xl">{t`Latest Invite Response`}</CardTitle>
           </CardHeader>
           <CardContent>
             {createdInvite ? (
               <AdminTable className="border-0">
                 <AdminTableBody>
                   <AdminTableRow>
-                    <AdminTableCell className="w-48 font-medium text-slate-950">{t`Invite Id`}</AdminTableCell>
+                    <AdminTableCell className="text-foreground w-48 font-medium">{t`Invite Id`}</AdminTableCell>
                     <AdminTableCell className="font-mono text-xs">
                       {createdInvite.id}
                     </AdminTableCell>
                   </AdminTableRow>
                   <AdminTableRow>
-                    <AdminTableCell className="font-medium text-slate-950">{t`Email`}</AdminTableCell>
+                    <AdminTableCell className="text-foreground font-medium">{t`Email`}</AdminTableCell>
                     <AdminTableCell>{createdInvite.email}</AdminTableCell>
                   </AdminTableRow>
                   <AdminTableRow>
-                    <AdminTableCell className="font-medium text-slate-950">{t`Role`}</AdminTableCell>
+                    <AdminTableCell className="text-foreground font-medium">{t`Role`}</AdminTableCell>
                     <AdminTableCell>{formatEnumLabel(createdInvite.roleToAssign)}</AdminTableCell>
                   </AdminTableRow>
                   <AdminTableRow>
-                    <AdminTableCell className="font-medium text-slate-950">{t`Status`}</AdminTableCell>
+                    <AdminTableCell className="text-foreground font-medium">{t`Status`}</AdminTableCell>
                     <AdminTableCell>
                       <AdminStatusBadge status={createdInvite.status} />
                     </AdminTableCell>
                   </AdminTableRow>
                   <AdminTableRow>
-                    <AdminTableCell className="font-medium text-slate-950">{t`Created At`}</AdminTableCell>
+                    <AdminTableCell className="text-foreground font-medium">{t`Created At`}</AdminTableCell>
                     <AdminTableCell>{formatAdminDateTime(createdInvite.createdAt)}</AdminTableCell>
                   </AdminTableRow>
                   <AdminTableRow>
-                    <AdminTableCell className="font-medium text-slate-950">{t`Expires At`}</AdminTableCell>
+                    <AdminTableCell className="text-foreground font-medium">{t`Expires At`}</AdminTableCell>
                     <AdminTableCell>{formatAdminDateTime(createdInvite.expiresAt)}</AdminTableCell>
                   </AdminTableRow>
                 </AdminTableBody>
               </AdminTable>
             ) : (
-              <p className="text-sm text-slate-600">
+              <p className="text-muted-foreground text-sm">
                 {t`Create an invite to inspect the returned metadata here.`}
               </p>
             )}

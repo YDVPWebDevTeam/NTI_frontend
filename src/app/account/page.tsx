@@ -1,7 +1,7 @@
 'use client';
 
 import { t } from '@lingui/core/macro';
-import type { ReactNode } from 'react';
+import { type ReactNode, Suspense } from 'react';
 
 import { CompanyWorkspaceLayout } from 'components/company-dashboard/company-workspace-layout';
 import { StudentStatusCard } from 'components/student-dashboard/page-shell-primitives';
@@ -80,7 +80,20 @@ export default function AccountPage() {
     );
   }
 
-  const accountContent = <AccountSettingsPage user={me} />;
+  const accountContent = (
+    <Suspense
+      fallback={
+        <main className="mx-auto flex min-h-screen w-full max-w-4xl items-center px-4">
+          <StudentStatusCard
+            title={t`Loading workspace`}
+            description={t`Resolving your authenticated workspace.`}
+          />
+        </main>
+      }
+    >
+      <AccountSettingsPage user={me} />
+    </Suspense>
+  );
 
   if (isStudentRole(me.role)) {
     return (

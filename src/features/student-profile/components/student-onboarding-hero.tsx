@@ -1,6 +1,6 @@
 import { t } from '@lingui/core/macro';
 
-import { PageSectionHeader } from 'components/layout';
+import { PageSectionHeader } from 'components/layout/page-section-header';
 import type { OnboardingStageConfig, StudentOnboardingStageId } from '../lib/config';
 
 import { StudentOnboardingStageList } from './student-onboarding-stage-list';
@@ -22,8 +22,8 @@ export function StudentOnboardingHero({
 
   return (
     <section
-      className={`border-b border-black/8 px-5 py-5 sm:px-8 ${
-        isProfileUpdate ? 'bg-white' : 'bg-[#e7e8eb]'
+      className={`border-border border-b px-5 py-5 sm:px-8 ${
+        isProfileUpdate ? 'bg-card' : 'bg-muted'
       }`}
     >
       <PageSectionHeader

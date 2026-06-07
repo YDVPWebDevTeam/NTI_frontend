@@ -22,6 +22,11 @@ import { formatEnumLabel } from 'lib/utils';
 import { normalizeUnknownText } from 'lib/student-dashboard/normalizers';
 
 export default function AdminProgramBProjectsPage() {
+  // BACKEND-BLOCKED: the generated client only exposes `listMy` (projects the current
+  // admin is assigned to as mentor/PO) — there is no admin-scoped "list all projects"
+  // endpoint. An admin therefore sees only their own assigned projects, not the full
+  // program-wide list. Surfacing the complete listing requires a new backend endpoint
+  // (e.g. an admin-scoped ProgramBProjects list). Do not swap this hook until that exists.
   const projectsQuery = useProgramBProjectsControllerListMy();
   const projects = projectsQuery.data ?? [];
 
@@ -42,12 +47,12 @@ export default function AdminProgramBProjectsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl border border-slate-200 bg-white p-5">
-        <p className="text-[11px] font-medium tracking-[0.12em] text-slate-500 uppercase">
+      <div className="border-border bg-card rounded-2xl border p-5">
+        <p className="text-muted-foreground text-[11px] font-medium tracking-[0.12em] uppercase">
           {t`Admin workspace`}
         </p>
-        <h1 className="mt-2 text-2xl font-semibold text-slate-950">{t`Program B projects`}</h1>
-        <p className="mt-1 text-sm text-slate-600">
+        <h1 className="text-foreground mt-2 text-2xl font-semibold">{t`Program B projects`}</h1>
+        <p className="text-muted-foreground mt-1 text-sm">
           {t`Oversee Program B delivery, assign mentors, and record NTI final acceptance.`}
         </p>
       </div>
@@ -55,7 +60,7 @@ export default function AdminProgramBProjectsPage() {
       {projects.length === 0 ? (
         <AdminEmptyState
           title={t`No Program B projects`}
-          description={t`Projects created from accepted Program B candidates will appear here.`}
+          description={t`Only projects you're assigned to are shown — admin-wide listing requires a backend endpoint. Projects created from accepted Program B candidates will appear here once you're assigned.`}
         />
       ) : (
         <AdminTable>
@@ -73,7 +78,7 @@ export default function AdminProgramBProjectsPage() {
           <AdminTableBody>
             {projects.map((project) => (
               <AdminTableRow key={project.id}>
-                <AdminTableCell className="font-medium text-slate-950">
+                <AdminTableCell className="text-foreground font-medium">
                   <Link
                     href={ROUTES.ADMIN.programBProjectDetail(project.id)}
                     className="hover:underline"

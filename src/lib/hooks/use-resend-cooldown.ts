@@ -34,8 +34,47 @@ export function useResendCooldown(storageKey: string, durationSeconds: number) {
   const [overrideState, setOverrideState] = useState<{ key: string; expiresAt: number } | null>(
     null,
   );
-  const storedExpiresAt = useMemo(() => readCooldownExpiry(storageKey), [storageKey]);
+  const [storedState, setStoredState] = useState(() => ({
+    key: storageKey,
+    expiresAt: readCooldownExpiry(storageKey),
+  }));
+
+  // Re-read the persisted expiry when the key changes — done during render
+  // (the sanctioned "adjust state when a prop changes" pattern) rather than in
+  // an effect, so the value is correct on the very first render after a switch.
+  if (storedState.key !== storageKey) {
+    setStoredState({ key: storageKey, expiresAt: readCooldownExpiry(storageKey) });
+  }
+
+  const storedExpiresAt = storedState.key === storageKey ? storedState.expiresAt : 0;
   const expiresAt = overrideState?.key === storageKey ? overrideState.expiresAt : storedExpiresAt;
+
+  // Keep this tab in sync when another tab writes the value (`storage` event)
+  // or when this tab regains focus, so a cooldown started elsewhere is respected.
+  useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const syncFromStorage = () => {
+      setStoredState({ key: storageKey, expiresAt: readCooldownExpiry(storageKey) });
+      setNow(Date.now());
+    };
+
+    const handleStorage = (event: StorageEvent) => {
+      if (event.key === null || event.key === storageKey) {
+        syncFromStorage();
+      }
+    };
+
+    window.addEventListener('storage', handleStorage);
+    window.addEventListener('focus', syncFromStorage);
+
+    return () => {
+      window.removeEventListener('storage', handleStorage);
+      window.removeEventListener('focus', syncFromStorage);
+    };
+  }, [storageKey]);
 
   useEffect(() => {
     if (expiresAt <= now) {

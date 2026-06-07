@@ -3,10 +3,12 @@
 import { t } from '@lingui/core/macro';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 import { AdminCallForm } from 'components/admin/admin-call-form';
 import { Button } from 'components/shadcn';
 import { useCreateAdminCall } from 'lib/api-client/admin/calls';
+import { extractApiErrorMessage } from 'lib/api-client/openapi-runtime/client';
 import { ROUTES } from 'lib/constants';
 
 export default function CreateAdminCallPage() {
@@ -15,12 +17,12 @@ export default function CreateAdminCallPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5">
+      <div className="border-border bg-card flex items-center justify-between rounded-2xl border p-5">
         <div>
-          <p className="text-[11px] font-medium tracking-[0.12em] text-slate-500 uppercase">
+          <p className="text-muted-foreground text-[11px] font-medium tracking-[0.12em] uppercase">
             {t`Calls`}
           </p>
-          <h1 className="mt-2 text-2xl font-semibold text-slate-950">{t`Create call`}</h1>
+          <h1 className="text-foreground mt-2 text-2xl font-semibold">{t`Create call`}</h1>
         </div>
 
         <Button asChild variant="outline">
@@ -33,7 +35,16 @@ export default function CreateAdminCallPage() {
         isSubmitting={createMutation.isPending}
         onSubmit={(values) => {
           createMutation.mutate(values, {
-            onSuccess: () => router.push(ROUTES.ADMIN.CALLS),
+            onSuccess: () => {
+              toast.success(t`Call created.`);
+              router.push(ROUTES.ADMIN.CALLS);
+            },
+            onError: (error) => {
+              toast.error(
+                extractApiErrorMessage(error) ??
+                  (error instanceof Error ? error.message : t`Unable to create the call.`),
+              );
+            },
           });
         }}
       />

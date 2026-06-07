@@ -138,12 +138,12 @@ export function FileUploader({
 
   return (
     <div className={cn('space-y-3', className)}>
-      <div className="flex flex-col gap-3 rounded-md border border-dashed border-black/15 bg-neutral-50 p-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="border-border bg-muted flex flex-col gap-3 rounded-md border border-dashed p-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-medium text-[#0c1a4f]">
+          <p className="text-foreground text-sm font-medium">
             {placeholder ?? t`Upload one or more files.`}
           </p>
-          <p className="text-xs text-neutral-500">
+          <p className="text-muted-foreground text-xs">
             {value.length > 0 ? t`${value.length} file(s) selected.` : t`No files selected yet.`}
           </p>
         </div>
@@ -164,10 +164,10 @@ export function FileUploader({
           {value.map((file, index) => (
             <li
               key={`${file.name}-${index}`}
-              className="flex items-center justify-between gap-3 rounded-md border border-black/10 bg-white px-3 py-2"
+              className="border-border bg-card flex items-center justify-between gap-3 rounded-md border px-3 py-2"
             >
-              <span className="flex min-w-0 items-center gap-2 text-sm text-neutral-800">
-                <FileText className="h-4 w-4 shrink-0 text-neutral-400" />
+              <span className="text-foreground flex min-w-0 items-center gap-2 text-sm">
+                <FileText className="text-muted-foreground h-4 w-4 shrink-0" />
                 <span className="truncate">{file.name}</span>
               </span>
               <Button
@@ -176,7 +176,7 @@ export function FileUploader({
                 size="icon"
                 onClick={() => handleRemove(index)}
                 disabled={disabled}
-                className="text-red-500 hover:bg-red-50 hover:text-red-600"
+                className="text-destructive hover:bg-destructive/10 hover:text-destructive"
               >
                 <X className="h-4 w-4" />
               </Button>

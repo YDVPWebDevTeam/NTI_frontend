@@ -10,6 +10,7 @@ import {
   useInvitationControllerRevokeInvitation,
   useTeamControllerCreate,
   useTeamControllerFindCurrentForUser,
+  useTeamControllerLeaveTeam,
   useTeamControllerRemoveMember,
   useTeamControllerTransferLeadership,
   useTeamControllerUpdate,
@@ -24,6 +25,7 @@ import {
   MembersSection,
   TeamCreationSection,
   TeamLeadOnboardingGuide,
+  TeamLockBanner,
   TeamOverviewSection,
   type TeamWorkspaceMode,
 } from './team-workspace-sections';
@@ -71,6 +73,7 @@ function TeamWorkspaceView({
   const revokeInvite = useInvitationControllerRevokeInvitation();
   const removeMember = useTeamControllerRemoveMember();
   const transferLeadership = useTeamControllerTransferLeadership();
+  const leaveTeam = useTeamControllerLeaveTeam();
 
   const members = useMemo(() => team?.members ?? [], [team?.members]);
   const canManageTeam = mode === 'management';
@@ -120,6 +123,7 @@ function TeamWorkspaceView({
   return (
     <StudentPageShell title={title} description={description}>
       <div className="space-y-6">
+        {isLocked ? <TeamLockBanner lockedAt={team.lockedAt} /> : null}
         {canManageTeam ? (
           <>
             <div className="grid gap-6 lg:grid-cols-2">
@@ -149,6 +153,8 @@ function TeamWorkspaceView({
               invitationsQuery={invitationsQuery}
               isLead={isLead}
               isLocked={isLocked}
+              leaveTeam={leaveTeam}
+              me={me}
               members={members}
               removeMember={removeMember}
               team={team}
@@ -160,21 +166,21 @@ function TeamWorkspaceView({
             title={t`Invite teammates`}
             description={t`Once the team lead is ready, this step is for inviting teammates.`}
           >
-            <div className="space-y-3 text-sm text-neutral-700">
+            <div className="text-foreground space-y-3 text-sm">
               <p>
-                {t`Team name:`} <span className="font-semibold text-neutral-950">{team.name}</span>
+                {t`Team name:`} <span className="text-foreground font-semibold">{team.name}</span>
               </p>
               <p>
                 {t`Lead access:`}{' '}
-                <span className="font-semibold text-neutral-950">{isLead ? t`Yes` : t`No`}</span>
+                <span className="text-foreground font-semibold">{isLead ? t`Yes` : t`No`}</span>
               </p>
               <p>
                 {t`Locked state:`}{' '}
-                <span className="font-semibold text-neutral-950">
+                <span className="text-foreground font-semibold">
                   {isLocked ? t`Locked` : t`Unlocked`}
                 </span>
               </p>
-              <p className="text-neutral-600">
+              <p className="text-muted-foreground">
                 {isLead
                   ? t`Invite teammates from here, then return to the dashboard once the roster looks right.`
                   : t`Only the current team lead can send invitations. Ask the lead to add the remaining teammates.`}

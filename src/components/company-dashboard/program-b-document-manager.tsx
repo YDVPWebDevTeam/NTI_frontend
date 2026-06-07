@@ -110,22 +110,22 @@ export function ProgramBDocumentManager({
   let listContent;
 
   if (isLoading) {
-    listContent = <p className="text-sm text-[#60718d]">{t`Loading documents…`}</p>;
+    listContent = <p className="text-muted-foreground text-sm">{t`Loading documents…`}</p>;
   } else if (isError) {
     listContent = (
-      <p className="text-sm text-[#60718d]">{t`Documents are unavailable right now.`}</p>
+      <p className="text-muted-foreground text-sm">{t`Documents are unavailable right now.`}</p>
     );
   } else if (documents.length === 0) {
-    listContent = <p className="text-sm text-[#60718d]">{t`No documents uploaded yet.`}</p>;
+    listContent = <p className="text-muted-foreground text-sm">{t`No documents uploaded yet.`}</p>;
   } else {
     listContent = documents.map((document) => (
       <div
         key={document.id}
-        className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#dfe7fa] bg-[#f8fbff] p-4"
+        className="border-border bg-muted flex flex-wrap items-center justify-between gap-3 rounded-2xl border p-4"
       >
         <div>
-          <p className="font-semibold text-[#10213d]">{document.name}</p>
-          <p className="mt-1 text-sm text-[#60718d]">
+          <p className="text-foreground font-semibold">{document.name}</p>
+          <p className="text-muted-foreground mt-1 text-sm">
             {formatEnumLabel(document.category)} · {formatEnumLabel(document.status)}
           </p>
         </div>
@@ -150,7 +150,7 @@ export function ProgramBDocumentManager({
   return (
     <div className="space-y-4">
       {canUpload ? (
-        <div className="rounded-2xl border border-dashed border-[#c4d4f5] bg-white/70 p-4">
+        <div className="border-border bg-card/70 rounded-2xl border border-dashed p-4">
           <div className="grid gap-3 md:grid-cols-[1fr_auto]">
             <FileInput
               id="program-b-document-upload"
@@ -159,7 +159,7 @@ export function ProgramBDocumentManager({
               disabled={disabled || isUploading}
             />
             <select
-              className="rounded-md border border-black/10 bg-white px-3 py-2 text-sm"
+              className="border-border bg-card rounded-md border px-3 py-2 text-sm"
               value={category}
               disabled={disabled || isUploading}
               onChange={(event) => setCategory(event.target.value)}

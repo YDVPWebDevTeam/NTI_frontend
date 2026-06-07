@@ -98,19 +98,19 @@ export default function MentorDashboardPage() {
           return (
             <article
               key={project.id}
-              className={`rounded-[1.5rem] border p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)] ${
+              className={`rounded-2xl border p-5 shadow-sm ${
                 project.status === ProgramBProjectDetailDtoStatus.CLOSED
-                  ? 'border-rose-200 bg-[linear-gradient(180deg,#ffffff_0%,#fff3f3_100%)]'
-                  : 'border-[#dfe7fa] bg-white/90'
+                  ? 'border-destructive/30 bg-destructive/10'
+                  : 'border-border bg-card'
               }`}
             >
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
-                  <h2 className="font-semibold text-[#10213d]">
+                  <h2 className="text-foreground font-semibold">
                     {normalizeUnknownText(project.backlogItem.title) ?? t`Program B project`}
                   </h2>
 
-                  <p className="mt-2 text-sm text-[#60718d]">
+                  <p className="text-muted-foreground mt-2 text-sm">
                     {t`Team:`} {project.team.name ?? t`Unknown team`}
                   </p>
                 </div>
@@ -118,33 +118,33 @@ export default function MentorDashboardPage() {
                 <CompanyStatusBadge status={project.status} />
               </div>
 
-              <div className="mt-4 rounded-2xl border border-[#dfe7fa] bg-[#f8fbff] p-4">
-                <p className="text-xs font-semibold tracking-[0.14em] text-[#60718d] uppercase">
+              <div className="border-border bg-muted mt-4 rounded-2xl border p-4">
+                <p className="text-muted-foreground text-xs font-semibold tracking-[0.14em] uppercase">
                   {t`Next milestone`}
                 </p>
 
                 {nextMilestone ? (
                   <>
                     <div className="mt-2 flex flex-wrap items-start justify-between gap-3">
-                      <p className="font-medium text-[#10213d]">{nextMilestone.title}</p>
+                      <p className="text-foreground font-medium">{nextMilestone.title}</p>
 
                       <CompanyStatusBadge status={nextMilestone.status} />
                     </div>
 
-                    <p className="mt-2 text-sm text-[#60718d]">
+                    <p className="text-muted-foreground mt-2 text-sm">
                       {nextMilestone.dueAt
                         ? t`Due ${formatUnknownDate(nextMilestone.dueAt)}`
                         : t`No due date`}
                     </p>
                   </>
                 ) : (
-                  <p className="mt-2 text-sm text-[#60718d]">{t`No upcoming milestone`}</p>
+                  <p className="text-muted-foreground mt-2 text-sm">{t`No upcoming milestone`}</p>
                 )}
               </div>
 
               <Link
                 href={ROUTES.MENTOR.programBProjectDetail(project.id)}
-                className="mt-4 inline-flex text-sm font-medium text-[#1e58d5]"
+                className="text-primary mt-4 inline-flex text-sm font-medium"
               >
                 {t`Open project`}
               </Link>
@@ -157,10 +157,10 @@ export default function MentorDashboardPage() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-[1.75rem] border border-[#dfe7fa] bg-white/90 p-6 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
-        <h1 className="text-2xl font-semibold text-[#10213d]">{t`Mentor dashboard`}</h1>
+      <section className="border-border bg-card rounded-2xl border p-6 shadow-sm">
+        <h1 className="text-foreground text-2xl font-semibold">{t`Mentor dashboard`}</h1>
 
-        <p className="mt-2 text-sm text-[#60718d]">
+        <p className="text-muted-foreground mt-2 text-sm">
           {t`Review your assigned Program A applications, Program B projects, and upcoming milestones.`}
         </p>
       </section>

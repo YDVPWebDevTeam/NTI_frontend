@@ -53,6 +53,7 @@ import type {
   PublicCallsResponseDto,
   ResubmitApplicationDto,
   SetActiveSectionVersionDto,
+  StudentApplicationSummaryDto,
   UpsertIdeaOverviewSectionDto
 } from '../index.schemas';
 
@@ -60,45 +61,6 @@ import { orvalMutator } from '../../api-client/openapi-runtime/runtime';
 
 
 type SecondParameter<T extends (...args: never) => unknown> = Parameters<T>[1];
-
-export type StudentApplicationCallSummaryDtoType = 'PROGRAM_A' | 'PROGRAM_B';
-export type StudentApplicationCallSummaryDtoStatus =
-  | 'DRAFT'
-  | 'OPEN'
-  | 'CLOSED'
-  | 'ARCHIVED';
-
-export interface StudentApplicationCallSummaryDto {
-  id: string;
-  title: string;
-  type: StudentApplicationCallSummaryDtoType;
-  status: StudentApplicationCallSummaryDtoStatus;
-}
-
-export type StudentApplicationSummaryDtoStatus =
-  | 'DRAFT'
-  | 'SUBMITTED'
-  | 'FORMALLY_VERIFIED'
-  | 'EVALUATING'
-  | 'NEEDS_INFO'
-  | 'APPROVED'
-  | 'REJECTED'
-  | 'ONBOARDING'
-  | 'ACTIVE_PROJECT'
-  | 'PAUSED'
-  | 'COMPLETED'
-  | 'ARCHIVED';
-
-export interface StudentApplicationSummaryDto {
-  id: string;
-  callId: string;
-  teamId: string;
-  status: StudentApplicationSummaryDtoStatus;
-  submittedAt?: Record<string, unknown> | null;
-  createdAt: string;
-  updatedAt: string;
-  call: StudentApplicationCallSummaryDto;
-}
 
 
 

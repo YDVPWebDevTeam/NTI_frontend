@@ -1,7 +1,8 @@
 'use client';
 
 import { t } from '@lingui/core/macro';
-import { useMemo, useState } from 'react';
+import { Loader2 } from 'lucide-react';
+import { type ReactNode, useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 
 import {
@@ -17,9 +18,10 @@ import {
   useApplicationsControllerGetSectionHistory,
   useApplicationsControllerUpsertIdeaOverviewSection,
 } from 'lib/api';
-import { Button, Input, Textarea } from 'components/shadcn';
+import { Button, Input, StatusBadge, Textarea } from 'components/shadcn';
 import { StudentSectionCard } from 'components/student-dashboard/page-shell-primitives';
 import { uploadAndCompleteFile } from 'lib/api-client/openapi-runtime/file-upload';
+import { DOCUMENT_ACCEPT, validateDocumentFile } from 'lib/files/upload-validation';
 import {
   formatEnumLikeName,
   formatUnknownDate,
@@ -44,6 +46,7 @@ const DOCUMENT_TYPE_OPTIONS: AttachApplicationDocumentDtoDocumentType[] = [
 type QueryLike<TData> = {
   data?: TData;
   isError: boolean;
+  isLoading?: boolean;
   error?: unknown;
   refetch: () => Promise<unknown>;
 };
@@ -127,7 +130,7 @@ export function RetryNotice({
   onRetry: () => void | Promise<unknown>;
 }) {
   return (
-    <div className="space-y-3 rounded-2xl border border-black/10 bg-[#f7f8fa] p-4 text-sm text-neutral-700">
+    <div className="border-border bg-muted text-muted-foreground space-y-3 rounded-2xl border p-4 text-sm">
       <p>{message}</p>
       <Button size="sm" variant="outline" onClick={() => void onRetry()}>
         {t`Retry`}
@@ -148,6 +151,10 @@ function ApplicationSectionEditor({
   const [ideaOverviewSection, setIdeaOverviewSection] = useState<UpsertIdeaOverviewSectionDto>(() =>
     getInitialIdeaOverviewValue(section.valueJson),
   );
+  // Track whether the user has typed unsaved edits. While dirty we must NOT
+  // reseed from incoming server data (a sibling mutation bumping the version
+  // would otherwise clobber in-progress text), and we warn on navigation.
+  const [isDirty, setIsDirty] = useState(false);
 
   const saveSection = useApplicationsControllerUpsertIdeaOverviewSection();
 
@@ -155,85 +162,107 @@ function ApplicationSectionEditor({
     query: { enabled: true },
   });
 
+  // Reseed local state from server data only when the field is clean. This keeps
+  // the editor in sync after a successful save / external update, but preserves
+  // unsaved local edits when a version bump arrives mid-typing.
+  const incomingValueJson = section.valueJson;
+
+  useEffect(() => {
+    if (!isDirty) {
+      setIdeaOverviewSection(getInitialIdeaOverviewValue(incomingValueJson));
+    }
+  }, [incomingValueJson, isDirty]);
+
+  // Warn the user before they navigate away (tab close / reload) with unsaved edits.
+  useEffect(() => {
+    if (!isDirty) {
+      return;
+    }
+
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      event.returnValue = '';
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, [isDirty]);
+
+  const updateField = (field: keyof UpsertIdeaOverviewSectionDto, value: string) => {
+    setIsDirty(true);
+    setIdeaOverviewSection((currentValue) => ({
+      ...currentValue,
+      [field]: value,
+    }));
+  };
+
   const canSave = canEdit && hasCompleteIdeaOverview(ideaOverviewSection) && !saveSection.isPending;
+  const showRequiredHint = canEdit && !hasCompleteIdeaOverview(ideaOverviewSection);
 
   return (
-    <div className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4">
+    <div className="border-border bg-muted rounded-2xl border p-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="font-semibold text-neutral-950">{formatEnumLikeName(section.key)}</p>
-        <p className="text-xs text-neutral-500">
+        <p className="text-foreground font-semibold">{formatEnumLikeName(section.key)}</p>
+        <p className="text-muted-foreground text-xs">
           {t`Version`} {section.version}
         </p>
       </div>
 
       <div className="mt-3 grid gap-3 md:grid-cols-2">
         <label className="block space-y-2">
-          <span className="text-xs font-medium tracking-[0.12em] text-neutral-500 uppercase">
+          <span className="text-muted-foreground text-xs font-medium tracking-[0.12em] uppercase">
             {t`Problem`}
           </span>
           <Input
             value={ideaOverviewSection.problem}
             disabled={!canEdit}
-            onChange={(event) =>
-              setIdeaOverviewSection((currentValue) => ({
-                ...currentValue,
-                problem: event.target.value,
-              }))
-            }
+            onChange={(event) => updateField('problem', event.target.value)}
           />
         </label>
 
         <label className="block space-y-2">
-          <span className="text-xs font-medium tracking-[0.12em] text-neutral-500 uppercase">
+          <span className="text-muted-foreground text-xs font-medium tracking-[0.12em] uppercase">
             {t`Solution`}
           </span>
           <Input
             value={ideaOverviewSection.solution}
             disabled={!canEdit}
-            onChange={(event) =>
-              setIdeaOverviewSection((currentValue) => ({
-                ...currentValue,
-                solution: event.target.value,
-              }))
-            }
+            onChange={(event) => updateField('solution', event.target.value)}
           />
         </label>
 
         <label className="block space-y-2">
-          <span className="text-xs font-medium tracking-[0.12em] text-neutral-500 uppercase">
+          <span className="text-muted-foreground text-xs font-medium tracking-[0.12em] uppercase">
             {t`Target users`}
           </span>
           <Input
             value={ideaOverviewSection.targetUsers}
             disabled={!canEdit}
-            onChange={(event) =>
-              setIdeaOverviewSection((currentValue) => ({
-                ...currentValue,
-                targetUsers: event.target.value,
-              }))
-            }
+            onChange={(event) => updateField('targetUsers', event.target.value)}
           />
         </label>
 
         <label className="block space-y-2">
-          <span className="text-xs font-medium tracking-[0.12em] text-neutral-500 uppercase">
+          <span className="text-muted-foreground text-xs font-medium tracking-[0.12em] uppercase">
             {t`Value proposition`}
           </span>
           <Input
             value={ideaOverviewSection.valueProposition}
             disabled={!canEdit}
-            onChange={(event) =>
-              setIdeaOverviewSection((currentValue) => ({
-                ...currentValue,
-                valueProposition: event.target.value,
-              }))
-            }
+            onChange={(event) => updateField('valueProposition', event.target.value)}
           />
         </label>
       </div>
 
+      {showRequiredHint ? (
+        <p className="text-muted-foreground mt-3 text-xs">
+          {t`All fields are required to save this section.`}
+        </p>
+      ) : null}
+
       <div className="mt-3 flex items-center justify-between gap-3">
-        <p className="text-xs text-neutral-500">
+        <p className="text-muted-foreground text-xs">
           {t`${historyQuery.data?.length ?? 0} historical version(s)`}
         </p>
         <Button
@@ -250,6 +279,7 @@ function ApplicationSectionEditor({
                   valueProposition: ideaOverviewSection.valueProposition.trim(),
                 },
               });
+              setIsDirty(false);
               await historyQuery.refetch();
               toast.success(t`Saved ${formatEnumLikeName(section.key)}.`);
             } catch (error) {
@@ -267,33 +297,62 @@ function ApplicationSectionEditor({
 export function OverviewSection({ application }: { application: ApplicationOverview }) {
   return (
     <StudentSectionCard title={t`Overview`}>
-      <div className="space-y-3 text-sm text-neutral-700">
+      <div className="text-muted-foreground space-y-3 text-sm">
         <p>
           {t`Status`}:{' '}
-          <span className="font-medium text-neutral-950">
+          <span className="text-foreground font-medium">
             {formatEnumLikeName(application.status)}
           </span>
         </p>
         {application.submittedAt ? (
           <p>
             {t`Submitted`}:{' '}
-            <span className="font-medium text-neutral-950">
+            <span className="text-foreground font-medium">
               {formatUnknownDate(application.submittedAt)}
             </span>
           </p>
         ) : null}
         <p>
           {t`Created`}:{' '}
-          <span className="font-medium text-neutral-950">
+          <span className="text-foreground font-medium">
             {formatUnknownDate(application.createdAt)}
           </span>
         </p>
         <p>
           {t`Updated`}:{' '}
-          <span className="font-medium text-neutral-950">
+          <span className="text-foreground font-medium">
             {formatUnknownDate(application.updatedAt)}
           </span>
         </p>
+      </div>
+    </StudentSectionCard>
+  );
+}
+
+function getReadOnlyStatusMessage(status: string): string {
+  if (status === 'SUBMITTED' || status === 'FORMALLY_VERIFIED' || status === 'EVALUATING') {
+    return t`This application is under review by the NTI team. No edits are possible while it is being evaluated.`;
+  }
+
+  if (status === 'APPROVED') {
+    return t`This application has been approved. It is now read-only.`;
+  }
+
+  if (status === 'REJECTED') {
+    return t`This application has been rejected. It is now read-only.`;
+  }
+
+  return t`This application is read-only in its current status.`;
+}
+
+export function ReadOnlyStatusBanner({ status }: { status: string }) {
+  return (
+    <StudentSectionCard title={t`Submission actions`}>
+      <div className="space-y-3">
+        <div className="border-border bg-muted text-muted-foreground rounded-2xl border p-4 text-sm">
+          <p className="text-foreground font-semibold">{formatEnumLikeName(status)}</p>
+          <p className="mt-1">{getReadOnlyStatusMessage(status)}</p>
+        </div>
       </div>
     </StudentSectionCard>
   );
@@ -304,6 +363,7 @@ export function SubmissionActionsSection({
   canSubmit,
   hasTeamLoadError,
   isLead,
+  resubmitBlocked,
   onRetryTeam,
   onSubmit,
   onResubmit,
@@ -317,6 +377,7 @@ export function SubmissionActionsSection({
   canSubmit: boolean;
   hasTeamLoadError: boolean;
   isLead: boolean;
+  resubmitBlocked: boolean;
   onRetryTeam: () => void;
   onSubmit: () => Promise<void>;
   onResubmit: () => Promise<void>;
@@ -329,12 +390,17 @@ export function SubmissionActionsSection({
   return (
     <StudentSectionCard title={t`Submission actions`}>
       <div className="space-y-3">
-        <p className="text-sm text-neutral-600">
+        <p className="text-muted-foreground text-sm">
           {isLead
             ? t`Submit is available for draft applications. Resubmit is available only when additional information is requested.`
             : t`Only the current team lead can submit or resubmit this application.`}
         </p>
         {hasTeamLoadError ? <RetryNotice message={teamErrorMessage} onRetry={onRetryTeam} /> : null}
+        {resubmitBlocked ? (
+          <p className="text-warning text-sm">
+            {t`Reply to all open requests before resubmitting.`}
+          </p>
+        ) : null}
         <div className="flex flex-wrap gap-2">
           <Button
             size="sm"
@@ -347,6 +413,7 @@ export function SubmissionActionsSection({
             size="sm"
             variant="outline"
             disabled={!canResubmit || isResubmitPending}
+            title={resubmitBlocked ? t`Reply to all open requests before resubmitting.` : undefined}
             onClick={() => void onResubmit()}
           >
             {t`Resubmit`}
@@ -374,7 +441,16 @@ export function DocumentCompletenessSection({
   getErrorMessage: (error: unknown, fallback: string) => string;
 }) {
   const missingDocuments = completenessQuery.data?.missingDocuments ?? [];
-  const requiredDocumentsCount = (requiredDocumentsQuery.data?.requiredDocuments ?? []).length;
+  // Only trust the count once the required-documents query has actually resolved.
+  // While loading or on error, defaulting to 0 would contradict the verdict, so
+  // show a dash instead.
+  const hasRequiredDocumentsData =
+    !requiredDocumentsQuery.isLoading &&
+    !requiredDocumentsQuery.isError &&
+    Array.isArray(requiredDocumentsQuery.data?.requiredDocuments);
+  const requiredDocumentsCount = hasRequiredDocumentsData
+    ? (requiredDocumentsQuery.data?.requiredDocuments ?? []).length
+    : null;
 
   return (
     <StudentSectionCard title={t`Document completeness`}>
@@ -387,7 +463,7 @@ export function DocumentCompletenessSection({
           onRetry={() => completenessQuery.refetch()}
         />
       ) : (
-        <div className="space-y-3 text-sm text-neutral-700">
+        <div className="text-muted-foreground space-y-3 text-sm">
           {requiredDocumentsQuery.isError ? (
             <RetryNotice
               message={getErrorMessage(
@@ -397,19 +473,19 @@ export function DocumentCompletenessSection({
               onRetry={() => requiredDocumentsQuery.refetch()}
             />
           ) : null}
-          <p>
+          <p className="flex items-center gap-2">
             {t`Complete`}:{' '}
-            <span className="font-medium text-neutral-950">
+            <StatusBadge tone={completenessQuery.data?.isComplete ? 'success' : 'neutral'}>
               {completenessQuery.data?.isComplete ? t`Yes` : t`No`}
-            </span>
+            </StatusBadge>
           </p>
           <p>
-            {t`Required by call`}: {requiredDocumentsCount}
+            {t`Required by call`}: {requiredDocumentsCount ?? '—'}
           </p>
           {missingDocuments.length > 0 ? (
             <div>
-              <p className="font-medium text-neutral-950">{t`Missing`}</p>
-              <ul className="mt-2 space-y-1 text-sm text-neutral-600">
+              <p className="text-foreground font-medium">{t`Missing`}</p>
+              <ul className="text-muted-foreground mt-2 space-y-1 text-sm">
                 {missingDocuments.map((item, index: number) => (
                   <li key={`${item.documentType}-${index}`}>
                     {formatEnumLikeName(item.documentType)} ·{' '}
@@ -451,11 +527,14 @@ export function EligibilitySignalsSection({
       ) : (
         <div className="space-y-3">
           {(signals ?? []).map((signal) => (
-            <div key={signal.code} className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4">
-              <p className="font-semibold text-neutral-950">
-                {formatEnumLikeName(signal.code)} · {signal.passed ? t`Passed` : t`Failed`}
-              </p>
-              <p className="mt-1 text-sm text-neutral-600">
+            <div key={signal.code} className="border-border bg-muted rounded-2xl border p-4">
+              <div className="flex flex-wrap items-center gap-2">
+                <p className="text-foreground font-semibold">{formatEnumLikeName(signal.code)}</p>
+                <StatusBadge tone={signal.passed ? 'success' : 'danger'}>
+                  {signal.passed ? t`Passed` : t`Failed`}
+                </StatusBadge>
+              </div>
+              <p className="text-muted-foreground mt-1 text-sm">
                 {normalizeUnknownText(signal.reason) ?? t`No reason provided.`}
               </p>
             </div>
@@ -482,38 +561,37 @@ export function SectionsEditorSection({
     [sectionsQuery.data],
   );
 
-  if (
-    !sectionsQuery.isError &&
-    Array.isArray(sectionsQuery.data) &&
-    editableSections.length === 0
-  ) {
-    return null;
+  const hasLoadedSections = !sectionsQuery.isError && Array.isArray(sectionsQuery.data);
+
+  let sectionsContent: ReactNode;
+
+  if (sectionsQuery.isError) {
+    sectionsContent = (
+      <RetryNotice
+        message={getErrorMessage(sectionsQuery.error, t`Application sections could not be loaded.`)}
+        onRetry={() => sectionsQuery.refetch()}
+      />
+    );
+  } else if (hasLoadedSections && editableSections.length === 0) {
+    sectionsContent = (
+      <p className="text-muted-foreground text-sm">{t`This section can't be edited here yet.`}</p>
+    );
+  } else {
+    sectionsContent = (
+      <div className="space-y-4">
+        {editableSections.map((section) => (
+          <ApplicationSectionEditor
+            key={section.id}
+            applicationId={applicationId}
+            section={section}
+            canEdit={canEdit}
+          />
+        ))}
+      </div>
+    );
   }
 
-  return (
-    <StudentSectionCard title={t`Sections`}>
-      {sectionsQuery.isError ? (
-        <RetryNotice
-          message={getErrorMessage(
-            sectionsQuery.error,
-            t`Application sections could not be loaded.`,
-          )}
-          onRetry={() => sectionsQuery.refetch()}
-        />
-      ) : (
-        <div className="space-y-4">
-          {editableSections.map((section) => (
-            <ApplicationSectionEditor
-              key={`${section.id}-${section.version}`}
-              applicationId={applicationId}
-              section={section}
-              canEdit={canEdit}
-            />
-          ))}
-        </div>
-      )}
-    </StudentSectionCard>
-  );
+  return <StudentSectionCard title={t`Sections`}>{sectionsContent}</StudentSectionCard>;
 }
 
 export function AttachDocumentSection({
@@ -545,12 +623,24 @@ export function AttachDocumentSection({
     useState<AttachApplicationDocumentDtoDocumentType>('EXECUTIVE_SUMMARY');
   const [documentFile, setDocumentFile] = useState<File | null>(null);
   const [selectedMemberUserId, setSelectedMemberUserId] = useState('');
+  // Covers the whole presign → S3 PUT → complete → attach pipeline, not just the
+  // final attach mutation, so the button reflects the long upload too.
+  const [isUploading, setIsUploading] = useState(false);
   const isCvDocument = documentType === 'CV';
+  const isPipelinePending =
+    isUploading ||
+    requestUploadUrl.isPending ||
+    uploadToPresignedUrl.isPending ||
+    completeUpload.isPending ||
+    attachDocument.isPending;
   const canUpload =
     isLead &&
     Boolean(documentFile) &&
-    !attachDocument.isPending &&
+    !isPipelinePending &&
     (!isCvDocument || Boolean(selectedMemberUserId));
+  // Mirror the required-field portion of `canUpload` to explain a disabled button.
+  const showUploadHint =
+    isLead && !isPipelinePending && (!documentFile || (isCvDocument && !selectedMemberUserId));
 
   return (
     <StudentSectionCard
@@ -559,7 +649,7 @@ export function AttachDocumentSection({
     >
       <div className="grid gap-3 md:grid-cols-2">
         <select
-          className="rounded-md border border-black/10 bg-white px-3 py-2 text-sm"
+          className="border-border bg-card text-foreground rounded-md border px-3 py-2 text-sm"
           value={documentType}
           onChange={(event) => {
             const nextDocumentType = event.target.value as AttachApplicationDocumentDtoDocumentType;
@@ -580,7 +670,7 @@ export function AttachDocumentSection({
 
         {isCvDocument ? (
           <select
-            className="rounded-md border border-black/10 bg-white px-3 py-2 text-sm"
+            className="border-border bg-card text-foreground rounded-md border px-3 py-2 text-sm"
             value={selectedMemberUserId}
             onChange={(event) => setSelectedMemberUserId(event.target.value)}
           >
@@ -593,7 +683,27 @@ export function AttachDocumentSection({
           </select>
         ) : null}
 
-        <Input type="file" onChange={(event) => setDocumentFile(event.target.files?.[0] ?? null)} />
+        <Input
+          type="file"
+          accept={DOCUMENT_ACCEPT}
+          onChange={(event) => {
+            const nextFile = event.target.files?.[0] ?? null;
+
+            if (nextFile) {
+              const validation = validateDocumentFile(nextFile);
+
+              if (!validation.ok) {
+                toast.error(validation.message);
+                event.target.value = '';
+                setDocumentFile(null);
+
+                return;
+              }
+            }
+
+            setDocumentFile(nextFile);
+          }}
+        />
         <div className="flex items-center">
           <Button
             disabled={!canUpload}
@@ -601,6 +711,16 @@ export function AttachDocumentSection({
               if (!documentFile) {
                 return;
               }
+
+              const validation = validateDocumentFile(documentFile);
+
+              if (!validation.ok) {
+                toast.error(validation.message);
+
+                return;
+              }
+
+              setIsUploading(true);
 
               try {
                 const uploadedFile = await uploadAndCompleteFile(
@@ -640,13 +760,29 @@ export function AttachDocumentSection({
                 toast.error(
                   error instanceof Error ? error.message : t`Unable to attach the document.`,
                 );
+              } finally {
+                setIsUploading(false);
               }
             }}
           >
-            {t`Upload and attach`}
+            {isPipelinePending ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                {t`Uploading…`}
+              </>
+            ) : (
+              t`Upload and attach`
+            )}
           </Button>
         </div>
       </div>
+      {showUploadHint ? (
+        <p className="text-muted-foreground mt-3 text-xs">
+          {isCvDocument
+            ? t`Select a file and a team member before uploading.`
+            : t`Select a file before uploading.`}
+        </p>
+      ) : null}
     </StudentSectionCard>
   );
 }
@@ -692,15 +828,17 @@ export function NeedsInfoThreadSection({
             const replyText = needsInfoReplyText[item.id] ?? '';
 
             return (
-              <div key={item.id} className="rounded-2xl border border-black/10 bg-[#f7f8fa] p-4">
-                <p className="font-semibold text-neutral-950">{formatEnumLikeName(item.status)}</p>
-                <p className="mt-1 text-sm text-neutral-700">{item.message}</p>
+              <div key={item.id} className="border-border bg-muted rounded-2xl border p-4">
+                <StatusBadge tone={item.status === 'OPEN' ? 'warning' : 'success'}>
+                  {formatEnumLikeName(item.status)}
+                </StatusBadge>
+                <p className="text-foreground mt-1 text-sm">{item.message}</p>
                 {item.replies.length > 0 ? (
                   <div className="mt-3 space-y-2">
                     {item.replies.map((reply) => (
                       <div
                         key={reply.id}
-                        className="rounded-xl bg-white p-3 text-sm text-neutral-700"
+                        className="border-border bg-card text-foreground rounded-xl border p-3 text-sm"
                       >
                         {reply.message}
                       </div>

@@ -10,6 +10,42 @@ const FORMAT_CODE = 16;
 
 const HEADING_TAGS = new Set(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']);
 
+/** URL schemes considered safe to render as a clickable link href. */
+const SAFE_LINK_SCHEMES = new Set(['http:', 'https:', 'mailto:', 'tel:']);
+
+/**
+ * Sanitize a CMS-provided link href. CMS rich-text can contain arbitrary URLs,
+ * so reject dangerous schemes (`javascript:`, `data:`, etc.) to prevent XSS.
+ * Relative, anchor, and same-page links are allowed; everything else is
+ * validated against a scheme allowlist and falls back to `#`.
+ */
+function sanitizeLinkHref(rawHref: string | null | undefined): string {
+  const href = rawHref?.trim();
+
+  if (!href) {
+    return '#';
+  }
+
+  // Relative paths, anchors, and protocol-relative-safe local links.
+  if (
+    href.startsWith('/') ||
+    href.startsWith('#') ||
+    href.startsWith('?') ||
+    href.startsWith('.')
+  ) {
+    return href;
+  }
+
+  try {
+    // Resolve against a base so scheme-relative and bare paths parse predictably.
+    const parsed = new URL(href, 'https://nti.local');
+
+    return SAFE_LINK_SCHEMES.has(parsed.protocol) ? href : '#';
+  } catch {
+    return '#';
+  }
+}
+
 function renderText(node: LexicalNode): ReactNode {
   const format = node.format ?? 0;
   let element: ReactNode = node.text ?? '';
@@ -96,7 +132,7 @@ function renderNode(node: LexicalNode, key: string): ReactNode {
       );
 
     case 'link': {
-      const href = node.fields?.url ?? node.url ?? '#';
+      const href = sanitizeLinkHref(node.fields?.url ?? node.url);
       const newTab = node.fields?.newTab ?? false;
 
       return (

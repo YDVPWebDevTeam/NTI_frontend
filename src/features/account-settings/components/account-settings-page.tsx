@@ -47,6 +47,7 @@ export function AccountSettingsPage({ user }: { user: AuthenticatedUserDto }) {
               }
               confirmFeedback={security.emailConfirmFeedback}
               confirmForm={security.emailConfirmForm}
+              isAutoConfirmPending={security.isAutoConfirmPending}
               isConfirmPending={security.emailConfirmMutation.isPending}
               isRedirectPending={security.isReauthRedirectPending}
               isRequestPending={security.emailRequestMutation.isPending}

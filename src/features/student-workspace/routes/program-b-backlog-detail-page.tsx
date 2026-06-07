@@ -1,11 +1,15 @@
 'use client';
 
 import { t } from '@lingui/core/macro';
+import { useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
 import { use, useState } from 'react';
 import { toast } from 'sonner';
 
 import {
+  getProgramBBacklogControllerFindPublishedByIdQueryKey,
+  getProgramBBacklogControllerListCandidatesQueryKey,
+  getProgramBTeamApplicationControllerGetMyQueryKey,
   useProgramBBacklogControllerFindPublishedById,
   useProgramBBacklogControllerRequestDocumentDownload,
   useProgramBTeamApplicationControllerGetMy,
@@ -35,6 +39,7 @@ import {
 export function StudentProgramBBacklogDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const me = useStudentWorkspaceUser();
+  const queryClient = useQueryClient();
   const [motivation, setMotivation] = useState('');
   const [proposalText, setProposalText] = useState('');
   const [cvFiles, setCvFiles] = useState<File[]>([]);
@@ -52,6 +57,7 @@ export function StudentProgramBBacklogDetailPage({ params }: { params: Promise<{
   const hasTeamLoadError = teamQuery.isError && !isApiNotFoundError(teamQuery.error);
   const team = isApiNotFoundError(teamQuery.error) ? null : (teamQuery.data ?? null);
   const isLead = Boolean(me && team && team.leaderId === me.id);
+  const isLocked = Boolean(team?.lockedAt);
   const myApplicationQuery = useProgramBTeamApplicationControllerGetMy(
     id,
     {
@@ -67,6 +73,22 @@ export function StudentProgramBBacklogDetailPage({ params }: { params: Promise<{
   const downloadDocument = useProgramBBacklogControllerRequestDocumentDownload();
   const submitApplication = useProgramBTeamApplicationControllerSubmit();
   const withdrawApplication = useProgramBTeamApplicationWithdrawalControllerWithdraw();
+
+  const refreshApplicationState = async () => {
+    await Promise.all([
+      queryClient.invalidateQueries({
+        queryKey: getProgramBTeamApplicationControllerGetMyQueryKey(id, {
+          teamId: team?.id ?? '',
+        }),
+      }),
+      queryClient.invalidateQueries({
+        queryKey: getProgramBBacklogControllerFindPublishedByIdQueryKey(id),
+      }),
+      queryClient.invalidateQueries({
+        queryKey: getProgramBBacklogControllerListCandidatesQueryKey(id),
+      }),
+    ]);
+  };
 
   if (hasTeamLoadError) {
     return (
@@ -102,25 +124,25 @@ export function StudentProgramBBacklogDetailPage({ params }: { params: Promise<{
       }
     >
       <StudentSectionCard title={t`Overview`}>
-        <div className="space-y-3 text-sm text-neutral-700">
+        <div className="text-muted-foreground space-y-3 text-sm">
           <p>
-            {t`Status:`} <span className="font-medium text-neutral-950">{item?.status}</span>
+            {t`Status:`} <span className="text-foreground font-medium">{item?.status}</span>
           </p>
           <p>
             {t`Budget:`}{' '}
-            <span className="font-medium text-neutral-950">
+            <span className="text-foreground font-medium">
               {normalizeUnknownText(item?.budget) ?? t`Not specified`}
             </span>
           </p>
           <p>
             {t`Expected outcomes:`}{' '}
-            <span className="font-medium text-neutral-950">
+            <span className="text-foreground font-medium">
               {normalizeUnknownText(item?.expectedOutcomes) ?? t`Not specified`}
             </span>
           </p>
           <p>
             {t`Last updated:`}{' '}
-            <span className="font-medium text-neutral-950">
+            <span className="text-foreground font-medium">
               {item ? formatUnknownDate(item.updatedAt) : t`Not available`}
             </span>
           </p>
@@ -143,6 +165,7 @@ export function StudentProgramBBacklogDetailPage({ params }: { params: Promise<{
       <TeamApplicationSection
         existingApplication={existingApplication}
         isLead={isLead}
+        isLocked={isLocked}
         team={team}
         motivation={motivation}
         proposalText={proposalText}
@@ -172,7 +195,7 @@ export function StudentProgramBBacklogDetailPage({ params }: { params: Promise<{
             setMotivation('');
             setProposalText('');
             setCvFiles([]);
-            await myApplicationQuery.refetch();
+            await refreshApplicationState();
             toast.success(t`Team application submitted.`);
           } catch (error) {
             toast.error(
@@ -188,7 +211,7 @@ export function StudentProgramBBacklogDetailPage({ params }: { params: Promise<{
           }
           try {
             await withdrawApplication.mutateAsync({ applicationId: existingApplication.id });
-            await myApplicationQuery.refetch();
+            await refreshApplicationState();
             toast.success(t`Application withdrawn.`);
           } catch (error) {
             toast.error(

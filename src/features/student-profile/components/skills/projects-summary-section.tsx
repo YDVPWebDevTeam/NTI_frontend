@@ -40,7 +40,7 @@ export function ProjectsSummarySection({ control }: ProjectsSummarySectionProps)
             {projectsFields.map((field, index) => (
               <div
                 key={field.id}
-                className="relative grid items-start gap-4 rounded-md border bg-neutral-50 p-4 md:grid-cols-2"
+                className="bg-muted relative grid items-start gap-4 rounded-md border p-4 md:grid-cols-2"
               >
                 <div className="col-span-2 md:col-span-1">
                   <FormField
@@ -128,7 +128,7 @@ export function ProjectsSummarySection({ control }: ProjectsSummarySectionProps)
                   variant="ghost"
                   size="icon"
                   onClick={() => removeProject(index)}
-                  className="absolute top-2 right-2 text-red-500 hover:bg-red-50 hover:text-red-600"
+                  className="text-destructive hover:bg-destructive/10 hover:text-destructive absolute top-2 right-2"
                 >
                   <Trash className="h-4 w-4" />
                 </Button>

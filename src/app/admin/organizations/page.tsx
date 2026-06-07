@@ -94,12 +94,15 @@ export default function AdminOrganizationsPage() {
             const isPendingRow =
               changeStatusMutation.isPending &&
               changeStatusMutation.variables?.id === organization.id;
+            const isRejectingRow = rejectingId === organization.id;
 
             return (
               <AdminTableRow key={organization.id}>
                 <AdminTableCell>
-                  <div className="font-medium text-slate-950">{organization.name}</div>
-                  <div className="mt-1 font-mono text-xs text-slate-500">{organization.id}</div>
+                  <div className="text-foreground font-medium">{organization.name}</div>
+                  <div className="text-muted-foreground mt-1 font-mono text-xs">
+                    {organization.id}
+                  </div>
                   {rejectingId === organization.id ? (
                     <div className="mt-3 max-w-xl">
                       <OrganizationRejectionForm
@@ -128,30 +131,42 @@ export default function AdminOrganizationsPage() {
                 <AdminTableCell>
                   <AdminStatusBadge status={organization.status} />
                 </AdminTableCell>
+                {/* Website is not exposed on AdminOrganizationRowDto (list endpoint);
+                    it would need a backend field to be displayed here. */}
                 <AdminTableCell>{t`Not provided`}</AdminTableCell>
                 <AdminTableCell className="space-y-2 text-right">
                   <div className="flex flex-wrap justify-end gap-2">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      disabled={isPendingRow}
-                      onClick={() =>
-                        changeStatusMutation
-                          .mutateAsync({
-                            id: organization.id,
-                            status: OrganizationStatus.ACTIVE,
-                          })
-                          .catch((error) =>
-                            handleSessionFailure(error, t`Unable to update the organization.`),
-                          )
-                      }
-                    >
-                      {isPendingRow &&
-                      changeStatusMutation.variables?.status === OrganizationStatus.ACTIVE
-                        ? t`Approving...`
-                        : t`Approve`}
-                    </Button>
+                    {isRejectingRow ? null : (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        disabled={isPendingRow}
+                        onClick={() => {
+                          if (
+                            !window.confirm(
+                              t`Approve ${organization.name}? They will gain active access immediately.`,
+                            )
+                          ) {
+                            return;
+                          }
+
+                          changeStatusMutation
+                            .mutateAsync({
+                              id: organization.id,
+                              status: OrganizationStatus.ACTIVE,
+                            })
+                            .catch((error) =>
+                              handleSessionFailure(error, t`Unable to update the organization.`),
+                            );
+                        }}
+                      >
+                        {isPendingRow &&
+                        changeStatusMutation.variables?.status === OrganizationStatus.ACTIVE
+                          ? t`Approving...`
+                          : t`Approve`}
+                      </Button>
+                    )}
                     <Button
                       type="button"
                       variant="destructive"
@@ -177,7 +192,7 @@ export default function AdminOrganizationsPage() {
           })}
           {organizations.length === 0 ? (
             <AdminTableRow>
-              <AdminTableCell className="py-10 text-center text-slate-500" colSpan={5}>
+              <AdminTableCell className="text-muted-foreground py-10 text-center" colSpan={5}>
                 {t`No organizations match the current filters.`}
               </AdminTableCell>
             </AdminTableRow>

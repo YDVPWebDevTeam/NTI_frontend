@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 
-import { AuthSplitShell } from 'components/layout';
+import { AuthSplitShell } from 'components/layout/auth-split-shell';
 
 type CompanyOwnerAuthLayoutProps = {
   eyebrow: ReactNode;

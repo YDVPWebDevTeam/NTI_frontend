@@ -104,7 +104,9 @@ export default function AdminUsersPage() {
 
             return (
               <AdminTableRow key={user.id}>
-                <AdminTableCell className="font-medium text-slate-950">{user.email}</AdminTableCell>
+                <AdminTableCell className="text-foreground font-medium">
+                  {user.email}
+                </AdminTableCell>
                 <AdminTableCell>{formatEnumLabel(user.role)}</AdminTableCell>
                 <AdminTableCell>
                   <AdminStatusBadge status={user.status} />
@@ -116,13 +118,22 @@ export default function AdminUsersPage() {
                     variant="outline"
                     size="sm"
                     disabled={isPendingRow || isProtectedRole}
-                    onClick={() =>
+                    onClick={() => {
+                      if (
+                        nextStatus === UserAccountStatus.SUSPENDED &&
+                        !window.confirm(
+                          t`Suspend ${user.email}? They will lose access until reactivated.`,
+                        )
+                      ) {
+                        return;
+                      }
+
                       changeStatusMutation
                         .mutateAsync({ id: user.id, status: nextStatus })
                         .catch((error) =>
                           handleSessionFailure(error, t`Unable to update the user status.`),
-                        )
-                    }
+                        );
+                    }}
                   >
                     {actionLabel}
                   </Button>
@@ -132,7 +143,7 @@ export default function AdminUsersPage() {
           })}
           {users.length === 0 ? (
             <AdminTableRow>
-              <AdminTableCell className="py-10 text-center text-slate-500" colSpan={5}>
+              <AdminTableCell className="text-muted-foreground py-10 text-center" colSpan={5}>
                 {t`No users match the current filters.`}
               </AdminTableCell>
             </AdminTableRow>

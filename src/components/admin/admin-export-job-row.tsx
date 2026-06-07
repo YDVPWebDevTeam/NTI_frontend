@@ -50,9 +50,9 @@ export function AdminExportJobRow({ id }: AdminExportJobRowProps) {
   if (jobQuery.isLoading) {
     return (
       <AdminTableRow className="hidden sm:table-row">
-        <AdminTableCell className="font-mono text-xs text-slate-500">{id}</AdminTableCell>
+        <AdminTableCell className="text-muted-foreground font-mono text-xs">{id}</AdminTableCell>
         <AdminTableCell colSpan={5}>
-          <div className="flex items-center gap-2 text-sm text-slate-500">
+          <div className="text-muted-foreground flex items-center gap-2 text-sm">
             <RefreshCcw className="h-4 w-4 animate-spin" />
             {t`Loading export job...`}
           </div>
@@ -64,8 +64,8 @@ export function AdminExportJobRow({ id }: AdminExportJobRowProps) {
   if (jobQuery.isError || !jobQuery.data) {
     return (
       <AdminTableRow className="hidden sm:table-row">
-        <AdminTableCell className="font-mono text-xs text-slate-500">{id}</AdminTableCell>
-        <AdminTableCell className="text-rose-700" colSpan={4}>
+        <AdminTableCell className="text-muted-foreground font-mono text-xs">{id}</AdminTableCell>
+        <AdminTableCell className="text-destructive" colSpan={4}>
           {t`Unable to load this export job right now.`}
         </AdminTableCell>
         <AdminTableCell className="text-right">
@@ -83,7 +83,7 @@ export function AdminExportJobRow({ id }: AdminExportJobRowProps) {
 
   return (
     <AdminTableRow className="hidden sm:table-row">
-      <AdminTableCell className="font-mono text-xs text-slate-500">{job.id}</AdminTableCell>
+      <AdminTableCell className="text-muted-foreground font-mono text-xs">{job.id}</AdminTableCell>
       <AdminTableCell>{getDatasetLabel(job.dataset)}</AdminTableCell>
       <AdminTableCell className="uppercase">{job.format}</AdminTableCell>
       <AdminTableCell>
@@ -92,12 +92,12 @@ export function AdminExportJobRow({ id }: AdminExportJobRowProps) {
       <AdminTableCell>
         <div>{formatAdminDateTime(job.createdAt)}</div>
         {job.completedAt ? (
-          <div className="mt-1 text-xs text-slate-500">
+          <div className="text-muted-foreground mt-1 text-xs">
             {t`Completed:`} {formatAdminDateTime(job.completedAt)}
           </div>
         ) : null}
         {job.errorMessage ? (
-          <div className="mt-1 text-xs text-rose-700">{job.errorMessage}</div>
+          <div className="text-destructive mt-1 text-xs">{job.errorMessage}</div>
         ) : null}
       </AdminTableCell>
       <AdminTableCell className="text-right">
@@ -112,7 +112,7 @@ export function AdminExportJobRow({ id }: AdminExportJobRowProps) {
             </Button>
           ) : null}
           {jobQuery.isFetching ? (
-            <div className="inline-flex items-center gap-2 rounded-md px-3 text-xs text-slate-500">
+            <div className="text-muted-foreground inline-flex items-center gap-2 rounded-md px-3 text-xs">
               <RefreshCcw className="h-4 w-4 animate-spin" />
               {t`Updating`}
             </div>
@@ -128,8 +128,8 @@ export function AdminExportJobCard({ id }: AdminExportJobRowProps) {
 
   if (jobQuery.isLoading) {
     return (
-      <div className="rounded-2xl border border-slate-200 bg-white p-4">
-        <div className="flex items-center gap-2 text-sm text-slate-500">
+      <div className="border-border bg-card rounded-2xl border p-4">
+        <div className="text-muted-foreground flex items-center gap-2 text-sm">
           <RefreshCcw className="h-4 w-4 animate-spin" />
           {t`Loading export job...`}
         </div>
@@ -139,9 +139,9 @@ export function AdminExportJobCard({ id }: AdminExportJobRowProps) {
 
   if (jobQuery.isError || !jobQuery.data) {
     return (
-      <div className="space-y-4 rounded-2xl border border-slate-200 bg-white p-4">
-        <div className="font-mono text-xs break-all text-slate-500">{id}</div>
-        <div className="text-sm text-rose-700">{t`Unable to load this export job right now.`}</div>
+      <div className="border-border bg-card space-y-4 rounded-2xl border p-4">
+        <div className="text-muted-foreground font-mono text-xs break-all">{id}</div>
+        <div className="text-destructive text-sm">{t`Unable to load this export job right now.`}</div>
         <Button type="button" variant="outline" size="sm" onClick={() => void jobQuery.refetch()}>
           {t`Retry`}
         </Button>
@@ -154,25 +154,25 @@ export function AdminExportJobCard({ id }: AdminExportJobRowProps) {
   const isDownloadReady = job.status === ExportJobStatusDtoStatus.COMPLETED && !!downloadHref;
 
   return (
-    <div className="space-y-4 rounded-2xl border border-slate-200 bg-white p-4">
-      <div className="font-mono text-xs break-all text-slate-500">{job.id}</div>
+    <div className="border-border bg-card space-y-4 rounded-2xl border p-4">
+      <div className="text-muted-foreground font-mono text-xs break-all">{job.id}</div>
       <dl className="grid gap-3 text-sm">
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <dt className="text-xs font-medium tracking-[0.08em] text-slate-500 uppercase">
+            <dt className="text-muted-foreground text-xs font-medium tracking-[0.08em] uppercase">
               {t`Dataset`}
             </dt>
-            <dd className="mt-1 text-slate-700">{getDatasetLabel(job.dataset)}</dd>
+            <dd className="text-foreground mt-1">{getDatasetLabel(job.dataset)}</dd>
           </div>
           <div>
-            <dt className="text-xs font-medium tracking-[0.08em] text-slate-500 uppercase">
+            <dt className="text-muted-foreground text-xs font-medium tracking-[0.08em] uppercase">
               {t`Format`}
             </dt>
-            <dd className="mt-1 text-slate-700 uppercase">{job.format}</dd>
+            <dd className="text-foreground mt-1 uppercase">{job.format}</dd>
           </div>
         </div>
         <div>
-          <dt className="text-xs font-medium tracking-[0.08em] text-slate-500 uppercase">
+          <dt className="text-muted-foreground text-xs font-medium tracking-[0.08em] uppercase">
             {t`Status`}
           </dt>
           <dd className="mt-1">
@@ -180,17 +180,17 @@ export function AdminExportJobCard({ id }: AdminExportJobRowProps) {
           </dd>
         </div>
         <div>
-          <dt className="text-xs font-medium tracking-[0.08em] text-slate-500 uppercase">
+          <dt className="text-muted-foreground text-xs font-medium tracking-[0.08em] uppercase">
             {t`Timeline`}
           </dt>
-          <dd className="mt-1 text-slate-700">{formatAdminDateTime(job.createdAt)}</dd>
+          <dd className="text-foreground mt-1">{formatAdminDateTime(job.createdAt)}</dd>
           {job.completedAt ? (
-            <dd className="mt-1 text-xs text-slate-500">
+            <dd className="text-muted-foreground mt-1 text-xs">
               {t`Completed:`} {formatAdminDateTime(job.completedAt)}
             </dd>
           ) : null}
           {job.errorMessage ? (
-            <dd className="mt-1 text-xs text-rose-700">{job.errorMessage}</dd>
+            <dd className="text-destructive mt-1 text-xs">{job.errorMessage}</dd>
           ) : null}
         </div>
       </dl>
@@ -206,7 +206,7 @@ export function AdminExportJobCard({ id }: AdminExportJobRowProps) {
         ) : null}
       </div>
       {jobQuery.isFetching ? (
-        <div className="inline-flex items-center gap-2 text-xs text-slate-500">
+        <div className="text-muted-foreground inline-flex items-center gap-2 text-xs">
           <RefreshCcw className="h-4 w-4 animate-spin" />
           {t`Updating`}
         </div>

@@ -1,20 +1,19 @@
 'use client';
 
-import {
-  useMutation,
-  useQuery,
-  type DataTag,
-  type DefinedInitialDataOptions,
-  type DefinedUseQueryResult,
-  type MutationFunction,
-  type QueryClient,
-  type QueryFunction,
-  type QueryKey,
-  type UndefinedInitialDataOptions,
-  type UseMutationOptions,
-  type UseMutationResult,
-  type UseQueryOptions,
-  type UseQueryResult,
+import { useMutation, useQuery } from '@tanstack/react-query';
+import type {
+  DataTag,
+  DefinedInitialDataOptions,
+  DefinedUseQueryResult,
+  MutationFunction,
+  QueryClient,
+  QueryFunction,
+  QueryKey,
+  UndefinedInitialDataOptions,
+  UseMutationOptions,
+  UseMutationResult,
+  UseQueryOptions,
+  UseQueryResult,
 } from '@tanstack/react-query';
 
 import type {
@@ -94,7 +93,6 @@ export const getOrganizationDocumentsControllerListDocumentsCompatQueryOptions =
   },
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
-
   const queryKey =
     queryOptions?.queryKey ?? getOrganizationDocumentsControllerListDocumentsQueryKey(id);
 
@@ -284,7 +282,9 @@ export const useOrganizationDocumentsControllerCreateUploadCompat = <
   { id: string; data: CreateOrganizationDocumentUploadDto },
   TContext
 > => {
-  const mutationOptions = getOrganizationDocumentsControllerCreateUploadCompatMutationOptions(options);
+  const mutationOptions = getOrganizationDocumentsControllerCreateUploadCompatMutationOptions(
+    options,
+  );
 
   return useMutation(mutationOptions, queryClient);
 };
@@ -363,8 +363,9 @@ export const useOrganizationDocumentsControllerCompleteUploadCompat = <
   { id: string; docId: string; data: CompleteOrganizationDocumentUploadDto },
   TContext
 > => {
-  const mutationOptions =
-    getOrganizationDocumentsControllerCompleteUploadCompatMutationOptions(options);
+  const mutationOptions = getOrganizationDocumentsControllerCompleteUploadCompatMutationOptions(
+    options,
+  );
 
   return useMutation(mutationOptions, queryClient);
 };
@@ -402,10 +403,8 @@ export const getOrganizationDocumentsControllerRequestDownloadCompatQueryOptions
   },
 ) => {
   const { query: queryOptions, request: requestOptions } = options ?? {};
-
   const queryKey =
-    queryOptions?.queryKey ??
-    getOrganizationDocumentsControllerRequestDownloadQueryKey(id, docId);
+    queryOptions?.queryKey ?? getOrganizationDocumentsControllerRequestDownloadQueryKey(id, docId);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof organizationDocumentsControllerRequestDownloadCompat>>

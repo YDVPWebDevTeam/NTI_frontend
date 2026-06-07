@@ -13,6 +13,8 @@ type KnownProgramAStatus =
   | 'EVALUATING'
   | 'FORMALLY_VERIFIED'
   | 'NEEDS_INFO'
+  | 'ONBOARDING'
+  | 'PAUSED'
   | 'REJECTED'
   | 'SUBMITTED';
 
@@ -25,6 +27,8 @@ const statusStyles: Record<KnownProgramAStatus, string> = {
   EVALUATING: 'border-indigo-200 bg-indigo-50 text-indigo-700',
   FORMALLY_VERIFIED: 'border-sky-200 bg-sky-50 text-sky-700',
   NEEDS_INFO: 'border-amber-200 bg-amber-50 text-amber-700',
+  ONBOARDING: 'border-cyan-200 bg-cyan-50 text-cyan-700',
+  PAUSED: 'border-yellow-200 bg-yellow-50 text-yellow-700',
   REJECTED: 'border-red-200 bg-red-50 text-red-700',
   SUBMITTED: 'border-orange-200 bg-orange-50 text-orange-700',
 };
@@ -70,6 +74,12 @@ function getProgramAStatusLabel(status: string): string {
 
     case 'SUBMITTED':
       return t`Submitted`;
+
+    case 'ONBOARDING':
+      return t`Onboarding`;
+
+    case 'PAUSED':
+      return t`Paused`;
 
     default:
       return status;

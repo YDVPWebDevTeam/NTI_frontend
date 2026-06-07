@@ -133,4 +133,3 @@ export const useApplicationsControllerUpsertSection = <
 
   return useMutation(mutationOptions, queryClient);
 };
-

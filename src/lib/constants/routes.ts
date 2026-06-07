@@ -63,7 +63,9 @@ const COMPANY_ROUTES = {
 const MENTOR_ROUTES = {
   ROOT: '/mentor/dashboard',
   DASHBOARD: '/mentor/dashboard',
+  PROGRAM_A_PROJECTS: '/mentor/program-a/projects',
   PROGRAM_B_PROJECTS: '/mentor/program-b/projects',
+  programAProjectDetail: (projectId: string) => `/mentor/program-a/projects/${projectId}`,
   programBProjectDetail: (projectId: string) => `/mentor/program-b/projects/${projectId}`,
 } as const;
 

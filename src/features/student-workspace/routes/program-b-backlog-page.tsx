@@ -56,7 +56,7 @@ export function StudentProgramBBacklogPage() {
             placeholder={t`Search title or description`}
           />
           <select
-            className="rounded-md border border-black/10 bg-white px-3 py-2 text-sm"
+            className="border-border bg-card rounded-md border px-3 py-2 text-sm"
             value={sort}
             onChange={(event) =>
               setSort(event.target.value as ProgramBBacklogControllerListPublishedSort)
@@ -68,7 +68,7 @@ export function StudentProgramBBacklogPage() {
             <option value="title">{t`Title`}</option>
           </select>
           <select
-            className="rounded-md border border-black/10 bg-white px-3 py-2 text-sm"
+            className="border-border bg-card rounded-md border px-3 py-2 text-sm"
             value={order}
             onChange={(event) =>
               setOrder(event.target.value as ProgramBBacklogControllerListPublishedOrder)
@@ -87,19 +87,19 @@ export function StudentProgramBBacklogPage() {
             title={normalizeUnknownText(item.title) ?? t`Untitled backlog item`}
             description={normalizeUnknownText(item.description) ?? t`No description provided.`}
           >
-            <div className="space-y-3 text-sm text-neutral-700">
+            <div className="text-muted-foreground space-y-3 text-sm">
               <p>
-                {t`Status:`} <span className="font-medium text-neutral-950">{item.status}</span>
+                {t`Status:`} <span className="text-foreground font-medium">{item.status}</span>
               </p>
               <p>
                 {t`Budget:`}{' '}
-                <span className="font-medium text-neutral-950">
+                <span className="text-foreground font-medium">
                   {normalizeUnknownText(item.budget) ?? t`Not specified`}
                 </span>
               </p>
               <Link
                 href={ROUTES.STUDENT.programBBacklogDetail(item.id)}
-                className="inline-flex rounded-md border border-black/10 px-3 py-2 text-sm font-medium text-[#1e58d5] transition hover:border-[#1e58d5]"
+                className="border-border text-primary hover:border-primary inline-flex rounded-md border px-3 py-2 text-sm font-medium transition"
               >
                 {t`Open detail`}
               </Link>
@@ -109,21 +109,21 @@ export function StudentProgramBBacklogPage() {
       </div>
 
       <StudentSectionCard title={t`Pagination`}>
-        <div className="flex items-center justify-between text-sm text-neutral-700">
+        <div className="text-muted-foreground flex items-center justify-between text-sm">
           <span>
             {t`Page`} {backlogQuery.data?.meta.page ?? page} {t`of`}{' '}
             {backlogQuery.data?.meta.totalPages ?? 1}
           </span>
           <div className="flex gap-2">
             <button
-              className="rounded-md border border-black/10 px-3 py-2 disabled:opacity-40"
+              className="border-border rounded-md border px-3 py-2 disabled:opacity-40"
               disabled={page <= 1}
               onClick={() => setPage((current) => Math.max(1, current - 1))}
             >
               {t`Previous`}
             </button>
             <button
-              className="rounded-md border border-black/10 px-3 py-2 disabled:opacity-40"
+              className="border-border rounded-md border px-3 py-2 disabled:opacity-40"
               disabled={page >= (backlogQuery.data?.meta.totalPages ?? 1)}
               onClick={() => setPage((current) => current + 1)}
             >

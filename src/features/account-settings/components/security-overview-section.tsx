@@ -16,7 +16,7 @@ import { SecurityFeedbackBanner } from './security-feedback-banner';
 
 function SecurityBehaviorItem({ children, icon }: { children: ReactNode; icon: ReactNode }) {
   return (
-    <div className="rounded-[1.25rem] border border-[#dce7ff] bg-[#f7faff] p-4">
+    <div className="border-border bg-muted rounded-2xl border p-4">
       <div className="flex items-start gap-3">
         {icon}
         <p>{children}</p>
@@ -58,7 +58,7 @@ export function SecurityOverviewSection({
           <SecurityFeedbackBanner feedback={latestFeedback} eyebrow={t`Latest update`} />
 
           {isReauthRedirectPending ? (
-            <div className="rounded-[1.25rem] border border-[#f7d58a] bg-[#fff7e6] px-4 py-4 text-sm leading-6 text-[#7a4b00]">
+            <div className="border-warning/30 bg-warning/10 text-warning rounded-2xl border px-4 py-4 text-sm leading-6">
               <div className="flex items-start gap-3">
                 <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
                 <p>{t`We're signing you out now. Please sign in again to keep going.`}</p>
@@ -72,19 +72,19 @@ export function SecurityOverviewSection({
         title={t`Helpful to know`}
         description={t`A few quick notes before you make changes.`}
       >
-        <div className="space-y-4 text-sm leading-6 text-[#5b667b]">
+        <div className="text-muted-foreground space-y-4 text-sm leading-6">
           <SecurityBehaviorItem
-            icon={<MailCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#1e58d5]" />}
+            icon={<MailCheck className="text-primary mt-0.5 h-4 w-4 shrink-0" />}
           >
             {t`When you change your email, your current address stays active until you confirm the new one from your inbox.`}
           </SecurityBehaviorItem>
           <SecurityBehaviorItem
-            icon={<KeyRound className="mt-0.5 h-4 w-4 shrink-0 text-[#1e58d5]" />}
+            icon={<KeyRound className="text-primary mt-0.5 h-4 w-4 shrink-0" />}
           >
             {t`To change your password, enter your current one first. After the update, you'll be asked to sign in again.`}
           </SecurityBehaviorItem>
           <SecurityBehaviorItem
-            icon={<ShieldAlert className="mt-0.5 h-4 w-4 shrink-0 text-[#1e58d5]" />}
+            icon={<ShieldAlert className="text-primary mt-0.5 h-4 w-4 shrink-0" />}
           >
             {t`If something goes wrong, we'll tell you what to do next.`}
           </SecurityBehaviorItem>

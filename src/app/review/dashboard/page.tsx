@@ -6,6 +6,7 @@ import { ArrowRight, ClipboardCheck, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 
 import { useAdminApplicationsControllerListProgramAApplications } from 'lib/api/admin/admin';
+import { StatusBadge } from 'components/shadcn';
 import { ROUTES } from 'lib/constants';
 import {
   formatDate,
@@ -27,9 +28,9 @@ type ReviewQueueRow = {
 type SortOrder = 'newest' | 'oldest';
 
 const OUTLINE_BUTTON_CLASS =
-  'inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50';
+  'inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-card px-4 py-2.5 text-sm font-semibold text-foreground transition hover:bg-muted disabled:cursor-not-allowed disabled:opacity-50';
 const INPUT_CLASS =
-  'h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-sm text-slate-950 transition outline-none focus:border-sky-400 focus:ring-4 focus:ring-sky-100';
+  'h-11 w-full rounded-xl border border-border bg-card px-3 text-sm text-foreground transition outline-none focus:border-ring focus:ring-4 focus:ring-ring/20';
 
 function normalizeReviewRow(row: unknown): ReviewQueueRow | null {
   if (!isRecord(row)) return null;
@@ -99,14 +100,14 @@ export default function ReviewDashboardPage() {
 
   return (
     <div className="space-y-6">
-      <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-        <div className="space-y-4 border-b border-slate-200 px-6 py-6">
+      <section className="border-border bg-card overflow-hidden rounded-2xl border shadow-sm">
+        <div className="border-border space-y-4 border-b px-6 py-6">
           <div>
-            <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-sky-50 text-sky-700">
+            <div className="bg-accent text-primary mb-3 flex h-10 w-10 items-center justify-center rounded-full">
               <ClipboardCheck className="h-5 w-5" />
             </div>
-            <h1 className="text-2xl font-bold text-slate-950">{t`Review queue`}</h1>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
+            <h1 className="text-foreground text-2xl font-bold">{t`Review queue`}</h1>
+            <p className="text-muted-foreground mt-2 max-w-3xl text-sm leading-6">
               {t`Applications currently in evaluation. Open an application to score its criteria and record your recommendation.`}
             </p>
           </div>
@@ -138,8 +139,8 @@ export default function ReviewDashboardPage() {
 
         <div className="space-y-5 px-6 py-6">
           {applicationsQuery.isLoading && (
-            <div className="flex min-h-72 items-center justify-center rounded-2xl border border-slate-200 bg-white">
-              <div className="flex items-center gap-3 text-sm font-medium text-slate-600">
+            <div className="border-border bg-card flex min-h-72 items-center justify-center rounded-2xl border">
+              <div className="text-muted-foreground flex items-center gap-3 text-sm font-medium">
                 <Loader2 className="h-4 w-4 animate-spin" />
                 {t`Loading applications to review...`}
               </div>
@@ -147,18 +148,18 @@ export default function ReviewDashboardPage() {
           )}
 
           {applicationsQuery.isError && (
-            <div className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm leading-6 text-rose-700">
+            <div className="border-destructive/30 bg-destructive/10 text-destructive rounded-2xl border px-4 py-3 text-sm leading-6">
               {t`Unable to load applications from the backend.`}
             </div>
           )}
 
           {shouldShowEmptyState && (
-            <div className="flex min-h-72 items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-6 text-center">
+            <div className="border-border bg-muted flex min-h-72 items-center justify-center rounded-2xl border border-dashed px-6 text-center">
               <div>
-                <p className="text-lg font-semibold text-slate-950">
+                <p className="text-foreground text-lg font-semibold">
                   {t`No applications to review`}
                 </p>
-                <p className="mt-2 max-w-md text-sm leading-6 text-slate-600">
+                <p className="text-muted-foreground mt-2 max-w-md text-sm leading-6">
                   {t`There are currently no applications in the evaluation stage.`}
                 </p>
               </div>
@@ -166,10 +167,10 @@ export default function ReviewDashboardPage() {
           )}
 
           {!applicationsQuery.isLoading && visibleApplications.length > 0 && (
-            <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
+            <div className="border-border bg-card overflow-hidden rounded-2xl border">
               <div className="overflow-x-auto">
                 <table className="w-full min-w-[820px] text-left text-sm">
-                  <thead className="border-b border-slate-200 bg-slate-50 text-[11px] tracking-[0.08em] text-slate-500 uppercase">
+                  <thead className="border-border bg-muted text-muted-foreground border-b text-[11px] tracking-[0.08em] uppercase">
                     <tr>
                       <th className="px-4 py-3 font-semibold">{t`Team`}</th>
                       <th className="px-4 py-3 font-semibold">{t`Call`}</th>
@@ -179,28 +180,24 @@ export default function ReviewDashboardPage() {
                     </tr>
                   </thead>
 
-                  <tbody className="divide-y divide-slate-100">
+                  <tbody className="divide-border divide-y">
                     {visibleApplications.map((application) => (
-                      <tr key={application.id} className="hover:bg-slate-50/80">
-                        <td className="px-4 py-4 font-medium text-slate-950">
+                      <tr key={application.id} className="hover:bg-muted/80">
+                        <td className="text-foreground px-4 py-4 font-medium">
                           {application.teamName}
                         </td>
-                        <td className="px-4 py-4 text-slate-600">{application.callTitle}</td>
-                        <td className="px-4 py-4 text-slate-600">
+                        <td className="text-muted-foreground px-4 py-4">{application.callTitle}</td>
+                        <td className="text-muted-foreground px-4 py-4">
                           {formatDate(application.submittedAt)}
                         </td>
                         <td className="px-4 py-4">
-                          <span
-                            className={`rounded-full border px-3 py-1 text-xs font-semibold ${
-                              application.evaluatedByCurrentUser
-                                ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
-                                : 'border-amber-200 bg-amber-50 text-amber-700'
-                            }`}
+                          <StatusBadge
+                            tone={application.evaluatedByCurrentUser ? 'success' : 'warning'}
                           >
                             {application.evaluatedByCurrentUser
                               ? t`Evaluated`
                               : t`Not yet evaluated`}
-                          </span>
+                          </StatusBadge>
                         </td>
                         <td className="px-4 py-4">
                           <Link
@@ -219,7 +216,7 @@ export default function ReviewDashboardPage() {
             </div>
           )}
 
-          <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-slate-500">
+          <div className="text-muted-foreground flex flex-wrap items-center justify-between gap-3 text-sm">
             <span>{t`Showing applications in the evaluation stage.`}</span>
             <span>
               {t`Rows`}: {visibleApplications.length} / {applications.length}

@@ -7,7 +7,6 @@ import { getCurrentYear, getMaxGraduationYear } from 'lib/date';
 export const PASSWORD_MIN_LENGTH = 8;
 export const PASSWORD_MAX_LENGTH = 128;
 export const PASSWORD_WEAK_MESSAGE = msg`Password must contain at least one letter and one number`;
-export const VERIFICATION_CODE_MIN_LENGTH = 4;
 export const NAME_MIN_LENGTH = 2;
 export const NAME_MAX_LENGTH = 50;
 export const STUDY_YEAR_MAX = 8;
@@ -118,18 +117,6 @@ export function createStudentIdentitySchema() {
     acceptTerms: z.boolean().refine((val) => val, {
       message: i18n._(msg`You must accept the terms.`),
     }),
-  });
-}
-
-export function createStudentEmailStepSchema() {
-  return z.object({
-    verificationCode: z
-      .string()
-      .trim()
-      .refine(
-        (value) => value.length === 0 || value.length >= VERIFICATION_CODE_MIN_LENGTH,
-        i18n._(msg`Code must be at least 4 characters.`),
-      ),
   });
 }
 
@@ -247,14 +234,12 @@ export function createStudentSkillsSchema() {
 
 export function createStudentRegistrationSchema() {
   const studentIdentitySchema = createStudentIdentitySchema();
-  const studentEmailStepSchema = createStudentEmailStepSchema();
   const studentAcademicSchema = createStudentAcademicSchema();
   const studentSkillsSchema = createStudentSkillsSchema();
 
   return z
     .object({
       ...studentIdentitySchema.shape,
-      ...studentEmailStepSchema.shape,
       ...studentAcademicSchema.shape,
       ...studentSkillsSchema.shape,
     })

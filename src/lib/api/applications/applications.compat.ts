@@ -1,24 +1,11 @@
 // This file is auto-generated. Do not edit manually.
-import { useMutation, useQuery } from '@tanstack/react-query';
-import type {
-  DataTag,
-  DefinedInitialDataOptions,
-  DefinedUseQueryResult,
-  QueryClient,
-  QueryFunction,
-  QueryKey,
-  UndefinedInitialDataOptions,
-  UseMutationOptions,
-  UseMutationResult,
-  UseQueryOptions,
-  UseQueryResult,
-} from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
+import type { QueryClient, UseMutationOptions, UseMutationResult } from '@tanstack/react-query';
 
 import type {
   ApplicationProfileSectionValueDto,
   UpsertIdeaOverviewSectionDto,
 } from '../index.schemas';
-import { orvalMutator } from '../../api-client/openapi-runtime/runtime';
 
 import { applicationsControllerUpsertIdeaOverviewSection } from './applications';
 
@@ -26,47 +13,6 @@ const IDEA_OVERVIEW_SECTION_KEY = 'idea_overview';
 
 export interface UpsertApplicationSectionDto {
   valueJson: ApplicationProfileSectionValueDto | Record<string, unknown>;
-}
-
-type SecondParameter<T extends (...args: never[]) => unknown> = Parameters<T>[1];
-
-export type StudentApplicationCallSummaryDtoType = 'PROGRAM_A' | 'PROGRAM_B';
-export type StudentApplicationCallSummaryDtoStatus =
-  | 'DRAFT'
-  | 'OPEN'
-  | 'CLOSED'
-  | 'ARCHIVED';
-
-export interface StudentApplicationCallSummaryDto {
-  id: string;
-  title: string;
-  type: StudentApplicationCallSummaryDtoType;
-  status: StudentApplicationCallSummaryDtoStatus;
-}
-
-export type StudentApplicationSummaryDtoStatus =
-  | 'DRAFT'
-  | 'SUBMITTED'
-  | 'FORMALLY_VERIFIED'
-  | 'EVALUATING'
-  | 'NEEDS_INFO'
-  | 'APPROVED'
-  | 'REJECTED'
-  | 'ONBOARDING'
-  | 'ACTIVE_PROJECT'
-  | 'PAUSED'
-  | 'COMPLETED'
-  | 'ARCHIVED';
-
-export interface StudentApplicationSummaryDto {
-  id: string;
-  callId: string;
-  teamId: string;
-  status: StudentApplicationSummaryDtoStatus;
-  submittedAt?: Record<string, unknown> | null;
-  createdAt: string;
-  updatedAt: string;
-  call: StudentApplicationCallSummaryDto;
 }
 
 function isNonEmptyString(value: unknown): value is string {
@@ -188,145 +134,3 @@ export const useApplicationsControllerUpsertSection = <
   return useMutation(mutationOptions, queryClient);
 };
 
-export const applicationsControllerListSubmittedForCurrentTeam = (
-  options?: SecondParameter<typeof orvalMutator>,
-  signal?: AbortSignal,
-) =>
-  orvalMutator<StudentApplicationSummaryDto[]>(
-    {
-      url: '/applications/team/current/submitted',
-      method: 'GET',
-      signal,
-    },
-    options,
-  );
-
-export const getApplicationsControllerListSubmittedForCurrentTeamQueryKey = () =>
-  ['/applications/team/current/submitted'] as const;
-
-export const getApplicationsControllerListSubmittedForCurrentTeamQueryOptions = <
-  TData = Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>,
-  TError = void,
->(options?: {
-  query?: Partial<
-    UseQueryOptions<
-      Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>,
-      TError,
-      TData
-    >
-  >;
-  request?: SecondParameter<typeof orvalMutator>;
-}) => {
-  const { query: queryOptions, request: requestOptions } = options ?? {};
-  const queryKey =
-    queryOptions?.queryKey ?? getApplicationsControllerListSubmittedForCurrentTeamQueryKey();
-
-  const queryFn: QueryFunction<
-    Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>
-  > = ({ signal }) => applicationsControllerListSubmittedForCurrentTeam(requestOptions, signal);
-
-  return {
-    queryKey,
-    queryFn,
-    ...queryOptions,
-  } as UseQueryOptions<
-    Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>,
-    TError,
-    TData
-  > & { queryKey: DataTag<QueryKey, TData, TError> };
-};
-
-export type ApplicationsControllerListSubmittedForCurrentTeamQueryResult = NonNullable<
-  Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>
->;
-export type ApplicationsControllerListSubmittedForCurrentTeamQueryError = void;
-
-export function useApplicationsControllerListSubmittedForCurrentTeam<
-  TData = Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>,
-  TError = void,
->(
-  options: {
-    query: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>,
-        TError,
-        TData
-      >
-    > &
-      Pick<
-        DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>,
-          TError,
-          Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>
-        >,
-        'initialData'
-      >;
-    request?: SecondParameter<typeof orvalMutator>;
-  },
-  queryClient?: QueryClient,
-): DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-export function useApplicationsControllerListSubmittedForCurrentTeam<
-  TData = Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>,
-  TError = void,
->(
-  options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>,
-        TError,
-        TData
-      >
-    > &
-      Pick<
-        UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>,
-          TError,
-          Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>
-        >,
-        'initialData'
-      >;
-    request?: SecondParameter<typeof orvalMutator>;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-export function useApplicationsControllerListSubmittedForCurrentTeam<
-  TData = Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>,
-  TError = void,
->(
-  options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>,
-        TError,
-        TData
-      >
-    >;
-    request?: SecondParameter<typeof orvalMutator>;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
-export function useApplicationsControllerListSubmittedForCurrentTeam<
-  TData = Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>,
-  TError = void,
->(
-  options?: {
-    query?: Partial<
-      UseQueryOptions<
-        Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>,
-        TError,
-        TData
-      >
-    >;
-    request?: SecondParameter<typeof orvalMutator>;
-  },
-  queryClient?: QueryClient,
-): UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
-  const queryOptions = getApplicationsControllerListSubmittedForCurrentTeamQueryOptions(options);
-  const query = useQuery(queryOptions, queryClient) as UseQueryResult<TData, TError> & {
-    queryKey: DataTag<QueryKey, TData, TError>;
-  };
-
-  query.queryKey = queryOptions.queryKey;
-
-  return query;
-}

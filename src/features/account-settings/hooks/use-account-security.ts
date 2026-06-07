@@ -309,8 +309,15 @@ export function useAccountSecurity(user: AuthenticatedUserDto) {
     runAutoConfirm,
   ]);
 
+  // While a token is present in the URL the auto-confirm effect will fire (or is
+  // already running). Surface this so the manual confirm button can be disabled to
+  // avoid a manual submit racing with the auto-confirm.
+  const isAutoConfirmPending =
+    confirmTokenFromSearch.length > 0 && (!hasAutoConfirmedToken || emailConfirmMutation.isPending);
+
   return {
     confirmTokenFromSearch,
+    isAutoConfirmPending,
     emailConfirmFeedback,
     emailConfirmForm,
     emailConfirmMutation,

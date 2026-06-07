@@ -147,38 +147,44 @@ export function OrganizationMembersSection({
       badge={t`Owner only`}
     >
       <div className="space-y-6">
-        <div className="rounded-[1.5rem] border border-[#dce5fb] bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] p-5">
+        <div className="border-border bg-muted rounded-2xl border p-5">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div className="space-y-1">
-              <p className="text-sm font-semibold text-[#10213d]">{t`Transfer ownership`}</p>
-              <p className="text-sm leading-6 text-[#60718d]">
+              <p className="text-foreground text-sm font-semibold">{t`Transfer ownership`}</p>
+              <p className="text-muted-foreground text-sm leading-6">
                 {t`Choose another active member to take over as company owner. Your access will switch to company employee.`}
               </p>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-[minmax(240px,1fr)_auto]">
-              <Select value={transferTargetId} onValueChange={setTransferTargetId}>
-                <SelectTrigger>
-                  <SelectValue placeholder={t`Select new owner`} />
-                </SelectTrigger>
-                <SelectContent>
-                  {transferCandidates.map((member) => (
-                    <SelectItem key={member.id} value={member.id}>
-                      {member.firstName} {member.lastName} · {member.email}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+            {transferCandidates.length === 0 ? (
+              <p className="border-border bg-card text-muted-foreground rounded-xl border border-dashed px-4 py-3 text-sm leading-6">
+                {t`No eligible members to transfer ownership to. Invite and activate another member first.`}
+              </p>
+            ) : (
+              <div className="grid gap-3 sm:grid-cols-[minmax(240px,1fr)_auto]">
+                <Select value={transferTargetId} onValueChange={setTransferTargetId}>
+                  <SelectTrigger>
+                    <SelectValue placeholder={t`Select new owner`} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {transferCandidates.map((member) => (
+                      <SelectItem key={member.id} value={member.id}>
+                        {member.firstName} {member.lastName} · {member.email}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
 
-              <Button
-                type="button"
-                disabled={!transferTargetId || transferOwner.isPending}
-                onClick={() => void handleTransferOwner()}
-              >
-                <Crown className="mr-2 h-4 w-4" />
-                {transferOwner.isPending ? t`Transferring…` : t`Transfer owner`}
-              </Button>
-            </div>
+                <Button
+                  type="button"
+                  disabled={!transferTargetId || transferOwner.isPending}
+                  onClick={() => void handleTransferOwner()}
+                >
+                  <Crown className="mr-2 h-4 w-4" />
+                  {transferOwner.isPending ? t`Transferring…` : t`Transfer owner`}
+                </Button>
+              </div>
+            )}
           </div>
         </div>
 
@@ -209,28 +215,28 @@ export function OrganizationMembersSection({
               return (
                 <div
                   key={member.id}
-                  className="grid gap-4 rounded-[1.5rem] border border-[#dfe7fa] bg-white p-5 shadow-[0_8px_20px_rgba(19,27,46,0.04)] lg:grid-cols-[minmax(0,1fr)_220px_auto]"
+                  className="border-border bg-card grid gap-4 rounded-2xl border p-5 shadow-sm lg:grid-cols-[minmax(0,1fr)_220px_auto]"
                 >
                   <div className="space-y-2">
                     <div className="flex flex-wrap items-center gap-2">
-                      <p className="text-base font-semibold text-[#10213d]">
+                      <p className="text-foreground text-base font-semibold">
                         {member.firstName} {member.lastName}
                       </p>
                       {isOwner ? (
-                        <span className="inline-flex items-center gap-1 rounded-full bg-[#fff4dd] px-3 py-1 text-xs font-semibold text-[#9a6500]">
+                        <span className="bg-warning/10 text-warning inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold">
                           <Crown className="h-3.5 w-3.5" />
                           {t`Owner`}
                         </span>
                       ) : null}
                       {isCurrentUser ? (
-                        <span className="inline-flex items-center gap-1 rounded-full bg-[#eef4ff] px-3 py-1 text-xs font-semibold text-[#1f56c2]">
+                        <span className="bg-accent text-primary inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold">
                           <ShieldCheck className="h-3.5 w-3.5" />
                           {t`You`}
                         </span>
                       ) : null}
                     </div>
 
-                    <div className="flex flex-wrap gap-x-5 gap-y-1 text-sm text-[#60718d]">
+                    <div className="text-muted-foreground flex flex-wrap gap-x-5 gap-y-1 text-sm">
                       <span>{member.email}</span>
                       <span>
                         {t`Status`}: {formatEnumLabel(member.status)}
@@ -242,10 +248,10 @@ export function OrganizationMembersSection({
                   </div>
 
                   <div className="space-y-2">
-                    <p className="text-[11px] font-semibold tracking-[0.14em] text-[#6c7c99] uppercase">
+                    <p className="text-muted-foreground text-[11px] font-semibold tracking-[0.14em] uppercase">
                       {t`Role`}
                     </p>
-                    <div className="rounded-xl border border-[#e2e8f7] bg-[#f8fbff] px-3 py-2 text-sm font-medium text-[#10213d]">
+                    <div className="border-border bg-muted text-foreground rounded-xl border px-3 py-2 text-sm font-medium">
                       {formatOrganizationRoleLabel(member.role)}
                     </div>
                   </div>

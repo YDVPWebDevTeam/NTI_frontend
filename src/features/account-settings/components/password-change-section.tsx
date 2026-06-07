@@ -59,7 +59,7 @@ export function PasswordChangeSection({
           <Button
             type="submit"
             disabled={isPending || isRedirectPending}
-            className="h-12 rounded-xl bg-[#1e58d5] px-5 text-[12px] font-semibold tracking-[0.16em] uppercase hover:bg-[#245fdc]"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 h-12 rounded-xl px-5 text-[12px] font-semibold tracking-[0.16em] uppercase"
           >
             {isPending ? (
               <>

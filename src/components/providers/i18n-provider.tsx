@@ -1,15 +1,10 @@
 'use client';
 
 import { I18nProvider } from '@lingui/react';
+import type { Messages } from '@lingui/core';
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
-import {
-  type AppLocale,
-  DEFAULT_LOCALE,
-  isAppLocale,
-  LOCALE_COOKIE_KEY,
-  LOCALE_STORAGE_KEY,
-} from 'lib/i18n/config';
+import { type AppLocale, LOCALE_COOKIE_KEY, LOCALE_STORAGE_KEY } from 'lib/i18n/config';
 import { activateLocale, i18n } from 'lib/i18n/runtime';
 
 type LocaleContextValue = {
@@ -19,32 +14,28 @@ type LocaleContextValue = {
 
 const LocaleContext = createContext<LocaleContextValue | null>(null);
 
-function getStoredLocale(): AppLocale {
-  if (typeof window === 'undefined') {
-    return DEFAULT_LOCALE;
-  }
+type LinguiProviderProps = {
+  children: React.ReactNode;
+  /** Locale resolved on the server from the request cookie. */
+  initialLocale: AppLocale;
+  /** Compiled catalog for {@link initialLocale}, loaded on the server. */
+  initialMessages: Messages;
+};
 
-  const localeCookie = document.cookie
-    .split('; ')
-    .find((cookie) => cookie.startsWith(`${LOCALE_COOKIE_KEY}=`))
-    ?.split('=')[1];
+export function LinguiProvider({ children, initialLocale, initialMessages }: LinguiProviderProps) {
+  // Activate the singleton synchronously on the very first render (server + client
+  // hydration) so content is never gated behind an async catalog load. Without this
+  // the whole app would render `null` until a client effect resolves, producing a
+  // blank first paint and no SSR HTML.
+  useState(() => {
+    i18n.load(initialLocale, initialMessages);
+    i18n.activate(initialLocale);
 
-  if (localeCookie && isAppLocale(localeCookie)) {
-    return localeCookie;
-  }
+    return true;
+  });
 
-  const locale = window.localStorage.getItem(LOCALE_STORAGE_KEY);
-
-  if (locale && isAppLocale(locale)) {
-    return locale;
-  }
-
-  return DEFAULT_LOCALE;
-}
-
-export function LinguiProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocaleState] = useState<AppLocale>(() => getStoredLocale());
-  const [activeLocale, setActiveLocale] = useState<AppLocale | null>(null);
+  const [locale, setLocaleState] = useState<AppLocale>(initialLocale);
+  const [activeLocale, setActiveLocale] = useState<AppLocale>(initialLocale);
 
   const setLocale = useCallback((nextLocale: AppLocale) => {
     if (typeof window !== 'undefined') {
@@ -54,10 +45,14 @@ export function LinguiProvider({ children }: { children: React.ReactNode }) {
     }
 
     setLocaleState(nextLocale);
-    setActiveLocale((currentLocale) => (currentLocale === nextLocale ? currentLocale : null));
   }, []);
 
   useEffect(() => {
+    // Initial locale is already loaded + activated synchronously above.
+    if (locale === activeLocale) {
+      return;
+    }
+
     let cancelled = false;
 
     const setup = async () => {
@@ -76,7 +71,7 @@ export function LinguiProvider({ children }: { children: React.ReactNode }) {
     return () => {
       cancelled = true;
     };
-  }, [locale]);
+  }, [locale, activeLocale]);
 
   const contextValue = useMemo(
     () => ({
@@ -85,10 +80,6 @@ export function LinguiProvider({ children }: { children: React.ReactNode }) {
     }),
     [locale, setLocale],
   );
-
-  if (activeLocale !== locale) {
-    return null;
-  }
 
   return (
     <LocaleContext.Provider value={contextValue}>

@@ -20,16 +20,16 @@ export function StudentPageShell({
 }) {
   return (
     <div className="space-y-6">
-      <section className="overflow-hidden rounded-[2rem] border border-white/80 bg-[linear-gradient(135deg,#ffffff_0%,#f4f7ff_58%,#eef8ff_100%)] shadow-[0_20px_50px_rgba(19,27,46,0.07)]">
+      <section className="border-border bg-card overflow-hidden rounded-2xl border shadow-sm">
         <div className="flex flex-col gap-6 p-6 sm:p-8 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
-            <p className="text-[11px] font-semibold tracking-[0.24em] text-[#1e58d5] uppercase">
+            <p className="text-primary text-[11px] font-semibold tracking-[0.24em] uppercase">
               {eyebrow}
             </p>
-            <h1 className="mt-3 text-3xl font-semibold tracking-tight text-[#101a2e] sm:text-4xl">
+            <h1 className="text-foreground mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
               {title}
             </h1>
-            <p className="mt-3 max-w-2xl text-sm leading-7 text-[#526178] sm:text-[15px]">
+            <p className="text-muted-foreground mt-3 max-w-2xl text-sm leading-7 sm:text-[15px]">
               {description}
             </p>
           </div>
@@ -52,12 +52,14 @@ export function StudentSectionCard({
   children: ReactNode;
 }) {
   return (
-    <Card className="overflow-hidden rounded-[1.75rem] border border-white/85 bg-white/92 shadow-[0_14px_36px_rgba(19,27,46,0.05)]">
-      <CardHeader className="border-b border-[#e7ecfb] bg-[linear-gradient(180deg,rgba(248,250,255,0.96)_0%,rgba(255,255,255,0.94)_100%)] p-6">
-        <CardTitle className="text-xl leading-tight font-semibold text-[#101a2e]">
+    <Card className="border-border bg-card overflow-hidden rounded-2xl border shadow-sm">
+      <CardHeader className="border-border bg-card border-b p-6">
+        <CardTitle className="text-foreground text-xl leading-tight font-semibold">
           {title}
         </CardTitle>
-        {description ? <p className="text-sm leading-6 text-[#5b667b]">{description}</p> : null}
+        {description ? (
+          <p className="text-muted-foreground text-sm leading-6">{description}</p>
+        ) : null}
       </CardHeader>
       <CardContent className="p-6">{children}</CardContent>
     </Card>
@@ -67,8 +69,8 @@ export function StudentSectionCard({
 export function StudentStatusCard({ title, description }: { title: string; description: string }) {
   return (
     <StudentSectionCard title={title}>
-      <div className="flex min-h-28 items-center justify-center rounded-[1.5rem] bg-[linear-gradient(135deg,#f5f8ff_0%,#eef4ff_100%)] px-6 text-center">
-        <p className="max-w-xl text-sm leading-7 text-[#5b667b]">{description}</p>
+      <div className="bg-accent flex min-h-28 items-center justify-center rounded-2xl px-6 text-center">
+        <p className="text-muted-foreground max-w-xl text-sm leading-7">{description}</p>
       </div>
     </StudentSectionCard>
   );
@@ -88,12 +90,12 @@ export function StudentMetricCard({
   hint?: string;
 }) {
   return (
-    <div className="rounded-[1.5rem] border border-[#dce5fb] bg-[linear-gradient(180deg,#ffffff_0%,#f8faff_100%)] p-5 shadow-[0_10px_24px_rgba(19,27,46,0.04)]">
-      <p className="text-[11px] font-semibold tracking-[0.18em] text-[#6980a8] uppercase">
+    <div className="border-border bg-card rounded-2xl border p-5 shadow-sm">
+      <p className="text-muted-foreground text-[11px] font-semibold tracking-[0.18em] uppercase">
         {label}
       </p>
-      <p className="mt-3 text-3xl font-semibold tracking-tight text-[#0f1d37]">{value}</p>
-      {hint ? <p className="mt-2 text-sm leading-6 text-[#5b667b]">{hint}</p> : null}
+      <p className="text-foreground mt-3 text-3xl font-semibold tracking-tight">{value}</p>
+      {hint ? <p className="text-muted-foreground mt-2 text-sm leading-6">{hint}</p> : null}
     </div>
   );
 }
@@ -104,10 +106,10 @@ export function StudentKeyValueList({ items }: { items: Array<{ label: string; v
       {items.map((item) => (
         <div
           key={item.label}
-          className="flex items-start justify-between gap-4 border-b border-[#edf1fb] pb-3 last:border-b-0 last:pb-0"
+          className="border-border flex items-start justify-between gap-4 border-b pb-3 last:border-b-0 last:pb-0"
         >
-          <span className="text-sm font-medium text-[#637187]">{item.label}</span>
-          <span className="max-w-[60%] text-right text-sm font-semibold text-[#122039]">
+          <span className="text-muted-foreground text-sm font-medium">{item.label}</span>
+          <span className="text-foreground max-w-[60%] text-right text-sm font-semibold">
             {item.value}
           </span>
         </div>

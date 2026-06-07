@@ -68,7 +68,7 @@ function ProgramAProjectStatusSection({ application }: { application: Applicatio
       <div className="mb-5 flex flex-wrap items-center gap-3">
         <ProgramAStatusBadge status={application.status} />
 
-        <span className="text-sm font-medium text-neutral-700">
+        <span className="text-muted-foreground text-sm font-medium">
           {formatEnumLikeName(application.status)}
         </span>
       </div>
@@ -109,17 +109,19 @@ function ProgramAMentorshipNotesSection({
   let content: ReactNode;
 
   if (notesQuery.isLoading) {
-    content = <p className="text-sm leading-7 text-[#58667d]">{t`Loading mentorship notes...`}</p>;
+    content = (
+      <p className="text-muted-foreground text-sm leading-7">{t`Loading mentorship notes...`}</p>
+    );
   } else if (isMentorshipNotesUnavailableError(notesQuery.error)) {
     content = (
-      <p className="text-sm leading-7 text-[#58667d]">
+      <p className="text-muted-foreground text-sm leading-7">
         {t`Mentorship notes are not available yet.`}
       </p>
     );
   } else if (notesQuery.isError) {
     content = (
       <div className="space-y-3">
-        <p className="text-sm text-red-700">
+        <p className="text-destructive text-sm">
           {getErrorMessage(notesQuery.error, t`Mentorship notes could not be loaded.`)}
         </p>
 
@@ -135,13 +137,12 @@ function ProgramAMentorshipNotesSection({
           const authorName = formatPersonName(note.author) || note.author.email || t`Mentor`;
 
           return (
-            <article
-              key={note.id}
-              className="rounded-[1.25rem] border border-[#dce5fb] bg-[#f8faff] p-4"
-            >
-              <p className="text-sm leading-7 whitespace-pre-wrap text-[#122039]">{note.content}</p>
+            <article key={note.id} className="border-border bg-muted rounded-2xl border p-4">
+              <p className="text-foreground text-sm leading-7 whitespace-pre-wrap">
+                {note.content}
+              </p>
 
-              <p className="mt-3 text-xs text-[#66758f]">
+              <p className="text-muted-foreground mt-3 text-xs">
                 {authorName} · {formatUnknownDate(note.createdAt)}
               </p>
             </article>
@@ -151,7 +152,7 @@ function ProgramAMentorshipNotesSection({
     );
   } else {
     content = (
-      <p className="text-sm leading-7 text-[#58667d]">
+      <p className="text-muted-foreground text-sm leading-7">
         {t`No mentorship notes have been added yet.`}
       </p>
     );
@@ -179,12 +180,12 @@ function ProgramAApplicationSectionsSummary({
 
   if (sectionsQuery.isLoading) {
     content = (
-      <p className="text-sm leading-7 text-[#58667d]">{t`Loading application sections...`}</p>
+      <p className="text-muted-foreground text-sm leading-7">{t`Loading application sections...`}</p>
     );
   } else if (sectionsQuery.isError) {
     content = (
       <div className="space-y-3">
-        <p className="text-sm text-red-700">
+        <p className="text-destructive text-sm">
           {getErrorMessage(sectionsQuery.error, t`Application sections could not be loaded.`)}
         </p>
 
@@ -202,12 +203,12 @@ function ProgramAApplicationSectionsSummary({
           return (
             <article
               key={`${section.id}-${section.version}`}
-              className="rounded-[1.25rem] border border-[#dce5fb] bg-[#f8faff] p-4"
+              className="border-border bg-muted rounded-2xl border p-4"
             >
               <div className="flex flex-wrap items-center justify-between gap-3">
-                <h3 className="font-semibold text-[#122039]">{formatEnumLikeName(section.key)}</h3>
+                <h3 className="text-foreground font-semibold">{formatEnumLikeName(section.key)}</h3>
 
-                <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#66758f]">
+                <span className="bg-card text-muted-foreground rounded-full px-3 py-1 text-xs font-semibold">
                   {t`Version`} {section.version}
                 </span>
               </div>
@@ -216,18 +217,18 @@ function ProgramAApplicationSectionsSummary({
                 <dl className="mt-4 space-y-3">
                   {entries.map((entry) => (
                     <div key={entry.label}>
-                      <dt className="text-xs font-semibold tracking-[0.14em] text-[#6f7f9a] uppercase">
+                      <dt className="text-muted-foreground text-xs font-semibold tracking-[0.14em] uppercase">
                         {entry.label}
                       </dt>
 
-                      <dd className="mt-1 text-sm leading-7 whitespace-pre-wrap text-[#122039]">
+                      <dd className="text-foreground mt-1 text-sm leading-7 whitespace-pre-wrap">
                         {entry.value}
                       </dd>
                     </div>
                   ))}
                 </dl>
               ) : (
-                <p className="mt-3 text-sm leading-7 text-[#58667d]">
+                <p className="text-muted-foreground mt-3 text-sm leading-7">
                   {t`No section content provided.`}
                 </p>
               )}
@@ -238,7 +239,7 @@ function ProgramAApplicationSectionsSummary({
     );
   } else {
     content = (
-      <p className="text-sm leading-7 text-[#58667d]">{t`No application sections found.`}</p>
+      <p className="text-muted-foreground text-sm leading-7">{t`No application sections found.`}</p>
     );
   }
 

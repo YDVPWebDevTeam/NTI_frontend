@@ -17,16 +17,16 @@ type PageSectionHeaderProps = {
 
 const THEME_STYLES = {
   default: {
-    eyebrow: 'text-neutral-500',
-    title: 'text-[#0c1a4f]',
-    description: 'text-neutral-600',
-    border: 'border-black/[0.07]',
+    eyebrow: 'text-muted-foreground',
+    title: 'text-foreground',
+    description: 'text-muted-foreground',
+    border: 'border-border',
   },
   admin: {
-    eyebrow: 'text-slate-500',
-    title: 'text-slate-950',
-    description: 'text-slate-600',
-    border: 'border-slate-200',
+    eyebrow: 'text-muted-foreground',
+    title: 'text-foreground',
+    description: 'text-muted-foreground',
+    border: 'border-border',
   },
   inverse: {
     eyebrow: 'text-white/60',

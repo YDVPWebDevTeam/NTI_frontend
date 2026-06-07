@@ -1,161 +1,188 @@
-import { t } from '@lingui/core/macro';
+import { msg } from '@lingui/core/macro';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 import { ContactSection } from 'components/marketing/contact-section';
 import { ROUTES } from 'lib/constants';
+import { getServerI18n } from 'lib/i18n/server-i18n';
+import { getRequestLocale } from 'lib/i18n/server-locale';
 
 import { NtiBrand } from './nti-brand';
 
-export function LandingFooter() {
+/** True when a route is an absolute, off-site URL (http/https). */
+function isExternalHref(href: string): boolean {
+  return /^https?:\/\//.test(href);
+}
+
+export async function LandingFooter() {
+  const i18n = await getServerI18n(await getRequestLocale());
+
+  const externalLinkProps = {
+    target: '_blank',
+    rel: 'noopener noreferrer',
+  } as const;
+
   return (
     <>
-      <ContactSection />
+      {/*
+        ContactSection reads `useSearchParams()`, which opts the subtree into
+        client-side rendering and must sit under a Suspense boundary so it does
+        not de-opt the whole page / break the static build.
+      */}
+      <Suspense fallback={null}>
+        <ContactSection />
+      </Suspense>
 
-      <footer className="w-full border-t border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-950">
+      <footer className="border-border bg-background w-full border-t">
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-8 py-12 text-sm antialiased md:grid-cols-4">
           <div className="space-y-4">
             <NtiBrand href={ROUTES.ROOT} variant="landing" size="sm" />
 
-            <p className="text-slate-500 dark:text-slate-400">
-              {t`Driving innovation and economic growth through technology and academic collaboration.`}
+            <p className="text-muted-foreground">
+              {i18n._(
+                msg`Driving innovation and economic growth through technology and academic collaboration.`,
+              )}
             </p>
           </div>
 
           <div>
-            <h6 className="mb-4 text-xs font-bold tracking-widest text-slate-400 uppercase">
-              {t`Explore`}
+            <h6 className="text-muted-foreground mb-4 text-xs font-bold tracking-widest uppercase">
+              {i18n._(msg`Explore`)}
             </h6>
 
             <ul className="space-y-2">
               <li>
                 <Link
-                  className="text-slate-500 transition-colors hover:text-blue-700 dark:text-slate-400 dark:hover:text-cyan-300"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                   href={ROUTES.ABOUT}
                 >
-                  {t`About`}
+                  {i18n._(msg`About`)}
                 </Link>
               </li>
 
               <li>
                 <Link
-                  className="text-slate-500 transition-colors hover:text-blue-700 dark:text-slate-400 dark:hover:text-cyan-300"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                   href={ROUTES.PROGRAMS}
                 >
-                  {t`Programs`}
+                  {i18n._(msg`Programs`)}
                 </Link>
               </li>
 
               <li>
                 <Link
-                  className="text-slate-500 transition-colors hover:text-blue-700 dark:text-slate-400 dark:hover:text-cyan-300"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                   href={ROUTES.CALLS}
                 >
-                  {t`Calls & Deadlines`}
+                  {i18n._(msg`Calls & Deadlines`)}
                 </Link>
               </li>
 
               <li>
                 <Link
-                  className="text-slate-500 transition-colors hover:text-blue-700 dark:text-slate-400 dark:hover:text-cyan-300"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                   href={ROUTES.MENTORS}
                 >
-                  {t`Mentors`}
+                  {i18n._(msg`Mentors`)}
                 </Link>
               </li>
 
               <li>
                 <Link
-                  className="text-slate-500 transition-colors hover:text-blue-700 dark:text-slate-400 dark:hover:text-cyan-300"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                   href={ROUTES.PARTNERS}
                 >
-                  {t`Partners`}
+                  {i18n._(msg`Partners`)}
                 </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h6 className="mb-4 text-xs font-bold tracking-widest text-slate-400 uppercase">
-              {t`Resources`}
+            <h6 className="text-muted-foreground mb-4 text-xs font-bold tracking-widest uppercase">
+              {i18n._(msg`Resources`)}
             </h6>
 
             <ul className="space-y-2">
               <li>
                 <Link
-                  className="text-slate-500 transition-colors hover:text-blue-700 dark:text-slate-400 dark:hover:text-cyan-300"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                   href={ROUTES.NEWS}
                 >
-                  {t`News`}
+                  {i18n._(msg`News`)}
                 </Link>
               </li>
 
               <li>
                 <Link
-                  className="text-slate-500 transition-colors hover:text-blue-700 dark:text-slate-400 dark:hover:text-cyan-300"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                   href={ROUTES.PRIVACY_POLICY}
                 >
-                  {t`Privacy Policy`}
+                  {i18n._(msg`Privacy Policy`)}
                 </Link>
               </li>
 
               <li>
                 <Link
-                  className="text-slate-500 transition-colors hover:text-blue-700 dark:text-slate-400 dark:hover:text-cyan-300"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                   href={ROUTES.TERMS_OF_SERVICE}
                 >
-                  {t`Terms of Service`}
+                  {i18n._(msg`Terms of Service`)}
                 </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h6 className="mb-4 text-xs font-bold tracking-widest text-slate-400 uppercase">
-              {t`Connect`}
+            <h6 className="text-muted-foreground mb-4 text-xs font-bold tracking-widest uppercase">
+              {i18n._(msg`Connect`)}
             </h6>
 
             <ul className="space-y-2">
               <li>
                 <Link
-                  className="text-slate-500 transition-colors hover:text-blue-700 dark:text-slate-400 dark:hover:text-cyan-300"
+                  className="text-muted-foreground hover:text-primary transition-colors"
                   href={ROUTES.HOME.CONTACT}
                 >
-                  {t`Contact Us`}
+                  {i18n._(msg`Contact Us`)}
                 </Link>
               </li>
 
               <li>
-                <Link
-                  className="text-slate-500 transition-colors hover:text-blue-700 dark:text-slate-400 dark:hover:text-cyan-300"
+                <a
+                  className="text-muted-foreground hover:text-primary transition-colors"
                   href={ROUTES.SOCIAL.LINKEDIN}
+                  {...externalLinkProps}
                 >
-                  {t`LinkedIn`}
-                </Link>
+                  {i18n._(msg`LinkedIn`)}
+                </a>
               </li>
 
               <li>
-                <Link
-                  className="text-slate-500 transition-colors hover:text-blue-700 dark:text-slate-400 dark:hover:text-cyan-300"
+                <a
+                  className="text-muted-foreground hover:text-primary transition-colors"
                   href={ROUTES.SOCIAL.TWITTER}
+                  {...externalLinkProps}
                 >
-                  {t`Twitter`}
-                </Link>
+                  {i18n._(msg`Twitter`)}
+                </a>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-slate-200 dark:border-slate-800">
+        <div className="border-border border-t">
           <div className="mx-auto flex max-w-7xl flex-col items-center gap-2 px-8 py-6 text-center">
             <Link
-              className="text-sm font-medium text-slate-700 transition-colors hover:text-blue-700 dark:text-slate-300 dark:hover:text-cyan-300"
+              className="text-foreground hover:text-primary text-sm font-medium transition-colors"
               href={ROUTES.ADMIN.LOGIN}
+              {...(isExternalHref(ROUTES.ADMIN.LOGIN) ? externalLinkProps : {})}
             >
-              {t`Admin Login`}
+              {i18n._(msg`Admin Login`)}
             </Link>
 
-            <span className="text-xs text-slate-500 dark:text-slate-400">
-              {t`© 2026 NTI. All rights reserved.`}
+            <span className="text-muted-foreground text-xs">
+              {i18n._(msg`© 2026 NTI. All rights reserved.`)}
             </span>
           </div>
         </div>

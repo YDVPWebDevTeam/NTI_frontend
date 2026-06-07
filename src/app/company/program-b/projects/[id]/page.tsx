@@ -14,6 +14,7 @@ import {
   programBProjectsControllerRequestDocumentDownload,
   ProgramBMilestoneDtoStatus,
   ProgramBProjectDetailDtoStatus,
+  UserRole,
   useProgramBProjectsControllerCompleteDocumentUpload,
   useProgramBProjectsControllerCreateDocumentUpload,
   useProgramBProjectsControllerCreateMilestone,
@@ -51,6 +52,7 @@ import {
   Textarea,
 } from 'components/shadcn';
 import { ROUTES } from 'lib/constants';
+import { useAuthenticatedUser } from 'lib/student-dashboard/use-authenticated-user';
 import {
   formatPersonName,
   formatUnknownDate,
@@ -58,9 +60,11 @@ import {
   normalizeUnknownText,
 } from 'lib/student-dashboard/normalizers';
 import { formatEnumLabel } from 'lib/utils';
+import { clampNumber, isWithinRange, parseNumericInput } from 'lib/validation/numeric';
 
 const CONFLICT_STATUS = 409;
 const ISO_DATE_LENGTH = 10;
+const MAX_REWARD_PER_MEMBER = 1_000_000;
 
 type MilestoneFormState = {
   milestoneId: string | null;
@@ -109,6 +113,7 @@ export default function CompanyProgramBProjectDetailPage({
 }) {
   const { id } = use(params);
   const queryClient = useQueryClient();
+  const { me } = useAuthenticatedUser();
   const projectQuery = useProgramBProjectsControllerGetProject(id);
   const milestonesQuery = useProgramBProjectsControllerListMilestones(id);
   const reviewsQuery = useProgramBProjectsControllerListPoReviews(id);
@@ -127,6 +132,9 @@ export default function CompanyProgramBProjectDetailPage({
   const notes = notesQuery.data ?? [];
   const documents = documentsQuery.data ?? [];
   const isProjectReadOnly = project?.status === ProgramBProjectDetailDtoStatus.CLOSED;
+  const isCompanyOwner = me?.role === UserRole.COMPANY_OWNER;
+  const isProductOwner = Boolean(me?.id) && me?.id === project?.productOwnerUserId;
+  const canManageProductOwnerActions = isProductOwner || isCompanyOwner;
   const hasCompanyFinalAcceptance = Boolean(project?.acceptedByCompanyAt);
   const hasNtiFinalAcceptance = Boolean(project?.acceptedByNtiAt);
   const hasOverdueMilestone = milestones.some((milestone) => {
@@ -166,19 +174,21 @@ export default function CompanyProgramBProjectDetailPage({
   };
 
   const handleUpdateReward = async () => {
-    const parsed = parseFloat(rewardInput.trim());
+    const parsed = parseNumericInput(rewardInput);
 
-    if (!rewardInput.trim() || !Number.isFinite(parsed) || parsed < 0) {
-      toast.error(t`Enter a valid non-negative number for the reward amount.`);
+    if (parsed === null || !isWithinRange(parsed, 0, MAX_REWARD_PER_MEMBER)) {
+      toast.error(t`Enter a reward between 0 and ${MAX_REWARD_PER_MEMBER.toLocaleString()} EUR.`);
 
       return;
     }
+
+    const rewardValue = clampNumber(parsed, 0, MAX_REWARD_PER_MEMBER);
 
     try {
       await updateReward.mutateAsync({
         id,
         data: {
-          rewardPerMember: parsed as unknown as Parameters<
+          rewardPerMember: rewardValue as unknown as Parameters<
             typeof updateReward.mutateAsync
           >[0]['data']['rewardPerMember'],
         },
@@ -308,23 +318,23 @@ export default function CompanyProgramBProjectDetailPage({
 
   if (milestonesQuery.isError) {
     milestonesContent = (
-      <p className="text-sm text-[#60718d]">{t`Milestones are unavailable right now.`}</p>
+      <p className="text-muted-foreground text-sm">{t`Milestones are unavailable right now.`}</p>
     );
   } else if (milestones.length === 0) {
-    milestonesContent = <p className="text-sm text-[#60718d]">{t`No milestones yet.`}</p>;
+    milestonesContent = <p className="text-muted-foreground text-sm">{t`No milestones yet.`}</p>;
   } else {
     milestonesContent = milestones.map((milestone) => (
-      <div key={milestone.id} className="rounded-2xl border border-[#dfe7fa] bg-[#f8fbff] p-4">
+      <div key={milestone.id} className="border-border bg-muted rounded-2xl border p-4">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <p className="font-semibold text-[#10213d]">{milestone.title}</p>
-            <p className="mt-1 text-sm text-[#60718d]">
+            <p className="text-foreground font-semibold">{milestone.title}</p>
+            <p className="text-muted-foreground mt-1 text-sm">
               {normalizeUnknownText(milestone.description) ?? t`No milestone description.`}
             </p>
           </div>
           <CompanyStatusBadge status={milestone.status} />
         </div>
-        <p className="mt-3 text-sm text-[#60718d]">
+        <p className="text-muted-foreground mt-3 text-sm">
           {milestone.dueAt ? t`Due ${formatUnknownDate(milestone.dueAt)}` : t`No due date`}
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
@@ -384,22 +394,24 @@ export default function CompanyProgramBProjectDetailPage({
 
   if (reviewsQuery.isError) {
     reviewsContent = (
-      <p className="text-sm text-[#60718d]">{t`Reviews are unavailable right now.`}</p>
+      <p className="text-muted-foreground text-sm">{t`Reviews are unavailable right now.`}</p>
     );
   } else if (reviews.length === 0) {
-    reviewsContent = <p className="text-sm text-[#60718d]">{t`No reviews yet.`}</p>;
+    reviewsContent = <p className="text-muted-foreground text-sm">{t`No reviews yet.`}</p>;
   } else {
     reviewsContent = reviews.map((review) => (
-      <div key={review.id} className="rounded-2xl border border-[#dfe7fa] bg-[#f8fbff] p-4">
+      <div key={review.id} className="border-border bg-muted rounded-2xl border p-4">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <p className="font-semibold text-[#10213d]">{formatEnumLabel(review.decision)}</p>
-          <span className="text-xs text-[#60718d]">{formatUnknownDate(review.createdAt)}</span>
+          <p className="text-foreground font-semibold">{formatEnumLabel(review.decision)}</p>
+          <span className="text-muted-foreground text-xs">
+            {formatUnknownDate(review.createdAt)}
+          </span>
         </div>
-        <p className="mt-1 text-sm text-[#60718d]">
+        <p className="text-muted-foreground mt-1 text-sm">
           {normalizeUnknownText(review.comment) ?? t`No comment`}
         </p>
         {formatPersonName(review.author) ? (
-          <p className="mt-2 text-xs text-[#94a3c4]">{formatPersonName(review.author)}</p>
+          <p className="text-muted-foreground mt-2 text-xs">{formatPersonName(review.author)}</p>
         ) : null}
       </div>
     ));
@@ -408,14 +420,16 @@ export default function CompanyProgramBProjectDetailPage({
   let notesContent;
 
   if (notesQuery.isError) {
-    notesContent = <p className="text-sm text-[#60718d]">{t`Notes are unavailable right now.`}</p>;
+    notesContent = (
+      <p className="text-muted-foreground text-sm">{t`Notes are unavailable right now.`}</p>
+    );
   } else if (notes.length === 0) {
-    notesContent = <p className="text-sm text-[#60718d]">{t`No mentoring notes yet.`}</p>;
+    notesContent = <p className="text-muted-foreground text-sm">{t`No mentoring notes yet.`}</p>;
   } else {
     notesContent = notes.map((note) => (
-      <div key={note.id} className="rounded-2xl border border-[#dfe7fa] bg-[#f8fbff] p-4">
-        <p className="text-sm leading-7 text-[#60718d]">{note.note}</p>
-        <div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-xs text-[#94a3c4]">
+      <div key={note.id} className="border-border bg-muted rounded-2xl border p-4">
+        <p className="text-muted-foreground text-sm leading-7">{note.note}</p>
+        <div className="text-muted-foreground mt-2 flex flex-wrap items-center justify-between gap-2 text-xs">
           <span>{formatPersonName(note.author) ?? t`Mentor`}</span>
           <span>{formatUnknownDate(note.createdAt)}</span>
         </div>
@@ -425,21 +439,21 @@ export default function CompanyProgramBProjectDetailPage({
 
   return (
     <div className="space-y-6">
-      <section className="rounded-[1.75rem] border border-[#dfe7fa] bg-white/90 p-6 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
+      <section className="border-border bg-card rounded-2xl border p-6 shadow-sm">
         <div className="flex items-start justify-between gap-4">
           <div>
             <div className="flex flex-wrap items-center gap-3">
-              <h1 className="text-2xl font-semibold text-[#10213d]">
+              <h1 className="text-foreground text-2xl font-semibold">
                 {normalizeUnknownText(project.backlogItem.title) ?? t`Program B project`}
               </h1>
               <CompanyStatusBadge status={project.status} />
               {isProjectReadOnly ? (
-                <span className="rounded-full bg-[#10213d] px-3 py-1 text-xs font-semibold text-white">
+                <span className="bg-foreground text-background rounded-full px-3 py-1 text-xs font-semibold">
                   {t`Closed Program B projects are read-only`}
                 </span>
               ) : null}
             </div>
-            <p className="mt-3 text-sm text-[#60718d]">
+            <p className="text-muted-foreground mt-3 text-sm">
               {isProjectReadOnly
                 ? t`This project is closed and now read-only.`
                 : formatEnumLabel(project.status)}
@@ -447,7 +461,7 @@ export default function CompanyProgramBProjectDetailPage({
           </div>
           <Link
             href={ROUTES.COMPANY.PROGRAM_B_PROJECTS}
-            className="text-sm font-medium text-[#1e58d5]"
+            className="text-primary text-sm font-medium"
           >
             {t`Back to projects`}
           </Link>
@@ -455,16 +469,16 @@ export default function CompanyProgramBProjectDetailPage({
       </section>
 
       {hasCompanyFinalAcceptance && !hasOverdueMilestone ? null : (
-        <article className="rounded-[1.5rem] border border-amber-200 bg-amber-50 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.04)]">
-          <h2 className="text-lg font-semibold text-amber-950">{t`Attention required`}</h2>
-          <div className="mt-3 flex flex-wrap gap-3 text-sm text-amber-900">
+        <article className="border-warning/30 bg-warning/10 rounded-2xl border p-5 shadow-sm">
+          <h2 className="text-warning text-lg font-semibold">{t`Attention required`}</h2>
+          <div className="text-warning mt-3 flex flex-wrap gap-3 text-sm">
             {hasCompanyFinalAcceptance ? null : (
-              <span className="rounded-full bg-white px-3 py-1 ring-1 ring-amber-200">
+              <span className="bg-card ring-warning/30 rounded-full px-3 py-1 ring-1">
                 {t`Company final acceptance is still pending.`}
               </span>
             )}
             {hasOverdueMilestone ? (
-              <span className="rounded-full bg-white px-3 py-1 ring-1 ring-amber-200">
+              <span className="bg-card ring-warning/30 rounded-full px-3 py-1 ring-1">
                 {t`At least one milestone is overdue and still needs status movement.`}
               </span>
             ) : null}
@@ -495,30 +509,30 @@ export default function CompanyProgramBProjectDetailPage({
         </TabsList>
 
         <TabsContent value="overview">
-          <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
-            <h2 className="text-lg font-semibold text-[#10213d]">{t`Overview`}</h2>
-            <div className="mt-4 grid gap-2 text-sm text-[#60718d] md:grid-cols-2">
+          <article className="border-border bg-card rounded-2xl border p-5 shadow-sm">
+            <h2 className="text-foreground text-lg font-semibold">{t`Overview`}</h2>
+            <div className="text-muted-foreground mt-4 grid gap-2 text-sm md:grid-cols-2">
               <p>
                 {t`Team:`}{' '}
-                <span className="font-medium text-[#10213d]">
+                <span className="text-foreground font-medium">
                   {project.team.name ?? t`Unknown team`}
                 </span>
               </p>
               <p>
                 {t`Product owner:`}{' '}
-                <span className="font-medium text-[#10213d]">
+                <span className="text-foreground font-medium">
                   {formatPersonName(project.productOwner)}
                 </span>
               </p>
               <p>
                 {t`Mentor:`}{' '}
-                <span className="font-medium text-[#10213d]">
+                <span className="text-foreground font-medium">
                   {formatPersonName(project.mentorAssignment.mentor) ?? t`Not assigned`}
                 </span>
               </p>
               <p>
                 {t`Reward per member:`}{' '}
-                <span className="font-medium text-[#10213d]">
+                <span className="text-foreground font-medium">
                   {typeof (project.rewardPerMember as unknown) === 'number'
                     ? `€${(project.rewardPerMember as unknown as number).toLocaleString()}`
                     : t`Not set`}
@@ -526,7 +540,7 @@ export default function CompanyProgramBProjectDetailPage({
               </p>
               <p>
                 {t`Company acceptance:`}{' '}
-                <span className="font-medium text-[#10213d]">
+                <span className="text-foreground font-medium">
                   {hasCompanyFinalAcceptance
                     ? formatUnknownDate(project.acceptedByCompanyAt)
                     : t`Pending`}
@@ -534,46 +548,54 @@ export default function CompanyProgramBProjectDetailPage({
               </p>
               <p>
                 {t`NTI acceptance:`}{' '}
-                <span className="font-medium text-[#10213d]">
+                <span className="text-foreground font-medium">
                   {hasNtiFinalAcceptance ? formatUnknownDate(project.acceptedByNtiAt) : t`Pending`}
                 </span>
               </p>
             </div>
 
-            {isProjectReadOnly ? null : (
-              <div className="mt-5 space-y-2 border-t border-[#dfe7fa] pt-4">
-                <p className="text-sm font-semibold text-[#10213d]">{t`Update reward per member`}</p>
-                <div className="flex flex-wrap items-center gap-2">
-                  <Input
-                    type="number"
-                    min={0}
-                    step="0.01"
-                    placeholder="e.g. 500"
-                    className="w-40"
-                    value={rewardInput}
-                    onChange={(event) => setRewardInput(event.target.value)}
-                  />
-                  <Button
-                    type="button"
-                    size="sm"
-                    disabled={!rewardInput.trim() || updateReward.isPending}
-                    onClick={() => void handleUpdateReward()}
-                  >
-                    {updateReward.isPending ? (
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    ) : null}
-                    {t`Set reward (EUR)`}
-                  </Button>
+            {!isProjectReadOnly &&
+              (canManageProductOwnerActions ? (
+                <div className="border-border mt-5 space-y-2 border-t pt-4">
+                  <p className="text-foreground text-sm font-semibold">{t`Update reward per member`}</p>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <Input
+                      type="number"
+                      min={0}
+                      max={MAX_REWARD_PER_MEMBER}
+                      step="0.01"
+                      placeholder="e.g. 500"
+                      className="w-40"
+                      value={rewardInput}
+                      onChange={(event) => setRewardInput(event.target.value)}
+                    />
+                    <Button
+                      type="button"
+                      size="sm"
+                      disabled={!rewardInput.trim() || updateReward.isPending}
+                      onClick={() => void handleUpdateReward()}
+                    >
+                      {updateReward.isPending ? (
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      ) : null}
+                      {t`Set reward (EUR)`}
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            )}
+              ) : (
+                <div className="border-border mt-5 border-t pt-4">
+                  <p className="text-muted-foreground text-sm">
+                    {t`Only the product owner or a company owner can change the reward per member.`}
+                  </p>
+                </div>
+              ))}
           </article>
         </TabsContent>
 
         <TabsContent value="milestones">
-          <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
+          <article className="border-border bg-card rounded-2xl border p-5 shadow-sm">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <h2 className="text-lg font-semibold text-[#10213d]">{t`Milestones`}</h2>
+              <h2 className="text-foreground text-lg font-semibold">{t`Milestones`}</h2>
               <Button
                 type="button"
                 size="sm"
@@ -589,17 +611,22 @@ export default function CompanyProgramBProjectDetailPage({
 
         <TabsContent value="reviews">
           <div className="grid gap-6 xl:grid-cols-2">
-            <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
-              <h2 className="text-lg font-semibold text-[#10213d]">{t`Product owner reviews`}</h2>
+            <article className="border-border bg-card rounded-2xl border p-5 shadow-sm">
+              <h2 className="text-foreground text-lg font-semibold">{t`Product owner reviews`}</h2>
               <div className="mt-4 space-y-3">{reviewsContent}</div>
 
-              {isProjectReadOnly ? null : (
-                <div className="mt-5 space-y-3 rounded-2xl border border-dashed border-[#c4d4f5] bg-white/70 p-4">
+              {!isProjectReadOnly && !canManageProductOwnerActions && (
+                <p className="text-muted-foreground mt-5 text-sm">
+                  {t`Only the product owner or a company owner can submit reviews for this project.`}
+                </p>
+              )}
+              {!isProjectReadOnly && canManageProductOwnerActions && (
+                <div className="border-border bg-card/70 mt-5 space-y-3 rounded-2xl border border-dashed p-4">
                   <div className="space-y-2">
                     <Label htmlFor="review-decision">{t`Decision`}</Label>
                     <select
                       id="review-decision"
-                      className="w-full rounded-md border border-black/10 bg-white px-3 py-2 text-sm"
+                      className="border-border bg-card w-full rounded-md border px-3 py-2 text-sm"
                       value={reviewDecision}
                       onChange={(event) =>
                         setReviewDecision(event.target.value as CreateProgramBPoReviewDtoDecision)
@@ -640,16 +667,16 @@ export default function CompanyProgramBProjectDetailPage({
               )}
             </article>
 
-            <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
-              <h2 className="text-lg font-semibold text-[#10213d]">{t`Mentoring notes`}</h2>
+            <article className="border-border bg-card rounded-2xl border p-5 shadow-sm">
+              <h2 className="text-foreground text-lg font-semibold">{t`Mentoring notes`}</h2>
               <div className="mt-4 space-y-3">{notesContent}</div>
             </article>
           </div>
         </TabsContent>
 
         <TabsContent value="documents">
-          <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
-            <h2 className="text-lg font-semibold text-[#10213d]">{t`Documents`}</h2>
+          <article className="border-border bg-card rounded-2xl border p-5 shadow-sm">
+            <h2 className="text-foreground text-lg font-semibold">{t`Documents`}</h2>
             <div className="mt-4">
               <ProgramBDocumentManager
                 documents={documents}

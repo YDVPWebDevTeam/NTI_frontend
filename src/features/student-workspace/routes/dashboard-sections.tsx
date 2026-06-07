@@ -81,9 +81,9 @@ export function NextStepsSection() {
       description={t`The fastest actions to keep the workflow moving.`}
     >
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="rounded-[1.5rem] border border-[#dce5fb] bg-[#f8faff] p-5">
-          <p className="text-sm font-semibold text-[#122039]">{t`Complete foundation setup`}</p>
-          <p className="mt-2 text-sm leading-7 text-[#58667d]">
+        <div className="border-border bg-muted rounded-2xl border p-5">
+          <p className="text-foreground text-sm font-semibold">{t`Complete foundation setup`}</p>
+          <p className="text-muted-foreground mt-2 text-sm leading-7">
             {t`Finish profile details and keep team membership current so application actions stay available.`}
           </p>
           <div className="mt-4">
@@ -92,9 +92,9 @@ export function NextStepsSection() {
             </Button>
           </div>
         </div>
-        <div className="rounded-[1.5rem] border border-[#dce5fb] bg-[#f8faff] p-5">
-          <p className="text-sm font-semibold text-[#122039]">{t`Move into program work`}</p>
-          <p className="mt-2 text-sm leading-7 text-[#58667d]">
+        <div className="border-border bg-muted rounded-2xl border p-5">
+          <p className="text-foreground text-sm font-semibold">{t`Move into program work`}</p>
+          <p className="text-muted-foreground mt-2 text-sm leading-7">
             {t`Program A is for draft and submission flow. Program B is for opportunity pairing and project delivery.`}
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
@@ -140,7 +140,7 @@ export function ProgramASection({
       <div className="space-y-4">
         <div>
           <div className="mb-3 flex items-center justify-between gap-3">
-            <h3 className="text-sm font-semibold tracking-[0.16em] text-[#6f7f9a] uppercase">
+            <h3 className="text-muted-foreground text-sm font-semibold tracking-[0.16em] uppercase">
               {t`Active projects`}
             </h3>
 
@@ -151,15 +151,12 @@ export function ProgramASection({
 
           <div className="space-y-3">
             {projectApplications.map((application) => (
-              <div
-                key={application.id}
-                className="rounded-[1.25rem] border border-[#dce5fb] bg-[#f8faff] p-4"
-              >
+              <div key={application.id} className="border-border bg-muted rounded-2xl border p-4">
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <p className="font-semibold text-[#122039]">{application.call.title}</p>
+                    <p className="text-foreground font-semibold">{application.call.title}</p>
 
-                    <p className="mt-1 text-sm text-[#58667d]">
+                    <p className="text-muted-foreground mt-1 text-sm">
                       {t`Updated`} {formatUnknownDate(application.updatedAt)}
                     </p>
                   </div>
@@ -178,7 +175,7 @@ export function ProgramASection({
             ))}
 
             {projectApplications.length ? null : (
-              <p className="text-sm leading-7 text-[#58667d]">
+              <p className="text-muted-foreground text-sm leading-7">
                 {t`Approved Program A projects will appear here once onboarding starts.`}
               </p>
             )}
@@ -188,18 +185,15 @@ export function ProgramASection({
           const draftEntry = team ? (draftRegistryMap.get(call.id) ?? null) : null;
 
           return (
-            <div
-              key={call.id}
-              className="rounded-[1.5rem] border border-[#dce5fb] bg-[linear-gradient(180deg,#ffffff_0%,#f8faff_100%)] p-5"
-            >
+            <div key={call.id} className="border-border bg-card rounded-2xl border p-5">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div className="min-w-0">
-                  <p className="font-semibold text-[#122039]">{call.title}</p>
-                  <p className="mt-1 text-sm text-[#5e6d86]">
+                  <p className="text-foreground font-semibold">{call.title}</p>
+                  <p className="text-muted-foreground mt-1 text-sm">
                     {t`Opens`} {call.opensAt ? formatUnknownDate(call.opensAt) : t`immediately`}
                   </p>
                 </div>
-                <span className="rounded-full bg-[#fff3e1] px-3 py-1 text-xs font-semibold text-[#a26200]">
+                <span className="bg-warning/10 text-warning rounded-full px-3 py-1 text-xs font-semibold">
                   {call.closesAt
                     ? `${t`Closes`} ${formatUnknownDate(call.closesAt)}`
                     : t`No closing date`}
@@ -231,39 +225,44 @@ export function ProgramASection({
           );
         })}
         {activeCalls.length ? null : (
-          <div className="rounded-[1.5rem] bg-[#f8faff] p-5">
-            <p className="text-sm leading-7 text-[#58667d]">
+          <div className="bg-muted rounded-2xl p-5">
+            <p className="text-muted-foreground text-sm leading-7">
               {t`No active Program A calls are available right now.`}
             </p>
           </div>
         )}
         {isLead ? (
-          <div className="rounded-[1.5rem] border border-dashed border-[#d6e1fa] bg-white p-5">
-            <p className="text-sm font-semibold text-[#122039]">{t`Recovered drafts`}</p>
+          <div className="border-border bg-card rounded-2xl border border-dashed p-5">
+            <p className="text-foreground text-sm font-semibold">{t`Recovered drafts`}</p>
             <div className="mt-3 space-y-3">
               {draftEntries.length ? (
-                draftEntries.map((entry) => (
-                  <div
-                    key={entry.applicationId}
-                    className="flex items-center justify-between gap-3 rounded-[1rem] bg-[#f6f8ff] p-3"
-                  >
-                    <div className="min-w-0">
-                      <p className="truncate text-sm font-semibold text-[#122039]">
-                        {t`Call`} {entry.callId}
-                      </p>
-                      <p className="text-xs text-[#66758f]">
-                        {t`Updated`} {formatUnknownDate(entry.updatedAt)}
-                      </p>
+                draftEntries.map((entry) => {
+                  const callTitle =
+                    activeCalls.find((call) => call.id === entry.callId)?.title ?? null;
+
+                  return (
+                    <div
+                      key={entry.applicationId}
+                      className="bg-muted flex items-center justify-between gap-3 rounded-xl p-3"
+                    >
+                      <div className="min-w-0">
+                        <p className="text-foreground truncate text-sm font-semibold">
+                          {callTitle ?? t`Program A draft`}
+                        </p>
+                        <p className="text-muted-foreground text-xs">
+                          {t`Updated`} {formatUnknownDate(entry.updatedAt)}
+                        </p>
+                      </div>
+                      <Button asChild size="sm" variant="outline">
+                        <Link href={ROUTES.STUDENT.studentApplication(entry.applicationId)}>
+                          {t`Open`}
+                        </Link>
+                      </Button>
                     </div>
-                    <Button asChild size="sm" variant="outline">
-                      <Link href={ROUTES.STUDENT.studentApplication(entry.applicationId)}>
-                        {t`Open`}
-                      </Link>
-                    </Button>
-                  </div>
-                ))
+                  );
+                })
               ) : (
-                <p className="text-sm leading-7 text-[#58667d]">{t`No local Program A drafts yet.`}</p>
+                <p className="text-muted-foreground text-sm leading-7">{t`No local Program A drafts yet.`}</p>
               )}
             </div>
           </div>
@@ -288,7 +287,7 @@ export function ProgramBSection({
       <div className="space-y-5">
         <div>
           <div className="mb-3 flex items-center justify-between gap-3">
-            <h3 className="text-sm font-semibold tracking-[0.16em] text-[#6f7f9a] uppercase">
+            <h3 className="text-muted-foreground text-sm font-semibold tracking-[0.16em] uppercase">
               {t`Opportunities`}
             </h3>
             <Button asChild size="sm" variant="outline">
@@ -297,20 +296,17 @@ export function ProgramBSection({
           </div>
           <div className="space-y-3">
             {backlogPreview.map((item) => (
-              <div
-                key={item.id}
-                className="rounded-[1.25rem] border border-[#dce5fb] bg-[#f8faff] p-4"
-              >
+              <div key={item.id} className="border-border bg-muted rounded-2xl border p-4">
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <p className="font-semibold text-[#122039]">
+                    <p className="text-foreground font-semibold">
                       {normalizeUnknownText(item.title) ?? t`Untitled backlog item`}
                     </p>
-                    <p className="mt-1 text-sm leading-7 text-[#58667d]">
+                    <p className="text-muted-foreground mt-1 text-sm leading-7">
                       {normalizeUnknownText(item.description) ?? t`No description provided.`}
                     </p>
                   </div>
-                  <span className="rounded-full bg-[#edf3ff] px-3 py-1 text-xs font-semibold text-[#0f4fb8]">
+                  <span className="bg-accent text-primary rounded-full px-3 py-1 text-xs font-semibold">
                     {item.status}
                   </span>
                 </div>
@@ -324,32 +320,29 @@ export function ProgramBSection({
               </div>
             ))}
             {backlogPreview.length ? null : (
-              <p className="text-sm leading-7 text-[#58667d]">
+              <p className="text-muted-foreground text-sm leading-7">
                 {t`Published Program B opportunities will appear here once available.`}
               </p>
             )}
           </div>
         </div>
         <div>
-          <h3 className="mb-3 text-sm font-semibold tracking-[0.16em] text-[#6f7f9a] uppercase">
+          <h3 className="text-muted-foreground mb-3 text-sm font-semibold tracking-[0.16em] uppercase">
             {t`Active projects`}
           </h3>
           <div className="space-y-3">
             {projectPreview.map((project) => (
-              <div
-                key={project.id}
-                className="rounded-[1.25rem] border border-[#dce5fb] bg-[#f8faff] p-4"
-              >
+              <div key={project.id} className="border-border bg-muted rounded-2xl border p-4">
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <p className="font-semibold text-[#122039]">
+                    <p className="text-foreground font-semibold">
                       {normalizeUnknownText(project.backlogItem.title) ?? t`Project`}
                     </p>
-                    <p className="mt-1 text-sm text-[#58667d]">
+                    <p className="text-muted-foreground mt-1 text-sm">
                       {t`Team`} {project.team.name}
                     </p>
                   </div>
-                  <span className="rounded-full bg-[#effaf7] px-3 py-1 text-xs font-semibold text-[#11785d]">
+                  <span className="bg-success/10 text-success rounded-full px-3 py-1 text-xs font-semibold">
                     {project.status}
                   </span>
                 </div>
@@ -363,7 +356,7 @@ export function ProgramBSection({
               </div>
             ))}
             {projectPreview.length ? null : (
-              <p className="text-sm leading-7 text-[#58667d]">{t`No active Program B projects yet.`}</p>
+              <p className="text-muted-foreground text-sm leading-7">{t`No active Program B projects yet.`}</p>
             )}
           </div>
         </div>
@@ -380,7 +373,7 @@ export function TeamLoadErrorState({ onRetry }: { onRetry: () => void }) {
     >
       <div className="space-y-4">
         <StudentSectionCard title={t`Unable to load team data`}>
-          <p className="text-sm text-neutral-600">
+          <p className="text-muted-foreground text-sm">
             {t`The current team could not be loaded right now. Retry the request instead of treating this as no team.`}
           </p>
         </StudentSectionCard>
@@ -394,13 +387,7 @@ export function TeamLoadErrorState({ onRetry }: { onRetry: () => void }) {
   );
 }
 
-export function StudentDashboardShell({
-  team: _team,
-  children,
-}: {
-  team: TeamDetailDto | null;
-  children: ReactNode;
-}) {
+export function StudentDashboardShell({ children }: { children: ReactNode }) {
   return (
     <StudentPageShell
       title={t`Dashboard`}

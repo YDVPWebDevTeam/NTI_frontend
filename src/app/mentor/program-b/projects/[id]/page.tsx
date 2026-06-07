@@ -44,6 +44,7 @@ import {
   Textarea,
 } from 'components/shadcn';
 import { ROUTES } from 'lib/constants';
+import { useAuthenticatedUser } from 'lib/student-dashboard/use-authenticated-user';
 import {
   formatPersonName,
   formatUnknownDate,
@@ -103,6 +104,7 @@ export default function MentorProgramBProjectDetailPage({
 }) {
   const { id } = use(params);
   const queryClient = useQueryClient();
+  const { me } = useAuthenticatedUser();
 
   const projectQuery = useProgramBProjectsControllerGetProject(id);
   const milestonesQuery = useProgramBProjectsControllerListMilestones(id);
@@ -121,6 +123,8 @@ export default function MentorProgramBProjectDetailPage({
   const documents = documentsQuery.data ?? [];
 
   const isProjectReadOnly = project?.status === ProgramBProjectDetailDtoStatus.CLOSED;
+  const isAssignedMentor = Boolean(me?.id) && me?.id === project?.mentorAssignment?.mentorUserId;
+  const canManageMilestones = !isProjectReadOnly && isAssignedMentor;
 
   const [noteBody, setNoteBody] = useState('');
   const [createMilestoneForm, setCreateMilestoneForm] =
@@ -270,25 +274,25 @@ export default function MentorProgramBProjectDetailPage({
 
   if (milestonesQuery.isLoading && !milestonesQuery.data) {
     milestonesContent = (
-      <div className="flex items-center gap-2 text-sm text-[#60718d]">
+      <div className="text-muted-foreground flex items-center gap-2 text-sm">
         <Loader2 className="h-4 w-4 animate-spin" />
         <span>{t`Loading milestones`}</span>
       </div>
     );
   } else if (milestonesQuery.isError) {
     milestonesContent = (
-      <p className="text-sm text-[#60718d]">{t`Milestones are unavailable right now.`}</p>
+      <p className="text-muted-foreground text-sm">{t`Milestones are unavailable right now.`}</p>
     );
   } else if (milestones.length === 0) {
-    milestonesContent = <p className="text-sm text-[#60718d]">{t`No milestones yet.`}</p>;
+    milestonesContent = <p className="text-muted-foreground text-sm">{t`No milestones yet.`}</p>;
   } else {
     milestonesContent = milestones.map((milestone) => (
-      <div key={milestone.id} className="rounded-2xl border border-[#dfe7fa] bg-[#f8fbff] p-4">
+      <div key={milestone.id} className="border-border bg-muted rounded-2xl border p-4">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <p className="font-semibold text-[#10213d]">{milestone.title}</p>
+            <p className="text-foreground font-semibold">{milestone.title}</p>
 
-            <p className="mt-1 text-sm text-[#60718d]">
+            <p className="text-muted-foreground mt-1 text-sm">
               {normalizeUnknownText(milestone.description) ?? t`No milestone description.`}
             </p>
           </div>
@@ -296,11 +300,11 @@ export default function MentorProgramBProjectDetailPage({
           <CompanyStatusBadge status={milestone.status} />
         </div>
 
-        <p className="mt-3 text-sm text-[#60718d]">
+        <p className="text-muted-foreground mt-3 text-sm">
           {milestone.dueAt ? t`Due ${formatUnknownDate(milestone.dueAt)}` : t`No due date`}
         </p>
 
-        {isProjectReadOnly ? null : (
+        {canManageMilestones ? (
           <div className="mt-4 flex justify-end">
             <Button
               type="button"
@@ -312,7 +316,7 @@ export default function MentorProgramBProjectDetailPage({
               {t`Edit`}
             </Button>
           </div>
-        )}
+        ) : null}
       </div>
     ));
   }
@@ -321,20 +325,22 @@ export default function MentorProgramBProjectDetailPage({
 
   if (reviewsQuery.isError) {
     reviewsContent = (
-      <p className="text-sm text-[#60718d]">{t`Reviews are unavailable right now.`}</p>
+      <p className="text-muted-foreground text-sm">{t`Reviews are unavailable right now.`}</p>
     );
   } else if (reviews.length === 0) {
-    reviewsContent = <p className="text-sm text-[#60718d]">{t`No reviews yet.`}</p>;
+    reviewsContent = <p className="text-muted-foreground text-sm">{t`No reviews yet.`}</p>;
   } else {
     reviewsContent = reviews.map((review) => (
-      <div key={review.id} className="rounded-2xl border border-[#dfe7fa] bg-[#f8fbff] p-4">
+      <div key={review.id} className="border-border bg-muted rounded-2xl border p-4">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <p className="font-semibold text-[#10213d]">{formatEnumLabel(review.decision)}</p>
+          <p className="text-foreground font-semibold">{formatEnumLabel(review.decision)}</p>
 
-          <span className="text-xs text-[#60718d]">{formatUnknownDate(review.createdAt)}</span>
+          <span className="text-muted-foreground text-xs">
+            {formatUnknownDate(review.createdAt)}
+          </span>
         </div>
 
-        <p className="mt-1 text-sm text-[#60718d]">
+        <p className="text-muted-foreground mt-1 text-sm">
           {normalizeUnknownText(review.comment) ?? t`No comment`}
         </p>
       </div>
@@ -344,15 +350,17 @@ export default function MentorProgramBProjectDetailPage({
   let notesContent;
 
   if (notesQuery.isError) {
-    notesContent = <p className="text-sm text-[#60718d]">{t`Notes are unavailable right now.`}</p>;
+    notesContent = (
+      <p className="text-muted-foreground text-sm">{t`Notes are unavailable right now.`}</p>
+    );
   } else if (notes.length === 0) {
-    notesContent = <p className="text-sm text-[#60718d]">{t`No mentoring notes yet.`}</p>;
+    notesContent = <p className="text-muted-foreground text-sm">{t`No mentoring notes yet.`}</p>;
   } else {
     notesContent = notes.map((note) => (
-      <div key={note.id} className="rounded-2xl border border-[#dfe7fa] bg-[#f8fbff] p-4">
-        <p className="text-sm leading-7 text-[#60718d]">{note.note}</p>
+      <div key={note.id} className="border-border bg-muted rounded-2xl border p-4">
+        <p className="text-muted-foreground text-sm leading-7">{note.note}</p>
 
-        <div className="mt-2 flex flex-wrap items-center justify-between gap-2 text-xs text-[#94a3c4]">
+        <div className="text-muted-foreground mt-2 flex flex-wrap items-center justify-between gap-2 text-xs">
           <span>{formatPersonName(note.author) ?? t`Mentor`}</span>
           <span>{formatUnknownDate(note.createdAt)}</span>
         </div>
@@ -362,25 +370,25 @@ export default function MentorProgramBProjectDetailPage({
 
   return (
     <div className="space-y-6">
-      <section className="rounded-[1.75rem] border border-[#dfe7fa] bg-white/90 p-6 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
+      <section className="border-border bg-card rounded-2xl border p-6 shadow-sm">
         <div className="flex items-start justify-between gap-4">
           <div>
             <div className="flex flex-wrap items-center gap-3">
-              <h1 className="text-2xl font-semibold text-[#10213d]">
+              <h1 className="text-foreground text-2xl font-semibold">
                 {normalizeUnknownText(project.backlogItem.title) ?? t`Program B project`}
               </h1>
 
               <CompanyStatusBadge status={project.status} />
             </div>
 
-            <p className="mt-3 text-sm text-[#60718d]">
+            <p className="text-muted-foreground mt-3 text-sm">
               {t`Team:`} {project.team.name ?? t`Unknown team`}
             </p>
           </div>
 
           <Link
             href={ROUTES.MENTOR.PROGRAM_B_PROJECTS}
-            className="text-sm font-medium text-[#1e58d5]"
+            className="text-primary text-sm font-medium"
           >
             {t`Back to projects`}
           </Link>
@@ -396,20 +404,20 @@ export default function MentorProgramBProjectDetailPage({
         </TabsList>
 
         <TabsContent value="overview">
-          <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
-            <h2 className="text-lg font-semibold text-[#10213d]">{t`Overview`}</h2>
+          <article className="border-border bg-card rounded-2xl border p-5 shadow-sm">
+            <h2 className="text-foreground text-lg font-semibold">{t`Overview`}</h2>
 
-            <div className="mt-4 grid gap-2 text-sm text-[#60718d] md:grid-cols-2">
+            <div className="text-muted-foreground mt-4 grid gap-2 text-sm md:grid-cols-2">
               <p>
                 {t`Product owner:`}{' '}
-                <span className="font-medium text-[#10213d]">
+                <span className="text-foreground font-medium">
                   {formatPersonName(project.productOwner)}
                 </span>
               </p>
 
               <p>
                 {t`Mentor:`}{' '}
-                <span className="font-medium text-[#10213d]">
+                <span className="text-foreground font-medium">
                   {formatPersonName(project.mentorAssignment.mentor) ?? t`Not assigned`}
                 </span>
               </p>
@@ -418,21 +426,27 @@ export default function MentorProgramBProjectDetailPage({
         </TabsContent>
 
         <TabsContent value="milestones">
-          <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
-            <h2 className="text-lg font-semibold text-[#10213d]">{t`Milestones`}</h2>
+          <article className="border-border bg-card rounded-2xl border p-5 shadow-sm">
+            <h2 className="text-foreground text-lg font-semibold">{t`Milestones`}</h2>
 
             <div className="mt-4 space-y-3">{milestonesContent}</div>
 
-            {isProjectReadOnly ? (
-              <p className="mt-5 rounded-2xl border border-[#dfe7fa] bg-[#f8fbff] p-4 text-sm text-[#60718d]">
+            {isProjectReadOnly && (
+              <p className="border-border bg-muted text-muted-foreground mt-5 rounded-2xl border p-4 text-sm">
                 {t`Closed Program B projects are read-only.`}
               </p>
-            ) : (
-              <div className="mt-6 rounded-2xl border border-dashed border-[#c4d4f5] bg-white/70 p-4">
+            )}
+            {!isProjectReadOnly && !isAssignedMentor && (
+              <p className="border-border bg-muted text-muted-foreground mt-5 rounded-2xl border p-4 text-sm">
+                {t`Only the mentor assigned to this project can create or edit milestones.`}
+              </p>
+            )}
+            {!isProjectReadOnly && isAssignedMentor && (
+              <div className="border-border bg-card/70 mt-6 rounded-2xl border border-dashed p-4">
                 <div>
-                  <h3 className="font-semibold text-[#10213d]">{t`Create milestone`}</h3>
+                  <h3 className="text-foreground font-semibold">{t`Create milestone`}</h3>
 
-                  <p className="mt-1 text-sm text-[#60718d]">
+                  <p className="text-muted-foreground mt-1 text-sm">
                     {t`Add a new delivery milestone to this project.`}
                   </p>
                 </div>
@@ -493,7 +507,7 @@ export default function MentorProgramBProjectDetailPage({
 
                       <select
                         id="create-milestone-status"
-                        className="h-10 w-full rounded-md border border-black/10 bg-white px-3 text-sm"
+                        className="border-border bg-card h-10 w-full rounded-md border px-3 text-sm"
                         value={createMilestoneForm.status}
                         onChange={(event) =>
                           setCreateMilestoneForm((current) => ({
@@ -533,13 +547,13 @@ export default function MentorProgramBProjectDetailPage({
 
         <TabsContent value="notes">
           <div className="grid gap-6 xl:grid-cols-2">
-            <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
-              <h2 className="text-lg font-semibold text-[#10213d]">{t`Mentoring notes`}</h2>
+            <article className="border-border bg-card rounded-2xl border p-5 shadow-sm">
+              <h2 className="text-foreground text-lg font-semibold">{t`Mentoring notes`}</h2>
 
               <div className="mt-4 space-y-3">{notesContent}</div>
 
               {isProjectReadOnly ? null : (
-                <div className="mt-5 space-y-3 rounded-2xl border border-dashed border-[#c4d4f5] bg-white/70 p-4">
+                <div className="border-border bg-card/70 mt-5 space-y-3 rounded-2xl border border-dashed p-4">
                   <div className="space-y-2">
                     <Label htmlFor="mentoring-note">{t`Add a mentoring note`}</Label>
 
@@ -570,8 +584,8 @@ export default function MentorProgramBProjectDetailPage({
               )}
             </article>
 
-            <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
-              <h2 className="text-lg font-semibold text-[#10213d]">{t`Product owner reviews`}</h2>
+            <article className="border-border bg-card rounded-2xl border p-5 shadow-sm">
+              <h2 className="text-foreground text-lg font-semibold">{t`Product owner reviews`}</h2>
 
               <div className="mt-4 space-y-3">{reviewsContent}</div>
             </article>
@@ -579,8 +593,8 @@ export default function MentorProgramBProjectDetailPage({
         </TabsContent>
 
         <TabsContent value="documents">
-          <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
-            <h2 className="text-lg font-semibold text-[#10213d]">{t`Documents`}</h2>
+          <article className="border-border bg-card rounded-2xl border p-5 shadow-sm">
+            <h2 className="text-foreground text-lg font-semibold">{t`Documents`}</h2>
 
             <div className="mt-4">
               <ProgramBDocumentManager
@@ -688,7 +702,7 @@ export default function MentorProgramBProjectDetailPage({
 
                 <select
                   id="edit-milestone-status"
-                  className="h-10 w-full rounded-md border border-black/10 bg-white px-3 text-sm"
+                  className="border-border bg-card h-10 w-full rounded-md border px-3 text-sm"
                   value={editMilestoneForm.status}
                   onChange={(event) =>
                     setEditMilestoneForm((current) =>

@@ -17,7 +17,7 @@ import {
   useOrganizationControllerListInvites,
   type AuthenticatedUserDto,
 } from 'lib/api';
-import { useOrganizationDocumentsControllerListDocumentsCompat } from 'lib/api';
+import { useOrganizationDocumentsControllerListDocuments } from 'lib/api';
 import { formatEnumLabel } from 'lib/utils';
 import { OrganizationDocumentsSection } from './organization-documents-section';
 import { OrganizationInvitesSection } from './organization-invites-section';
@@ -48,7 +48,7 @@ export function OrganizationWorkspacePage({ currentUser }: { currentUser: Authen
       enabled: hasOperationalAccess,
     },
   });
-  const documentsQuery = useOrganizationDocumentsControllerListDocumentsCompat(organizationId, {
+  const documentsQuery = useOrganizationDocumentsControllerListDocuments(organizationId, {
     query: {
       enabled: hasOperationalAccess,
     },
@@ -71,7 +71,9 @@ export function OrganizationWorkspacePage({ currentUser }: { currentUser: Authen
           (invitesQuery.data?.data ?? []).filter((invite) => invite.status === 'PENDING').length,
         );
     membersValue = membersQuery.isLoading ? '...' : String(membersQuery.data?.length ?? 0);
-    documentsValue = documentsQuery.isLoading ? '...' : String(documentsQuery.data?.length ?? 0);
+    documentsValue = documentsQuery.isLoading
+      ? '...'
+      : String((documentsQuery.data as unknown as unknown[] | undefined)?.length ?? 0);
   }
 
   if (!organizationQuery.isLoading && !organization) {
@@ -113,28 +115,28 @@ export function OrganizationWorkspacePage({ currentUser }: { currentUser: Authen
       </StudentMetricGrid>
 
       <div className="grid gap-6 xl:grid-cols-2">
-        <div className="rounded-[1.75rem] border border-white/85 bg-white/92 p-6 shadow-[0_14px_36px_rgba(19,27,46,0.05)]">
+        <div className="border-border bg-card rounded-2xl border p-6 shadow-sm">
           <div className="flex items-start gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#eef4ff] text-[#1f56c2]">
+            <div className="bg-accent text-primary flex h-12 w-12 items-center justify-center rounded-2xl">
               <Building2 className="h-6 w-6" />
             </div>
             <div className="space-y-2">
-              <h2 className="text-xl font-semibold text-[#101a2e]">{t`Owner controls`}</h2>
-              <p className="text-sm leading-6 text-[#5b667b]">
+              <h2 className="text-foreground text-xl font-semibold">{t`Owner controls`}</h2>
+              <p className="text-muted-foreground text-sm leading-6">
                 {t`Only the company owner can update company details, manage invites, change member access, and transfer ownership.`}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="rounded-[1.75rem] border border-white/85 bg-white/92 p-6 shadow-[0_14px_36px_rgba(19,27,46,0.05)]">
+        <div className="border-border bg-card rounded-2xl border p-6 shadow-sm">
           <div className="flex items-start gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#eef8ff] text-[#1570a6]">
+            <div className="bg-info/10 text-info flex h-12 w-12 items-center justify-center rounded-2xl">
               <Files className="h-6 w-6" />
             </div>
             <div className="space-y-2">
-              <h2 className="text-xl font-semibold text-[#101a2e]">{t`Documents`}</h2>
-              <p className="text-sm leading-6 text-[#5b667b]">
+              <h2 className="text-foreground text-xl font-semibold">{t`Documents`}</h2>
+              <p className="text-muted-foreground text-sm leading-6">
                 {t`Keep important company files in one place so they're easy to upload, find, and download later.`}
               </p>
             </div>

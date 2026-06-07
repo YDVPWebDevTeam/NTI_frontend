@@ -17,7 +17,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 
-import { NtiBrand } from 'components/layout';
+import { NtiBrand } from 'components/layout/nti-brand';
 import { LanguageSwitcher } from 'components/i18n/language-switcher';
 import { Button } from 'components/shadcn';
 import { useWorkspaceLogout } from 'components/workspace/use-workspace-logout';
@@ -54,16 +54,16 @@ function StudentNavItem({
       className={cn(
         'flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition-all',
         active
-          ? 'bg-[#0f4fb8] text-white shadow-[0_16px_28px_rgba(15,79,184,0.28)]'
-          : 'text-[#53637b] hover:bg-[#edf4ff] hover:text-[#123a82]',
+          ? 'bg-primary text-primary-foreground shadow-sm'
+          : 'text-muted-foreground hover:bg-accent hover:text-primary',
       )}
     >
       <span
         className={cn(
           'flex h-9 w-9 items-center justify-center rounded-xl border transition-colors',
           active
-            ? 'border-white/20 bg-white/10 text-white'
-            : 'border-[#d8e4fb] bg-white text-[#355ea8]',
+            ? 'border-primary-foreground/20 bg-primary-foreground/10 text-primary-foreground'
+            : 'border-border bg-card text-primary',
         )}
       >
         <Icon className="h-4 w-4" />
@@ -125,7 +125,7 @@ export function StudentWorkspaceLayout({ children }: { children: ReactNode }) {
 
   const shellBody = (
     <>
-      <header className="sticky top-0 z-40 border-b border-[#dfe7fa] bg-white/92 backdrop-blur-xl">
+      <header className="border-border bg-card/92 sticky top-0 z-40 border-b backdrop-blur-xl">
         <div className="flex w-full items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
           <Link
             href={ROUTES.ROOT}
@@ -134,21 +134,21 @@ export function StudentWorkspaceLayout({ children }: { children: ReactNode }) {
           >
             <NtiBrand size="sm" />
             <div className="min-w-0 text-left">
-              <p className="truncate text-sm font-semibold tracking-[0.12em] text-[#101a2e] uppercase">
+              <p className="text-foreground truncate text-sm font-semibold tracking-[0.12em] uppercase">
                 {displayName}
               </p>
-              <p className="truncate text-xs text-[#60718d]">{roleLabel}</p>
+              <p className="text-muted-foreground truncate text-xs">{roleLabel}</p>
             </div>
           </Link>
 
           <div className="hidden items-center gap-3 lg:flex">
             <LanguageSwitcher
-              className="border border-[#d8e4fb] bg-[#f8fbff] shadow-none"
-              triggerClassName="bg-transparent text-[#10213d] hover:bg-[#eef4ff]"
+              className="border-border bg-muted border shadow-none"
+              triggerClassName="bg-transparent text-foreground hover:bg-accent"
             />
             <Button
               variant="outline"
-              className="rounded-2xl border-[#d8e4fb] bg-white/90 text-[#122039] hover:bg-[#f5f8ff]"
+              className="border-border bg-card/90 text-foreground hover:bg-muted rounded-2xl"
               disabled={isLogoutPending}
               onClick={() => void handleLogout()}
             >
@@ -161,7 +161,7 @@ export function StudentWorkspaceLayout({ children }: { children: ReactNode }) {
             <Button
               variant="outline"
               size="icon"
-              className="shrink-0 rounded-2xl border-[#dce6fb] bg-white/90"
+              className="border-border bg-card/90 shrink-0 rounded-2xl"
               onClick={() => setMobileNavState({ open: !isMobileNavOpen, pathname })}
               aria-label={isMobileNavOpen ? t`Close navigation` : t`Open navigation`}
             >
@@ -181,14 +181,14 @@ export function StudentWorkspaceLayout({ children }: { children: ReactNode }) {
           type="button"
           aria-label={t`Close navigation`}
           className={cn(
-            'absolute inset-0 bg-[#0f172a]/35 backdrop-blur-[2px] transition-opacity duration-300 ease-out',
+            'bg-foreground/35 absolute inset-0 backdrop-blur-[2px] transition-opacity duration-300 ease-out',
             isMobileNavOpen ? 'opacity-100' : 'opacity-0',
           )}
           onClick={() => setMobileNavState({ open: false, pathname })}
         />
         <aside
           className={cn(
-            'absolute inset-y-0 left-0 w-[min(88vw,22rem)] border-r border-[#dfe7fa] bg-[linear-gradient(180deg,#f9fbff_0%,#f2f7ff_100%)] p-4 shadow-[0_24px_80px_rgba(15,23,42,0.18)] transition-transform duration-300 ease-out',
+            'border-border bg-card absolute inset-y-0 left-0 w-[min(88vw,22rem)] border-r p-4 shadow-sm transition-transform duration-300 ease-out',
             isMobileNavOpen ? 'translate-x-0' : '-translate-x-full',
           )}
         >
@@ -198,22 +198,22 @@ export function StudentWorkspaceLayout({ children }: { children: ReactNode }) {
               items={studentNavItems}
               onNavigate={() => setMobileNavState({ open: false, pathname })}
             />
-            <div className="mt-auto space-y-4 rounded-[1.5rem] border border-[#cdddff] bg-[linear-gradient(135deg,#ffffff_0%,#f3f8ff_100%)] p-5 shadow-[0_18px_36px_rgba(19,27,46,0.1)]">
+            <div className="border-border bg-card mt-auto space-y-4 rounded-2xl border p-5 shadow-sm">
               <div>
-                <p className="text-[10px] font-semibold tracking-[0.22em] text-[#5c74a3] uppercase">
+                <p className="text-muted-foreground text-[10px] font-semibold tracking-[0.22em] uppercase">
                   {t`Language`}
                 </p>
-                <p className="mt-1.5 text-sm font-medium text-[#314361]">
+                <p className="text-foreground mt-1.5 text-sm font-medium">
                   {t`Switch the app locale.`}
                 </p>
               </div>
               <LanguageSwitcher
-                className="w-full border border-[#cddfff] bg-white shadow-none"
-                triggerClassName="w-full justify-between rounded-xl bg-transparent text-[#10213d] hover:bg-[#eef4ff]"
+                className="border-border bg-card w-full border shadow-none"
+                triggerClassName="w-full justify-between rounded-xl bg-transparent text-foreground hover:bg-accent"
               />
               <Button
                 variant="outline"
-                className="w-full justify-start rounded-xl border-[#cddfff] bg-white text-[#122039] hover:bg-[#f3f7ff]"
+                className="border-border bg-card text-foreground hover:bg-muted w-full justify-start rounded-xl"
                 disabled={isLogoutPending}
                 onClick={() => void handleLogout()}
               >
@@ -237,16 +237,16 @@ export function StudentWorkspaceLayout({ children }: { children: ReactNode }) {
   );
 
   return (
-    <main className="min-h-screen bg-[linear-gradient(180deg,#f8faff_0%,#f2f6ff_45%,#f8fbff_100%)]">
+    <main className="bg-background min-h-screen">
       {shellBody}
-      <footer className="border-t border-[#dfe7fa] bg-white/80">
-        <div className="flex w-full flex-col gap-3 px-4 py-5 text-sm text-[#60718d] sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
+      <footer className="border-border bg-card/80 border-t">
+        <div className="text-muted-foreground flex w-full flex-col gap-3 px-4 py-5 text-sm sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
           <p>{t`NTI student workspace. Separate flows for profile completion, team coordination, and program work.`}</p>
           <div className="flex flex-wrap gap-4">
-            <Link href={ROUTES.PRIVACY_POLICY} className="transition hover:text-[#123a82]">
+            <Link href={ROUTES.PRIVACY_POLICY} className="hover:text-primary transition">
               {t`Privacy policy`}
             </Link>
-            <Link href={ROUTES.TERMS_OF_SERVICE} className="transition hover:text-[#123a82]">
+            <Link href={ROUTES.TERMS_OF_SERVICE} className="hover:text-primary transition">
               {t`Terms of service`}
             </Link>
           </div>

@@ -9,23 +9,23 @@ const FEEDBACK_STYLES: Record<
   { container: string; icon: string; Icon: typeof CheckCircle2 }
 > = {
   success: {
-    container: 'border-emerald-200 bg-emerald-50/90 text-emerald-950',
-    icon: 'bg-emerald-100 text-emerald-700',
+    container: 'border-success/30 bg-success/10 text-success',
+    icon: 'bg-success/10 text-success',
     Icon: CheckCircle2,
   },
   info: {
-    container: 'border-sky-200 bg-sky-50/90 text-sky-950',
-    icon: 'bg-sky-100 text-sky-700',
+    container: 'border-info/30 bg-info/10 text-info',
+    icon: 'bg-info/10 text-info',
     Icon: ShieldCheck,
   },
   warning: {
-    container: 'border-amber-200 bg-amber-50/90 text-amber-950',
-    icon: 'bg-amber-100 text-amber-700',
+    container: 'border-warning/30 bg-warning/10 text-warning',
+    icon: 'bg-warning/10 text-warning',
     Icon: AlertTriangle,
   },
   danger: {
-    container: 'border-rose-200 bg-rose-50/90 text-rose-950',
-    icon: 'bg-rose-100 text-rose-700',
+    container: 'border-destructive/30 bg-destructive/10 text-destructive',
+    icon: 'bg-destructive/10 text-destructive',
     Icon: ShieldAlert,
   },
 };
@@ -40,9 +40,7 @@ export function SecurityFeedbackBanner({
   const { container, icon, Icon } = FEEDBACK_STYLES[feedback.tone];
 
   return (
-    <div
-      className={`rounded-[1.5rem] border p-5 shadow-[0_12px_24px_rgba(15,23,42,0.05)] ${container}`}
-    >
+    <div className={`rounded-2xl border p-5 shadow-sm ${container}`}>
       <div className="flex gap-4">
         <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${icon}`}>
           <Icon className="h-5 w-5" />

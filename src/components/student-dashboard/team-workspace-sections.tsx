@@ -22,6 +22,42 @@ type QueryLike<TData> = {
   refetch: () => Promise<unknown>;
 };
 
+export function formatLockedAt(lockedAt: unknown): string | null {
+  if (lockedAt == null) {
+    return null;
+  }
+
+  if (typeof lockedAt === 'string' || lockedAt instanceof Date) {
+    const parsed = new Date(lockedAt);
+
+    if (!Number.isNaN(parsed.getTime())) {
+      return formatDateTime(parsed);
+    }
+  }
+
+  return null;
+}
+
+export const TEAM_LOCKED_TOOLTIP = t`This team is locked and can no longer be modified.`;
+
+export function TeamLockBanner({ lockedAt }: { lockedAt?: unknown }) {
+  const lockedAtLabel = formatLockedAt(lockedAt);
+
+  return (
+    <div
+      role="status"
+      className="border-warning/30 bg-warning/10 text-warning rounded-2xl border p-4 text-sm"
+    >
+      <p className="font-semibold">{t`Team locked`}</p>
+      <p className="mt-1">
+        {lockedAtLabel
+          ? t`This team was locked on ${lockedAtLabel}. Membership, invitations, and applications can no longer be changed.`
+          : t`This team is locked. Membership, invitations, and applications can no longer be changed.`}
+      </p>
+    </div>
+  );
+}
+
 export function parseEmails(input: string) {
   const allEmails = input
     .split(/[\n,\s]+/)
@@ -43,7 +79,7 @@ export function TeamLeadOnboardingGuide({ mode }: { mode: TeamWorkspaceMode }) {
 
   return (
     <StudentSectionCard title={t`Create your team`} description={description}>
-      <div className="space-y-4 text-sm text-neutral-700">
+      <div className="text-foreground space-y-4 text-sm">
         <p>{t`Team creation requires a team name and at least two teammate email addresses.`}</p>
       </div>
     </StudentSectionCard>
@@ -84,7 +120,7 @@ export function TeamCreationSection({
           placeholder={t`name@example.com, teammate@example.com`}
           rows={5}
         />
-        <p className="text-sm text-neutral-600">
+        <p className="text-muted-foreground text-sm">
           {t`Add at least two teammate emails. Your own account will be added automatically as the team lead.`}
         </p>
         <div className="flex flex-wrap gap-2">
@@ -160,17 +196,17 @@ export function TeamOverviewSection({
       title={t`Team overview`}
       description={t`Non-leads stay read-only. Lead privileges are derived from the current team leader id.`}
     >
-      <div className="space-y-3 text-sm text-neutral-700">
+      <div className="text-foreground space-y-3 text-sm">
         <p>
-          {t`Team name:`} <span className="font-semibold text-neutral-950">{team.name}</span>
+          {t`Team name:`} <span className="text-foreground font-semibold">{team.name}</span>
         </p>
         <p>
           {t`Lead access:`}{' '}
-          <span className="font-semibold text-neutral-950">{isLead ? t`Yes` : t`No`}</span>
+          <span className="text-foreground font-semibold">{isLead ? t`Yes` : t`No`}</span>
         </p>
         <p>
           {t`Locked state:`}{' '}
-          <span className="font-semibold text-neutral-950">
+          <span className="text-foreground font-semibold">
             {isLocked ? t`Locked` : t`Unlocked`}
           </span>
         </p>
@@ -185,6 +221,7 @@ export function TeamOverviewSection({
           />
           <Button
             disabled={!teamName.trim() || isLocked || renameTeam.isPending}
+            title={isLocked ? TEAM_LOCKED_TOOLTIP : undefined}
             onClick={async () => {
               try {
                 await renameTeam.mutateAsync({ id: team.id, data: { name: teamName.trim() } });
@@ -233,7 +270,7 @@ export function LeadershipTransferSection({
       {isLead ? (
         <div className="space-y-3">
           <select
-            className="w-full rounded-md border border-black/10 bg-white px-3 py-2 text-sm"
+            className="border-border bg-card w-full rounded-md border px-3 py-2 text-sm"
             value={newLeaderId}
             onChange={(event) => setNewLeaderId(event.target.value)}
           >
@@ -248,6 +285,7 @@ export function LeadershipTransferSection({
           </select>
           <Button
             disabled={!newLeaderId || isLocked || transferLeadership.isPending}
+            title={isLocked ? TEAM_LOCKED_TOOLTIP : undefined}
             onClick={async () => {
               try {
                 await transferLeadership.mutateAsync({
@@ -270,7 +308,7 @@ export function LeadershipTransferSection({
           </Button>
         </div>
       ) : (
-        <p className="text-sm text-neutral-600">
+        <p className="text-muted-foreground text-sm">
           {t`Only the current team lead can transfer leadership.`}
         </p>
       )}
@@ -282,6 +320,8 @@ export function MembersSection({
   invitationsQuery,
   isLead,
   isLocked,
+  leaveTeam,
+  me,
   members,
   removeMember,
   team,
@@ -290,6 +330,8 @@ export function MembersSection({
   invitationsQuery: QueryLike<{ data: TeamInviteItemDto[] }>;
   isLead: boolean;
   isLocked: boolean;
+  leaveTeam: MutationLike<{ teamId: string }>;
+  me: AuthenticatedUserDto;
   members: TeamDetailDto['members'];
   removeMember: MutationLike<{ teamId: string; memberId: string }>;
   team: TeamDetailDto;
@@ -303,21 +345,22 @@ export function MembersSection({
       <div className="space-y-3">
         {members.map((member) => {
           const isCurrentLeader = member.userId === team.leaderId;
+          const isCurrentUser = member.userId === me.id;
 
           return (
             <div
               key={member.userId}
-              className="flex flex-col gap-3 rounded-2xl border border-black/10 bg-[#f7f8fa] p-4 sm:flex-row sm:items-center sm:justify-between"
+              className="border-border bg-muted flex flex-col gap-3 rounded-2xl border p-4 sm:flex-row sm:items-center sm:justify-between"
             >
               <div>
-                <p className="font-semibold text-neutral-950">
+                <p className="text-foreground font-semibold">
                   {member.user.firstName} {member.user.lastName}
                 </p>
-                <p className="text-sm text-neutral-600">{member.user.email}</p>
+                <p className="text-muted-foreground text-sm">{member.user.email}</p>
               </div>
               <div className="flex items-center gap-2">
                 {isCurrentLeader ? (
-                  <span className="rounded-full bg-[#dce8ff] px-3 py-1 text-xs font-semibold text-[#0c3fa3]">
+                  <span className="bg-accent text-accent-foreground rounded-full px-3 py-1 text-xs font-semibold">
                     {t`Leader`}
                   </span>
                 ) : null}
@@ -326,6 +369,7 @@ export function MembersSection({
                     size="sm"
                     variant="outline"
                     disabled={isLocked || removeMember.isPending}
+                    title={isLocked ? TEAM_LOCKED_TOOLTIP : undefined}
                     onClick={async () => {
                       try {
                         await removeMember.mutateAsync({
@@ -344,6 +388,37 @@ export function MembersSection({
                     }}
                   >
                     {t`Remove`}
+                  </Button>
+                ) : null}
+                {isCurrentUser && !isCurrentLeader ? (
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    disabled={isLocked || leaveTeam.isPending}
+                    title={isLocked ? TEAM_LOCKED_TOOLTIP : undefined}
+                    onClick={async () => {
+                      const confirmed = window.confirm(
+                        t`Leave this team? You will lose access to its workspace immediately.`,
+                      );
+
+                      if (!confirmed) {
+                        return;
+                      }
+
+                      try {
+                        await leaveTeam.mutateAsync({ teamId: team.id });
+                        await Promise.all([teamQuery.refetch(), invitationsQuery.refetch()]);
+                        toast.success(t`You left the team.`);
+                      } catch (error) {
+                        toast.error(
+                          error instanceof Error
+                            ? error.message
+                            : t`Unable to leave the team right now.`,
+                        );
+                      }
+                    }}
+                  >
+                    {t`Leave team`}
                   </Button>
                 ) : null}
               </div>
@@ -389,6 +464,7 @@ export function InvitationsSection({
         <div className="flex flex-wrap gap-2">
           <Button
             disabled={isLocked || createInvites.isPending}
+            title={isLocked ? TEAM_LOCKED_TOOLTIP : undefined}
             onClick={async () => {
               const parsed = parseEmails(inviteEmails);
 
@@ -429,11 +505,11 @@ export function InvitationsSection({
           {(invitationsQuery.data?.data ?? []).map((invitation) => (
             <div
               key={invitation.id}
-              className="flex flex-col gap-3 rounded-2xl border border-black/10 bg-[#f7f8fa] p-4 sm:flex-row sm:items-center sm:justify-between"
+              className="border-border bg-muted flex flex-col gap-3 rounded-2xl border p-4 sm:flex-row sm:items-center sm:justify-between"
             >
               <div>
-                <p className="font-semibold text-neutral-950">{invitation.email}</p>
-                <p className="text-sm text-neutral-600">
+                <p className="text-foreground font-semibold">{invitation.email}</p>
+                <p className="text-muted-foreground text-sm">
                   {invitation.status} · {t`created`} {formatDateTime(invitation.createdAt)}
                 </p>
               </div>
@@ -442,6 +518,7 @@ export function InvitationsSection({
                   size="sm"
                   variant="outline"
                   disabled={isLocked || invitation.status !== 'PENDING' || resendInvite.isPending}
+                  title={isLocked ? TEAM_LOCKED_TOOLTIP : undefined}
                   onClick={async () => {
                     try {
                       await resendInvite.mutateAsync({
@@ -465,6 +542,7 @@ export function InvitationsSection({
                   size="sm"
                   variant="outline"
                   disabled={isLocked || invitation.status !== 'PENDING' || revokeInvite.isPending}
+                  title={isLocked ? TEAM_LOCKED_TOOLTIP : undefined}
                   onClick={async () => {
                     try {
                       await revokeInvite.mutateAsync({

@@ -152,21 +152,21 @@ export default function AdminProgramBProjectDetailPage({
 
   if (milestonesQuery.isError) {
     milestonesContent = (
-      <p className="text-sm text-slate-600">{t`Milestones are unavailable right now.`}</p>
+      <p className="text-muted-foreground text-sm">{t`Milestones are unavailable right now.`}</p>
     );
   } else if (milestones.length === 0) {
-    milestonesContent = <p className="text-sm text-slate-600">{t`No milestones yet.`}</p>;
+    milestonesContent = <p className="text-muted-foreground text-sm">{t`No milestones yet.`}</p>;
   } else {
     milestonesContent = milestones.map((milestone) => (
-      <div key={milestone.id} className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+      <div key={milestone.id} className="border-border bg-muted rounded-xl border p-4">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <p className="font-medium text-slate-950">{milestone.title}</p>
-          <span className="text-xs text-slate-500">{formatEnumLabel(milestone.status)}</span>
+          <p className="text-foreground font-medium">{milestone.title}</p>
+          <span className="text-muted-foreground text-xs">{formatEnumLabel(milestone.status)}</span>
         </div>
-        <p className="mt-1 text-sm text-slate-600">
+        <p className="text-muted-foreground mt-1 text-sm">
           {normalizeUnknownText(milestone.description) ?? t`No description.`}
         </p>
-        <p className="mt-2 text-xs text-slate-500">
+        <p className="text-muted-foreground mt-2 text-xs">
           {milestone.dueAt ? t`Due ${formatUnknownDate(milestone.dueAt)}` : t`No due date`}
         </p>
       </div>
@@ -177,15 +177,15 @@ export default function AdminProgramBProjectDetailPage({
 
   if (reviewsQuery.isError) {
     reviewsContent = (
-      <p className="text-sm text-slate-600">{t`Reviews are unavailable right now.`}</p>
+      <p className="text-muted-foreground text-sm">{t`Reviews are unavailable right now.`}</p>
     );
   } else if (reviews.length === 0) {
-    reviewsContent = <p className="text-sm text-slate-600">{t`No reviews yet.`}</p>;
+    reviewsContent = <p className="text-muted-foreground text-sm">{t`No reviews yet.`}</p>;
   } else {
     reviewsContent = reviews.map((review) => (
-      <div key={review.id} className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-        <p className="font-medium text-slate-950">{formatEnumLabel(review.decision)}</p>
-        <p className="mt-1 text-sm text-slate-600">
+      <div key={review.id} className="border-border bg-muted rounded-xl border p-4">
+        <p className="text-foreground font-medium">{formatEnumLabel(review.decision)}</p>
+        <p className="text-muted-foreground mt-1 text-sm">
           {normalizeUnknownText(review.comment) ?? t`No comment`}
         </p>
       </div>
@@ -195,14 +195,16 @@ export default function AdminProgramBProjectDetailPage({
   let notesContent;
 
   if (notesQuery.isError) {
-    notesContent = <p className="text-sm text-slate-600">{t`Notes are unavailable right now.`}</p>;
+    notesContent = (
+      <p className="text-muted-foreground text-sm">{t`Notes are unavailable right now.`}</p>
+    );
   } else if (notes.length === 0) {
-    notesContent = <p className="text-sm text-slate-600">{t`No mentoring notes yet.`}</p>;
+    notesContent = <p className="text-muted-foreground text-sm">{t`No mentoring notes yet.`}</p>;
   } else {
     notesContent = notes.map((note) => (
-      <div key={note.id} className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-        <p className="text-sm text-slate-600">{note.note}</p>
-        <p className="mt-2 text-xs text-slate-500">
+      <div key={note.id} className="border-border bg-muted rounded-xl border p-4">
+        <p className="text-muted-foreground text-sm">{note.note}</p>
+        <p className="text-muted-foreground mt-2 text-xs">
           {formatPersonName(note.author) ?? t`Mentor`} · {formatAdminDateTime(note.createdAt)}
         </p>
       </div>
@@ -211,42 +213,42 @@ export default function AdminProgramBProjectDetailPage({
 
   return (
     <div className="space-y-6">
-      <div className="rounded-2xl border border-slate-200 bg-white p-5">
+      <div className="border-border bg-card rounded-2xl border p-5">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <p className="text-[11px] font-medium tracking-[0.12em] text-slate-500 uppercase">
+            <p className="text-muted-foreground text-[11px] font-medium tracking-[0.12em] uppercase">
               {t`Program B project`}
             </p>
-            <h1 className="mt-2 text-2xl font-semibold text-slate-950">
+            <h1 className="text-foreground mt-2 text-2xl font-semibold">
               {normalizeUnknownText(project.backlogItem.title) ?? t`Program B project`}
             </h1>
-            <p className="mt-1 text-sm text-slate-600">
+            <p className="text-muted-foreground mt-1 text-sm">
               {formatEnumLabel(project.status)} · {project.team.name ?? t`Unknown team`}
             </p>
           </div>
-          <Link href={ROUTES.ADMIN.PROGRAM_B_PROJECTS} className="text-sm font-medium text-sky-700">
+          <Link href={ROUTES.ADMIN.PROGRAM_B_PROJECTS} className="text-primary text-sm font-medium">
             {t`Back to projects`}
           </Link>
         </div>
       </div>
 
       <div className="grid gap-4 lg:grid-cols-3">
-        <div className="rounded-2xl border border-slate-200 bg-white p-5">
-          <h2 className="text-lg font-semibold text-slate-950">{t`Mentor assignment`}</h2>
-          <p className="mt-1 text-sm text-slate-600">
+        <div className="border-border bg-card rounded-2xl border p-5">
+          <h2 className="text-foreground text-lg font-semibold">{t`Mentor assignment`}</h2>
+          <p className="text-muted-foreground mt-1 text-sm">
             {t`Current mentor:`}{' '}
-            <span className="font-medium text-slate-900">
+            <span className="text-foreground font-medium">
               {formatPersonName(project.mentorAssignment.mentor) ?? t`Not assigned`}
             </span>
           </p>
           {isProjectReadOnly ? (
-            <p className="mt-3 text-sm text-slate-500">
+            <p className="text-muted-foreground mt-3 text-sm">
               {t`This project is closed and now read-only.`}
             </p>
           ) : (
             <div className="mt-4 flex flex-wrap items-center gap-2">
               <select
-                className="min-w-56 rounded-md border border-slate-300 bg-white px-3 py-2 text-sm"
+                className="border-border bg-card min-w-56 rounded-md border px-3 py-2 text-sm"
                 value={selectedMentorId}
                 disabled={mentorsQuery.isLoading}
                 onChange={(event) => setSelectedMentorId(event.target.value)}
@@ -273,19 +275,19 @@ export default function AdminProgramBProjectDetailPage({
           )}
         </div>
 
-        <div className="rounded-2xl border border-slate-200 bg-white p-5">
-          <h2 className="text-lg font-semibold text-slate-950">{t`Final acceptance`}</h2>
-          <p className="mt-1 text-sm text-slate-600">
+        <div className="border-border bg-card rounded-2xl border p-5">
+          <h2 className="text-foreground text-lg font-semibold">{t`Final acceptance`}</h2>
+          <p className="text-muted-foreground mt-1 text-sm">
             {t`Company:`}{' '}
-            <span className="font-medium text-slate-900">
+            <span className="text-foreground font-medium">
               {project.acceptedByCompanyAt
                 ? formatAdminDateTime(project.acceptedByCompanyAt)
                 : t`Pending`}
             </span>
           </p>
-          <p className="mt-1 text-sm text-slate-600">
+          <p className="text-muted-foreground mt-1 text-sm">
             {t`NTI:`}{' '}
-            <span className="font-medium text-slate-900">
+            <span className="text-foreground font-medium">
               {hasNtiFinalAcceptance ? formatAdminDateTime(project.acceptedByNtiAt) : t`Pending`}
             </span>
           </p>
@@ -306,18 +308,18 @@ export default function AdminProgramBProjectDetailPage({
           ) : null}
         </div>
 
-        <div className="rounded-2xl border border-slate-200 bg-white p-5">
-          <h2 className="text-lg font-semibold text-slate-950">{t`Reward per member`}</h2>
-          <p className="mt-1 text-sm text-slate-600">
+        <div className="border-border bg-card rounded-2xl border p-5">
+          <h2 className="text-foreground text-lg font-semibold">{t`Reward per member`}</h2>
+          <p className="text-muted-foreground mt-1 text-sm">
             {t`Current reward:`}{' '}
-            <span className="font-medium text-slate-900">
+            <span className="text-foreground font-medium">
               {typeof (project.rewardPerMember as unknown) === 'number'
                 ? `€${(project.rewardPerMember as unknown as number).toLocaleString()}`
                 : t`Not set`}
             </span>
           </p>
           {isProjectReadOnly ? (
-            <p className="mt-3 text-sm text-slate-500">
+            <p className="text-muted-foreground mt-3 text-sm">
               {t`This project is closed and now read-only.`}
             </p>
           ) : (
@@ -359,29 +361,29 @@ export default function AdminProgramBProjectDetailPage({
         </TabsList>
 
         <TabsContent value="milestones">
-          <div className="rounded-2xl border border-slate-200 bg-white p-5">
-            <h2 className="text-lg font-semibold text-slate-950">{t`Milestones`}</h2>
+          <div className="border-border bg-card rounded-2xl border p-5">
+            <h2 className="text-foreground text-lg font-semibold">{t`Milestones`}</h2>
             <div className="mt-4 space-y-3">{milestonesContent}</div>
           </div>
         </TabsContent>
 
         <TabsContent value="reviews">
           <div className="grid gap-4 lg:grid-cols-2">
-            <div className="rounded-2xl border border-slate-200 bg-white p-5">
-              <h2 className="text-lg font-semibold text-slate-950">{t`Product owner reviews`}</h2>
+            <div className="border-border bg-card rounded-2xl border p-5">
+              <h2 className="text-foreground text-lg font-semibold">{t`Product owner reviews`}</h2>
               <div className="mt-4 space-y-3">{reviewsContent}</div>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-5">
-              <h2 className="text-lg font-semibold text-slate-950">{t`Mentoring notes`}</h2>
+            <div className="border-border bg-card rounded-2xl border p-5">
+              <h2 className="text-foreground text-lg font-semibold">{t`Mentoring notes`}</h2>
               <div className="mt-4 space-y-3">{notesContent}</div>
             </div>
           </div>
         </TabsContent>
 
         <TabsContent value="documents">
-          <div className="rounded-2xl border border-slate-200 bg-white p-5">
-            <h2 className="text-lg font-semibold text-slate-950">{t`Documents`}</h2>
+          <div className="border-border bg-card rounded-2xl border p-5">
+            <h2 className="text-foreground text-lg font-semibold">{t`Documents`}</h2>
             <div className="mt-4">
               <ProgramBDocumentManager
                 documents={documents}

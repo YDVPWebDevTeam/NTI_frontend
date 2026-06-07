@@ -49,7 +49,7 @@ export function TechnicalSkillsSection({ control }: TechnicalSkillsSectionProps)
         {skillsFields.map((field, index) => (
           <div
             key={field.id}
-            className="relative grid items-end gap-4 rounded-md border bg-neutral-50 p-4 md:grid-cols-12"
+            className="bg-muted relative grid items-end gap-4 rounded-md border p-4 md:grid-cols-12"
           >
             <div className="md:col-span-4">
               <FormField
@@ -150,7 +150,7 @@ export function TechnicalSkillsSection({ control }: TechnicalSkillsSectionProps)
                     variant="ghost"
                     size="icon"
                     onClick={() => removeSkill(index)}
-                    className="text-red-500 hover:bg-red-50 hover:text-red-600"
+                    className="text-destructive hover:bg-destructive/10 hover:text-destructive"
                   >
                     <Trash className="h-4 w-4" />
                   </Button>

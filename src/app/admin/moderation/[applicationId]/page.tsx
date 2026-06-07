@@ -1,7 +1,9 @@
 'use client';
 
-import { use, useMemo, useRef, useState, type ReactNode } from 'react';
+import { use, useMemo, useState, type ReactNode } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import { t } from '@lingui/core/macro';
+import { toast } from 'sonner';
 import {
   Archive as ArchiveIcon,
   ArrowLeft,
@@ -21,6 +23,21 @@ import Link from 'next/link';
 
 import { ProgramAStatusBadge } from 'features/admin-program-a/components/program-a-status-badge';
 import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  ConfirmDialog,
+  ErrorState,
+  Input,
+  Label,
+  LoadingState,
+  StatusBadge,
+  Textarea,
+} from 'components/shadcn';
+import {
+  getAdminApplicationsControllerListProgramAApplicationsQueryKey,
   useAdminApplicationsControllerActivate,
   useAdminApplicationsControllerApprove,
   useAdminApplicationsControllerArchive,
@@ -36,6 +53,9 @@ import {
   useAdminApplicationsControllerUpdateGrantBudget,
   useAdminApplicationsControllerUpdateProgramAMilestone,
 } from 'lib/api/admin/admin';
+import { getReportsControllerGetDashboardQueryKey } from 'lib/api/reports/reports';
+import { useAdminListUsers } from 'lib/api/admin-users/admin-users';
+import { AdminListUsersRole, AdminListUsersStatus } from 'lib/api/index.schemas';
 import {
   useApplicationsControllerAssignMentor,
   useApplicationsControllerCreateEvaluation,
@@ -63,6 +83,13 @@ import type {
   UpdateProgramAMilestoneDto,
 } from 'lib/api/index.schemas';
 import { ROUTES } from 'lib/constants';
+import { clampNumber, isWithinRange, parseNumericInput } from 'lib/validation/numeric';
+
+const SCORE_MIN = 0;
+const SCORE_MAX = 100;
+const GRANT_BUDGET_MIN = 0;
+// Upper bound guards against fat-finger / overflow values being sent to the backend.
+const GRANT_BUDGET_MAX = 100_000_000;
 
 type AdminProgramAApplicationDetailPageProps = {
   params: Promise<{ applicationId: string }>;
@@ -102,13 +129,10 @@ const EVALUATION_CRITERIA: EvaluationCriterion[] = [
 
 const MILESTONE_STATUSES = ['PLANNED', 'IN_PROGRESS', 'DONE', 'BLOCKED'] as const;
 
-const BUTTON_BASE_CLASS =
-  'inline-flex items-center justify-center gap-2 rounded-xl border px-4 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50';
-const PRIMARY_BUTTON_CLASS = `${BUTTON_BASE_CLASS} border-sky-600 bg-sky-600 text-white hover:bg-sky-500`;
-const OUTLINE_BUTTON_CLASS = `${BUTTON_BASE_CLASS} border-slate-200 bg-white text-slate-950 hover:bg-slate-50`;
-const DANGER_BUTTON_CLASS = `${BUTTON_BASE_CLASS} border-rose-200 bg-white text-rose-700 hover:bg-rose-50`;
+// Token-based class for the few remaining native <input>/<select> controls,
+// mirroring the shared Input/Select primitives so they stay theme-aware.
 const INPUT_CLASS =
-  'w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-950 outline-none focus:border-sky-400 focus:ring-4 focus:ring-sky-100 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-500';
+  'border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-md border px-3 py-2 text-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50';
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null;
@@ -383,9 +407,11 @@ function FieldCard({
   const textValue = toText(value, '');
 
   return (
-    <div className={`rounded-2xl border border-slate-200 bg-slate-50 p-4 ${className}`}>
-      <p className="text-xs font-semibold tracking-[0.14em] text-slate-500 uppercase">{label}</p>
-      <p className="mt-2 text-sm leading-6 whitespace-pre-wrap text-slate-900">
+    <div className={`border-border bg-muted rounded-lg border p-4 ${className}`}>
+      <p className="text-muted-foreground text-xs font-semibold tracking-[0.14em] uppercase">
+        {label}
+      </p>
+      <p className="text-foreground mt-2 text-sm leading-6 whitespace-pre-wrap">
         {textValue || t`Not provided`}
       </p>
     </div>
@@ -451,67 +477,29 @@ function SectionValueDisplay({ sectionKey, value }: { sectionKey: string; value:
   }
 
   return (
-    <pre className="overflow-x-auto rounded-2xl bg-slate-50 p-4 text-sm leading-6 whitespace-pre-wrap text-slate-700">
+    <pre className="bg-muted text-muted-foreground overflow-x-auto rounded-lg p-4 text-sm leading-6 whitespace-pre-wrap">
       {renderJsonValue(value)}
     </pre>
   );
 }
 
-function Card({ children, className = '' }: { children: ReactNode; className?: string }) {
+// Compact icon + title row for card headers (shared CardTitle is a styled text node).
+function SectionTitle({ children }: { children: ReactNode }) {
+  return <CardTitle className="flex items-center gap-2 text-xl">{children}</CardTitle>;
+}
+
+// Inline, dashed note used inside cards for small loading / empty hints.
+function InlineNote({ children }: { children: ReactNode }) {
   return (
-    <section className={`rounded-2xl border border-slate-200 bg-white shadow-sm ${className}`}>
-      {children}
-    </section>
-  );
-}
-
-function CardHeader({ children }: { children: ReactNode }) {
-  return <div className="border-b border-slate-100 px-6 py-5">{children}</div>;
-}
-
-function CardTitle({ children }: { children: ReactNode }) {
-  return <h2 className="flex items-center gap-2 text-xl font-bold text-slate-950">{children}</h2>;
-}
-
-function CardContent({ children, className = '' }: { children: ReactNode; className?: string }) {
-  return <div className={`px-6 py-5 ${className}`}>{children}</div>;
-}
-
-function EmptyState({ children }: { children: ReactNode }) {
-  return (
-    <div className="rounded-2xl border border-dashed border-slate-300 bg-slate-50 px-4 py-4 text-sm text-slate-600">
+    <div className="border-border bg-muted text-muted-foreground rounded-lg border border-dashed px-4 py-4 text-sm">
       {children}
     </div>
   );
 }
 
-function ErrorToast({ message, onDismiss }: { message: string; onDismiss: () => void }) {
-  return (
-    <div
-      className="fixed right-6 bottom-6 z-50 max-w-md rounded-2xl border border-rose-200 bg-white p-4 text-sm leading-6 text-rose-700 shadow-2xl shadow-rose-950/10"
-      role="alert"
-    >
-      <div className="flex items-start gap-3">
-        <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-rose-50 text-xs font-bold text-rose-700">
-          !
-        </div>
-        <div className="min-w-0 flex-1">
-          <p className="font-semibold text-rose-800">{t`Action failed`}</p>
-          <p className="mt-1 text-rose-700">{message}</p>
-        </div>
-        <button
-          className="rounded-lg px-2 py-1 text-rose-500 transition hover:bg-rose-50 hover:text-rose-700"
-          type="button"
-          onClick={onDismiss}
-        >
-          ×
-        </button>
-      </div>
-    </div>
-  );
-}
-
-function NativeTextarea({
+// Thin wrapper around the shared Textarea that keeps the (value: string) => void
+// onChange contract used across the lifecycle forms on this page.
+function FormTextarea({
   value,
   onChange,
   placeholder,
@@ -525,8 +513,8 @@ function NativeTextarea({
   className?: string;
 }) {
   return (
-    <textarea
-      className={`min-h-28 w-full resize-y rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm leading-6 text-slate-900 transition outline-none placeholder:text-slate-400 focus:border-sky-400 focus:ring-4 focus:ring-sky-100 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-500 ${className}`}
+    <Textarea
+      className={`min-h-28 resize-y ${className}`}
       disabled={disabled}
       placeholder={placeholder}
       value={value}
@@ -549,15 +537,13 @@ function getSectionDescription(sectionKey: string): string {
 
 function SectionCard({ section }: { section: ApplicationSectionDto }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="border-border bg-card rounded-lg border p-5 shadow-sm">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h3 className="text-lg font-bold text-slate-950">{prettySectionTitle(section.key)}</h3>
-          <p className="mt-1 text-sm text-slate-500">{getSectionDescription(section.key)}</p>
+          <h3 className="text-foreground text-lg font-bold">{prettySectionTitle(section.key)}</h3>
+          <p className="text-muted-foreground mt-1 text-sm">{getSectionDescription(section.key)}</p>
         </div>
-        <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-600">
-          v{section.version}
-        </span>
+        <StatusBadge tone="neutral">v{section.version}</StatusBadge>
       </div>
 
       <div className="mt-4">
@@ -571,32 +557,34 @@ function EvaluationCard({ evaluation }: { evaluation: ApplicationEvaluationDto }
   const scores = Array.isArray(evaluation.scores) ? evaluation.scores : [];
 
   return (
-    <div className="rounded-2xl border border-slate-200 p-4">
+    <div className="border-border rounded-lg border p-4">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="font-semibold text-slate-950">{t`Evaluator`}</p>
-          <p className="mt-1 text-sm text-slate-500">{formatDate(evaluation.createdAt)}</p>
+          <p className="text-foreground font-semibold">{t`Evaluator`}</p>
+          <p className="text-muted-foreground mt-1 text-sm">{formatDate(evaluation.createdAt)}</p>
         </div>
-        <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
+        <StatusBadge tone="success">
           {evaluation.recommendation ?? t`No recommendation`}
-        </span>
+        </StatusBadge>
       </div>
 
       {toText(evaluation.comment, '').length > 0 && (
-        <p className="mt-3 rounded-xl bg-slate-50 p-3 text-sm leading-6 text-slate-700">
+        <p className="bg-muted text-muted-foreground mt-3 rounded-md p-3 text-sm leading-6">
           {toText(evaluation.comment)}
         </p>
       )}
 
       <div className="mt-4 grid gap-3 md:grid-cols-3">
         {scores.map((score) => (
-          <div key={score.id} className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-            <p className="text-xs font-semibold tracking-[0.08em] text-slate-500 uppercase">
+          <div key={score.id} className="border-border bg-muted rounded-md border p-3">
+            <p className="text-muted-foreground text-xs font-semibold tracking-[0.08em] uppercase">
               {score.criterionCode}
             </p>
-            <p className="mt-1 text-lg font-bold text-slate-950">{score.score}/100</p>
+            <p className="text-foreground mt-1 text-lg font-bold">{score.score}/100</p>
             {toText(score.comment, '').length > 0 && (
-              <p className="mt-1 text-xs leading-5 text-slate-600">{toText(score.comment)}</p>
+              <p className="text-muted-foreground mt-1 text-xs leading-5">
+                {toText(score.comment)}
+              </p>
             )}
           </div>
         ))}
@@ -609,15 +597,13 @@ function NeedsInfoCard({ item }: { item: NeedsInfoItemDto }) {
   const replies = Array.isArray(item.replies) ? item.replies : [];
 
   return (
-    <div className="rounded-2xl border border-slate-200 p-4">
+    <div className="border-border rounded-lg border p-4">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="font-semibold text-slate-950">{toText(item.message, '—')}</p>
-          <p className="mt-1 text-sm text-slate-500">{formatDate(item.createdAt)}</p>
+          <p className="text-foreground font-semibold">{toText(item.message, '—')}</p>
+          <p className="text-muted-foreground mt-1 text-sm">{formatDate(item.createdAt)}</p>
         </div>
-        <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-700">
-          {item.status}
-        </span>
+        <StatusBadge tone="neutral">{item.status}</StatusBadge>
       </div>
 
       {replies.length > 0 && (
@@ -625,10 +611,10 @@ function NeedsInfoCard({ item }: { item: NeedsInfoItemDto }) {
           {replies.map((reply) => (
             <div
               key={reply.id}
-              className="rounded-xl bg-slate-50 p-3 text-sm leading-6 text-slate-700"
+              className="bg-muted text-muted-foreground rounded-md p-3 text-sm leading-6"
             >
               <p>{reply.message}</p>
-              <p className="mt-1 text-xs text-slate-500">{formatDate(reply.createdAt)}</p>
+              <p className="text-muted-foreground mt-1 text-xs">{formatDate(reply.createdAt)}</p>
             </div>
           ))}
         </div>
@@ -641,9 +627,9 @@ function MentorshipNoteCard({ note }: { note: ProgramAMentorshipNoteDto }) {
   const authorName = `${note.author.firstName} ${note.author.lastName}`.trim();
 
   return (
-    <div className="rounded-2xl border border-slate-200 p-4">
-      <p className="text-sm leading-6 text-slate-900">{note.content}</p>
-      <p className="mt-3 text-xs text-slate-500">
+    <div className="border-border rounded-lg border p-4">
+      <p className="text-foreground text-sm leading-6">{note.content}</p>
+      <p className="text-muted-foreground mt-3 text-xs">
         {authorName.length > 0 ? authorName : note.author.email} · {formatDate(note.createdAt)}
       </p>
     </div>
@@ -654,6 +640,8 @@ export default function AdminProgramAApplicationDetailPage({
   params,
 }: AdminProgramAApplicationDetailPageProps) {
   const { applicationId } = use(params);
+
+  const queryClient = useQueryClient();
 
   const [transitionReason, setTransitionReason] = useState('');
   const [grantBudgetInput, setGrantBudgetInput] = useState('');
@@ -681,19 +669,34 @@ export default function AdminProgramAApplicationDetailPage({
     {},
   );
   const [actionError, setActionError] = useState<string | null>(null);
-  const [errorToast, setErrorToast] = useState<{ id: number; message: string } | null>(null);
-  const errorToastIdRef = useRef(0);
 
   const showActionError = (message: string) => {
-    errorToastIdRef.current += 1;
-
     setActionError(message);
-    setErrorToast({ id: errorToastIdRef.current, message });
+    toast.error(message);
   };
+
+  // Which lifecycle transition currently has its confirmation dialog open.
+  const [confirmAction, setConfirmAction] = useState<
+    'approve' | 'reject' | 'startOnboarding' | 'activate' | 'pause' | 'complete' | 'archive' | null
+  >(null);
+  const closeConfirm = () => setConfirmAction(null);
 
   // Queue query — used as the authoritative source for mentor assignment state,
   // because ApplicationDetailDto does not include mentor fields.
   const programAApplicationsQuery = useAdminApplicationsControllerListProgramAApplications();
+
+  // Assignable mentors for the mentor dropdown. There is no Program A-specific
+  // "assignable mentors" endpoint, but the admin users list supports a role filter,
+  // so we list active MENTOR-role users instead of relying on a free-text user id.
+  const assignableMentorsQuery = useAdminListUsers(
+    {
+      role: AdminListUsersRole.MENTOR,
+      status: AdminListUsersStatus.ACTIVE,
+      limit: 100,
+    },
+    { query: { enabled: applicationId.length > 0 } },
+  );
+  const assignableMentors = assignableMentorsQuery.data?.data ?? [];
 
   const applicationQuery = useApplicationsControllerFindById<ApplicationDetailDto>(applicationId, {
     query: { enabled: applicationId.length > 0 },
@@ -743,11 +746,25 @@ export default function AdminProgramAApplicationDetailPage({
     void milestonesQuery.refetch();
   };
 
+  // Invalidate the shared queries that other admin views read from, so navigating
+  // back to the moderation list / overview reflects the new lifecycle status instead
+  // of stale data. The detail page only holds its own query instances; without this,
+  // the list query key and the dashboard counts would never update after a transition.
+  const invalidateSharedApplicationQueries = () => {
+    void queryClient.invalidateQueries({
+      queryKey: getAdminApplicationsControllerListProgramAApplicationsQueryKey(),
+    });
+    void queryClient.invalidateQueries({
+      queryKey: getReportsControllerGetDashboardQueryKey(),
+    });
+  };
+
   const refetchAllData = () => {
     refetchApplicationData();
     void sectionsQuery.refetch();
     refetchReviewData();
     refetchMentorshipData();
+    invalidateSharedApplicationQueries();
   };
 
   const mutationOptions = {
@@ -1118,7 +1135,7 @@ export default function AdminProgramAApplicationDetailPage({
     if (!validateBaseAction()) return;
 
     if (!hasMentorUserId) {
-      showActionError(t`Enter a mentor user ID before assigning a mentor.`);
+      showActionError(t`Select a mentor before assigning one.`);
 
       return;
     }
@@ -1179,6 +1196,18 @@ export default function AdminProgramAApplicationDetailPage({
       return;
     }
 
+    const invalidCriterion = EVALUATION_CRITERIA.find(
+      (criterion) => !isWithinRange(evaluationScores[criterion.code], SCORE_MIN, SCORE_MAX),
+    );
+
+    if (invalidCriterion) {
+      showActionError(
+        t`Each score must be a number between ${SCORE_MIN} and ${SCORE_MAX}. Check "${invalidCriterion.label}".`,
+      );
+
+      return;
+    }
+
     const data: CreateApplicationEvaluationDto = {
       recommendation: evaluationRecommendation,
       comment: evaluationComment.trim().length > 0 ? evaluationComment.trim() : undefined,
@@ -1230,14 +1259,18 @@ export default function AdminProgramAApplicationDetailPage({
       return;
     }
 
-    const parsed = parseFloat(grantBudgetInput.trim());
+    const parsed = parseNumericInput(grantBudgetInput);
 
-    if (!grantBudgetInput.trim() || !Number.isFinite(parsed) || parsed < 0) {
-      showActionError(t`Enter a valid non-negative number for the grant budget.`);
+    if (parsed === null || !isWithinRange(parsed, GRANT_BUDGET_MIN, GRANT_BUDGET_MAX)) {
+      showActionError(
+        t`Enter a grant budget between ${GRANT_BUDGET_MIN} and ${GRANT_BUDGET_MAX} EUR.`,
+      );
 
       return;
     }
 
+    // The generated client types grantBudget as a loose object, but the backend
+    // expects a numeric EUR amount; this cast is required to honour the real contract.
     const data: UpdateApplicationGrantBudgetDto = {
       grantBudget: parsed as unknown as UpdateApplicationGrantBudgetDto['grantBudget'],
     };
@@ -1246,48 +1279,37 @@ export default function AdminProgramAApplicationDetailPage({
   };
 
   if (applicationQuery.isLoading) {
-    return (
-      <div className="flex min-h-96 items-center justify-center rounded-2xl border border-slate-200 bg-white">
-        <div className="flex items-center gap-3 text-sm font-medium text-slate-600">
-          <Loader2 className="h-4 w-4 animate-spin" />
-          {t`Loading application detail...`}
-        </div>
-      </div>
-    );
+    return <LoadingState label={t`Loading application detail...`} />;
   }
 
   return (
     <div className="space-y-6">
-      {errorToast && (
-        <ErrorToast message={errorToast.message} onDismiss={() => setErrorToast(null)} />
-      )}
-
-      <Link
-        className={`${OUTLINE_BUTTON_CLASS} w-fit shadow-sm`}
-        href={ROUTES.ADMIN.PROGRAM_A_MODERATION}
-      >
-        <ArrowLeft className="h-4 w-4" />
-        {t`Back to review queue`}
-      </Link>
+      <Button asChild className="w-fit" variant="outline">
+        <Link href={ROUTES.ADMIN.PROGRAM_A_MODERATION}>
+          <ArrowLeft className="h-4 w-4" />
+          {t`Back to review queue`}
+        </Link>
+      </Button>
 
       {(applicationQuery.isError || actionError) && (
-        <div className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm leading-6 text-rose-700">
-          {actionError ?? t`Unable to load application detail from the backend.`}
-        </div>
+        <ErrorState
+          description={actionError ?? t`Unable to load application detail from the backend.`}
+          title={t`Action failed`}
+        />
       )}
 
       <Card>
         <div className="space-y-6 p-6">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
             <div>
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-sky-50 text-sky-700">
+              <div className="bg-accent text-primary mb-4 flex h-12 w-12 items-center justify-center rounded-full">
                 <ClipboardCheck className="h-6 w-6" />
               </div>
               <div className="flex flex-wrap items-center gap-3">
-                <h1 className="text-3xl font-bold text-slate-950">{applicationTitle}</h1>
+                <h1 className="text-foreground text-3xl font-bold">{applicationTitle}</h1>
                 {status && <ProgramAStatusBadge status={status} />}
               </div>
-              <p className="mt-3 max-w-3xl text-base leading-7 text-slate-600">
+              <p className="text-muted-foreground mt-3 max-w-3xl text-base leading-7">
                 {t`Review metadata, evaluate the application, request information, assign a mentor, and manage Program A delivery milestones.`}
               </p>
             </div>
@@ -1295,20 +1317,20 @@ export default function AdminProgramAApplicationDetailPage({
 
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {applicationInfoRows.map((row) => (
-              <div key={row.label} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <p className="text-xs font-semibold tracking-[0.14em] text-slate-500 uppercase">
+              <div key={row.label} className="border-border bg-muted rounded-lg border p-4">
+                <p className="text-muted-foreground text-xs font-semibold tracking-[0.14em] uppercase">
                   {row.label}
                 </p>
-                <p className="mt-2 font-semibold break-words text-slate-950">
+                <p className="text-foreground mt-2 font-semibold break-words">
                   {toText(row.value, '—')}
                 </p>
               </div>
             ))}
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 md:col-span-2 xl:col-span-4">
-              <p className="text-xs font-semibold tracking-[0.14em] text-slate-500 uppercase">
+            <div className="border-border bg-muted rounded-lg border p-4 md:col-span-2 xl:col-span-4">
+              <p className="text-muted-foreground text-xs font-semibold tracking-[0.14em] uppercase">
                 {t`Decision reason`}
               </p>
-              <p className="mt-2 text-sm leading-6 text-slate-800">
+              <p className="text-foreground mt-2 text-sm leading-6">
                 {toText(application?.decisionRationale, '—')}
               </p>
             </div>
@@ -1320,17 +1342,17 @@ export default function AdminProgramAApplicationDetailPage({
         <div className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>
-                <FileText className="h-5 w-5 text-sky-700" />
+              <SectionTitle>
+                <FileText className="text-primary h-5 w-5" />
                 {t`Application sections`}
-              </CardTitle>
+              </SectionTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               {sectionsQuery.isLoading && (
-                <EmptyState>{t`Loading application sections...`}</EmptyState>
+                <InlineNote>{t`Loading application sections...`}</InlineNote>
               )}
               {!sectionsQuery.isLoading && sections.length === 0 && (
-                <EmptyState>{t`No application sections were returned by the backend.`}</EmptyState>
+                <InlineNote>{t`No application sections were returned by the backend.`}</InlineNote>
               )}
               {sections.map((section) => (
                 <SectionCard key={section.id} section={section} />
@@ -1340,44 +1362,51 @@ export default function AdminProgramAApplicationDetailPage({
 
           <Card>
             <CardHeader>
-              <CardTitle>
-                <Star className="h-5 w-5 text-sky-700" />
+              <SectionTitle>
+                <Star className="text-primary h-5 w-5" />
                 {t`Evaluations`}
-              </CardTitle>
+              </SectionTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {evaluationsQuery.isLoading && <EmptyState>{t`Loading evaluations...`}</EmptyState>}
+              {evaluationsQuery.isLoading && <InlineNote>{t`Loading evaluations...`}</InlineNote>}
               {!evaluationsQuery.isLoading && evaluations.length === 0 && (
-                <EmptyState>{t`No evaluations were returned by the backend.`}</EmptyState>
+                <InlineNote>{t`No evaluations were returned by the backend.`}</InlineNote>
               )}
               {evaluations.map((evaluation) => (
                 <EvaluationCard key={evaluation.id} evaluation={evaluation} />
               ))}
 
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <p className="font-semibold text-slate-950">{t`Add evaluation`}</p>
-                <p className="mt-1 text-sm leading-6 text-slate-500">
+              <div className="border-border bg-muted rounded-lg border p-4">
+                <p className="text-foreground font-semibold">{t`Add evaluation`}</p>
+                <p className="text-muted-foreground mt-1 text-sm leading-6">
                   {t`Create criterion-based scoring after formal verification or during evaluation.`}
                 </p>
 
                 <div className="mt-4 grid gap-3 md:grid-cols-3">
                   {EVALUATION_CRITERIA.map((criterion) => (
                     <label key={criterion.code} className="block">
-                      <span className="text-xs font-semibold tracking-[0.08em] text-slate-500 uppercase">
+                      <span className="text-muted-foreground text-xs font-semibold tracking-[0.08em] uppercase">
                         {criterion.label}
                       </span>
                       <input
                         className={`${INPUT_CLASS} mt-2 font-semibold`}
-                        max={100}
-                        min={0}
+                        max={SCORE_MAX}
+                        min={SCORE_MIN}
                         type="number"
                         value={evaluationScores[criterion.code]}
-                        onChange={(event) =>
+                        onChange={(event) => {
+                          const parsed = parseNumericInput(event.target.value);
+
+                          // Ignore non-numeric / empty input so we never store NaN.
+                          if (parsed === null) {
+                            return;
+                          }
+
                           setEvaluationScores((currentScores) => ({
                             ...currentScores,
-                            [criterion.code]: Number(event.target.value),
-                          }))
-                        }
+                            [criterion.code]: clampNumber(parsed, SCORE_MIN, SCORE_MAX),
+                          }));
+                        }}
                       />
                     </label>
                   ))}
@@ -1385,7 +1414,7 @@ export default function AdminProgramAApplicationDetailPage({
 
                 <div className="mt-4 grid gap-3 md:grid-cols-[220px_minmax(0,1fr)]">
                   <label className="block">
-                    <span className="text-xs font-semibold tracking-[0.08em] text-slate-500 uppercase">
+                    <span className="text-muted-foreground text-xs font-semibold tracking-[0.08em] uppercase">
                       {t`Recommendation`}
                     </span>
                     <select
@@ -1399,7 +1428,7 @@ export default function AdminProgramAApplicationDetailPage({
                     </select>
                   </label>
                   <label className="block">
-                    <span className="text-xs font-semibold tracking-[0.08em] text-slate-500 uppercase">
+                    <span className="text-muted-foreground text-xs font-semibold tracking-[0.08em] uppercase">
                       {t`Comment`}
                     </span>
                     <input
@@ -1410,8 +1439,8 @@ export default function AdminProgramAApplicationDetailPage({
                   </label>
                 </div>
 
-                <button
-                  className={`${PRIMARY_BUTTON_CLASS} mt-4`}
+                <Button
+                  className="mt-4"
                   disabled={!canRunAction || !canCreateEvaluation(status)}
                   type="button"
                   onClick={runCreateEvaluation}
@@ -1420,32 +1449,32 @@ export default function AdminProgramAApplicationDetailPage({
                     <Loader2 className="h-4 w-4 animate-spin" />
                   )}
                   {t`Save evaluation`}
-                </button>
+                </Button>
               </div>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>
-                <MessageSquareText className="h-5 w-5 text-sky-700" />
+              <SectionTitle>
+                <MessageSquareText className="text-primary h-5 w-5" />
                 {t`Needs-info thread`}
-              </CardTitle>
+              </SectionTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               {needsInfoQuery.isLoading && (
-                <EmptyState>{t`Loading needs-info thread...`}</EmptyState>
+                <InlineNote>{t`Loading needs-info thread...`}</InlineNote>
               )}
               {!needsInfoQuery.isLoading && needsInfoItems.length === 0 && (
-                <EmptyState>{t`No needs-info messages were returned by the backend.`}</EmptyState>
+                <InlineNote>{t`No needs-info messages were returned by the backend.`}</InlineNote>
               )}
               {needsInfoItems.map((item) => (
                 <NeedsInfoCard key={item.id} item={item} />
               ))}
 
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <p className="font-semibold text-slate-950">{t`Request additional information`}</p>
-                <NativeTextarea
+              <div className="border-border bg-muted rounded-lg border p-4">
+                <p className="text-foreground font-semibold">{t`Request additional information`}</p>
+                <FormTextarea
                   disabled={!canRunAction}
                   placeholder={t`Explain what the team has to clarify or upload...`}
                   value={needsInfoMessage}
@@ -1453,28 +1482,28 @@ export default function AdminProgramAApplicationDetailPage({
                 />
                 <div className="mt-3 flex flex-col gap-3 md:flex-row md:items-end">
                   <label className="block md:w-56">
-                    <span className="text-xs font-semibold tracking-[0.08em] text-slate-500 uppercase">
+                    <span className="text-muted-foreground text-xs font-semibold tracking-[0.08em] uppercase">
                       {t`Due date`}
                     </span>
-                    <input
-                      className={`${INPUT_CLASS} mt-2`}
+                    <Input
+                      className="mt-2"
                       disabled={!canRunAction}
                       type="date"
                       value={needsInfoDueAt}
                       onChange={(event) => setNeedsInfoDueAt(event.target.value)}
                     />
                   </label>
-                  <button
-                    className={OUTLINE_BUTTON_CLASS}
+                  <Button
                     disabled={!canRunAction || !hasNeedsInfoMessage}
                     type="button"
+                    variant="outline"
                     onClick={runCreateNeedsInfo}
                   >
                     {createNeedsInfoMutation.isPending && (
                       <Loader2 className="h-4 w-4 animate-spin" />
                     )}
                     {t`Create needs-info item`}
-                  </button>
+                  </Button>
                 </div>
               </div>
             </CardContent>
@@ -1482,53 +1511,77 @@ export default function AdminProgramAApplicationDetailPage({
 
           <Card>
             <CardHeader>
-              <CardTitle>
-                <NotebookPen className="h-5 w-5 text-sky-700" />
+              <SectionTitle>
+                <NotebookPen className="text-primary h-5 w-5" />
                 {t`Mentorship notes`}
-              </CardTitle>
+              </SectionTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <p className="font-semibold text-slate-950">{t`Mentor assignment`}</p>
-                <p className="mt-1 text-sm leading-6 text-slate-500">
+              <div className="border-border bg-muted rounded-lg border p-4">
+                <p className="text-foreground font-semibold">{t`Mentor assignment`}</p>
+                <p className="text-muted-foreground mt-1 text-sm leading-6">
                   {t`Assign or update the Program A mentor responsible for delivery follow-up.`}
                 </p>
-                <div className="mt-3 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-600">
-                  <span className="font-semibold text-slate-950">{t`Current mentor`}:</span>{' '}
+                <div className="border-border bg-background text-muted-foreground mt-3 rounded-md border px-3 py-2 text-sm">
+                  <span className="text-foreground font-semibold">{t`Current mentor`}:</span>{' '}
                   {mentorAssigned ? t`Assigned` : t`Not assigned`}
                 </div>
                 <div className="mt-3 flex flex-col gap-3 md:flex-row">
-                  <input
+                  <select
                     className={`${INPUT_CLASS} min-w-0 flex-1`}
-                    disabled={!canRunAction}
-                    placeholder={t`Mentor user id`}
+                    disabled={!canRunAction || assignableMentorsQuery.isLoading}
                     value={mentorUserId}
                     onChange={(event) => setMentorUserId(event.target.value)}
-                  />
-                  <button
-                    className={OUTLINE_BUTTON_CLASS}
+                  >
+                    <option value="">
+                      {assignableMentorsQuery.isLoading
+                        ? t`Loading mentors...`
+                        : t`Select a mentor`}
+                    </option>
+                    {assignableMentors.map((mentor) => {
+                      const mentorName = `${mentor.firstName} ${mentor.lastName}`.trim();
+
+                      return (
+                        <option key={mentor.id} value={mentor.id}>
+                          {mentorName.length > 0 ? `${mentorName} (${mentor.email})` : mentor.email}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  {/* TODO: replace this list with a searchable mentor picker once a
+                      dedicated "assignable mentors" search endpoint exists. */}
+                  <Button
                     disabled={!canRunAction || !hasMentorUserId}
                     type="button"
+                    variant="outline"
                     onClick={runAssignMentor}
                   >
                     {assignMentorMutation.isPending && <Loader2 className="h-4 w-4 animate-spin" />}
                     <UserRoundPlus className="h-4 w-4" />
                     {mentorAssigned ? t`Reassign mentor` : t`Assign mentor`}
-                  </button>
+                  </Button>
                 </div>
+                <p className="text-muted-foreground mt-2 text-xs leading-5">
+                  {t`Pick an active MENTOR-role user. The selected user becomes responsible for delivery follow-up.`}
+                </p>
+                {!assignableMentorsQuery.isLoading && assignableMentors.length === 0 ? (
+                  <p className="text-muted-foreground mt-2 text-xs leading-5">
+                    {t`No active mentor-role users were found. Create or activate a user with the MENTOR role to assign one.`}
+                  </p>
+                ) : null}
               </div>
 
               {mentorshipNotesQuery.isLoading && (
-                <EmptyState>{t`Loading mentorship notes...`}</EmptyState>
+                <InlineNote>{t`Loading mentorship notes...`}</InlineNote>
               )}
               {!mentorshipNotesQuery.isLoading && mentorshipNotes.length === 0 && (
-                <EmptyState>{t`No mentorship notes were returned by the backend.`}</EmptyState>
+                <InlineNote>{t`No mentorship notes were returned by the backend.`}</InlineNote>
               )}
               {mentorshipNotes.map((note) => (
                 <MentorshipNoteCard key={note.id} note={note} />
               ))}
 
-              <NativeTextarea
+              <FormTextarea
                 disabled={!canUseMentorshipNotes}
                 placeholder={
                   mentorAssigned
@@ -1538,33 +1591,33 @@ export default function AdminProgramAApplicationDetailPage({
                 value={mentorshipNote}
                 onChange={setMentorshipNote}
               />
-              <button
-                className={OUTLINE_BUTTON_CLASS}
+              <Button
                 disabled={!canUseMentorshipNotes || !hasMentorshipNote}
                 type="button"
+                variant="outline"
                 onClick={runCreateMentorshipNote}
               >
                 {createMentorshipNoteMutation.isPending && (
                   <Loader2 className="h-4 w-4 animate-spin" />
                 )}
                 {t`Add note`}
-              </button>
+              </Button>
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>
-                <NotebookPen className="h-5 w-5 text-sky-700" />
+              <SectionTitle>
+                <NotebookPen className="text-primary h-5 w-5" />
                 {t`Program A milestones`}
-              </CardTitle>
+              </SectionTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               {milestonesQuery.isLoading && (
-                <EmptyState>{t`Loading Program A milestones...`}</EmptyState>
+                <InlineNote>{t`Loading Program A milestones...`}</InlineNote>
               )}
               {!milestonesQuery.isLoading && milestones.length === 0 && (
-                <EmptyState>{t`No Program A milestones were returned by the backend.`}</EmptyState>
+                <InlineNote>{t`No Program A milestones were returned by the backend.`}</InlineNote>
               )}
 
               {milestones.map((milestone) => {
@@ -1572,16 +1625,16 @@ export default function AdminProgramAApplicationDetailPage({
                   milestoneProgressDrafts[milestone.id] ?? toText(milestone.progressNote, '');
 
                 return (
-                  <div key={milestone.id} className="rounded-2xl border border-slate-200 p-4">
+                  <div key={milestone.id} className="border-border rounded-lg border p-4">
                     <div className="flex flex-wrap items-start justify-between gap-3">
                       <div>
-                        <p className="font-semibold text-slate-950">{milestone.title}</p>
-                        <p className="mt-1 text-sm text-slate-500">
+                        <p className="text-foreground font-semibold">{milestone.title}</p>
+                        <p className="text-muted-foreground mt-1 text-sm">
                           {t`Due`}: {formatDate(milestone.dueAt)}
                         </p>
                       </div>
                       <select
-                        className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-800 outline-none focus:border-sky-400 focus:ring-4 focus:ring-sky-100"
+                        className={`${INPUT_CLASS} h-auto w-auto py-2 text-xs font-semibold`}
                         disabled={!canRunAction}
                         value={milestone.status}
                         onChange={(event) =>
@@ -1599,18 +1652,18 @@ export default function AdminProgramAApplicationDetailPage({
                     </div>
 
                     {toText(milestone.description, '').length > 0 && (
-                      <p className="mt-3 text-sm leading-6 text-slate-600">
+                      <p className="text-muted-foreground mt-3 text-sm leading-6">
                         {milestone.description}
                       </p>
                     )}
 
                     <div className="mt-4 grid gap-3 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
                       <label className="block">
-                        <span className="text-xs font-semibold tracking-[0.08em] text-slate-500 uppercase">
+                        <span className="text-muted-foreground text-xs font-semibold tracking-[0.08em] uppercase">
                           {t`Progress note`}
                         </span>
-                        <input
-                          className={`${INPUT_CLASS} mt-2`}
+                        <Input
+                          className="mt-2"
                           disabled={!canRunAction}
                           value={progressDraft}
                           onChange={(event) =>
@@ -1621,10 +1674,10 @@ export default function AdminProgramAApplicationDetailPage({
                           }
                         />
                       </label>
-                      <button
-                        className={OUTLINE_BUTTON_CLASS}
+                      <Button
                         disabled={!canRunAction}
                         type="button"
+                        variant="outline"
                         onClick={() =>
                           runUpdateMilestone(milestone, {
                             progressNote: progressDraft.trim() || undefined,
@@ -1632,14 +1685,14 @@ export default function AdminProgramAApplicationDetailPage({
                         }
                       >
                         {t`Save progress`}
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 );
               })}
 
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                <p className="font-semibold text-slate-950">{t`Create milestone`}</p>
+              <div className="border-border bg-muted rounded-lg border p-4">
+                <p className="text-foreground font-semibold">{t`Create milestone`}</p>
                 <div className="mt-4 grid gap-3 md:grid-cols-2">
                   <input
                     className={INPUT_CLASS}
@@ -1686,7 +1739,7 @@ export default function AdminProgramAApplicationDetailPage({
                     }
                   />
                 </div>
-                <NativeTextarea
+                <FormTextarea
                   className="mt-3 min-h-20"
                   disabled={!canRunAction}
                   placeholder={t`Milestone description`}
@@ -1695,8 +1748,8 @@ export default function AdminProgramAApplicationDetailPage({
                     setMilestoneDraft((draft) => ({ ...draft, description }))
                   }
                 />
-                <button
-                  className={`${PRIMARY_BUTTON_CLASS} mt-3`}
+                <Button
+                  className="mt-3"
                   disabled={!canRunAction || !hasMilestoneTitle}
                   type="button"
                   onClick={runCreateMilestone}
@@ -1705,7 +1758,7 @@ export default function AdminProgramAApplicationDetailPage({
                     <Loader2 className="h-4 w-4 animate-spin" />
                   )}
                   {t`Create milestone`}
-                </button>
+                </Button>
               </div>
             </CardContent>
           </Card>
@@ -1714,24 +1767,24 @@ export default function AdminProgramAApplicationDetailPage({
         <aside className="space-y-4 xl:sticky xl:top-6 xl:self-start">
           <Card>
             <CardHeader>
-              <CardTitle>
-                <PlayCircle className="h-5 w-5 text-sky-700" />
+              <SectionTitle>
+                <PlayCircle className="text-primary h-5 w-5" />
                 {t`Moderation actions`}
-              </CardTitle>
+              </SectionTitle>
             </CardHeader>
             <CardContent className="space-y-5">
               <div className="space-y-2">
-                <p className="text-xs font-semibold tracking-[0.14em] text-slate-500 uppercase">
+                <p className="text-muted-foreground text-xs font-semibold tracking-[0.14em] uppercase">
                   {t`Transition reason`}
                 </p>
-                <NativeTextarea
+                <FormTextarea
                   className="min-h-32"
                   disabled={!hasApplication || isAnyMutationPending}
                   placeholder={t`Write an optional note. Reject, pause, and archive require a reason.`}
                   value={transitionReason}
                   onChange={setTransitionReason}
                 />
-                <p className="text-xs leading-5 text-slate-500">
+                <p className="text-muted-foreground text-xs leading-5">
                   {isAnyMutationPending
                     ? t`Please wait. The previous action is still running.`
                     : t`Use the reason field when a transition requires a reason.`}
@@ -1739,100 +1792,112 @@ export default function AdminProgramAApplicationDetailPage({
               </div>
 
               <div className="space-y-2">
-                <p className="text-xs font-semibold tracking-[0.14em] text-slate-500 uppercase">
+                <p className="text-muted-foreground text-xs font-semibold tracking-[0.14em] uppercase">
                   {t`Review workflow`}
                 </p>
-                <button
-                  className={`${PRIMARY_BUTTON_CLASS} w-full justify-start`}
+                {/* The currently-valid transition is shown as a primary button so the
+                    expected next step is obvious; not-yet-applicable ones stay outlined
+                    and de-emphasized. */}
+                <Button
+                  className={`w-full justify-start ${canFormalVerify ? '' : 'opacity-60'}`}
                   disabled={!canRunAction || !canFormalVerify}
                   type="button"
+                  variant={canFormalVerify ? 'default' : 'outline'}
                   onClick={runFormalVerify}
                 >
                   <ShieldCheck className="h-4 w-4" />
                   {t`Formal verify`}
-                </button>
-                <button
-                  className={`${OUTLINE_BUTTON_CLASS} w-full justify-start`}
+                </Button>
+                <Button
+                  className={`w-full justify-start ${canStartEvaluation ? '' : 'opacity-60'}`}
                   disabled={!canRunAction || !canStartEvaluation}
                   type="button"
+                  variant={canStartEvaluation ? 'default' : 'outline'}
                   onClick={runStartEvaluation}
                 >
                   <Star className="h-4 w-4" />
                   {t`Start evaluation`}
-                </button>
-                <button
-                  className={`${OUTLINE_BUTTON_CLASS} w-full justify-start`}
+                </Button>
+                <Button
+                  className={`w-full justify-start ${canApprove ? '' : 'opacity-60'}`}
                   disabled={!canRunAction || !canApprove}
                   type="button"
-                  onClick={runApprove}
+                  variant={canApprove ? 'default' : 'outline'}
+                  onClick={() => setConfirmAction('approve')}
                 >
                   <UserRoundCheck className="h-4 w-4" />
                   {t`Approve`}
-                </button>
-                <button
-                  className={`${DANGER_BUTTON_CLASS} w-full justify-start`}
-                  disabled={!canRunAction || !canReject || !hasTransitionReason}
+                </Button>
+                <Button
+                  className={`w-full justify-start ${canReject ? '' : 'opacity-60'}`}
+                  disabled={!canRunAction || !canReject}
                   type="button"
-                  onClick={runReject}
+                  variant={canReject ? 'destructive' : 'outline'}
+                  onClick={() => setConfirmAction('reject')}
                 >
                   <MessageSquareText className="h-4 w-4" />
                   {t`Reject`}
-                </button>
+                </Button>
               </div>
 
               <div className="space-y-2">
-                <p className="text-xs font-semibold tracking-[0.14em] text-slate-500 uppercase">
+                <p className="text-muted-foreground text-xs font-semibold tracking-[0.14em] uppercase">
                   {t`Delivery workflow`}
                 </p>
-                <button
-                  className={`${OUTLINE_BUTTON_CLASS} w-full justify-start`}
+                <Button
+                  className={`w-full justify-start ${canStartOnboarding ? '' : 'opacity-60'}`}
                   disabled={!canRunAction || !canStartOnboarding}
                   type="button"
-                  onClick={runStartOnboarding}
+                  variant={canStartOnboarding ? 'default' : 'outline'}
+                  onClick={() => setConfirmAction('startOnboarding')}
                 >
                   <PlayCircle className="h-4 w-4" />
                   {t`Start onboarding`}
-                </button>
-                <button
-                  className={`${OUTLINE_BUTTON_CLASS} w-full justify-start`}
+                </Button>
+                <Button
+                  className={`w-full justify-start ${canActivateProject ? '' : 'opacity-60'}`}
                   disabled={!canRunAction || !canActivateProject}
                   type="button"
-                  onClick={runActivate}
+                  variant={canActivateProject ? 'default' : 'outline'}
+                  onClick={() => setConfirmAction('activate')}
                 >
                   <PlayCircle className="h-4 w-4" />
                   {t`Activate project`}
-                </button>
-                <button
-                  className={`${OUTLINE_BUTTON_CLASS} w-full justify-start`}
-                  disabled={!canRunAction || !canPauseProject || !hasTransitionReason}
+                </Button>
+                <Button
+                  className={`w-full justify-start ${canPauseProject ? '' : 'opacity-60'}`}
+                  disabled={!canRunAction || !canPauseProject}
                   type="button"
-                  onClick={runPause}
+                  variant={canPauseProject ? 'default' : 'outline'}
+                  onClick={() => setConfirmAction('pause')}
                 >
                   <MessageSquareText className="h-4 w-4" />
                   {t`Pause project`}
-                </button>
-                <button
-                  className={`${OUTLINE_BUTTON_CLASS} w-full justify-start`}
+                </Button>
+                <Button
+                  className={`w-full justify-start ${canCompleteProject ? '' : 'opacity-60'}`}
                   disabled={!canRunAction || !canCompleteProject}
                   type="button"
-                  onClick={runComplete}
+                  variant={canCompleteProject ? 'default' : 'outline'}
+                  onClick={() => setConfirmAction('complete')}
                 >
                   <NotebookPen className="h-4 w-4" />
                   {t`Complete project`}
-                </button>
-                <button
-                  className={`${OUTLINE_BUTTON_CLASS} w-full justify-start`}
-                  disabled={!canRunAction || !canArchive || !hasTransitionReason}
+                </Button>
+                <Button
+                  className={`w-full justify-start ${canArchive ? '' : 'opacity-60'}`}
+                  disabled={!canRunAction || !canArchive}
                   type="button"
-                  onClick={runArchive}
+                  variant={canArchive ? 'destructive' : 'outline'}
+                  onClick={() => setConfirmAction('archive')}
                 >
                   <ArchiveIcon className="h-4 w-4" />
                   {t`Archive`}
-                </button>
+                </Button>
               </div>
 
               {isAnyMutationPending && (
-                <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-600">
+                <div className="border-border bg-muted text-muted-foreground flex items-center gap-2 rounded-md border px-3 py-2 text-xs">
                   <Loader2 className="h-3.5 w-3.5 animate-spin" />
                   {t`Updating application...`}
                 </div>
@@ -1842,24 +1907,24 @@ export default function AdminProgramAApplicationDetailPage({
 
           <Card>
             <CardHeader>
-              <CardTitle>
-                <DollarSign className="h-5 w-5 text-sky-700" />
+              <SectionTitle>
+                <DollarSign className="text-primary h-5 w-5" />
                 {t`Grant budget`}
-              </CardTitle>
+              </SectionTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              <div className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-600">
-                <span className="font-semibold text-slate-950">{t`Current budget`}:</span>{' '}
+              <div className="border-border bg-muted text-muted-foreground rounded-md border px-3 py-2 text-sm">
+                <span className="text-foreground font-semibold">{t`Current budget`}:</span>{' '}
                 {grantBudgetDisplay}
               </div>
-              <p className="text-xs leading-5 text-slate-500">
+              <p className="text-muted-foreground text-xs leading-5">
                 {canSetGrantBudget
                   ? t`Set the approved grant budget in EUR for this project.`
                   : t`Grant budget can be set after the application is approved.`}
               </p>
               <div className="flex flex-col gap-2">
                 <label className="block">
-                  <span className="text-xs font-semibold tracking-[0.08em] text-slate-500 uppercase">
+                  <span className="text-muted-foreground text-xs font-semibold tracking-[0.08em] uppercase">
                     {t`Amount (EUR)`}
                   </span>
                   <input
@@ -1873,22 +1938,146 @@ export default function AdminProgramAApplicationDetailPage({
                     onChange={(event) => setGrantBudgetInput(event.target.value)}
                   />
                 </label>
-                <button
-                  className={`${OUTLINE_BUTTON_CLASS} w-full justify-start`}
+                <Button
+                  className="w-full justify-start"
                   disabled={!canRunAction || !canSetGrantBudget || !grantBudgetInput.trim()}
                   type="button"
+                  variant="outline"
                   onClick={runUpdateGrantBudget}
                 >
                   {updateGrantBudgetMutation.isPending && (
                     <Loader2 className="h-4 w-4 animate-spin" />
                   )}
                   {t`Set grant budget`}
-                </button>
+                </Button>
               </div>
             </CardContent>
           </Card>
         </aside>
       </div>
+
+      <ConfirmDialog
+        confirmLabel={t`Approve`}
+        description={t`Approve this application and move it to the approved state.`}
+        loading={approveMutation.isPending}
+        open={confirmAction === 'approve'}
+        title={t`Approve application?`}
+        onConfirm={() => {
+          runApprove();
+          closeConfirm();
+        }}
+        onOpenChange={(open) => (open ? undefined : closeConfirm())}
+      />
+
+      <ConfirmDialog
+        confirmDisabled={!hasTransitionReason}
+        confirmLabel={t`Reject`}
+        description={t`Rejecting an application is irreversible. Provide a reason that will be recorded on the decision.`}
+        destructive
+        loading={rejectMutation.isPending}
+        open={confirmAction === 'reject'}
+        title={t`Reject application?`}
+        onConfirm={() => {
+          runReject();
+          closeConfirm();
+        }}
+        onOpenChange={(open) => (open ? undefined : closeConfirm())}
+      >
+        <div className="space-y-2">
+          <Label htmlFor="reject-reason">{t`Reason`}</Label>
+          <FormTextarea
+            placeholder={t`Explain why this application is being rejected...`}
+            value={transitionReason}
+            onChange={setTransitionReason}
+          />
+        </div>
+      </ConfirmDialog>
+
+      <ConfirmDialog
+        confirmLabel={t`Start onboarding`}
+        description={t`Move this approved application into the onboarding stage.`}
+        loading={startOnboardingMutation.isPending}
+        open={confirmAction === 'startOnboarding'}
+        title={t`Start onboarding?`}
+        onConfirm={() => {
+          runStartOnboarding();
+          closeConfirm();
+        }}
+        onOpenChange={(open) => (open ? undefined : closeConfirm())}
+      />
+
+      <ConfirmDialog
+        confirmLabel={t`Activate project`}
+        description={t`Activate this project so delivery tracking can begin.`}
+        loading={activateMutation.isPending}
+        open={confirmAction === 'activate'}
+        title={t`Activate project?`}
+        onConfirm={() => {
+          runActivate();
+          closeConfirm();
+        }}
+        onOpenChange={(open) => (open ? undefined : closeConfirm())}
+      />
+
+      <ConfirmDialog
+        confirmDisabled={!hasTransitionReason}
+        confirmLabel={t`Pause project`}
+        description={t`Pause this active project. Provide a reason that will be recorded.`}
+        loading={pauseMutation.isPending}
+        open={confirmAction === 'pause'}
+        title={t`Pause project?`}
+        onConfirm={() => {
+          runPause();
+          closeConfirm();
+        }}
+        onOpenChange={(open) => (open ? undefined : closeConfirm())}
+      >
+        <div className="space-y-2">
+          <Label htmlFor="pause-reason">{t`Reason`}</Label>
+          <FormTextarea
+            placeholder={t`Explain why this project is being paused...`}
+            value={transitionReason}
+            onChange={setTransitionReason}
+          />
+        </div>
+      </ConfirmDialog>
+
+      <ConfirmDialog
+        confirmLabel={t`Complete project`}
+        description={t`Mark this project as completed. Completion is terminal and cannot be undone.`}
+        loading={completeMutation.isPending}
+        open={confirmAction === 'complete'}
+        title={t`Complete project?`}
+        onConfirm={() => {
+          runComplete();
+          closeConfirm();
+        }}
+        onOpenChange={(open) => (open ? undefined : closeConfirm())}
+      />
+
+      <ConfirmDialog
+        confirmDisabled={!hasTransitionReason}
+        confirmLabel={t`Archive`}
+        description={t`Archiving is irreversible. Provide a reason that will be recorded on the application.`}
+        destructive
+        loading={archiveMutation.isPending}
+        open={confirmAction === 'archive'}
+        title={t`Archive application?`}
+        onConfirm={() => {
+          runArchive();
+          closeConfirm();
+        }}
+        onOpenChange={(open) => (open ? undefined : closeConfirm())}
+      >
+        <div className="space-y-2">
+          <Label htmlFor="archive-reason">{t`Reason`}</Label>
+          <FormTextarea
+            placeholder={t`Explain why this application is being archived...`}
+            value={transitionReason}
+            onChange={setTransitionReason}
+          />
+        </div>
+      </ConfirmDialog>
     </div>
   );
 }

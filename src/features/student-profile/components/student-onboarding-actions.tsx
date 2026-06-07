@@ -28,7 +28,11 @@ export function StudentOnboardingActions({
   if (isComplete) {
     return (
       <div className="flex flex-wrap gap-3">
-        <Button type="button" onClick={onContinue} className="bg-[#1e58d5] hover:bg-[#245fdc]">
+        <Button
+          type="button"
+          onClick={onContinue}
+          className="bg-primary text-primary-foreground hover:bg-primary/90"
+        >
           {t`Go to dashboard`}
         </Button>
       </div>
@@ -47,7 +51,7 @@ export function StudentOnboardingActions({
         type="button"
         disabled={isBusy}
         onClick={activeStage === 'academic' ? onSaveAcademic : onSaveSkills}
-        className="bg-[#1e58d5] hover:bg-[#245fdc]"
+        className="bg-primary text-primary-foreground hover:bg-primary/90"
       >
         {isBusy ? t`Saving…` : saveActionLabel}
       </Button>

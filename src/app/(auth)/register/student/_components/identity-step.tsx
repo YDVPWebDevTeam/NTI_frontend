@@ -60,7 +60,7 @@ export function IdentityStep() {
         control={control}
         name="acceptTerms"
         render={({ field }) => (
-          <FormItem className="mt-1 flex flex-row items-start space-y-0 space-x-3 rounded-sm border border-black/10 bg-white px-4 py-4 text-sm text-neutral-700">
+          <FormItem className="border-border bg-card text-foreground mt-1 flex flex-row items-start space-y-0 space-x-3 rounded-sm border px-4 py-4 text-sm">
             <FormControl>
               <Checkbox
                 checked={field.value}

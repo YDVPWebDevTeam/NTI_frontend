@@ -1,10 +1,12 @@
 import { t } from '@lingui/core/macro';
 import type { Control } from 'react-hook-form';
+import { toast } from 'sonner';
 
 import { ControlledFileField, FormSectionCard } from 'components/forms';
 import { Checkbox } from 'components/shadcn';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from 'components/shadcn';
 import type { StudentRegistrationValues } from 'lib/auth/schemas';
+import { DOCUMENT_ACCEPT, validateDocumentFile } from 'lib/files/upload-validation';
 
 type AcademicVerificationSectionProps = {
   control: Control<StudentRegistrationValues>;
@@ -24,8 +26,21 @@ export function AcademicVerificationSection({
           control={control}
           name="academicEvidenceFileId"
           label={t`Academic evidence`}
+          accept={DOCUMENT_ACCEPT}
           file={selectedAcademicEvidenceFile instanceof File ? selectedAcademicEvidenceFile : null}
-          onFileChange={onAcademicEvidenceFileChange}
+          onFileChange={(file) => {
+            if (file) {
+              const validation = validateDocumentFile(file);
+
+              if (!validation.ok) {
+                toast.error(validation.message);
+
+                return;
+              }
+            }
+
+            onAcademicEvidenceFileChange(file);
+          }}
           placeholder={t`Choose academic evidence`}
           buttonLabel={t`Browse file`}
         />
@@ -34,7 +49,7 @@ export function AcademicVerificationSection({
           control={control}
           name="academicDeclarationAccepted"
           render={({ field }) => (
-            <FormItem className="flex flex-row items-start space-y-0 space-x-3 rounded-md bg-neutral-50 p-4">
+            <FormItem className="bg-muted flex flex-row items-start space-y-0 space-x-3 rounded-md p-4">
               <FormControl>
                 <Checkbox
                   checked={field.value}

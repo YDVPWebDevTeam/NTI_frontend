@@ -32,9 +32,9 @@ const SIZE_STYLES = {
 } as const;
 
 const VARIANT_STYLES = {
-  default: 'text-neutral-900 hover:text-neutral-700',
+  default: 'text-foreground hover:text-muted-foreground',
   light: 'text-white hover:text-white/85',
-  landing: 'text-blue-900 hover:text-blue-800 dark:text-white dark:hover:text-white/85',
+  landing: 'text-primary hover:text-primary/90 dark:text-white dark:hover:text-white/85',
   admin: 'text-slate-50 hover:text-white',
 } as const;
 

@@ -33,7 +33,7 @@ function AdminReportsPagination({
   onNext,
 }: AdminReportsPaginationProps) {
   return (
-    <div className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between">
+    <div className="border-border bg-muted text-muted-foreground flex flex-col gap-3 rounded-2xl border px-4 py-3 text-sm sm:flex-row sm:items-center sm:justify-between">
       <div>
         {t`Page`} {currentPage} {t`of`} {totalPages} · {totalRows} {t`rows`}
       </div>
@@ -42,7 +42,7 @@ function AdminReportsPagination({
           type="button"
           variant="outline"
           size="sm"
-          className="bg-white"
+          className="bg-card"
           disabled={currentPage <= 1}
           onClick={onPrevious}
         >
@@ -52,7 +52,7 @@ function AdminReportsPagination({
           type="button"
           variant="outline"
           size="sm"
-          className="bg-white"
+          className="bg-card"
           disabled={currentPage >= totalPages}
           onClick={onNext}
         >
@@ -83,55 +83,55 @@ export function AdminApplicationsReportTable({
     <div className="space-y-4">
       <div className="space-y-3 sm:hidden">
         {rows.length === 0 ? (
-          <div className="rounded-2xl border border-slate-200 bg-white px-4 py-10 text-center text-sm text-slate-500">
+          <div className="border-border bg-card text-muted-foreground rounded-2xl border px-4 py-10 text-center text-sm">
             {t`No application rows match the current filters.`}
           </div>
         ) : (
           rows.map((row) => (
-            <article key={row.id} className="rounded-2xl border border-slate-200 bg-white p-4">
-              <div className="font-medium text-slate-950">{row.callTitle}</div>
-              <div className="mt-1 font-mono text-xs break-all text-slate-500">{row.id}</div>
+            <article key={row.id} className="border-border bg-card rounded-2xl border p-4">
+              <div className="text-foreground font-medium">{row.callTitle}</div>
+              <div className="text-muted-foreground mt-1 font-mono text-xs break-all">{row.id}</div>
               <dl className="mt-4 grid gap-3 text-sm">
                 <div>
-                  <dt className="text-xs font-medium tracking-[0.08em] text-slate-500 uppercase">
+                  <dt className="text-muted-foreground text-xs font-medium tracking-[0.08em] uppercase">
                     {t`Team`}
                   </dt>
-                  <dd className="mt-1 text-slate-700">{row.teamName}</dd>
+                  <dd className="text-foreground mt-1">{row.teamName}</dd>
                 </div>
                 <div>
-                  <dt className="text-xs font-medium tracking-[0.08em] text-slate-500 uppercase">
+                  <dt className="text-muted-foreground text-xs font-medium tracking-[0.08em] uppercase">
                     {t`Created By`}
                   </dt>
-                  <dd className="mt-1 break-all text-slate-700">{row.createdByEmail}</dd>
+                  <dd className="text-foreground mt-1 break-all">{row.createdByEmail}</dd>
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <dt className="text-xs font-medium tracking-[0.08em] text-slate-500 uppercase">
+                    <dt className="text-muted-foreground text-xs font-medium tracking-[0.08em] uppercase">
                       {t`Program`}
                     </dt>
-                    <dd className="mt-1 text-slate-700">{formatEnumLabel(row.programType)}</dd>
+                    <dd className="text-foreground mt-1">{formatEnumLabel(row.programType)}</dd>
                   </div>
                   <div>
-                    <dt className="text-xs font-medium tracking-[0.08em] text-slate-500 uppercase">
+                    <dt className="text-muted-foreground text-xs font-medium tracking-[0.08em] uppercase">
                       {t`Status`}
                     </dt>
-                    <dd className="mt-1 text-slate-700">{formatEnumLabel(row.status)}</dd>
+                    <dd className="text-foreground mt-1">{formatEnumLabel(row.status)}</dd>
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <dt className="text-xs font-medium tracking-[0.08em] text-slate-500 uppercase">
+                    <dt className="text-muted-foreground text-xs font-medium tracking-[0.08em] uppercase">
                       {t`Submitted`}
                     </dt>
-                    <dd className="mt-1 text-slate-700">
+                    <dd className="text-foreground mt-1">
                       {formatOptionalReportDate(row.submittedAt)}
                     </dd>
                   </div>
                   <div>
-                    <dt className="text-xs font-medium tracking-[0.08em] text-slate-500 uppercase">
+                    <dt className="text-muted-foreground text-xs font-medium tracking-[0.08em] uppercase">
                       {t`Decided`}
                     </dt>
-                    <dd className="mt-1 text-slate-700">
+                    <dd className="text-foreground mt-1">
                       {formatOptionalReportDate(row.decidedAt)}
                     </dd>
                   </div>
@@ -158,8 +158,8 @@ export function AdminApplicationsReportTable({
           {rows.map((row) => (
             <AdminTableRow key={row.id}>
               <AdminTableCell>
-                <div className="font-medium text-slate-950">{row.callTitle}</div>
-                <div className="mt-1 font-mono text-xs text-slate-500">{row.id}</div>
+                <div className="text-foreground font-medium">{row.callTitle}</div>
+                <div className="text-muted-foreground mt-1 font-mono text-xs">{row.id}</div>
               </AdminTableCell>
               <AdminTableCell>{row.teamName}</AdminTableCell>
               <AdminTableCell>{row.createdByEmail}</AdminTableCell>
@@ -171,7 +171,7 @@ export function AdminApplicationsReportTable({
           ))}
           {rows.length === 0 ? (
             <AdminTableRow>
-              <AdminTableCell className="py-10 text-center text-slate-500" colSpan={7}>
+              <AdminTableCell className="text-muted-foreground py-10 text-center" colSpan={7}>
                 {t`No application rows match the current filters.`}
               </AdminTableCell>
             </AdminTableRow>
@@ -210,45 +210,45 @@ export function AdminProgramBReportTable({
     <div className="space-y-4">
       <div className="space-y-3 sm:hidden">
         {rows.length === 0 ? (
-          <div className="rounded-2xl border border-slate-200 bg-white px-4 py-10 text-center text-sm text-slate-500">
+          <div className="border-border bg-card text-muted-foreground rounded-2xl border px-4 py-10 text-center text-sm">
             {t`No Program B rows match the current filters.`}
           </div>
         ) : (
           rows.map((row) => (
-            <article key={row.id} className="rounded-2xl border border-slate-200 bg-white p-4">
-              <div className="font-medium text-slate-950">{row.backlogTitle}</div>
-              <div className="mt-1 font-mono text-xs break-all text-slate-500">{row.id}</div>
+            <article key={row.id} className="border-border bg-card rounded-2xl border p-4">
+              <div className="text-foreground font-medium">{row.backlogTitle}</div>
+              <div className="text-muted-foreground mt-1 font-mono text-xs break-all">{row.id}</div>
               <dl className="mt-4 grid gap-3 text-sm">
                 <div>
-                  <dt className="text-xs font-medium tracking-[0.08em] text-slate-500 uppercase">
+                  <dt className="text-muted-foreground text-xs font-medium tracking-[0.08em] uppercase">
                     {t`Organization`}
                   </dt>
-                  <dd className="mt-1 text-slate-700">{row.organizationName}</dd>
+                  <dd className="text-foreground mt-1">{row.organizationName}</dd>
                 </div>
                 <div>
-                  <dt className="text-xs font-medium tracking-[0.08em] text-slate-500 uppercase">
+                  <dt className="text-muted-foreground text-xs font-medium tracking-[0.08em] uppercase">
                     {t`Team`}
                   </dt>
-                  <dd className="mt-1 text-slate-700">{row.teamName}</dd>
+                  <dd className="text-foreground mt-1">{row.teamName}</dd>
                 </div>
                 <div>
-                  <dt className="text-xs font-medium tracking-[0.08em] text-slate-500 uppercase">
+                  <dt className="text-muted-foreground text-xs font-medium tracking-[0.08em] uppercase">
                     {t`Created By`}
                   </dt>
-                  <dd className="mt-1 break-all text-slate-700">{row.createdByEmail}</dd>
+                  <dd className="text-foreground mt-1 break-all">{row.createdByEmail}</dd>
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <dt className="text-xs font-medium tracking-[0.08em] text-slate-500 uppercase">
+                    <dt className="text-muted-foreground text-xs font-medium tracking-[0.08em] uppercase">
                       {t`Status`}
                     </dt>
-                    <dd className="mt-1 text-slate-700">{formatEnumLabel(row.status)}</dd>
+                    <dd className="text-foreground mt-1">{formatEnumLabel(row.status)}</dd>
                   </div>
                   <div>
-                    <dt className="text-xs font-medium tracking-[0.08em] text-slate-500 uppercase">
+                    <dt className="text-muted-foreground text-xs font-medium tracking-[0.08em] uppercase">
                       {t`Submitted`}
                     </dt>
-                    <dd className="mt-1 text-slate-700">{formatAdminDateTime(row.submittedAt)}</dd>
+                    <dd className="text-foreground mt-1">{formatAdminDateTime(row.submittedAt)}</dd>
                   </div>
                 </div>
               </dl>
@@ -272,8 +272,8 @@ export function AdminProgramBReportTable({
           {rows.map((row) => (
             <AdminTableRow key={row.id}>
               <AdminTableCell>
-                <div className="font-medium text-slate-950">{row.backlogTitle}</div>
-                <div className="mt-1 font-mono text-xs text-slate-500">{row.id}</div>
+                <div className="text-foreground font-medium">{row.backlogTitle}</div>
+                <div className="text-muted-foreground mt-1 font-mono text-xs">{row.id}</div>
               </AdminTableCell>
               <AdminTableCell>{row.organizationName}</AdminTableCell>
               <AdminTableCell>{row.teamName}</AdminTableCell>
@@ -284,7 +284,7 @@ export function AdminProgramBReportTable({
           ))}
           {rows.length === 0 ? (
             <AdminTableRow>
-              <AdminTableCell className="py-10 text-center text-slate-500" colSpan={6}>
+              <AdminTableCell className="text-muted-foreground py-10 text-center" colSpan={6}>
                 {t`No Program B rows match the current filters.`}
               </AdminTableCell>
             </AdminTableRow>

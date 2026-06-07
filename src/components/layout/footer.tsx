@@ -18,7 +18,7 @@ export function Footer() {
       <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-3 sm:gap-4 md:flex-row md:items-center md:justify-between">
         <div className="flex flex-col items-center gap-2 md:items-start">
           <NtiBrand href={ROUTES.ROOT} size="sm" />
-          <span className="text-center text-[10px] tracking-[0.06em] text-neutral-400 md:text-left">
+          <span className="text-muted-foreground text-center text-[10px] tracking-[0.06em] md:text-left">
             {t`© 2026 NTI. All rights reserved.`}
           </span>
         </div>
@@ -27,7 +27,7 @@ export function Footer() {
             <Link
               key={link.label}
               href={link.href}
-              className="text-[10px] font-normal tracking-[0.08em] text-neutral-400 transition-colors hover:text-neutral-700"
+              className="text-muted-foreground hover:text-foreground text-[10px] font-normal tracking-[0.08em] transition-colors"
             >
               {link.label}
             </Link>

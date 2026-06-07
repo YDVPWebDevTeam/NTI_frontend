@@ -26,11 +26,11 @@ import {
 } from 'components/shadcn';
 
 export const LABEL_CLASS_NAME =
-  'text-[11px] font-medium tracking-[0.1em] text-neutral-500 uppercase';
+  'text-[11px] font-medium tracking-[0.1em] text-muted-foreground uppercase';
 export const INPUT_CLASS_NAME =
-  'h-12 w-full rounded-sm border border-black/10 bg-white px-4 text-sm text-neutral-800 transition-colors focus-visible:ring-blue-500';
+  'h-12 w-full rounded-sm border border-border bg-card px-4 text-sm text-foreground transition-colors focus-visible:ring-ring';
 const ICON_WRAPPER_CLASS_NAME =
-  'pointer-events-none absolute top-1/2 -translate-y-1/2 text-neutral-400';
+  'pointer-events-none absolute top-1/2 -translate-y-1/2 text-muted-foreground';
 
 type RenderField<TFieldValues extends FieldValues, TName extends FieldPath<TFieldValues>> = (
   field: ControllerRenderProps<TFieldValues, TName>,
@@ -117,7 +117,7 @@ export function ControlledInputField<
         <div className="space-y-2">
           <div className="relative">
             {startIcon ? (
-              <span className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-neutral-400">
+              <span className="text-muted-foreground pointer-events-none absolute top-1/2 left-4 -translate-y-1/2">
                 {startIcon}
               </span>
             ) : null}
@@ -197,7 +197,7 @@ export function ControlledPasswordField<
               type="button"
               variant="ghost"
               size="icon"
-              className="absolute top-1/2 right-1 h-10 w-10 -translate-y-1/2 rounded-sm text-neutral-500 hover:bg-transparent hover:text-neutral-700"
+              className="text-muted-foreground hover:text-foreground absolute top-1/2 right-1 h-10 w-10 -translate-y-1/2 rounded-sm hover:bg-transparent"
               onClick={() => {
                 setIsVisible((current) => !current);
               }}
@@ -253,7 +253,7 @@ export function ControlledTextareaField<
               placeholder={placeholder}
               spellCheck={spellCheck}
               className={cn(
-                'min-h-28 w-full rounded-sm border border-black/10 bg-white px-4 py-3 text-sm text-neutral-800 focus-visible:ring-blue-500',
+                'border-border bg-card text-foreground focus-visible:ring-ring min-h-28 w-full rounded-sm border px-4 py-3 text-sm',
                 inputClassName,
               )}
             />
@@ -307,9 +307,7 @@ export function ControlledSelectField<
           value={typeof field.value === 'string' ? field.value : ''}
           onValueChange={field.onChange}
         >
-          <SelectTrigger
-            className={cn('h-12 rounded-sm border-black/10 bg-white', triggerClassName)}
-          >
+          <SelectTrigger className={cn('border-border bg-card h-12 rounded-sm', triggerClassName)}>
             <SelectValue placeholder={placeholder} />
           </SelectTrigger>
           <SelectContent>

@@ -22,7 +22,8 @@ import { useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { useEffect, useState } from 'react';
 
-import { AdminBrandBlock, PageSectionHeader } from 'components/layout';
+import { AdminBrandBlock } from 'components/layout/admin-brand-block';
+import { PageSectionHeader } from 'components/layout/page-section-header';
 import { LanguageSwitcher } from 'components/i18n/language-switcher';
 import { Button } from 'components/shadcn';
 import {
@@ -139,7 +140,7 @@ function AdminLanguageBlock() {
       <LanguageSwitcher
         className="mt-4 w-full border border-white/10 bg-white/8 shadow-none"
         triggerClassName="w-full justify-between bg-transparent text-slate-100 hover:bg-white/10"
-        contentClassName="border border-slate-200/80 bg-white"
+        contentClassName="border border-border bg-card"
       />
     </div>
   );
@@ -200,7 +201,7 @@ export function AdminShell({ children, user }: AdminShellProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(180deg,#f2f5fb_0%,#ebeff8_100%)] text-slate-950">
+    <div className="text-foreground min-h-screen bg-[linear-gradient(180deg,#f2f5fb_0%,#ebeff8_100%)]">
       {isMobileSidebarOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <button
@@ -228,17 +229,17 @@ export function AdminShell({ children, user }: AdminShellProps) {
       )}
 
       <div className="mx-auto grid min-h-screen max-w-[1600px] grid-cols-1 lg:grid-cols-[272px_minmax(0,1fr)]">
-        <aside className="hidden border-r border-slate-200 bg-[#0f172a] px-5 py-6 text-slate-100 lg:block">
+        <aside className="border-border hidden border-r bg-[#0f172a] px-5 py-6 text-slate-100 lg:block">
           <AdminSidebarContent pathname={pathname} />
         </aside>
 
         <div className="flex min-w-0 flex-col">
-          <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/90 px-4 py-4 backdrop-blur sm:px-8 lg:static">
+          <header className="border-border bg-card/90 sticky top-0 z-40 border-b px-4 py-4 backdrop-blur sm:px-8 lg:static">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div className="flex items-start gap-3">
                 <Button
                   variant="outline"
-                  className="mt-1 shrink-0 bg-white lg:hidden"
+                  className="bg-card mt-1 shrink-0 lg:hidden"
                   type="button"
                   onClick={() => setIsMobileSidebarOpen(true)}
                 >
@@ -256,13 +257,13 @@ export function AdminShell({ children, user }: AdminShellProps) {
               </div>
 
               <div className="flex flex-wrap items-center gap-3">
-                <div className="min-w-0 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm">
-                  <div className="truncate font-medium text-slate-900">{user.email}</div>
-                  <div className="text-xs tracking-[0.08em] text-slate-500 uppercase">
+                <div className="border-border bg-muted min-w-0 rounded-xl border px-3 py-2 text-sm">
+                  <div className="text-foreground truncate font-medium">{user.email}</div>
+                  <div className="text-muted-foreground text-xs tracking-[0.08em] uppercase">
                     {user.role}
                   </div>
                 </div>
-                <Button variant="outline" className="bg-white" onClick={() => void handleLogout()}>
+                <Button variant="outline" className="bg-card" onClick={() => void handleLogout()}>
                   <LogOut className="h-4 w-4" />
                   {t`Log out`}
                 </Button>
@@ -281,7 +282,7 @@ export function AdminShellSkeleton() {
   return (
     <div className="min-h-screen bg-[linear-gradient(180deg,#f2f5fb_0%,#ebeff8_100%)]">
       <div className="mx-auto grid min-h-screen max-w-[1600px] grid-cols-1 lg:grid-cols-[272px_minmax(0,1fr)]">
-        <aside className="hidden border-r border-slate-200 bg-[#0f172a] p-6 lg:block">
+        <aside className="border-border hidden border-r bg-[#0f172a] p-6 lg:block">
           <div className="h-6 w-40 animate-pulse rounded bg-white/10" />
           <div className="mt-8 space-y-3">
             {Array.from({ length: 4 }).map((_, index) => (
@@ -291,13 +292,13 @@ export function AdminShellSkeleton() {
         </aside>
 
         <div className="p-4 sm:p-8">
-          <div className="h-18 animate-pulse rounded-2xl bg-white/70" />
+          <div className="bg-card/70 h-18 animate-pulse rounded-2xl" />
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {Array.from({ length: 3 }).map((_, index) => (
-              <div key={index} className="h-32 animate-pulse rounded-2xl bg-white/70" />
+              <div key={index} className="bg-card/70 h-32 animate-pulse rounded-2xl" />
             ))}
           </div>
-          <div className="mt-6 h-72 animate-pulse rounded-2xl bg-white/70" />
+          <div className="bg-card/70 mt-6 h-72 animate-pulse rounded-2xl" />
         </div>
       </div>
     </div>

@@ -404,18 +404,18 @@ export default function AdminReportsPage() {
       )}
 
       <section className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_420px]">
-        <Card className="border-slate-200 bg-white shadow-none">
+        <Card className="border-border bg-card shadow-none">
           <CardHeader className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
             <div>
-              <CardTitle className="text-2xl text-slate-950">{t`Datasets`}</CardTitle>
-              <p className="mt-2 text-sm text-slate-600">
+              <CardTitle className="text-foreground text-2xl">{t`Datasets`}</CardTitle>
+              <p className="text-muted-foreground mt-2 text-sm">
                 {t`Switch between operational report tables, apply filters, and keep the export scope aligned with what you are reviewing.`}
               </p>
             </div>
             <Button
               type="button"
               variant="outline"
-              className="w-full bg-white sm:w-auto"
+              className="bg-card w-full sm:w-auto"
               onClick={() => void activeDatasetQuery.refetch()}
             >
               <RefreshCcw className="h-4 w-4" />
@@ -423,7 +423,7 @@ export default function AdminReportsPage() {
             </Button>
           </CardHeader>
           <CardContent className="space-y-6">
-            <div className="grid grid-cols-1 gap-2 rounded-2xl border border-slate-200 bg-slate-50 p-2 sm:grid-cols-2">
+            <div className="border-border bg-muted grid grid-cols-1 gap-2 rounded-2xl border p-2 sm:grid-cols-2">
               {REPORT_DATASETS.map((dataset) => {
                 const isActive = dataset === selectedDataset;
 
@@ -433,8 +433,8 @@ export default function AdminReportsPage() {
                     type="button"
                     className={
                       isActive
-                        ? 'w-full rounded-xl bg-slate-950 px-4 py-2 text-sm font-medium text-white transition-colors'
-                        : 'w-full rounded-xl px-4 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-white hover:text-slate-950'
+                        ? 'bg-primary text-primary-foreground w-full rounded-xl px-4 py-2 text-sm font-medium transition-colors'
+                        : 'text-muted-foreground hover:bg-card hover:text-foreground w-full rounded-xl px-4 py-2 text-sm font-medium transition-colors'
                     }
                     onClick={() => setSelectedDataset(dataset)}
                   >
@@ -477,35 +477,37 @@ export default function AdminReportsPage() {
         </Card>
 
         <div className="space-y-6">
-          <Card className="border-slate-200 bg-white shadow-none">
+          <Card className="border-border bg-card shadow-none">
             <CardHeader>
-              <CardTitle className="text-2xl text-slate-950">{t`Export Current View`}</CardTitle>
-              <p className="mt-2 text-sm text-slate-600">
+              <CardTitle className="text-foreground text-2xl">{t`Export Current View`}</CardTitle>
+              <p className="text-muted-foreground mt-2 text-sm">
                 {t`Export the dataset currently selected on the left. Large result sets will continue as background jobs.`}
               </p>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm text-slate-600">
-                <div className="font-medium text-slate-950">{getDatasetLabel(selectedDataset)}</div>
+              <div className="border-border bg-muted text-muted-foreground rounded-2xl border p-4 text-sm">
+                <div className="text-foreground font-medium">
+                  {getDatasetLabel(selectedDataset)}
+                </div>
                 <div className="mt-1">
                   {t`Filters applied to the table are reused for the export request.`}
                 </div>
                 {activeDatasetTotalRows === 0 ? (
-                  <div className="mt-2 text-rose-600">
+                  <div className="text-destructive mt-2">
                     {t`Export is unavailable until the current filters return at least one row.`}
                   </div>
                 ) : null}
               </div>
 
               <div>
-                <label className="mb-2 block text-[11px] font-medium tracking-[0.12em] text-slate-500 uppercase">
+                <label className="text-muted-foreground mb-2 block text-[11px] font-medium tracking-[0.12em] uppercase">
                   {t`Format`}
                 </label>
                 <Select
                   value={exportFormat}
                   onValueChange={(value) => setExportFormat(value as ExportFormat)}
                 >
-                  <SelectTrigger className="h-11 bg-white">
+                  <SelectTrigger className="bg-card h-11">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -530,18 +532,18 @@ export default function AdminReportsPage() {
             </CardContent>
           </Card>
 
-          <Card className="border-slate-200 bg-white shadow-none">
+          <Card className="border-border bg-card shadow-none">
             <CardHeader className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
               <div>
-                <CardTitle className="text-2xl text-slate-950">{t`Export Jobs`}</CardTitle>
-                <p className="mt-2 text-sm text-slate-600">
+                <CardTitle className="text-foreground text-2xl">{t`Export Jobs`}</CardTitle>
+                <p className="text-muted-foreground mt-2 text-sm">
                   {t`Queued exports stay here until they complete or fail.`}
                 </p>
               </div>
               <Button
                 type="button"
                 variant="outline"
-                className="w-full bg-white sm:w-auto"
+                className="bg-card w-full sm:w-auto"
                 onClick={() => void refreshExportJobs()}
               >
                 <RefreshCcw className="h-4 w-4" />

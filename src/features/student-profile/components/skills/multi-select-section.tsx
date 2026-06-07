@@ -38,7 +38,7 @@ const MultiSelectSectionInner = React.forwardRef(function MultiSelectSection<TVa
               <label
                 key={option}
                 className={cn(
-                  'flex items-start gap-3 rounded-md border border-black/10 bg-neutral-50 p-3',
+                  'border-border bg-muted flex items-start gap-3 rounded-md border p-3',
                   isDisabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
                 )}
               >
@@ -47,7 +47,7 @@ const MultiSelectSectionInner = React.forwardRef(function MultiSelectSection<TVa
                   disabled={isDisabled}
                   onCheckedChange={(value) => onValueChange(option, Boolean(value))}
                 />
-                <span className="text-sm text-neutral-700">{formatEnumLabel(option)}</span>
+                <span className="text-foreground text-sm">{formatEnumLabel(option)}</span>
               </label>
             );
           })}

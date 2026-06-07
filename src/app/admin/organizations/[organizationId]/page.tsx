@@ -55,14 +55,14 @@ export default function OrganizationInviteDetailPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-5 sm:flex-row sm:items-center sm:justify-between">
+      <div className="border-border bg-card flex flex-col gap-4 rounded-2xl border p-5 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-[11px] font-medium tracking-[0.12em] text-slate-500 uppercase">
+          <p className="text-muted-foreground text-[11px] font-medium tracking-[0.12em] uppercase">
             {t`Organization Id`}
           </p>
-          <h1 className="mt-2 font-mono text-sm text-slate-900">{organizationId}</h1>
+          <h1 className="text-foreground mt-2 font-mono text-sm">{organizationId}</h1>
         </div>
-        <Button asChild variant="outline" className="bg-white">
+        <Button asChild variant="outline" className="bg-card">
           <Link href={ROUTES.ADMIN.ORGANIZATIONS}>{t`Back to Organizations`}</Link>
         </Button>
       </div>
@@ -88,7 +88,7 @@ export default function OrganizationInviteDetailPage() {
           <AdminTableBody>
             {invites.map((invite) => (
               <AdminTableRow key={invite.id}>
-                <AdminTableCell className="font-medium text-slate-950">
+                <AdminTableCell className="text-foreground font-medium">
                   {invite.email}
                 </AdminTableCell>
                 <AdminTableCell>{formatEnumLabel(invite.roleToAssign)}</AdminTableCell>

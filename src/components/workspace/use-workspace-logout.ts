@@ -16,13 +16,20 @@ export function useWorkspaceLogout() {
   const handleLogout = async () => {
     try {
       await logout.mutateAsync();
-      await queryClient.cancelQueries({ queryKey: getGetMeQueryKey() });
-      queryClient.removeQueries({ queryKey: getGetMeQueryKey(), exact: true });
-      await queryClient.invalidateQueries();
-      router.replace(ROUTES.ROOT);
     } catch (error) {
       toast.error(error instanceof Error ? error.message : t`Unable to log out right now.`);
+
+      return;
     }
+
+    // Logout succeeded: clear the cached session and leave the dashboard.
+    // The redirect must run before invalidating queries — invalidateQueries
+    // refetches active queries, which now return 401 and reject the promise.
+    // If that rejection happened before the redirect, we'd never leave the page.
+    await queryClient.cancelQueries({ queryKey: getGetMeQueryKey() });
+    queryClient.removeQueries({ queryKey: getGetMeQueryKey(), exact: true });
+    router.replace(ROUTES.ROOT);
+    void queryClient.invalidateQueries();
   };
 
   return {

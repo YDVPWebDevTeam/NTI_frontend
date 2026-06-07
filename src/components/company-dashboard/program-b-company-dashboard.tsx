@@ -163,14 +163,14 @@ export function ProgramBCompanyDashboard() {
   if (!isOrganizationActive) {
     return (
       <div className="space-y-6">
-        <section className="rounded-[1.75rem] border border-[#dfe7fa] bg-white/90 p-8 shadow-[0_18px_40px_rgba(15,23,42,0.08)]">
-          <p className="text-xs font-semibold tracking-[0.18em] text-[#1e58d5] uppercase">
+        <section className="border-border bg-card rounded-2xl border p-8 shadow-sm">
+          <p className="text-primary text-xs font-semibold tracking-[0.18em] uppercase">
             {t`Company workspace`}
           </p>
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight text-[#10213d]">
+          <h1 className="text-foreground mt-3 text-3xl font-semibold tracking-tight">
             {t`Program B company dashboard`}
           </h1>
-          <p className="mt-3 max-w-2xl text-sm leading-7 text-[#60718d]">
+          <p className="text-muted-foreground mt-3 max-w-2xl text-sm leading-7">
             {t`This dashboard becomes available once your organization is active.`}
           </p>
         </section>
@@ -209,19 +209,19 @@ export function ProgramBCompanyDashboard() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-[1.75rem] border border-[#dfe7fa] bg-white/90 p-8 shadow-[0_18px_40px_rgba(15,23,42,0.08)]">
+      <section className="border-border bg-card rounded-2xl border p-8 shadow-sm">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="max-w-3xl">
-            <p className="text-xs font-semibold tracking-[0.18em] text-[#1e58d5] uppercase">
+            <p className="text-primary text-xs font-semibold tracking-[0.18em] uppercase">
               {t`Company workspace`}
             </p>
-            <h1 className="mt-3 text-3xl font-semibold tracking-tight text-[#10213d]">
+            <h1 className="text-foreground mt-3 text-3xl font-semibold tracking-tight">
               {t`Program B company dashboard`}
             </h1>
-            <p className="mt-3 max-w-2xl text-sm leading-7 text-[#60718d]">
+            <p className="text-muted-foreground mt-3 max-w-2xl text-sm leading-7">
               {t`Action queues, backlog movement, and project delivery status are summarized here so company users can move directly into the right Program B workspace.`}
             </p>
-            <p className="mt-3 text-sm text-[#60718d]">
+            <p className="text-muted-foreground mt-3 text-sm">
               {overview?.updatedAt
                 ? `${t`Overview updated`} ${formatDateTime(overview.updatedAt)}`
                 : t`Dashboard data refreshes automatically when you return from related Program B workspaces.`}
@@ -249,7 +249,7 @@ export function ProgramBCompanyDashboard() {
       </section>
 
       {hasPartialFailure ? (
-        <div className="rounded-[1.5rem] border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-900">
+        <div className="border-warning/30 bg-warning/10 text-warning rounded-2xl border px-5 py-4 text-sm">
           <p className="font-semibold">{t`Some dashboard sections could not be refreshed.`}</p>
           <p className="mt-1 leading-7">
             {t`Available sections are still shown below, and you can refresh again without leaving the workspace.`}

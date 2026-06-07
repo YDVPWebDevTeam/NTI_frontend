@@ -11,9 +11,9 @@ type AdminTableProps = {
 
 export function AdminTable({ children, className }: AdminTableProps) {
   return (
-    <div className={cn('overflow-hidden rounded-2xl border border-slate-200 bg-white', className)}>
+    <div className={cn('border-border bg-card overflow-hidden rounded-2xl border', className)}>
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-slate-200 text-left text-sm">{children}</table>
+        <table className="divide-border min-w-full divide-y text-left text-sm">{children}</table>
       </div>
     </div>
   );
@@ -21,14 +21,14 @@ export function AdminTable({ children, className }: AdminTableProps) {
 
 export function AdminTableHead({ children }: { children: ReactNode }) {
   return (
-    <thead className="bg-slate-50 text-xs tracking-[0.08em] text-slate-500 uppercase">
+    <thead className="bg-muted text-muted-foreground text-xs tracking-[0.08em] uppercase">
       {children}
     </thead>
   );
 }
 
 export function AdminTableBody({ children }: { children: ReactNode }) {
-  return <tbody className="divide-y divide-slate-200 bg-white">{children}</tbody>;
+  return <tbody className="divide-border bg-card divide-y">{children}</tbody>;
 }
 
 export function AdminTableRow({
@@ -61,7 +61,7 @@ export function AdminTableCell({
   ...props
 }: TdHTMLAttributes<HTMLTableCellElement>) {
   return (
-    <td className={cn('px-4 py-4 text-slate-700', className)} {...props}>
+    <td className={cn('text-foreground px-4 py-4', className)} {...props}>
       {children}
     </td>
   );

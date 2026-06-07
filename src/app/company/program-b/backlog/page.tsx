@@ -127,21 +127,18 @@ export default function CompanyProgramBBacklogPage() {
     backlogContent = (
       <div className="grid gap-4 lg:grid-cols-2">
         {backlogItems.map((item) => (
-          <article
-            key={item.id}
-            className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]"
-          >
-            <p className="font-semibold text-[#10213d]">
+          <article key={item.id} className="border-border bg-card rounded-2xl border p-5 shadow-sm">
+            <p className="text-foreground font-semibold">
               {normalizeUnknownText(item.title) ?? t`Untitled backlog item`}
             </p>
-            <p className="mt-2 text-sm leading-7 text-[#60718d]">
+            <p className="text-muted-foreground mt-2 text-sm leading-7">
               {normalizeUnknownText(item.description) ?? t`No description provided.`}
             </p>
             <div className="mt-4 flex items-center justify-between gap-3 text-sm">
               <CompanyStatusBadge status={item.status} />
               <Link
                 href={ROUTES.COMPANY.programBBacklogDetail(item.id)}
-                className="font-medium text-[#1e58d5]"
+                className="text-primary font-medium"
               >
                 {t`Open detail`}
               </Link>
@@ -154,11 +151,11 @@ export default function CompanyProgramBBacklogPage() {
 
   return (
     <div className="space-y-6">
-      <section className="rounded-[1.75rem] border border-[#dfe7fa] bg-white/90 p-6 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
+      <section className="border-border bg-card rounded-2xl border p-6 shadow-sm">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-semibold text-[#10213d]">{t`Company Program B backlog`}</h1>
-            <p className="mt-2 text-sm text-[#60718d]">
+            <h1 className="text-foreground text-2xl font-semibold">{t`Company Program B backlog`}</h1>
+            <p className="text-muted-foreground mt-2 text-sm">
               {t`Published and draft backlog items scoped to the authenticated organization.`}
             </p>
           </div>
@@ -176,7 +173,7 @@ export default function CompanyProgramBBacklogPage() {
             placeholder={t`Search backlog items`}
           />
           <select
-            className="rounded-md border border-black/10 bg-white px-3 py-2 text-sm"
+            className="border-border bg-card rounded-md border px-3 py-2 text-sm"
             value={sort}
             onChange={(event) => setSort(event.target.value as ProgramBBacklogControllerListMySort)}
           >
@@ -186,7 +183,7 @@ export default function CompanyProgramBBacklogPage() {
             <option value="title">{t`Title`}</option>
           </select>
           <select
-            className="rounded-md border border-black/10 bg-white px-3 py-2 text-sm"
+            className="border-border bg-card rounded-md border px-3 py-2 text-sm"
             value={order}
             onChange={(event) =>
               setOrder(event.target.value as ProgramBBacklogControllerListMyOrder)
@@ -200,21 +197,21 @@ export default function CompanyProgramBBacklogPage() {
 
       {backlogContent}
 
-      <section className="flex items-center justify-between rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
-        <span className="text-sm text-[#60718d]">
+      <section className="border-border bg-card flex items-center justify-between rounded-2xl border p-5 shadow-sm">
+        <span className="text-muted-foreground text-sm">
           {t`Page`} {backlogQuery.data?.meta.page ?? page} {t`of`}{' '}
           {backlogQuery.data?.meta.totalPages ?? 1}
         </span>
         <div className="flex gap-2">
           <button
-            className="rounded-md border border-black/10 px-3 py-2 text-sm disabled:opacity-40"
+            className="border-border rounded-md border px-3 py-2 text-sm disabled:opacity-40"
             disabled={page <= 1}
             onClick={() => setPage((current) => Math.max(1, current - 1))}
           >
             {t`Previous`}
           </button>
           <button
-            className="rounded-md border border-black/10 px-3 py-2 text-sm disabled:opacity-40"
+            className="border-border rounded-md border px-3 py-2 text-sm disabled:opacity-40"
             disabled={page >= (backlogQuery.data?.meta.totalPages ?? 1)}
             onClick={() => setPage((current) => current + 1)}
           >

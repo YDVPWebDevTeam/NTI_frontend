@@ -12,6 +12,7 @@ import {
   ReportsControllerGetProgramBSort,
   ReportsControllerGetProgramBStatus,
 } from 'lib/api';
+import type { StatusBadgeTone } from 'components/shadcn/status-badge';
 import { buildApiUrl, extractApiErrorMessage } from 'lib/api-client/openapi-runtime/client';
 import { formatEnumLabel } from 'lib/utils';
 
@@ -80,11 +81,11 @@ export const PROGRAM_B_SORT_OPTIONS: readonly ProgramBSort[] = [
   ReportsControllerGetProgramBSort.status,
 ];
 
-export const EXPORT_STATUS_CLASS_NAMES: Record<string, string> = {
-  [ExportJobStatusDtoStatus.PENDING]: 'border-amber-200 bg-amber-100 text-amber-800',
-  [ExportJobStatusDtoStatus.PROCESSING]: 'border-sky-200 bg-sky-100 text-sky-800',
-  [ExportJobStatusDtoStatus.COMPLETED]: 'border-emerald-200 bg-emerald-100 text-emerald-800',
-  [ExportJobStatusDtoStatus.FAILED]: 'border-rose-200 bg-rose-100 text-rose-800',
+export const EXPORT_STATUS_TONES: Record<string, StatusBadgeTone> = {
+  [ExportJobStatusDtoStatus.PENDING]: 'warning',
+  [ExportJobStatusDtoStatus.PROCESSING]: 'info',
+  [ExportJobStatusDtoStatus.COMPLETED]: 'success',
+  [ExportJobStatusDtoStatus.FAILED]: 'danger',
 };
 
 export function getDatasetLabel(dataset: ReportDataset) {

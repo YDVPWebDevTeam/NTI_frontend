@@ -8,7 +8,7 @@ export type StudentOnboardingStageId = 'academic' | 'skills';
 
 export const STUDENT_PROFILE_FIELD_GROUPS = {
   identity: ['firstName', 'lastName', 'email', 'password', 'acceptTerms'],
-  email: ['verificationCode'],
+  email: [],
   academic: [
     'universityId',
     'facultyId',

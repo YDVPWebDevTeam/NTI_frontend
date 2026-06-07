@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useQueryClient } from '@tanstack/react-query';
 import { ArrowRight, Loader2, Lock, Mail, UserPlus } from 'lucide-react';
 import Link from 'next/link';
-import { startTransition, useMemo, useState } from 'react';
+import { startTransition, Suspense, useMemo, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -67,7 +67,7 @@ type RegisterViaInviteValues = z.infer<ReturnType<typeof createRegisterViaInvite
 type ExistingAccountValues = z.infer<ReturnType<typeof createLoginSchema>>;
 type InvitePath = 'create-account' | 'existing-account';
 
-export default function InvitePage() {
+function InvitePageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const queryClient = useQueryClient();
@@ -168,17 +168,35 @@ export default function InvitePage() {
       return;
     }
 
+    let didLogin = false;
+
     try {
       await login.mutateAsync({ data: values });
+      didLogin = true;
       await acceptInvitation.mutateAsync({ data: { token } });
       routeToProfileOnboarding();
     } catch (error) {
-      if (isApiRequestError(error) && error.status === FORBIDDEN_STATUS) {
+      // If login succeeded but accepting the invite failed (expired=400,
+      // already-accepted=409, forbidden=403, etc.), the user is now logged in as
+      // this account but stranded on the invite screen. Always log them back out so
+      // they aren't silently left in a half-joined session, then surface a clear
+      // message about the invite state.
+      if (didLogin) {
         try {
           await logout.mutateAsync();
         } finally {
           void queryClient.invalidateQueries({ queryKey: ['/auth/me'] });
+          void queryClient.invalidateQueries({ queryKey: ['auth'] });
         }
+
+        setExistingAccountError(
+          getInviteActionErrorMessage(
+            error,
+            t`We signed you in, but couldn't join this invite — it may be expired or already accepted. You've been signed back out. Please request a new invite.`,
+          ),
+        );
+
+        return;
       }
 
       setExistingAccountError(
@@ -208,20 +226,20 @@ export default function InvitePage() {
 
   if (isValidating) {
     mainContent = (
-      <div className="flex min-h-90 items-center justify-center rounded-xl border border-black/10 bg-white">
-        <div className="flex items-center gap-3 text-sm text-neutral-600">
-          <Loader2 className="h-5 w-5 animate-spin text-[#1e58d5]" />
+      <div className="border-border bg-card flex min-h-90 items-center justify-center rounded-xl border">
+        <div className="text-muted-foreground flex items-center gap-3 text-sm">
+          <Loader2 className="text-primary h-5 w-5 animate-spin" />
           <span>{t`Validating invite...`}</span>
         </div>
       </div>
     );
   } else if (blockingState) {
     mainContent = (
-      <Card className="border-red-200 bg-red-50 shadow-none">
+      <Card className="border-destructive/30 bg-destructive/10 shadow-none">
         <CardHeader>
-          <CardTitle className="text-2xl text-red-700">{blockingState.title}</CardTitle>
+          <CardTitle className="text-destructive text-2xl">{blockingState.title}</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4 text-sm text-red-700">
+        <CardContent className="text-destructive space-y-4 text-sm">
           <p>{blockingState.description}</p>
           <Button type="button" onClick={() => router.replace(ROUTES.ROOT)}>
             {t`Back to home`}
@@ -233,13 +251,13 @@ export default function InvitePage() {
     mainContent = (
       <div className="space-y-6">
         <div>
-          <p className="text-[11px] font-medium tracking-[0.12em] text-neutral-500">
+          <p className="text-muted-foreground text-[11px] font-medium tracking-[0.12em]">
             {t`INVITE ONBOARDING`}
           </p>
-          <h2 className="mt-2 text-4xl font-semibold tracking-tight text-[#0c1a4f]">
+          <h2 className="text-foreground mt-2 text-4xl font-semibold tracking-tight">
             {t`Accept your invitation`}
           </h2>
-          <p className="mt-3 text-[15px] leading-relaxed text-neutral-600">
+          <p className="text-muted-foreground mt-3 text-[15px] leading-relaxed">
             {t`Choose whether you need a new account or want to join with an existing account. The invited email stays fixed to this invite.`}
           </p>
         </div>
@@ -248,7 +266,7 @@ export default function InvitePage() {
           <Button
             type="button"
             variant={activePath === 'create-account' ? 'default' : 'outline'}
-            className={activePath === 'create-account' ? 'bg-[#1e58d5]' : ''}
+            className={activePath === 'create-account' ? 'bg-primary' : ''}
             onClick={() => setActivePath('create-account')}
           >
             <UserPlus className="mr-2 h-4 w-4" />
@@ -257,7 +275,7 @@ export default function InvitePage() {
           <Button
             type="button"
             variant={activePath === 'existing-account' ? 'default' : 'outline'}
-            className={activePath === 'existing-account' ? 'bg-[#1e58d5]' : ''}
+            className={activePath === 'existing-account' ? 'bg-primary' : ''}
             onClick={() => setActivePath('existing-account')}
           >
             <Mail className="mr-2 h-4 w-4" />
@@ -265,26 +283,22 @@ export default function InvitePage() {
           </Button>
         </div>
 
-        <Card className="border-black/10 bg-white shadow-sm">
+        <Card className="border-border bg-card shadow-sm">
           <CardHeader className="space-y-4">
             <div className="flex items-center gap-3">
-              <Badge variant="secondary" className="bg-[#dce8ff] text-[#0c3fa3]">
+              <Badge variant="secondary" className="bg-accent text-accent-foreground">
                 {acceptedInvite.teamName}
               </Badge>
-              <span className="text-sm text-neutral-500">{acceptedInvite.email}</span>
+              <span className="text-muted-foreground text-sm">{acceptedInvite.email}</span>
             </div>
-            <CardTitle className="text-2xl text-[#0c1a4f]">{cardTitle}</CardTitle>
+            <CardTitle className="text-foreground text-2xl">{cardTitle}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-5">
             <div className="space-y-2">
-              <label className="text-[11px] font-medium tracking-[0.1em] text-neutral-500 uppercase">
+              <label className="text-muted-foreground text-[11px] font-medium tracking-[0.1em] uppercase">
                 {t`Invited email`}
               </label>
-              <Input
-                value={acceptedInvite.email}
-                disabled
-                className="h-12 rounded-sm bg-neutral-100"
-              />
+              <Input value={acceptedInvite.email} disabled className="bg-muted h-12 rounded-sm" />
             </div>
 
             {activePath === 'create-account' ? (
@@ -322,7 +336,7 @@ export default function InvitePage() {
 
                   {registerError ? (
                     <div
-                      className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+                      className="border-destructive/30 bg-destructive/10 text-destructive rounded-xl border px-4 py-3 text-sm"
                       aria-live="polite"
                     >
                       {registerError}
@@ -332,7 +346,7 @@ export default function InvitePage() {
                   <Button
                     type="submit"
                     disabled={registerViaInvite.isPending}
-                    className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
+                    className="bg-primary text-primary-foreground hover:bg-primary/90 h-12 w-full rounded-sm text-[12px] font-semibold tracking-widest"
                   >
                     {registerButtonLabel}
                     <ArrowRight className="ml-2 h-4 w-4" />
@@ -370,7 +384,7 @@ export default function InvitePage() {
 
                   {existingAccountError ? (
                     <div
-                      className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+                      className="border-destructive/30 bg-destructive/10 text-destructive rounded-xl border px-4 py-3 text-sm"
                       aria-live="polite"
                     >
                       {existingAccountError}
@@ -380,7 +394,7 @@ export default function InvitePage() {
                   <Button
                     type="submit"
                     disabled={login.isPending || acceptInvitation.isPending || logout.isPending}
-                    className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
+                    className="bg-primary text-primary-foreground hover:bg-primary/90 h-12 w-full rounded-sm text-[12px] font-semibold tracking-widest"
                   >
                     {existingButtonLabel}
                     <ArrowRight className="ml-2 h-4 w-4" />
@@ -396,7 +410,7 @@ export default function InvitePage() {
 
   return (
     <main className="mx-auto flex w-full max-w-7xl flex-1 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
-      <div className="grid w-full grid-cols-1 overflow-hidden border border-black/10 bg-[#e7e8eb] lg:grid-cols-[420px_1fr]">
+      <div className="border-border bg-muted grid w-full grid-cols-1 overflow-hidden border lg:grid-cols-[420px_1fr]">
         <aside className="relative bg-[#0f254f] px-6 py-8 text-white lg:px-8 lg:py-10">
           <div
             className="pointer-events-none absolute inset-0 opacity-20"
@@ -449,10 +463,27 @@ export default function InvitePage() {
           </div>
         </aside>
 
-        <section className="flex items-center bg-[#ececef] px-5 py-7 sm:px-8 sm:py-10 lg:px-12">
+        <section className="bg-background flex items-center px-5 py-7 sm:px-8 sm:py-10 lg:px-12">
           <div className="w-full max-w-160">{mainContent}</div>
         </section>
       </div>
     </main>
+  );
+}
+
+export default function InvitePage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="mx-auto flex w-full max-w-7xl flex-1 items-center justify-center px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+          <div className="text-muted-foreground flex items-center gap-3 text-sm">
+            <Loader2 className="text-primary h-5 w-5 animate-spin" />
+            <span>{t`Loading invite…`}</span>
+          </div>
+        </main>
+      }
+    >
+      <InvitePageContent />
+    </Suspense>
   );
 }

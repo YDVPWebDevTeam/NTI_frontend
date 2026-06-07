@@ -47,11 +47,13 @@ import type {
   NeedsInfoItemDto,
   NeedsInfoReplyDto,
   NeedsInfoThreadDto,
+  ProgramAMentoredApplicationDto,
   ProgramAMentorshipNoteDto,
   PublicCallDto,
   PublicCallsResponseDto,
   ResubmitApplicationDto,
   SetActiveSectionVersionDto,
+  StudentApplicationSummaryDto,
   UpsertIdeaOverviewSectionDto
 } from '../index.schemas';
 
@@ -409,6 +411,192 @@ export const useApplicationsControllerCreateDraft = <TError = void,
       return useMutation(mutationOptions, queryClient);
     }
     /**
+ * Returns submitted applications for the current student team so the dashboard can show application statuses and needs-info alerts.
+ * @summary List submitted applications for current team
+ */
+export const applicationsControllerListSubmittedForCurrentTeam = (
+    
+ options?: SecondParameter<typeof orvalMutator>,signal?: AbortSignal
+) => {
+      
+      
+      return orvalMutator<StudentApplicationSummaryDto[]>(
+      {url: `/applications/team/current/submitted`, method: 'GET', signal
+    },
+      options);
+    }
+  
+
+
+
+export const getApplicationsControllerListSubmittedForCurrentTeamQueryKey = () => {
+    return [
+    `/applications/team/current/submitted`
+    ] as const;
+    }
+
+    
+export const getApplicationsControllerListSubmittedForCurrentTeamQueryOptions = <TData = Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>, TError = void>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getApplicationsControllerListSubmittedForCurrentTeamQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>> = ({ signal }) => applicationsControllerListSubmittedForCurrentTeam(requestOptions, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type ApplicationsControllerListSubmittedForCurrentTeamQueryResult = NonNullable<Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>>
+export type ApplicationsControllerListSubmittedForCurrentTeamQueryError = void
+
+
+export function useApplicationsControllerListSubmittedForCurrentTeam<TData = Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>, TError = void>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>,
+          TError,
+          Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useApplicationsControllerListSubmittedForCurrentTeam<TData = Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>, TError = void>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>,
+          TError,
+          Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useApplicationsControllerListSubmittedForCurrentTeam<TData = Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>, TError = void>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary List submitted applications for current team
+ */
+
+export function useApplicationsControllerListSubmittedForCurrentTeam<TData = Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>, TError = void>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerListSubmittedForCurrentTeam>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getApplicationsControllerListSubmittedForCurrentTeamQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * Returns Program A applications assigned to the current authenticated mentor for mentor workspace summary views.
+ * @summary List current mentor assigned Program A applications
+ */
+export const applicationsControllerListMyMentoredProgramAApplications = (
+    
+ options?: SecondParameter<typeof orvalMutator>,signal?: AbortSignal
+) => {
+      
+      
+      return orvalMutator<ProgramAMentoredApplicationDto[]>(
+      {url: `/applications/program-a/my-mentored`, method: 'GET', signal
+    },
+      options);
+    }
+  
+
+
+
+export const getApplicationsControllerListMyMentoredProgramAApplicationsQueryKey = () => {
+    return [
+    `/applications/program-a/my-mentored`
+    ] as const;
+    }
+
+    
+export const getApplicationsControllerListMyMentoredProgramAApplicationsQueryOptions = <TData = Awaited<ReturnType<typeof applicationsControllerListMyMentoredProgramAApplications>>, TError = void>( options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerListMyMentoredProgramAApplications>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getApplicationsControllerListMyMentoredProgramAApplicationsQueryKey();
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof applicationsControllerListMyMentoredProgramAApplications>>> = ({ signal }) => applicationsControllerListMyMentoredProgramAApplications(requestOptions, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerListMyMentoredProgramAApplications>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type ApplicationsControllerListMyMentoredProgramAApplicationsQueryResult = NonNullable<Awaited<ReturnType<typeof applicationsControllerListMyMentoredProgramAApplications>>>
+export type ApplicationsControllerListMyMentoredProgramAApplicationsQueryError = void
+
+
+export function useApplicationsControllerListMyMentoredProgramAApplications<TData = Awaited<ReturnType<typeof applicationsControllerListMyMentoredProgramAApplications>>, TError = void>(
+  options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerListMyMentoredProgramAApplications>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof applicationsControllerListMyMentoredProgramAApplications>>,
+          TError,
+          Awaited<ReturnType<typeof applicationsControllerListMyMentoredProgramAApplications>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useApplicationsControllerListMyMentoredProgramAApplications<TData = Awaited<ReturnType<typeof applicationsControllerListMyMentoredProgramAApplications>>, TError = void>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerListMyMentoredProgramAApplications>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof applicationsControllerListMyMentoredProgramAApplications>>,
+          TError,
+          Awaited<ReturnType<typeof applicationsControllerListMyMentoredProgramAApplications>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useApplicationsControllerListMyMentoredProgramAApplications<TData = Awaited<ReturnType<typeof applicationsControllerListMyMentoredProgramAApplications>>, TError = void>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerListMyMentoredProgramAApplications>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary List current mentor assigned Program A applications
+ */
+
+export function useApplicationsControllerListMyMentoredProgramAApplications<TData = Awaited<ReturnType<typeof applicationsControllerListMyMentoredProgramAApplications>>, TError = void>(
+  options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerListMyMentoredProgramAApplications>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getApplicationsControllerListMyMentoredProgramAApplicationsQueryOptions(options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
  * Returns application details by identifier.
  * @summary Get application by id
  */

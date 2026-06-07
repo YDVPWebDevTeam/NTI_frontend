@@ -235,7 +235,7 @@ export default function OrganizationInviteOnboardingPage() {
               </div>
 
               <div>
-                <CardTitle className="font-headline text-3xl text-[#0c1a4f]">
+                <CardTitle className="font-headline text-foreground text-3xl">
                   {t`Accept organization invite`}
                 </CardTitle>
 
@@ -247,7 +247,7 @@ export default function OrganizationInviteOnboardingPage() {
 
             <CardContent className="space-y-6">
               {token ? null : (
-                <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                <div className="border-destructive/30 bg-destructive/10 text-destructive rounded-xl border px-4 py-3 text-sm">
                   <div className="flex gap-3">
                     <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
 
@@ -262,14 +262,14 @@ export default function OrganizationInviteOnboardingPage() {
               )}
 
               {token && validateInvite.isPending ? (
-                <div className="flex items-center gap-3 rounded-xl border border-black/10 bg-[#f7f8fa] px-4 py-3 text-sm text-neutral-600">
-                  <Loader2 className="h-4 w-4 animate-spin text-[#1e58d5]" />
+                <div className="border-border bg-muted text-muted-foreground flex items-center gap-3 rounded-xl border px-4 py-3 text-sm">
+                  <Loader2 className="text-primary h-4 w-4 animate-spin" />
                   {t`Validating invitation…`}
                 </div>
               ) : null}
 
               {token && validateInvite.isError ? (
-                <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                <div className="border-destructive/30 bg-destructive/10 text-destructive rounded-xl border px-4 py-3 text-sm">
                   <div className="flex gap-3">
                     <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
 
@@ -285,27 +285,27 @@ export default function OrganizationInviteOnboardingPage() {
 
               {invitation ? (
                 <div className="bg-surface-container-low rounded-2xl border border-black/10 p-4">
-                  <p className="text-[11px] font-medium tracking-[0.12em] text-neutral-500 uppercase">
+                  <p className="text-muted-foreground text-[11px] font-medium tracking-[0.12em] uppercase">
                     {t`Invitation details`}
                   </p>
 
                   <div className="mt-3 space-y-3">
                     <div>
-                      <p className="text-xs text-neutral-500">{t`Organization`}</p>
-                      <p className="text-lg font-semibold text-[#0c1a4f]">
+                      <p className="text-muted-foreground text-xs">{t`Organization`}</p>
+                      <p className="text-foreground text-lg font-semibold">
                         {invitation.organizationName}
                       </p>
                     </div>
 
                     <div>
-                      <p className="text-xs text-neutral-500">{t`Invited email`}</p>
-                      <p className="flex items-center gap-2 text-sm font-medium text-neutral-900">
-                        <Mail className="h-4 w-4 text-neutral-400" />
+                      <p className="text-muted-foreground text-xs">{t`Invited email`}</p>
+                      <p className="text-foreground flex items-center gap-2 text-sm font-medium">
+                        <Mail className="text-muted-foreground h-4 w-4" />
                         {invitation.email}
                       </p>
                     </div>
 
-                    <Badge className="bg-[#dce8ff] text-[#0c3fa3] hover:bg-[#dce8ff]">
+                    <Badge className="bg-accent text-accent-foreground hover:bg-accent">
                       {formatEnumLabel(invitation.roleToAssign)}
                     </Badge>
                   </div>
@@ -321,8 +321,8 @@ export default function OrganizationInviteOnboardingPage() {
                       onClick={() => setMode('create-account')}
                       className={
                         mode === 'create-account'
-                          ? 'h-11 rounded-lg bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]'
-                          : 'h-11 rounded-lg text-[12px] font-semibold tracking-widest text-[#0c1a4f]'
+                          ? 'bg-primary text-primary-foreground hover:bg-primary/90 h-11 rounded-lg text-[12px] font-semibold tracking-widest'
+                          : 'text-foreground h-11 rounded-lg text-[12px] font-semibold tracking-widest'
                       }
                     >
                       {t`CREATE ACCOUNT`}
@@ -334,8 +334,8 @@ export default function OrganizationInviteOnboardingPage() {
                       onClick={() => setMode('existing-account')}
                       className={
                         mode === 'existing-account'
-                          ? 'h-11 rounded-lg bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]'
-                          : 'h-11 rounded-lg text-[12px] font-semibold tracking-widest text-[#0c1a4f]'
+                          ? 'bg-primary text-primary-foreground hover:bg-primary/90 h-11 rounded-lg text-[12px] font-semibold tracking-widest'
+                          : 'text-foreground h-11 rounded-lg text-[12px] font-semibold tracking-widest'
                       }
                     >
                       {t`I HAVE ACCOUNT`}
@@ -354,7 +354,7 @@ export default function OrganizationInviteOnboardingPage() {
                         <div className="space-y-2">
                           <label
                             htmlFor="first-name"
-                            className="text-[11px] font-medium tracking-[0.12em] text-neutral-500 uppercase"
+                            className="text-muted-foreground text-[11px] font-medium tracking-[0.12em] uppercase"
                           >
                             {t`First name`}
                           </label>
@@ -366,14 +366,14 @@ export default function OrganizationInviteOnboardingPage() {
                               updateCreateAccountField('firstName', event.target.value)
                             }
                             autoComplete="given-name"
-                            className="h-12 rounded-sm border-black/10 bg-white"
+                            className="border-border bg-card h-12 rounded-sm"
                           />
                         </div>
 
                         <div className="space-y-2">
                           <label
                             htmlFor="last-name"
-                            className="text-[11px] font-medium tracking-[0.12em] text-neutral-500 uppercase"
+                            className="text-muted-foreground text-[11px] font-medium tracking-[0.12em] uppercase"
                           >
                             {t`Last name`}
                           </label>
@@ -385,7 +385,7 @@ export default function OrganizationInviteOnboardingPage() {
                               updateCreateAccountField('lastName', event.target.value)
                             }
                             autoComplete="family-name"
-                            className="h-12 rounded-sm border-black/10 bg-white"
+                            className="border-border bg-card h-12 rounded-sm"
                           />
                         </div>
                       </div>
@@ -393,7 +393,7 @@ export default function OrganizationInviteOnboardingPage() {
                       <div className="space-y-2">
                         <label
                           htmlFor="new-password"
-                          className="text-[11px] font-medium tracking-[0.12em] text-neutral-500 uppercase"
+                          className="text-muted-foreground text-[11px] font-medium tracking-[0.12em] uppercase"
                         >
                           {t`Password`}
                         </label>
@@ -406,14 +406,14 @@ export default function OrganizationInviteOnboardingPage() {
                           }
                           type="password"
                           autoComplete="new-password"
-                          className="h-12 rounded-sm border-black/10 bg-white"
+                          className="border-border bg-card h-12 rounded-sm"
                         />
                       </div>
 
                       <div className="space-y-2">
                         <label
                           htmlFor="confirm-password"
-                          className="text-[11px] font-medium tracking-[0.12em] text-neutral-500 uppercase"
+                          className="text-muted-foreground text-[11px] font-medium tracking-[0.12em] uppercase"
                         >
                           {t`Confirm password`}
                         </label>
@@ -426,11 +426,11 @@ export default function OrganizationInviteOnboardingPage() {
                           }
                           type="password"
                           autoComplete="new-password"
-                          className="h-12 rounded-sm border-black/10 bg-white"
+                          className="border-border bg-card h-12 rounded-sm"
                         />
 
                         {passwordMismatch ? (
-                          <p className="text-sm text-red-700" aria-live="polite">
+                          <p className="text-destructive text-sm" aria-live="polite">
                             {t`Passwords do not match.`}
                           </p>
                         ) : null}
@@ -439,7 +439,7 @@ export default function OrganizationInviteOnboardingPage() {
                       <Button
                         type="submit"
                         disabled={!isCreateAccountFormValid || isCreateAccountPending}
-                        className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
+                        className="bg-primary text-primary-foreground hover:bg-primary/90 h-12 w-full rounded-sm text-[12px] font-semibold tracking-widest"
                       >
                         {isCreateAccountPending ? t`JOINING...` : t`JOIN ORGANIZATION`}
 
@@ -458,7 +458,7 @@ export default function OrganizationInviteOnboardingPage() {
                         void handleExistingAccountSubmit();
                       }}
                     >
-                      <div className="rounded-xl border border-[#1e58d5]/15 bg-[#f4f8ff] px-4 py-3 text-sm text-[#23407b]">
+                      <div className="border-info/30 bg-info/10 text-info rounded-xl border px-4 py-3 text-sm">
                         <div className="flex gap-3">
                           <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" />
 
@@ -471,7 +471,7 @@ export default function OrganizationInviteOnboardingPage() {
                       <div className="space-y-2">
                         <label
                           htmlFor="existing-email"
-                          className="text-[11px] font-medium tracking-[0.12em] text-neutral-500 uppercase"
+                          className="text-muted-foreground text-[11px] font-medium tracking-[0.12em] uppercase"
                         >
                           {t`Email`}
                         </label>
@@ -481,14 +481,14 @@ export default function OrganizationInviteOnboardingPage() {
                           value={invitation.email}
                           disabled
                           type="email"
-                          className="h-12 rounded-sm border-black/10 bg-neutral-100"
+                          className="border-border bg-muted h-12 rounded-sm"
                         />
                       </div>
 
                       <div className="space-y-2">
                         <label
                           htmlFor="existing-password"
-                          className="text-[11px] font-medium tracking-[0.12em] text-neutral-500 uppercase"
+                          className="text-muted-foreground text-[11px] font-medium tracking-[0.12em] uppercase"
                         >
                           {t`Password`}
                         </label>
@@ -499,14 +499,14 @@ export default function OrganizationInviteOnboardingPage() {
                           onChange={(event) => setExistingAccountPassword(event.target.value)}
                           type="password"
                           autoComplete="current-password"
-                          className="h-12 rounded-sm border-black/10 bg-white"
+                          className="border-border bg-card h-12 rounded-sm"
                         />
                       </div>
 
                       <Button
                         type="submit"
                         disabled={!isExistingAccountFormValid || isExistingAccountPending}
-                        className="h-12 w-full rounded-sm bg-[#1e58d5] text-[12px] font-semibold tracking-widest text-white hover:bg-[#245fdc]"
+                        className="bg-primary text-primary-foreground hover:bg-primary/90 h-12 w-full rounded-sm text-[12px] font-semibold tracking-widest"
                       >
                         {isExistingAccountPending ? t`ACCEPTING...` : t`SIGN IN AND ACCEPT`}
 

@@ -163,16 +163,15 @@ export function PendingActionsSection({
         const href = resolvePendingActionHref(action.code, context);
 
         return (
-          <div
-            key={action.code}
-            className="rounded-[1.5rem] border border-[#dfe7fa] bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] p-5"
-          >
+          <div key={action.code} className="border-border bg-accent rounded-2xl border p-5">
             <div className="flex items-start justify-between gap-4">
               <div className="max-w-xl">
-                <p className="text-lg font-semibold text-[#10213d]">{presentation.title}</p>
-                <p className="mt-2 text-sm leading-7 text-[#60718d]">{presentation.description}</p>
+                <p className="text-foreground text-lg font-semibold">{presentation.title}</p>
+                <p className="text-muted-foreground mt-2 text-sm leading-7">
+                  {presentation.description}
+                </p>
               </div>
-              <span className="rounded-full bg-[#e8f0ff] px-3 py-1 text-sm font-semibold text-[#1e58d5]">
+              <span className="bg-accent text-primary rounded-full px-3 py-1 text-sm font-semibold">
                 {action.count}
               </span>
             </div>
@@ -193,13 +192,13 @@ export function PendingActionsSection({
 
 export function BacklogPreviewCard({ item }: { item: CompanyBacklogSummaryItemDto }) {
   return (
-    <div className="rounded-2xl border border-[#dfe7fa] bg-[#f8fbff] p-4">
+    <div className="border-border bg-muted rounded-2xl border p-4">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="font-semibold text-[#10213d]">
+          <p className="text-foreground font-semibold">
             {normalizeUnknownText(item.title) ?? t`Untitled backlog item`}
           </p>
-          <p className="mt-1 text-sm text-[#60718d]">
+          <p className="text-muted-foreground mt-1 text-sm">
             {item.productOwner?.fullName
               ? t`Product owner: ${item.productOwner.fullName}`
               : t`Product owner is not assigned yet.`}
@@ -208,14 +207,14 @@ export function BacklogPreviewCard({ item }: { item: CompanyBacklogSummaryItemDt
         <CompanyStatusBadge status={item.status} />
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-2 text-xs text-[#60718d]">
-        <span className="rounded-full bg-white px-3 py-1 ring-1 ring-[#d7e3ff]">
+      <div className="text-muted-foreground mt-4 flex flex-wrap gap-2 text-xs">
+        <span className="bg-card ring-border rounded-full px-3 py-1 ring-1">
           {t`${item.pendingCandidatesCount} pending reviews`}
         </span>
-        <span className="rounded-full bg-white px-3 py-1 ring-1 ring-[#d7e3ff]">
+        <span className="bg-card ring-border rounded-full px-3 py-1 ring-1">
           {t`${item.candidatesCount} total candidates`}
         </span>
-        <span className="rounded-full bg-white px-3 py-1 ring-1 ring-[#d7e3ff]">
+        <span className="bg-card ring-border rounded-full px-3 py-1 ring-1">
           {t`Updated ${formatDateTime(item.updatedAt)}`}
         </span>
       </div>
@@ -223,7 +222,7 @@ export function BacklogPreviewCard({ item }: { item: CompanyBacklogSummaryItemDt
       <div className="mt-4">
         <Link
           href={ROUTES.COMPANY.programBBacklogDetail(item.id)}
-          className="inline-flex items-center text-sm font-medium text-[#1e58d5]"
+          className="text-primary inline-flex items-center text-sm font-medium"
         >
           {t`Open backlog detail`}
         </Link>
@@ -238,45 +237,43 @@ export function ProjectPreviewCard({ item }: { item: CompanyProjectSummaryItemDt
   return (
     <div
       className={`rounded-2xl border p-4 ${
-        isClosedProject
-          ? 'border-rose-200 bg-[linear-gradient(180deg,#fff7f7_0%,#fff1f1_100%)]'
-          : 'border-[#dfe7fa] bg-[#f8fbff]'
+        isClosedProject ? 'border-destructive/30 bg-destructive/10' : 'border-border bg-muted'
       }`}
     >
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="font-semibold text-[#10213d]">
+          <p className="text-foreground font-semibold">
             {normalizeUnknownText(item.title) ?? t`Project`}
           </p>
-          <p className="mt-1 text-sm text-[#60718d]">{item.teamName}</p>
+          <p className="text-muted-foreground mt-1 text-sm">{item.teamName}</p>
         </div>
         <CompanyStatusBadge status={item.status} />
       </div>
 
       {isClosedProject ? (
-        <div className="mt-4 rounded-xl border border-rose-200 bg-white/80 px-3 py-2 text-xs font-medium text-rose-700">
+        <div className="border-destructive/30 bg-card/80 text-destructive mt-4 rounded-xl border px-3 py-2 text-xs font-medium">
           {t`This project is closed and now read-only.`}
         </div>
       ) : null}
 
-      <div className="mt-4 flex flex-wrap gap-2 text-xs text-[#60718d]">
+      <div className="text-muted-foreground mt-4 flex flex-wrap gap-2 text-xs">
         {item.awaitingFinalAcceptance ? (
-          <span className="rounded-full bg-[#fff4d6] px-3 py-1 text-[#9a6500] ring-1 ring-[#f4d27b]">
+          <span className="bg-warning/10 text-warning ring-warning/30 rounded-full px-3 py-1 ring-1">
             {t`Awaiting final acceptance`}
           </span>
         ) : null}
 
-        <span className="rounded-full bg-white px-3 py-1 ring-1 ring-[#d7e3ff]">
+        <span className="bg-card ring-border rounded-full px-3 py-1 ring-1">
           {item.nextMilestone?.title
             ? t`Next milestone: ${item.nextMilestone.title}`
             : t`No upcoming milestone`}
         </span>
-        <span className="rounded-full bg-white px-3 py-1 ring-1 ring-[#d7e3ff]">
+        <span className="bg-card ring-border rounded-full px-3 py-1 ring-1">
           {t`Updated ${formatDateTime(item.updatedAt)}`}
         </span>
       </div>
 
-      <p className="mt-4 text-sm text-[#60718d]">
+      <p className="text-muted-foreground mt-4 text-sm">
         {item.mentor?.fullName
           ? t`Mentor: ${item.mentor.fullName}`
           : t`Mentor is not assigned yet.`}
@@ -285,7 +282,7 @@ export function ProjectPreviewCard({ item }: { item: CompanyProjectSummaryItemDt
       <div className="mt-4">
         <Link
           href={ROUTES.COMPANY.programBProjectDetail(item.id)}
-          className="inline-flex items-center text-sm font-medium text-[#1e58d5]"
+          className="text-primary inline-flex items-center text-sm font-medium"
         >
           {t`Open project detail`}
         </Link>

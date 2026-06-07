@@ -16,10 +16,14 @@ const catalogLoaders: Record<AppLocale, () => Promise<CatalogModule>> = {
   sk: () => import('locales/sk/messages'),
 };
 
-export async function getServerI18n(locale: AppLocale): Promise<I18n> {
+export async function loadCatalogMessages(locale: AppLocale): Promise<Messages> {
   const catalogModule = await catalogLoaders[locale]();
 
-  const messages = catalogModule.messages ?? catalogModule.default?.messages ?? {};
+  return catalogModule.messages ?? catalogModule.default?.messages ?? {};
+}
+
+export async function getServerI18n(locale: AppLocale): Promise<I18n> {
+  const messages = await loadCatalogMessages(locale);
 
   return setupI18n({
     locale,

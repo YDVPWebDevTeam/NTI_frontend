@@ -256,6 +256,16 @@ export default function CompanyProgramBBacklogDetailPage({
   };
 
   const handleAssignProductOwner = async (productOwnerUserId: string) => {
+    if (item?.productOwner) {
+      const confirmed = window.confirm(
+        t`A product owner is already assigned. Reassign delivery to this member?`,
+      );
+
+      if (!confirmed) {
+        return;
+      }
+    }
+
     try {
       await assignProductOwner.mutateAsync({ id, data: { productOwnerUserId } });
       toast.success(t`Product owner assigned.`);
@@ -312,6 +322,12 @@ export default function CompanyProgramBBacklogDetailPage({
   const isDecisionPending =
     shortlistCandidate.isPending || acceptCandidate.isPending || rejectCandidate.isPending;
 
+  const isCandidateDecisionPending = (applicationId: string) =>
+    (shortlistCandidate.isPending &&
+      shortlistCandidate.variables?.applicationId === applicationId) ||
+    (acceptCandidate.isPending && acceptCandidate.variables?.applicationId === applicationId) ||
+    (rejectCandidate.isPending && rejectCandidate.variables?.applicationId === applicationId);
+
   if ((companyBacklogLookupQuery.isLoading || itemQuery.isLoading) && !item) {
     return (
       <CompanyDashboardStatus
@@ -334,109 +350,115 @@ export default function CompanyProgramBBacklogDetailPage({
   let candidatesContent;
 
   if (candidatesQuery.isLoading && !candidatesQuery.data) {
-    candidatesContent = <p className="text-sm text-[#60718d]">{t`Loading candidates…`}</p>;
+    candidatesContent = <p className="text-muted-foreground text-sm">{t`Loading candidates…`}</p>;
   } else if (candidatesQuery.isError) {
     candidatesContent = (
-      <p className="text-sm text-[#60718d]">{t`Candidates are unavailable right now.`}</p>
+      <p className="text-muted-foreground text-sm">{t`Candidates are unavailable right now.`}</p>
     );
   } else if (candidates.length === 0) {
-    candidatesContent = <p className="text-sm text-[#60718d]">{t`No candidates yet.`}</p>;
+    candidatesContent = <p className="text-muted-foreground text-sm">{t`No candidates yet.`}</p>;
   } else {
-    candidatesContent = candidates.map((candidate) => (
-      <div key={candidate.id} className="rounded-2xl border border-[#dfe7fa] bg-[#f8fbff] p-4">
-        <div className="flex flex-wrap items-start justify-between gap-3">
-          <div>
-            <p className="font-semibold text-[#10213d]">
-              {t`Team:`} {candidate.teamId}
-            </p>
-            <p className="mt-1 text-sm text-[#60718d]">
-              {t`Submitted:`} {formatUnknownDate(candidate.submittedAt)}
-            </p>
+    candidatesContent = candidates.map((candidate) => {
+      const candidatePending = isCandidateDecisionPending(candidate.id);
+
+      return (
+        <div key={candidate.id} className="border-border bg-muted rounded-2xl border p-4">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <p className="text-foreground font-semibold">
+                {t`Team:`} {candidate.teamId}
+              </p>
+              <p className="text-muted-foreground mt-1 text-sm">
+                {t`Submitted:`} {formatUnknownDate(candidate.submittedAt)}
+              </p>
+            </div>
+            <CompanyStatusBadge status={candidate.status} />
           </div>
-          <CompanyStatusBadge status={candidate.status} />
-        </div>
 
-        <p className="mt-3 text-sm leading-7 text-[#60718d]">
-          {normalizeUnknownText(candidate.motivation) ?? t`No motivation provided.`}
-        </p>
-
-        {candidate.decisionReason ? (
-          <p className="mt-2 text-sm text-[#60718d]">
-            {t`Decision note:`} {candidate.decisionReason}
+          <p className="text-muted-foreground mt-3 text-sm leading-7">
+            {normalizeUnknownText(candidate.motivation) ?? t`No motivation provided.`}
           </p>
-        ) : null}
 
-        <div className="mt-4 flex flex-wrap gap-2">
-          {candidate.status === ProgramBTeamApplicationResponseDtoStatus.SUBMITTED ? (
-            <Button
-              type="button"
-              size="sm"
-              variant="outline"
-              disabled={isDecisionPending}
-              onClick={() => {
-                setDecisionReason('');
-                setDecisionTarget({ applicationId: candidate.id, action: 'shortlist' });
-              }}
-            >
-              {t`Shortlist`}
-            </Button>
+          {candidate.decisionReason ? (
+            <p className="text-muted-foreground mt-2 text-sm">
+              {t`Decision note:`} {candidate.decisionReason}
+            </p>
           ) : null}
 
-          {candidate.status === ProgramBTeamApplicationResponseDtoStatus.SUBMITTED ||
-          candidate.status === ProgramBTeamApplicationResponseDtoStatus.SHORTLISTED ? (
-            <>
-              <Button
-                type="button"
-                size="sm"
-                disabled={isDecisionPending}
-                onClick={() => {
-                  setDecisionReason('');
-                  setDecisionTarget({ applicationId: candidate.id, action: 'accept' });
-                }}
-              >
-                {t`Accept`}
-              </Button>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {candidate.status === ProgramBTeamApplicationResponseDtoStatus.SUBMITTED ? (
               <Button
                 type="button"
                 size="sm"
                 variant="outline"
-                disabled={isDecisionPending}
+                disabled={candidatePending}
                 onClick={() => {
                   setDecisionReason('');
-                  setDecisionTarget({ applicationId: candidate.id, action: 'reject' });
+                  setDecisionTarget({ applicationId: candidate.id, action: 'shortlist' });
                 }}
               >
-                {t`Reject`}
+                {t`Shortlist`}
               </Button>
-            </>
-          ) : null}
+            ) : null}
 
-          {candidate.status === ProgramBTeamApplicationResponseDtoStatus.ACCEPTED ? (
-            <Button
-              type="button"
-              size="sm"
-              disabled={createProject.isPending}
-              onClick={() => void handleCreateProject(candidate.id)}
-            >
-              {createProject.isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-              {t`Create project workspace`}
-            </Button>
-          ) : null}
+            {candidate.status === ProgramBTeamApplicationResponseDtoStatus.SUBMITTED ||
+            candidate.status === ProgramBTeamApplicationResponseDtoStatus.SHORTLISTED ? (
+              <>
+                <Button
+                  type="button"
+                  size="sm"
+                  disabled={candidatePending}
+                  onClick={() => {
+                    setDecisionReason('');
+                    setDecisionTarget({ applicationId: candidate.id, action: 'accept' });
+                  }}
+                >
+                  {t`Accept`}
+                </Button>
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="outline"
+                  disabled={candidatePending}
+                  onClick={() => {
+                    setDecisionReason('');
+                    setDecisionTarget({ applicationId: candidate.id, action: 'reject' });
+                  }}
+                >
+                  {t`Reject`}
+                </Button>
+              </>
+            ) : null}
+
+            {candidate.status === ProgramBTeamApplicationResponseDtoStatus.ACCEPTED ? (
+              <Button
+                type="button"
+                size="sm"
+                disabled={createProject.isPending}
+                onClick={() => void handleCreateProject(candidate.id)}
+              >
+                {createProject.isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                {t`Create project workspace`}
+              </Button>
+            ) : null}
+          </div>
         </div>
-      </div>
-    ));
+      );
+    });
   }
 
   let poDialogBody;
 
   if (membersQuery.isLoading) {
-    poDialogBody = <p className="text-sm text-[#60718d]">{t`Loading members…`}</p>;
+    poDialogBody = <p className="text-muted-foreground text-sm">{t`Loading members…`}</p>;
   } else if (members.length === 0) {
-    poDialogBody = <p className="text-sm text-[#60718d]">{t`No organization members found.`}</p>;
+    poDialogBody = (
+      <p className="text-muted-foreground text-sm">{t`No organization members found.`}</p>
+    );
   } else {
     poDialogBody = (
       <select
-        className="w-full rounded-md border border-black/10 bg-white px-3 py-2 text-sm"
+        className="border-border bg-card w-full rounded-md border px-3 py-2 text-sm"
         value={selectedMemberId}
         onChange={(event) => setSelectedMemberId(event.target.value)}
       >
@@ -460,22 +482,22 @@ export default function CompanyProgramBBacklogDetailPage({
 
   return (
     <div className="space-y-6">
-      <section className="rounded-[1.75rem] border border-[#dfe7fa] bg-white/90 p-6 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
+      <section className="border-border bg-card rounded-2xl border p-6 shadow-sm">
         <div className="flex items-start justify-between gap-4">
           <div>
             <div className="flex flex-wrap items-center gap-3">
-              <h1 className="text-2xl font-semibold text-[#10213d]">
+              <h1 className="text-foreground text-2xl font-semibold">
                 {normalizeUnknownText(item.title) ?? t`Program B backlog item`}
               </h1>
               <CompanyStatusBadge status={item.status} />
             </div>
-            <p className="mt-2 max-w-3xl text-sm leading-7 text-[#60718d]">
+            <p className="text-muted-foreground mt-2 max-w-3xl text-sm leading-7">
               {normalizeUnknownText(item.description) ?? t`No description provided.`}
             </p>
           </div>
           <Link
             href={ROUTES.COMPANY.PROGRAM_B_BACKLOG}
-            className="text-sm font-medium text-[#1e58d5]"
+            className="text-primary text-sm font-medium"
           >
             {t`Back to backlog`}
           </Link>
@@ -541,9 +563,9 @@ export default function CompanyProgramBBacklogDetailPage({
 
         <TabsContent value="overview">
           <div className="grid gap-6 xl:grid-cols-2">
-            <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
-              <h2 className="text-lg font-semibold text-[#10213d]">{t`Overview`}</h2>
-              <div className="mt-4 space-y-2 text-sm text-[#60718d]">
+            <article className="border-border bg-card rounded-2xl border p-5 shadow-sm">
+              <h2 className="text-foreground text-lg font-semibold">{t`Overview`}</h2>
+              <div className="text-muted-foreground mt-4 space-y-2 text-sm">
                 <p>
                   {t`Status:`}{' '}
                   <span className="align-middle">
@@ -552,57 +574,57 @@ export default function CompanyProgramBBacklogDetailPage({
                 </p>
                 <p>
                   {t`Budget:`}{' '}
-                  <span className="font-medium text-[#10213d]">
+                  <span className="text-foreground font-medium">
                     {normalizeUnknownText(item.budget) ?? t`Not specified`}
                   </span>
                 </p>
                 <p>
                   {t`Expected outcomes:`}{' '}
-                  <span className="font-medium text-[#10213d]">
+                  <span className="text-foreground font-medium">
                     {normalizeUnknownText(item.expectedOutcomes) ?? t`Not specified`}
                   </span>
                 </p>
                 <p>
                   {t`Updated:`}{' '}
-                  <span className="font-medium text-[#10213d]">
+                  <span className="text-foreground font-medium">
                     {formatUnknownDate(item.updatedAt)}
                   </span>
                 </p>
               </div>
             </article>
 
-            <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
-              <h2 className="text-lg font-semibold text-[#10213d]">{t`Product owner`}</h2>
-              <p className="mt-4 text-sm text-[#60718d]">
+            <article className="border-border bg-card rounded-2xl border p-5 shadow-sm">
+              <h2 className="text-foreground text-lg font-semibold">{t`Product owner`}</h2>
+              <p className="text-muted-foreground mt-4 text-sm">
                 {t`Assigned:`}{' '}
-                <span className="font-medium text-[#10213d]">
+                <span className="text-foreground font-medium">
                   {formatPersonName(item.productOwner) ?? t`Not assigned`}
                 </span>
               </p>
               {item.productOwner ? null : (
-                <p className="mt-2 text-sm text-amber-700">
+                <p className="text-warning mt-2 text-sm">
                   {t`Product owner still needs assignment.`}
                 </p>
               )}
               {hasPendingCandidateReview ? (
-                <p className="mt-2 text-sm text-amber-700">{t`Candidate decisions are waiting.`}</p>
+                <p className="text-warning mt-2 text-sm">{t`Candidate decisions are waiting.`}</p>
               ) : null}
-              <div className="mt-4 flex flex-wrap gap-2">
-                {me ? (
-                  <Button
-                    type="button"
-                    size="sm"
-                    variant="outline"
-                    disabled={assignProductOwner.isPending}
-                    onClick={() => void handleAssignProductOwner(me.id)}
-                  >
-                    {assignProductOwner.isPending ? (
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    ) : null}
-                    {t`Assign myself`}
-                  </Button>
-                ) : null}
-                {isCompanyOwner ? (
+              {isCompanyOwner ? (
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {me ? (
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="outline"
+                      disabled={assignProductOwner.isPending}
+                      onClick={() => void handleAssignProductOwner(me.id)}
+                    >
+                      {assignProductOwner.isPending ? (
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      ) : null}
+                      {item.productOwner ? t`Reassign to myself` : t`Assign myself`}
+                    </Button>
+                  ) : null}
                   <Button
                     type="button"
                     size="sm"
@@ -611,24 +633,24 @@ export default function CompanyProgramBBacklogDetailPage({
                       setIsPoOpen(true);
                     }}
                   >
-                    {t`Assign a team member`}
+                    {item.productOwner ? t`Reassign a team member` : t`Assign a team member`}
                   </Button>
-                ) : null}
-              </div>
+                </div>
+              ) : null}
             </article>
           </div>
         </TabsContent>
 
         <TabsContent value="candidates">
-          <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
-            <h2 className="text-lg font-semibold text-[#10213d]">{t`Candidates`}</h2>
+          <article className="border-border bg-card rounded-2xl border p-5 shadow-sm">
+            <h2 className="text-foreground text-lg font-semibold">{t`Candidates`}</h2>
             <div className="mt-4 space-y-3">{candidatesContent}</div>
           </article>
         </TabsContent>
 
         <TabsContent value="documents">
-          <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
-            <h2 className="text-lg font-semibold text-[#10213d]">{t`Documents`}</h2>
+          <article className="border-border bg-card rounded-2xl border p-5 shadow-sm">
+            <h2 className="text-foreground text-lg font-semibold">{t`Documents`}</h2>
             <div className="mt-4">
               <ProgramBDocumentManager
                 documents={documents}

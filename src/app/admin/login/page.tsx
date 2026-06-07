@@ -9,7 +9,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import { AuthSplitShell } from 'components/layout';
+import { AuthSplitShell } from 'components/layout/auth-split-shell';
 import { ControlledInputField, ControlledPasswordField } from 'components/forms';
 import { Button, Form } from 'components/shadcn';
 import {
@@ -110,7 +110,7 @@ export default function AdminLoginPage() {
 
           <Button
             type="submit"
-            className="h-12 w-full rounded-xl bg-slate-950 text-[12px] font-semibold tracking-[0.16em] uppercase hover:bg-slate-800"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 h-12 w-full rounded-xl text-[12px] font-semibold tracking-[0.16em] uppercase"
             disabled={form.formState.isSubmitting}
           >
             {form.formState.isSubmitting ? t`Signing In...` : t`Access Admin`}

@@ -4,6 +4,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import { AppProviders } from 'components/providers';
 import { activateDefaultLocale } from 'lib/i18n/runtime';
+import { loadCatalogMessages } from 'lib/i18n/server-i18n';
 import { getRequestLocale } from 'lib/i18n/server-locale';
 
 import './styles/global.css';
@@ -63,6 +64,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const locale = await getRequestLocale();
+  const messages = await loadCatalogMessages(locale);
 
   return (
     <html
@@ -71,7 +73,9 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body className="antialiased">
-        <AppProviders>{children}</AppProviders>
+        <AppProviders initialLocale={locale} initialMessages={messages}>
+          {children}
+        </AppProviders>
         <SpeedInsights />
       </body>
     </html>

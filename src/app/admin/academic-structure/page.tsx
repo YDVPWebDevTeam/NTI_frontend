@@ -143,8 +143,8 @@ function ActiveStateBadge({ isActive }: { isActive: boolean }) {
       className={cn(
         'border px-2.5 py-1 text-[11px] tracking-[0.08em] uppercase',
         isActive
-          ? 'border-emerald-200 bg-emerald-50 text-emerald-700'
-          : 'border-slate-200 bg-slate-100 text-slate-600',
+          ? 'border-success/30 bg-success/10 text-success'
+          : 'border-border bg-muted text-muted-foreground',
       )}
     >
       {isActive ? t`Active` : t`Inactive`}
@@ -162,7 +162,7 @@ function ActiveCheckboxField<TValues extends { isActive: boolean }>({
       control={control}
       name={'isActive' as never}
       render={({ field }) => (
-        <FormItem className="flex flex-row items-start space-y-0 space-x-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-4">
+        <FormItem className="border-border bg-muted flex flex-row items-start space-y-0 space-x-3 rounded-xl border px-4 py-4">
           <FormControl>
             <Checkbox
               checked={field.value}
@@ -171,8 +171,8 @@ function ActiveCheckboxField<TValues extends { isActive: boolean }>({
             />
           </FormControl>
           <div className="space-y-1">
-            <FormLabel className="text-sm font-medium text-slate-900">{t`Record is active`}</FormLabel>
-            <p className="text-sm text-slate-600">
+            <FormLabel className="text-foreground text-sm font-medium">{t`Record is active`}</FormLabel>
+            <p className="text-muted-foreground text-sm">
               {t`Use this for soft disabling. Delete only when the record is truly obsolete.`}
             </p>
             <FormMessage />
@@ -196,14 +196,14 @@ function SectionSearch({
 }) {
   return (
     <div className="min-w-0">
-      <label className="mb-2 block text-[11px] font-medium tracking-[0.12em] text-slate-500 uppercase">
+      <label className="text-muted-foreground mb-2 block text-[11px] font-medium tracking-[0.12em] uppercase">
         {label}
       </label>
       <Input
         value={value}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
-        className="h-11 bg-white"
+        className="bg-card h-11"
       />
     </div>
   );
@@ -593,13 +593,13 @@ export default function AdminAcademicStructurePage() {
               }
 
               return (
-                <AdminTableRow key={faculty.id} className={cn(isSelected && 'bg-sky-50/70')}>
+                <AdminTableRow key={faculty.id} className={cn(isSelected && 'bg-accent')}>
                   <AdminTableCell>
-                    <div className="font-medium text-slate-950">{faculty.name}</div>
-                    <div className="mt-1 text-xs text-slate-500">
+                    <div className="text-foreground font-medium">{faculty.name}</div>
+                    <div className="text-muted-foreground mt-1 text-xs">
                       {faculty.shortName || t`No short name`}
                     </div>
-                    <div className="mt-1 font-mono text-xs text-slate-400">{faculty.id}</div>
+                    <div className="text-muted-foreground mt-1 font-mono text-xs">{faculty.id}</div>
                   </AdminTableCell>
                   <AdminTableCell>
                     <ActiveStateBadge isActive={faculty.isActive} />
@@ -638,7 +638,7 @@ export default function AdminAcademicStructurePage() {
                         type="button"
                         size="sm"
                         variant="ghost"
-                        className="text-rose-700 hover:bg-rose-50 hover:text-rose-800"
+                        className="text-destructive hover:bg-destructive/10 hover:text-destructive"
                         disabled={isUpdatingFaculty || isDeletingFaculty}
                         onClick={() => {
                           if (
@@ -740,14 +740,16 @@ export default function AdminAcademicStructurePage() {
               }
 
               return (
-                <AdminTableRow key={specialization.id} className={cn(isSelected && 'bg-sky-50/70')}>
+                <AdminTableRow key={specialization.id} className={cn(isSelected && 'bg-accent')}>
                   <AdminTableCell>
-                    <div className="font-medium text-slate-950">{specialization.name}</div>
-                    <div className="mt-1 font-mono text-xs text-slate-400">{specialization.id}</div>
+                    <div className="text-foreground font-medium">{specialization.name}</div>
+                    <div className="text-muted-foreground mt-1 font-mono text-xs">
+                      {specialization.id}
+                    </div>
                   </AdminTableCell>
                   <AdminTableCell>
                     <div>{specialization.degreeLabel || t`No degree label`}</div>
-                    <div className="mt-1 text-xs text-slate-500">
+                    <div className="text-muted-foreground mt-1 text-xs">
                       {specialization.code || t`No code`}
                     </div>
                   </AdminTableCell>
@@ -787,7 +789,7 @@ export default function AdminAcademicStructurePage() {
                         type="button"
                         size="sm"
                         variant="ghost"
-                        className="text-rose-700 hover:bg-rose-50 hover:text-rose-800"
+                        className="text-destructive hover:bg-destructive/10 hover:text-destructive"
                         disabled={isUpdatingSpecialization || isDeletingSpecialization}
                         onClick={() => {
                           if (
@@ -871,10 +873,10 @@ export default function AdminAcademicStructurePage() {
         />
       </section>
 
-      <Card className="border-slate-200 bg-white shadow-none">
+      <Card className="border-border bg-card shadow-none">
         <CardHeader>
-          <CardTitle className="text-2xl text-slate-950">{t`Directory Controls`}</CardTitle>
-          <p className="text-sm leading-6 text-slate-600">
+          <CardTitle className="text-foreground text-2xl">{t`Directory Controls`}</CardTitle>
+          <p className="text-muted-foreground text-sm leading-6">
             {t`Use the backend search for universities, then manage dependent faculties and specializations from the selected branch. Prefer deactivating records before attempting deletion.`}
           </p>
         </CardHeader>
@@ -885,7 +887,7 @@ export default function AdminAcademicStructurePage() {
             onChange={setUniversitySearch}
             placeholder={t`Search universities by name, short name, city, or country`}
           />
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
+          <div className="border-border bg-muted rounded-2xl border px-4 py-4">
             <label className="flex items-start gap-3">
               <Checkbox
                 checked={includeInactive}
@@ -893,8 +895,8 @@ export default function AdminAcademicStructurePage() {
                 className="mt-0.5"
               />
               <span>
-                <span className="block text-sm font-medium text-slate-900">{t`Include inactive records`}</span>
-                <span className="mt-1 block text-sm leading-6 text-slate-600">
+                <span className="text-foreground block text-sm font-medium">{t`Include inactive records`}</span>
+                <span className="text-muted-foreground mt-1 block text-sm leading-6">
                   {t`Deleted rows may be restricted by student profile references, so inactive records should stay easy to recover.`}
                 </span>
               </span>
@@ -904,11 +906,11 @@ export default function AdminAcademicStructurePage() {
       </Card>
 
       <section className="grid gap-6 xl:grid-cols-[minmax(0,1.4fr)_420px]">
-        <Card className="border-slate-200 bg-white shadow-none">
+        <Card className="border-border bg-card shadow-none">
           <CardHeader className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <CardTitle className="text-2xl text-slate-950">{t`Universities`}</CardTitle>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
+              <CardTitle className="text-foreground text-2xl">{t`Universities`}</CardTitle>
+              <p className="text-muted-foreground mt-2 text-sm leading-6">
                 {t`Select a university to manage its faculties. Search is executed by the backend on this level.`}
               </p>
             </div>
@@ -956,16 +958,13 @@ export default function AdminAcademicStructurePage() {
                     }
 
                     return (
-                      <AdminTableRow
-                        key={university.id}
-                        className={cn(isSelected && 'bg-sky-50/70')}
-                      >
+                      <AdminTableRow key={university.id} className={cn(isSelected && 'bg-accent')}>
                         <AdminTableCell>
-                          <div className="font-medium text-slate-950">{university.name}</div>
-                          <div className="mt-1 text-xs text-slate-500">
+                          <div className="text-foreground font-medium">{university.name}</div>
+                          <div className="text-muted-foreground mt-1 text-xs">
                             {university.shortName || t`No short name`}
                           </div>
-                          <div className="mt-1 font-mono text-xs text-slate-400">
+                          <div className="text-muted-foreground mt-1 font-mono text-xs">
                             {university.id}
                           </div>
                         </AdminTableCell>
@@ -982,7 +981,7 @@ export default function AdminAcademicStructurePage() {
                               href={university.website}
                               target="_blank"
                               rel="noreferrer"
-                              className="text-sky-700 underline-offset-4 hover:underline"
+                              className="text-primary underline-offset-4 hover:underline"
                             >
                               {university.website}
                             </a>
@@ -1030,7 +1029,7 @@ export default function AdminAcademicStructurePage() {
                               type="button"
                               size="sm"
                               variant="ghost"
-                              className="text-rose-700 hover:bg-rose-50 hover:text-rose-800"
+                              className="text-destructive hover:bg-destructive/10 hover:text-destructive"
                               disabled={isUpdatingUniversity || isDeletingUniversity}
                               onClick={() => {
                                 if (
@@ -1077,13 +1076,13 @@ export default function AdminAcademicStructurePage() {
           </CardContent>
         </Card>
 
-        <Card className="border-slate-200 bg-white shadow-none">
+        <Card className="border-border bg-card shadow-none">
           <CardHeader className="flex flex-row items-start justify-between gap-4">
             <div>
-              <CardTitle className="text-2xl text-slate-950">
+              <CardTitle className="text-foreground text-2xl">
                 {editingUniversityId ? t`Edit University` : t`Create University`}
               </CardTitle>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
+              <p className="text-muted-foreground mt-2 text-sm leading-6">
                 {editingUniversityId
                   ? t`Selected university values are loaded here for direct editing.`
                   : t`Add a new university record to start a new academic branch.`}
@@ -1140,7 +1139,7 @@ export default function AdminAcademicStructurePage() {
                 <ActiveCheckboxField control={universityForm.control} />
                 <Button
                   type="submit"
-                  className="h-11 w-full rounded-xl bg-slate-950 hover:bg-slate-800"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 h-11 w-full rounded-xl"
                   disabled={isSavingUniversity}
                 >
                   <PencilLine className="h-4 w-4" />
@@ -1153,11 +1152,11 @@ export default function AdminAcademicStructurePage() {
       </section>
 
       <section className="grid gap-6 xl:grid-cols-[minmax(0,1.4fr)_420px]">
-        <Card className="border-slate-200 bg-white shadow-none">
+        <Card className="border-border bg-card shadow-none">
           <CardHeader className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <CardTitle className="text-2xl text-slate-950">{t`Faculties`}</CardTitle>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
+              <CardTitle className="text-foreground text-2xl">{t`Faculties`}</CardTitle>
+              <p className="text-muted-foreground mt-2 text-sm leading-6">
                 {selectedUniversity
                   ? t`Managing faculties for the selected university.`
                   : t`Select a university to load its faculties.`}
@@ -1175,13 +1174,13 @@ export default function AdminAcademicStructurePage() {
           <CardContent>{facultySectionContent}</CardContent>
         </Card>
 
-        <Card className="border-slate-200 bg-white shadow-none">
+        <Card className="border-border bg-card shadow-none">
           <CardHeader className="flex flex-row items-start justify-between gap-4">
             <div>
-              <CardTitle className="text-2xl text-slate-950">
+              <CardTitle className="text-foreground text-2xl">
                 {editingFacultyId ? t`Edit Faculty` : t`Create Faculty`}
               </CardTitle>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
+              <p className="text-muted-foreground mt-2 text-sm leading-6">
                 {selectedUniversity
                   ? t`The faculty will be created under the selected university.`
                   : t`Select a university before creating or editing faculties.`}
@@ -1205,12 +1204,14 @@ export default function AdminAcademicStructurePage() {
                   className="space-y-5"
                   onSubmit={facultyForm.handleSubmit(handleFacultySubmit)}
                 >
-                  <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
-                    <div className="text-[11px] font-medium tracking-[0.12em] text-slate-500 uppercase">
+                  <div className="border-border bg-muted rounded-2xl border px-4 py-4">
+                    <div className="text-muted-foreground text-[11px] font-medium tracking-[0.12em] uppercase">
                       {t`Selected University`}
                     </div>
-                    <div className="mt-2 font-medium text-slate-950">{selectedUniversity.name}</div>
-                    <div className="mt-1 text-sm text-slate-600">
+                    <div className="text-foreground mt-2 font-medium">
+                      {selectedUniversity.name}
+                    </div>
+                    <div className="text-muted-foreground mt-1 text-sm">
                       {selectedUniversity.shortName || t`No short name`}
                     </div>
                   </div>
@@ -1229,7 +1230,7 @@ export default function AdminAcademicStructurePage() {
                   <ActiveCheckboxField control={facultyForm.control} />
                   <Button
                     type="submit"
-                    className="h-11 w-full rounded-xl bg-slate-950 hover:bg-slate-800"
+                    className="bg-primary text-primary-foreground hover:bg-primary/90 h-11 w-full rounded-xl"
                     disabled={isSavingFaculty}
                   >
                     <PencilLine className="h-4 w-4" />
@@ -1248,11 +1249,11 @@ export default function AdminAcademicStructurePage() {
       </section>
 
       <section className="grid gap-6 xl:grid-cols-[minmax(0,1.4fr)_420px]">
-        <Card className="border-slate-200 bg-white shadow-none">
+        <Card className="border-border bg-card shadow-none">
           <CardHeader className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <div>
-              <CardTitle className="text-2xl text-slate-950">{t`Specializations`}</CardTitle>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
+              <CardTitle className="text-foreground text-2xl">{t`Specializations`}</CardTitle>
+              <p className="text-muted-foreground mt-2 text-sm leading-6">
                 {selectedFaculty
                   ? t`Managing specializations for the selected faculty.`
                   : t`Select a faculty to load its specializations.`}
@@ -1270,13 +1271,13 @@ export default function AdminAcademicStructurePage() {
           <CardContent>{specializationSectionContent}</CardContent>
         </Card>
 
-        <Card className="border-slate-200 bg-white shadow-none">
+        <Card className="border-border bg-card shadow-none">
           <CardHeader className="flex flex-row items-start justify-between gap-4">
             <div>
-              <CardTitle className="text-2xl text-slate-950">
+              <CardTitle className="text-foreground text-2xl">
                 {editingSpecializationId ? t`Edit Specialization` : t`Create Specialization`}
               </CardTitle>
-              <p className="mt-2 text-sm leading-6 text-slate-600">
+              <p className="text-muted-foreground mt-2 text-sm leading-6">
                 {selectedFaculty
                   ? t`The specialization will be created under the selected faculty.`
                   : t`Select a faculty before creating or editing specializations.`}
@@ -1300,12 +1301,12 @@ export default function AdminAcademicStructurePage() {
                   className="space-y-5"
                   onSubmit={specializationForm.handleSubmit(handleSpecializationSubmit)}
                 >
-                  <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-4">
-                    <div className="text-[11px] font-medium tracking-[0.12em] text-slate-500 uppercase">
+                  <div className="border-border bg-muted rounded-2xl border px-4 py-4">
+                    <div className="text-muted-foreground text-[11px] font-medium tracking-[0.12em] uppercase">
                       {t`Selected Faculty`}
                     </div>
-                    <div className="mt-2 font-medium text-slate-950">{selectedFaculty.name}</div>
-                    <div className="mt-1 text-sm text-slate-600">
+                    <div className="text-foreground mt-2 font-medium">{selectedFaculty.name}</div>
+                    <div className="text-muted-foreground mt-1 text-sm">
                       {selectedUniversity?.name || t`No university selected`}
                     </div>
                   </div>
@@ -1332,7 +1333,7 @@ export default function AdminAcademicStructurePage() {
                   <ActiveCheckboxField control={specializationForm.control} />
                   <Button
                     type="submit"
-                    className="h-11 w-full rounded-xl bg-slate-950 hover:bg-slate-800"
+                    className="bg-primary text-primary-foreground hover:bg-primary/90 h-11 w-full rounded-xl"
                     disabled={isSavingSpecialization}
                   >
                     <PencilLine className="h-4 w-4" />

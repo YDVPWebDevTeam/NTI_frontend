@@ -1,6 +1,6 @@
 import { t } from '@lingui/core/macro';
 
-import { PageSectionHeader } from 'components/layout';
+import { PageSectionHeader } from 'components/layout/page-section-header';
 import { Button } from 'components/shadcn';
 
 type RegistrationStageHeaderProps = {
@@ -31,7 +31,7 @@ export function RegistrationStageHeader({
             variant="ghost"
             onClick={onStartFromBeginning}
             disabled={isBusy}
-            className="h-11 justify-center rounded-sm border border-black/10 px-5 text-[11px] font-semibold tracking-widest text-neutral-700 hover:bg-black/3 disabled:opacity-40"
+            className="border-border text-foreground hover:bg-muted h-11 justify-center rounded-sm border px-5 text-[11px] font-semibold tracking-widest disabled:opacity-40"
           >
             {t`START FROM THE BEGINNING`}
           </Button>

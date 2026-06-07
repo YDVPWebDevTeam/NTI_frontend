@@ -3,11 +3,13 @@
 import { t } from '@lingui/core/macro';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 import { AdminErrorState, AdminLoadingState } from 'components/admin';
 import { AdminCallForm } from 'components/admin/admin-call-form';
 import { Button } from 'components/shadcn';
 import { useAdminCall, useUpdateAdminCall } from 'lib/api-client/admin/calls';
+import { extractApiErrorMessage } from 'lib/api-client/openapi-runtime/client';
 import { ROUTES } from 'lib/constants';
 
 export default function EditAdminCallPage() {
@@ -44,12 +46,12 @@ export default function EditAdminCallPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white p-5">
+      <div className="border-border bg-card flex items-center justify-between rounded-2xl border p-5">
         <div>
-          <p className="text-[11px] font-medium tracking-[0.12em] text-slate-500 uppercase">
+          <p className="text-muted-foreground text-[11px] font-medium tracking-[0.12em] uppercase">
             {t`Calls`}
           </p>
-          <h1 className="mt-2 text-2xl font-semibold text-slate-950">{t`Edit call`}</h1>
+          <h1 className="text-foreground mt-2 text-2xl font-semibold">{t`Edit call`}</h1>
         </div>
 
         <Button asChild variant="outline">
@@ -68,7 +70,16 @@ export default function EditAdminCallPage() {
               data: values,
             },
             {
-              onSuccess: () => router.push(ROUTES.ADMIN.callDetails(callId)),
+              onSuccess: () => {
+                toast.success(t`Call updated.`);
+                router.push(ROUTES.ADMIN.callDetails(callId));
+              },
+              onError: (error) => {
+                toast.error(
+                  extractApiErrorMessage(error) ??
+                    (error instanceof Error ? error.message : t`Unable to update the call.`),
+                );
+              },
             },
           );
         }}

@@ -30,13 +30,13 @@ function EmailChangePanel({
   children: ReactNode;
 }) {
   return (
-    <div className="space-y-6 rounded-[1.5rem] border border-[#e5ecfb] bg-[#fbfcff] p-5">
+    <div className="border-border bg-muted space-y-6 rounded-2xl border p-5">
       <div>
-        <p className="text-[11px] font-semibold tracking-[0.18em] text-[#5f76a2] uppercase">
+        <p className="text-muted-foreground text-[11px] font-semibold tracking-[0.18em] uppercase">
           {eyebrow}
         </p>
-        <h3 className="mt-2 text-lg font-semibold text-[#101a2e]">{title}</h3>
-        <p className="mt-2 text-sm leading-6 text-[#5b667b]">{description}</p>
+        <h3 className="text-foreground mt-2 text-lg font-semibold">{title}</h3>
+        <p className="text-muted-foreground mt-2 text-sm leading-6">{description}</p>
       </div>
 
       {feedback ? <SecurityFeedbackBanner feedback={feedback} eyebrow={feedbackEyebrow} /> : null}
@@ -50,6 +50,7 @@ export function EmailChangeSection({
   canConfirmEmailChange,
   confirmFeedback,
   confirmForm,
+  isAutoConfirmPending,
   isConfirmPending,
   isRedirectPending,
   isRequestPending,
@@ -62,6 +63,7 @@ export function EmailChangeSection({
   canConfirmEmailChange: boolean;
   confirmFeedback: SecurityFeedback | null;
   confirmForm: UseFormReturn<ChangeEmailConfirmFormValues>;
+  isAutoConfirmPending: boolean;
   isConfirmPending: boolean;
   isRedirectPending: boolean;
   isRequestPending: boolean;
@@ -123,7 +125,7 @@ export function EmailChangeSection({
             <Button
               type="submit"
               disabled={isRequestPending || isRedirectPending || isCoolingDown}
-              className="h-12 rounded-xl bg-[#1e58d5] px-5 text-[12px] font-semibold tracking-[0.16em] uppercase hover:bg-[#245fdc]"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 h-12 rounded-xl px-5 text-[12px] font-semibold tracking-[0.16em] uppercase"
             >
               {isRequestPending ? (
                 <>
@@ -159,10 +161,12 @@ export function EmailChangeSection({
 
               <Button
                 type="submit"
-                disabled={isConfirmPending || isRedirectPending || !isConfirmReady}
-                className="h-12 rounded-xl bg-[#123a82] px-5 text-[12px] font-semibold tracking-[0.16em] uppercase hover:bg-[#174899]"
+                disabled={
+                  isConfirmPending || isAutoConfirmPending || isRedirectPending || !isConfirmReady
+                }
+                className="bg-primary text-primary-foreground hover:bg-primary/90 h-12 rounded-xl px-5 text-[12px] font-semibold tracking-[0.16em] uppercase"
               >
-                {isConfirmPending ? (
+                {isConfirmPending || isAutoConfirmPending ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" />
                     {t`Confirming…`}
@@ -174,7 +178,7 @@ export function EmailChangeSection({
             </form>
           </Form>
         ) : (
-          <div className="rounded-[1.25rem] border border-dashed border-[#d4def3] bg-white/80 p-4 text-sm leading-6 text-[#5b667b]">
+          <div className="border-border bg-card text-muted-foreground rounded-2xl border border-dashed p-4 text-sm leading-6">
             {t`This step will unlock after you request the change or open the link from your inbox.`}
           </div>
         )}

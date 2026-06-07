@@ -40,25 +40,25 @@ export function AdminFilterBar<TFilter extends string>({
   filters,
 }: AdminFilterBarProps<TFilter>) {
   return (
-    <div className="flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 lg:flex-row lg:items-end">
+    <div className="border-border bg-card flex flex-col gap-4 rounded-2xl border p-4 lg:flex-row lg:items-end">
       <div className="min-w-0 flex-1">
-        <label className="mb-2 block text-[11px] font-medium tracking-[0.12em] text-slate-500 uppercase">
+        <label className="text-muted-foreground mb-2 block text-[11px] font-medium tracking-[0.12em] uppercase">
           {t`Search`}
         </label>
         <Input
           value={search}
           onChange={(event) => onSearchChange(event.target.value)}
           placeholder={searchPlaceholder}
-          className="h-11 bg-white"
+          className="bg-card h-11"
         />
       </div>
 
       <div className="w-full lg:w-56">
-        <label className="mb-2 block text-[11px] font-medium tracking-[0.12em] text-slate-500 uppercase">
+        <label className="text-muted-foreground mb-2 block text-[11px] font-medium tracking-[0.12em] uppercase">
           {t`Status`}
         </label>
         <Select value={status} onValueChange={(value) => onStatusChange(value as TFilter)}>
-          <SelectTrigger className="h-11 bg-white">
+          <SelectTrigger className="bg-card h-11">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>

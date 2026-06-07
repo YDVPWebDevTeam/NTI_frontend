@@ -8,7 +8,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
-import { AdminBrandBlock } from 'components/layout';
+import { AdminBrandBlock } from 'components/layout/admin-brand-block';
 import { ControlledPasswordField } from 'components/forms';
 import { Button, Form } from 'components/shadcn';
 import {

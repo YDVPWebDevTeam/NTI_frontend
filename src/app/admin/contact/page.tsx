@@ -124,22 +124,22 @@ export default function AdminContactPage() {
 
             return (
               <AdminTableRow key={s.id}>
-                <AdminTableCell className="font-medium text-slate-950">{s.name}</AdminTableCell>
-                <AdminTableCell className="text-slate-600">{s.email}</AdminTableCell>
+                <AdminTableCell className="text-foreground font-medium">{s.name}</AdminTableCell>
+                <AdminTableCell className="text-muted-foreground">{s.email}</AdminTableCell>
                 <AdminTableCell className="max-w-48 truncate">{s.subject}</AdminTableCell>
                 <AdminTableCell>
                   {s.topic ? (
-                    <span className="rounded bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600">
+                    <span className="bg-muted text-muted-foreground rounded px-2 py-0.5 text-xs font-medium">
                       {s.topic}
                     </span>
                   ) : (
-                    <span className="text-slate-400">—</span>
+                    <span className="text-muted-foreground">—</span>
                   )}
                 </AdminTableCell>
                 <AdminTableCell>
                   <Badge variant={statusBadgeVariant(s.status)}>{s.status}</Badge>
                 </AdminTableCell>
-                <AdminTableCell className="text-xs text-slate-500">
+                <AdminTableCell className="text-muted-foreground text-xs">
                   {formatDate(s.createdAt, DATE_FORMATS.ISO_DATE)}
                 </AdminTableCell>
                 <AdminTableCell className="text-right">
@@ -164,7 +164,7 @@ export default function AdminContactPage() {
 
           {submissions.length === 0 && (
             <AdminTableRow>
-              <AdminTableCell className="py-10 text-center text-slate-500" colSpan={7}>
+              <AdminTableCell className="text-muted-foreground py-10 text-center" colSpan={7}>
                 {t`No submissions match the current filters.`}
               </AdminTableCell>
             </AdminTableRow>

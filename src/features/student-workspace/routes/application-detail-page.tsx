@@ -36,6 +36,7 @@ import {
   EligibilitySignalsSection,
   NeedsInfoThreadSection,
   OverviewSection,
+  ReadOnlyStatusBanner,
   SectionsEditorSection,
   SubmissionActionsSection,
 } from 'features/student-workspace/routes/application-detail-sections';
@@ -178,8 +179,22 @@ export function StudentApplicationDetailPage({ params }: { params: Promise<{ id:
     );
   }
 
+  const isEditableStatus = application.status === 'DRAFT' || application.status === 'NEEDS_INFO';
+
+  // A NEEDS_INFO application can only be resubmitted once every OPEN request has
+  // at least one reply. Until the thread has actually loaded we treat it as
+  // unresolved so resubmit stays blocked (avoids a premature "allowed" state).
+  const needsInfoThreadLoaded = Boolean(needsInfoQuery.data);
+  const needsInfoItems = needsInfoQuery.data?.items ?? [];
+  const hasOpenUnansweredItems = needsInfoItems.some(
+    (item) => item.status === 'OPEN' && item.replies.length === 0,
+  );
+  // Block resubmit while the thread is still loading or has unanswered items.
+  const resubmitBlocked =
+    application.status === 'NEEDS_INFO' && (!needsInfoThreadLoaded || hasOpenUnansweredItems);
+
   const canSubmitApplication = isLead && application.status === 'DRAFT';
-  const canResubmitApplication = isLead && application.status === 'NEEDS_INFO';
+  const canResubmitApplication = isLead && application.status === 'NEEDS_INFO' && !resubmitBlocked;
 
   return (
     <StudentPageShell
@@ -188,49 +203,63 @@ export function StudentApplicationDetailPage({ params }: { params: Promise<{ id:
     >
       <div className="grid gap-6 lg:grid-cols-2">
         <OverviewSection application={application} />
-        <SubmissionActionsSection
-          canResubmit={canResubmitApplication}
-          canSubmit={canSubmitApplication}
-          hasTeamLoadError={hasTeamLoadError}
-          isLead={isLead}
-          onRetryTeam={() => void teamQuery.refetch()}
-          onSubmit={async () => {
-            try {
-              await submitApplication.mutateAsync({ id });
-              await applicationQuery.refetch();
-              toast.success(t`Application submitted.`);
-            } catch (error) {
-              toast.error(
-                error instanceof Error ? error.message : t`Unable to submit the application.`,
-              );
-            }
-          }}
-          onResubmit={async () => {
-            const payload = resubmitNote.trim() ? { note: resubmitNote.trim() } : {};
+        {isEditableStatus ? (
+          <SubmissionActionsSection
+            canResubmit={canResubmitApplication}
+            canSubmit={canSubmitApplication}
+            hasTeamLoadError={hasTeamLoadError}
+            isLead={isLead}
+            resubmitBlocked={resubmitBlocked}
+            onRetryTeam={() => void teamQuery.refetch()}
+            onSubmit={async () => {
+              try {
+                await submitApplication.mutateAsync({ id });
+                await Promise.all([
+                  applicationQuery.refetch(),
+                  completenessQuery.refetch(),
+                  eligibilityQuery.refetch(),
+                ]);
+                toast.success(t`Application submitted.`);
+              } catch (error) {
+                toast.error(
+                  error instanceof Error ? error.message : t`Unable to submit the application.`,
+                );
+              }
+            }}
+            onResubmit={async () => {
+              const payload = resubmitNote.trim() ? { note: resubmitNote.trim() } : {};
 
-            try {
-              await resubmitApplication.mutateAsync({
-                id,
-                data: payload as Record<string, unknown>,
-              });
-              await Promise.all([applicationQuery.refetch(), needsInfoQuery.refetch()]);
-              setResubmitNote('');
-              toast.success(t`Application resubmitted.`);
-            } catch (error) {
-              toast.error(
-                error instanceof Error ? error.message : t`Unable to resubmit the application.`,
-              );
-            }
-          }}
-          isSubmitPending={submitApplication.isPending}
-          isResubmitPending={resubmitApplication.isPending}
-          resubmitNote={resubmitNote}
-          setResubmitNote={setResubmitNote}
-          teamErrorMessage={getErrorMessage(
-            teamQuery.error,
-            t`The current team context could not be loaded, so lead-only actions remain unavailable until this is retried.`,
-          )}
-        />
+              try {
+                await resubmitApplication.mutateAsync({
+                  id,
+                  data: payload as Record<string, unknown>,
+                });
+                await Promise.all([
+                  applicationQuery.refetch(),
+                  needsInfoQuery.refetch(),
+                  completenessQuery.refetch(),
+                  eligibilityQuery.refetch(),
+                ]);
+                setResubmitNote('');
+                toast.success(t`Application resubmitted.`);
+              } catch (error) {
+                toast.error(
+                  error instanceof Error ? error.message : t`Unable to resubmit the application.`,
+                );
+              }
+            }}
+            isSubmitPending={submitApplication.isPending}
+            isResubmitPending={resubmitApplication.isPending}
+            resubmitNote={resubmitNote}
+            setResubmitNote={setResubmitNote}
+            teamErrorMessage={getErrorMessage(
+              teamQuery.error,
+              t`The current team context could not be loaded, so lead-only actions remain unavailable until this is retried.`,
+            )}
+          />
+        ) : (
+          <ReadOnlyStatusBanner status={application.status} />
+        )}
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">
@@ -252,18 +281,24 @@ export function StudentApplicationDetailPage({ params }: { params: Promise<{ id:
         getErrorMessage={getErrorMessage}
       />
 
-      <AttachDocumentSection
-        applicationId={id}
-        isLead={isLead}
-        members={team?.members ?? []}
-        attachDocument={attachDocument}
-        requestUploadUrl={requestUploadUrl}
-        uploadToPresignedUrl={uploadToPresignedUrl}
-        completeUpload={completeUpload}
-        onAttached={async () => {
-          await completenessQuery.refetch();
-        }}
-      />
+      {isEditableStatus ? (
+        <AttachDocumentSection
+          applicationId={id}
+          isLead={isLead}
+          members={team?.members ?? []}
+          attachDocument={attachDocument}
+          requestUploadUrl={requestUploadUrl}
+          uploadToPresignedUrl={uploadToPresignedUrl}
+          completeUpload={completeUpload}
+          onAttached={async () => {
+            await Promise.all([
+              completenessQuery.refetch(),
+              eligibilityQuery.refetch(),
+              applicationQuery.refetch(),
+            ]);
+          }}
+        />
+      ) : null}
 
       <NeedsInfoThreadSection
         applicationId={id}

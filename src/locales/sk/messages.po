@@ -73,6 +73,9 @@ msgstr "Niekoľko rýchlych poznámok predtým, než niečo zmeníte."
 msgid "A lighter student workspace with separate flows for foundation setup, Program A applications, and Program B opportunities."
 msgstr "Jednoduchšie študentské pracovisko so samostatnými tokmi pre základné nastavenie, prihlášky do Programu A a príležitosti v Programe B."
 
+msgid "A product owner is already assigned. Reassign delivery to this member?"
+msgstr ""
+
 msgid "A quick look at the current Program B projects for your organization."
 msgstr "Rýchly prehľad aktuálnych projektov Programu B pre vašu organizáciu."
 
@@ -130,8 +133,14 @@ msgstr "Prijať pozvánku"
 msgid "Accepted"
 msgstr "Prijaté"
 
-msgid "Accepted formats: PDF and DOCX."
-msgstr "Podporované formáty: PDF a DOCX."
+msgid "Accepted by company:"
+msgstr ""
+
+#~ msgid "Accepted formats: PDF and DOCX."
+#~ msgstr "Podporované formáty: PDF a DOCX."
+
+msgid "Accepted formats: PDF, DOC, DOCX, PNG, JPG, JPEG, WEBP."
+msgstr ""
 
 msgid "ACCEPTING..."
 msgstr "PRIJÍMA SA..."
@@ -325,6 +334,9 @@ msgstr "Suma (EUR)"
 msgid "An account with this invited email already exists. Use the existing account path instead."
 msgstr "Účet s touto pozvánkou už existuje. Použite radšej existujúci účet."
 
+msgid "An unexpected error occurred. You can try again — if the problem persists, please come back later."
+msgstr ""
+
 msgid "Application"
 msgstr "Prihláška"
 
@@ -379,6 +391,10 @@ msgstr "Schválenie je dostupné iba počas hodnotenia prihlášky."
 msgid "Approve"
 msgstr "Schváliť"
 
+#. placeholder {0}: organization.name
+msgid "Approve {0}? They will gain active access immediately."
+msgstr ""
+
 msgid "Approve or reject organization onboarding requests."
 msgstr "Schváľte alebo zamietnite požiadavky na onboarding organizácie."
 
@@ -393,6 +409,10 @@ msgstr "Schvaľuje sa..."
 
 msgid "Archive"
 msgstr "Archivovať"
+
+#. placeholder {0}: call.title
+msgid "Archive \"{0}\"? Archiving is terminal and cannot be undone."
+msgstr ""
 
 msgid "Archive application"
 msgstr "Archivovať prihlášku"
@@ -517,6 +537,9 @@ msgstr "Späť na projekty"
 msgid "Back to review queue"
 msgstr "Späť na frontu kontroly"
 
+msgid "Back to sign in"
+msgstr ""
+
 msgid "Backlog"
 msgstr "Zoznam úloh"
 
@@ -556,6 +579,9 @@ msgstr "Základné informácie o profile prihlášky"
 msgid "Becoming a mentor"
 msgstr "Stať sa mentorom"
 
+msgid "Big things ahead"
+msgstr ""
+
 msgid "Bio"
 msgstr "Medailón"
 
@@ -577,14 +603,23 @@ msgstr "Rozpočet musí byť nezáporné číslo."
 msgid "Budget:"
 msgstr "Rozpočet:"
 
+msgid "By accessing NTI you agree to use the platform lawfully and to provide accurate information when you register or apply to a program."
+msgstr ""
+
 msgid "Call"
 msgstr "Výzva"
+
+msgid "Call created."
+msgstr ""
 
 msgid "Call details"
 msgstr "Detaily výzvy"
 
 msgid "Call unavailable"
 msgstr "Výzva nie je dostupná"
+
+msgid "Call updated."
+msgstr ""
 
 msgid "Calls"
 msgstr "Výzvy"
@@ -633,6 +668,12 @@ msgstr "Kategórie"
 
 msgid "Category"
 msgstr "Kategória"
+
+msgid "Change language"
+msgstr ""
+
+msgid "Changes"
+msgstr ""
 
 msgid "Changes requested"
 msgstr "Vyžiadané zmeny"
@@ -738,6 +779,9 @@ msgstr "Kód"
 
 msgid "Code must be at least 4 characters."
 msgstr "Kód musí mať aspoň 4 znaky."
+
+msgid "Coming Soon"
+msgstr ""
 
 msgid "Comment"
 msgstr "Komentár"
@@ -880,6 +924,9 @@ msgstr "Potvrdzuje sa váš e-mail"
 msgid "Confirming your email address..."
 msgstr "Potvrdzuje sa vaša e-mailová adresa..."
 
+msgid "Confirming your email change"
+msgstr ""
+
 msgid "Confirming…"
 msgstr "Potvrdzuje sa…"
 
@@ -900,6 +947,9 @@ msgstr "Kontaktné správy sú nedostupné"
 
 msgid "Contact Us"
 msgstr "Kontaktujte nás"
+
+msgid "Content temporarily unavailable"
+msgstr ""
 
 msgid "CONTINUE"
 msgstr "POKRAČOVAŤ"
@@ -1102,6 +1152,9 @@ msgstr "Súbor CV"
 msgid "CV file is required."
 msgstr "Súbor CV je povinný."
 
+msgid "CV on file — replace by uploading a new file."
+msgstr ""
+
 msgid "CV, technical skills, roles, links, and projects."
 msgstr "CV, technické zručnosti, roly, odkazy a projekty."
 
@@ -1258,11 +1311,17 @@ msgstr "Dokončené"
 msgid "Download"
 msgstr "Stiahnuť"
 
+msgid "Download current CV"
+msgstr ""
+
 msgid "Draft"
 msgstr "Koncept"
 
 msgid "Driving innovation and economic growth through technology and academic collaboration."
 msgstr "Podporujeme inovácie a ekonomický rast prostredníctvom technológií a akademickej spolupráce."
+
+msgid "due"
+msgstr ""
 
 msgid "Due"
 msgstr "Termín"
@@ -1283,6 +1342,10 @@ msgstr "Napr. súťaže, ocenenia, štipendiá..."
 
 msgid "e.g., React"
 msgstr "napr. React"
+
+#. placeholder {0}: invalidCriterion.label
+msgid "Each score must be a number between {SCORE_MIN} and {SCORE_MAX}. Check \"{0}\"."
+msgstr ""
 
 msgid "Edit"
 msgstr "Upraviť"
@@ -1389,8 +1452,11 @@ msgstr "KOMPLEXNÉ"
 msgid "Enter a different email address."
 msgstr "Zadajte inú e-mailovú adresu."
 
-msgid "Enter a mentor user ID before assigning a mentor."
-msgstr "Pred priradením mentora zadajte ID používateľa mentora."
+msgid "Enter a grant budget between {GRANT_BUDGET_MIN} and {GRANT_BUDGET_MAX} EUR."
+msgstr ""
+
+#~ msgid "Enter a mentor user ID before assigning a mentor."
+#~ msgstr "Pred priradením mentora zadajte ID používateľa mentora."
 
 msgid "Enter a milestone title before creating it."
 msgstr "Pred vytvorením míľnika zadajte jeho názov."
@@ -1401,14 +1467,22 @@ msgstr "Zadajte nové heslo"
 msgid "Enter a new password for your account."
 msgstr "Zadajte nové heslo pre svoj účet."
 
+#. placeholder {0}: MAX_REWARD_PER_MEMBER.toLocaleString()
+msgid "Enter a reward between 0 and {0} EUR."
+msgstr ""
+
+#. placeholder {0}: criterion.label
+msgid "Enter a score between {MIN_SCORE} and {MAX_SCORE} for \"{0}\"."
+msgstr ""
+
 msgid "Enter a strong password"
 msgstr "Zadajte silné heslo"
 
 msgid "Enter a valid email"
 msgstr "Zadajte platný e-mail"
 
-msgid "Enter a valid non-negative number for the grant budget."
-msgstr "Zadajte platné kladné číslo pre rozpočet grantu."
+#~ msgid "Enter a valid non-negative number for the grant budget."
+#~ msgstr "Zadajte platné kladné číslo pre rozpočet grantu."
 
 msgid "Enter a valid non-negative number for the reward amount."
 msgstr "Zadajte platné kladné číslo ako výšku odmeny."
@@ -1469,6 +1543,9 @@ msgstr "Podniková dátová analytika"
 
 msgid "Entry point for Program B stakeholders. Manage technical challenges, oversee precision metrics, and interface directly with emerging talent pools through the Engine portal."
 msgstr "Vstupný bod pre partnerov Programu B. Spravujte technické zadania, sledujte kľúčové ukazovatele a spolupracujte s talentmi cez portál Engine."
+
+msgid "Error 404"
+msgstr ""
 
 msgid "Evaluated"
 msgstr "Ohodnotené"
@@ -1728,6 +1805,9 @@ msgstr "Prejsť na nasledujúcu stránku výziev"
 msgid "Go to previous calls page"
 msgstr "Prejsť na predchádzajúcu stránku výziev"
 
+msgid "Go to sign in"
+msgstr ""
+
 msgid "Go to site home"
 msgstr "Prejsť na domovskú stránku"
 
@@ -1769,6 +1849,12 @@ msgstr "Zdôraznite svoje technické a soft skills pre potenciálnych partnerov.
 
 msgid "How can we help?"
 msgstr "Ako vám môžeme pomôcť?"
+
+msgid "How NTI collects, uses, and protects the personal information you share with us."
+msgstr ""
+
+msgid "How we use it"
+msgstr ""
 
 msgid "https://example.edu"
 msgstr "https://priklad.edu"
@@ -1818,6 +1904,9 @@ msgstr "Ak sa niečo pokazí, povieme vám, čo robiť ďalej."
 msgid "If you are onboarding as the team lead, create the team here and send the first teammate invites immediately."
 msgstr "Ak prechádzate onboardingom ako vedúci tímu, vytvorte tu tím a ihneď odošlite prvé pozvánky spoluhráčom."
 
+msgid "If you have questions about this policy or your data, please reach out through our contact form."
+msgstr ""
+
 msgid "immediately"
 msgstr "okamžite"
 
@@ -1841,6 +1930,9 @@ msgstr "Informačné technológie"
 
 msgid "Information Technology…"
 msgstr "Informačné technológie…"
+
+msgid "Information we collect"
+msgstr ""
 
 msgid "Initial progress note"
 msgstr "Úvodná poznámka o pokroku"
@@ -1996,8 +2088,14 @@ msgstr "Naposledy aktualizované"
 msgid "Last updated:"
 msgstr "Naposledy aktualizované:"
 
+msgid "Last updated: {formattedDate}"
+msgstr ""
+
 msgid "Latest Invite Response"
 msgstr "Najnovšia odpoveď na pozvánku"
+
+msgid "Latest News"
+msgstr ""
 
 msgid "Latest update"
 msgstr "Posledná aktualizácia"
@@ -2020,6 +2118,15 @@ msgstr "Prenos vedenia je vypnutý, keď je tím uzamknutý."
 msgid "Leadership transferred."
 msgstr "Vedenie bolo prenesené."
 
+msgid "Leave team"
+msgstr ""
+
+msgid "Leave this team? You will lose access to its workspace immediately."
+msgstr ""
+
+msgid "Legal"
+msgstr ""
+
 msgid "Level is required."
 msgstr "Úroveň je povinná."
 
@@ -2037,6 +2144,9 @@ msgstr "Odkazy"
 
 msgid "List your primary technical skills and proficiency."
 msgstr "Uveďte svoje hlavné technické zručnosti a úroveň znalostí."
+
+msgid "Loading"
+msgstr ""
 
 msgid "Loading academic structure..."
 msgstr "Načítava sa akademická štruktúra..."
@@ -2065,6 +2175,9 @@ msgstr "Načítavajú sa kandidáti…"
 msgid "Loading company workspace"
 msgstr "Načítava sa firemné pracovisko"
 
+msgid "Loading CV…"
+msgstr ""
+
 msgid "Loading dataset..."
 msgstr "Načítava sa dataset..."
 
@@ -2086,8 +2199,14 @@ msgstr "Načítavajú sa fakulty..."
 msgid "Loading invitations…"
 msgstr "Načítavajú sa pozvánky…"
 
+msgid "Loading invite…"
+msgstr ""
+
 msgid "Loading members…"
 msgstr "Načítavajú sa členovia…"
+
+msgid "Loading mentors..."
+msgstr ""
 
 msgid "Loading mentors…"
 msgstr "Načítavajú sa mentori…"
@@ -2131,6 +2250,9 @@ msgstr "Načítava sa pracovisko"
 msgid "Loading your submitted applications..."
 msgstr "Načítavajú sa vaše odoslané prihlášky..."
 
+msgid "Loading…"
+msgstr ""
+
 msgid "Location"
 msgstr "Lokalita"
 
@@ -2168,11 +2290,14 @@ msgstr "Súbor loga nemôže byť prázdny."
 msgid "Logo must be a PNG, JPG, WEBP, or SVG image."
 msgstr "Logo musí byť obrázok vo formáte PNG, JPG, WEBP alebo SVG."
 
-msgid "Logo upload failed. Profile changes will be saved without replacing the logo."
-msgstr "Nahratie loga zlyhalo. Zmeny profilu sa uložia bez výmeny loga."
+#~ msgid "Logo upload failed. Profile changes will be saved without replacing the logo."
+#~ msgstr "Nahratie loga zlyhalo. Zmeny profilu sa uložia bez výmeny loga."
 
 msgid "Logo upload failed. The organization will be created without a logo."
 msgstr "Nahratie loga zlyhalo. Organizácia bude vytvorená bez loga."
+
+msgid "Logo upload failed. Your profile changes were not saved. Please try again."
+msgstr ""
 
 msgid "Looking absolutely stellar"
 msgstr "Vyzerá to výborne"
@@ -2216,6 +2341,9 @@ msgstr "Označiť ako vyriešené"
 msgid "Mark reviewed"
 msgstr "Označiť ako skontrolované"
 
+msgid "Mark this project as completed? Completion is terminal and cannot be undone."
+msgstr ""
+
 msgid "Max profile subjects average"
 msgstr "Maximálny priemer profilových predmetov"
 
@@ -2258,8 +2386,8 @@ msgstr "Mentorský dashboard"
 msgid "Mentor is not assigned yet."
 msgstr "Mentor ešte nie je priradený."
 
-msgid "Mentor user id"
-msgstr "ID používateľa mentora"
+#~ msgid "Mentor user id"
+#~ msgstr "ID používateľa mentora"
 
 msgid "Mentor workspace"
 msgstr "Mentorské pracovisko"
@@ -2455,6 +2583,9 @@ msgstr "Žiadna akcia"
 msgid "No active calls"
 msgstr "Žiadne aktívne výzvy"
 
+msgid "No active mentor-role users were found. Create or activate a user with the MENTOR role to assign one."
+msgstr ""
+
 msgid "No active Program A calls are available right now."
 msgstr "Momentálne nie sú dostupné žiadne aktívne výzvy Programu A."
 
@@ -2512,6 +2643,9 @@ msgstr "Bez komentára"
 msgid "No degree label"
 msgstr "Bez označenia titulu"
 
+msgid "No description"
+msgstr ""
+
 msgid "No description provided."
 msgstr "Nebola poskytnutá žiadna odpoveď."
 
@@ -2529,6 +2663,9 @@ msgstr "Bez termínu"
 
 msgid "No eligibility signals were returned by the backend."
 msgstr "Backend nevrátil žiadne signály oprávnenosti."
+
+msgid "No eligible members to transfer ownership to. Invite and activate another member first."
+msgstr ""
 
 msgid "No evaluations were returned by the backend."
 msgstr "Backend nevrátil žiadne hodnotenia."
@@ -2749,6 +2886,9 @@ msgstr "Keď sa pre túto organizáciu vytvorí backlog, najnovšie položky sa 
 msgid "Once the team lead is ready, this step is for inviting teammates."
 msgstr "Keď je vedúci tímu pripravený, tento krok slúži na pozvanie spoluhráčov."
 
+msgid "Only projects you're assigned to are shown — admin-wide listing requires a backend endpoint. Projects created from accepted Program B candidates will appear here once you're assigned."
+msgstr ""
+
 msgid "Only team leads can manage invitations."
 msgstr "Pozvánky môžu spravovať len vedúci tímu."
 
@@ -2766,6 +2906,15 @@ msgstr "Túto prihlášku môže odoslať alebo znovu odoslať iba aktuálny ved
 
 msgid "Only the current team lead can transfer leadership."
 msgstr "Len aktuálny vedúci tímu môže preniesť vedenie."
+
+msgid "Only the mentor assigned to this project can create or edit milestones."
+msgstr ""
+
+msgid "Only the product owner or a company owner can change the reward per member."
+msgstr ""
+
+msgid "Only the product owner or a company owner can submit reviews for this project."
+msgstr ""
 
 msgid "Open"
 msgstr "Otvorená"
@@ -2977,6 +3126,9 @@ msgstr "Prehľad"
 msgid "Overview updated"
 msgstr "Prehľad bol aktualizovaný"
 
+msgid "Overview, milestones, mentoring notes, reviews, and project documents from generated Program B project hooks."
+msgstr ""
+
 msgid "Owner"
 msgstr "Vlastník"
 
@@ -2991,6 +3143,9 @@ msgstr "Strana"
 
 msgid "Page {currentPage} of {totalPages}"
 msgstr "Strana {currentPage} z {totalPages}"
+
+msgid "Page not found"
+msgstr ""
 
 msgid "Pagination"
 msgstr "Stránkovanie"
@@ -3139,6 +3294,9 @@ msgstr "Pred ďalším pokusom chvíľu počkajte"
 msgid "Please wait until the current request finishes."
 msgstr "Počkajte, kým sa aktuálna požiadavka dokončí."
 
+msgid "Please wait while we confirm your new email address."
+msgstr ""
+
 msgid "Please wait while we verify your company owner account."
 msgstr "Počkajte, kým overíme váš účet vlastníka spoločnosti."
 
@@ -3165,6 +3323,9 @@ msgstr "Preferované roly"
 
 msgid "Preparing download…"
 msgstr "Pripravuje sa stiahnutie…"
+
+msgid "Preparing email confirmation."
+msgstr ""
 
 msgid "Preparing export..."
 msgstr "Pripravuje sa export..."
@@ -3233,8 +3394,8 @@ msgstr "Úroveň znalostí"
 msgid "Profile"
 msgstr "Profil"
 
-msgid "Profile changes will be saved without replacing the logo."
-msgstr "Zmeny profilu sa uložia bez výmeny loga."
+#~ msgid "Profile changes will be saved without replacing the logo."
+#~ msgstr "Zmeny profilu sa uložia bez výmeny loga."
 
 msgid "Profile details could not be loaded right now. You can retry without leaving the workspace."
 msgstr "Podrobnosti profilu sa teraz nepodarilo načítať. Môžete to skúsiť znova bez opustenia pracoviska."
@@ -3244,6 +3405,12 @@ msgstr "Profil hotový"
 
 msgid "Profile onboarding is unavailable"
 msgstr "Onboarding profilu nie je dostupný"
+
+msgid "Profile sections"
+msgstr ""
+
+msgid "Profile settings"
+msgstr ""
 
 msgid "PROFILE SETTINGS"
 msgstr "NASTAVENIA PROFILU"
@@ -3259,6 +3426,9 @@ msgstr "Program A"
 
 msgid "Program A application"
 msgstr "Prihláška do Programu A"
+
+msgid "Program A draft"
+msgstr ""
 
 msgid "Program A flow"
 msgstr "Tok Programu A"
@@ -3332,6 +3502,9 @@ msgstr "Dokončenie projektu je dostupné iba pre aktívne projekty."
 msgid "Project is unavailable"
 msgstr "Projekt nie je dostupný"
 
+msgid "Project not found"
+msgstr ""
+
 msgid "Project pause is only available for active projects."
 msgstr "Pozastavenie projektu je dostupné iba pre aktívne projekty."
 
@@ -3392,14 +3565,26 @@ msgstr "Zaradené exporty zostanú tu, kým sa nedokončia alebo nezlyhajú."
 msgid "Quick Links"
 msgstr "Rýchle odkazy"
 
+msgid "Read more"
+msgstr ""
+
+msgid "Read the news"
+msgstr ""
+
 msgid "Read-only notes shared by your mentor."
 msgstr "Poznámky iba na čítanie zdieľané vaším mentorom."
 
 msgid "Reason (optional)"
 msgstr "Dôvod (voliteľné)"
 
+msgid "Reassign a team member"
+msgstr ""
+
 msgid "Reassign mentor"
 msgstr "Zmeniť mentora"
+
+msgid "Reassign to myself"
+msgstr ""
 
 msgid "Received"
 msgstr "Prijaté"
@@ -3500,6 +3685,9 @@ msgstr "Zopakujte nové heslo"
 msgid "Repeat the new password"
 msgstr "Zopakujte nové heslo"
 
+msgid "Reply to all open requests before resubmitting."
+msgstr ""
+
 msgid "Reply to this needs-info item"
 msgstr "Odpovedať na túto žiadosť o doplnenie informácií"
 
@@ -3577,6 +3765,9 @@ msgstr "Načítava sa detail projektu Programu B pre túto organizáciu."
 
 msgid "Resolving the Program B project detail."
 msgstr "Načítava sa detail projektu programu B."
+
+msgid "Resolving this Program B project workspace."
+msgstr ""
 
 msgid "Resolving your authenticated workspace."
 msgstr "Overuje sa vaše autentifikované pracovisko."
@@ -3813,8 +4004,17 @@ msgstr "Vyberte člena"
 msgid "Select a mentor"
 msgstr "Vyberte mentora"
 
+msgid "Select a mentor before assigning one."
+msgstr ""
+
+msgid "Select a recommendation before submitting."
+msgstr ""
+
 msgid "Select a role"
 msgstr "Vyberte rolu"
+
+msgid "Select a section to review or update your information."
+msgstr ""
 
 msgid "Select a team member for CV"
 msgstr "Vyberte člena tímu pre CV"
@@ -4032,6 +4232,9 @@ msgstr "Návrh riešenia"
 msgid "Some dashboard sections could not be refreshed."
 msgstr "Niektoré sekcie dashboardu sa nepodarilo obnoviť."
 
+msgid "Something big is brewing"
+msgstr ""
+
 msgid "Something went wrong"
 msgstr "Niečo sa pokazilo"
 
@@ -4109,6 +4312,9 @@ msgstr "Stav"
 
 msgid "Status:"
 msgstr "Stav:"
+
+msgid "Stay Tuned"
+msgstr ""
 
 msgid "Step {ACADEMIC_STEP_NUMBER}"
 msgstr "Krok {ACADEMIC_STEP_NUMBER}"
@@ -4203,6 +4409,10 @@ msgstr "Podporný dokument"
 msgid "Suspend"
 msgstr "Pozastaviť"
 
+#. placeholder {0}: user.email
+msgid "Suspend {0}? They will lose access until reactivated."
+msgstr ""
+
 msgid "Suspended"
 msgstr "Pozastavené"
 
@@ -4259,6 +4469,9 @@ msgstr "Pozvánky do tímu"
 
 msgid "Team lock"
 msgstr "Uzamknutie tímu"
+
+msgid "Team locked"
+msgstr ""
 
 msgid "Team name is required."
 msgstr "Názov tímu je povinný."
@@ -4383,6 +4596,9 @@ msgstr "Vlákno so žiadosťou o doplnenie informácií sa nepodarilo načítať
 msgid "The organization will be created without a logo."
 msgstr "Organizácia bude vytvorená bez loga."
 
+msgid "The page you are looking for doesn't exist or may have been moved."
+msgstr ""
+
 msgid "The Program B backlog list could not be loaded right now."
 msgstr "Zoznam backlogu Programu B sa teraz nepodarilo načítať."
 
@@ -4425,6 +4641,9 @@ msgstr "Súhrnné počty teraz nie sú dostupné, ale samostatné sekcie backlog
 msgid "The summary queries failed. Refresh the page to try again."
 msgstr "Súhrnné požiadavky zlyhali. Obnovte stránku a skúste to znova."
 
+msgid "The terms that govern your use of the NTI platform."
+msgstr ""
+
 msgid "The university directory could not be loaded."
 msgstr "Adresár univerzít sa nepodarilo načítať."
 
@@ -4461,11 +4680,36 @@ msgstr "Tento typ účtu momentálne nemá samoobslužné pracovisko pre nastave
 msgid "This application does not exist or is no longer available."
 msgstr "Táto prihláška neexistuje alebo už nie je dostupná."
 
+msgid "This application has been approved. It is now read-only."
+msgstr ""
+
+msgid "This application has been finalized and can no longer be changed."
+msgstr ""
+
+msgid "This application has been rejected. It is now read-only."
+msgstr ""
+
+msgid "This application is read-only in its current status."
+msgstr ""
+
+msgid "This application is under review by the NTI team. No edits are possible while it is being evaluated."
+msgstr ""
+
 msgid "This backlog item is in an internal company workflow state, so this page is showing the organization-scoped workspace summary instead of the published-detail endpoint."
 msgstr "Táto položka backlogu je v internom stave firemného workflow, preto táto stránka zobrazuje zhrnutie pracoviska v rozsahu organizácie namiesto detailu z publikovaného endpointu."
 
+msgid "This confirmation link is incomplete. Open the full link from your email."
+msgstr ""
+
 msgid "This dashboard becomes available once your organization is active."
 msgstr "Tento dashboard bude dostupný, keď sa vaša organizácia aktivuje."
+
+msgid "This file is empty. Please choose a different file."
+msgstr ""
+
+#. placeholder {0}: formatBytes(maxBytes)
+msgid "This file is too large. Maximum size is {0}."
+msgstr ""
 
 msgid "This flow validates the invite first, then gets you into the invited team and your student profile onboarding."
 msgstr "Tento proces najprv overí pozvánku, potom vás pripojí do pozvaného tímu a prevedie onboardingom študentského profilu."
@@ -4485,6 +4729,18 @@ msgstr "Tento pozývací odkaz je neplatný alebo už neexistuje."
 msgid "This organization has no invite records available right now."
 msgstr "Táto organizácia momentálne nemá dostupné žiadne záznamy o pozvánkach."
 
+msgid "This page failed to load"
+msgstr ""
+
+msgid "This page is a placeholder for NTI's privacy policy. The final policy is being prepared. Until it is published, please contact us with any questions about how your data is handled."
+msgstr ""
+
+msgid "This page is a placeholder for NTI's terms of service. The final terms are being prepared. Until they are published, the summary below describes how we expect the platform to be used."
+msgstr ""
+
+msgid "This Program B project does not exist or is no longer available to you."
+msgstr ""
+
 msgid "This project is closed and now read-only."
 msgstr "Tento projekt je uzavretý a teraz je len na čítanie."
 
@@ -4496,6 +4752,21 @@ msgstr "Tento krok slúži na pozvanie spoluhráčov, keď je vedúci tímu prip
 
 msgid "This step will unlock after you request the change or open the link from your inbox."
 msgstr "Tento krok sa sprístupní po odoslaní žiadosti o zmenu alebo po otvorení odkazu z doručenej pošty."
+
+msgid "This team is locked and can no longer be modified."
+msgstr ""
+
+msgid "This team is locked and can no longer submit or withdraw applications."
+msgstr ""
+
+msgid "This team is locked, so applications can no longer be submitted or withdrawn."
+msgstr ""
+
+msgid "This team is locked. Membership, invitations, and applications can no longer be changed."
+msgstr ""
+
+msgid "This team was locked on {lockedAtLabel}. Membership, invitations, and applications can no longer be changed."
+msgstr ""
 
 msgid "This workspace is correctly routed, but its feature surface is not implemented yet."
 msgstr "Toto pracovisko je smerované správne, ale jeho funkčná vrstva ešte nie je implementovaná."
@@ -4622,6 +4893,9 @@ msgstr "Nepodarilo sa vytvoriť projekt."
 msgid "Unable to create team."
 msgstr "Nepodarilo sa vytvoriť tím."
 
+msgid "Unable to create the call."
+msgstr ""
+
 msgid "Unable to create the invite."
 msgstr "Nepodarilo sa vytvoriť pozvánku."
 
@@ -4651,6 +4925,9 @@ msgstr "Tento report sa momentálne nepodarilo exportovať."
 
 msgid "Unable to join the invited team right now."
 msgstr "Momentálne sa nemôžem pripojiť k pozvanému tímu."
+
+msgid "Unable to leave the team right now."
+msgstr ""
 
 msgid "Unable to load application"
 msgstr "Prihlášku sa nepodarilo načítať"
@@ -4694,6 +4971,9 @@ msgstr "Nepodarilo sa načítať údaje profilu na kontrolu."
 msgid "Unable to load Program A applications from the backend."
 msgstr "Nepodarilo sa načítať prihlášky Programu A z backendu"
 
+msgid "Unable to load project"
+msgstr ""
+
 msgid "Unable to load project preview"
 msgstr "Nepodarilo sa načítať náhľad projektov"
 
@@ -4708,6 +4988,9 @@ msgstr "Nepodarilo sa načítať tímové pracovisko"
 
 msgid "Unable to load this export job right now."
 msgstr "Túto exportnú úlohu sa momentálne nepodarilo načítať."
+
+msgid "Unable to load your profile"
+msgstr ""
 
 msgid "Unable to load your profile."
 msgstr "Nepodarilo sa načítať váš profil."
@@ -4826,6 +5109,9 @@ msgstr "Nepodarilo sa aktualizovať odmenu pre člena."
 msgid "Unable to update status."
 msgstr "Nepodarilo sa aktualizovať stav."
 
+msgid "Unable to update the call."
+msgstr ""
+
 msgid "Unable to update the faculty."
 msgstr "Nepodarilo sa aktualizovať fakultu."
 
@@ -4891,6 +5177,9 @@ msgstr "Neznámy tím"
 
 msgid "Unlocked"
 msgstr "Odomknuté"
+
+msgid "Unsupported file type. Allowed types: {list}."
+msgstr ""
 
 msgid "Untitled backlog item"
 msgstr "Položka backlogu bez názvu"
@@ -4980,6 +5269,9 @@ msgstr "Nahrané"
 msgid "Uploading document…"
 msgstr "Nahráva sa dokument…"
 
+msgid "Uploading…"
+msgstr ""
+
 msgid "Use at least 6 characters to secure the invited account."
 msgstr "Použite aspoň 6 znakov na zabezpečenie pozvaného účtu."
 
@@ -5016,12 +5308,14 @@ msgstr "Používatelia"
 msgid "Users are unavailable"
 msgstr "Používatelia nie sú dostupní"
 
-#. placeholder {0}: field.value
-msgid "Using existing CV (ID: {0})"
-msgstr "Používa sa existujúce CV (ID: {0})"
+#~ msgid "Using existing CV (ID: {0})"
+#~ msgstr "Používa sa existujúce CV (ID: {0})"
 
 msgid "Using organization backlog data"
 msgstr "Používajú sa backlog dáta organizácie"
+
+msgid "Using the platform"
+msgstr ""
 
 msgid "Validating invitation…"
 msgstr "Overuje sa pozvánka…"
@@ -5095,6 +5389,9 @@ msgstr "Viditeľnosť"
 msgid "Waiting for team"
 msgstr "Čaká sa na tím"
 
+msgid "We collect the information you provide when you register, apply to a program, or contact us — such as your name, email address, and any details you choose to share."
+msgstr ""
+
 msgid "We could not load the Program B action queues right now."
 msgstr "Fronty akcií Programu B sa teraz nepodarilo načítať."
 
@@ -5104,8 +5401,14 @@ msgstr "Túto položku backlogu Programu B sa teraz nepodarilo načítať."
 msgid "We could not load this Program B project right now."
 msgstr "Tento projekt Programu B sa teraz nepodarilo načítať."
 
+msgid "We could not load this Program B project right now. Please try again."
+msgstr ""
+
 msgid "We could not resolve the organization linked to your company account."
 msgstr "Nepodarilo sa určiť organizáciu prepojenú s vaším firemným účtom."
+
+msgid "We couldn't confirm this email change. The link may have expired or already been used."
+msgstr ""
 
 msgid "We couldn’t load invitations right now."
 msgstr "Pozvánky sa teraz nepodarilo načítať."
@@ -5119,17 +5422,26 @@ msgstr "Zoznam členov sa teraz nepodarilo načítať."
 msgid "We couldn’t load the project preview right now."
 msgstr "Náhľad projektu sa teraz nepodarilo načítať."
 
+msgid "We couldn't load this page right now. Please try again in a few minutes."
+msgstr ""
+
 msgid "We couldn’t load your documents right now."
 msgstr "Vaše dokumenty sa teraz nepodarilo načítať."
 
 msgid "We couldn't load your team right now. Please try again."
 msgstr "Váš tím sa momentálne nepodarilo načítať. Skúste to prosím znova."
 
+msgid "We may update these terms from time to time. Continued use of the platform after an update means you accept the revised terms."
+msgstr ""
+
 msgid "We read every message personally"
 msgstr "Každú správu čítame osobne"
 
 msgid "We sent a confirmation message to your new email. Your current email will stay the same until you confirm the change."
 msgstr "Na váš nový e-mail sme odoslali potvrdzovaciu správu. Váš aktuálny e-mail zostane nezmenený, kým zmenu nepotvrdíte."
+
+msgid "We signed you in, but couldn't join this invite — it may be expired or already accepted. You've been signed back out. Please request a new invite."
+msgstr ""
 
 msgid "We'd love to hear from you"
 msgstr "Radi vás vypočujeme"
@@ -5221,11 +5533,17 @@ msgstr "Zatiaľ nemáte tím. Dokončite onboarding profilu a najprv vytvorte t�
 msgid "You don’t have access to download this document right now."
 msgstr "Tento dokument momentálne nemáte oprávnenie stiahnuť."
 
+msgid "You left the team."
+msgstr ""
+
 msgid "You must accept the academic declaration."
 msgstr "Musíte prijať akademické vyhlásenie."
 
 msgid "You must accept the terms."
 msgstr "Musíte prijať podmienky."
+
+msgid "You retain ownership of the content you submit. You are responsible for ensuring you have the right to share it."
+msgstr ""
 
 msgid "You survived the boss fight"
 msgstr "Zvládli ste aj finálnu výzvu"
@@ -5254,11 +5572,17 @@ msgstr "Vaše pridelené projekty programu B sa momentálne nepodarilo načíta�
 msgid "Your company owner account is already linked to an organization. Opening your organization workspace."
 msgstr "Váš účet vlastníka spoločnosti je už prepojený s organizáciou. Otvárame pracovný priestor vašej organizácie."
 
+msgid "Your content"
+msgstr ""
+
 msgid "Your details are never shared"
 msgstr "Vaše údaje nikdy nezdieľame"
 
 msgid "your email address"
 msgstr "vaša e-mailová adresa"
+
+msgid "Your email address was changed. Please sign in again with your new email."
+msgstr ""
 
 msgid "Your email address was confirmed successfully. Redirecting you to the next step."
 msgstr "Vaša e-mailová adresa bola úspešne potvrdená. Presmerujeme vás na ďalší krok"
@@ -5269,11 +5593,17 @@ msgstr "Vaša e-mailová adresa bola úspešne potvrdená. Presmerujeme vás do 
 msgid "Your evaluation"
 msgstr "Vaše hodnotenie"
 
+msgid "Your information is used to operate the platform, process applications, and respond to your requests. We do not sell your personal data."
+msgstr ""
+
 msgid "Your invitation token is verified before account setup."
 msgstr "Váš token pozvánky je overený pred nastavením účtu."
 
 msgid "Your message has been sent."
 msgstr "Vaša správa bola odoslaná."
+
+msgid "Your new email is now active. All sessions were signed out — please sign in again with your updated address."
+msgstr ""
 
 msgid "Your new email is now active. To keep your account safe, you'll need to sign in again."
 msgstr "Váš nový e-mail je teraz aktívny. Kvôli bezpečnosti účtu sa budete musieť znova prihlásiť."
@@ -5284,17 +5614,30 @@ msgstr "Vaša organizácia je prepojená správne, ale toto pracovisko sa sprís
 msgid "Your organization is still being activated. Invites, member changes, and document tools will open as soon as activation is complete."
 msgstr "Vaša organizácia sa ešte aktivuje. Pozvánky, správa členov a dokumenty budú dostupné hneď po dokončení aktivácie."
 
+msgid "Your password was changed. Please sign in again with your new password."
+msgstr ""
+
 msgid "Your password was reset successfully. You can now sign in with the new password."
 msgstr "Vaše heslo bolo úspešne obnovené. Teraz sa môžete prihlásiť s novým heslom"
 
 msgid "Your password was updated. To keep your account safe, you'll need to sign in again with the new password."
 msgstr "Vaše heslo bolo aktualizované. Kvôli bezpečnosti účtu sa budete musieť znova prihlásiť s novým heslom."
 
+#. placeholder {0}: existingApplication.status
+msgid "Your previous application is {0}. You can submit a new application below."
+msgstr ""
+
+msgid "Your profile changes were not saved. Please try again."
+msgstr ""
+
 msgid "Your Role (e.g., Frontend Dev)"
 msgstr "Vaša rola (napr. Frontend Dev)"
 
 msgid "Your session is no longer valid"
 msgstr "Vaša relácia už nie je platná"
+
+msgid "Your session is no longer valid. Please sign in again to continue."
+msgstr ""
 
 msgid "Your team data could not be loaded right now, so lead-only actions cannot be resolved."
 msgstr "Údaje o vašom tíme sa momentálne nepodarilo načítať, takže akcie dostupné len vedúcemu tímu sa nedajú vyhodnotiť."

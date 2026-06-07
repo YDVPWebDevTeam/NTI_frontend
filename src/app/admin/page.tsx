@@ -38,21 +38,21 @@ function ActiveCallsCard() {
   const activeCalls = callsQuery.data?.data?.slice(0, ACTIVE_CALLS_PREVIEW_LIMIT) ?? [];
 
   return (
-    <Card className="border-slate-200 bg-white shadow-none">
+    <Card className="border-border bg-card shadow-none">
       <CardHeader className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-sky-50 text-sky-700">
+          <div className="bg-accent text-primary mb-3 flex h-10 w-10 items-center justify-center rounded-full">
             <CalendarClock className="h-5 w-5" />
           </div>
 
-          <CardTitle className="text-2xl text-slate-950">{t`Active Calls`}</CardTitle>
+          <CardTitle className="text-foreground text-2xl">{t`Active Calls`}</CardTitle>
 
-          <p className="mt-2 text-sm text-slate-600">
+          <p className="text-muted-foreground mt-2 text-sm">
             {t`Currently open calls receiving submissions.`}
           </p>
         </div>
 
-        <Button asChild variant="outline" className="bg-white">
+        <Button asChild variant="outline" className="bg-card">
           <Link href={ROUTES.ADMIN.CALLS}>
             {t`View all calls`}
             <ArrowRight className="h-4 w-4" />
@@ -94,21 +94,21 @@ function ActiveCallsCard() {
               <Link
                 key={call.id}
                 href={ROUTES.ADMIN.callDetails(call.id)}
-                className="block rounded-2xl border border-slate-200 px-4 py-4 transition-colors hover:border-slate-300 hover:bg-slate-50"
+                className="border-border hover:border-border hover:bg-muted block rounded-2xl border px-4 py-4 transition-colors"
               >
                 <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
                   <div className="min-w-0">
-                    <div className="font-medium text-slate-950">{call.title}</div>
+                    <div className="text-foreground font-medium">{call.title}</div>
 
-                    <div className="mt-1 text-sm text-slate-600">
+                    <div className="text-muted-foreground mt-1 text-sm">
                       {t`Opens`}: {formatAdminDateTime(call.opensAt)}
                     </div>
                   </div>
 
-                  <div className="text-sm text-slate-600 md:text-right">
+                  <div className="text-muted-foreground text-sm md:text-right">
                     <div>{t`Deadline`}</div>
 
-                    <div className="font-medium text-slate-950">
+                    <div className="text-foreground font-medium">
                       {formatAdminDateTime(call.closesAt)}
                     </div>
                   </div>
@@ -182,15 +182,15 @@ export default function AdminOverviewPage() {
       <ActiveCallsCard />
 
       <section className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_360px]">
-        <Card className="border-slate-200 bg-white shadow-none">
+        <Card className="border-border bg-card shadow-none">
           <CardHeader className="flex flex-row items-center justify-between">
             <div>
-              <CardTitle className="text-2xl text-slate-950">{t`Attention Required`}</CardTitle>
-              <p className="mt-2 text-sm text-slate-600">
+              <CardTitle className="text-foreground text-2xl">{t`Attention Required`}</CardTitle>
+              <p className="text-muted-foreground mt-2 text-sm">
                 {t`Recent organizations that still need an operational decision.`}
               </p>
             </div>
-            <Button asChild variant="outline" className="bg-white">
+            <Button asChild variant="outline" className="bg-card">
               <Link href={ROUTES.ADMIN.ORGANIZATIONS}>
                 {t`Open Queue`}
                 <ArrowRight className="h-4 w-4" />
@@ -208,17 +208,17 @@ export default function AdminOverviewPage() {
                 {attentionRequired.slice(0, ATTENTION_PREVIEW_LIMIT).map((organization) => (
                   <div
                     key={organization.id}
-                    className="flex flex-col gap-3 rounded-2xl border border-slate-200 px-4 py-4 md:flex-row md:items-center md:justify-between"
+                    className="border-border flex flex-col gap-3 rounded-2xl border px-4 py-4 md:flex-row md:items-center md:justify-between"
                   >
                     <div className="min-w-0">
-                      <div className="font-medium text-slate-950">{organization.name}</div>
-                      <div className="mt-1 text-sm text-slate-600">
+                      <div className="text-foreground font-medium">{organization.name}</div>
+                      <div className="text-muted-foreground mt-1 text-sm">
                         {organization.sector || t`No sector provided`}
                       </div>
                     </div>
                     <div className="flex flex-wrap items-center gap-3">
                       <AdminStatusBadge status={organization.status} />
-                      <Button asChild variant="outline" size="sm" className="bg-white">
+                      <Button asChild variant="outline" size="sm" className="bg-card">
                         <Link href={ROUTES.ADMIN.organizationDetails(organization.id)}>
                           {t`View Invites`}
                         </Link>
@@ -231,9 +231,9 @@ export default function AdminOverviewPage() {
           </CardContent>
         </Card>
 
-        <Card className="border-slate-200 bg-white shadow-none">
+        <Card className="border-border bg-card shadow-none">
           <CardHeader>
-            <CardTitle className="text-2xl text-slate-950">{t`Quick Links`}</CardTitle>
+            <CardTitle className="text-foreground text-2xl">{t`Quick Links`}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             {[
@@ -266,10 +266,12 @@ export default function AdminOverviewPage() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="block rounded-2xl border border-slate-200 px-4 py-4 transition-colors hover:border-slate-300 hover:bg-slate-50"
+                className="border-border hover:border-border hover:bg-muted block rounded-2xl border px-4 py-4 transition-colors"
               >
-                <div className="font-medium text-slate-950">{link.title}</div>
-                <div className="mt-1 text-sm leading-6 text-slate-600">{link.description}</div>
+                <div className="text-foreground font-medium">{link.title}</div>
+                <div className="text-muted-foreground mt-1 text-sm leading-6">
+                  {link.description}
+                </div>
               </Link>
             ))}
           </CardContent>

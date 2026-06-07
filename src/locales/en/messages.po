@@ -64,9 +64,6 @@ msgstr "© 2026 NTI. All rights reserved."
 msgid "100% Complete"
 msgstr "100% Complete"
 
-msgid "A confirmation link will be sent to"
-msgstr "A confirmation link will be sent to"
-
 msgid "A few quick notes before you make changes."
 msgstr "A few quick notes before you make changes."
 
@@ -136,9 +133,6 @@ msgstr "Accepted"
 msgid "Accepted by company:"
 msgstr "Accepted by company:"
 
-#~ msgid "Accepted formats: PDF and DOCX."
-#~ msgstr "Accepted formats: PDF and DOCX."
-
 msgid "Accepted formats: PDF, DOC, DOCX, PNG, JPG, JPEG, WEBP."
 msgstr "Accepted formats: PDF, DOC, DOCX, PNG, JPG, JPEG, WEBP."
 
@@ -204,6 +198,12 @@ msgstr "Activate"
 
 msgid "Activate project"
 msgstr "Activate project"
+
+msgid "Activate project?"
+msgstr "Activate project?"
+
+msgid "Activate this project so delivery tracking can begin."
+msgstr "Activate this project so delivery tracking can begin."
 
 msgid "Active"
 msgstr "Active"
@@ -313,6 +313,9 @@ msgstr "All"
 msgid "All calls"
 msgstr "All calls"
 
+msgid "All fields are required to save this section."
+msgstr "All fields are required to save this section."
+
 msgid "All programs"
 msgstr "All programs"
 
@@ -395,8 +398,14 @@ msgstr "Approve"
 msgid "Approve {0}? They will gain active access immediately."
 msgstr "Approve {0}? They will gain active access immediately."
 
+msgid "Approve application?"
+msgstr "Approve application?"
+
 msgid "Approve or reject organization onboarding requests."
 msgstr "Approve or reject organization onboarding requests."
+
+msgid "Approve this application and move it to the approved state."
+msgstr "Approve this application and move it to the approved state."
 
 msgid "Approved"
 msgstr "Approved"
@@ -417,11 +426,17 @@ msgstr "Archive \"{0}\"? Archiving is terminal and cannot be undone."
 msgid "Archive application"
 msgstr "Archive application"
 
+msgid "Archive application?"
+msgstr "Archive application?"
+
 msgid "Archive is only available for rejected or completed applications."
 msgstr "Archive is only available for rejected or completed applications."
 
 msgid "Archived"
 msgstr "Archived"
+
+msgid "Archiving is irreversible. Provide a reason that will be recorded on the application."
+msgstr "Archiving is irreversible. Provide a reason that will be recorded on the application."
 
 msgid "Ascending"
 msgstr "Ascending"
@@ -684,9 +699,6 @@ msgstr "Check team readiness"
 msgid "Check your email"
 msgstr "Check your email"
 
-msgid "Check your inbox and use the token only if you want to confirm now."
-msgstr "Check your inbox and use the token only if you want to confirm now."
-
 msgid "Checking your organization access before loading the dashboard."
 msgstr "Checking your organization access before loading the dashboard."
 
@@ -777,9 +789,6 @@ msgstr "Closes at"
 msgid "Code"
 msgstr "Code"
 
-msgid "Code must be at least 4 characters."
-msgstr "Code must be at least 4 characters."
-
 msgid "Coming Soon"
 msgstr "Coming Soon"
 
@@ -843,6 +852,9 @@ msgstr "Complete foundation setup"
 msgid "Complete project"
 msgstr "Complete project"
 
+msgid "Complete project?"
+msgstr "Complete project?"
+
 msgid "Complete your student profile"
 msgstr "Complete your student profile"
 
@@ -870,9 +882,6 @@ msgstr "Confirm change"
 msgid "Confirm email"
 msgstr "Confirm email"
 
-msgid "CONFIRM EMAIL"
-msgstr "CONFIRM EMAIL"
-
 msgid "Confirm New Email"
 msgstr "Confirm New Email"
 
@@ -893,6 +902,9 @@ msgstr "Confirm Rejection"
 
 msgid "Confirm your company owner account"
 msgstr "Confirm your company owner account"
+
+msgid "Confirm your email"
+msgstr "Confirm your email"
 
 msgid "Confirm your email address from the message sent to your inbox before full platform access."
 msgstr "Confirm your email address from the message sent to your inbox before full platform access."
@@ -929,9 +941,6 @@ msgstr "Confirming your email change"
 
 msgid "Confirming…"
 msgstr "Confirming…"
-
-msgid "CONFIRMING..."
-msgstr "CONFIRMING..."
 
 msgid "Connect"
 msgstr "Connect"
@@ -1001,6 +1010,9 @@ msgstr "CREATE ACCOUNT AND JOIN TEAM"
 
 msgid "Create account from invite"
 msgstr "Create account from invite"
+
+msgid "Create an account"
+msgstr "Create an account"
 
 msgid "CREATE AN ACCOUNT"
 msgstr "CREATE AN ACCOUNT"
@@ -1251,6 +1263,9 @@ msgstr "Description must be at least 10 characters."
 msgid "Description must be at most 2000 characters."
 msgstr "Description must be at most 2000 characters."
 
+msgid "Did not get the email? Resend it or check your spam folder."
+msgstr "Did not get the email? Resend it or check your spam folder."
+
 msgid "Directory Controls"
 msgstr "Directory Controls"
 
@@ -1455,9 +1470,6 @@ msgstr "Enter a different email address."
 msgid "Enter a grant budget between {GRANT_BUDGET_MIN} and {GRANT_BUDGET_MAX} EUR."
 msgstr "Enter a grant budget between {GRANT_BUDGET_MIN} and {GRANT_BUDGET_MAX} EUR."
 
-#~ msgid "Enter a mentor user ID before assigning a mentor."
-#~ msgstr "Enter a mentor user ID before assigning a mentor."
-
 msgid "Enter a milestone title before creating it."
 msgstr "Enter a milestone title before creating it."
 
@@ -1480,9 +1492,6 @@ msgstr "Enter a strong password"
 
 msgid "Enter a valid email"
 msgstr "Enter a valid email"
-
-#~ msgid "Enter a valid non-negative number for the grant budget."
-#~ msgstr "Enter a valid non-negative number for the grant budget."
 
 msgid "Enter a valid non-negative number for the reward amount."
 msgstr "Enter a valid non-negative number for the reward amount."
@@ -1507,9 +1516,6 @@ msgstr "Enter specialization name"
 
 msgid "Enter the 8-digit company identifier."
 msgstr "Enter the 8-digit company identifier."
-
-msgid "Enter the verification token from your email."
-msgstr "Enter the verification token from your email."
 
 msgid "Enter university name"
 msgstr "Enter university name"
@@ -1610,14 +1616,26 @@ msgstr "Expiry timestamp returned by the backend."
 msgid "Explain what the team has to clarify or upload..."
 msgstr "Explain what the team has to clarify or upload..."
 
+msgid "Explain why this application is being archived..."
+msgstr "Explain why this application is being archived..."
+
+msgid "Explain why this application is being rejected..."
+msgstr "Explain why this application is being rejected..."
+
 msgid "Explain why this organization should be rejected."
 msgstr "Explain why this organization should be rejected."
+
+msgid "Explain why this project is being paused..."
+msgstr "Explain why this project is being paused..."
 
 msgid "Explore"
 msgstr "Explore"
 
 msgid "Explore active program calls, review important dates, and prepare your application before the deadline."
 msgstr "Explore active program calls, review important dates, and prepare your application before the deadline."
+
+msgid "Explore the programs"
+msgstr "Explore the programs"
 
 msgid "Export Current View"
 msgstr "Export Current View"
@@ -2290,9 +2308,6 @@ msgstr "Logo file cannot be empty."
 msgid "Logo must be a PNG, JPG, WEBP, or SVG image."
 msgstr "Logo must be a PNG, JPG, WEBP, or SVG image."
 
-#~ msgid "Logo upload failed. Profile changes will be saved without replacing the logo."
-#~ msgstr "Logo upload failed. Profile changes will be saved without replacing the logo."
-
 msgid "Logo upload failed. The organization will be created without a logo."
 msgstr "Logo upload failed. The organization will be created without a logo."
 
@@ -2341,8 +2356,8 @@ msgstr "Mark resolved"
 msgid "Mark reviewed"
 msgstr "Mark reviewed"
 
-msgid "Mark this project as completed? Completion is terminal and cannot be undone."
-msgstr "Mark this project as completed? Completion is terminal and cannot be undone."
+msgid "Mark this project as completed. Completion is terminal and cannot be undone."
+msgstr "Mark this project as completed. Completion is terminal and cannot be undone."
 
 msgid "Max profile subjects average"
 msgstr "Max profile subjects average"
@@ -2385,9 +2400,6 @@ msgstr "Mentor dashboard"
 
 msgid "Mentor is not assigned yet."
 msgstr "Mentor is not assigned yet."
-
-#~ msgid "Mentor user id"
-#~ msgstr "Mentor user id"
 
 msgid "Mentor workspace"
 msgstr "Mentor workspace"
@@ -2482,6 +2494,9 @@ msgstr "Motivation letter"
 
 msgid "Move into program work"
 msgstr "Move into program work"
+
+msgid "Move this approved application into the onboarding stage."
+msgstr "Move this approved application into the onboarding stage."
 
 msgid "MULTI-FACTOR"
 msgstr "MULTI-FACTOR"
@@ -2718,6 +2733,9 @@ msgstr "No motivation provided."
 msgid "No needs-info messages were returned by the backend."
 msgstr "No needs-info messages were returned by the backend."
 
+msgid "No open calls right now"
+msgstr "No open calls right now"
+
 msgid "No organization invites found"
 msgstr "No organization invites found"
 
@@ -2931,6 +2949,9 @@ msgstr "Open backlog detail"
 msgid "Open Calls"
 msgstr "Open Calls"
 
+msgid "Open calls & deadlines"
+msgstr "Open calls & deadlines"
+
 msgid "Open calls, draft recovery, and application-start actions live here."
 msgstr "Open calls, draft recovery, and application-start actions live here."
 
@@ -2982,11 +3003,35 @@ msgstr "Open Reports"
 msgid "Open team"
 msgstr "Open team"
 
+msgid "Open that link from any device to confirm your email — it works even if you are signed out."
+msgstr "Open that link from any device to confirm your email — it works even if you are signed out."
+
+msgid "Open that link from any device to confirm your email — it works even if you are signed out. You can keep setting up your profile in the meantime."
+msgstr "Open that link from any device to confirm your email — it works even if you are signed out. You can keep setting up your profile in the meantime."
+
 msgid "Open the application detail and reply to the needs-info request."
 msgstr "Open the application detail and reply to the needs-info request."
 
+msgid "Open the confirmation link from the email we sent to verify your company owner account."
+msgstr "Open the confirmation link from the email we sent to verify your company owner account."
+
+msgid "Open the confirmation link from the email we sent you to finish verifying your account."
+msgstr "Open the confirmation link from the email we sent you to finish verifying your account."
+
+msgid "Open the full confirmation link from your email. If it still does not work, request a new confirmation email below or from the login page."
+msgstr "Open the full confirmation link from your email. If it still does not work, request a new confirmation email below or from the login page."
+
+msgid "Open the full confirmation link from your email. If it still does not work, request a new confirmation email from the login page."
+msgstr "Open the full confirmation link from your email. If it still does not work, request a new confirmation email from the login page."
+
 msgid "Open the full invitation link from your email and try again."
 msgstr "Open the full invitation link from your email and try again."
+
+msgid "Open the full password reset link from your email."
+msgstr "Open the full password reset link from your email."
+
+msgid "Open the full reset link from your email. If it expired, request a new one from the forgot password page."
+msgstr "Open the full reset link from your email. If it expired, request a new one from the forgot password page."
 
 msgid "Open the link in your email, or paste the code here. After that, sign in again."
 msgstr "Open the link in your email, or paste the code here. After that, sign in again."
@@ -3020,9 +3065,6 @@ msgstr "Optional country"
 
 msgid "Optional degree label"
 msgstr "Optional degree label"
-
-msgid "Optional for now. Leave this blank if you want to verify later from the email link."
-msgstr "Optional for now. Leave this blank if you want to verify later from the email link."
 
 msgid "Optional resubmission note"
 msgstr "Optional resubmission note"
@@ -3207,29 +3249,17 @@ msgstr "Passwords do not match."
 msgid "Passwords must match."
 msgstr "Passwords must match."
 
-msgid "Paste reset token"
-msgstr "Paste reset token"
-
 msgid "Paste the code from your email"
 msgstr "Paste the code from your email"
 
-msgid "Paste the token from your email…"
-msgstr "Paste the token from your email…"
-
-msgid "Paste verification token"
-msgstr "Paste verification token"
-
-msgid "Paste your reset token only if the email link did not open correctly."
-msgstr "Paste your reset token only if the email link did not open correctly."
-
-msgid "Paste your verification token"
-msgstr "Paste your verification token"
-
-msgid "Paste your verification token if the email link did not open correctly."
-msgstr "Paste your verification token if the email link did not open correctly."
-
 msgid "Pause project"
 msgstr "Pause project"
+
+msgid "Pause project?"
+msgstr "Pause project?"
+
+msgid "Pause this active project. Provide a reason that will be recorded."
+msgstr "Pause this active project. Provide a reason that will be recorded."
 
 msgid "Paused"
 msgstr "Paused"
@@ -3257,6 +3287,9 @@ msgstr "Personal Portfolio / Website"
 
 msgid "Phew! You survived."
 msgstr "Phew! You survived."
+
+msgid "Pick an active MENTOR-role user. The selected user becomes responsible for delivery follow-up."
+msgstr "Pick an active MENTOR-role user. The selected user becomes responsible for delivery follow-up."
 
 msgid "Planned"
 msgstr "Planned"
@@ -3394,9 +3427,6 @@ msgstr "Proficiency"
 msgid "Profile"
 msgstr "Profile"
 
-#~ msgid "Profile changes will be saved without replacing the logo."
-#~ msgstr "Profile changes will be saved without replacing the logo."
-
 msgid "Profile details could not be loaded right now. You can retry without leaving the workspace."
 msgstr "Profile details could not be loaded right now. You can retry without leaving the workspace."
 
@@ -3447,6 +3477,9 @@ msgstr "Program A project"
 
 msgid "Program B"
 msgstr "Program B"
+
+msgid "Program B · Live practice"
+msgstr "Program B · Live practice"
 
 msgid "Program B backlog"
 msgstr "Program B backlog"
@@ -3574,6 +3607,9 @@ msgstr "Read the news"
 msgid "Read-only notes shared by your mentor."
 msgstr "Read-only notes shared by your mentor."
 
+msgid "Reason"
+msgstr "Reason"
+
 msgid "Reason (optional)"
 msgstr "Reason (optional)"
 
@@ -3649,6 +3685,9 @@ msgstr "Regular User"
 msgid "Reject"
 msgstr "Reject"
 
+msgid "Reject application?"
+msgstr "Reject application?"
+
 msgid "Reject candidate"
 msgstr "Reject candidate"
 
@@ -3657,6 +3696,9 @@ msgstr "Reject is only available during submitted, formal verification, evaluati
 
 msgid "Rejected"
 msgstr "Rejected"
+
+msgid "Rejecting an application is irreversible. Provide a reason that will be recorded on the decision."
+msgstr "Rejecting an application is irreversible. Provide a reason that will be recorded on the decision."
 
 msgid "Rejecting..."
 msgstr "Rejecting..."
@@ -3715,6 +3757,9 @@ msgstr "Request failed"
 msgid "Request new link"
 msgstr "Request new link"
 
+msgid "REQUEST NEW LINK"
+msgstr "REQUEST NEW LINK"
+
 msgid "Request status"
 msgstr "Request status"
 
@@ -3736,17 +3781,14 @@ msgstr "Resend confirmation email"
 msgid "Resend in {remainingSeconds}s"
 msgstr "Resend in {remainingSeconds}s"
 
-msgid "Resend the email if it did not arrive. Paste the token below only if you want to verify this step immediately."
-msgstr "Resend the email if it did not arrive. Paste the token below only if you want to verify this step immediately."
-
 msgid "Reset link expired"
 msgstr "Reset link expired"
 
+msgid "Reset link incomplete"
+msgstr "Reset link incomplete"
+
 msgid "RESET PASSWORD"
 msgstr "RESET PASSWORD"
-
-msgid "Reset token"
-msgstr "Reset token"
 
 msgid "Reset your password"
 msgstr "Reset your password"
@@ -3997,6 +4039,12 @@ msgstr "Select a faculty to inspect its specializations."
 
 msgid "Select a faculty to load its specializations."
 msgstr "Select a faculty to load its specializations."
+
+msgid "Select a file and a team member before uploading."
+msgstr "Select a file and a team member before uploading."
+
+msgid "Select a file before uploading."
+msgstr "Select a file before uploading."
 
 msgid "Select a member"
 msgstr "Select a member"
@@ -4306,6 +4354,9 @@ msgstr "START FROM THE BEGINNING"
 
 msgid "Start onboarding"
 msgstr "Start onboarding"
+
+msgid "Start onboarding?"
+msgstr "Start onboarding?"
 
 msgid "Status"
 msgstr "Status"
@@ -4650,20 +4701,26 @@ msgstr "The university directory could not be loaded."
 msgid "The user list could not be loaded."
 msgstr "The user list could not be loaded."
 
-msgid "The verification link could not be completed. You can try again or return to login."
-msgstr "The verification link could not be completed. You can try again or return to login."
+msgid "The verification link could not be completed."
+msgstr "The verification link could not be completed."
+
+msgid "The verification link could not be completed. It may have expired or already been used."
+msgstr "The verification link could not be completed. It may have expired or already been used."
 
 msgid "There are currently no applications in the evaluation stage."
 msgstr "There are currently no applications in the evaluation stage."
 
-msgid "There are no active program calls at the moment. Please check again later."
-msgstr "There are no active program calls at the moment. Please check again later."
-
 msgid "There are no currently open calls receiving submissions."
 msgstr "There are no currently open calls receiving submissions."
 
+msgid "There are no open Program B challenges at the moment. Explore the programs to learn how they work, or register to be notified when the next call opens."
+msgstr "There are no open Program B challenges at the moment. Explore the programs to learn how they work, or register to be notified when the next call opens."
+
 msgid "There is no data to export for the current filters."
 msgstr "There is no data to export for the current filters."
+
+msgid "These are open Program B challenges from partner companies. Review the deadlines and register your team to apply. Program A runs on a rolling quarterly basis — register to be notified when a round opens."
+msgstr "These are open Program B challenges from partner companies. Review the deadlines and register your team to apply. Program A runs on a rolling quarterly basis — register to be notified when a round opens."
 
 msgid "These items need attention and link you to the right place to continue."
 msgstr "These items need attention and link you to the right place to continue."
@@ -4726,6 +4783,9 @@ msgstr "This invite link is incomplete. Open the full invite URL and try again."
 msgid "This invite link is invalid or no longer exists."
 msgstr "This invite link is invalid or no longer exists."
 
+msgid "This link is incomplete"
+msgstr "This link is incomplete"
+
 msgid "This organization has no invite records available right now."
 msgstr "This organization has no invite records available right now."
 
@@ -4743,6 +4803,9 @@ msgstr "This Program B project does not exist or is no longer available to you."
 
 msgid "This project is closed and now read-only."
 msgstr "This project is closed and now read-only."
+
+msgid "This section can't be edited here yet."
+msgstr "This section can't be edited here yet."
 
 msgid "This section is unavailable right now."
 msgstr "This section is unavailable right now."
@@ -4934,6 +4997,9 @@ msgstr "Unable to load application"
 
 msgid "Unable to load application detail from the backend."
 msgstr "Unable to load application detail from the backend."
+
+msgid "Unable to load applications"
+msgstr "Unable to load applications"
 
 msgid "Unable to load applications from the backend."
 msgstr "Unable to load applications from the backend."
@@ -5308,9 +5374,6 @@ msgstr "Users"
 msgid "Users are unavailable"
 msgstr "Users are unavailable"
 
-#~ msgid "Using existing CV (ID: {0})"
-#~ msgstr "Using existing CV (ID: {0})"
-
 msgid "Using organization backlog data"
 msgstr "Using organization backlog data"
 
@@ -5338,17 +5401,8 @@ msgstr "Verification pending"
 msgid "VERIFICATION STEP"
 msgstr "VERIFICATION STEP"
 
-msgid "Verification token"
-msgstr "Verification token"
-
-msgid "Verification Token"
-msgstr "Verification Token"
-
 msgid "Verification token is required."
 msgstr "Verification token is required."
-
-msgid "Verification token must be at least 4 characters."
-msgstr "Verification token must be at least 4 characters."
 
 msgid "VERIFY EMAIL"
 msgstr "VERIFY EMAIL"
@@ -5436,6 +5490,12 @@ msgstr "We may update these terms from time to time. Continued use of the platfo
 
 msgid "We read every message personally"
 msgstr "We read every message personally"
+
+msgid "We sent a confirmation link to"
+msgstr "We sent a confirmation link to"
+
+msgid "We sent a confirmation link to your inbox. Open it to verify your account."
+msgstr "We sent a confirmation link to your inbox. Open it to verify your account."
 
 msgid "We sent a confirmation message to your new email. Your current email will stay the same until you confirm the change."
 msgstr "We sent a confirmation message to your new email. Your current email will stay the same until you confirm the change."

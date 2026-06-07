@@ -15,13 +15,13 @@ export function LandingHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 z-50 w-full bg-white/80 shadow-sm backdrop-blur-md dark:bg-slate-900/80 dark:shadow-none">
+    <header className="bg-card/80 fixed top-0 z-50 w-full shadow-sm backdrop-blur-md">
       <nav className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between px-6 py-4 font-bold tracking-tight">
-        <div className="flex w-full items-center justify-between md:w-auto">
+        <div className="flex w-full items-center justify-between lg:w-auto">
           <NtiBrand href={ROUTES.ROOT} variant="landing" size="md" />
 
           <button
-            className="text-slate-600 md:hidden dark:text-slate-400"
+            className="text-muted-foreground lg:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? t`Close menu` : t`Open menu`}
             type="button"
@@ -33,45 +33,45 @@ export function LandingHeader() {
         <div
           className={`${
             mobileMenuOpen ? 'flex' : 'hidden'
-          } w-full flex-col items-center gap-4 pt-6 md:flex md:w-auto md:flex-row md:pt-0`}
+          } w-full flex-col items-center gap-4 pt-6 lg:flex lg:w-auto lg:flex-row lg:pt-0`}
         >
           <Link
-            className="text-slate-600 transition-colors hover:text-blue-900 dark:text-slate-400 dark:hover:text-white"
+            className="text-muted-foreground hover:text-primary transition-colors"
             href={ROUTES.ABOUT}
           >
             {t`About`}
           </Link>
 
           <Link
-            className="text-slate-600 transition-colors hover:text-blue-900 dark:text-slate-400 dark:hover:text-white"
+            className="text-muted-foreground hover:text-primary transition-colors"
             href={ROUTES.PROGRAMS}
           >
             {t`Programs`}
           </Link>
 
           <Link
-            className="text-slate-600 transition-colors hover:text-blue-900 dark:text-slate-400 dark:hover:text-white"
+            className="text-muted-foreground hover:text-primary transition-colors"
             href={ROUTES.CALLS}
           >
             {t`Calls`}
           </Link>
 
           <Link
-            className="text-slate-600 transition-colors hover:text-blue-900 dark:text-slate-400 dark:hover:text-white"
+            className="text-muted-foreground hover:text-primary transition-colors"
             href={ROUTES.MENTORS}
           >
             {t`Mentors`}
           </Link>
 
           <Link
-            className="text-slate-600 transition-colors hover:text-blue-900 dark:text-slate-400 dark:hover:text-white"
+            className="text-muted-foreground hover:text-primary transition-colors"
             href={ROUTES.PARTNERS}
           >
             {t`Partners`}
           </Link>
 
           <Link
-            className="text-slate-600 transition-colors hover:text-blue-900 dark:text-slate-400 dark:hover:text-white"
+            className="text-muted-foreground hover:text-primary transition-colors"
             href={ROUTES.NEWS}
           >
             {t`News`}
@@ -81,12 +81,12 @@ export function LandingHeader() {
         <div
           className={`${
             mobileMenuOpen ? 'flex' : 'hidden'
-          } w-full flex-col items-center gap-3 pt-6 md:flex md:w-auto md:flex-row md:pt-0`}
+          } w-full flex-col items-center gap-3 pt-6 lg:flex lg:w-auto lg:flex-row lg:pt-0`}
         >
           <LanguageSelector
-            className="border-slate-200 bg-white/90 dark:border-slate-700 dark:bg-slate-900/80"
-            triggerClassName="text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800/70"
-            contentClassName="border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-900"
+            className="border-border bg-card/90"
+            triggerClassName="text-foreground hover:bg-muted"
+            contentClassName="border-border bg-card"
           />
 
           <LandingAuthActions
@@ -95,7 +95,7 @@ export function LandingHeader() {
             unauthenticatedActions={[
               {
                 className:
-                  'w-full px-4 py-2 text-center font-bold text-slate-600 transition-all hover:text-blue-900 md:w-auto dark:text-slate-400',
+                  'w-full px-4 py-2 text-center font-bold text-muted-foreground transition-all hover:text-primary md:w-auto',
                 href: ROUTES.AUTH.LOGIN,
                 label: t`Login`,
               },

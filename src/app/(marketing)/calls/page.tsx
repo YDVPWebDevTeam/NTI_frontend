@@ -46,10 +46,10 @@ function getPaginationClassName(isDisabled: boolean): string {
     'inline-flex min-h-12 min-w-28 items-center justify-center rounded-xl border px-5 py-3 text-sm font-semibold transition-colors';
 
   if (isDisabled) {
-    return `${baseClassName} cursor-not-allowed border-slate-200 bg-slate-100 text-slate-400`;
+    return `${baseClassName} cursor-not-allowed border-border bg-muted text-muted-foreground/60`;
   }
 
-  return `${baseClassName} border-slate-300 bg-white text-slate-700 hover:border-slate-400 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2`;
+  return `${baseClassName} border-border bg-card text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2`;
 }
 
 function parsePage(value: string | string[] | undefined): number {
@@ -144,29 +144,29 @@ export default async function CallsPage({ searchParams }: CallsPageProps) {
       <section className="px-4 py-14 sm:px-6 sm:py-16 lg:px-12 lg:py-20">
         <div className="mx-auto w-full max-w-7xl">
           <div className="max-w-3xl">
-            <p className="text-sm font-semibold tracking-[0.16em] text-cyan-700 uppercase">
-              {serverI18n._(msg`Program B`)}
+            <p className="text-primary text-sm font-semibold tracking-[0.16em] uppercase">
+              {serverI18n._(msg`Program B · Live practice`)}
             </p>
 
-            <h1 className="mt-4 text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
-              {serverI18n._(msg`Calls & Deadlines`)}
+            <h1 className="text-foreground mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
+              {serverI18n._(msg`Open calls & deadlines`)}
             </h1>
 
-            <p className="mt-5 text-lg leading-8 text-slate-600">
+            <p className="text-muted-foreground mt-5 text-lg leading-8">
               {serverI18n._(
-                msg`Explore active program calls, review important dates, and prepare your application before the deadline.`,
+                msg`These are open Program B challenges from partner companies. Review the deadlines and register your team to apply. Program A runs on a rolling quarterly basis — register to be notified when a round opens.`,
               )}
             </p>
           </div>
 
           <section id="calls-results" className="mt-10 scroll-mt-24" aria-live="polite">
             {hasError ? (
-              <div className="rounded-3xl border border-red-200 bg-red-50 p-8">
-                <h2 className="text-lg font-semibold text-red-950">
+              <div className="border-destructive/30 bg-destructive/5 rounded-3xl border p-8">
+                <h2 className="text-destructive text-lg font-semibold">
                   {serverI18n._(msg`Calls could not be loaded`)}
                 </h2>
 
-                <p className="mt-2 text-sm leading-7 text-red-800">
+                <p className="text-destructive/90 mt-2 text-sm leading-7">
                   {serverI18n._(
                     msg`The active program calls are temporarily unavailable. Please try again later.`,
                   )}
@@ -175,16 +175,32 @@ export default async function CallsPage({ searchParams }: CallsPageProps) {
             ) : null}
 
             {!hasError && calls.length === 0 ? (
-              <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-                <h2 className="text-lg font-semibold text-slate-950">
-                  {serverI18n._(msg`No active calls`)}
+              <div className="border-border bg-card rounded-3xl border p-8 shadow-sm">
+                <h2 className="text-foreground text-lg font-semibold">
+                  {serverI18n._(msg`No open calls right now`)}
                 </h2>
 
-                <p className="mt-2 text-sm leading-7 text-slate-600">
+                <p className="text-muted-foreground mt-2 max-w-xl text-sm leading-7">
                   {serverI18n._(
-                    msg`There are no active program calls at the moment. Please check again later.`,
+                    msg`There are no open Program B challenges at the moment. Explore the programs to learn how they work, or register to be notified when the next call opens.`,
                   )}
                 </p>
+
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link
+                    href={ROUTES.PROGRAMS}
+                    className="border-border bg-card text-foreground hover:bg-muted focus-visible:ring-ring inline-flex min-h-12 items-center justify-center rounded-xl border px-5 py-3 text-sm font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+                  >
+                    {serverI18n._(msg`Explore the programs`)}
+                  </Link>
+
+                  <Link
+                    href={ROUTES.AUTH.REGISTER_SELECT}
+                    className="bg-primary text-primary-foreground hover:bg-primary/90 focus-visible:ring-ring inline-flex min-h-12 items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+                  >
+                    {serverI18n._(msg`Create an account`)}
+                  </Link>
+                </div>
               </div>
             ) : null}
 
@@ -198,36 +214,36 @@ export default async function CallsPage({ searchParams }: CallsPageProps) {
                   return (
                     <article
                       key={call.id}
-                      className="flex h-full min-h-[360px] flex-col rounded-3xl border border-slate-200 bg-white p-7 shadow-sm transition-shadow hover:shadow-md"
+                      className="border-border bg-card flex h-full min-h-[360px] flex-col rounded-3xl border p-7 shadow-sm transition-shadow hover:shadow-md"
                     >
                       <div className="flex flex-1 flex-col">
                         <div>
-                          <span className="inline-flex rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700">
+                          <span className="bg-accent text-primary inline-flex rounded-full px-3 py-1 text-xs font-semibold">
                             {serverI18n._(msg`Program B`)}
                           </span>
 
-                          <h2 className="mt-5 text-xl leading-8 font-semibold text-slate-950">
+                          <h2 className="text-foreground mt-5 text-xl leading-8 font-semibold">
                             {call.title}
                           </h2>
                         </div>
 
-                        <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-slate-200 pt-6">
+                        <dl className="border-border mt-8 grid grid-cols-2 gap-x-6 gap-y-4 border-t pt-6">
                           <div>
-                            <dt className="text-xs font-semibold tracking-wide text-slate-500 uppercase">
+                            <dt className="text-muted-foreground text-xs font-semibold tracking-wide uppercase">
                               {serverI18n._(msg`Opens`)}
                             </dt>
 
-                            <dd className="mt-2 text-sm font-medium text-slate-950">
+                            <dd className="text-foreground mt-2 text-sm font-medium">
                               {opensAt ?? serverI18n._(msg`Not specified`)}
                             </dd>
                           </div>
 
                           <div>
-                            <dt className="text-xs font-semibold tracking-wide text-slate-500 uppercase">
+                            <dt className="text-muted-foreground text-xs font-semibold tracking-wide uppercase">
                               {serverI18n._(msg`Deadline`)}
                             </dt>
 
-                            <dd className="mt-2 text-sm font-medium text-slate-950">
+                            <dd className="text-foreground mt-2 text-sm font-medium">
                               {closesAt ?? serverI18n._(msg`Not specified`)}
                             </dd>
                           </div>
@@ -237,16 +253,16 @@ export default async function CallsPage({ searchParams }: CallsPageProps) {
                       <div className="mt-auto pt-9">
                         <LandingAuthActions
                           className="w-full"
-                          authenticatedClassName="inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+                          authenticatedClassName="inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-foreground px-5 py-3 text-sm font-semibold text-background transition-colors hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                           loadingFallback={
-                            <div className="h-12 w-full animate-pulse rounded-xl bg-slate-100" />
+                            <div className="bg-muted h-12 w-full animate-pulse rounded-xl" />
                           }
                           unauthenticatedActions={[
                             {
                               href: ROUTES.AUTH.REGISTER_SELECT,
                               label: serverI18n._(msg`Register to apply`),
                               className:
-                                'inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-blue-700 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2',
+                                'inline-flex min-h-12 w-full items-center justify-center rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
                             },
                           ]}
                         />
@@ -279,7 +295,7 @@ export default async function CallsPage({ searchParams }: CallsPageProps) {
                   )}
                 </div>
 
-                <span className="text-center text-sm font-medium whitespace-nowrap text-slate-600">
+                <span className="text-muted-foreground text-center text-sm font-medium whitespace-nowrap">
                   {serverI18n._(msg`Page ${currentPage} of ${totalPages}`)}
                 </span>
 

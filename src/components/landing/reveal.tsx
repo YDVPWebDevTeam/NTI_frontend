@@ -31,6 +31,13 @@ export function Reveal({
   const ref = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
 
+  // Progressive enhancement: mark the document so the hidden/animated initial
+  // `.reveal` state in global.css only kicks in once JS is running. Without
+  // this (JS disabled / pre-hydration) `.reveal` content stays visible.
+  useEffect(() => {
+    document.documentElement.classList.add('reveal-js');
+  }, []);
+
   useEffect(() => {
     const node = ref.current;
 

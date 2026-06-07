@@ -97,6 +97,68 @@ type LandingCtas = {
   finalSecondary: StaticCta;
 };
 
+/**
+ * Static fallback *copy* for the landing page, used only when the CMS returns
+ * empty text (unconfigured / unreachable) so the page never renders blank
+ * headings or empty sections. The CMS remains the source of truth when present.
+ */
+type LandingFallbackCopy = {
+  hero: {
+    eyebrow: string;
+    titlePrefix: string;
+    titleHighlight: string;
+    titleSuffix: string;
+    description: string;
+  };
+  programsHeading: string;
+  infrastructure: { eyebrow: string; heading: string };
+  ecosystem: { heading: string; description: string };
+  finalCTA: { title: string; description: string };
+};
+
+export const landingFallback: Record<AppLocale, LandingFallbackCopy> = {
+  en: {
+    hero: {
+      eyebrow: 'National Technology Initiative',
+      titlePrefix: 'Build the',
+      titleHighlight: 'next generation',
+      titleSuffix: 'of technology together',
+      description:
+        'NTI connects students, companies, and mentors to turn bold ideas into real ventures and solve industry challenges.',
+    },
+    programsHeading: 'Our Programs',
+    infrastructure: { eyebrow: 'Why NTI', heading: 'Everything you need to build' },
+    ecosystem: {
+      heading: 'A growing ecosystem',
+      description: 'Founders, mentors, and partners working side by side.',
+    },
+    finalCTA: {
+      title: 'Ready to get started?',
+      description: 'Join NTI as a student or partner and start building today.',
+    },
+  },
+  sk: {
+    hero: {
+      eyebrow: 'Národná technologická iniciatíva',
+      titlePrefix: 'Budujme',
+      titleHighlight: 'novú generáciu',
+      titleSuffix: 'technológií spoločne',
+      description:
+        'NTI spája študentov, firmy a mentorov, aby premenili odvážne nápady na reálne projekty a riešili výzvy odvetvia.',
+    },
+    programsHeading: 'Naše programy',
+    infrastructure: { eyebrow: 'Prečo NTI', heading: 'Všetko, čo potrebujete na budovanie' },
+    ecosystem: {
+      heading: 'Rastúci ekosystém',
+      description: 'Zakladatelia, mentori a partneri pracujúci bok po boku.',
+    },
+    finalCTA: {
+      title: 'Pripravení začať?',
+      description: 'Pridajte sa k NTI ako študent alebo partner a začnite budovať ešte dnes.',
+    },
+  },
+};
+
 export const landingStatic: Record<AppLocale, LandingCtas> = {
   en: {
     heroPrimary: { href: ROUTES.AUTH.REGISTER_STUDENT, label: 'Apply as student/team' },

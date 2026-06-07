@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import { msg } from '@lingui/core/macro';
 import {
   ArrowRight,
   BadgeCheck,
@@ -12,13 +11,21 @@ import {
   UserRoundCog,
   Users,
 } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 import { Reveal, ScrollProgress } from 'components/landing';
 import { LandingAuthActions } from 'components/layout';
 import { fetchLandingPageContent, type LandingPageContent } from 'lib/cms/landing-page';
 import { fetchLatestNewsArticle } from 'lib/cms/news';
+import { getServerI18n } from 'lib/i18n/server-i18n';
 import { getRequestLocale } from 'lib/i18n/server-locale';
-import { landingStatic } from 'lib/marketing/static-content';
+import { landingFallback, landingStatic } from 'lib/marketing/static-content';
+
+/** Coalesce a possibly-empty CMS string down to a static fallback. */
+function withFallback(value: string, fallback: string): string {
+  return value.trim() ? value : fallback;
+}
 
 /** Per-item delay (ms) for staggered scroll-reveal animations. */
 const STAGGER_MS = 120;
@@ -103,7 +110,8 @@ function accentClasses(accent: LandingPageContent['programs']['items'][number]['
 
 export default async function HomePage() {
   const locale = await getRequestLocale();
-  const [content, latestNews] = await Promise.all([
+  const [i18n, content, latestNews] = await Promise.all([
+    getServerI18n(locale),
     fetchLandingPageContent(locale),
     fetchLatestNewsArticle(locale),
   ]);
@@ -111,6 +119,10 @@ export default async function HomePage() {
   // Repeat the logos enough to overflow the viewport, then render the group
   // twice so the -50% translate produces a seamless, gapless loop.
   const cta = landingStatic[locale];
+
+  // Static copy used only when the CMS returns empty text, so the page never
+  // renders blank headings on a CMS outage.
+  const fb = landingFallback[locale];
 
   const marqueeGroup = Array.from({ length: MARQUEE_REPEAT }).flatMap(
     () => content.ecosystem.partnerLogos,
@@ -137,15 +149,17 @@ export default async function HomePage() {
             <Reveal className="space-y-8 lg:col-span-7">
               <span className="border-tertiary/30 bg-tertiary-fixed/60 text-on-tertiary-fixed inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-xs font-bold tracking-widest uppercase backdrop-blur">
                 <span className="bg-tertiary-fixed-dim pulse-dot inline-block h-2 w-2 rounded-full" />
-                {content.hero.eyebrow}
+                {withFallback(content.hero.eyebrow, fb.hero.eyebrow)}
               </span>
               <h1 className="font-headline text-on-surface text-4xl leading-[1.05] font-extrabold tracking-tight sm:text-5xl lg:text-7xl">
-                {content.hero.titlePrefix}{' '}
-                <span className="text-gradient">{content.hero.titleHighlight}</span>{' '}
-                {content.hero.titleSuffix}
+                {withFallback(content.hero.titlePrefix, fb.hero.titlePrefix)}{' '}
+                <span className="text-gradient">
+                  {withFallback(content.hero.titleHighlight, fb.hero.titleHighlight)}
+                </span>{' '}
+                {withFallback(content.hero.titleSuffix, fb.hero.titleSuffix)}
               </h1>
               <p className="text-on-surface-variant max-w-2xl text-lg leading-relaxed md:text-xl">
-                {content.hero.description}
+                {withFallback(content.hero.description, fb.hero.description)}
               </p>
               <LandingAuthActions
                 className="flex flex-col gap-4 pt-4 sm:flex-row"
@@ -197,7 +211,7 @@ export default async function HomePage() {
                   </span>
                   <div className="min-w-0">
                     <p className="text-on-surface-variant text-[0.65rem] font-bold tracking-widest uppercase">
-                      Latest News
+                      {i18n._(msg`Latest News`)}
                     </p>
                     <p className="text-on-surface truncate text-sm font-bold">{latestNews.title}</p>
                   </div>
@@ -209,9 +223,11 @@ export default async function HomePage() {
                   </span>
                   <div className="min-w-0">
                     <p className="text-on-surface-variant text-[0.65rem] font-bold tracking-widest uppercase">
-                      Coming Soon
+                      {i18n._(msg`Coming Soon`)}
                     </p>
-                    <p className="text-on-surface truncate text-sm font-bold">Big things ahead</p>
+                    <p className="text-on-surface truncate text-sm font-bold">
+                      {i18n._(msg`Big things ahead`)}
+                    </p>
                   </div>
                 </div>
               )}
@@ -253,12 +269,19 @@ export default async function HomePage() {
       <section className="bg-surface-container-low relative py-24" id="programs">
         <div className="mx-auto max-w-7xl px-6">
           <Reveal className="mb-16 text-center lg:text-left">
-            <h2 className="font-headline mb-4 text-4xl font-bold">{content.programs.heading}</h2>
+            <h2 className="font-headline mb-4 text-4xl font-bold">
+              {withFallback(content.programs.heading, fb.programsHeading)}
+            </h2>
             <div className="bg-tertiary-fixed-dim h-1.5 w-20 rounded-full max-lg:mx-auto" />
           </Reveal>
           <div className="grid gap-8 md:grid-cols-2">
             {content.programs.items.map((program, index) => {
               const accent = accentClasses(program.accent);
+
+              // programCtas is a fixed 2-tuple; the CMS program list can be any
+              // length, so fall back to the last CTA for extra cards.
+              const programCta =
+                cta.programCtas[index] ?? cta.programCtas[cta.programCtas.length - 1];
 
               return (
                 <Reveal key={program.title || index} delay={index * STAGGER_MS}>
@@ -296,10 +319,10 @@ export default async function HomePage() {
                         ))}
                       </ul>
                       <Link
-                        href={cta.programCtas[index].href}
+                        href={programCta.href}
                         className={`flex w-full items-center justify-center gap-2 rounded-xl border-2 py-4 text-center font-bold transition-all ${accent.button}`}
                       >
-                        {cta.programCtas[index].label}
+                        {programCta.label}
                         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </Link>
                     </div>
@@ -316,9 +339,11 @@ export default async function HomePage() {
         <div className="mx-auto max-w-7xl px-6">
           <Reveal className="mb-16 text-center">
             <p className="text-tertiary mb-2 text-xs font-bold tracking-widest uppercase">
-              {content.infrastructure.eyebrow}
+              {withFallback(content.infrastructure.eyebrow, fb.infrastructure.eyebrow)}
             </p>
-            <h2 className="font-headline text-4xl font-bold">{content.infrastructure.heading}</h2>
+            <h2 className="font-headline text-4xl font-bold">
+              {withFallback(content.infrastructure.heading, fb.infrastructure.heading)}
+            </h2>
           </Reveal>
           <div className="grid h-full grid-cols-1 gap-4 md:grid-cols-4 md:grid-rows-2">
             <Reveal className="md:col-span-2 md:row-span-2">
@@ -379,10 +404,10 @@ export default async function HomePage() {
           <div className="grid items-center gap-16 lg:grid-cols-3">
             <Reveal>
               <h2 className="font-headline mb-6 text-center text-3xl font-bold lg:text-left">
-                {content.ecosystem.heading}
+                {withFallback(content.ecosystem.heading, fb.ecosystem.heading)}
               </h2>
               <p className="text-on-surface-variant mb-8 text-center lg:text-left">
-                {content.ecosystem.description}
+                {withFallback(content.ecosystem.description, fb.ecosystem.description)}
               </p>
               <div className="flex flex-wrap justify-center gap-8 opacity-40 lg:justify-start">
                 {content.ecosystem.partnerLogos.map((partner) => (
@@ -422,7 +447,7 @@ export default async function HomePage() {
                         <Newspaper className="h-10 w-10 opacity-50" />
                         <div>
                           <p className="text-xs font-bold tracking-widest uppercase opacity-70">
-                            Latest News
+                            {i18n._(msg`Latest News`)}
                           </p>
                           <h5 className="line-clamp-1 text-xl font-bold">{latestNews.title}</h5>
                         </div>
@@ -432,7 +457,7 @@ export default async function HomePage() {
                           <p className="text-sm font-medium">{latestNews.category}</p>
                         )}
                         <p className="flex items-center justify-end gap-1 text-xs opacity-70">
-                          Read more <ArrowRight className="h-3 w-3" />
+                          {i18n._(msg`Read more`)} <ArrowRight className="h-3 w-3" />
                         </p>
                       </div>
                     </div>
@@ -444,9 +469,11 @@ export default async function HomePage() {
                       <Sparkles className="h-10 w-10 opacity-50" />
                       <div>
                         <p className="text-xs font-bold tracking-widest uppercase opacity-70">
-                          Stay Tuned
+                          {i18n._(msg`Stay Tuned`)}
                         </p>
-                        <h5 className="text-xl font-bold">Something big is brewing</h5>
+                        <h5 className="text-xl font-bold">
+                          {i18n._(msg`Something big is brewing`)}
+                        </h5>
                       </div>
                     </div>
                   </div>
@@ -470,10 +497,10 @@ export default async function HomePage() {
                   NTI
                 </span>
                 <h2 className="font-headline mb-8 text-4xl leading-tight font-extrabold tracking-tight md:text-5xl">
-                  {content.finalCTA.title}
+                  {withFallback(content.finalCTA.title, fb.finalCTA.title)}
                 </h2>
                 <p className="mx-auto mb-12 max-w-2xl text-lg leading-relaxed text-blue-100 md:text-xl">
-                  {content.finalCTA.description}
+                  {withFallback(content.finalCTA.description, fb.finalCTA.description)}
                 </p>
                 <LandingAuthActions
                   className="mx-auto flex w-full flex-col justify-center gap-6 sm:w-auto sm:flex-row"

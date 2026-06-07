@@ -56,7 +56,14 @@ async function fetchNewsDocs(
   }
 }
 
-/** List published articles, newest first. Empty when the CMS has none. */
+/**
+ * List published articles, newest first. Empty when the CMS has none.
+ *
+ * NOTE: capped at 24 articles with no pagination. This is intentional for now —
+ * the news list page has no paging UI. If/when the archive grows past 24, add
+ * page-based fetching here (the Payload API supports `page`/`limit` params) plus
+ * pagination controls on the list page.
+ */
 export async function fetchNewsList(locale: AppLocale): Promise<NewsArticle[]> {
   const articles = await fetchNewsDocs(locale, {
     sort: '-publishedAt',

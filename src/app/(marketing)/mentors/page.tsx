@@ -1,9 +1,10 @@
+import { msg } from '@lingui/core/macro';
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
 
 import { Reveal } from 'components/landing';
 import {
+  ContentUnavailable,
   CTASection,
   FeatureGrid,
   MarketingHero,
@@ -11,6 +12,7 @@ import {
   SectionHeading,
 } from 'components/marketing';
 import { fetchMentorsContent } from 'lib/cms/mentors';
+import { getServerI18n } from 'lib/i18n/server-i18n';
 import { getRequestLocale } from 'lib/i18n/server-locale';
 import { mentorsStatic } from 'lib/marketing/static-content';
 
@@ -31,7 +33,18 @@ export default async function MentorsPage() {
   const c = await fetchMentorsContent(locale);
 
   if (!c) {
-    notFound();
+    const i18n = await getServerI18n(locale);
+
+    return (
+      <ContentUnavailable
+        eyebrow={mentorsStatic[locale].metaTitle}
+        title={i18n._(msg`Content temporarily unavailable`)}
+        description={i18n._(
+          msg`We couldn't load this page right now. Please try again in a few minutes.`,
+        )}
+        homeLabel={i18n._(msg`Back to home`)}
+      />
+    );
   }
 
   const cta = mentorsStatic[locale];

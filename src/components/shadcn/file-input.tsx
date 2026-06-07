@@ -48,12 +48,12 @@ export function FileInput({
 
   return (
     <div className={cn('space-y-3', className)}>
-      <div className="flex flex-col gap-3 rounded-md border border-dashed border-black/15 bg-neutral-50 p-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="border-border bg-muted flex flex-col gap-3 rounded-md border border-dashed p-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-medium text-[#0c1a4f]">
+          <p className="text-foreground truncate text-sm font-medium">
             {file ? file.name : placeholder}
           </p>
-          <p className="text-xs text-neutral-500">
+          <p className="text-muted-foreground text-xs">
             {file
               ? t`Selected file will be uploaded after you continue.`
               : t`No file selected yet.`}
@@ -68,7 +68,7 @@ export function FileInput({
               size="icon"
               onClick={handleClear}
               disabled={disabled}
-              className="text-red-500 hover:bg-red-50 hover:text-red-600"
+              className="text-destructive hover:bg-destructive/10 hover:text-destructive"
             >
               <X className="h-4 w-4" />
             </Button>

@@ -11,20 +11,26 @@
   --card-foreground: 240 10% 3.9%;
   --popover: 0 0% 100%;
   --popover-foreground: 240 10% 3.9%;
-  --primary: 240 5.9% 10%;
-  --primary-foreground: 0 0% 98%;
-  --secondary: 240 4.8% 95.9%;
-  --secondary-foreground: 240 5.9% 10%;
-  --muted: 240 4.8% 95.9%;
-  --muted-foreground: 240 3.8% 46.1%;
-  --accent: 240 4.8% 95.9%;
-  --accent-foreground: 240 5.9% 10%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 0 0% 98%;
-  --border: 240 5.9% 90%;
-  --input: 240 5.9% 90%;
-  --ring: 240 5.9% 10%;
-  --radius: 0.5rem;
+  --primary: 216 100% 30%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 216 33% 95%;
+  --secondary-foreground: 217 33% 20%;
+  --muted: 220 20% 96%;
+  --muted-foreground: 217 15% 45%;
+  --accent: 216 60% 95%;
+  --accent-foreground: 216 100% 27%;
+  --destructive: 0 72% 45%;
+  --destructive-foreground: 0 0% 100%;
+  --success: 142 64% 32%;
+  --success-foreground: 0 0% 100%;
+  --warning: 35 92% 45%;
+  --warning-foreground: 0 0% 100%;
+  --info: 216 100% 30%;
+  --info-foreground: 0 0% 100%;
+  --border: 220 30% 90%;
+  --input: 220 30% 90%;
+  --ring: 216 100% 30%;
+  --radius: 0.75rem;
   --chart-1: 12 76% 61%;
   --chart-2: 173 58% 39%;
   --chart-3: 197 37% 24%;
@@ -39,19 +45,25 @@
   --card-foreground: 0 0% 98%;
   --popover: 240 10% 3.9%;
   --popover-foreground: 0 0% 98%;
-  --primary: 0 0% 98%;
-  --primary-foreground: 240 5.9% 10%;
-  --secondary: 240 3.7% 15.9%;
+  --primary: 216 100% 72%;
+  --primary-foreground: 217 60% 12%;
+  --secondary: 217 25% 18%;
   --secondary-foreground: 0 0% 98%;
-  --muted: 240 3.7% 15.9%;
-  --muted-foreground: 240 5% 64.9%;
-  --accent: 240 3.7% 15.9%;
+  --muted: 217 25% 18%;
+  --muted-foreground: 217 12% 65%;
+  --accent: 216 40% 22%;
   --accent-foreground: 0 0% 98%;
-  --destructive: 0 62.8% 30.6%;
+  --destructive: 0 62.8% 45%;
   --destructive-foreground: 0 0% 98%;
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
-  --ring: 240 4.9% 83.9%;
+  --success: 142 50% 50%;
+  --success-foreground: 0 0% 100%;
+  --warning: 35 85% 58%;
+  --warning-foreground: 217 60% 12%;
+  --info: 216 100% 72%;
+  --info-foreground: 217 60% 12%;
+  --border: 217 25% 22%;
+  --input: 217 25% 22%;
+  --ring: 216 100% 72%;
   --chart-1: 220 70% 50%;
   --chart-2: 160 60% 45%;
   --chart-3: 30 80% 55%;
@@ -76,6 +88,12 @@
   --color-accent-foreground: hsl(var(--accent-foreground));
   --color-destructive: hsl(var(--destructive));
   --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-success: hsl(var(--success));
+  --color-success-foreground: hsl(var(--success-foreground));
+  --color-warning: hsl(var(--warning));
+  --color-warning-foreground: hsl(var(--warning-foreground));
+  --color-info: hsl(var(--info));
+  --color-info-foreground: hsl(var(--info-foreground));
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
@@ -100,15 +118,17 @@
   --color-inverse-primary: #b2c5ff;
   --color-surface-dim: #d2d9f4;
   --color-on-secondary-fixed-variant: #3a485b;
+  /* NOTE: shadcn `secondary`/`primary` tokens are the single source of truth
+     (mapped above to brand-blue HSL vars). MD3 surface/* and on-* tokens below
+     remain for the marketing pages only. Do not re-add bare --color-primary /
+     --color-secondary here — it caused the dark-on-dark secondary button bug. */
   --color-on-error: #ffffff;
   --color-outline-variant: #c3c6d6;
   --color-on-primary-container: #c4d2ff;
-  --color-secondary: #515f74;
   --color-inverse-on-surface: #eef0ff;
   --color-tertiary-fixed-dim: #00daf3;
   --color-secondary-fixed-dim: #b9c7df;
   --color-primary-fixed: #dae2ff;
-  --color-primary: #003d9b;
   --color-outline: #737685;
   --color-on-surface-variant: #434654;
   --color-surface-container-low: #f2f3ff;
@@ -208,8 +228,17 @@
     animation: program-fade 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
-  /* Scroll-reveal primitive (toggled by the Reveal component) */
+  /* Scroll-reveal primitive (toggled by the Reveal component).
+     Progressive enhancement: content is visible by default so the page is
+     never blank without JS (disabled / slow / pre-hydration). The hidden
+     initial state + transition only apply once the Reveal component has
+     marked the document with `.reveal-js`, at which point hydration is in
+     control and the IntersectionObserver will reveal the content. */
   .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal-js .reveal {
     opacity: 0;
     transform: translateY(28px);
     transition:
@@ -217,7 +246,7 @@
       transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     will-change: opacity, transform;
   }
-  .reveal[data-reveal='visible'] {
+  .reveal-js .reveal[data-reveal='visible'] {
     opacity: 1;
     transform: none;
   }
@@ -276,7 +305,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .reveal,
+  .reveal-js .reveal {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;

@@ -143,13 +143,18 @@ function ApplicationSectionEditor({
   applicationId,
   section,
   canEdit,
+  onSaved,
 }: {
   applicationId: string;
-  section: ApplicationSectionDto;
+  // `null` means no `idea_overview` section exists yet — the editor bootstraps
+  // the first version through the upsert endpoint (which creates version 1).
+  section: ApplicationSectionDto | null;
   canEdit: boolean;
+  onSaved?: () => void | Promise<unknown>;
 }) {
+  const sectionKey = section?.key ?? IDEA_OVERVIEW_SECTION_KEY;
   const [ideaOverviewSection, setIdeaOverviewSection] = useState<UpsertIdeaOverviewSectionDto>(() =>
-    getInitialIdeaOverviewValue(section.valueJson),
+    getInitialIdeaOverviewValue(section?.valueJson),
   );
   // Track whether the user has typed unsaved edits. While dirty we must NOT
   // reseed from incoming server data (a sibling mutation bumping the version
@@ -158,14 +163,16 @@ function ApplicationSectionEditor({
 
   const saveSection = useApplicationsControllerUpsertIdeaOverviewSection();
 
-  const historyQuery = useApplicationsControllerGetSectionHistory(applicationId, section.key, {
-    query: { enabled: true },
+  // No history exists until the first version is saved, so keep the query
+  // disabled while the section is still being bootstrapped.
+  const historyQuery = useApplicationsControllerGetSectionHistory(applicationId, sectionKey, {
+    query: { enabled: Boolean(section) },
   });
 
   // Reseed local state from server data only when the field is clean. This keeps
   // the editor in sync after a successful save / external update, but preserves
   // unsaved local edits when a version bump arrives mid-typing.
-  const incomingValueJson = section.valueJson;
+  const incomingValueJson = section?.valueJson;
 
   useEffect(() => {
     if (!isDirty) {
@@ -203,9 +210,9 @@ function ApplicationSectionEditor({
   return (
     <div className="border-border bg-muted rounded-2xl border p-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-foreground font-semibold">{formatEnumLikeName(section.key)}</p>
+        <p className="text-foreground font-semibold">{formatEnumLikeName(sectionKey)}</p>
         <p className="text-muted-foreground text-xs">
-          {t`Version`} {section.version}
+          {section ? `${t`Version`} ${section.version}` : t`Not saved yet`}
         </p>
       </div>
 
@@ -280,8 +287,11 @@ function ApplicationSectionEditor({
                 },
               });
               setIsDirty(false);
+              // Refresh the parent sections list so a freshly bootstrapped
+              // section rebinds to its persisted record, then reload history.
+              await onSaved?.();
               await historyQuery.refetch();
-              toast.success(t`Saved ${formatEnumLikeName(section.key)}.`);
+              toast.success(t`Saved ${formatEnumLikeName(sectionKey)}.`);
             } catch (error) {
               toast.error(error instanceof Error ? error.message : t`Unable to save this section.`);
             }
@@ -556,8 +566,10 @@ export function SectionsEditorSection({
   sectionsQuery: QueryLike<ApplicationSectionDto[]>;
   getErrorMessage: (error: unknown, fallback: string) => string;
 }) {
-  const editableSections = useMemo(
-    () => (sectionsQuery.data ?? []).filter((section) => section.key === IDEA_OVERVIEW_SECTION_KEY),
+  const ideaOverviewSection = useMemo(
+    () =>
+      (sectionsQuery.data ?? []).find((section) => section.key === IDEA_OVERVIEW_SECTION_KEY) ??
+      null,
     [sectionsQuery.data],
   );
 
@@ -572,21 +584,34 @@ export function SectionsEditorSection({
         onRetry={() => sectionsQuery.refetch()}
       />
     );
-  } else if (hasLoadedSections && editableSections.length === 0) {
+  } else if (!hasLoadedSections) {
     sectionsContent = (
-      <p className="text-muted-foreground text-sm">{t`This section can't be edited here yet.`}</p>
+      <div className="text-muted-foreground flex items-center gap-2 text-sm">
+        <Loader2 className="h-4 w-4 animate-spin" />
+        {t`Loading sections…`}
+      </div>
+    );
+  } else if (!ideaOverviewSection && !canEdit) {
+    // No section exists yet and the viewer can't create one (read-only role or
+    // non-draft status), so there is nothing to show or bootstrap.
+    sectionsContent = (
+      <p className="text-muted-foreground text-sm">{t`No sections have been filled in yet.`}</p>
     );
   } else {
+    // Render the idea_overview editor even when no section exists yet: an
+    // editable draft bootstraps version 1 through the existing upsert endpoint.
     sectionsContent = (
       <div className="space-y-4">
-        {editableSections.map((section) => (
-          <ApplicationSectionEditor
-            key={section.id}
-            applicationId={applicationId}
-            section={section}
-            canEdit={canEdit}
-          />
-        ))}
+        <ApplicationSectionEditor
+          // Keying by the section id (or a stable placeholder before it exists)
+          // remounts the editor with fresh server state once the first save
+          // persists the section.
+          key={ideaOverviewSection?.id ?? 'idea_overview-new'}
+          applicationId={applicationId}
+          section={ideaOverviewSection}
+          canEdit={canEdit}
+          onSaved={() => sectionsQuery.refetch()}
+        />
       </div>
     );
   }

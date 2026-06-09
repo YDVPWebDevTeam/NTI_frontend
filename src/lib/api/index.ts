@@ -11,6 +11,7 @@ export * from './applications/applications.compat';
 export * from './auth/auth';
 export * from './calls/calls';
 export * from './contact/contact';
+export * from './conversations/conversations';
 export * from './files/files';
 export * from './health/health';
 export * from './index.schemas';

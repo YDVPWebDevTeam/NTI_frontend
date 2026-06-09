@@ -94,6 +94,7 @@ export function TeamCreationSection({
   setTeamName,
   teamName,
   teamQuery,
+  onCreated,
 }: {
   createTeam: MutationLike<{ data: { name: string; emails: string[] } }>;
   currentUserEmail?: string;
@@ -102,18 +103,27 @@ export function TeamCreationSection({
   setTeamName: (value: string) => void;
   teamName: string;
   teamQuery: QueryLike<unknown>;
+  onCreated?: () => void;
 }) {
   const normalizedCurrentUserEmail = currentUserEmail?.trim().toLowerCase() ?? '';
-  const description = t`Create the team first, then start inviting the rest of the student members.`;
 
   return (
-    <StudentSectionCard title={t`Create your team`} description={description}>
-      <div className="space-y-4">
+    <div className="space-y-6">
+      <div className="space-y-2">
+        <label className="text-foreground block text-[11px] font-semibold tracking-widest uppercase">
+          {t`Team name`}
+        </label>
         <Input
           value={teamName}
           onChange={(event) => setTeamName(event.target.value)}
           placeholder={t`Alpha Team`}
         />
+      </div>
+
+      <div className="space-y-2">
+        <label className="text-foreground block text-[11px] font-semibold tracking-widest uppercase">
+          {t`Invite teammates`}
+        </label>
         <Textarea
           value={inviteEmails}
           onChange={(event) => setInviteEmails(event.target.value)}
@@ -121,56 +131,59 @@ export function TeamCreationSection({
           rows={5}
         />
         <p className="text-muted-foreground text-sm">
-          {t`Add at least two teammate emails. Your own account will be added automatically as the team lead.`}
+          {t`Add at least two teammate emails, separated by commas or new lines. Your own account is added automatically as the team lead.`}
         </p>
-        <div className="flex flex-wrap gap-2">
-          <Button
-            disabled={createTeam.isPending || !teamName.trim()}
-            onClick={async () => {
-              const parsed = parseEmails(inviteEmails);
-              const teammateEmails = parsed.validEmails.filter(
-                (email) => email !== normalizedCurrentUserEmail,
-              );
-
-              if (!teamName.trim()) {
-                toast.error(t`Team name is required.`);
-
-                return;
-              }
-
-              if (parsed.invalidEmails.length > 0) {
-                toast.error(t`Invalid emails: ${parsed.invalidEmails.join(', ')}`);
-
-                return;
-              }
-
-              if (teammateEmails.length < MIN_TEAMMATES_FOR_TEAM_CREATION) {
-                toast.error(t`Add at least two valid teammate email addresses.`);
-
-                return;
-              }
-
-              try {
-                await createTeam.mutateAsync({
-                  data: {
-                    name: teamName.trim(),
-                    emails: teammateEmails,
-                  },
-                });
-                setTeamName('');
-                setInviteEmails('');
-                await teamQuery.refetch();
-                toast.success(t`Team created.`);
-              } catch (error) {
-                toast.error(error instanceof Error ? error.message : t`Unable to create team.`);
-              }
-            }}
-          >
-            {createTeam.isPending ? t`Creating...` : t`Create team`}
-          </Button>
-        </div>
       </div>
-    </StudentSectionCard>
+
+      <div className="flex flex-wrap gap-2">
+        <Button
+          className="bg-primary text-primary-foreground hover:bg-primary/90"
+          disabled={createTeam.isPending || !teamName.trim()}
+          onClick={async () => {
+            const parsed = parseEmails(inviteEmails);
+            const teammateEmails = parsed.validEmails.filter(
+              (email) => email !== normalizedCurrentUserEmail,
+            );
+
+            if (!teamName.trim()) {
+              toast.error(t`Team name is required.`);
+
+              return;
+            }
+
+            if (parsed.invalidEmails.length > 0) {
+              toast.error(t`Invalid emails: ${parsed.invalidEmails.join(', ')}`);
+
+              return;
+            }
+
+            if (teammateEmails.length < MIN_TEAMMATES_FOR_TEAM_CREATION) {
+              toast.error(t`Add at least two valid teammate email addresses.`);
+
+              return;
+            }
+
+            try {
+              await createTeam.mutateAsync({
+                data: {
+                  name: teamName.trim(),
+                  emails: teammateEmails,
+                },
+              });
+              setTeamName('');
+              setInviteEmails('');
+              await teamQuery.refetch();
+              toast.success(t`Team created.`);
+              onCreated?.();
+            } catch (error) {
+              toast.error(error instanceof Error ? error.message : t`Unable to create team.`);
+            }
+          }}
+        >
+          {createTeam.isPending ? t`Creating team…` : t`Create team & send invites`}
+        </Button>
+      </div>
+    </div>
   );
 }
 

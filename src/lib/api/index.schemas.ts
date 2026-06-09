@@ -2723,6 +2723,27 @@ export interface CreateApplicationDto {
   teamId: string;
 }
 
+export interface MentorshipNoteAuthorDto {
+  id: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+}
+
+export type ApplicationMentorAssignmentDtoMentorUserId = { [key: string]: unknown };
+
+export type ApplicationMentorAssignmentDtoAssignedAt = { [key: string]: unknown };
+
+export type ApplicationMentorAssignmentDtoAssignedById = { [key: string]: unknown };
+
+export interface ApplicationMentorAssignmentDto {
+  mentorUserId?: ApplicationMentorAssignmentDtoMentorUserId;
+  mentor?: MentorshipNoteAuthorDto;
+  assignedAt?: ApplicationMentorAssignmentDtoAssignedAt;
+  assignedById?: ApplicationMentorAssignmentDtoAssignedById;
+  assignedBy?: MentorshipNoteAuthorDto;
+}
+
 export type ApplicationDetailDtoStatus = typeof ApplicationDetailDtoStatus[keyof typeof ApplicationDetailDtoStatus];
 
 
@@ -2783,6 +2804,7 @@ export interface ApplicationDetailDto {
   decisionRationale?: ApplicationDetailDtoDecisionRationale;
   /** @nullable */
   grantBudget?: ApplicationDetailDtoGrantBudget;
+  mentorAssignment?: ApplicationMentorAssignmentDto;
   createdAt: string;
   updatedAt: string;
 }
@@ -3261,13 +3283,6 @@ export interface MentorAssignmentDto {
 }
 
 export interface CreateMentorshipNoteDto { [key: string]: unknown }
-
-export interface MentorshipNoteAuthorDto {
-  id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-}
 
 export interface ProgramAMentorshipNoteDto {
   id: string;
@@ -3954,6 +3969,95 @@ export const UpdateContactStatusDtoStatus = {
 
 export interface UpdateContactStatusDto {
   status: UpdateContactStatusDtoStatus;
+}
+
+export interface ConversationUserSummaryDto {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+
+export type ConversationMessageAttachmentDtoStatus = typeof ConversationMessageAttachmentDtoStatus[keyof typeof ConversationMessageAttachmentDtoStatus];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ConversationMessageAttachmentDtoStatus = {
+  PENDING: 'PENDING',
+  UPLOADED: 'UPLOADED',
+  FAILED: 'FAILED',
+} as const;
+
+export interface ConversationMessageAttachmentDto {
+  id: string;
+  fileId: string;
+  name: string;
+  mimeType: string;
+  size: number;
+  status: ConversationMessageAttachmentDtoStatus;
+}
+
+export type ConversationMessageDtoChannel = typeof ConversationMessageDtoChannel[keyof typeof ConversationMessageDtoChannel];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const ConversationMessageDtoChannel = {
+  INTERNAL: 'INTERNAL',
+  PARTICIPANTS: 'PARTICIPANTS',
+} as const;
+
+/**
+ * @nullable
+ */
+export type ConversationMessageDtoEditedAt = { [key: string]: unknown } | null;
+
+export interface ConversationMessageDto {
+  id: string;
+  channel: ConversationMessageDtoChannel;
+  author: ConversationUserSummaryDto;
+  /** Message body. Empty string when the message was deleted. */
+  body: string;
+  attachments: ConversationMessageAttachmentDto[];
+  /** True when the author has soft-deleted this message. */
+  isDeleted: boolean;
+  /** @nullable */
+  editedAt?: ConversationMessageDtoEditedAt;
+  createdAt: string;
+}
+
+export interface ConversationMessagePageMetaDto {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+}
+
+export interface ConversationMessagePageDto {
+  data: ConversationMessageDto[];
+  meta: ConversationMessagePageMetaDto;
+}
+
+export interface CreateConversationMessageDto {
+  /**
+   * Message body.
+   * @maxLength 5000
+   */
+  body: string;
+  /** Ids of already-uploaded files (owned by the author) to attach to the message. */
+  fileIds?: string[];
+}
+
+export interface UpdateConversationMessageDto {
+  /**
+   * New message body.
+   * @maxLength 5000
+   */
+  body: string;
+}
+
+export interface ConversationAttachmentDownloadDto {
+  attachmentId: string;
+  downloadUrl: string;
 }
 
 export type AppControllerGetHealth1200 = {

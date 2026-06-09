@@ -61,8 +61,8 @@ msgstr "{activeUsers} active accounts across the platform."
 msgid "© 2026 NTI. All rights reserved."
 msgstr "© 2026 NTI. All rights reserved."
 
-msgid "100% Complete"
-msgstr "100% Complete"
+#~ msgid "100% Complete"
+#~ msgstr "100% Complete"
 
 msgid "A few quick notes before you make changes."
 msgstr "A few quick notes before you make changes."
@@ -160,6 +160,9 @@ msgstr "Access to Program A Frameworks"
 msgid "Access your account"
 msgstr "Access your account"
 
+#~ msgid "Account created"
+#~ msgstr "Account created"
+
 msgid "ACCOUNT RECOVERY"
 msgstr "ACCOUNT RECOVERY"
 
@@ -232,6 +235,9 @@ msgstr "ACTIVE STAGE"
 msgid "Add a mentoring note"
 msgstr "Add a mentoring note"
 
+msgid "Add a mentorship note"
+msgstr "Add a mentorship note"
+
 msgid "Add a new delivery milestone to this project."
 msgstr "Add a new delivery milestone to this project."
 
@@ -244,8 +250,11 @@ msgstr "Add at least one technical skill."
 msgid "Add at least one valid email address."
 msgstr "Add at least one valid email address."
 
-msgid "Add at least two teammate emails. Your own account will be added automatically as the team lead."
-msgstr "Add at least two teammate emails. Your own account will be added automatically as the team lead."
+msgid "Add at least two teammate emails, separated by commas or new lines. Your own account is added automatically as the team lead."
+msgstr "Add at least two teammate emails, separated by commas or new lines. Your own account is added automatically as the team lead."
+
+#~ msgid "Add at least two teammate emails. Your own account will be added automatically as the team lead."
+#~ msgstr "Add at least two teammate emails. Your own account will be added automatically as the team lead."
 
 msgid "Add at least two valid teammate email addresses."
 msgstr "Add at least two valid teammate email addresses."
@@ -361,6 +370,9 @@ msgstr "Application not found"
 msgid "Application resubmitted."
 msgstr "Application resubmitted."
 
+msgid "Application rounds you can apply to. Start a draft to submit your team's own idea while a round is open — these are not projects you own yet."
+msgstr "Application rounds you can apply to. Start a draft to submit your team's own idea while a round is open — these are not projects you own yet."
+
 msgid "Application sections"
 msgstr "Application sections"
 
@@ -474,6 +486,9 @@ msgstr "Assigned"
 msgid "Assigned mentor"
 msgstr "Assigned mentor"
 
+msgid "Assigned Program A projects could not be loaded right now."
+msgstr "Assigned Program A projects could not be loaded right now."
+
 msgid "Assigned:"
 msgstr "Assigned:"
 
@@ -491,6 +506,9 @@ msgstr "At least one skill must be marked as primary."
 
 msgid "Attach document"
 msgstr "Attach document"
+
+msgid "Attached documents"
+msgstr "Attached documents"
 
 msgid "Attention required"
 msgstr "Attention required"
@@ -542,6 +560,9 @@ msgstr "Back to home"
 
 msgid "Back to login"
 msgstr "Back to login"
+
+#~ msgid "BACK TO LOGIN"
+#~ msgstr "BACK TO LOGIN"
 
 msgid "Back to Organizations"
 msgstr "Back to Organizations"
@@ -618,6 +639,9 @@ msgstr "Budget must be a non-negative number."
 msgid "Budget:"
 msgstr "Budget:"
 
+msgid "Build your team"
+msgstr "Build your team"
+
 msgid "By accessing NTI you agree to use the platform lawfully and to provide accurate information when you register or apply to a program."
 msgstr "By accessing NTI you agree to use the platform lawfully and to provide accurate information when you register or apply to a program."
 
@@ -635,6 +659,9 @@ msgstr "Call unavailable"
 
 msgid "Call updated."
 msgstr "Call updated."
+
+msgid "Call:"
+msgstr "Call:"
 
 msgid "Calls"
 msgstr "Calls"
@@ -741,8 +768,8 @@ msgstr "Choose another active member to take over as company owner. Your access 
 msgid "Choose whether you need a new account or want to join with an existing account. The invited email stays fixed to this invite."
 msgstr "Choose whether you need a new account or want to join with an existing account. The invited email stays fixed to this invite."
 
-msgid "Choose who this document should be visible to."
-msgstr "Choose who this document should be visible to."
+#~ msgid "Choose who this document should be visible to."
+#~ msgstr "Choose who this document should be visible to."
 
 msgid "Choose your CV"
 msgstr "Choose your CV"
@@ -870,8 +897,8 @@ msgstr "Completed:"
 msgid "COMPLIANT"
 msgstr "COMPLIANT"
 
-msgid "Confidential"
-msgstr "Confidential"
+#~ msgid "Confidential"
+#~ msgstr "Confidential"
 
 msgid "Confirm"
 msgstr "Confirm"
@@ -906,8 +933,14 @@ msgstr "Confirm your company owner account"
 msgid "Confirm your email"
 msgstr "Confirm your email"
 
-msgid "Confirm your email address from the message sent to your inbox before full platform access."
-msgstr "Confirm your email address from the message sent to your inbox before full platform access."
+#~ msgid "Confirm your email address from the message sent to your inbox before full platform access."
+#~ msgstr "Confirm your email address from the message sent to your inbox before full platform access."
+
+msgid "Confirm your email address from the message sent to your inbox to continue with onboarding."
+msgstr "Confirm your email address from the message sent to your inbox to continue with onboarding."
+
+#~ msgid "Confirm your email to continue"
+#~ msgstr "Confirm your email to continue"
 
 msgid "Confirm your new email"
 msgstr "Confirm your new email"
@@ -971,6 +1004,9 @@ msgstr "Continue as Regular User"
 
 msgid "Continue draft"
 msgstr "Continue draft"
+
+#~ msgid "Continue to team setup"
+#~ msgstr "Continue to team setup"
 
 msgid "Continue your onboarding, track applications, and manage your NTI profile from one place."
 msgstr "Continue your onboarding, track applications, and manage your NTI profile from one place."
@@ -1059,8 +1095,11 @@ msgstr "Create Specialization"
 msgid "Create System Invite"
 msgstr "Create System Invite"
 
-msgid "Create team"
-msgstr "Create team"
+#~ msgid "Create team"
+#~ msgstr "Create team"
+
+msgid "Create team & send invites"
+msgstr "Create team & send invites"
 
 msgid "Create the first faculty for this university or adjust the local filter."
 msgstr "Create the first faculty for this university or adjust the local filter."
@@ -1068,8 +1107,8 @@ msgstr "Create the first faculty for this university or adjust the local filter.
 msgid "Create the first specialization for this faculty or adjust the local filter."
 msgstr "Create the first specialization for this faculty or adjust the local filter."
 
-msgid "Create the team first, then start inviting the rest of the student members."
-msgstr "Create the team first, then start inviting the rest of the student members."
+#~ msgid "Create the team first, then start inviting the rest of the student members."
+#~ msgstr "Create the team first, then start inviting the rest of the student members."
 
 msgid "Create the team first, then the invited students can join through their email links."
 msgstr "Create the team first, then the invited students can join through their email links."
@@ -1092,6 +1131,9 @@ msgstr "Create your registration profile with core credentials and accept the in
 msgid "Create your team"
 msgstr "Create your team"
 
+msgid "Create your team and invite your teammates."
+msgstr "Create your team and invite your teammates."
+
 msgid "created"
 msgstr "created"
 
@@ -1107,11 +1149,17 @@ msgstr "Created At"
 msgid "Created By"
 msgstr "Created By"
 
+msgid "Created:"
+msgstr "Created:"
+
 msgid "CREATING ACCOUNT..."
 msgstr "CREATING ACCOUNT..."
 
 msgid "Creating organization…"
 msgstr "Creating organization…"
+
+msgid "Creating team…"
+msgstr "Creating team…"
 
 msgid "Creating..."
 msgstr "Creating..."
@@ -1316,6 +1364,9 @@ msgstr "Documents are unavailable right now."
 
 msgid "Documents aren't available for this account yet."
 msgstr "Documents aren't available for this account yet."
+
+msgid "Documents currently attached to this application. Download to review the uploaded files."
+msgstr "Documents currently attached to this application. Download to review the uploaded files."
 
 msgid "Doe"
 msgstr "Doe"
@@ -1766,8 +1817,8 @@ msgstr "FORGOT PASSWORD"
 msgid "Forgot password?"
 msgstr "Forgot password?"
 
-msgid "Form Conquered"
-msgstr "Form Conquered"
+#~ msgid "Form Conquered"
+#~ msgstr "Form Conquered"
 
 msgid "Formal verification"
 msgstr "Formal verification"
@@ -1790,8 +1841,8 @@ msgstr "Format"
 msgid "Foundation"
 msgstr "Foundation"
 
-msgid "Friends Next"
-msgstr "Friends Next"
+#~ msgid "Friends Next"
+#~ msgstr "Friends Next"
 
 msgid "Full name"
 msgstr "Full name"
@@ -1862,8 +1913,8 @@ msgstr ""
 msgid "Hide password"
 msgstr "Hide password"
 
-msgid "Highlight your technical and soft skills for potential partners."
-msgstr "Highlight your technical and soft skills for potential partners."
+#~ msgid "Highlight your technical and soft skills for potential partners."
+#~ msgstr "Highlight your technical and soft skills for potential partners."
 
 msgid "How can we help?"
 msgstr "How can we help?"
@@ -1964,8 +2015,8 @@ msgstr "Inspect KPI rollups, compare report datasets, and manage export jobs."
 msgid "Inspect projects"
 msgstr "Inspect projects"
 
-msgid "Internal"
-msgstr "Internal"
+#~ msgid "Internal"
+#~ msgstr "Internal"
 
 msgid "Invalid call id"
 msgstr "Invalid call id"
@@ -1998,8 +2049,8 @@ msgstr "Invitations"
 msgid "Invitations created."
 msgstr "Invitations created."
 
-msgid "INVITE COLLEAGUES"
-msgstr "INVITE COLLEAGUES"
+#~ msgid "INVITE COLLEAGUES"
+#~ msgstr "INVITE COLLEAGUES"
 
 msgid "Invite Id"
 msgstr "Invite Id"
@@ -2148,6 +2199,9 @@ msgstr "Legal"
 msgid "Level is required."
 msgstr "Level is required."
 
+msgid "Lifecycle:"
+msgstr "Lifecycle:"
+
 msgid "Link expired"
 msgstr "Link expired"
 
@@ -2183,6 +2237,9 @@ msgstr "Loading application sections..."
 
 msgid "Loading applications to review..."
 msgstr "Loading applications to review..."
+
+msgid "Loading attached documents…"
+msgstr "Loading attached documents…"
 
 msgid "Loading backlog item"
 msgstr "Loading backlog item"
@@ -2250,11 +2307,17 @@ msgstr "Loading Program A applications..."
 msgid "Loading Program A milestones..."
 msgstr "Loading Program A milestones..."
 
+msgid "Loading Program A project"
+msgstr "Loading Program A project"
+
 msgid "Loading project"
 msgstr "Loading project"
 
 msgid "Loading reports..."
 msgstr "Loading reports..."
+
+msgid "Loading sections…"
+msgstr "Loading sections…"
 
 msgid "Loading specializations..."
 msgstr "Loading specializations..."
@@ -2314,8 +2377,8 @@ msgstr "Logo upload failed. The organization will be created without a logo."
 msgid "Logo upload failed. Your profile changes were not saved. Please try again."
 msgstr "Logo upload failed. Your profile changes were not saved. Please try again."
 
-msgid "Looking absolutely stellar"
-msgstr "Looking absolutely stellar"
+#~ msgid "Looking absolutely stellar"
+#~ msgstr "Looking absolutely stellar"
 
 msgid "Manage"
 msgstr "Manage"
@@ -2420,6 +2483,9 @@ msgstr "Mentoring notes"
 msgid "Mentors"
 msgstr "Mentors"
 
+msgid "Mentorship note added."
+msgstr "Mentorship note added."
+
 msgid "Mentorship notes"
 msgstr "Mentorship notes"
 
@@ -2516,6 +2582,12 @@ msgstr "My Applications"
 msgid "Name"
 msgstr "Name"
 
+msgid "Name your team and invite your teammates to get started together."
+msgstr "Name your team and invite your teammates to get started together."
+
+msgid "Name your team and invite your teammates. You'll be added automatically as the team lead."
+msgstr "Name your team and invite your teammates. You'll be added automatically as the team lead."
+
 msgid "name@company.com"
 msgstr "name@company.com"
 
@@ -2589,6 +2661,9 @@ msgstr "NEXT STEP"
 msgid "Next steps"
 msgstr "Next steps"
 
+#~ msgid "Next: create your team and invite teammates."
+#~ msgstr "Next: create your team and invite teammates."
+
 msgid "No"
 msgstr "No"
 
@@ -2610,8 +2685,8 @@ msgstr "No active Program B projects yet."
 msgid "No active projects yet"
 msgstr "No active projects yet"
 
-msgid "No active team"
-msgstr "No active team"
+#~ msgid "No active team"
+#~ msgstr "No active team"
 
 msgid "No application rows match the current filters."
 msgstr "No application rows match the current filters."
@@ -2622,11 +2697,17 @@ msgstr "No application sections found."
 msgid "No application sections were returned by the backend."
 msgstr "No application sections were returned by the backend."
 
+msgid "No application sections yet."
+msgstr "No application sections yet."
+
 msgid "No applications found."
 msgstr "No applications found."
 
 msgid "No applications to review"
 msgstr "No applications to review"
+
+msgid "No assigned Program A projects"
+msgstr "No assigned Program A projects"
 
 msgid "No assigned projects"
 msgstr "No assigned projects"
@@ -2666,6 +2747,9 @@ msgstr "No description provided."
 
 msgid "No description."
 msgstr "No description."
+
+msgid "No documents have been attached yet."
+msgstr "No documents have been attached yet."
 
 msgid "No documents uploaded yet"
 msgstr "No documents uploaded yet"
@@ -2720,6 +2804,9 @@ msgstr "No mentorship notes have been added yet."
 
 msgid "No mentorship notes were returned by the backend."
 msgstr "No mentorship notes were returned by the backend."
+
+msgid "No mentorship notes yet."
+msgstr "No mentorship notes yet."
 
 msgid "No milestone description."
 msgstr "No milestone description."
@@ -2784,6 +2871,9 @@ msgstr "No reviews yet."
 msgid "No section content provided."
 msgstr "No section content provided."
 
+msgid "No sections have been filled in yet."
+msgstr "No sections have been filled in yet."
+
 msgid "No sector provided"
 msgstr "No sector provided"
 
@@ -2804,6 +2894,9 @@ msgstr "No submitted applications yet."
 
 msgid "No team"
 msgstr "No team"
+
+msgid "No team members were returned."
+msgstr "No team members were returned."
 
 msgid "No universities available"
 msgstr "No universities available"
@@ -2846,6 +2939,9 @@ msgstr "Not checked"
 
 msgid "Not provided"
 msgstr "Not provided"
+
+msgid "Not saved yet"
+msgstr "Not saved yet"
 
 msgid "Not set"
 msgstr "Not set"
@@ -2946,6 +3042,9 @@ msgstr "Open backlog"
 msgid "Open backlog detail"
 msgstr "Open backlog detail"
 
+msgid "Open calls"
+msgstr "Open calls"
+
 msgid "Open Calls"
 msgstr "Open Calls"
 
@@ -3006,8 +3105,11 @@ msgstr "Open team"
 msgid "Open that link from any device to confirm your email — it works even if you are signed out."
 msgstr "Open that link from any device to confirm your email — it works even if you are signed out."
 
-msgid "Open that link from any device to confirm your email — it works even if you are signed out. You can keep setting up your profile in the meantime."
-msgstr "Open that link from any device to confirm your email — it works even if you are signed out. You can keep setting up your profile in the meantime."
+msgid "Open that link from any device to confirm your email — it works even if you are signed out. Once confirmed, you'll continue setting up your profile in onboarding."
+msgstr "Open that link from any device to confirm your email — it works even if you are signed out. Once confirmed, you'll continue setting up your profile in onboarding."
+
+#~ msgid "Open that link from any device to confirm your email — it works even if you are signed out. You can keep setting up your profile in the meantime."
+#~ msgstr "Open that link from any device to confirm your email — it works even if you are signed out. You can keep setting up your profile in the meantime."
 
 msgid "Open the application detail and reply to the needs-info request."
 msgstr "Open the application detail and reply to the needs-info request."
@@ -3285,8 +3387,8 @@ msgstr "People with access"
 msgid "Personal Portfolio / Website"
 msgstr "Personal Portfolio / Website"
 
-msgid "Phew! You survived."
-msgstr "Phew! You survived."
+#~ msgid "Phew! You survived."
+#~ msgstr "Phew! You survived."
 
 msgid "Pick an active MENTOR-role user. The selected user becomes responsible for delivery follow-up."
 msgstr "Pick an active MENTOR-role user. The selected user becomes responsible for delivery follow-up."
@@ -3309,8 +3411,8 @@ msgstr "Please enter a valid email address."
 msgid "Please enter a valid website URL."
 msgstr "Please enter a valid website URL."
 
-msgid "Please review your information before completing the registration."
-msgstr "Please review your information before completing the registration."
+#~ msgid "Please review your information before completing the registration."
+#~ msgstr "Please review your information before completing the registration."
 
 msgid "Please sign in again to continue."
 msgstr "Please sign in again to continue."
@@ -3430,8 +3532,8 @@ msgstr "Profile"
 msgid "Profile details could not be loaded right now. You can retry without leaving the workspace."
 msgstr "Profile details could not be loaded right now. You can retry without leaving the workspace."
 
-msgid "Profile Nailed"
-msgstr "Profile Nailed"
+#~ msgid "Profile Nailed"
+#~ msgstr "Profile Nailed"
 
 msgid "Profile onboarding is unavailable"
 msgstr "Profile onboarding is unavailable"
@@ -3457,6 +3559,12 @@ msgstr "Program A"
 msgid "Program A application"
 msgstr "Program A application"
 
+msgid "Program A applications where you are the assigned mentor will appear here."
+msgstr "Program A applications where you are the assigned mentor will appear here."
+
+msgid "Program A applications where you provide mentoring support."
+msgstr "Program A applications where you provide mentoring support."
+
 msgid "Program A draft"
 msgstr "Program A draft"
 
@@ -3474,6 +3582,12 @@ msgstr "Program A Moderation"
 
 msgid "Program A project"
 msgstr "Program A project"
+
+msgid "Program A project is unavailable"
+msgstr "Program A project is unavailable"
+
+msgid "Program A projects"
+msgstr "Program A projects"
 
 msgid "Program B"
 msgstr "Program B"
@@ -3799,6 +3913,9 @@ msgstr "RESETTING..."
 msgid "Resolve overdue milestones"
 msgstr "Resolve overdue milestones"
 
+msgid "Resolving the Program A project detail."
+msgstr "Resolving the Program A project detail."
+
 msgid "Resolving the Program B backlog detail for this organization."
 msgstr "Resolving the Program B backlog detail for this organization."
 
@@ -3874,8 +3991,11 @@ msgstr "Review workspace"
 msgid "Review your application details, required documents, eligibility checks, and messages from the NTI team."
 msgstr "Review your application details, required documents, eligibility checks, and messages from the NTI team."
 
-msgid "Review your assigned Program B projects and their upcoming milestones."
-msgstr "Review your assigned Program B projects and their upcoming milestones."
+msgid "Review your assigned Program A applications, Program B projects, and upcoming milestones."
+msgstr "Review your assigned Program A applications, Program B projects, and upcoming milestones."
+
+#~ msgid "Review your assigned Program B projects and their upcoming milestones."
+#~ msgstr "Review your assigned Program B projects and their upcoming milestones."
 
 msgid "Reviewer"
 msgstr "Reviewer"
@@ -3955,7 +4075,7 @@ msgstr "Save section"
 msgid "Save your academic section first so professional data can be attached to a valid student profile."
 msgstr "Save your academic section first so professional data can be attached to a valid student profile."
 
-#. placeholder {0}: formatEnumLikeName(section.key)
+#. placeholder {0}: formatEnumLikeName(sectionKey)
 msgid "Saved {0}."
 msgstr "Saved {0}."
 
@@ -4006,6 +4126,9 @@ msgstr "Searchable, sortable, paginated list of published Program B opportunitie
 
 msgid "Sections"
 msgstr "Sections"
+
+msgid "Sections are unavailable right now."
+msgstr "Sections are unavailable right now."
 
 msgid "Sector"
 msgstr "Sector"
@@ -4367,8 +4490,16 @@ msgstr "Status:"
 msgid "Stay Tuned"
 msgstr "Stay Tuned"
 
-msgid "Step {ACADEMIC_STEP_NUMBER}"
-msgstr "Step {ACADEMIC_STEP_NUMBER}"
+#. placeholder {0}: index + 1
+msgid "Step {0}"
+msgstr "Step {0}"
+
+#. placeholder {0}: activeIndex + 1
+msgid "Step {0} of {totalSteps}"
+msgstr "Step {0} of {totalSteps}"
+
+#~ msgid "Step {ACADEMIC_STEP_NUMBER}"
+#~ msgstr "Step {ACADEMIC_STEP_NUMBER}"
 
 msgid "Step {EMAIL_STEP_NUMBER}"
 msgstr "Step {EMAIL_STEP_NUMBER}"
@@ -4376,11 +4507,11 @@ msgstr "Step {EMAIL_STEP_NUMBER}"
 msgid "Step {IDENTITY_STEP_NUMBER}"
 msgstr "Step {IDENTITY_STEP_NUMBER}"
 
-msgid "Step {REVIEW_STEP_NUMBER}"
-msgstr "Step {REVIEW_STEP_NUMBER}"
+#~ msgid "Step {REVIEW_STEP_NUMBER}"
+#~ msgstr "Step {REVIEW_STEP_NUMBER}"
 
-msgid "Step {SKILLS_STEP_NUMBER}"
-msgstr "Step {SKILLS_STEP_NUMBER}"
+#~ msgid "Step {SKILLS_STEP_NUMBER}"
+#~ msgstr "Step {SKILLS_STEP_NUMBER}"
 
 msgid "Store important organization files here and download them whenever you need them."
 msgstr "Store important organization files here and download them whenever you need them."
@@ -4506,6 +4637,9 @@ msgstr "Team application submitted."
 msgid "Team Collaboration Tools"
 msgstr "Team Collaboration Tools"
 
+msgid "Team created"
+msgstr "Team created"
+
 msgid "Team created."
 msgstr "Team created."
 
@@ -4523,6 +4657,12 @@ msgstr "Team lock"
 
 msgid "Team locked"
 msgstr "Team locked"
+
+msgid "Team member"
+msgstr "Team member"
+
+msgid "Team name"
+msgstr "Team name"
 
 msgid "Team name is required."
 msgstr "Team name is required."
@@ -4563,8 +4703,8 @@ msgstr "Tell us a bit about yourself and what you're interested in…"
 msgid "Tell us a little about your goals and experience..."
 msgstr "Tell us a little about your goals and experience..."
 
-msgid "Tell us about your educational background."
-msgstr "Tell us about your educational background."
+#~ msgid "Tell us about your educational background."
+#~ msgstr "Tell us about your educational background."
 
 msgid "Terms of service"
 msgstr "Terms of service"
@@ -4581,8 +4721,8 @@ msgstr "Test Company…"
 msgid "Thanks for reaching out. We'll get back to you within 2 business days."
 msgstr "Thanks for reaching out. We'll get back to you within 2 business days."
 
-msgid "That was a lot of typing, but you made it! Your profile is officially sparkling clean and ready to go. Now, don't suffer alone—invite your colleagues to share the joy of filling out this form!"
-msgstr "That was a lot of typing, but you made it! Your profile is officially sparkling clean and ready to go. Now, don't suffer alone—invite your colleagues to share the joy of filling out this form!"
+#~ msgid "That was a lot of typing, but you made it! Your profile is officially sparkling clean and ready to go. Now, don't suffer alone—invite your colleagues to share the joy of filling out this form!"
+#~ msgstr "That was a lot of typing, but you made it! Your profile is officially sparkling clean and ready to go. Now, don't suffer alone—invite your colleagues to share the joy of filling out this form!"
 
 msgid "The active calls request failed, but the rest of the dashboard is still available."
 msgstr "The active calls request failed, but the rest of the dashboard is still available."
@@ -4804,8 +4944,8 @@ msgstr "This Program B project does not exist or is no longer available to you."
 msgid "This project is closed and now read-only."
 msgstr "This project is closed and now read-only."
 
-msgid "This section can't be edited here yet."
-msgstr "This section can't be edited here yet."
+#~ msgid "This section can't be edited here yet."
+#~ msgstr "This section can't be edited here yet."
 
 msgid "This section is unavailable right now."
 msgstr "This section is unavailable right now."
@@ -4813,8 +4953,8 @@ msgstr "This section is unavailable right now."
 msgid "This step is for inviting teammates once the team lead is ready."
 msgstr "This step is for inviting teammates once the team lead is ready."
 
-msgid "This step will unlock after you request the change or open the link from your inbox."
-msgstr "This step will unlock after you request the change or open the link from your inbox."
+#~ msgid "This step will unlock after you request the change or open the link from your inbox."
+#~ msgstr "This step will unlock after you request the change or open the link from your inbox."
 
 msgid "This team is locked and can no longer be modified."
 msgstr "This team is locked and can no longer be modified."
@@ -4837,8 +4977,8 @@ msgstr "This workspace is correctly routed, but its feature surface is not imple
 msgid "This workspace needs attention."
 msgstr "This workspace needs attention."
 
-msgid "Time to invite colleagues"
-msgstr "Time to invite colleagues"
+#~ msgid "Time to invite colleagues"
+#~ msgstr "Time to invite colleagues"
 
 msgid "Timeline"
 msgstr "Timeline"
@@ -4920,6 +5060,9 @@ msgstr "Unable to accept invitation."
 msgid "Unable to add mentoring note."
 msgstr "Unable to add mentoring note."
 
+msgid "Unable to add mentorship note."
+msgstr "Unable to add mentorship note."
+
 msgid "Unable to assign mentor."
 msgstr "Unable to assign mentor."
 
@@ -4983,6 +5126,9 @@ msgstr "Unable to delete the university."
 msgid "Unable to download document."
 msgstr "Unable to download document."
 
+msgid "Unable to download the document."
+msgstr "Unable to download the document."
+
 msgid "Unable to export this report right now."
 msgstr "Unable to export this report right now."
 
@@ -5003,6 +5149,9 @@ msgstr "Unable to load applications"
 
 msgid "Unable to load applications from the backend."
 msgstr "Unable to load applications from the backend."
+
+msgid "Unable to load attached documents."
+msgstr "Unable to load attached documents."
 
 msgid "Unable to load backlog preview"
 msgstr "Unable to load backlog preview"
@@ -5036,6 +5185,9 @@ msgstr "Unable to load profile data for review."
 
 msgid "Unable to load Program A applications from the backend."
 msgstr "Unable to load Program A applications from the backend."
+
+msgid "Unable to load Program A projects"
+msgstr "Unable to load Program A projects"
 
 msgid "Unable to load project"
 msgstr "Unable to load project"
@@ -5278,6 +5430,8 @@ msgid "Updated"
 msgstr "Updated"
 
 #. placeholder {0}: formatDateTime(item.updatedAt)
+#. placeholder {0}: formatUnknownDate(project.updatedAt)
+#. placeholder {0}: formatUnknownDate(section.updatedAt)
 msgid "Updated {0}"
 msgstr "Updated {0}"
 
@@ -5437,8 +5591,8 @@ msgstr "View Invites"
 msgid "View team access"
 msgstr "View team access"
 
-msgid "Visibility"
-msgstr "Visibility"
+#~ msgid "Visibility"
+#~ msgstr "Visibility"
 
 msgid "Waiting for team"
 msgstr "Waiting for team"
@@ -5448,6 +5602,9 @@ msgstr "We collect the information you provide when you register, apply to a pro
 
 msgid "We could not load the Program B action queues right now."
 msgstr "We could not load the Program B action queues right now."
+
+msgid "We could not load this Program A project right now."
+msgstr "We could not load this Program A project right now."
 
 msgid "We could not load this Program B backlog item right now."
 msgstr "We could not load this Program B backlog item right now."
@@ -5494,11 +5651,17 @@ msgstr "We read every message personally"
 msgid "We sent a confirmation link to"
 msgstr "We sent a confirmation link to"
 
+#~ msgid "We sent a confirmation link to {trimmedEmail}. Open it to verify your account, then you'll continue setting up your profile in onboarding."
+#~ msgstr "We sent a confirmation link to {trimmedEmail}. Open it to verify your account, then you'll continue setting up your profile in onboarding."
+
 msgid "We sent a confirmation link to your inbox. Open it to verify your account."
 msgstr "We sent a confirmation link to your inbox. Open it to verify your account."
 
 msgid "We sent a confirmation message to your new email. Your current email will stay the same until you confirm the change."
 msgstr "We sent a confirmation message to your new email. Your current email will stay the same until you confirm the change."
+
+#~ msgid "We sent you a confirmation link. Open it to verify your account, then you'll continue setting up your profile in onboarding."
+#~ msgstr "We sent you a confirmation link. Open it to verify your account, then you'll continue setting up your profile in onboarding."
 
 msgid "We signed you in, but couldn't join this invite — it may be expired or already accepted. You've been signed back out. Please request a new invite."
 msgstr "We signed you in, but couldn't join this invite — it may be expired or already accepted. You've been signed back out. Please request a new invite."
@@ -5587,8 +5750,8 @@ msgstr "You can’t upload this file right now. Check that your account is activ
 msgid "You do not have permission to manage milestones for this project."
 msgstr "You do not have permission to manage milestones for this project."
 
-msgid "You don't have a team yet. Complete your profile onboarding and create a team first."
-msgstr "You don't have a team yet. Complete your profile onboarding and create a team first."
+#~ msgid "You don't have a team yet. Complete your profile onboarding and create a team first."
+#~ msgstr "You don't have a team yet. Complete your profile onboarding and create a team first."
 
 msgid "You don’t have access to download this document right now."
 msgstr "You don’t have access to download this document right now."
@@ -5605,8 +5768,8 @@ msgstr "You must accept the terms."
 msgid "You retain ownership of the content you submit. You are responsible for ensuring you have the right to share it."
 msgstr "You retain ownership of the content you submit. You are responsible for ensuring you have the right to share it."
 
-msgid "You survived the boss fight"
-msgstr "You survived the boss fight"
+#~ msgid "You survived the boss fight"
+#~ msgstr "You survived the boss fight"
 
 msgid "Your account cannot access this application."
 msgstr "Your account cannot access this application."
@@ -5701,6 +5864,9 @@ msgstr "Your session is no longer valid. Please sign in again to continue."
 
 msgid "Your team data could not be loaded right now, so lead-only actions cannot be resolved."
 msgstr "Your team data could not be loaded right now, so lead-only actions cannot be resolved."
+
+msgid "Your team is set up and invitations are on their way. Manage everything here, or head to your dashboard."
+msgstr "Your team is set up and invitations are on their way. Manage everything here, or head to your dashboard."
 
 msgid "Your Top 3 Soft Skills"
 msgstr "Your Top 3 Soft Skills"

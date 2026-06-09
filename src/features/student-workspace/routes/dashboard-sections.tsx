@@ -139,15 +139,9 @@ export function ProgramASection({
     >
       <div className="space-y-4">
         <div>
-          <div className="mb-3 flex items-center justify-between gap-3">
-            <h3 className="text-muted-foreground text-sm font-semibold tracking-[0.16em] uppercase">
-              {t`Active projects`}
-            </h3>
-
-            <Button asChild size="sm" variant="outline">
-              <Link href={ROUTES.STUDENT.APPLICATIONS}>{t`View all`}</Link>
-            </Button>
-          </div>
+          <h3 className="text-muted-foreground mb-3 text-sm font-semibold tracking-[0.16em] uppercase">
+            {t`Active projects`}
+          </h3>
 
           <div className="space-y-3">
             {projectApplications.map((application) => (
@@ -181,56 +175,66 @@ export function ProgramASection({
             )}
           </div>
         </div>
-        {activeCalls.map((call) => {
-          const draftEntry = team ? (draftRegistryMap.get(call.id) ?? null) : null;
+        <div>
+          <h3 className="text-muted-foreground mb-1 text-sm font-semibold tracking-[0.16em] uppercase">
+            {t`Open calls`}
+          </h3>
+          <p className="text-muted-foreground mb-3 text-sm leading-7">
+            {t`Application rounds you can apply to. Start a draft to submit your team's own idea while a round is open — these are not projects you own yet.`}
+          </p>
+          <div className="space-y-4">
+            {activeCalls.map((call) => {
+              const draftEntry = team ? (draftRegistryMap.get(call.id) ?? null) : null;
 
-          return (
-            <div key={call.id} className="border-border bg-card rounded-2xl border p-5">
-              <div className="flex flex-wrap items-start justify-between gap-3">
-                <div className="min-w-0">
-                  <p className="text-foreground font-semibold">{call.title}</p>
-                  <p className="text-muted-foreground mt-1 text-sm">
-                    {t`Opens`} {call.opensAt ? formatUnknownDate(call.opensAt) : t`immediately`}
-                  </p>
+              return (
+                <div key={call.id} className="border-border bg-card rounded-2xl border p-5">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="text-foreground font-semibold">{call.title}</p>
+                      <p className="text-muted-foreground mt-1 text-sm">
+                        {t`Opens`} {call.opensAt ? formatUnknownDate(call.opensAt) : t`immediately`}
+                      </p>
+                    </div>
+                    <span className="bg-warning/10 text-warning rounded-full px-3 py-1 text-xs font-semibold">
+                      {call.closesAt
+                        ? `${t`Closes`} ${formatUnknownDate(call.closesAt)}`
+                        : t`No closing date`}
+                    </span>
+                  </div>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {draftEntry ? (
+                      <Button asChild size="sm">
+                        <Link href={ROUTES.STUDENT.studentApplication(draftEntry.applicationId)}>
+                          {t`Continue draft`}
+                        </Link>
+                      </Button>
+                    ) : (
+                      <Button
+                        size="sm"
+                        disabled={!isLead || !team || isLocked || createDraft.isPending}
+                        onClick={() => void handleCreateDraft(call.id)}
+                      >
+                        {t`Start draft`}
+                      </Button>
+                    )}
+                    <Button asChild size="sm" variant="outline">
+                      <Link href={ROUTES.STUDENT.TEAM}>
+                        {isLead ? t`Check team readiness` : t`View team access`}
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
-                <span className="bg-warning/10 text-warning rounded-full px-3 py-1 text-xs font-semibold">
-                  {call.closesAt
-                    ? `${t`Closes`} ${formatUnknownDate(call.closesAt)}`
-                    : t`No closing date`}
-                </span>
+              );
+            })}
+            {activeCalls.length ? null : (
+              <div className="bg-muted rounded-2xl p-5">
+                <p className="text-muted-foreground text-sm leading-7">
+                  {t`No active Program A calls are available right now.`}
+                </p>
               </div>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {draftEntry ? (
-                  <Button asChild size="sm">
-                    <Link href={ROUTES.STUDENT.studentApplication(draftEntry.applicationId)}>
-                      {t`Continue draft`}
-                    </Link>
-                  </Button>
-                ) : (
-                  <Button
-                    size="sm"
-                    disabled={!isLead || !team || isLocked || createDraft.isPending}
-                    onClick={() => void handleCreateDraft(call.id)}
-                  >
-                    {t`Start draft`}
-                  </Button>
-                )}
-                <Button asChild size="sm" variant="outline">
-                  <Link href={ROUTES.STUDENT.TEAM}>
-                    {isLead ? t`Check team readiness` : t`View team access`}
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          );
-        })}
-        {activeCalls.length ? null : (
-          <div className="bg-muted rounded-2xl p-5">
-            <p className="text-muted-foreground text-sm leading-7">
-              {t`No active Program A calls are available right now.`}
-            </p>
+            )}
           </div>
-        )}
+        </div>
         {isLead ? (
           <div className="border-border bg-card rounded-2xl border border-dashed p-5">
             <p className="text-foreground text-sm font-semibold">{t`Recovered drafts`}</p>

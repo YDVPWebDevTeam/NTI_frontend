@@ -5,10 +5,12 @@ import { use, useState } from 'react';
 import { toast } from 'sonner';
 
 import {
+  applicationsControllerRequestDocumentDownloadUrl,
   useApplicationsControllerListMentorshipNotes,
   useApplicationsControllerAttachDocument,
   useApplicationsControllerFindById,
   useApplicationsControllerGetDocumentCompleteness,
+  useApplicationsControllerListDocuments,
   useApplicationsControllerGetEligibilitySignals,
   useApplicationsControllerGetNeedsInfoThread,
   useApplicationsControllerListSections,
@@ -32,6 +34,7 @@ import { isApiNotFoundError } from 'lib/student-dashboard/normalizers';
 import { useStudentWorkspaceUser } from 'lib/student-dashboard/student-workspace-user-context';
 import {
   AttachDocumentSection,
+  AttachedDocumentsSection,
   DocumentCompletenessSection,
   EligibilitySignalsSection,
   NeedsInfoThreadSection,
@@ -80,6 +83,10 @@ export function StudentApplicationDetailPage({ params }: { params: Promise<{ id:
   const shouldLoadEditableApplicationData = Boolean(applicationStatus) && !isProjectView;
 
   const completenessQuery = useApplicationsControllerGetDocumentCompleteness(id, {
+    query: { enabled: shouldLoadEditableApplicationData },
+  });
+
+  const documentsQuery = useApplicationsControllerListDocuments(id, {
     query: { enabled: shouldLoadEditableApplicationData },
   });
 
@@ -295,10 +302,18 @@ export function StudentApplicationDetailPage({ params }: { params: Promise<{ id:
               completenessQuery.refetch(),
               eligibilityQuery.refetch(),
               applicationQuery.refetch(),
+              documentsQuery.refetch(),
             ]);
           }}
         />
       ) : null}
+
+      <AttachedDocumentsSection
+        documentsQuery={documentsQuery}
+        requestDownload={(documentId) =>
+          applicationsControllerRequestDocumentDownloadUrl(id, documentId)
+        }
+      />
 
       <NeedsInfoThreadSection
         applicationId={id}

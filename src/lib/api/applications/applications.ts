@@ -42,6 +42,7 @@ import type {
   CreateNeedsInfoItemDto,
   CreateNeedsInfoReplyDto,
   DocumentCompletenessDto,
+  DownloadUrlDto,
   EligibilitySignalsResponseDto,
   MentorAssignmentDto,
   NeedsInfoItemDto,
@@ -756,6 +757,199 @@ export const useApplicationsControllerAttachDocument = <TError = void,
       return useMutation(mutationOptions, queryClient);
     }
     /**
+ * Returns the active documents attached to an application with file metadata. Accessible to team members and reviewer-side users.
+ * @summary List application documents
+ */
+export const applicationsControllerListDocuments = (
+    id: string,
+ options?: SecondParameter<typeof orvalMutator>,signal?: AbortSignal
+) => {
+      
+      
+      return orvalMutator<ApplicationDocumentDto[]>(
+      {url: `/applications/${id}/documents`, method: 'GET', signal
+    },
+      options);
+    }
+  
+
+
+
+export const getApplicationsControllerListDocumentsQueryKey = (id?: string,) => {
+    return [
+    `/applications/${id}/documents`
+    ] as const;
+    }
+
+    
+export const getApplicationsControllerListDocumentsQueryOptions = <TData = Awaited<ReturnType<typeof applicationsControllerListDocuments>>, TError = void>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerListDocuments>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getApplicationsControllerListDocumentsQueryKey(id);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof applicationsControllerListDocuments>>> = ({ signal }) => applicationsControllerListDocuments(id, requestOptions, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerListDocuments>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type ApplicationsControllerListDocumentsQueryResult = NonNullable<Awaited<ReturnType<typeof applicationsControllerListDocuments>>>
+export type ApplicationsControllerListDocumentsQueryError = void
+
+
+export function useApplicationsControllerListDocuments<TData = Awaited<ReturnType<typeof applicationsControllerListDocuments>>, TError = void>(
+ id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerListDocuments>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof applicationsControllerListDocuments>>,
+          TError,
+          Awaited<ReturnType<typeof applicationsControllerListDocuments>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useApplicationsControllerListDocuments<TData = Awaited<ReturnType<typeof applicationsControllerListDocuments>>, TError = void>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerListDocuments>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof applicationsControllerListDocuments>>,
+          TError,
+          Awaited<ReturnType<typeof applicationsControllerListDocuments>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useApplicationsControllerListDocuments<TData = Awaited<ReturnType<typeof applicationsControllerListDocuments>>, TError = void>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerListDocuments>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary List application documents
+ */
+
+export function useApplicationsControllerListDocuments<TData = Awaited<ReturnType<typeof applicationsControllerListDocuments>>, TError = void>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerListDocuments>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getApplicationsControllerListDocumentsQueryOptions(id,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
+ * Returns a temporary download URL for an attached application document. Accessible to team members and reviewer-side users.
+ * @summary Request application document download URL
+ */
+export const applicationsControllerRequestDocumentDownloadUrl = (
+    id: string,
+    documentId: string,
+ options?: SecondParameter<typeof orvalMutator>,signal?: AbortSignal
+) => {
+      
+      
+      return orvalMutator<DownloadUrlDto>(
+      {url: `/applications/${id}/documents/${documentId}/download-url`, method: 'GET', signal
+    },
+      options);
+    }
+  
+
+
+
+export const getApplicationsControllerRequestDocumentDownloadUrlQueryKey = (id?: string,
+    documentId?: string,) => {
+    return [
+    `/applications/${id}/documents/${documentId}/download-url`
+    ] as const;
+    }
+
+    
+export const getApplicationsControllerRequestDocumentDownloadUrlQueryOptions = <TData = Awaited<ReturnType<typeof applicationsControllerRequestDocumentDownloadUrl>>, TError = void>(id: string,
+    documentId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerRequestDocumentDownloadUrl>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getApplicationsControllerRequestDocumentDownloadUrlQueryKey(id,documentId);
+
+  
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof applicationsControllerRequestDocumentDownloadUrl>>> = ({ signal }) => applicationsControllerRequestDocumentDownloadUrl(id,documentId, requestOptions, signal);
+
+      
+
+      
+
+   return  { queryKey, queryFn, enabled: !!(id && documentId), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerRequestDocumentDownloadUrl>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+}
+
+export type ApplicationsControllerRequestDocumentDownloadUrlQueryResult = NonNullable<Awaited<ReturnType<typeof applicationsControllerRequestDocumentDownloadUrl>>>
+export type ApplicationsControllerRequestDocumentDownloadUrlQueryError = void
+
+
+export function useApplicationsControllerRequestDocumentDownloadUrl<TData = Awaited<ReturnType<typeof applicationsControllerRequestDocumentDownloadUrl>>, TError = void>(
+ id: string,
+    documentId: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerRequestDocumentDownloadUrl>>, TError, TData>> & Pick<
+        DefinedInitialDataOptions<
+          Awaited<ReturnType<typeof applicationsControllerRequestDocumentDownloadUrl>>,
+          TError,
+          Awaited<ReturnType<typeof applicationsControllerRequestDocumentDownloadUrl>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient
+  ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useApplicationsControllerRequestDocumentDownloadUrl<TData = Awaited<ReturnType<typeof applicationsControllerRequestDocumentDownloadUrl>>, TError = void>(
+ id: string,
+    documentId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerRequestDocumentDownloadUrl>>, TError, TData>> & Pick<
+        UndefinedInitialDataOptions<
+          Awaited<ReturnType<typeof applicationsControllerRequestDocumentDownloadUrl>>,
+          TError,
+          Awaited<ReturnType<typeof applicationsControllerRequestDocumentDownloadUrl>>
+        > , 'initialData'
+      >, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+export function useApplicationsControllerRequestDocumentDownloadUrl<TData = Awaited<ReturnType<typeof applicationsControllerRequestDocumentDownloadUrl>>, TError = void>(
+ id: string,
+    documentId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerRequestDocumentDownloadUrl>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient
+  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
+/**
+ * @summary Request application document download URL
+ */
+
+export function useApplicationsControllerRequestDocumentDownloadUrl<TData = Awaited<ReturnType<typeof applicationsControllerRequestDocumentDownloadUrl>>, TError = void>(
+ id: string,
+    documentId: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof applicationsControllerRequestDocumentDownloadUrl>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+ , queryClient?: QueryClient 
+ ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
+
+  const queryOptions = getApplicationsControllerRequestDocumentDownloadUrlQueryOptions(id,documentId,options)
+
+  const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
+
+  query.queryKey = queryOptions.queryKey ;
+
+  return query;
+}
+
+
+
+
+/**
  * Returns the exact required document slots that are satisfied or missing for the application.
  * @summary Get application document completeness
  */

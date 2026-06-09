@@ -6,6 +6,12 @@ import type { StudentRegistrationValues } from 'lib/auth/schemas';
 export type StudentRegistrationStepId = 'identity' | 'email' | 'academic' | 'skills' | 'review';
 export type StudentOnboardingStageId = 'academic' | 'skills';
 
+// The full post-confirmation journey shown in the progress stepper. Identity and
+// email happen during registration (gated by email confirmation), so they stay
+// outside this stepper. The `team` step lives on a separate page (/student/team)
+// but is surfaced here so the journey reads as one continuous, step-by-step flow.
+export type StudentJourneyStepId = 'academic' | 'skills' | 'team';
+
 export const STUDENT_PROFILE_FIELD_GROUPS = {
   identity: ['firstName', 'lastName', 'email', 'password', 'acceptTerms'],
   email: [],
@@ -51,6 +57,13 @@ export type RegistrationStepConfig = {
 
 export type OnboardingStageConfig = {
   id: StudentOnboardingStageId;
+  title: string;
+  description: string;
+  completed: boolean;
+};
+
+export type JourneyStepConfig = {
+  id: StudentJourneyStepId;
   title: string;
   description: string;
   completed: boolean;
@@ -126,4 +139,52 @@ export function getNextStudentOnboardingStage(
   }
 
   return 'skills';
+}
+
+export function getStudentJourneyStepMeta(stepId: StudentJourneyStepId) {
+  if (stepId === 'team') {
+    return {
+      title: t`Build your team`,
+      description: t`Name your team and invite your teammates to get started together.`,
+    };
+  }
+
+  return getStudentOnboardingStageMeta(stepId);
+}
+
+// The full onboarding journey rendered in the progress stepper across both the
+// profile page and the team page: academic → skills → team.
+export function getStudentJourneySteps(
+  completion: StudentProfileCompletionDto,
+  hasTeam: boolean,
+): JourneyStepConfig[] {
+  return [
+    {
+      id: 'academic',
+      title: t`Academic information`,
+      description: t`Education details, academic verification, and declaration.`,
+      completed: completion.academicInformationCompleted,
+    },
+    {
+      id: 'skills',
+      title: t`Professional skills`,
+      description: t`CV, technical skills, roles, links, and projects.`,
+      completed: completion.professionalSkillsCompleted,
+    },
+    {
+      id: 'team',
+      title: t`Build your team`,
+      description: t`Create your team and invite your teammates.`,
+      completed: hasTeam,
+    },
+  ];
+}
+
+export function isOnboardingJourneyComplete(
+  completion: StudentProfileCompletionDto,
+  hasTeam: boolean,
+): boolean {
+  return (
+    completion.academicInformationCompleted && completion.professionalSkillsCompleted && hasTeam
+  );
 }

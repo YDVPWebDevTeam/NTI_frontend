@@ -1,11 +1,12 @@
 'use client';
 
 import { t } from '@lingui/core/macro';
-import { Loader2 } from 'lucide-react';
+import { Download, Loader2 } from 'lucide-react';
 import { type ReactNode, useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 
 import {
+  type ApplicationDocumentDto,
   type ApplicationSectionDto,
   type AttachApplicationDocumentDtoDocumentType,
   type ApplicationsControllerAttachDocumentMutationBody,
@@ -808,6 +809,113 @@ export function AttachDocumentSection({
             : t`Select a file before uploading.`}
         </p>
       ) : null}
+    </StudentSectionCard>
+  );
+}
+
+const BYTES_IN_KB = 1024;
+const BYTES_IN_MB = BYTES_IN_KB * BYTES_IN_KB;
+
+function formatDocumentSize(size: number): string {
+  if (!Number.isFinite(size) || size <= 0) {
+    return '';
+  }
+
+  if (size < BYTES_IN_KB) {
+    return `${size} B`;
+  }
+
+  if (size < BYTES_IN_MB) {
+    return `${(size / BYTES_IN_KB).toFixed(1)} KB`;
+  }
+
+  return `${(size / BYTES_IN_MB).toFixed(1)} MB`;
+}
+
+export function AttachedDocumentsSection({
+  documentsQuery,
+  requestDownload,
+}: {
+  documentsQuery: QueryLike<ApplicationDocumentDto[]>;
+  requestDownload: (documentId: string) => Promise<{ downloadUrl: string }>;
+}) {
+  const [downloadingId, setDownloadingId] = useState<string | null>(null);
+  const documents = documentsQuery.data ?? [];
+
+  const handleDownload = async (documentId: string) => {
+    setDownloadingId(documentId);
+
+    try {
+      const result = await requestDownload(documentId);
+      // Mirror the document-download behaviour used elsewhere: prefer a new tab,
+      // and fall back to same-tab navigation when the popup is blocked.
+      const popup = window.open(result.downloadUrl, '_blank', 'noopener,noreferrer');
+
+      if (!popup) {
+        window.location.href = result.downloadUrl;
+      }
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : t`Unable to download the document.`);
+    } finally {
+      setDownloadingId(null);
+    }
+  };
+
+  let content: ReactNode;
+
+  if (documentsQuery.isLoading) {
+    content = <p className="text-muted-foreground text-sm">{t`Loading attached documents…`}</p>;
+  } else if (documentsQuery.isError) {
+    content = <p className="text-destructive text-sm">{t`Unable to load attached documents.`}</p>;
+  } else if (documents.length === 0) {
+    content = (
+      <p className="text-muted-foreground text-sm">{t`No documents have been attached yet.`}</p>
+    );
+  } else {
+    content = (
+      <ul className="space-y-3">
+        {documents.map((document) => {
+          const sizeLabel = formatDocumentSize(document.size);
+
+          return (
+            <li
+              key={document.id}
+              className="border-border bg-muted flex flex-wrap items-center justify-between gap-3 rounded-xl border p-4"
+            >
+              <div className="min-w-0">
+                <p className="text-foreground truncate font-medium">{document.originalName}</p>
+                <p className="text-muted-foreground mt-1 text-xs">
+                  {formatEnumLikeName(document.documentType)}
+                  {sizeLabel ? ` · ${sizeLabel}` : ''}
+                </p>
+              </div>
+              <Button
+                type="button"
+                size="sm"
+                variant="outline"
+                disabled={downloadingId === document.id}
+                onClick={() => void handleDownload(document.id)}
+              >
+                {downloadingId === document.id ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : (
+                  <Download className="mr-2 h-4 w-4" />
+                )}
+                {t`Download`}
+              </Button>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  }
+
+  return (
+    <StudentSectionCard
+      title={t`Attached documents`}
+      description={t`Documents currently attached to this application. Download to review the uploaded files.`}
+    >
+      {content}
     </StudentSectionCard>
   );
 }

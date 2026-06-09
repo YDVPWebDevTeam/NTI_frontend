@@ -303,7 +303,7 @@ export function useProgramBBacklogControllerListMy<TData = Awaited<ReturnType<ty
 
 
 
-export const programBBacklogControllerFindPublishedById = (
+export const programBBacklogControllerFindById = (
     id: string,
  options?: SecondParameter<typeof orvalMutator>,signal?: AbortSignal
 ) => {
@@ -318,66 +318,66 @@ export const programBBacklogControllerFindPublishedById = (
 
 
 
-export const getProgramBBacklogControllerFindPublishedByIdQueryKey = (id?: string,) => {
+export const getProgramBBacklogControllerFindByIdQueryKey = (id?: string,) => {
     return [
     `/program-b/backlog/${id}`
     ] as const;
     }
 
     
-export const getProgramBBacklogControllerFindPublishedByIdQueryOptions = <TData = Awaited<ReturnType<typeof programBBacklogControllerFindPublishedById>>, TError = unknown>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof programBBacklogControllerFindPublishedById>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+export const getProgramBBacklogControllerFindByIdQueryOptions = <TData = Awaited<ReturnType<typeof programBBacklogControllerFindById>>, TError = unknown>(id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof programBBacklogControllerFindById>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
 ) => {
 
 const {query: queryOptions, request: requestOptions} = options ?? {};
 
-  const queryKey =  queryOptions?.queryKey ?? getProgramBBacklogControllerFindPublishedByIdQueryKey(id);
+  const queryKey =  queryOptions?.queryKey ?? getProgramBBacklogControllerFindByIdQueryKey(id);
 
   
 
-    const queryFn: QueryFunction<Awaited<ReturnType<typeof programBBacklogControllerFindPublishedById>>> = ({ signal }) => programBBacklogControllerFindPublishedById(id, requestOptions, signal);
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof programBBacklogControllerFindById>>> = ({ signal }) => programBBacklogControllerFindById(id, requestOptions, signal);
 
       
 
       
 
-   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof programBBacklogControllerFindPublishedById>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
+   return  { queryKey, queryFn, enabled: !!(id), ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof programBBacklogControllerFindById>>, TError, TData> & { queryKey: DataTag<QueryKey, TData, TError> }
 }
 
-export type ProgramBBacklogControllerFindPublishedByIdQueryResult = NonNullable<Awaited<ReturnType<typeof programBBacklogControllerFindPublishedById>>>
-export type ProgramBBacklogControllerFindPublishedByIdQueryError = unknown
+export type ProgramBBacklogControllerFindByIdQueryResult = NonNullable<Awaited<ReturnType<typeof programBBacklogControllerFindById>>>
+export type ProgramBBacklogControllerFindByIdQueryError = unknown
 
 
-export function useProgramBBacklogControllerFindPublishedById<TData = Awaited<ReturnType<typeof programBBacklogControllerFindPublishedById>>, TError = unknown>(
- id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof programBBacklogControllerFindPublishedById>>, TError, TData>> & Pick<
+export function useProgramBBacklogControllerFindById<TData = Awaited<ReturnType<typeof programBBacklogControllerFindById>>, TError = unknown>(
+ id: string, options: { query:Partial<UseQueryOptions<Awaited<ReturnType<typeof programBBacklogControllerFindById>>, TError, TData>> & Pick<
         DefinedInitialDataOptions<
-          Awaited<ReturnType<typeof programBBacklogControllerFindPublishedById>>,
+          Awaited<ReturnType<typeof programBBacklogControllerFindById>>,
           TError,
-          Awaited<ReturnType<typeof programBBacklogControllerFindPublishedById>>
+          Awaited<ReturnType<typeof programBBacklogControllerFindById>>
         > , 'initialData'
       >, request?: SecondParameter<typeof orvalMutator>}
  , queryClient?: QueryClient
   ):  DefinedUseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useProgramBBacklogControllerFindPublishedById<TData = Awaited<ReturnType<typeof programBBacklogControllerFindPublishedById>>, TError = unknown>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof programBBacklogControllerFindPublishedById>>, TError, TData>> & Pick<
+export function useProgramBBacklogControllerFindById<TData = Awaited<ReturnType<typeof programBBacklogControllerFindById>>, TError = unknown>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof programBBacklogControllerFindById>>, TError, TData>> & Pick<
         UndefinedInitialDataOptions<
-          Awaited<ReturnType<typeof programBBacklogControllerFindPublishedById>>,
+          Awaited<ReturnType<typeof programBBacklogControllerFindById>>,
           TError,
-          Awaited<ReturnType<typeof programBBacklogControllerFindPublishedById>>
+          Awaited<ReturnType<typeof programBBacklogControllerFindById>>
         > , 'initialData'
       >, request?: SecondParameter<typeof orvalMutator>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
-export function useProgramBBacklogControllerFindPublishedById<TData = Awaited<ReturnType<typeof programBBacklogControllerFindPublishedById>>, TError = unknown>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof programBBacklogControllerFindPublishedById>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+export function useProgramBBacklogControllerFindById<TData = Awaited<ReturnType<typeof programBBacklogControllerFindById>>, TError = unknown>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof programBBacklogControllerFindById>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
  , queryClient?: QueryClient
   ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> }
 
-export function useProgramBBacklogControllerFindPublishedById<TData = Awaited<ReturnType<typeof programBBacklogControllerFindPublishedById>>, TError = unknown>(
- id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof programBBacklogControllerFindPublishedById>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
+export function useProgramBBacklogControllerFindById<TData = Awaited<ReturnType<typeof programBBacklogControllerFindById>>, TError = unknown>(
+ id: string, options?: { query?:Partial<UseQueryOptions<Awaited<ReturnType<typeof programBBacklogControllerFindById>>, TError, TData>>, request?: SecondParameter<typeof orvalMutator>}
  , queryClient?: QueryClient 
  ):  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> } {
 
-  const queryOptions = getProgramBBacklogControllerFindPublishedByIdQueryOptions(id,options)
+  const queryOptions = getProgramBBacklogControllerFindByIdQueryOptions(id,options)
 
   const query = useQuery(queryOptions, queryClient) as  UseQueryResult<TData, TError> & { queryKey: DataTag<QueryKey, TData, TError> };
 

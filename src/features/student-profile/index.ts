@@ -6,4 +6,5 @@ export { StudentProfilePage } from './components/student-profile-page';
 export { AcademicStep } from './components/academic-step';
 export { SkillsStep } from './components/skills-step';
 export { RegistrationStageHeader } from './components/registration-stage-header';
+export { StudentOnboardingStepper } from './components/student-onboarding-stepper';
 export { createStudentRegistrationSchema, type StudentRegistrationValues } from 'lib/auth/schemas';

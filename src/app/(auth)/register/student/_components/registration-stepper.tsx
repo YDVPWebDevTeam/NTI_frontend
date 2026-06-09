@@ -13,15 +13,10 @@ import { cn } from 'lib/utils';
 type RegistrationStepperProps = {
   steps: RegistrationStepConfig[];
   activeStepIndex: number;
-  isCompletionStep: boolean;
 };
 
-export function RegistrationStepper({
-  steps,
-  activeStepIndex,
-  isCompletionStep,
-}: RegistrationStepperProps) {
-  const currentIndex = isCompletionStep ? steps.length : activeStepIndex;
+export function RegistrationStepper({ steps, activeStepIndex }: RegistrationStepperProps) {
+  const currentIndex = activeStepIndex;
   const stepIcons = {
     identity: ShieldCheck,
     email: MailCheck,
@@ -35,7 +30,7 @@ export function RegistrationStepper({
       <div className="scrollbar-hide flex items-center justify-between gap-2 overflow-x-auto overflow-y-hidden [-ms-overflow-style:none] [scrollbar-width:none] sm:gap-3 lg:gap-4 [&::-webkit-scrollbar]:hidden">
         {steps.map((step, index) => {
           const isCompleted = index < currentIndex;
-          const isActive = !isCompletionStep && index === currentIndex;
+          const isActive = index === currentIndex;
           const StepIcon = stepIcons[step.id];
           const stepStateClass = isCompleted
             ? 'border-primary bg-primary text-primary-foreground'

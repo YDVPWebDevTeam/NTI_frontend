@@ -1,14 +1,17 @@
 'use client';
 
+import { t } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { type FormEvent, Suspense, useEffect, useMemo, useRef } from 'react';
 import { type Resolver, useForm } from 'react-hook-form';
 
 import { ROUTES } from 'lib/constants';
 
-import { Form } from 'components/shadcn';
+import { Button, Form } from 'components/shadcn';
 import {
   createStudentRegistrationSchema,
   getStudentProfileDefaultValues,
@@ -18,7 +21,6 @@ import {
 import { RegistrationStageHeader } from 'features/student-profile';
 import { useStudentRegistrationStore } from 'store/student-registration-store';
 import { RegistrationActions } from './_components/registration-actions';
-import { RegistrationCompletion } from './_components/registration-completion';
 import { RegistrationStepContent } from './_components/registration-step-content';
 import { RegistrationStepper } from './_components/registration-stepper';
 import { useStudentRegistrationActions } from './_hooks/use-student-registration-actions';
@@ -50,12 +52,14 @@ function SignUpContent() {
 
   const safeCurrentStepIndex = Math.min(currentStepIndex, steps.length - 1);
   const currentStep = steps[safeCurrentStepIndex];
-  const isCompletionStep = currentStepIndex >= steps.length;
   const isLastStep = safeCurrentStepIndex === steps.length - 1;
 
+  // Registration ends at the email-confirmation gate (the last step); there is
+  // no further step to advance into, so clamp any persisted index that points
+  // past it back onto the final step.
   useEffect(() => {
-    if (currentStepIndex > steps.length) {
-      setCurrentStepIndex(steps.length);
+    if (currentStepIndex > steps.length - 1) {
+      setCurrentStepIndex(steps.length - 1);
     }
   }, [currentStepIndex, setCurrentStepIndex, steps.length]);
 
@@ -132,45 +136,43 @@ function SignUpContent() {
   return (
     <main className="mx-auto flex w-full max-w-5xl flex-1 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
       <div className="border-border bg-muted flex w-full flex-col overflow-hidden rounded-xl border shadow-sm">
-        <RegistrationStepper
-          steps={steps}
-          activeStepIndex={safeCurrentStepIndex}
-          isCompletionStep={isCompletionStep}
-        />
+        <RegistrationStepper steps={steps} activeStepIndex={safeCurrentStepIndex} />
 
         <section className="bg-background px-5 py-7 sm:px-8 sm:py-10 lg:px-12">
-          {isCompletionStep ? (
-            <RegistrationCompletion
-              email={form.getValues('email')}
-              onBackToLoginClick={() => {
-                resetStep();
-                form.reset();
-              }}
-            />
-          ) : (
-            <>
-              <RegistrationStageHeader
-                title={currentStep.label}
-                description={currentStep.description}
-                showRestartButton={safeCurrentStepIndex > 0}
-                onStartFromBeginning={handleStartFromBeginning}
-                isBusy={isBusy}
-              />
+          <RegistrationStageHeader
+            title={currentStep.label}
+            description={currentStep.description}
+            showRestartButton={safeCurrentStepIndex > 0}
+            onStartFromBeginning={handleStartFromBeginning}
+            isBusy={isBusy}
+          />
 
-              <Form {...form}>
-                <form onSubmit={handleFormSubmit}>
-                  <RegistrationStepContent stepId={currentStep.id} />
+          <Form {...form}>
+            <form onSubmit={handleFormSubmit}>
+              <RegistrationStepContent stepId={currentStep.id} />
 
-                  <RegistrationActions
-                    safeCurrentStepIndex={safeCurrentStepIndex}
-                    isLastStep={isLastStep}
-                    isBusy={isBusy}
-                    onPreviousStep={goToPreviousStep}
-                  />
-                </form>
-              </Form>
-            </>
-          )}
+              {currentStep.id === 'email' ? (
+                // Email confirmation happens out-of-band via the link sent to
+                // the inbox (handled on /verify-email), so there is no forward
+                // action here — the student cannot continue until they confirm.
+                <div className="mt-9 flex justify-end border-t border-black/[0.07] pt-6">
+                  <Button asChild variant="ghost" className="text-primary h-auto p-0">
+                    <Link href={ROUTES.AUTH.LOGIN}>
+                      {t`Back to login`}
+                      <ArrowRight className="ml-1 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
+              ) : (
+                <RegistrationActions
+                  safeCurrentStepIndex={safeCurrentStepIndex}
+                  isLastStep={isLastStep}
+                  isBusy={isBusy}
+                  onPreviousStep={goToPreviousStep}
+                />
+              )}
+            </form>
+          </Form>
         </section>
       </div>
     </main>

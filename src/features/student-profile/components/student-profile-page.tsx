@@ -11,6 +11,7 @@ import { toast } from 'sonner';
 
 import {
   getNextStudentOnboardingStage,
+  getStudentJourneySteps,
   getStudentOnboardingStageMeta,
   getStudentOnboardingStages,
   STUDENT_PROFILE_FIELD_GROUPS,
@@ -29,9 +30,11 @@ import {
   StudentStatusCard,
 } from 'components/student-dashboard/page-shell-primitives';
 
+import { RegistrationStageHeader } from './registration-stage-header';
 import { StudentOnboardingActions } from './student-onboarding-actions';
 import { StudentOnboardingBody } from './student-onboarding-body';
 import { StudentOnboardingStageList } from './student-onboarding-stage-list';
+import { StudentOnboardingStepper } from './student-onboarding-stepper';
 
 export function StudentProfilePage() {
   const router = useRouter();
@@ -62,6 +65,8 @@ export function StudentProfilePage() {
     ? getNextStudentOnboardingStage(profileQuery.data.completion)
     : 'academic';
   const activeStage = selectedStage ?? derivedStage;
+  const isProfileUpdateFlow = pathname === ROUTES.STUDENT.PROFILE;
+  const shouldRedirectToTeam = !isProfileUpdateFlow && isOnboardingComplete;
 
   useEffect(() => {
     if (!profileQuery.data) {
@@ -70,6 +75,14 @@ export function StudentProfilePage() {
 
     form.reset(mapStudentProfileToFormValues(profileQuery.data));
   }, [form, profileQuery.data]);
+
+  // Once both onboarding stages are complete, send students straight to team
+  // setup instead of surfacing an intermediate "continue" step.
+  useEffect(() => {
+    if (shouldRedirectToTeam) {
+      router.replace(ROUTES.STUDENT.TEAM);
+    }
+  }, [router, shouldRedirectToTeam]);
 
   const saveStage = async (stageId: 'academic' | 'skills') => {
     const isValid = await form.trigger(STUDENT_PROFILE_FIELD_GROUPS[stageId]);
@@ -151,10 +164,53 @@ export function StudentProfilePage() {
     return null;
   }
 
+  // Redirect to team setup is in-flight; avoid flashing the onboarding form.
+  if (shouldRedirectToTeam) {
+    return (
+      <main className="mx-auto flex w-full max-w-5xl flex-1 items-center justify-center px-4 py-6">
+        <Loader2 className="text-primary h-5 w-5 animate-spin" />
+      </main>
+    );
+  }
+
   const stageMeta = getStudentOnboardingStageMeta(activeStage);
   const stages = getStudentOnboardingStages(profileQuery.data.completion);
-  const isProfileUpdateFlow = pathname === ROUTES.STUDENT.PROFILE;
-  const shouldShowContinueOnly = !isProfileUpdateFlow && isOnboardingComplete;
+  // Team existence isn't known on this page; the team step renders as upcoming.
+  const journeySteps = getStudentJourneySteps(profileQuery.data.completion, false);
+
+  const onboardingForm = (
+    <Form {...form}>
+      <div className="space-y-6">
+        <StudentOnboardingBody activeStage={activeStage} />
+
+        <StudentOnboardingActions
+          activeStage={activeStage}
+          isBusy={isProfileSubmitBusy}
+          onStageChange={setSelectedStage}
+          onSaveAcademic={() => void saveStage('academic')}
+          onSaveSkills={() => void saveStage('skills')}
+        />
+      </div>
+    </Form>
+  );
+
+  // Onboarding presents academic + skills as a guided stepper wizard (matching
+  // the registration flow), while the in-workspace profile-update route keeps
+  // the section-card layout for free-form editing.
+  if (!isProfileUpdateFlow) {
+    return (
+      <main className="mx-auto flex w-full max-w-5xl flex-1 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+        <div className="border-border bg-muted flex w-full flex-col overflow-hidden rounded-xl border shadow-sm">
+          <StudentOnboardingStepper stages={journeySteps} activeStage={activeStage} />
+
+          <section className="bg-background px-5 py-7 sm:px-8 sm:py-10 lg:px-12">
+            <RegistrationStageHeader title={stageMeta.title} description={stageMeta.description} />
+            <div className="mt-8">{onboardingForm}</div>
+          </section>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <StudentPageShell {...profileShellProps}>
@@ -170,21 +226,7 @@ export function StudentProfilePage() {
       </StudentSectionCard>
 
       <StudentSectionCard title={stageMeta.title} description={stageMeta.description}>
-        <Form {...form}>
-          <div className="space-y-6">
-            <StudentOnboardingBody activeStage={activeStage} />
-
-            <StudentOnboardingActions
-              activeStage={activeStage}
-              isBusy={isProfileSubmitBusy}
-              isComplete={shouldShowContinueOnly}
-              onContinue={() => router.replace(ROUTES.STUDENT.TEAM)}
-              onStageChange={setSelectedStage}
-              onSaveAcademic={() => void saveStage('academic')}
-              onSaveSkills={() => void saveStage('skills')}
-            />
-          </div>
-        </Form>
+        {onboardingForm}
       </StudentSectionCard>
     </StudentPageShell>
   );

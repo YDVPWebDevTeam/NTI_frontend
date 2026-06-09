@@ -56,12 +56,11 @@ export function useStudentRegistrationActions(form: UseFormReturn<StudentRegistr
           await handleIdentityStep();
           onAdvance(Math.min(currentStepIndex + 1, stepsLength - 1));
         },
-        email: ({ stepsLength, onAdvance }) => {
-          // Email is the final registration step: confirmation happens via the
-          // link in the email (handled on /verify-email), after which the
-          // student continues into onboarding. Finishing here shows the
-          // post-registration completion screen.
-          onAdvance(stepsLength);
+        email: () => {
+          // Email is the final registration step and a hard gate: confirmation
+          // happens via the link in the email (handled on /verify-email), after
+          // which the student continues into onboarding. There is no in-app
+          // forward action, so this step never advances.
         },
         academic: async ({ currentStepIndex, stepsLength, onAdvance }) => {
           await submitAcademic();

@@ -23,7 +23,7 @@ import {
   useProgramBBacklogControllerCompleteDocumentUpload,
   useProgramBBacklogControllerCreateDocumentUpload,
   useProgramBBacklogControllerCreateProject,
-  useProgramBBacklogControllerFindPublishedById,
+  useProgramBBacklogControllerFindById,
   useProgramBBacklogControllerListCandidates,
   useProgramBBacklogControllerListDocuments,
   useProgramBBacklogControllerPublish,
@@ -124,7 +124,7 @@ export default function CompanyProgramBBacklogDetailPage({
     companyBacklogItem?.status === ProgramBBacklogItemDtoStatus.PUBLISHED;
   const isPublishedDetailUnavailable =
     canLoadCompanyBacklogRelatedData && !shouldLoadPublishedDetail;
-  const itemQuery = useProgramBBacklogControllerFindPublishedById(id, {
+  const itemQuery = useProgramBBacklogControllerFindById(id, {
     query: { enabled: shouldLoadPublishedDetail, retry: false },
   });
   const candidatesQuery = useProgramBBacklogControllerListCandidates(id, {

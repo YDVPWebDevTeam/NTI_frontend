@@ -3,7 +3,7 @@
 import type { QueryClient } from '@tanstack/react-query';
 
 import {
-  getProgramBBacklogControllerFindPublishedByIdQueryKey,
+  getProgramBBacklogControllerFindByIdQueryKey,
   getProgramBBacklogControllerListCandidatesQueryKey,
   getProgramBBacklogControllerListDocumentsQueryKey,
   getProgramBCompanyOverviewControllerGetBacklogSummaryQueryKey,
@@ -53,7 +53,7 @@ export function invalidateProgramBCompanyWorkspace(
         queryKey: getCompanyProgramBBacklogDetailLookupQueryKey(ids.backlogId),
       }),
       queryClient.invalidateQueries({
-        queryKey: getProgramBBacklogControllerFindPublishedByIdQueryKey(ids.backlogId),
+        queryKey: getProgramBBacklogControllerFindByIdQueryKey(ids.backlogId),
       }),
       queryClient.invalidateQueries({
         queryKey: getProgramBBacklogControllerListCandidatesQueryKey(ids.backlogId),

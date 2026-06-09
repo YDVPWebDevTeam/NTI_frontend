@@ -7,10 +7,10 @@ import { use, useState } from 'react';
 import { toast } from 'sonner';
 
 import {
-  getProgramBBacklogControllerFindPublishedByIdQueryKey,
+  getProgramBBacklogControllerFindByIdQueryKey,
   getProgramBBacklogControllerListCandidatesQueryKey,
   getProgramBTeamApplicationControllerGetMyQueryKey,
-  useProgramBBacklogControllerFindPublishedById,
+  useProgramBBacklogControllerFindById,
   useProgramBBacklogControllerRequestDocumentDownload,
   useProgramBTeamApplicationControllerGetMy,
   useProgramBTeamApplicationControllerSubmit,
@@ -45,7 +45,7 @@ export function StudentProgramBBacklogDetailPage({ params }: { params: Promise<{
   const [cvFiles, setCvFiles] = useState<File[]>([]);
   const { uploadFiles, isUploading } = useFileUploads();
 
-  const backlogItemQuery = useProgramBBacklogControllerFindPublishedById(id, {
+  const backlogItemQuery = useProgramBBacklogControllerFindById(id, {
     query: { enabled: true },
   });
   const teamQuery = useTeamControllerFindCurrentForUser({
@@ -82,7 +82,7 @@ export function StudentProgramBBacklogDetailPage({ params }: { params: Promise<{
         }),
       }),
       queryClient.invalidateQueries({
-        queryKey: getProgramBBacklogControllerFindPublishedByIdQueryKey(id),
+        queryKey: getProgramBBacklogControllerFindByIdQueryKey(id),
       }),
       queryClient.invalidateQueries({
         queryKey: getProgramBBacklogControllerListCandidatesQueryKey(id),

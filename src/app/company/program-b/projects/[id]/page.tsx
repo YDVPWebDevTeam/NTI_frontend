@@ -51,6 +51,7 @@ import {
   TabsTrigger,
   Textarea,
 } from 'components/shadcn';
+import { ProjectConversations } from 'features/conversations/project-conversations';
 import { ROUTES } from 'lib/constants';
 import { useAuthenticatedUser } from 'lib/student-dashboard/use-authenticated-user';
 import {
@@ -505,6 +506,7 @@ export default function CompanyProgramBProjectDetailPage({
           <TabsTrigger value="overview">{t`Overview`}</TabsTrigger>
           <TabsTrigger value="milestones">{t`Milestones`}</TabsTrigger>
           <TabsTrigger value="reviews">{t`Reviews & notes`}</TabsTrigger>
+          <TabsTrigger value="messages">{t`Messages`}</TabsTrigger>
           <TabsTrigger value="documents">{t`Documents`}</TabsTrigger>
         </TabsList>
 
@@ -672,6 +674,20 @@ export default function CompanyProgramBProjectDetailPage({
               <div className="mt-4 space-y-3">{notesContent}</div>
             </article>
           </div>
+        </TabsContent>
+
+        <TabsContent value="messages">
+          <article className="border-border bg-card rounded-2xl border p-5 shadow-sm">
+            <h2 className="text-foreground text-lg font-semibold">{t`Messages`}</h2>
+            <div className="mt-4">
+              <ProjectConversations
+                anchor={{ kind: 'program-b', projectId: id }}
+                currentUserId={me?.id}
+                role={me?.role}
+                canWrite={!isProjectReadOnly}
+              />
+            </div>
+          </article>
         </TabsContent>
 
         <TabsContent value="documents">

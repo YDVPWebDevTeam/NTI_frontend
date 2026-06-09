@@ -19,12 +19,14 @@ import {
 } from 'components/student-dashboard/page-shell-primitives';
 
 import { ProgramAStatusBadge } from 'features/admin-program-a/components/program-a-status-badge';
+import { ProjectConversations } from 'features/conversations/project-conversations';
 
 import {
   formatEnumLikeName,
   formatPersonName,
   formatUnknownDate,
 } from 'lib/student-dashboard/normalizers';
+import { useAuthenticatedUser } from 'lib/student-dashboard/use-authenticated-user';
 
 import {
   getApplicationMentorName,
@@ -259,6 +261,8 @@ export function ProgramAProjectView({
   sectionsQuery,
   getErrorMessage,
 }: ProgramAProjectViewProps) {
+  const { me } = useAuthenticatedUser();
+
   return (
     <StudentPageShell
       title={t`Program A project`}
@@ -278,6 +282,15 @@ export function ProgramAProjectView({
             getErrorMessage={getErrorMessage}
           />
         </div>
+
+        <StudentSectionCard title={t`Messages with your mentor`}>
+          <ProjectConversations
+            anchor={{ kind: 'program-a', applicationId: application.id }}
+            currentUserId={me?.id}
+            role={me?.role}
+            canWrite={application.status !== 'ARCHIVED'}
+          />
+        </StudentSectionCard>
       </div>
     </StudentPageShell>
   );

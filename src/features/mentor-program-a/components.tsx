@@ -30,12 +30,14 @@ import {
   TabsTrigger,
   Textarea,
 } from 'components/shadcn';
+import { ProjectConversations } from 'features/conversations/project-conversations';
 import { ROUTES } from 'lib/constants';
 import {
   formatPersonName,
   formatUnknownDate,
   normalizeUnknownText,
 } from 'lib/student-dashboard/normalizers';
+import { useAuthenticatedUser } from 'lib/student-dashboard/use-authenticated-user';
 import { formatEnumLabel } from 'lib/utils';
 
 type ProgramAMentorProjectsListProps = {
@@ -155,6 +157,7 @@ export function ProgramAMentorProjectsPage() {
 }
 
 export function ProgramAMentorProjectDetailPage({ applicationId }: { applicationId: string }) {
+  const { me } = useAuthenticatedUser();
   const [noteBody, setNoteBody] = useState('');
   const projectsQuery = useProgramAMentorProjects();
   const applicationQuery = useProgramAMentorProjectDetail(applicationId);
@@ -277,6 +280,7 @@ export function ProgramAMentorProjectDetailPage({ applicationId }: { application
           <TabsTrigger value="overview">{t`Overview`}</TabsTrigger>
           <TabsTrigger value="sections">{t`Application sections`}</TabsTrigger>
           <TabsTrigger value="notes">{t`Mentorship notes`}</TabsTrigger>
+          <TabsTrigger value="messages">{t`Messages`}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview">
@@ -365,6 +369,23 @@ export function ProgramAMentorProjectDetailPage({ applicationId }: { application
                   {t`Add note`}
                 </Button>
               </div>
+            </div>
+          </article>
+        </TabsContent>
+
+        <TabsContent value="messages">
+          <article className="rounded-[1.5rem] border border-[#dfe7fa] bg-white/90 p-5 shadow-[0_18px_40px_rgba(15,23,42,0.06)]">
+            <h2 className="text-lg font-semibold text-[#10213d]">{t`Messages`}</h2>
+            <p className="mt-1 text-sm text-[#60718d]">
+              {t`Private channel with the team. The client company cannot see this.`}
+            </p>
+            <div className="mt-4">
+              <ProjectConversations
+                anchor={{ kind: 'program-a', applicationId }}
+                currentUserId={me?.id}
+                role={me?.role}
+                canWrite={application.status !== 'ARCHIVED'}
+              />
             </div>
           </article>
         </TabsContent>

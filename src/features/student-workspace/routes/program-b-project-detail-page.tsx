@@ -15,15 +15,18 @@ import {
   StudentSectionCard,
   StudentStatusCard,
 } from 'components/student-dashboard/page-shell-primitives';
+import { ProjectConversations } from 'features/conversations/project-conversations';
 import {
   formatPersonName,
   formatUnknownDate,
   isApiNotFoundError,
   normalizeUnknownText,
 } from 'lib/student-dashboard/normalizers';
+import { useAuthenticatedUser } from 'lib/student-dashboard/use-authenticated-user';
 
 export function StudentProgramBProjectDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
+  const { me } = useAuthenticatedUser();
   const projectQuery = useProgramBProjectsControllerGetProject(id, {
     query: { enabled: true, retry: false },
   });
@@ -178,6 +181,15 @@ export function StudentProgramBProjectDetailPage({ params }: { params: Promise<{
             </div>
           ))}
         </div>
+      </StudentSectionCard>
+
+      <StudentSectionCard title={t`Messages`}>
+        <ProjectConversations
+          anchor={{ kind: 'program-b', projectId: id }}
+          currentUserId={me?.id}
+          role={me?.role}
+          canWrite={project.status !== 'CLOSED'}
+        />
       </StudentSectionCard>
     </StudentPageShell>
   );

@@ -141,7 +141,8 @@ function SignUpContent() {
         <section className="bg-background px-5 py-7 sm:px-8 sm:py-10 lg:px-12">
           {isCompletionStep ? (
             <RegistrationCompletion
-              onInviteClick={() => {
+              email={form.getValues('email')}
+              onBackToLoginClick={() => {
                 resetStep();
                 form.reset();
               }}

@@ -56,10 +56,12 @@ export function useStudentRegistrationActions(form: UseFormReturn<StudentRegistr
           await handleIdentityStep();
           onAdvance(Math.min(currentStepIndex + 1, stepsLength - 1));
         },
-        email: ({ currentStepIndex, stepsLength, onAdvance }) => {
-          // Email confirmation now happens entirely via the link in the email
-          // (handled on /verify-email), so this step is purely informational.
-          onAdvance(Math.min(currentStepIndex + 1, stepsLength - 1));
+        email: ({ stepsLength, onAdvance }) => {
+          // Email is the final registration step: confirmation happens via the
+          // link in the email (handled on /verify-email), after which the
+          // student continues into onboarding. Finishing here shows the
+          // post-registration completion screen.
+          onAdvance(stepsLength);
         },
         academic: async ({ currentStepIndex, stepsLength, onAdvance }) => {
           await submitAcademic();

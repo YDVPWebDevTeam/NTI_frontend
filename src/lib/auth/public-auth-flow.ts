@@ -4,7 +4,7 @@ import { UserRole, UserStatus, type AuthenticatedUserDto } from 'lib/api';
 import { isApiRequestError } from 'lib/api-client/openapi-runtime/client';
 import { ROUTES } from 'lib/constants';
 
-import { getDefaultRouteForRole } from './access';
+import { getDefaultRouteForRole, isStudentRole } from './access';
 
 const FORBIDDEN_STATUS_CODE = 403;
 
@@ -15,7 +15,18 @@ export type AuthFlowErrorAction = {
   actionLabel?: string;
 };
 
-export function getPostAuthRedirect(user?: AuthenticatedUserDto | null): string {
+export type PostAuthRedirectOptions = {
+  // Students collect their academic/skills details in onboarding *after*
+  // confirming their email, so right after confirmation we send them to the
+  // onboarding flow instead of the dashboard. A normal login still goes to the
+  // dashboard, so this is opt-in per call site.
+  afterEmailConfirmation?: boolean;
+};
+
+export function getPostAuthRedirect(
+  user?: AuthenticatedUserDto | null,
+  options: PostAuthRedirectOptions = {},
+): string {
   if (!user) {
     return ROUTES.AUTH.LOGIN;
   }
@@ -30,6 +41,10 @@ export function getPostAuthRedirect(user?: AuthenticatedUserDto | null): string 
     }
 
     return ROUTES.AUTH.LOGIN;
+  }
+
+  if (options.afterEmailConfirmation && isStudentRole(user.role)) {
+    return ROUTES.ONBOARDING_PROFILE;
   }
 
   return getDefaultRouteForRole(user.role);

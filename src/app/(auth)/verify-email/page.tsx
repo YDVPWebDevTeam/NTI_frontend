@@ -68,7 +68,7 @@ function VerifyEmailContent() {
         setStatus('success');
 
         window.setTimeout(() => {
-          router.replace(getPostAuthRedirect(response.user));
+          router.replace(getPostAuthRedirect(response.user, { afterEmailConfirmation: true }));
         }, REDIRECT_DELAY_MS);
       } catch (error) {
         setStatus('error');

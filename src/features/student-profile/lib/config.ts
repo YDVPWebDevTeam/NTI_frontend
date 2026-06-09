@@ -58,10 +58,10 @@ export type OnboardingStageConfig = {
 
 const IDENTITY_STEP_NUMBER = 1;
 const EMAIL_STEP_NUMBER = 2;
-const ACADEMIC_STEP_NUMBER = 3;
-const SKILLS_STEP_NUMBER = 4;
-const REVIEW_STEP_NUMBER = 5;
 
+// Registration only collects identity + email. Academic and professional
+// details are gathered later in the onboarding flow (/onboarding/profile),
+// which a student reaches right after confirming their email.
 export function getStudentRegistrationSteps(): RegistrationStepConfig[] {
   return [
     {
@@ -76,28 +76,7 @@ export function getStudentRegistrationSteps(): RegistrationStepConfig[] {
       label: t`Email Confirmation`,
       stepText: t`Step ${EMAIL_STEP_NUMBER}`,
       fields: STUDENT_PROFILE_FIELD_GROUPS.email,
-      description: t`Confirm your email address from the message sent to your inbox before full platform access.`,
-    },
-    {
-      id: 'academic',
-      label: t`Academic Information`,
-      stepText: t`Step ${ACADEMIC_STEP_NUMBER}`,
-      fields: STUDENT_PROFILE_FIELD_GROUPS.academic,
-      description: t`Tell us about your educational background.`,
-    },
-    {
-      id: 'skills',
-      label: t`Professional Skills`,
-      stepText: t`Step ${SKILLS_STEP_NUMBER}`,
-      fields: STUDENT_PROFILE_FIELD_GROUPS.skills,
-      description: t`Highlight your technical and soft skills for potential partners.`,
-    },
-    {
-      id: 'review',
-      label: t`Review`,
-      stepText: t`Step ${REVIEW_STEP_NUMBER}`,
-      fields: STUDENT_PROFILE_FIELD_GROUPS.review,
-      description: t`Please review your information before completing the registration.`,
+      description: t`Confirm your email address from the message sent to your inbox to continue with onboarding.`,
     },
   ];
 }

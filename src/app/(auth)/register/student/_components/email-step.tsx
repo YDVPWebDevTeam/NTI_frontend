@@ -18,7 +18,7 @@ export function EmailStep() {
           <span className="text-foreground font-medium">{email || t`your email address`}</span>.
         </p>
         <p className="text-muted-foreground mt-2 text-sm">
-          {t`Open that link from any device to confirm your email — it works even if you are signed out. You can keep setting up your profile in the meantime.`}
+          {t`Open that link from any device to confirm your email — it works even if you are signed out. Once confirmed, you'll continue setting up your profile in onboarding.`}
         </p>
       </div>
 

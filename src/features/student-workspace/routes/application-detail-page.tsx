@@ -36,6 +36,7 @@ import {
   AttachDocumentSection,
   AttachedDocumentsSection,
   DocumentCompletenessSection,
+  DocumentTemplatesSection,
   EligibilitySignalsSection,
   NeedsInfoThreadSection,
   OverviewSection,
@@ -287,6 +288,8 @@ export function StudentApplicationDetailPage({ params }: { params: Promise<{ id:
         sectionsQuery={sectionsQuery}
         getErrorMessage={getErrorMessage}
       />
+
+      {isEditableStatus ? <DocumentTemplatesSection /> : null}
 
       {isEditableStatus ? (
         <AttachDocumentSection

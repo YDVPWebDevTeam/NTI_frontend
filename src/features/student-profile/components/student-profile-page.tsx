@@ -59,7 +59,8 @@ export function StudentProfilePage() {
   } = useStudentProfileSubmit(form);
   const isOnboardingComplete = Boolean(
     profileQuery.data?.completion.academicInformationCompleted &&
-    profileQuery.data?.completion.professionalSkillsCompleted,
+    profileQuery.data?.completion.professionalSkillsCompleted &&
+    profileQuery.data?.completion.studentEmailConfirmed,
   );
   const derivedStage = profileQuery.data
     ? getNextStudentOnboardingStage(profileQuery.data.completion)
@@ -181,7 +182,11 @@ export function StudentProfilePage() {
   const onboardingForm = (
     <Form {...form}>
       <div className="space-y-6">
-        <StudentOnboardingBody activeStage={activeStage} />
+        <StudentOnboardingBody
+          activeStage={activeStage}
+          user={profileQuery.data.user}
+          onRefresh={() => void profileQuery.refetch()}
+        />
 
         <StudentOnboardingActions
           activeStage={activeStage}

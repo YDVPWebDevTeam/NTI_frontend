@@ -1,14 +1,50 @@
 'use client';
 
 import { t } from '@lingui/core/macro';
+import { Info } from 'lucide-react';
 import Link from 'next/link';
-import { useFormContext } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 import { ControlledInputField, ControlledPasswordField } from 'components/forms';
 import { Checkbox } from 'components/shadcn';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from 'components/shadcn';
 import type { StudentRegistrationValues } from 'lib/auth/schemas';
+import { useCheckUniversityEmailDomain } from 'lib/api-client/university-email-domains';
 import { ROUTES } from 'lib/constants';
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_CHECK_DEBOUNCE_MS = 500;
+
+function NonUniversityEmailNotice() {
+  const control = useFormContext<StudentRegistrationValues>().control;
+  const email = useWatch({ control, name: 'email' }) ?? '';
+  const [debouncedEmail, setDebouncedEmail] = useState('');
+
+  useEffect(() => {
+    const trimmed = email.trim().toLowerCase();
+    const timeoutId = window.setTimeout(() => {
+      setDebouncedEmail(EMAIL_PATTERN.test(trimmed) ? trimmed : '');
+    }, EMAIL_CHECK_DEBOUNCE_MS);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [email]);
+
+  const domainCheck = useCheckUniversityEmailDomain(debouncedEmail, debouncedEmail.length > 0);
+
+  if (!domainCheck.data || domainCheck.data.isUniversityDomain) {
+    return null;
+  }
+
+  return (
+    <div className="border-warning/30 bg-warning/10 text-warning-foreground flex items-start gap-2 rounded-sm border px-3 py-2 text-xs">
+      <Info className="mt-0.5 h-4 w-4 shrink-0" />
+      <span>
+        {t`This doesn't look like a university email. You can register with it, but you'll need to add and confirm a student email during onboarding.`}
+      </span>
+    </div>
+  );
+}
 
 export function IdentityStep() {
   const { control } = useFormContext<StudentRegistrationValues>();
@@ -35,16 +71,19 @@ export function IdentityStep() {
         />
       </div>
 
-      <ControlledInputField
-        control={control}
-        name="email"
-        label={t`Email Address`}
-        type="email"
-        placeholder={t`name@institution.edu…`}
-        autoComplete="email"
-        inputMode="email"
-        spellCheck={false}
-      />
+      <div className="space-y-2">
+        <ControlledInputField
+          control={control}
+          name="email"
+          label={t`Email Address`}
+          type="email"
+          placeholder={t`name@institution.edu…`}
+          autoComplete="email"
+          inputMode="email"
+          spellCheck={false}
+        />
+        <NonUniversityEmailNotice />
+      </div>
 
       <ControlledPasswordField
         control={control}

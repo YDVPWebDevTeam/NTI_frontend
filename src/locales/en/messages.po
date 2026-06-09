@@ -16,6 +16,9 @@ msgstr ""
 msgid " and institutional data processing terms required for platform access."
 msgstr " and institutional data processing terms required for platform access."
 
+msgid "—"
+msgstr "—"
+
 #. placeholder {0}: overview.projects.awaitingFinalAcceptance
 #. placeholder {1}: overview.projects.overdueMilestones
 msgid "{0} awaiting final acceptance · {1} overdue milestones"
@@ -60,9 +63,6 @@ msgstr "{activeUsers} active accounts across the platform."
 
 msgid "© 2026 NTI. All rights reserved."
 msgstr "© 2026 NTI. All rights reserved."
-
-#~ msgid "100% Complete"
-#~ msgstr "100% Complete"
 
 msgid "A few quick notes before you make changes."
 msgstr "A few quick notes before you make changes."
@@ -163,9 +163,6 @@ msgstr "Access to Program A Frameworks"
 msgid "Access your account"
 msgstr "Access your account"
 
-#~ msgid "Account created"
-#~ msgstr "Account created"
-
 msgid "ACCOUNT RECOVERY"
 msgstr "ACCOUNT RECOVERY"
 
@@ -247,6 +244,15 @@ msgstr "Add a new delivery milestone to this project."
 msgid "Add a new university record to start a new academic branch."
 msgstr "Add a new university record to start a new academic branch."
 
+msgid "Add an approved domain"
+msgstr "Add an approved domain"
+
+msgid "Add and confirm your university email address."
+msgstr "Add and confirm your university email address."
+
+msgid "Add and confirm your university email so we can verify your student status."
+msgstr "Add and confirm your university email so we can verify your student status."
+
 msgid "Add at least one technical skill."
 msgstr "Add at least one technical skill."
 
@@ -256,9 +262,6 @@ msgstr "Add at least one valid email address."
 msgid "Add at least two teammate emails, separated by commas or new lines. Your own account is added automatically as the team lead."
 msgstr "Add at least two teammate emails, separated by commas or new lines. Your own account is added automatically as the team lead."
 
-#~ msgid "Add at least two teammate emails. Your own account will be added automatically as the team lead."
-#~ msgstr "Add at least two teammate emails. Your own account will be added automatically as the team lead."
-
 msgid "Add at least two valid teammate email addresses."
 msgstr "Add at least two valid teammate email addresses."
 
@@ -267,6 +270,9 @@ msgstr "Add basic information about your organization."
 
 msgid "Add company details so your organization can be reviewed and connected to the platform."
 msgstr "Add company details so your organization can be reviewed and connected to the platform."
+
+msgid "Add domain"
+msgstr "Add domain"
 
 msgid "Add evaluation"
 msgstr "Add evaluation"
@@ -285,6 +291,9 @@ msgstr "Add your CV, skills, and supporting professional details."
 
 msgid "Add your evaluation"
 msgstr "Add your evaluation"
+
+msgid "Adding…"
+msgstr "Adding…"
 
 msgid "Additional submitted section data."
 msgstr "Additional submitted section data."
@@ -567,11 +576,11 @@ msgstr "Back to home"
 msgid "Back to login"
 msgstr "Back to login"
 
-#~ msgid "BACK TO LOGIN"
-#~ msgstr "BACK TO LOGIN"
-
 msgid "Back to Organizations"
 msgstr "Back to Organizations"
+
+msgid "Back to professional skills"
+msgstr "Back to professional skills"
 
 msgid "Back to projects"
 msgstr "Back to projects"
@@ -774,9 +783,6 @@ msgstr "Choose another active member to take over as company owner. Your access 
 msgid "Choose whether you need a new account or want to join with an existing account. The invited email stays fixed to this invite."
 msgstr "Choose whether you need a new account or want to join with an existing account. The invited email stays fixed to this invite."
 
-#~ msgid "Choose who this document should be visible to."
-#~ msgstr "Choose who this document should be visible to."
-
 msgid "Choose your CV"
 msgstr "Choose your CV"
 
@@ -903,9 +909,6 @@ msgstr "Completed:"
 msgid "COMPLIANT"
 msgstr "COMPLIANT"
 
-#~ msgid "Confidential"
-#~ msgstr "Confidential"
-
 msgid "Confirm"
 msgstr "Confirm"
 
@@ -939,20 +942,17 @@ msgstr "Confirm your company owner account"
 msgid "Confirm your email"
 msgstr "Confirm your email"
 
-#~ msgid "Confirm your email address from the message sent to your inbox before full platform access."
-#~ msgstr "Confirm your email address from the message sent to your inbox before full platform access."
-
 msgid "Confirm your email address from the message sent to your inbox to continue with onboarding."
 msgstr "Confirm your email address from the message sent to your inbox to continue with onboarding."
-
-#~ msgid "Confirm your email to continue"
-#~ msgstr "Confirm your email to continue"
 
 msgid "Confirm your new email"
 msgstr "Confirm your new email"
 
 msgid "Confirm your NTI account"
 msgstr "Confirm your NTI account"
+
+msgid "Confirm your student email"
+msgstr "Confirm your student email"
 
 msgid "Confirmation code"
 msgstr "Confirmation code"
@@ -962,6 +962,9 @@ msgstr "Confirmation code is required."
 
 msgid "Confirmation email sent."
 msgstr "Confirmation email sent."
+
+msgid "Confirmation link sent again."
+msgstr "Confirmation link sent again."
 
 msgid "Confirmation status"
 msgstr "Confirmation status"
@@ -977,6 +980,12 @@ msgstr "Confirming your email address..."
 
 msgid "Confirming your email change"
 msgstr "Confirming your email change"
+
+msgid "Confirming your student email"
+msgstr "Confirming your student email"
+
+msgid "Confirming your student email address..."
+msgstr "Confirming your student email address..."
 
 msgid "Confirming…"
 msgstr "Confirming…"
@@ -1011,8 +1020,8 @@ msgstr "Continue as Regular User"
 msgid "Continue draft"
 msgstr "Continue draft"
 
-#~ msgid "Continue to team setup"
-#~ msgstr "Continue to team setup"
+msgid "CONTINUE ONBOARDING"
+msgstr "CONTINUE ONBOARDING"
 
 msgid "Continue your onboarding, track applications, and manage your NTI profile from one place."
 msgstr "Continue your onboarding, track applications, and manage your NTI profile from one place."
@@ -1101,9 +1110,6 @@ msgstr "Create Specialization"
 msgid "Create System Invite"
 msgstr "Create System Invite"
 
-#~ msgid "Create team"
-#~ msgstr "Create team"
-
 msgid "Create team & send invites"
 msgstr "Create team & send invites"
 
@@ -1112,9 +1118,6 @@ msgstr "Create the first faculty for this university or adjust the local filter.
 
 msgid "Create the first specialization for this faculty or adjust the local filter."
 msgstr "Create the first specialization for this faculty or adjust the local filter."
-
-#~ msgid "Create the team first, then start inviting the rest of the student members."
-#~ msgstr "Create the team first, then start inviting the rest of the student members."
 
 msgid "Create the team first, then the invited students can join through their email links."
 msgstr "Create the team first, then the invited students can join through their email links."
@@ -1353,6 +1356,9 @@ msgstr "Document name"
 msgid "Document name is required."
 msgstr "Document name is required."
 
+msgid "Document templates"
+msgstr "Document templates"
+
 msgid "Document type"
 msgstr "Document type"
 
@@ -1377,14 +1383,39 @@ msgstr "Documents currently attached to this application. Download to review the
 msgid "Doe"
 msgstr "Doe"
 
+msgid "Domain"
+msgstr "Domain"
+
+msgid "Domain added."
+msgstr "Domain added."
+
+msgid "Domain approved."
+msgstr "Domain approved."
+
+msgid "Domain not recognized"
+msgstr "Domain not recognized"
+
+msgid "Domain rejected."
+msgstr "Domain rejected."
+
+msgid "Domain removed."
+msgstr "Domain removed."
+
 msgid "Done"
 msgstr "Done"
 
 msgid "Download"
 msgstr "Download"
 
+msgid "Download a Word template, fill it in, and upload it below."
+msgstr "Download a Word template, fill it in, and upload it below."
+
 msgid "Download current CV"
 msgstr "Download current CV"
+
+#. placeholder {0}: selectedTemplate.label
+msgid "Download the {0} template"
+msgstr "Download the {0} template"
 
 msgid "Draft"
 msgstr "Draft"
@@ -1411,6 +1442,9 @@ msgstr "E.g. Algorithms, Distributed Systems, UX Design"
 
 msgid "E.g. competitions, awards, scholarships..."
 msgstr "E.g. competitions, awards, scholarships..."
+
+msgid "e.g. ukf.sk"
+msgstr "e.g. ukf.sk"
 
 msgid "e.g., React"
 msgstr "e.g., React"
@@ -1552,6 +1586,9 @@ msgstr "Enter a strong password"
 
 msgid "Enter a valid email"
 msgstr "Enter a valid email"
+
+msgid "Enter a valid email address."
+msgstr "Enter a valid email address."
 
 msgid "Enter a valid non-negative number for the reward amount."
 msgstr "Enter a valid non-negative number for the reward amount."
@@ -1763,6 +1800,9 @@ msgstr "Failed"
 msgid "Failed signals"
 msgstr "Failed signals"
 
+msgid "Fetching the latest opportunity details."
+msgstr "Fetching the latest opportunity details."
+
 msgid "File"
 msgstr "File"
 
@@ -1826,9 +1866,6 @@ msgstr "FORGOT PASSWORD"
 msgid "Forgot password?"
 msgstr "Forgot password?"
 
-#~ msgid "Form Conquered"
-#~ msgstr "Form Conquered"
-
 msgid "Formal verification"
 msgstr "Formal verification"
 
@@ -1849,9 +1886,6 @@ msgstr "Format"
 
 msgid "Foundation"
 msgstr "Foundation"
-
-#~ msgid "Friends Next"
-#~ msgstr "Friends Next"
 
 msgid "Full name"
 msgstr "Full name"
@@ -1922,9 +1956,6 @@ msgstr ""
 msgid "Hide password"
 msgstr "Hide password"
 
-#~ msgid "Highlight your technical and soft skills for potential partners."
-#~ msgstr "Highlight your technical and soft skills for potential partners."
-
 msgid "How can we help?"
 msgstr "How can we help?"
 
@@ -1948,6 +1979,9 @@ msgstr "I declare that the academic information provided is accurate."
 
 msgid "I HAVE ACCOUNT"
 msgstr "I HAVE ACCOUNT"
+
+msgid "I've confirmed it"
+msgstr "I've confirmed it"
 
 msgid "ICO"
 msgstr "ICO"
@@ -2024,9 +2058,6 @@ msgstr "Inspect KPI rollups, compare report datasets, and manage export jobs."
 msgid "Inspect projects"
 msgstr "Inspect projects"
 
-#~ msgid "Internal"
-#~ msgstr "Internal"
-
 msgid "Invalid call id"
 msgstr "Invalid call id"
 
@@ -2057,9 +2088,6 @@ msgstr "Invitations"
 
 msgid "Invitations created."
 msgstr "Invitations created."
-
-#~ msgid "INVITE COLLEAGUES"
-#~ msgstr "INVITE COLLEAGUES"
 
 msgid "Invite Id"
 msgstr "Invite Id"
@@ -2307,6 +2335,9 @@ msgstr "Loading milestones"
 msgid "Loading needs-info thread..."
 msgstr "Loading needs-info thread..."
 
+msgid "Loading opportunity…"
+msgstr "Loading opportunity…"
+
 msgid "Loading organization profile…"
 msgstr "Loading organization profile…"
 
@@ -2388,9 +2419,6 @@ msgstr "Logo upload failed. The organization will be created without a logo."
 
 msgid "Logo upload failed. Your profile changes were not saved. Please try again."
 msgstr "Logo upload failed. Your profile changes were not saved. Please try again."
-
-#~ msgid "Looking absolutely stellar"
-#~ msgstr "Looking absolutely stellar"
 
 msgid "Manage"
 msgstr "Manage"
@@ -2627,6 +2655,9 @@ msgstr "name@institution.edu"
 msgid "name@institution.edu…"
 msgstr "name@institution.edu…"
 
+msgid "name@ukf.sk"
+msgstr "name@ukf.sk"
+
 msgid "Needs attention"
 msgstr "Needs attention"
 
@@ -2688,9 +2719,6 @@ msgstr "NEXT STEP"
 msgid "Next steps"
 msgstr "Next steps"
 
-#~ msgid "Next: create your team and invite teammates."
-#~ msgstr "Next: create your team and invite teammates."
-
 msgid "No"
 msgstr "No"
 
@@ -2711,9 +2739,6 @@ msgstr "No active Program B projects yet."
 
 msgid "No active projects yet"
 msgstr "No active projects yet"
-
-#~ msgid "No active team"
-#~ msgstr "No active team"
 
 msgid "No application rows match the current filters."
 msgstr "No application rows match the current filters."
@@ -2783,6 +2808,9 @@ msgstr "No documents uploaded yet"
 
 msgid "No documents uploaded yet."
 msgstr "No documents uploaded yet."
+
+msgid "No domains match the current filters."
+msgstr "No domains match the current filters."
 
 msgid "No due date"
 msgstr "No due date"
@@ -3138,14 +3166,14 @@ msgstr "Open that link from any device to confirm your email — it works even i
 msgid "Open that link from any device to confirm your email — it works even if you are signed out. Once confirmed, you'll continue setting up your profile in onboarding."
 msgstr "Open that link from any device to confirm your email — it works even if you are signed out. Once confirmed, you'll continue setting up your profile in onboarding."
 
-#~ msgid "Open that link from any device to confirm your email — it works even if you are signed out. You can keep setting up your profile in the meantime."
-#~ msgstr "Open that link from any device to confirm your email — it works even if you are signed out. You can keep setting up your profile in the meantime."
-
 msgid "Open the application detail and reply to the needs-info request."
 msgstr "Open the application detail and reply to the needs-info request."
 
 msgid "Open the confirmation link from the email we sent to verify your company owner account."
 msgstr "Open the confirmation link from the email we sent to verify your company owner account."
+
+msgid "Open the confirmation link from the email we sent to your student address."
+msgstr "Open the confirmation link from the email we sent to your student address."
 
 msgid "Open the confirmation link from the email we sent you to finish verifying your account."
 msgstr "Open the confirmation link from the email we sent you to finish verifying your account."
@@ -3155,6 +3183,9 @@ msgstr "Open the full confirmation link from your email. If it still does not wo
 
 msgid "Open the full confirmation link from your email. If it still does not work, request a new confirmation email from the login page."
 msgstr "Open the full confirmation link from your email. If it still does not work, request a new confirmation email from the login page."
+
+msgid "Open the full confirmation link from your email. If it still does not work, request a new confirmation email from your onboarding."
+msgstr "Open the full confirmation link from your email. If it still does not work, request a new confirmation email from your onboarding."
 
 msgid "Open the full invitation link from your email and try again."
 msgstr "Open the full invitation link from your email and try again."
@@ -3417,9 +3448,6 @@ msgstr "People with access"
 msgid "Personal Portfolio / Website"
 msgstr "Personal Portfolio / Website"
 
-#~ msgid "Phew! You survived."
-#~ msgstr "Phew! You survived."
-
 msgid "Pick an active MENTOR-role user. The selected user becomes responsible for delivery follow-up."
 msgstr "Pick an active MENTOR-role user. The selected user becomes responsible for delivery follow-up."
 
@@ -3440,9 +3468,6 @@ msgstr "Please enter a valid email address."
 
 msgid "Please enter a valid website URL."
 msgstr "Please enter a valid website URL."
-
-#~ msgid "Please review your information before completing the registration."
-#~ msgstr "Please review your information before completing the registration."
 
 msgid "Please sign in again to continue."
 msgstr "Please sign in again to continue."
@@ -3467,6 +3492,9 @@ msgstr "Please wait while we verify your company owner account."
 
 msgid "Please wait while we verify your email address."
 msgstr "Please wait while we verify your email address."
+
+msgid "Please wait while we verify your student email address."
+msgstr "Please wait while we verify your student email address."
 
 msgid "Please wait. The previous action is still running."
 msgstr "Please wait. The previous action is still running."
@@ -3567,9 +3595,6 @@ msgstr "Profile"
 
 msgid "Profile details could not be loaded right now. You can retry without leaving the workspace."
 msgstr "Profile details could not be loaded right now. You can retry without leaving the workspace."
-
-#~ msgid "Profile Nailed"
-#~ msgstr "Profile Nailed"
 
 msgid "Profile onboarding is unavailable"
 msgstr "Profile onboarding is unavailable"
@@ -3763,6 +3788,9 @@ msgstr "Reason"
 msgid "Reason (optional)"
 msgstr "Reason (optional)"
 
+msgid "Reason for rejecting this domain?"
+msgstr "Reason for rejecting this domain?"
+
 msgid "Reassign a team member"
 msgstr "Reassign a team member"
 
@@ -3859,6 +3887,9 @@ msgstr "Relevant Courses"
 msgid "Remove"
 msgstr "Remove"
 
+msgid "Remove \"{domain}\" from the list?"
+msgstr "Remove \"{domain}\" from the list?"
+
 msgid "Remove {label} from the organization? They will lose organization access immediately."
 msgstr "Remove {label} from the organization? They will lose organization access immediately."
 
@@ -3913,8 +3944,17 @@ msgstr "Request new link"
 msgid "REQUEST NEW LINK"
 msgstr "REQUEST NEW LINK"
 
+msgid "Request sent. An administrator will review this domain."
+msgstr "Request sent. An administrator will review this domain."
+
 msgid "Request status"
 msgstr "Request status"
+
+msgid "Request this domain"
+msgstr "Request this domain"
+
+msgid "Requested note"
+msgstr "Requested note"
 
 msgid "Required by call"
 msgstr "Required by call"
@@ -3927,6 +3967,9 @@ msgstr "Required document types"
 
 msgid "Resend"
 msgstr "Resend"
+
+msgid "Resend confirmation"
+msgstr "Resend confirmation"
 
 msgid "Resend confirmation email"
 msgstr "Resend confirmation email"
@@ -3988,6 +4031,9 @@ msgstr "Retry"
 msgid "RETURN TO LOGIN"
 msgstr "RETURN TO LOGIN"
 
+msgid "RETURN TO ONBOARDING"
+msgstr "RETURN TO ONBOARDING"
+
 msgid "Review"
 msgstr "Review"
 
@@ -4032,9 +4078,6 @@ msgstr "Review your application details, required documents, eligibility checks,
 
 msgid "Review your assigned Program A applications, Program B projects, and upcoming milestones."
 msgstr "Review your assigned Program A applications, Program B projects, and upcoming milestones."
-
-#~ msgid "Review your assigned Program B projects and their upcoming milestones."
-#~ msgstr "Review your assigned Program B projects and their upcoming milestones."
 
 msgid "Reviewer"
 msgstr "Reviewer"
@@ -4144,6 +4187,9 @@ msgstr "Search backlog items"
 
 msgid "Search by call title"
 msgstr "Search by call title"
+
+msgid "Search by domain"
+msgstr "Search by domain"
 
 msgid "Search by email, role, or id"
 msgstr "Search by email, role, or id"
@@ -4327,6 +4373,9 @@ msgstr "Send reply"
 
 msgid "SEND RESET LINK"
 msgstr "SEND RESET LINK"
+
+msgid "Send verification"
+msgstr "Send verification"
 
 msgid "Send Verification"
 msgstr "Send Verification"
@@ -4543,20 +4592,11 @@ msgstr "Step {0}"
 msgid "Step {0} of {totalSteps}"
 msgstr "Step {0} of {totalSteps}"
 
-#~ msgid "Step {ACADEMIC_STEP_NUMBER}"
-#~ msgstr "Step {ACADEMIC_STEP_NUMBER}"
-
 msgid "Step {EMAIL_STEP_NUMBER}"
 msgstr "Step {EMAIL_STEP_NUMBER}"
 
 msgid "Step {IDENTITY_STEP_NUMBER}"
 msgstr "Step {IDENTITY_STEP_NUMBER}"
-
-#~ msgid "Step {REVIEW_STEP_NUMBER}"
-#~ msgstr "Step {REVIEW_STEP_NUMBER}"
-
-#~ msgid "Step {SKILLS_STEP_NUMBER}"
-#~ msgstr "Step {SKILLS_STEP_NUMBER}"
 
 msgid "Store important organization files here and download them whenever you need them."
 msgstr "Store important organization files here and download them whenever you need them."
@@ -4566,6 +4606,24 @@ msgstr "Strategic Institutions"
 
 msgid "StrongPass123!"
 msgstr "StrongPass123!"
+
+msgid "Student email"
+msgstr "Student email"
+
+msgid "Student Email"
+msgstr "Student Email"
+
+msgid "STUDENT EMAIL"
+msgstr "STUDENT EMAIL"
+
+msgid "Student email confirmed"
+msgstr "Student email confirmed"
+
+msgid "Student email confirmed successfully."
+msgstr "Student email confirmed successfully."
+
+msgid "Student email verified"
+msgstr "Student email verified"
 
 msgid "Student workspace"
 msgstr "Student workspace"
@@ -4751,9 +4809,6 @@ msgstr "Tell us a bit about yourself and what you're interested in…"
 msgid "Tell us a little about your goals and experience..."
 msgstr "Tell us a little about your goals and experience..."
 
-#~ msgid "Tell us about your educational background."
-#~ msgstr "Tell us about your educational background."
-
 msgid "Terms of service"
 msgstr "Terms of service"
 
@@ -4768,9 +4823,6 @@ msgstr "Test Company…"
 
 msgid "Thanks for reaching out. We'll get back to you within 2 business days."
 msgstr "Thanks for reaching out. We'll get back to you within 2 business days."
-
-#~ msgid "That was a lot of typing, but you made it! Your profile is officially sparkling clean and ready to go. Now, don't suffer alone—invite your colleagues to share the joy of filling out this form!"
-#~ msgstr "That was a lot of typing, but you made it! Your profile is officially sparkling clean and ready to go. Now, don't suffer alone—invite your colleagues to share the joy of filling out this form!"
 
 msgid "The active calls request failed, but the rest of the dashboard is still available."
 msgstr "The active calls request failed, but the rest of the dashboard is still available."
@@ -4804,6 +4856,12 @@ msgstr "The current team context could not be loaded, so lead-only actions remai
 
 msgid "The current team could not be loaded right now. Retry the request instead of treating this as no team."
 msgstr "The current team could not be loaded right now. Retry the request instead of treating this as no team."
+
+msgid "The domain \"{blockedDomain}\" is not on the approved university list. You can ask an administrator to add it."
+msgstr "The domain \"{blockedDomain}\" is not on the approved university list. You can ask an administrator to add it."
+
+msgid "The domain list could not be loaded."
+msgstr "The domain list could not be loaded."
 
 msgid "The export job response was incomplete."
 msgstr "The export job response was incomplete."
@@ -4895,6 +4953,9 @@ msgstr "The verification link could not be completed."
 msgid "The verification link could not be completed. It may have expired or already been used."
 msgstr "The verification link could not be completed. It may have expired or already been used."
 
+msgid "The verification link could not be completed. Request a new confirmation email from your onboarding."
+msgstr "The verification link could not be completed. Request a new confirmation email from your onboarding."
+
 msgid "There are currently no applications in the evaluation stage."
 msgstr "There are currently no applications in the evaluation stage."
 
@@ -4949,6 +5010,9 @@ msgstr "This confirmation link is incomplete. Open the full link from your email
 msgid "This dashboard becomes available once your organization is active."
 msgstr "This dashboard becomes available once your organization is active."
 
+msgid "This doesn't look like a university email. You can register with it, but you'll need to add and confirm a student email during onboarding."
+msgstr "This doesn't look like a university email. You can register with it, but you'll need to add and confirm a student email during onboarding."
+
 msgid "This file is empty. Please choose a different file."
 msgstr "This file is empty. Please choose a different file."
 
@@ -4974,6 +5038,9 @@ msgstr "This invite link is invalid or no longer exists."
 msgid "This link is incomplete"
 msgstr "This link is incomplete"
 
+msgid "This opportunity could not be loaded right now."
+msgstr "This opportunity could not be loaded right now."
+
 msgid "This organization has no invite records available right now."
 msgstr "This organization has no invite records available right now."
 
@@ -4992,17 +5059,11 @@ msgstr "This Program B project does not exist or is no longer available to you."
 msgid "This project is closed and now read-only."
 msgstr "This project is closed and now read-only."
 
-#~ msgid "This section can't be edited here yet."
-#~ msgstr "This section can't be edited here yet."
-
 msgid "This section is unavailable right now."
 msgstr "This section is unavailable right now."
 
 msgid "This step is for inviting teammates once the team lead is ready."
 msgstr "This step is for inviting teammates once the team lead is ready."
-
-#~ msgid "This step will unlock after you request the change or open the link from your inbox."
-#~ msgstr "This step will unlock after you request the change or open the link from your inbox."
 
 msgid "This team is locked and can no longer be modified."
 msgstr "This team is locked and can no longer be modified."
@@ -5024,9 +5085,6 @@ msgstr "This workspace is correctly routed, but its feature surface is not imple
 
 msgid "This workspace needs attention."
 msgstr "This workspace needs attention."
-
-#~ msgid "Time to invite colleagues"
-#~ msgstr "Time to invite colleagues"
 
 msgid "Timeline"
 msgstr "Timeline"
@@ -5111,6 +5169,12 @@ msgstr "Unable to add mentoring note."
 msgid "Unable to add mentorship note."
 msgstr "Unable to add mentorship note."
 
+msgid "Unable to add the domain."
+msgstr "Unable to add the domain."
+
+msgid "Unable to approve the domain."
+msgstr "Unable to approve the domain."
+
 msgid "Unable to assign mentor."
 msgstr "Unable to assign mentor."
 
@@ -5177,10 +5241,11 @@ msgstr "Unable to delete the university."
 msgid "Unable to download document."
 msgstr "Unable to download document."
 
-msgid "Unable to download the document."
-msgstr "Unable to download the document."
 msgid "Unable to download the attachment."
 msgstr "Unable to download the attachment."
+
+msgid "Unable to download the document."
+msgstr "Unable to download the document."
 
 msgid "Unable to export this report right now."
 msgstr "Unable to export this report right now."
@@ -5226,6 +5291,9 @@ msgstr "Unable to load live applications."
 
 msgid "Unable to load members"
 msgstr "Unable to load members"
+
+msgid "Unable to load opportunity"
+msgstr "Unable to load opportunity"
 
 msgid "Unable to load organization profile"
 msgstr "Unable to load organization profile"
@@ -5284,8 +5352,14 @@ msgstr "Unable to record NTI final acceptance."
 msgid "Unable to register. Please try again."
 msgstr "Unable to register. Please try again."
 
+msgid "Unable to reject the domain."
+msgstr "Unable to reject the domain."
+
 msgid "Unable to remove member."
 msgstr "Unable to remove member."
+
+msgid "Unable to remove the domain."
+msgstr "Unable to remove the domain."
 
 msgid "Unable to remove the member right now."
 msgstr "Unable to remove the member right now."
@@ -5304,6 +5378,9 @@ msgstr "Unable to resend invitation."
 
 msgid "Unable to resend the confirmation email right now."
 msgstr "Unable to resend the confirmation email right now."
+
+msgid "Unable to resend the email."
+msgstr "Unable to resend the email."
 
 msgid "Unable to resend the invitation."
 msgstr "Unable to resend the invitation."
@@ -5338,11 +5415,17 @@ msgstr "Unable to save the university."
 msgid "Unable to save this section."
 msgstr "Unable to save this section."
 
+msgid "Unable to save your student email."
+msgstr "Unable to save your student email."
+
 msgid "Unable to send invitation."
 msgstr "Unable to send invitation."
 
 msgid "Unable to send the message."
 msgstr "Unable to send the message."
+
+msgid "Unable to send the request."
+msgstr "Unable to send the request."
 
 msgid "Unable to sign in and accept the organization invitation."
 msgstr "Unable to sign in and accept the organization invitation."
@@ -5424,6 +5507,15 @@ msgstr "University deactivated."
 
 msgid "University deleted."
 msgstr "University deleted."
+
+msgid "University Domains"
+msgstr "University Domains"
+
+msgid "University email"
+msgstr "University email"
+
+msgid "University email domains are unavailable"
+msgstr "University email domains are unavailable"
 
 msgid "University is required."
 msgstr "University is required."
@@ -5551,6 +5643,9 @@ msgstr "Uploading document…"
 msgid "Uploading…"
 msgstr "Uploading…"
 
+msgid "Use a different email"
+msgstr "Use a different email"
+
 msgid "Use at least 6 characters to secure the invited account."
 msgstr "Use at least 6 characters to secure the invited account."
 
@@ -5580,6 +5675,9 @@ msgstr "Use your admin credentials to access moderation, organization reviews, a
 
 msgid "Use your email and password to continue."
 msgstr "Use your email and password to continue."
+
+msgid "Use your official university email address. We'll send a confirmation link to verify it."
+msgstr "Use your official university email address. We'll send a confirmation link to verify it."
 
 msgid "Users"
 msgstr "Users"
@@ -5620,6 +5718,9 @@ msgstr "Verification token is required."
 msgid "VERIFY EMAIL"
 msgstr "VERIFY EMAIL"
 
+msgid "VERIFY STUDENT EMAIL"
+msgstr "VERIFY STUDENT EMAIL"
+
 msgid "Verify your email"
 msgstr "Verify your email"
 
@@ -5628,6 +5729,12 @@ msgstr "Verify your email address before creating your organization profile."
 
 msgid "Verify your email address to activate your account and continue with onboarding."
 msgstr "Verify your email address to activate your account and continue with onboarding."
+
+msgid "Verify your student email"
+msgstr "Verify your student email"
+
+msgid "Verify your university email address to continue with onboarding."
+msgstr "Verify your university email address to continue with onboarding."
 
 msgid "Version"
 msgstr "Version"
@@ -5649,9 +5756,6 @@ msgstr "View Invites"
 
 msgid "View team access"
 msgstr "View team access"
-
-#~ msgid "Visibility"
-#~ msgstr "Visibility"
 
 msgid "Visible to the team, the mentor, and the client company."
 msgstr "Visible to the team, the mentor, and the client company."
@@ -5713,17 +5817,18 @@ msgstr "We read every message personally"
 msgid "We sent a confirmation link to"
 msgstr "We sent a confirmation link to"
 
-#~ msgid "We sent a confirmation link to {trimmedEmail}. Open it to verify your account, then you'll continue setting up your profile in onboarding."
-#~ msgstr "We sent a confirmation link to {trimmedEmail}. Open it to verify your account, then you'll continue setting up your profile in onboarding."
+#. placeholder {0}: user.studentEmail ?? ''
+msgid "We sent a confirmation link to {0}. Open it to verify your student status."
+msgstr "We sent a confirmation link to {0}. Open it to verify your student status."
+
+msgid "We sent a confirmation link to {normalized}."
+msgstr "We sent a confirmation link to {normalized}."
 
 msgid "We sent a confirmation link to your inbox. Open it to verify your account."
 msgstr "We sent a confirmation link to your inbox. Open it to verify your account."
 
 msgid "We sent a confirmation message to your new email. Your current email will stay the same until you confirm the change."
 msgstr "We sent a confirmation message to your new email. Your current email will stay the same until you confirm the change."
-
-#~ msgid "We sent you a confirmation link. Open it to verify your account, then you'll continue setting up your profile in onboarding."
-#~ msgstr "We sent you a confirmation link. Open it to verify your account, then you'll continue setting up your profile in onboarding."
 
 msgid "We signed you in, but couldn't join this invite — it may be expired or already accepted. You've been signed back out. Please request a new invite."
 msgstr "We signed you in, but couldn't join this invite — it may be expired or already accepted. You've been signed back out. Please request a new invite."
@@ -5818,9 +5923,6 @@ msgstr "You can’t upload this file right now. Check that your account is activ
 msgid "You do not have permission to manage milestones for this project."
 msgstr "You do not have permission to manage milestones for this project."
 
-#~ msgid "You don't have a team yet. Complete your profile onboarding and create a team first."
-#~ msgstr "You don't have a team yet. Complete your profile onboarding and create a team first."
-
 msgid "You don’t have access to download this document right now."
 msgstr "You don’t have access to download this document right now."
 
@@ -5835,9 +5937,6 @@ msgstr "You must accept the terms."
 
 msgid "You retain ownership of the content you submit. You are responsible for ensuring you have the right to share it."
 msgstr "You retain ownership of the content you submit. You are responsible for ensuring you have the right to share it."
-
-#~ msgid "You survived the boss fight"
-#~ msgstr "You survived the boss fight"
 
 msgid "Your account cannot access this application."
 msgstr "Your account cannot access this application."
@@ -5929,6 +6028,9 @@ msgstr "Your session is no longer valid"
 
 msgid "Your session is no longer valid. Please sign in again to continue."
 msgstr "Your session is no longer valid. Please sign in again to continue."
+
+msgid "Your student email was confirmed successfully. You can continue your onboarding."
+msgstr "Your student email was confirmed successfully. You can continue your onboarding."
 
 msgid "Your team data could not be loaded right now, so lead-only actions cannot be resolved."
 msgstr "Your team data could not be loaded right now, so lead-only actions cannot be resolved."

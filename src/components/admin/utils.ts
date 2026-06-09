@@ -53,6 +53,10 @@ export const ADMIN_NAV_ITEMS: AdminNavItem[] = [
     label: 'Organizations',
   },
   {
+    href: ROUTES.ADMIN.UNIVERSITY_EMAIL_DOMAINS,
+    label: 'University Domains',
+  },
+  {
     href: ROUTES.ADMIN.INVITES,
     label: 'Invites',
   },
@@ -93,6 +97,10 @@ export function getAdminNavLabel(href: string) {
 
   if (href === ROUTES.ADMIN.ORGANIZATIONS) {
     return 'Organizations';
+  }
+
+  if (href === ROUTES.ADMIN.UNIVERSITY_EMAIL_DOMAINS) {
+    return 'University Domains';
   }
 
   if (href === ROUTES.ADMIN.INVITES) {

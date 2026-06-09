@@ -6,6 +6,7 @@ const AUTH_ROUTES = {
   REGISTER_COMPANY_ORGANIZATION: '/register/company-owner/organization',
   FORGOT_PASSWORD: '/forgot-password',
   VERIFY_EMAIL: '/verify-email',
+  VERIFY_STUDENT_EMAIL: '/verify-student-email',
   RESET_PASSWORD: '/reset-password',
   REGISTER_SELECT: '/register/select-role',
 } as const;
@@ -28,6 +29,7 @@ const ADMIN_ROUTES = {
   CONTACT: '/admin/contact',
   USERS: '/admin/users',
   ACADEMIC_STRUCTURE: '/admin/academic-structure',
+  UNIVERSITY_EMAIL_DOMAINS: '/admin/university-email-domains',
   ORGANIZATIONS: '/admin/organizations',
   ORGANIZATION_DETAILS: '/admin/organizations/[organizationId]',
   organizationDetails: (organizationId: string) => `/admin/organizations/${organizationId}`,

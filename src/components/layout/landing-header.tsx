@@ -14,6 +14,10 @@ import { NtiBrand } from './nti-brand';
 export function LandingHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
   return (
     <header className="bg-card/80 fixed top-0 z-50 w-full shadow-sm backdrop-blur-md">
       <nav className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-between px-6 py-4 font-bold tracking-tight">
@@ -22,8 +26,9 @@ export function LandingHeader() {
 
           <button
             className="text-muted-foreground lg:hidden"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            onClick={() => setMobileMenuOpen((previousState) => !previousState)}
             aria-label={mobileMenuOpen ? t`Close menu` : t`Open menu`}
+            aria-expanded={mobileMenuOpen}
             type="button"
           >
             {mobileMenuOpen ? <X className="h-8 w-8" /> : <Menu className="h-8 w-8" />}
@@ -38,6 +43,7 @@ export function LandingHeader() {
           <Link
             className="text-muted-foreground hover:text-primary transition-colors"
             href={ROUTES.ABOUT}
+            onClick={closeMobileMenu}
           >
             {t`About`}
           </Link>
@@ -45,6 +51,7 @@ export function LandingHeader() {
           <Link
             className="text-muted-foreground hover:text-primary transition-colors"
             href={ROUTES.PROGRAMS}
+            onClick={closeMobileMenu}
           >
             {t`Programs`}
           </Link>
@@ -52,6 +59,7 @@ export function LandingHeader() {
           <Link
             className="text-muted-foreground hover:text-primary transition-colors"
             href={ROUTES.CALLS}
+            onClick={closeMobileMenu}
           >
             {t`Calls`}
           </Link>
@@ -59,6 +67,7 @@ export function LandingHeader() {
           <Link
             className="text-muted-foreground hover:text-primary transition-colors"
             href={ROUTES.MENTORS}
+            onClick={closeMobileMenu}
           >
             {t`Mentors`}
           </Link>
@@ -66,6 +75,7 @@ export function LandingHeader() {
           <Link
             className="text-muted-foreground hover:text-primary transition-colors"
             href={ROUTES.PARTNERS}
+            onClick={closeMobileMenu}
           >
             {t`Partners`}
           </Link>
@@ -73,6 +83,7 @@ export function LandingHeader() {
           <Link
             className="text-muted-foreground hover:text-primary transition-colors"
             href={ROUTES.NEWS}
+            onClick={closeMobileMenu}
           >
             {t`News`}
           </Link>

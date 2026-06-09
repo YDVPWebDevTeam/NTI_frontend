@@ -18,6 +18,18 @@ export function StudentOnboardingActions({
   onSaveAcademic,
   onSaveSkills,
 }: StudentOnboardingActionsProps) {
+  // The student-email stage manages its own actions inside StudentEmailStage;
+  // here we only surface navigation back to the professional skills stage.
+  if (activeStage === 'student-email') {
+    return (
+      <div className="flex flex-wrap gap-3">
+        <Button type="button" variant="outline" onClick={() => onStageChange('skills')}>
+          {t`Back to professional skills`}
+        </Button>
+      </div>
+    );
+  }
+
   const saveActionLabel =
     activeStage === 'academic' ? t`Save academic information` : t`Save professional skills`;
 

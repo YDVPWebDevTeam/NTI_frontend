@@ -1,5 +1,5 @@
 import { t } from '@lingui/core/macro';
-import { BriefcaseBusiness, Check, GraduationCap, Users } from 'lucide-react';
+import { AtSign, BriefcaseBusiness, Check, GraduationCap, Users } from 'lucide-react';
 
 import { cn } from 'lib/utils';
 
@@ -8,6 +8,7 @@ import type { JourneyStepConfig, StudentJourneyStepId } from '../lib/config';
 const STEP_ICONS = {
   academic: GraduationCap,
   skills: BriefcaseBusiness,
+  'student-email': AtSign,
   team: Users,
 } as const;
 

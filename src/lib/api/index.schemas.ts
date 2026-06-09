@@ -2319,11 +2319,19 @@ export interface CreateTeamApplicationDto {
   cvFileIds: string[];
 }
 
+/**
+ * @nullable
+ */
+export type StudentProfileUserDtoStudentEmail = string | null;
+
 export interface StudentProfileUserDto {
   id: string;
   firstName: string;
   lastName: string;
   email: string;
+  /** @nullable */
+  studentEmail: StudentProfileUserDtoStudentEmail;
+  isStudentEmailConfirmed: boolean;
 }
 
 export type StudentProfileDataDtoDegreeLevel = typeof StudentProfileDataDtoDegreeLevel[keyof typeof StudentProfileDataDtoDegreeLevel];
@@ -2453,6 +2461,7 @@ export interface StudentProjectDto {
 export interface StudentProfileCompletionDto {
   academicInformationCompleted: boolean;
   professionalSkillsCompleted: boolean;
+  studentEmailConfirmed: boolean;
   profileCompleted: boolean;
 }
 
@@ -4060,6 +4069,33 @@ export interface ConversationAttachmentDownloadDto {
   downloadUrl: string;
 }
 
+export interface RequestUniversityEmailDomainDto {
+  /** Student email whose domain should be reviewed for approval. */
+  email: string;
+  /** Optional message for the admins reviewing the request. */
+  note?: string;
+}
+
+export interface CreateUniversityEmailDomainDto {
+  /** Domain to add to the approved list (with or without "@"). */
+  domain: string;
+}
+
+export interface RejectUniversityEmailDomainDto {
+  /** Reason the domain request was rejected. */
+  reason: string;
+}
+
+export interface SetStudentEmailDto {
+  /** University email the student wants to verify. */
+  studentEmail: string;
+}
+
+export interface ConfirmStudentEmailDto {
+  /** Token from the verification email. */
+  token: string;
+}
+
 export type AppControllerGetHealth1200 = {
   status?: string;
 };
@@ -4950,4 +4986,25 @@ dateFrom: string;
  */
 dateTo: string;
 };
+
+export type UniversityEmailDomainControllerCheckParams = {
+/**
+ * Email whose domain should be checked.
+ */
+email: string;
+};
+
+export type AdminUniversityEmailDomainsControllerListParams = {
+status?: AdminUniversityEmailDomainsControllerListStatus;
+};
+
+export type AdminUniversityEmailDomainsControllerListStatus = typeof AdminUniversityEmailDomainsControllerListStatus[keyof typeof AdminUniversityEmailDomainsControllerListStatus];
+
+
+// eslint-disable-next-line @typescript-eslint/no-redeclare
+export const AdminUniversityEmailDomainsControllerListStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED',
+} as const;
 

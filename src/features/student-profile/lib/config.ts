@@ -4,13 +4,13 @@ import type { StudentProfileCompletionDto } from 'lib/api';
 import type { StudentRegistrationValues } from 'lib/auth/schemas';
 
 export type StudentRegistrationStepId = 'identity' | 'email' | 'academic' | 'skills' | 'review';
-export type StudentOnboardingStageId = 'academic' | 'skills';
+export type StudentOnboardingStageId = 'academic' | 'skills' | 'student-email';
 
 // The full post-confirmation journey shown in the progress stepper. Identity and
 // email happen during registration (gated by email confirmation), so they stay
 // outside this stepper. The `team` step lives on a separate page (/student/team)
 // but is surfaced here so the journey reads as one continuous, step-by-step flow.
-export type StudentJourneyStepId = 'academic' | 'skills' | 'team';
+export type StudentJourneyStepId = 'academic' | 'skills' | 'student-email' | 'team';
 
 export const STUDENT_PROFILE_FIELD_GROUPS = {
   identity: ['firstName', 'lastName', 'email', 'password', 'acceptTerms'],
@@ -102,6 +102,13 @@ export function getStudentOnboardingStageMeta(stageId: StudentOnboardingStageId)
     };
   }
 
+  if (stageId === 'student-email') {
+    return {
+      title: t`Student Email`,
+      description: t`Add and confirm your university email so we can verify your student status.`,
+    };
+  }
+
   return {
     title: t`Professional Skills`,
     description: t`Add your CV, skills, and supporting professional details.`,
@@ -124,6 +131,12 @@ export function getStudentOnboardingStages(
       description: t`CV, technical skills, roles, links, and projects.`,
       completed: completion.professionalSkillsCompleted,
     },
+    {
+      id: 'student-email',
+      title: t`Student email`,
+      description: t`Add and confirm your university email address.`,
+      completed: completion.studentEmailConfirmed,
+    },
   ];
 }
 
@@ -138,7 +151,7 @@ export function getNextStudentOnboardingStage(
     return 'skills';
   }
 
-  return 'skills';
+  return 'student-email';
 }
 
 export function getStudentJourneyStepMeta(stepId: StudentJourneyStepId) {
@@ -172,6 +185,12 @@ export function getStudentJourneySteps(
       completed: completion.professionalSkillsCompleted,
     },
     {
+      id: 'student-email',
+      title: t`Student email`,
+      description: t`Add and confirm your university email address.`,
+      completed: completion.studentEmailConfirmed,
+    },
+    {
       id: 'team',
       title: t`Build your team`,
       description: t`Create your team and invite your teammates.`,
@@ -185,6 +204,9 @@ export function isOnboardingJourneyComplete(
   hasTeam: boolean,
 ): boolean {
   return (
-    completion.academicInformationCompleted && completion.professionalSkillsCompleted && hasTeam
+    completion.academicInformationCompleted &&
+    completion.professionalSkillsCompleted &&
+    completion.studentEmailConfirmed &&
+    hasTeam
   );
 }

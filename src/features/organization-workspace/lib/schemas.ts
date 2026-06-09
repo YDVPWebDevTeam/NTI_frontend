@@ -143,7 +143,6 @@ export function createOrganizationDocumentUploadSchema() {
       .string()
       .trim()
       .min(1, { message: t`Document type is required.` }),
-    visibility: z.enum(['INTERNAL', 'CONFIDENTIAL']),
     file: z
       .custom<File | null>((value) => value === null || isBrowserFile(value), {
         message: t`Please choose a file to upload.`,
@@ -160,6 +159,5 @@ export function createOrganizationDocumentUploadSchema() {
 export type OrganizationDocumentUploadFormValues = {
   name: string;
   documentType: string;
-  visibility: 'INTERNAL' | 'CONFIDENTIAL';
   file: File | null;
 };

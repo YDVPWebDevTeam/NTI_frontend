@@ -271,7 +271,7 @@ export function ProgramBCompanyDashboard() {
         {pendingActionsContent}
       </CompanyDashboardSection>
 
-      <section className="grid gap-6 xl:grid-cols-2">
+      <section className="space-y-6">
         <CompanyDashboardSection
           title={t`Backlog preview`}
           description={t`A quick look at the latest backlog items for your organization.`}

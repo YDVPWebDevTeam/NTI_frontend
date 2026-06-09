@@ -117,7 +117,7 @@ export function OrganizationWorkspacePage({ currentUser }: { currentUser: Authen
       <div className="grid gap-6 xl:grid-cols-2">
         <div className="border-border bg-card rounded-2xl border p-6 shadow-sm">
           <div className="flex items-start gap-4">
-            <div className="bg-accent text-primary flex h-12 w-12 items-center justify-center rounded-2xl">
+            <div className="bg-accent text-primary flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl">
               <Building2 className="h-6 w-6" />
             </div>
             <div className="space-y-2">
@@ -131,7 +131,7 @@ export function OrganizationWorkspacePage({ currentUser }: { currentUser: Authen
 
         <div className="border-border bg-card rounded-2xl border p-6 shadow-sm">
           <div className="flex items-start gap-4">
-            <div className="bg-info/10 text-info flex h-12 w-12 items-center justify-center rounded-2xl">
+            <div className="bg-info/10 text-info flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl">
               <Files className="h-6 w-6" />
             </div>
             <div className="space-y-2">

@@ -90,7 +90,7 @@ export function EmailChangeSection({
   }
 
   return (
-    <div className="grid gap-6 xl:grid-cols-2">
+    <div className="space-y-6">
       <EmailChangePanel
         eyebrow={t`Request change`}
         title={t`Confirm your new email`}
@@ -140,14 +140,14 @@ export function EmailChangeSection({
         </Form>
       </EmailChangePanel>
 
-      <EmailChangePanel
-        eyebrow={t`Confirm change`}
-        title={t`Finish email change`}
-        description={t`Open the link in your email, or paste the code here. After that, sign in again.`}
-        feedback={confirmFeedback}
-        feedbackEyebrow={t`Confirmation status`}
-      >
-        {canConfirmEmailChange ? (
+      {canConfirmEmailChange ? (
+        <EmailChangePanel
+          eyebrow={t`Confirm change`}
+          title={t`Finish email change`}
+          description={t`Open the link in your email, or paste the code here. After that, sign in again.`}
+          feedback={confirmFeedback}
+          feedbackEyebrow={t`Confirmation status`}
+        >
           <Form {...confirmForm}>
             <form onSubmit={confirmForm.handleSubmit(onConfirmSubmit)} className="space-y-5">
               <ControlledInputField
@@ -177,12 +177,8 @@ export function EmailChangeSection({
               </Button>
             </form>
           </Form>
-        ) : (
-          <div className="border-border bg-card text-muted-foreground rounded-2xl border border-dashed p-4 text-sm leading-6">
-            {t`This step will unlock after you request the change or open the link from your inbox.`}
-          </div>
-        )}
-      </EmailChangePanel>
+        </EmailChangePanel>
+      ) : null}
     </div>
   );
 }

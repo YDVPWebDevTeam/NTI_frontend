@@ -3,13 +3,12 @@
 import { t } from '@lingui/core/macro';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useQueryClient } from '@tanstack/react-query';
-import { Download, FileText, Lock, Upload } from 'lucide-react';
+import { Download, FileText, Upload } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { type Resolver, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import {
-  CreateOrganizationDocumentUploadDtoVisibility,
   getOrganizationDocumentsControllerListDocumentsQueryKey,
   useOrganizationDocumentsControllerCompleteUpload,
   useOrganizationDocumentsControllerCreateUpload,
@@ -29,11 +28,6 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
 } from 'components/shadcn';
 import { formatEnumLabel } from 'lib/utils';
 import {
@@ -55,7 +49,6 @@ interface OrganizationDocument {
   id: string;
   name: string;
   version: number | string;
-  visibility: string;
   documentType: string;
   status: string;
   sizeBytes: number;
@@ -98,7 +91,6 @@ export function OrganizationDocumentsSection({ organizationId }: { organizationI
     defaultValues: {
       name: '',
       documentType: '',
-      visibility: CreateOrganizationDocumentUploadDtoVisibility.INTERNAL,
       file: null,
     },
     mode: 'onChange',
@@ -141,7 +133,6 @@ export function OrganizationDocumentsSection({ organizationId }: { organizationI
           documentType: values.documentType.trim(),
           mimeType: values.file.type || DEFAULT_MIME_TYPE,
           sizeBytes: values.file.size,
-          visibility: values.visibility,
         },
       })) as unknown as OrganizationDocumentUploadTicket;
 
@@ -162,7 +153,6 @@ export function OrganizationDocumentsSection({ organizationId }: { organizationI
       form.reset({
         name: '',
         documentType: '',
-        visibility: CreateOrganizationDocumentUploadDtoVisibility.INTERNAL,
         file: null,
       });
       await refreshDocuments();
@@ -234,69 +224,32 @@ export function OrganizationDocumentsSection({ organizationId }: { organizationI
               />
             </div>
 
-            <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_220px]">
-              <FormField
-                control={form.control}
-                name="file"
-                render={() => (
-                  <FormItem>
-                    <FormLabel>{t`File`}</FormLabel>
-                    <FormControl>
-                      <FileInput
-                        id="organization-document-file"
-                        file={selectedFile instanceof File ? selectedFile : null}
-                        onFileChange={(file) =>
-                          form.setValue('file', file, { shouldDirty: true, shouldValidate: true })
-                        }
-                        accept={DOCUMENT_ACCEPT}
-                        disabled={isUploading}
-                        placeholder={t`Choose a document file`}
-                        buttonLabel={t`Browse file`}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                    <p className="text-muted-foreground text-sm leading-6">
-                      {t`Accepted formats: PDF, DOC, DOCX, PNG, JPG, JPEG, WEBP.`}
-                    </p>
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="visibility"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>{t`Visibility`}</FormLabel>
-                    <Select
-                      value={field.value}
-                      onValueChange={field.onChange}
+            <FormField
+              control={form.control}
+              name="file"
+              render={() => (
+                <FormItem>
+                  <FormLabel>{t`File`}</FormLabel>
+                  <FormControl>
+                    <FileInput
+                      id="organization-document-file"
+                      file={selectedFile instanceof File ? selectedFile : null}
+                      onFileChange={(file) =>
+                        form.setValue('file', file, { shouldDirty: true, shouldValidate: true })
+                      }
+                      accept={DOCUMENT_ACCEPT}
                       disabled={isUploading}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value={CreateOrganizationDocumentUploadDtoVisibility.INTERNAL}>
-                          {t`Internal`}
-                        </SelectItem>
-                        <SelectItem
-                          value={CreateOrganizationDocumentUploadDtoVisibility.CONFIDENTIAL}
-                        >
-                          {t`Confidential`}
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <p className="text-muted-foreground text-sm leading-6">
-                      {t`Choose who this document should be visible to.`}
-                    </p>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+                      placeholder={t`Choose a document file`}
+                      buttonLabel={t`Browse file`}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                  <p className="text-muted-foreground text-sm leading-6">
+                    {t`Accepted formats: PDF, DOC, DOCX, PNG, JPG, JPEG, WEBP.`}
+                  </p>
+                </FormItem>
+              )}
+            />
 
             <div className="flex justify-end">
               <Button type="submit" disabled={isUploading || !form.formState.isValid}>
@@ -346,10 +299,6 @@ export function OrganizationDocumentsSection({ organizationId }: { organizationI
                       <p className="text-foreground text-base font-semibold">{document.name}</p>
                       <span className="bg-accent text-primary inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold">
                         {`v${document.version}`}
-                      </span>
-                      <span className="bg-muted text-muted-foreground inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold">
-                        <Lock className="h-3.5 w-3.5" />
-                        {formatEnumLabel(document.visibility)}
                       </span>
                     </div>
 

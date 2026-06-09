@@ -17,7 +17,7 @@ msgid " and institutional data processing terms required for platform access."
 msgstr " a inštitucionálne podmienky spracovania údajov potrebné na prístup k platforme."
 
 msgid "—"
-msgstr ""
+msgstr "—"
 
 #. placeholder {0}: overview.projects.awaitingFinalAcceptance
 #. placeholder {1}: overview.projects.overdueMilestones
@@ -71,7 +71,7 @@ msgid "A lighter student workspace with separate flows for foundation setup, Pro
 msgstr "Jednoduchšie študentské pracovisko so samostatnými tokmi pre základné nastavenie, prihlášky do Programu A a príležitosti v Programe B."
 
 msgid "A message may have at most {MAX_ATTACHMENTS} attachments."
-msgstr ""
+msgstr "Správa môže mať maximálne {MAX_ATTACHMENTS} príloh."
 
 msgid "A product owner is already assigned. Reassign delivery to this member?"
 msgstr "Produktový vlastník je už pridelený. Preradiť dodávku tomuto členovi?"
@@ -236,7 +236,7 @@ msgid "Add a mentoring note"
 msgstr "Pridať mentorskú poznámku"
 
 msgid "Add a mentorship note"
-msgstr ""
+msgstr "Pridať mentorskú poznámku"
 
 msgid "Add a new delivery milestone to this project."
 msgstr "Pridajte do tohto projektu nový realizačný míľnik."
@@ -245,13 +245,13 @@ msgid "Add a new university record to start a new academic branch."
 msgstr "Pridajte nový záznam univerzity na vytvorenie novej akademickej vetvy."
 
 msgid "Add an approved domain"
-msgstr ""
+msgstr "Pridať schválenú doménu"
 
 msgid "Add and confirm your university email address."
-msgstr ""
+msgstr "Pridajte a potvrďte svoju univerzitnú e-mailovú adresu."
 
 msgid "Add and confirm your university email so we can verify your student status."
-msgstr ""
+msgstr "Pridajte a potvrďte svoju univerzitnú e-mailovú adresu, aby sme mohli overiť váš štatút študenta."
 
 msgid "Add at least one technical skill."
 msgstr "Pridajte aspoň jednu technickú zručnosť."
@@ -272,7 +272,7 @@ msgid "Add company details so your organization can be reviewed and connected to
 msgstr "Pridajte údaje o spoločnosti, aby mohla byť vaša organizácia skontrolovaná a prepojená s platformou."
 
 msgid "Add domain"
-msgstr ""
+msgstr "Pridať doménu"
 
 msgid "Add evaluation"
 msgstr "Pridať hodnotenie"
@@ -293,7 +293,7 @@ msgid "Add your evaluation"
 msgstr "Pridať vaše hodnotenie"
 
 msgid "Adding…"
-msgstr ""
+msgstr "Pridáva sa…"
 
 msgid "Additional submitted section data."
 msgstr "Ďalšie odoslané údaje sekcie."
@@ -499,7 +499,7 @@ msgid "Assigned mentor"
 msgstr "Pridelený mentor"
 
 msgid "Assigned Program A projects could not be loaded right now."
-msgstr ""
+msgstr "Priradené projekty Programu A sa momentálne nedajú načítať."
 
 msgid "Assigned:"
 msgstr "Priradený:"
@@ -517,13 +517,13 @@ msgid "At least one skill must be marked as primary."
 msgstr "Aspoň jedna zručnosť musí byť označená ako hlavná."
 
 msgid "Attach"
-msgstr ""
+msgstr "Priložiť"
 
 msgid "Attach document"
 msgstr "Priložiť dokument"
 
 msgid "Attached documents"
-msgstr ""
+msgstr "Priložené dokumenty"
 
 msgid "Attention required"
 msgstr "Vyžaduje sa pozornosť"
@@ -580,7 +580,7 @@ msgid "Back to Organizations"
 msgstr "Späť na organizácie"
 
 msgid "Back to professional skills"
-msgstr ""
+msgstr "Späť na profesijné zručnosti"
 
 msgid "Back to projects"
 msgstr "Späť na projekty"
@@ -676,7 +676,7 @@ msgid "Call updated."
 msgstr "Výzva bola aktualizovaná."
 
 msgid "Call:"
-msgstr ""
+msgstr "Výzva:"
 
 msgid "Calls"
 msgstr "Výzvy"
@@ -943,7 +943,7 @@ msgid "Confirm your email"
 msgstr "Potvrďte svoj e-mail"
 
 msgid "Confirm your email address from the message sent to your inbox to continue with onboarding."
-msgstr ""
+msgstr "Potvrďte svoju e-mailovú adresu prostredníctvom správy odoslanej do vašej schránky, aby ste mohli pokračovať s onboardingom."
 
 msgid "Confirm your new email"
 msgstr "Potvrďte svoj nový e-mail"
@@ -952,7 +952,7 @@ msgid "Confirm your NTI account"
 msgstr "Potvrďte svoj účet NTI"
 
 msgid "Confirm your student email"
-msgstr ""
+msgstr "Potvrďte svoj študentský e-mail"
 
 msgid "Confirmation code"
 msgstr "Potvrdzovací kód"
@@ -964,7 +964,7 @@ msgid "Confirmation email sent."
 msgstr "Potvrdzovací e-mail bol odoslaný."
 
 msgid "Confirmation link sent again."
-msgstr ""
+msgstr "Potvrdzovací odkaz bol odoslaný znova."
 
 msgid "Confirmation status"
 msgstr "Stav potvrdenia"
@@ -982,10 +982,10 @@ msgid "Confirming your email change"
 msgstr "Potvrdzovanie zmeny vášho e-mailu"
 
 msgid "Confirming your student email"
-msgstr ""
+msgstr "Potvrdzuje sa váš študentský e-mail"
 
 msgid "Confirming your student email address..."
-msgstr ""
+msgstr "Potvrdzuje sa vaša študentská e-mailová adresa..."
 
 msgid "Confirming…"
 msgstr "Potvrdzuje sa…"
@@ -1021,7 +1021,7 @@ msgid "Continue draft"
 msgstr "Pokračovať v návrhu"
 
 msgid "CONTINUE ONBOARDING"
-msgstr ""
+msgstr "POKRAČOVAŤ V ONBOARDINGU"
 
 msgid "Continue your onboarding, track applications, and manage your NTI profile from one place."
 msgstr "Pokračujte v onboardingu, sledujte prihlášky a spravujte svoj NTI profil z jedného miesta."
@@ -1159,7 +1159,7 @@ msgid "Created By"
 msgstr "Vytvoril"
 
 msgid "Created:"
-msgstr ""
+msgstr "Vytvorené:"
 
 msgid "CREATING ACCOUNT..."
 msgstr "VYTVÁRA SA ÚČET..."
@@ -1357,7 +1357,7 @@ msgid "Document name is required."
 msgstr "Názov dokumentu je povinný."
 
 msgid "Document templates"
-msgstr ""
+msgstr "Šablóny dokumentov"
 
 msgid "Document type"
 msgstr "Typ dokumentu"
@@ -1378,28 +1378,28 @@ msgid "Documents aren't available for this account yet."
 msgstr "Dokumenty pre tento účet zatiaľ nie sú dostupné."
 
 msgid "Documents currently attached to this application. Download to review the uploaded files."
-msgstr ""
+msgstr "Dokumenty momentálne priložené k tejto prihláške. Stiahnite si ich a skontrolujte nahrané súbory."
 
 msgid "Doe"
 msgstr "Novák"
 
 msgid "Domain"
-msgstr ""
+msgstr "Doména"
 
 msgid "Domain added."
-msgstr ""
+msgstr "Doména bola pridaná."
 
 msgid "Domain approved."
-msgstr ""
+msgstr "Doména bola schválená."
 
 msgid "Domain not recognized"
-msgstr ""
+msgstr "Doména nebola rozpoznaná"
 
 msgid "Domain rejected."
-msgstr ""
+msgstr "Doména bola zamietnutá."
 
 msgid "Domain removed."
-msgstr ""
+msgstr "Doména bola odstránená."
 
 msgid "Done"
 msgstr "Dokončené"
@@ -1408,14 +1408,14 @@ msgid "Download"
 msgstr "Stiahnuť"
 
 msgid "Download a Word template, fill it in, and upload it below."
-msgstr ""
+msgstr "Stiahnite si šablónu Word, vyplňte ju a nahrajte ju nižšie."
 
 msgid "Download current CV"
 msgstr "Stiahnuť aktuálne CV"
 
 #. placeholder {0}: selectedTemplate.label
 msgid "Download the {0} template"
-msgstr ""
+msgstr "Stiahnuť šablónu {0}"
 
 msgid "Draft"
 msgstr "Koncept"
@@ -1444,7 +1444,7 @@ msgid "E.g. competitions, awards, scholarships..."
 msgstr "Napr. súťaže, ocenenia, štipendiá..."
 
 msgid "e.g. ukf.sk"
-msgstr ""
+msgstr "napr. ukf.sk"
 
 msgid "e.g., React"
 msgstr "napr. React"
@@ -1484,7 +1484,7 @@ msgid "Edit your evaluation"
 msgstr "Upraviť vaše hodnotenie"
 
 msgid "edited"
-msgstr ""
+msgstr "upravené"
 
 msgid "Education details, academic verification, and declaration."
 msgstr "Detaily vzdelania, akademické overenie a vyhlásenie."
@@ -1588,7 +1588,7 @@ msgid "Enter a valid email"
 msgstr "Zadajte platný e-mail"
 
 msgid "Enter a valid email address."
-msgstr ""
+msgstr "Zadajte platnú e-mailovú adresu."
 
 msgid "Enter a valid non-negative number for the reward amount."
 msgstr "Zadajte platné kladné číslo ako výšku odmeny."
@@ -1801,7 +1801,7 @@ msgid "Failed signals"
 msgstr "Nesplnené signály"
 
 msgid "Fetching the latest opportunity details."
-msgstr ""
+msgstr "Načítavajú sa najnovšie detaily príležitosti."
 
 msgid "File"
 msgstr "Súbor"
@@ -1949,6 +1949,9 @@ msgid ""
 "\n"
 ""
 msgstr ""
+"Dobrý deň, rád/rada by som sa dozvedel/a viac o možnosti stať sa mentorom NTI. Tu je pár slov o mne:\n"
+"\n"
+""
 
 msgid "Hide password"
 msgstr "Skryť heslo"
@@ -1978,7 +1981,7 @@ msgid "I HAVE ACCOUNT"
 msgstr "MÁM ÚČET"
 
 msgid "I've confirmed it"
-msgstr ""
+msgstr "Potvrdil/a som to"
 
 msgid "ICO"
 msgstr "IČO"
@@ -2234,7 +2237,7 @@ msgid "Level is required."
 msgstr "Úroveň je povinná."
 
 msgid "Lifecycle:"
-msgstr ""
+msgstr "Životný cyklus:"
 
 msgid "Link expired"
 msgstr "Platnosť odkazu vypršala"
@@ -2273,7 +2276,7 @@ msgid "Loading applications to review..."
 msgstr "Načítavajú sa prihlášky na kontrolu..."
 
 msgid "Loading attached documents…"
-msgstr ""
+msgstr "Načítavajú sa priložené dokumenty…"
 
 msgid "Loading backlog item"
 msgstr "Načítava sa položka backlogu"
@@ -2324,7 +2327,7 @@ msgid "Loading mentorship notes..."
 msgstr "Načítavajú sa mentorské poznámky..."
 
 msgid "Loading messages"
-msgstr ""
+msgstr "Načítavajú sa správy"
 
 msgid "Loading milestones"
 msgstr "Načítavajú sa míľniky"
@@ -2333,7 +2336,7 @@ msgid "Loading needs-info thread..."
 msgstr "Načítava sa vlákno požiadaviek na doplnenie informácií..."
 
 msgid "Loading opportunity…"
-msgstr ""
+msgstr "Načítava sa príležitosť…"
 
 msgid "Loading organization profile…"
 msgstr "Načítava sa profil organizácie…"
@@ -2348,7 +2351,7 @@ msgid "Loading Program A milestones..."
 msgstr "Načítavajú sa míľniky Programu A..."
 
 msgid "Loading Program A project"
-msgstr ""
+msgstr "Načítava sa projekt Programu A"
 
 msgid "Loading project"
 msgstr "Načítava sa projekt"
@@ -2357,7 +2360,7 @@ msgid "Loading reports..."
 msgstr "Načítavajú sa reporty..."
 
 msgid "Loading sections…"
-msgstr ""
+msgstr "Načítavajú sa sekcie…"
 
 msgid "Loading specializations..."
 msgstr "Načítavajú sa špecializácie..."
@@ -2521,7 +2524,7 @@ msgid "Mentors"
 msgstr "Mentori"
 
 msgid "Mentorship note added."
-msgstr ""
+msgstr "Mentorská poznámka bola pridaná."
 
 msgid "Mentorship notes"
 msgstr "Mentorské poznámky"
@@ -2536,22 +2539,22 @@ msgid "Message"
 msgstr "Správa"
 
 msgid "Message cannot be empty."
-msgstr ""
+msgstr "Správa nemôže byť prázdna."
 
 msgid "Message deleted"
-msgstr ""
+msgstr "Správa bola odstránená"
 
 msgid "Message sent!"
 msgstr "Správa odoslaná!"
 
 msgid "Messages"
-msgstr ""
+msgstr "Správy"
 
 msgid "Messages are unavailable right now."
-msgstr ""
+msgstr "Správy teraz nie sú dostupné."
 
 msgid "Messages with your mentor"
-msgstr ""
+msgstr "Správy s vaším mentorom"
 
 msgid "Milestone created."
 msgstr "Míľnik bol vytvorený."
@@ -2653,7 +2656,7 @@ msgid "name@institution.edu…"
 msgstr "meno@institucia.edu…"
 
 msgid "name@ukf.sk"
-msgstr ""
+msgstr "meno@ukf.sk"
 
 msgid "Needs attention"
 msgstr "Vyžaduje pozornosť"
@@ -2747,7 +2750,7 @@ msgid "No application sections were returned by the backend."
 msgstr "Backend nevrátil žiadne sekcie prihlášky."
 
 msgid "No application sections yet."
-msgstr ""
+msgstr "Zatiaľ žiadne sekcie prihlášky."
 
 msgid "No applications found."
 msgstr "Nenašli sa žiadne prihlášky."
@@ -2756,7 +2759,7 @@ msgid "No applications to review"
 msgstr "Žiadne prihlášky na kontrolu"
 
 msgid "No assigned Program A projects"
-msgstr ""
+msgstr "Žiadne priradené projekty Programu A"
 
 msgid "No assigned projects"
 msgstr "Žiadne priradené projekty"
@@ -2798,7 +2801,7 @@ msgid "No description."
 msgstr "Bez popisu."
 
 msgid "No documents have been attached yet."
-msgstr ""
+msgstr "Zatiaľ neboli priložené žiadne dokumenty."
 
 msgid "No documents uploaded yet"
 msgstr "Zatiaľ neboli nahrané žiadne dokumenty"
@@ -2807,7 +2810,7 @@ msgid "No documents uploaded yet."
 msgstr "Zatiaľ neboli nahrané žiadne dokumenty."
 
 msgid "No domains match the current filters."
-msgstr ""
+msgstr "Žiadne domény nezodpovedajú aktuálnym filtrom."
 
 msgid "No due date"
 msgstr "Bez termínu"
@@ -2858,10 +2861,10 @@ msgid "No mentorship notes were returned by the backend."
 msgstr "Backend nevrátil žiadne mentorské poznámky."
 
 msgid "No mentorship notes yet."
-msgstr ""
+msgstr "Zatiaľ žiadne mentorské poznámky."
 
 msgid "No messages yet."
-msgstr ""
+msgstr "Zatiaľ žiadne správy."
 
 msgid "No milestone description."
 msgstr "Bez popisu míľnika."
@@ -2927,7 +2930,7 @@ msgid "No section content provided."
 msgstr "Obsah sekcie nebol poskytnutý."
 
 msgid "No sections have been filled in yet."
-msgstr ""
+msgstr "Zatiaľ neboli vyplnené žiadne sekcie."
 
 msgid "No sector provided"
 msgstr "Neuvádza sa žiadne odvetvie"
@@ -2951,7 +2954,7 @@ msgid "No team"
 msgstr "Žiadny tím"
 
 msgid "No team members were returned."
-msgstr ""
+msgstr "Neboli vrátení žiadni členovia tímu."
 
 msgid "No universities available"
 msgstr "Nie sú dostupné žiadne univerzity"
@@ -2996,7 +2999,7 @@ msgid "Not provided"
 msgstr "Neuvedené"
 
 msgid "Not saved yet"
-msgstr ""
+msgstr "Ešte neuložené"
 
 msgid "Not set"
 msgstr "Nenastavené"
@@ -3161,7 +3164,7 @@ msgid "Open that link from any device to confirm your email — it works even if
 msgstr "Otvorte odkaz z ľubovoľného zariadenia na potvrdenie e-mailu — funguje aj keď ste sa odhlásili."
 
 msgid "Open that link from any device to confirm your email — it works even if you are signed out. Once confirmed, you'll continue setting up your profile in onboarding."
-msgstr ""
+msgstr "Otvorte tento odkaz z ľubovoľného zariadenia na potvrdenie e-mailu — funguje aj keď ste odhlásení. Po potvrdení budete pokračovať v nastavení profilu počas onboardingu."
 
 msgid "Open the application detail and reply to the needs-info request."
 msgstr "Otvorte detail prihlášky a odpovedzte na žiadosť o doplnenie informácií."
@@ -3170,7 +3173,7 @@ msgid "Open the confirmation link from the email we sent to verify your company 
 msgstr "Otvorte potvrdzovací odkaz z e-mailu, ktorý sme vám poslali, aby ste overili svoj účet vlastníka spoločnosti."
 
 msgid "Open the confirmation link from the email we sent to your student address."
-msgstr ""
+msgstr "Otvorte potvrdzovací odkaz z e-mailu, ktorý sme odoslali na vašu študentskú adresu."
 
 msgid "Open the confirmation link from the email we sent you to finish verifying your account."
 msgstr "Otvorte potvrdzovací odkaz z e-mailu, ktorý sme vám poslali, aby ste dokončili overovanie svojho účtu."
@@ -3182,7 +3185,7 @@ msgid "Open the full confirmation link from your email. If it still does not wor
 msgstr "Otvorte úplný potvrdzovací odkaz z vášho e-mailu. Ak to stále nefunguje, požiadajte o nový potvrdzovací e-mail zo stránky prihlásenia."
 
 msgid "Open the full confirmation link from your email. If it still does not work, request a new confirmation email from your onboarding."
-msgstr ""
+msgstr "Otvorte celý potvrdzovací odkaz z vášho e-mailu. Ak to stále nefunguje, požiadajte o nový potvrdzovací e-mail z vášho onboardingu."
 
 msgid "Open the full invitation link from your email and try again."
 msgstr "Otvorte celý odkaz pozvánky z vášho e-mailu a skúste to znova."
@@ -3491,7 +3494,7 @@ msgid "Please wait while we verify your email address."
 msgstr "Počkajte, kým overíme vašu e-mailovú adresu."
 
 msgid "Please wait while we verify your student email address."
-msgstr ""
+msgstr "Počkajte, kým overíme vašu študentskú e-mailovú adresu."
 
 msgid "Please wait. The previous action is still running."
 msgstr "Počkajte, predchádzajúca akcia stále prebieha."
@@ -3539,10 +3542,10 @@ msgid "PRIVACY POLICY"
 msgstr "ZÁSADY OCHRANY SÚKROMIA"
 
 msgid "Private channel with the team. The client company cannot see this."
-msgstr ""
+msgstr "Súkromný kanál s tímom. Klientska spoločnosť to nemôže vidieť."
 
 msgid "Private to the team and the mentor. The client company cannot see this."
-msgstr ""
+msgstr "Súkromné pre tím a mentora. Klientska spoločnosť to nemôže vidieť."
 
 msgid "Problem"
 msgstr "Problém"
@@ -3618,10 +3621,10 @@ msgid "Program A application"
 msgstr "Prihláška do Programu A"
 
 msgid "Program A applications where you are the assigned mentor will appear here."
-msgstr ""
+msgstr "Tu sa zobrazia prihlášky Programu A, ku ktorým ste pridelený ako mentor."
 
 msgid "Program A applications where you provide mentoring support."
-msgstr ""
+msgstr "Prihlášky Programu A, kde poskytujete mentorskú podporu."
 
 msgid "Program A draft"
 msgstr "Návrh Programu A"
@@ -3642,10 +3645,10 @@ msgid "Program A project"
 msgstr "Projekt Programu A"
 
 msgid "Program A project is unavailable"
-msgstr ""
+msgstr "Projekt Programu A nie je dostupný"
 
 msgid "Program A projects"
-msgstr ""
+msgstr "Projekty Programu A"
 
 msgid "Program B"
 msgstr "Program B"
@@ -3786,7 +3789,7 @@ msgid "Reason (optional)"
 msgstr "Dôvod (voliteľné)"
 
 msgid "Reason for rejecting this domain?"
-msgstr ""
+msgstr "Dôvod zamietnutia tejto domény?"
 
 msgid "Reassign a team member"
 msgstr "Preradiť člena tímu"
@@ -3885,13 +3888,13 @@ msgid "Remove"
 msgstr "Odstrániť"
 
 msgid "Remove \"{domain}\" from the list?"
-msgstr ""
+msgstr "Odstrániť \"{domain}\" zo zoznamu?"
 
 msgid "Remove {label} from the organization? They will lose organization access immediately."
 msgstr "Odstrániť {label} z organizácie? Okamžite stratia prístup do organizácie."
 
 msgid "Remove attachment"
-msgstr ""
+msgstr "Odstrániť prílohu"
 
 msgid "Remove member"
 msgstr "Odstrániť člena"
@@ -3942,16 +3945,16 @@ msgid "REQUEST NEW LINK"
 msgstr "POŽIADAŤ O NOVÝ ODKAZ"
 
 msgid "Request sent. An administrator will review this domain."
-msgstr ""
+msgstr "Požiadavka bola odoslaná. Administrátor preskúma túto doménu."
 
 msgid "Request status"
 msgstr "Stav požiadavky"
 
 msgid "Request this domain"
-msgstr ""
+msgstr "Požiadať o túto doménu"
 
 msgid "Requested note"
-msgstr ""
+msgstr "Požadovaná poznámka"
 
 msgid "Required by call"
 msgstr "Vyžadované výzvou"
@@ -3966,7 +3969,7 @@ msgid "Resend"
 msgstr "Poslať znova"
 
 msgid "Resend confirmation"
-msgstr ""
+msgstr "Znova odoslať potvrdenie"
 
 msgid "Resend confirmation email"
 msgstr "Znovu odoslať potvrdzovací e-mail"
@@ -3993,7 +3996,7 @@ msgid "Resolve overdue milestones"
 msgstr "Vyriešiť omeškané míľniky"
 
 msgid "Resolving the Program A project detail."
-msgstr ""
+msgstr "Načítava sa detail projektu Programu A."
 
 msgid "Resolving the Program B backlog detail for this organization."
 msgstr "Načítava sa detail backlogu Programu B pre túto organizáciu."
@@ -4029,7 +4032,7 @@ msgid "RETURN TO LOGIN"
 msgstr "SPÄŤ NA PRIHLÁSENIE"
 
 msgid "RETURN TO ONBOARDING"
-msgstr ""
+msgstr "VRÁTIŤ SA NA ONBOARDING"
 
 msgid "Review"
 msgstr "Kontrola"
@@ -4074,7 +4077,7 @@ msgid "Review your application details, required documents, eligibility checks, 
 msgstr "Skontrolujte detaily prihlášky, povinné dokumenty, kontroly oprávnenosti a správy od tímu NTI."
 
 msgid "Review your assigned Program A applications, Program B projects, and upcoming milestones."
-msgstr ""
+msgstr "Skontrolujte svoje priradené prihlášky Programu A, projekty Programu B a nadchádzajúce míľniky."
 
 msgid "Reviewer"
 msgstr "Hodnotiteľ"
@@ -4128,7 +4131,7 @@ msgid "Running"
 msgstr "Prebieha"
 
 msgid "Save"
-msgstr ""
+msgstr "Uložiť"
 
 msgid "Save academic information"
 msgstr "Uložiť akademické informácie"
@@ -4186,7 +4189,7 @@ msgid "Search by call title"
 msgstr "Vyhľadávať podľa názvu výzvy"
 
 msgid "Search by domain"
-msgstr ""
+msgstr "Hľadať podľa domény"
 
 msgid "Search by email, role, or id"
 msgstr "Vyhľadávať podľa e-mailu, roly alebo ID"
@@ -4213,7 +4216,7 @@ msgid "Sections"
 msgstr "Sekcie"
 
 msgid "Sections are unavailable right now."
-msgstr ""
+msgstr "Sekcie teraz nie sú dostupné."
 
 msgid "Sector"
 msgstr "Sektor"
@@ -4351,7 +4354,7 @@ msgid "Selected university values are loaded here for direct editing."
 msgstr "Hodnoty vybranej univerzity sú načítané tu pre priamu úpravu."
 
 msgid "Send"
-msgstr ""
+msgstr "Odoslať"
 
 msgid "Send another message"
 msgstr "Odoslať ďalšiu správu"
@@ -4372,7 +4375,7 @@ msgid "SEND RESET LINK"
 msgstr "ODOSLAŤ ODKAZ NA OBNOVENIE"
 
 msgid "Send verification"
-msgstr ""
+msgstr "Odoslať overenie"
 
 msgid "Send Verification"
 msgstr "Odoslať overenie"
@@ -4583,7 +4586,7 @@ msgstr "Buďte v strehu"
 
 #. placeholder {0}: index + 1
 msgid "Step {0}"
-msgstr ""
+msgstr "Krok {0}"
 
 #. placeholder {0}: activeIndex + 1
 msgid "Step {0} of {totalSteps}"
@@ -4605,22 +4608,22 @@ msgid "StrongPass123!"
 msgstr "SilneHeslo123!"
 
 msgid "Student email"
-msgstr ""
+msgstr "Študentský e-mail"
 
 msgid "Student Email"
-msgstr ""
+msgstr "Študentský e-mail"
 
 msgid "STUDENT EMAIL"
-msgstr ""
+msgstr "ŠTUDENTSKÝ E-MAIL"
 
 msgid "Student email confirmed"
-msgstr ""
+msgstr "Študentský e-mail potvrdený"
 
 msgid "Student email confirmed successfully."
-msgstr ""
+msgstr "Študentský e-mail bol úspešne potvrdený."
 
 msgid "Student email verified"
-msgstr ""
+msgstr "Študentský e-mail bol overený"
 
 msgid "Student workspace"
 msgstr "Študentské pracovisko"
@@ -4726,7 +4729,7 @@ msgid "Team"
 msgstr "Tím"
 
 msgid "Team & mentor (private)"
-msgstr ""
+msgstr "Tím a mentor (súkromné)"
 
 msgid "Team access"
 msgstr "Prístup tímu"
@@ -4762,7 +4765,7 @@ msgid "Team locked"
 msgstr "Tím je uzamknutý"
 
 msgid "Team member"
-msgstr ""
+msgstr "Člen tímu"
 
 msgid "Team name"
 msgstr "Názov tímu"
@@ -4855,10 +4858,10 @@ msgid "The current team could not be loaded right now. Retry the request instead
 msgstr "Aktuálny tím sa momentálne nepodarilo načítať. Skúste požiadavku zopakovať namiesto toho, aby sa to bralo ako neexistujúci tím."
 
 msgid "The domain \"{blockedDomain}\" is not on the approved university list. You can ask an administrator to add it."
-msgstr ""
+msgstr "Doména \"{blockedDomain}\" nie je na zozname schválených univerzít. Môžete požiadať administrátora, aby ju pridal."
 
 msgid "The domain list could not be loaded."
-msgstr ""
+msgstr "Zoznam domén sa nepodarilo načítať."
 
 msgid "The export job response was incomplete."
 msgstr "Odpoveď exportnej úlohy bola neúplná."
@@ -4951,7 +4954,7 @@ msgid "The verification link could not be completed. It may have expired or alre
 msgstr "Potvrdzovací odkaz sa nepodarilo dokončiť. Môže byť vypršaný alebo už použitý."
 
 msgid "The verification link could not be completed. Request a new confirmation email from your onboarding."
-msgstr ""
+msgstr "Overovací odkaz sa nepodarilo dokončiť. Požiadajte o nový potvrdzovací e-mail z vášho onboardingu."
 
 msgid "There are currently no applications in the evaluation stage."
 msgstr "Momentálne nie sú žiadne prihlášky vo fáze hodnotenia."
@@ -5008,7 +5011,7 @@ msgid "This dashboard becomes available once your organization is active."
 msgstr "Tento dashboard bude dostupný, keď sa vaša organizácia aktivuje."
 
 msgid "This doesn't look like a university email. You can register with it, but you'll need to add and confirm a student email during onboarding."
-msgstr ""
+msgstr "Toto nevyzerá ako univerzitný e-mail. Môžete sa s ním zaregistrovať, ale počas onboardingu budete musieť pridať a potvrdiť študentský e-mail."
 
 msgid "This file is empty. Please choose a different file."
 msgstr "Tento súbor je prázdny. Vyberte iný súbor."
@@ -5036,7 +5039,7 @@ msgid "This link is incomplete"
 msgstr "Tento odkaz je neúplný"
 
 msgid "This opportunity could not be loaded right now."
-msgstr ""
+msgstr "Táto príležitosť sa momentálne nedá načítať."
 
 msgid "This organization has no invite records available right now."
 msgstr "Táto organizácia momentálne nemá dostupné žiadne záznamy o pozvánkach."
@@ -5164,13 +5167,13 @@ msgid "Unable to add mentoring note."
 msgstr "Nepodarilo sa pridať mentorskú poznámku."
 
 msgid "Unable to add mentorship note."
-msgstr ""
+msgstr "Mentorskú poznámku sa nepodarilo pridať."
 
 msgid "Unable to add the domain."
-msgstr ""
+msgstr "Doménu sa nepodarilo pridať."
 
 msgid "Unable to approve the domain."
-msgstr ""
+msgstr "Doménu sa nepodarilo schváliť."
 
 msgid "Unable to assign mentor."
 msgstr "Nepodarilo sa priradiť mentora."
@@ -5227,7 +5230,7 @@ msgid "Unable to delete the faculty."
 msgstr "Nepodarilo sa odstrániť fakultu."
 
 msgid "Unable to delete the message."
-msgstr ""
+msgstr "Správu sa nepodarilo odstrániť."
 
 msgid "Unable to delete the specialization."
 msgstr "Nepodarilo sa odstrániť špecializáciu."
@@ -5239,10 +5242,10 @@ msgid "Unable to download document."
 msgstr "Nepodarilo sa stiahnuť dokument."
 
 msgid "Unable to download the attachment."
-msgstr ""
+msgstr "Prílohu sa nepodarilo stiahnuť."
 
 msgid "Unable to download the document."
-msgstr ""
+msgstr "Dokument sa nepodarilo stiahnuť."
 
 msgid "Unable to export this report right now."
 msgstr "Tento report sa momentálne nepodarilo exportovať."
@@ -5266,7 +5269,7 @@ msgid "Unable to load applications from the backend."
 msgstr "Nepodarilo sa načítať prihlášky z backendu."
 
 msgid "Unable to load attached documents."
-msgstr ""
+msgstr "Priložené dokumenty sa nepodarilo načítať."
 
 msgid "Unable to load backlog preview"
 msgstr "Nepodarilo sa načítať náhľad backlogu"
@@ -5290,7 +5293,7 @@ msgid "Unable to load members"
 msgstr "Nepodarilo sa načítať členov"
 
 msgid "Unable to load opportunity"
-msgstr ""
+msgstr "Príležitosť sa nepodarilo načítať"
 
 msgid "Unable to load organization profile"
 msgstr "Nepodarilo sa načítať profil organizácie"
@@ -5305,7 +5308,7 @@ msgid "Unable to load Program A applications from the backend."
 msgstr "Nepodarilo sa načítať prihlášky Programu A z backendu"
 
 msgid "Unable to load Program A projects"
-msgstr ""
+msgstr "Projekty Programu A sa nepodarilo načítať"
 
 msgid "Unable to load project"
 msgstr "Nepodarilo sa načítať projekt"
@@ -5350,13 +5353,13 @@ msgid "Unable to register. Please try again."
 msgstr "Nepodarilo sa zaregistrovať. Skúste to znova."
 
 msgid "Unable to reject the domain."
-msgstr ""
+msgstr "Doménu sa nepodarilo zamietnuť."
 
 msgid "Unable to remove member."
 msgstr "Nepodarilo sa odstrániť člena."
 
 msgid "Unable to remove the domain."
-msgstr ""
+msgstr "Doménu sa nepodarilo odstrániť."
 
 msgid "Unable to remove the member right now."
 msgstr "Momentálne sa nepodarilo odstrániť člena."
@@ -5377,7 +5380,7 @@ msgid "Unable to resend the confirmation email right now."
 msgstr "Momentálne sa nepodarilo znovu odoslať potvrdzovací e-mail."
 
 msgid "Unable to resend the email."
-msgstr ""
+msgstr "E-mail sa nepodarilo znova odoslať."
 
 msgid "Unable to resend the invitation."
 msgstr "Pozvánku sa nepodarilo odoslať znova."
@@ -5413,16 +5416,16 @@ msgid "Unable to save this section."
 msgstr "Túto sekciu sa nepodarilo uložiť."
 
 msgid "Unable to save your student email."
-msgstr ""
+msgstr "Váš študentský e-mail sa nepodarilo uložiť."
 
 msgid "Unable to send invitation."
 msgstr "Nepodarilo sa odoslať pozvánku."
 
 msgid "Unable to send the message."
-msgstr ""
+msgstr "Správu sa nepodarilo odoslať."
 
 msgid "Unable to send the request."
-msgstr ""
+msgstr "Požiadavku sa nepodarilo odoslať."
 
 msgid "Unable to sign in and accept the organization invitation."
 msgstr "Nepodarilo sa prihlásiť a prijať pozvánku do organizácie."
@@ -5470,7 +5473,7 @@ msgid "Unable to update the faculty."
 msgstr "Nepodarilo sa aktualizovať fakultu."
 
 msgid "Unable to update the message."
-msgstr ""
+msgstr "Správu sa nepodarilo aktualizovať."
 
 msgid "Unable to update the organization."
 msgstr "Nepodarilo sa aktualizovať organizáciu."
@@ -5506,13 +5509,13 @@ msgid "University deleted."
 msgstr "Univerzita bola odstránená."
 
 msgid "University Domains"
-msgstr ""
+msgstr "Univerzitné domény"
 
 msgid "University email"
-msgstr ""
+msgstr "Univerzitný e-mail"
 
 msgid "University email domains are unavailable"
-msgstr ""
+msgstr "Univerzitné e-mailové domény nie sú dostupné"
 
 msgid "University is required."
 msgstr "Univerzita je povinná."
@@ -5641,7 +5644,7 @@ msgid "Uploading…"
 msgstr "Nahrávanie…"
 
 msgid "Use a different email"
-msgstr ""
+msgstr "Použiť iný e-mail"
 
 msgid "Use at least 6 characters to secure the invited account."
 msgstr "Použite aspoň 6 znakov na zabezpečenie pozvaného účtu."
@@ -5674,7 +5677,7 @@ msgid "Use your email and password to continue."
 msgstr "Ak chcete pokračovať, použite svoj e-mail a heslo."
 
 msgid "Use your official university email address. We'll send a confirmation link to verify it."
-msgstr ""
+msgstr "Použite svoju oficiálnu univerzitnú e-mailovú adresu. Pošleme vám potvrdzovací odkaz na jej overenie."
 
 msgid "Users"
 msgstr "Používatelia"
@@ -5716,7 +5719,7 @@ msgid "VERIFY EMAIL"
 msgstr "OVERIŤ E-MAIL"
 
 msgid "VERIFY STUDENT EMAIL"
-msgstr ""
+msgstr "OVERIŤ ŠTUDENTSKÝ E-MAIL"
 
 msgid "Verify your email"
 msgstr "Overte svoj e-mail"
@@ -5728,10 +5731,10 @@ msgid "Verify your email address to activate your account and continue with onbo
 msgstr "Overte svoju e-mailovú adresu, aby ste aktivovali účet a mohli pokračovať v onboardingu"
 
 msgid "Verify your student email"
-msgstr ""
+msgstr "Overte svoj študentský e-mail"
 
 msgid "Verify your university email address to continue with onboarding."
-msgstr ""
+msgstr "Overte svoju univerzitnú e-mailovú adresu, aby ste mohli pokračovať s onboardingom."
 
 msgid "Version"
 msgstr "Verzia"
@@ -5755,7 +5758,7 @@ msgid "View team access"
 msgstr "Zobraziť prístup tímu"
 
 msgid "Visible to the team, the mentor, and the client company."
-msgstr ""
+msgstr "Viditeľné pre tím, mentora a klientsku spoločnosť."
 
 msgid "Waiting for team"
 msgstr "Čaká sa na tím"
@@ -5767,7 +5770,7 @@ msgid "We could not load the Program B action queues right now."
 msgstr "Fronty akcií Programu B sa teraz nepodarilo načítať."
 
 msgid "We could not load this Program A project right now."
-msgstr ""
+msgstr "Tento projekt Programu A sa momentálne nepodarilo načítať."
 
 msgid "We could not load this Program B backlog item right now."
 msgstr "Túto položku backlogu Programu B sa teraz nepodarilo načítať."
@@ -5816,10 +5819,10 @@ msgstr "Poslali sme potvrdzovací odkaz na"
 
 #. placeholder {0}: user.studentEmail ?? ''
 msgid "We sent a confirmation link to {0}. Open it to verify your student status."
-msgstr ""
+msgstr "Poslali sme potvrdzovací odkaz na adresu {0}. Otvorte ho na overenie svojho štatútu študenta."
 
 msgid "We sent a confirmation link to {normalized}."
-msgstr ""
+msgstr "Poslali sme potvrdzovací odkaz na adresu {normalized}."
 
 msgid "We sent a confirmation link to your inbox. Open it to verify your account."
 msgstr "Poslali sme potvrdzovací odkaz do vašej doručenej pošty. Otvorte ho, aby ste overili svoj účet."
@@ -5855,7 +5858,7 @@ msgid "Whether you want to partner with NTI, join as a mentor, submit a challeng
 msgstr "Či chcete byť partnerom NTI, pripojiť sa ako mentor, zaslať výzvu alebo sa len dozvedieť viac — napíšte nám."
 
 msgid "With client"
-msgstr ""
+msgstr "S klientom"
 
 msgid "Withdraw application"
 msgstr "Odvolať žiadosť"
@@ -5873,7 +5876,7 @@ msgid "Write a mentorship note..."
 msgstr "Napíšte mentorskú poznámku..."
 
 msgid "Write a message…"
-msgstr ""
+msgstr "Napíšte správu…"
 
 msgid "Write an optional note. Reject, pause, and archive require a reason."
 msgstr "Napíšte voliteľnú poznámku. Zamietnutie, pozastavenie a archivácia vyžadujú dôvod."
@@ -6027,7 +6030,7 @@ msgid "Your session is no longer valid. Please sign in again to continue."
 msgstr "Vaša relácia nie je viac platná. Aby ste mohli pokračovať, prihláste sa znova."
 
 msgid "Your student email was confirmed successfully. You can continue your onboarding."
-msgstr ""
+msgstr "Váš študentský e-mail bol úspešne potvrdený. Môžete pokračovať v onboardingu."
 
 msgid "Your team data could not be loaded right now, so lead-only actions cannot be resolved."
 msgstr "Údaje o vašom tíme sa momentálne nepodarilo načítať, takže akcie dostupné len vedúcemu tímu sa nedajú vyhodnotiť."

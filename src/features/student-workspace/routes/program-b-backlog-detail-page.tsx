@@ -155,7 +155,11 @@ export function StudentProgramBBacklogDetailPage({ params }: { params: Promise<{
           try {
             const download = await downloadDocument.mutateAsync({ id, documentId });
 
-            window.open(download.downloadUrl, '_blank', 'noopener,noreferrer');
+            const popup = window.open(download.downloadUrl, '_blank', 'noopener,noreferrer');
+
+            if (!popup) {
+              window.location.href = download.downloadUrl;
+            }
           } catch (error) {
             toast.error(error instanceof Error ? error.message : t`Unable to open the document.`);
           }

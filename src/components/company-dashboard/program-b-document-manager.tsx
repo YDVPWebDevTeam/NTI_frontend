@@ -99,7 +99,11 @@ export function ProgramBDocumentManager({
     try {
       const result = await requestDownload(documentId);
 
-      window.open(result.downloadUrl, '_blank', 'noopener,noreferrer');
+      const popup = window.open(result.downloadUrl, '_blank', 'noopener,noreferrer');
+
+      if (!popup) {
+        window.location.href = result.downloadUrl;
+      }
     } catch (error) {
       toast.error(error instanceof Error ? error.message : t`Unable to download document.`);
     } finally {

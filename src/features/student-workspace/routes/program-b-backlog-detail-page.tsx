@@ -111,6 +111,41 @@ export function StudentProgramBBacklogDetailPage({ params }: { params: Promise<{
     );
   }
 
+  if (backlogItemQuery.isLoading) {
+    return (
+      <StudentPageShell
+        title={t`Program B backlog item`}
+        description={t`Published Program B opportunity detail.`}
+      >
+        <StudentStatusCard
+          title={t`Loading opportunity…`}
+          description={t`Fetching the latest opportunity details.`}
+        />
+      </StudentPageShell>
+    );
+  }
+
+  if (backlogItemQuery.isError) {
+    return (
+      <StudentPageShell
+        title={t`Program B backlog item`}
+        description={t`Published Program B opportunity detail.`}
+      >
+        <div className="space-y-4">
+          <StudentStatusCard
+            title={t`Unable to load opportunity`}
+            description={t`This opportunity could not be loaded right now.`}
+          />
+          <div className="flex justify-center">
+            <Button variant="outline" onClick={() => void backlogItemQuery.refetch()}>
+              {t`Retry`}
+            </Button>
+          </div>
+        </div>
+      </StudentPageShell>
+    );
+  }
+
   const item = backlogItemQuery.data;
   const existingApplication = isApiNotFoundError(myApplicationQuery.error)
     ? null

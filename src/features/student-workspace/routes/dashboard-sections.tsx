@@ -342,9 +342,7 @@ export function ProgramBSection({
                     <p className="text-foreground font-semibold">
                       {normalizeUnknownText(project.backlogItem.title) ?? t`Project`}
                     </p>
-                    <p className="text-muted-foreground mt-1 text-sm">
-                      {t`Team`} {project.team.name}
-                    </p>
+                    <p className="text-muted-foreground mt-1 text-sm">{project.team.name}</p>
                   </div>
                   <span className="bg-success/10 text-success rounded-full px-3 py-1 text-xs font-semibold">
                     {project.status}

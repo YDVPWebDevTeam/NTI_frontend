@@ -24,6 +24,10 @@ import { StudentSectionCard } from 'components/student-dashboard/page-shell-prim
 import { uploadAndCompleteFile } from 'lib/api-client/openapi-runtime/file-upload';
 import { DOCUMENT_ACCEPT, validateDocumentFile } from 'lib/files/upload-validation';
 import {
+  PROGRAM_A_TEMPLATE_LIST,
+  getTemplateForDocumentType,
+} from 'lib/templates/document-templates';
+import {
   formatEnumLikeName,
   formatUnknownDate,
   normalizeUnknownText,
@@ -653,6 +657,7 @@ export function AttachDocumentSection({
   // final attach mutation, so the button reflects the long upload too.
   const [isUploading, setIsUploading] = useState(false);
   const isCvDocument = documentType === 'CV';
+  const selectedTemplate = getTemplateForDocumentType(documentType);
   const isPipelinePending =
     isUploading ||
     requestUploadUrl.isPending ||
@@ -802,6 +807,16 @@ export function AttachDocumentSection({
           </Button>
         </div>
       </div>
+      {selectedTemplate ? (
+        <a
+          href={selectedTemplate.url}
+          download={selectedTemplate.filename}
+          className="text-primary hover:text-primary/80 mt-3 inline-flex items-center gap-1.5 text-xs font-medium underline-offset-2 hover:underline"
+        >
+          <Download className="h-3.5 w-3.5" />
+          {t`Download the ${selectedTemplate.label} template`}
+        </a>
+      ) : null}
       {showUploadHint ? (
         <p className="text-muted-foreground mt-3 text-xs">
           {isCvDocument
@@ -809,6 +824,30 @@ export function AttachDocumentSection({
             : t`Select a file before uploading.`}
         </p>
       ) : null}
+    </StudentSectionCard>
+  );
+}
+
+export function DocumentTemplatesSection() {
+  return (
+    <StudentSectionCard
+      title={t`Document templates`}
+      description={t`Download a Word template, fill it in, and upload it below.`}
+    >
+      <ul className="grid gap-2 sm:grid-cols-2">
+        {PROGRAM_A_TEMPLATE_LIST.map((documentTemplate) => (
+          <li key={documentTemplate.documentType}>
+            <a
+              href={documentTemplate.url}
+              download={documentTemplate.filename}
+              className="border-border bg-card hover:bg-accent flex items-center gap-2 rounded-md border px-3 py-2 text-sm transition-colors"
+            >
+              <Download className="text-muted-foreground h-4 w-4 shrink-0" />
+              <span className="truncate">{documentTemplate.label}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
     </StudentSectionCard>
   );
 }

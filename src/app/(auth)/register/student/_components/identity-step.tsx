@@ -37,7 +37,7 @@ function NonUniversityEmailNotice() {
   }
 
   return (
-    <div className="border-warning/30 bg-warning/10 text-warning-foreground flex items-start gap-2 rounded-sm border px-3 py-2 text-xs">
+    <div className="border-warning/40 bg-warning/15 text-foreground flex items-start gap-2 rounded-sm border px-3 py-2 text-xs">
       <Info className="mt-0.5 h-4 w-4 shrink-0" />
       <span>
         {t`This doesn't look like a university email. You can register with it, but you'll need to add and confirm a student email during onboarding.`}

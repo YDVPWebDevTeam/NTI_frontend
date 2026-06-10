@@ -95,7 +95,24 @@ export function ConversationPanel({
       const fileIds: string[] = [];
 
       for (const file of pendingFiles) {
-        const fileId = await attachmentUpload.mutateAsync(file);
+        let fileId: string;
+
+        try {
+          fileId = await attachmentUpload.mutateAsync(file);
+        } catch (uploadError) {
+          const msg = uploadError instanceof Error ? uploadError.message : '';
+          // "Network Error" is the axios signal for a CORS/connectivity failure
+          // during the direct browser → R2 PUT step.
+          const isCors = msg === 'Network Error' || msg.toLowerCase().includes('network');
+
+          toast.error(
+            isCors
+              ? t`Could not upload "${file.name}". The storage bucket may not allow uploads from this origin — check the R2 CORS configuration.`
+              : msg || t`Unable to upload "${file.name}".`,
+          );
+
+          return;
+        }
 
         fileIds.push(fileId);
       }

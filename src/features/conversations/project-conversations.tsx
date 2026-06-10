@@ -10,6 +10,13 @@ import type { ConversationAnchor } from './types';
 
 const COMPANY_ROLES: UserRole[] = [UserRole.COMPANY_OWNER, UserRole.COMPANY_EMPLOYEE];
 
+/** Roles that may post to the PARTICIPANTS ("With client") channel. */
+const PARTICIPANTS_WRITE_ROLES: UserRole[] = [
+  UserRole.MENTOR,
+  UserRole.ADMIN,
+  UserRole.SUPER_ADMIN,
+];
+
 type ProjectConversationsProps = {
   anchor: ConversationAnchor;
   currentUserId: string | undefined;
@@ -31,6 +38,12 @@ export function ProjectConversations({
   canWrite = true,
 }: ProjectConversationsProps) {
   const isCompanyUser = role !== undefined && COMPANY_ROLES.includes(role);
+  // Students and evaluators may read PARTICIPANTS but not write to it — only
+  // the mentor, client company members, and admins post there.
+  const canWriteParticipants =
+    canWrite &&
+    role !== undefined &&
+    (COMPANY_ROLES.includes(role) || PARTICIPANTS_WRITE_ROLES.includes(role));
 
   if (anchor.kind === 'program-a') {
     return (
@@ -69,7 +82,7 @@ export function ProjectConversations({
           anchor={anchor}
           channel="PARTICIPANTS"
           currentUserId={currentUserId}
-          canWrite={canWrite}
+          canWrite={canWriteParticipants}
         />
       </TabsContent>
 

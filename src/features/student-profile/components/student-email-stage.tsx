@@ -199,9 +199,6 @@ export function StudentEmailStage({ user, onRefresh }: StudentEmailStageProps) {
             <Button type="button" variant="outline" onClick={() => setShowInput(true)}>
               {t`Use a different email`}
             </Button>
-            <Button type="button" variant="ghost" onClick={onRefresh}>
-              {t`I've confirmed it`}
-            </Button>
           </div>
         </div>
       ) : (

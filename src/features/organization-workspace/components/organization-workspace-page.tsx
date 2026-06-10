@@ -1,7 +1,7 @@
 'use client';
 
 import { t } from '@lingui/core/macro';
-import { Building2, Files } from 'lucide-react';
+import { Building2, Clock, Files } from 'lucide-react';
 
 import {
   StudentMetricCard,
@@ -91,6 +91,22 @@ export function OrganizationWorkspacePage({ currentUser }: { currentUser: Authen
       title={t`Manage your organization`}
       description={t`Keep your company details, shared files, and team access up to date in one place.`}
     >
+      {!isOrganizationActive && organization && (
+        <div className="flex items-start gap-4 rounded-2xl border border-amber-200 bg-amber-50 p-5 dark:border-amber-800 dark:bg-amber-950/40">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-100 text-amber-600 dark:bg-amber-900/60 dark:text-amber-400">
+            <Clock className="h-5 w-5" />
+          </div>
+          <div className="space-y-1">
+            <p className="text-sm font-semibold text-amber-800 dark:text-amber-300">
+              {t`Waiting for approval`}
+            </p>
+            <p className="text-sm leading-6 text-amber-700 dark:text-amber-400">
+              {t`Your organization registration is under review. An administrator will approve it shortly. Invites, members, and document tools will become available once your account is activated.`}
+            </p>
+          </div>
+        </div>
+      )}
+
       <StudentMetricGrid>
         <StudentMetricCard
           label={t`Organization`}

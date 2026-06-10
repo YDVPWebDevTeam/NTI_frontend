@@ -41,12 +41,22 @@ function buildCmsRemotePatterns(): RemotePattern[] {
   return patterns;
 }
 
+const BACKEND_ORIGIN = (process.env.BACKEND_ORIGIN ?? 'http://localhost:3001').replace(/\/+$/, '');
+
 const nextConfig: NextConfig = {
   experimental: {
     swcPlugins: [['@lingui/swc-plugin', {}]],
   },
   images: {
     remotePatterns: buildCmsRemotePatterns(),
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/api/v1/:path*',
+        destination: `${BACKEND_ORIGIN}/api/v1/:path*`,
+      },
+    ];
   },
 };
 

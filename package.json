@@ -87,7 +87,7 @@
     "lint-staged": "^16.4.0",
     "madge": "^8.0.0",
     "openapi-typescript": "^7.13.0",
-    "orval": "^7.16.1",
+    "orval": "^8.20.0",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tailwindcss": "^4",
